@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h3 id="toc">TOC</h3>
+<ul>
+<li>Preface</li>
+<li>I. Tutorial</li>
+<li><ol start="2" style="list-style-type: upper-roman">
+<li>The SQL Language</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: upper-roman">
+<li>Server Administration</li>
+</ol></li>
+<li>V. Server Programming</li>
+<li><ol start="6" style="list-style-type: upper-roman">
+<li>Reference</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: upper-roman">
+<li>Internals</li>
+</ol></li>
+<li><ol start="8" style="list-style-type: upper-roman">
+<li>Appendixes</li>
+</ol></li>
+</ul>
+<h3 id="i.-tutorialtutorial">I. <a href="http://www.postgresql.org/docs/9.3/interactive/tutorial.html">Tutorial</a></h3>
+<ol style="list-style-type: decimal">
+<li>Getting Started</li>
+</ol>
+<ul>
+<li>Installation
+<ul>
+<li>After Installation: <a href="http://stackoverflow.com/questions/11919391/postgresql-error-fatal-role-username-does-not-exist"><code>sudo su - postgres</code></a></li>
+</ul></li>
+<li><a href="http://www.postgresql.org/docs/9.3/interactive/tutorial-arch.html">Architectural Fundamentals</a>
+<ul>
+<li>Server process, user&#8217;s client (frontend) application</li>
+<li>handle multiple concurrent connections. To achieve this it starts (&#8220;forks&#8221;) a new process for each connection.</li>
+</ul></li>
+<li><a href="http://www.postgresql.org/docs/9.3/interactive/tutorial-createdb.html">Creating a Database</a>
+<ul>
+<li><pre><code>createdb mydb
+dropdb mydb</code></pre></li>
+</ul></li>
+<li><a href="http://www.postgresql.org/docs/9.3/interactive/tutorial-accessdb.html">Accessing a Database</a>
+<ul>
+<li><pre><code>psql mydb
+select sersion();
+help;
+help create table;
+\q</code></pre></li>
+</ul></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><a href="http://www.postgresql.org/docs/9.3/interactive/tutorial-sql.HTML">The SQL Language</a></li>
+</ol>
+<ul>
+<li><a href="http://www.postgresql.org/docs/9.3/interactive/tutorial-sql-intro.html">Introduction</a></li>
+<li>Concepts
+<ul>
+<li>PostgreSQL is a relational database management system (RDBMS).</li>
+<li>Relation is essentially a mathematical term for table.</li>
+<li>A more modern development is the object-oriented database.</li>
+</ul></li>
+<li>Creating a New Table
+<ul>
+<li><pre><code>CREATE TABLE weather (
+city            varchar(80),
+temp_lo         int,           -- low temperature
+temp_hi         int,           -- high temperature
+prcp            real,          -- precipitation
+date            date
+);</code></pre></li>
+</ul></li>
+<li>Populating a Table With Rows</li>
+<li>Querying a Table</li>
+<li>Joins Between Tables</li>
+<li>Aggregate Functions</li>
+<li>Updates</li>
+<li>Deletions</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Advanced Features</li>
+</ol>
+<ul>
+<li>Introduction</li>
+<li>Views</li>
+<li>Foreign Keys</li>
+<li>Transactions</li>
+<li>Window Functions</li>
+<li>Inheritance</li>
+<li>Conclusion</li>
+</ul>
+<h3 id="iii.-server-administration">III. Server Administration</h3>
+<h3 id="vi.-reference">VI. Reference</h3>
+<pre><code>log: $1. 2014-04-19: created; </code></pre>
+<p>Some Notes:</p>
+<ul>
+<li>SQL is case insensitive about key words and identifiers, except when identifiers are double-quoted to preserve the case (not done above).</li>
+</ul>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

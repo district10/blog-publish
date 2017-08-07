@@ -1,0 +1,21 @@
+---
+tzx-changes:
+  - hash: 2229474410c54785c4ce5b45ee82e2206eda8585
+    datetime: 1482929656
+    insertions: 1
+    deletions: 11
+  - hash: 5a7d1f7d62a5cd8a23e9aaa6609f69393870e372
+    datetime: 1480428507
+    insertions: 10
+    deletions: 9
+  - hash: 4e79227ed0bbb1572f1cb3b1a36e597431e69e3a
+    datetime: 1480252469
+    insertions: 9
+    deletions: 1
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 190
+    deletions: 0
+
+tzx-filename: _posts/post-0085-cvrs-presentation.md
+...

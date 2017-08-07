@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="blvccaffe">BLVC/caffe</h1>
+<blockquote>
+<p><a href="https://github.com/BVLC/caffe/wiki">Home &#183; BVLC/caffe Wiki</a></p>
+</blockquote>
+<dl>
+<dt><a href="https://github.com/BVLC/caffe/wiki/Model-Zoo">Model Zoo &#183; BVLC/caffe Wiki</a></dt>
+<dd><p>&#36825;&#37324;&#20171;&#32461;&#20102; model zoo&#65292;&#20197;&#21450;&#21508;&#31181;&#31639;&#27861;&#35757;&#32451;&#20986;&#26469;&#30340;&#32467;&#26524;&#12290;</p>
+<p>see also <a href="http://caffe.berkeleyvision.org/model_zoo.html">Caffe | Model Zoo</a>.</p>
+<p>A caffe model is distributed as a directory containing:</p>
+<ul>
+<li>Solver/model prototxt(s)</li>
+<li><code>readme.md</code> containing
+<ul>
+<li>YAML frontmatter
+<ul>
+<li>Caffe version used to train this model (tagged release or commit hash).</li>
+<li><code>[optional]</code> file URL and SHA1 of the trained <code>.caffemodel</code>.</li>
+<li><code>[optional]</code> github gist id.</li>
+</ul></li>
+<li>Information about what data the model was trained on, modeling choices, etc.</li>
+<li>License information.</li>
+</ul></li>
+<li><code>[optional]</code> Other helpful scripts.</li>
+</ul>
+</dd>
+<dt><a href="https://github.com/BVLC/caffe/wiki/Borrowing-Weights-from-a-Pretrained-Network">Borrowing Weights from a Pretrained Network &#183; BVLC/caffe Wiki</a> <code class="fold">@</code></dt>
+<dd><ul>
+<li>Weights are learnable parameters in the network, which are tuned by the back propagation phase.</li>
+<li>weights &#26159; caffe &#29983;&#25104;&#20102;&#65292;&#24182;&#34987; solver &#19981;&#26029;&#20462;&#25913;&#20248;&#21270;&#65292;&#36824;&#20250;&#34987;&#26102;&#19981;&#26102;&#20445;&#23384;&#21040; model &#37324;&#12290;</li>
+<li><code class="sourceCode bash"><span class="kw">caffe</span> train &#8212;solver ourSolver.prototxt &#8212;weights theirModel.caffemodel</code></li>
+<li>&#19978;&#38754;&#21487;&#20197;&#36733;&#20837; model &#37324;&#30340;&#26435;&#37325;&#65292;&#21482;&#35201;&#25105;&#20204;&#33258;&#24049;&#23450;&#20041;&#30340; prototxt &#25991;&#20214;&#26377;&#21516;&#26679;&#30340; layer &#21517;&#65292;&#26435;&#37325;&#23601;&#20250;&#34987;&#23548;&#20837;&#65292;&#20854;&#20182;&#30340; layer &#21017;&#20250;&#34987;&#21021;&#22987;&#21270;&#12290;</li>
+<li>&#25152;&#20197;&#21834;&#65292;&#21482;&#26377;&#25226;&#21035;&#20154;&#30340; prototxt &#20462;&#25913;&#19968;&#19979;&#23601;&#21487;&#20197;&#20102;&#12290;</li>
+<li>&#20854;&#23454;&#36825;&#20010;&#24847;&#24605;&#24456;&#31616;&#21333;&#12290;&#20294;&#26159; wiki &#37324;&#25226;&#23427;&#35828;&#24471;&#22797;&#26434;&#20102;&#8230;&#8230;&#128546;</li>
+</ul>
+</dd>
+<dt><a href="http://caffe.berkeleyvision.org/development.html">Caffe | Developing and Contributing</a> <code class="fold">@</code></dt>
+<dd><p>&#26368;&#35753;&#25105;&#27427;&#36175;&#30340;&#26159;&#20851;&#20110; copyright &#30340;&#37027;&#19968;&#27573;&#12290;&#35828;&#26159; caffe &#30340; copyright &#26159;&#27599;&#20010; contributor &#33258;&#23450;&#20041;&#30340;&#65292;&#32426;&#24405;&#22312; version control system &#37324;&#12290;&#20320;&#24212;&#35813;&#22312;&#33258;&#24049;&#30340; commit message &#37324;&#20889; copyright &#30340;&#22768;&#26126;&#25110;&#32773;&#21464;&#26356;&#65292;&#32780;&#19981;&#26159;&#22312;&#25991;&#20214;&#37324;&#12290;&#25105;&#19968;&#30452;&#29305;&#21035;&#35752;&#21388;&#22312;&#28304;&#25991;&#20214;&#37324;&#21152;&#19978;&#19968;&#20010;&#24040;&#22823;&#30340;&#12289;&#19985;&#38475;&#30340; copyright &#22768;&#26126;&#20102;&#65281;&#128544;</p>
+</dd>
+</dl>
+<p><a href="https://github.com/BVLC/caffe/wiki/Fine-Tuning-or-Training-Certain-Layers-Exclusively">Fine Tuning or Training Certain Layers Exclusively &#183; BVLC/caffe Wiki</a></p>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

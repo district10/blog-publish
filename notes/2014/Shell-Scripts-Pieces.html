@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<ul>
+<li><p>printenv PATH # like echo $PATH, but seems more professional</p></li>
+<li><p>tr &#8216;[:lower:]&#8217; &#8216;[:upper:]&#8217;</p></li>
+<li><p>Define Functions</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">usage ()</span>
+<span class="kw">{</span>
+<span class="kw">cat</span> &lt;&lt;EOF
+some illustrations
+here
+A huge File Descriptino
+EOF
+}</code></pre></div></li>
+<li><p>Parse Parameters ```bash for arg in $@; do case $arg in -h|&#8211;help) usage exit 0 ;; esac done</p></li>
+</ul>
+<p>if [ $# -gt 2 ] ; then echo &#8220;ERROR: expecting 2 parameters. Please see option &#8211;help&#8221; exit 1 fi</p>
+<p>require_tool $@ ```</p>
+<ul>
+<li><p>Read</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">read</span> <span class="st">&quot;a?</span><span class="ot">$1</span><span class="st"> [y/N] &quot;</span>
+<span class="kw">if [[</span> <span class="ot">$a</span> <span class="ot">==</span> <span class="st">&quot;N&quot;</span> || <span class="ot">$a</span> <span class="ot">==</span> <span class="st">&quot;n&quot;</span> || <span class="ot">$a</span> <span class="ot">=</span> <span class="st">&quot;&quot;</span><span class="kw"> ]]</span>; <span class="kw">then</span>
+    <span class="kw">return</span> 0
+<span class="kw">fi</span>
+<span class="kw">return</span> 1</code></pre></div></li>
+<li><p>tput cols</p></li>
+<li><p>You Should man these</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">man</span> test</code></pre></div></li>
+<li>Skills
+<ul>
+<li>printf &#8216;33[0;34m%s33[0m&#8217; &#8220;Upgrading Oh My Zsh&#8221; (better looking than inlined color prompt)</li>
+</ul></li>
+<li>Words You should know
+<ul>
+<li>source: source /etc/profile</li>
+<li>profile</li>
+<li>ack-grep</li>
+</ul></li>
+<li><p>Words You should Google</p></li>
+</ul>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

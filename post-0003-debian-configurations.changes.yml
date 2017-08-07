@@ -1,0 +1,21 @@
+---
+tzx-changes:
+  - hash: 4a39d7832bd52675016094a50434d1b7edcd13ab
+    datetime: 1483950786
+    insertions: 14
+    deletions: 14
+  - hash: 2229474410c54785c4ce5b45ee82e2206eda8585
+    datetime: 1482929656
+    insertions: 68
+    deletions: 41
+  - hash: 3cd52522fc5cfff122bac2ba73dfc72f28050ab1
+    datetime: 1482608116
+    insertions: 1
+    deletions: 1
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 570
+    deletions: 0
+
+tzx-filename: _posts/post-0003-debian-configurations.md
+...

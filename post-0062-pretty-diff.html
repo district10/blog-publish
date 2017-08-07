@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-11-18" />
+  <title>Pretty Diff | &#21548;&#27468;&#23398;&#33521;&#35821;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Pretty Diff | &#21548;&#27468;&#23398;&#33521;&#35821;</h1>
+<h3 class="date">2015-11-18</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#pretty-diff-&#21548;&#27468;&#23398;&#33521;&#35821;">Pretty Diff | &#21548;&#27468;&#23398;&#33521;&#35821;</a><ul>
+        <li><a href="#&#22914;&#26524;&#21482;&#28385;&#36275;&#21069;&#20004;&#28857;">&#22914;&#26524;&#21482;&#28385;&#36275;&#21069;&#20004;&#28857;</a></li>
+        <li><a href="#&#20026;&#20102;&#28385;&#36275;&#31532;&#19977;&#28857;&#25105;&#25214;&#20102;&#24456;&#22810;&#36164;&#26009;">&#20026;&#20102;&#28385;&#36275;&#31532;&#19977;&#28857;&#25105;&#25214;&#20102;&#24456;&#22810;&#36164;&#26009;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="pretty-diff-&#21548;&#27468;&#23398;&#33521;&#35821;">Pretty Diff | &#21548;&#27468;&#23398;&#33521;&#35821;</h1>
+<p>&#26152;&#26202;&#19968;&#20010;&#24819;&#27861;&#20987;&#20013;&#20102;&#25105;&#12290;&#26082;&#28982;&#35201;&#32451;&#21548;&#21147;&#65288;&#34429;&#28982;&#23521;&#20154;&#27700;&#24179;&#24050;&#32463;&#24456;&#39640;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>&#65289;&#65292;&#20026;&#20160;&#20040;&#19981;&#27599;&#22825;&#22312;&#34430;&#31859;&#19978;&#21548;&#19968;&#39318;&#27468;&#65292;&#28982;&#21518;&#25226;&#27468;&#35789; dictate &#20986;&#26469;&#21602;&#65311;</p>
+<p>&#36825;&#26159;&#19968;&#20010;&#22909;&#20027;&#24847;&#65292;&#20294;&#25105;&#20204;&#38656;&#35201;&#19968;&#28857;&#33258;&#21160;&#21270;&#65306;</p>
+<ol style="list-style-type: decimal">
+<li>&#33021;&#22815;&#26174;&#31034;&#25105;&#21548;&#23545;&#21644;&#21548;&#38169;&#30340;&#37096;&#20998;</li>
+<li>&#33021;&#22815;&#20998;&#20139;&#31532;&#19968;&#28857;</li>
+<li>&#31532;&#20108;&#28857;&#35201;&#36275;&#22815;&#22909;&#30475;</li>
+</ol>
+<h2 id="&#22914;&#26524;&#21482;&#28385;&#36275;&#21069;&#20004;&#28857;">&#22914;&#26524;&#21482;&#28385;&#36275;&#21069;&#20004;&#28857;</h2>
+<p>&#37027;&#23601;&#29992;&#33050;&#26412;&#37324;&#24120;&#29992;&#30340;&#19968;&#20010;&#21483; diff &#30340; Util &#23601;&#34892;&#65292;</p>
+<p>&#27604;&#22914;&#36825;&#37324;&#26377;&#20004;&#20010;&#27979;&#35797;&#25991;&#26723; <code>_a.txt</code> &#21644; <code>_b.txt</code>&#65292;&#22914;&#19979;&#65306;&#65288;respectively&#65289;</p>
+<pre class="tzx-bigquote"><code>What do you mean?&#65288;&#36825;&#34892;&#34987;&#21024;&#38500;&#65289;
+When you nod your head yes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;
+But you wanna say no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;
+What do you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;
+When you don&#39;t want me to move&#65288;&#36825;&#34892;&#19981;&#21464;&#65289;</code></pre>
+<pre class="tzx-bigquote"><code>When you nod your haydes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;
+But you wanna say me no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;
+What you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;
+When you don&#39;t want me to move&#65288;&#36825;&#34892;&#19981;&#21464;&#65289;
+But you tell me to go&#65288;&#36825;&#34892;&#26032;&#28155;&#21152;&#65289;</code></pre>
+<p>&#21629;&#20196;&#34892;&#19979;&#36816;&#34892; <code class="sourceCode bash"><span class="kw">diff</span> _a.txt _b.txt</code>&#65292;&#32467;&#26524;&#23601;&#20986;&#26469;&#20102;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode diff"><code class="sourceCode diff"><span class="dt">1,4c1,3</span>
+<span class="st">&lt; What do you mean?&#65288;&#36825;&#34892;&#34987;&#21024;&#38500;&#65289;</span>
+<span class="st">&lt; When you nod your head yes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;</span>
+<span class="st">&lt; But you wanna say no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;</span>
+<span class="st">&lt; What do you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;</span>
+<span class="kw">---</span>
+<span class="ot">&gt; When you nod your haydes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;</span>
+<span class="ot">&gt; But you wanna say me no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;</span>
+<span class="ot">&gt; What you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;</span>
+<span class="dt">5a5</span>
+<span class="ot">&gt; But you tell me to go&#65288;&#36825;&#34892;&#26032;&#28155;&#21152;&#65289;</span></code></pre></div>
+<p>&#20854;&#23454;&#25105;&#20063;&#19981;&#29087;&#24713; diff &#20986;&#26469;&#30340;&#19996;&#35199;&#65292;&#25105;&#29468;&#20320;&#20063;&#19981;&#25026;&#12290;&#21487;&#20197;&#30475;&#21040;&#65292;&#21069;&#20004;&#28857;&#24895;&#26395;&#23454;&#29616;&#20102;&#32780;&#31532;&#19977;&#28857;&#36824;&#24046;&#24471;&#36828;&#12290;</p>
+<h2 id="&#20026;&#20102;&#28385;&#36275;&#31532;&#19977;&#28857;&#25105;&#25214;&#20102;&#24456;&#22810;&#36164;&#26009;">&#20026;&#20102;&#28385;&#36275;&#31532;&#19977;&#28857;&#25105;&#25214;&#20102;&#24456;&#22810;&#36164;&#26009;</h2>
+<p>&#28982;&#21518;&#25105;&#23601;&#24517;&#24212;&#12289;GitHub&#12289;&#30334;&#24230;&#12289;StackOverflow &#21508;&#31181;&#25628;&#65292;&#29992;&#21040;&#30340;&#20851;&#38190;&#35789;&#26377;</p>
+<ol>
+<li>pretty diff</li>
+<li>diff html output</li>
+<li>git diff pretty print</li>
+<li>kompare</li>
+<li>git diff not show hash tag</li>
+<li>git diff not show header</li>
+<li>git diff status</li>
+<li><em>etc.</em></li>
+</ol>
+<p>&#20808;&#26159;&#25214;&#21040;&#19968;&#20010; jsdifflib&#65292;&#20294;&#25928;&#26524;&#24456;&#31967;&#31957;&#12290;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/diffed/jsdifflib.png" alt="diff via jsdifflib" />
+<p class="caption">diff via jsdifflib</p>
+</div>
+<p>&#28982;&#21518;&#24819;&#21040;&#20102; GitHub&#65292;&#19978;&#38754;&#30340;&#20195;&#30721; diff &#21487;&#26159;&#26497;&#20854;&#36190;&#30340;&#12290;&#25105;&#26412;&#24819;&#23427;&#33021; diff &#20986;&#36825;&#31181;&#25928;&#26524;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/diffed/github-diff.png" />
+
+</div>
+<p>&#32467;&#26524;&#21364;&#26159;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/diffed/github-diff-terrible.png" />
+
+</div>
+<p>&#22823;&#22833;&#25152;&#26395;&#65292;&#22823;&#22833;&#25152;&#26395;&#12290;</p>
+<p>&#32487;&#32493;&#26597;&#12290;</p>
+<p>&#25454;&#35828;&#29992; <a href="http://pygments.org/">Pygments</a><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> &#21487;&#20197;&#65292;&#25105;&#27809;&#26377;&#35797;&#65292;&#22240;&#20026;&#36825;&#19996;&#35199;&#20063;&#22826;&#22823;&#20102;&#65281;&#20043;&#21069;&#36824;&#26159;&#20889;&#27605;&#19994;&#35770;&#25991;&#30340;&#26102;&#20505;&#29992;&#36807;&#65292;&#20316;&#20026; LaTeX &#20195;&#30721;&#39640;&#20142;&#30340;&#24341;&#25806;&#12290;&#25105;&#25165;&#19981;&#21916;&#27426;&#36825;&#20040;&#28857; diff &#24037;&#20316;&#36824;&#35201;&#20877;&#35013;&#23427;&#12290;</p>
+<p>&#25628;&#30528;&#25628;&#30528;&#25105;&#23601;&#38145;&#23450;&#20102; <code class="sourceCode bash"><span class="kw">git</span> diff</code>&#12290;&#36825;&#20010; diff &#24456;&#22909;&#30475;&#65292;&#25928;&#26524;&#22909;&#65292;&#32780;&#19988;&#25105;&#26377; git&#65288;&#26412;&#21338;&#23458;&#23601;&#26159;&#29992; Git &#29256;&#26412;&#25511;&#21046;&#30340;&#65289;&#12290;</p>
+<p>&#29992; <code class="sourceCode bash"><span class="kw">git</span> diff --no-index --color-words _a.txt _b.txt</code>&#65292;&#25928;&#26524;&#24456;&#28385;&#24847;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/diffed/git-diff.png" />
+
+</div>
+<p>Git &#25105;&#20063;&#19981;&#29087;&#65292;&#21448;&#21435;&#26597;&#25991;&#26723;&#65292;&#30475;&#21040;</p>
+<ol>
+<li><code>--no-index</code> &#26159;&#35828; diff &#30340;&#26159;&#25991;&#20214;&#31995;&#32479;&#37324;&#30340;&#25991;&#20214;&#65292;&#32780;&#19981;&#26159; Git Repository &#37324;&#30340;&#25991;&#20214;</li>
+<li><code>--color-words</code> &#26159;&#35828;&#25353;&#29031;&#21333;&#35789;&#26469;&#26174;&#31034; diff &#32467;&#26524;&#65292;&#32780;&#19981;&#26159;&#34892;</li>
+</ol>
+<p>&#36825;&#20010;&#25351;&#20196;&#20986;&#26469;&#30340;&#32467;&#26524;&#22312;&#21629;&#20196;&#34892;&#19979;&#26159;&#24425;&#33394;&#65292;&#20854;&#23454;&#29992;&#30340;&#26159; &#8220;ANSI&#8221; &#39068;&#33394;&#34920;&#31034;&#27861;&#65292;&#36755;&#20986;&#30340;&#25991;&#26412;&#20026;&#65306;</p>
+<pre class="tzx-plain"><code>ESC[1mdiff --git a/_a.txt b/_b.txtESC[m
+ESC[1mindex 0cb3b2a..d540f3f 100644ESC[m
+ESC[1m--- a/_a.txtESC[m
+ESC[1m+++ b/_b.txtESC[m
+ESC[36m@@ -1,5 +1,5 @@ESC[m
+ESC[31mWhat do you mean?&#65288;&#36825;&#34892;&#34987;&#21024;&#38500;&#65289;ESC[mWhen you nod your ESC[31mhead yes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;ESC[mESC[32mhaydes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;ESC[m
+But you wanna say ESC[32mmeESC[m no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;
+WhatESC[31mdoESC[m you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;
+When you don&#39;t want me to move&#65288;&#36825;&#34892;&#19981;&#21464;&#65289;ESC[m
+ESC[32mBut you tell me to go&#65288;&#36825;&#34892;&#26032;&#28155;&#21152;&#65289;ESC[m</code></pre>
+<p>&#22312; <a href="post-0024-linux-shell-scripting-cookbook.html">Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</a> &#36825;&#31687;&#31508;&#35760;&#20102;&#20063;&#35762;&#21040;&#36807;&#12290; <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>&#26368;&#21518;&#38382;&#39064;&#36716;&#21270;&#20026;&#22914;&#20309;&#25226; ANSI &#26631;&#35760;&#30340;&#25991;&#26412;&#36716;&#21270;&#20026; HTML&#12290;&#25105;&#21040; GitHub &#19978;&#19968;&#25628;&#65292;&#32467;&#26524;&#23601;&#20986;&#26469;&#20102;&#65306;<a href="https://github.com/theZiz/aha">theZiz/aha</a>&#12290;</p>
+<p>&#25105; fork &#20102;&#20182;&#30340; repo&#65292;&#31245;&#24494;&#19968;&#25913;&#65288;<a href="https://github.com/district10/aha">district10/aha</a>&#65289;&#23601;&#33021;&#29992;&#12290;</p>
+<p><code class="sourceCode bash"><span class="kw">git</span> diff --color-words --no-index _a.txt _b.txt <span class="kw">|</span> <span class="kw">aha</span> <span class="kw">&gt;</span> diffed.md</code> &#30340;&#36816;&#34892;&#32467;&#26524;&#26159; diffed.md&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;pre</span><span class="ot"> class=</span><span class="st">&quot;diffed&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;font-weight:bold;&quot;</span><span class="kw">&gt;</span>diff --git a/_a.txt b/_b.txt<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;font-weight:bold;&quot;</span><span class="kw">&gt;</span>index 0cb3b2a..d540f3f 100644<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;font-weight:bold;&quot;</span><span class="kw">&gt;</span>--- a/_a.txt<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;font-weight:bold;&quot;</span><span class="kw">&gt;</span>+++ b/_b.txt<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:teal;&quot;</span><span class="kw">&gt;</span>@@ -1,5 +1,5 @@<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:red;&quot;</span><span class="kw">&gt;</span>What do you mean?&#65288;&#36825;&#34892;&#34987;&#21024;&#38500;&#65289;<span class="kw">&lt;/span&gt;</span>When you nod
+your <span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:red;&quot;</span><span class="kw">&gt;</span>head yes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;<span class="kw">&lt;/span&gt;&lt;span</span>
+<span class="ot">style=</span><span class="st">&quot;color:green;&quot;</span><span class="kw">&gt;</span>haydes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;<span class="kw">&lt;/span&gt;</span>
+But you wanna say <span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:green;&quot;</span><span class="kw">&gt;</span>me<span class="kw">&lt;/span&gt;</span> no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;
+What<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:red;&quot;</span><span class="kw">&gt;</span>do<span class="kw">&lt;/span&gt;</span> you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;
+When you don&#39;t want me to move&#65288;&#36825;&#34892;&#19981;&#21464;&#65289;
+<span class="kw">&lt;span</span><span class="ot"> style=</span><span class="st">&quot;color:green;&quot;</span><span class="kw">&gt;</span>But you tell me to go&#65288;&#36825;&#34892;&#26032;&#28155;&#21152;&#65289;<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/pre&gt;</span></code></pre></div>
+<p>&#21152;&#28857; CSS&#65288;&#19979;&#38754;&#19981;&#26159;&#22270;&#29255;&#65292;&#34429;&#28982;&#30475;&#19978;&#21435;&#20687;&#26159;&#25130;&#22270;&#65289;&#65306;</p>
+<pre class="diffed"><span style="font-weight:bold;">diff --git a/_a.txt b/_b.txt</span><span style="font-weight:bold;">index 0cb3b2a..d540f3f 100644</span><span style="font-weight:bold;">--- a/_a.txt</span><span style="font-weight:bold;">+++ b/_b.txt</span><span style="color:teal;">@@ -1,5 +1,5 @@</span><span style="color:red;text-decoration:line-through;">What do you mean?&#65288;&#36825;&#34892;&#34987;&#21024;&#38500;&#65289;</span>When you nod your <span style="color:red;text-decoration:line-through;">head yes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;</span><span style="color:green;">haydes&#65288;&#21333;&#35789;&#25913;&#21464;&#65289;</span>But you wanna say <span style="color:green;">me</span> no&#65288;&#21333;&#35789;&#28155;&#21152;&#65289;What<span style="color:red;text-decoration:line-through;">do</span> you mean?&#65288;&#21024;&#38500;&#21333;&#35789;&#65289;When you don't want me to move&#65288;&#36825;&#34892;&#19981;&#21464;&#65289;<span style="color:green;">But you tell me to go&#65288;&#36825;&#34892;&#26032;&#28155;&#21152;&#65289;</span></pre>
+<p>&#19981;&#38169;&#19981;&#38169;&#65292;&#21487;&#20197;&#23433;&#23433;&#38745;&#38745;&#22320;&#27599;&#22825; dictation &#20102;&#12290;&#29616;&#22312;&#25105;&#24471;&#21435;&#20027;&#39029;&#26032;&#24320;&#19968;&#20010; bucket&#65292;&#25918;&#27599;&#22825;&#30340; dictation &#24037;&#20316;&#12290;</p>
+<p>&#20197;&#21518;&#25226; dictation &#25918;&#22312; <a href="http://tangzx.qiniudn.com/lyrics.html">Lyrics | &#21548;&#20889;</a>&#65292;&#35797;&#29992;&#20102;&#19968;&#27425;&#25928;&#26524;&#30456;&#24403;&#36190;&#12290;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/dictation.png" alt="&#22522;&#26412;&#19978;&#26159;&#20010;&#21512;&#26684;&#30340;&#32416;&#38169;&#23567;&#21161;&#25163;" />
+<p class="caption">&#22522;&#26412;&#19978;&#26159;&#20010;&#21512;&#26684;&#30340;&#32416;&#38169;&#23567;&#21161;&#25163;</p>
+</div>
+<p>&#21448;&#31245;&#24494;&#25913;&#20102;&#19979; CSS&#65292;<a href="https://github.com/district10/aha/commit/0f2e01732a978b94812067e9f00a06f3f8488cb1#diff-b195e3edfccd2066f031dd3d65cfea88L295">district10/aha@0f2e017</a>&#65292;&#29616;&#22312;&#30340;&#25928;&#26524;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/diffed/diff-new-css-2.png" />
+
+</div>
+<hr />
+<p>refs and see also</p>
+<ol>
+<li><a href="https://github.com/theZiz/aha">theZiz/aha</a></li>
+<li><a href="http://stackoverflow.com/questions/2013091/coloured-git-diff-to-html">Coloured Git diff to HTML - Stack Overflow</a></li>
+<li><a href="http://stackoverflow.com/questions/641055/diff-to-html-diff2html-program">diff to html (diff2html) program - Stack Overflow</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html">&#35835;&#25026; diff - &#38446;&#19968;&#23792;&#30340;&#32593;&#32476;&#26085;&#24535;</a></li>
+<li><a href="http://www.pixelbeat.org/docs/terminal_colours/">Terminal colour highlights</a></li>
+<li><a href="https://www.kernel.org/pub/software/scm/git/docs/git-diff.html">git-diff(1)</a></li>
+</ol>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#36890;&#24120;&#25105;&#37117;&#36825;&#20040;&#21561;&#29275;&#65306;&#8220;&#21733;&#22235;&#32423;&#21548;&#21147; 230&#65288;&#28385;&#20998; 248&#65289;&#65292;&#30475;&#30005;&#24433;&#38656;&#35201;&#23383;&#24149;&#20040;&#65311;&#65281;&#8221; (Surely I need&#8230;) &#128516;<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p><code class="sourceCode bash"><span class="kw">diff</span> -U9999999 -y _a.txt _b.txt <span class="kw">|</span> <span class="kw">pygmentize</span> -l diff -f html -O full -o file_diff.html</code><a href="#fnref2">&#8617;</a></p></li>
+<li id="fn3"><p>&#34429;&#28982;&#37027;&#26102;&#27809;&#35828;&#36825;&#26159; ANSI &#39068;&#33394;&#34920;&#31034;&#27861;&#12290;<a href="#fnref3">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#diff">diff</a></li>
+<li><a class="tzx-tag" href="tags.html/#util">util</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0062-pretty-diff.md" title="30 insertions(+), 34 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0062-pretty-diff.md" title="193 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0062-pretty-diff.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 30,
+        deletions: 34
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 193,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

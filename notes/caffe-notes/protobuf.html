@@ -1,0 +1,3839 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Protocal Buffers</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h2 id="protocol-buffers">Protocol Buffers</h2>
+<dl>
+<dt><a href="https://github.com/google/protobuf">google/protobuf: Protocol Buffers - Google&#8217;s data interchange format</a> <code class="foldable">@</code></dt>
+<dd><p>Protocol Buffers are a way of encoding structured data in an efficient yet extensible format. Google uses Protocol Buffers for almost all of its internal RPC protocols and file formats.</p>
+</dd>
+<dt><a href="https://developers.google.com/protocol-buffers/">Protocol Buffers &#160;|&#160; Google Developers</a> <code class="foldable">@</code></dt>
+<dd><p>Protocol buffers are Google&#8217;s language-neutral, platform-neutral, extensible mechanism for serializing structured data &#8211; think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages.</p>
+<dl>
+<dt>Why not just use XML? <code class="fold">@</code></dt>
+<dd><p>Protocol buffers have many advantages over XML for serializing structured data. Protocol buffers:</p>
+<ul>
+<li>are simpler</li>
+<li>are 3 to 10 times smaller</li>
+<li>are 20 to 100 times faster</li>
+<li>are less ambiguous</li>
+<li>generate data access classes that are easier to use programmatically</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt><a href="https://github.com/google/protobuf/wiki">Home &#183; google/protobuf Wiki</a> <code class="fold">@</code></dt>
+<dd><p>brief intro.</p>
+<dl>
+<dt><code>.proto</code></dt>
+<dd><pre><code>message Person {
+  required int32 id = 1;
+  required string name = 2;
+  optional string email = 3;
+}</code></pre>
+<p>&#19968;&#26086;&#20320;&#23450;&#20041;&#20102;&#33258;&#24049;&#30340;&#25253;&#25991;&#26684;&#24335;(message)&#65292;&#20320;&#23601;&#21487;&#20197;&#36816;&#34892;ProtocolBuffer&#32534;&#35793;&#22120;&#65292;&#23558;&#20320;&#30340; .proto &#25991;&#20214;&#32534;&#35793;&#25104;&#29305;&#23450;&#35821;&#35328;&#30340;&#31867;&#12290;</p>
+</dd>
+<dt>usage</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// write</span>
+Person person;
+person.set_id(<span class="dv">123</span>);
+person.set_name(<span class="st">&quot;Bob&quot;</span>);
+person.set_email(<span class="st">&quot;bob@example.com&quot;</span>);
+
+fstream out(<span class="st">&quot;person.pb&quot;</span>, ios::out | ios::binary | ios::trunc);
+person.SerializeToOstream(&amp;out);
+out.close();
+
+<span class="co">// read</span>
+Person person;
+fstream in(<span class="st">&quot;person.pb&quot;</span>, ios::in | ios::binary);
+<span class="kw">if</span> (!person.ParseFromIstream(&amp;in)) {
+  cerr &lt;&lt; <span class="st">&quot;Failed to parse person.pb.&quot;</span> &lt;&lt; endl;
+  exit(<span class="dv">1</span>);
+}
+
+<span class="co">// check</span>
+cout &lt;&lt; <span class="st">&quot;ID: &quot;</span> &lt;&lt; person.id() &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;name: &quot;</span> &lt;&lt; person.name() &lt;&lt; endl;
+<span class="kw">if</span> (person.has_email()) {   <span class="co">// &#19981;&#26159; optional &#20063;&#26377;&#36825;&#20010;&#20989;&#25968;</span>
+  cout &lt;&lt; <span class="st">&quot;e-mail: &quot;</span> &lt;&lt; person.email() &lt;&lt; endl;
+}</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt><a href="https://developers.google.com/protocol-buffers/docs/cpptutorial#parsing-and-serialization">Protocol Buffer Basics: C++ &#160;|&#160; Protocol Buffers &#160;|&#160; Google Developers</a> <code class="fold">@</code></dt>
+<dd><dl>
+<dt>source: addressbook.proto <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// &#22914;&#26524;&#27809;&#26377; package&#65292;namespace &#23601;&#26159;&#20840;&#23616;&#30340;&#12290;</span>
+package tutorial;
+
+message Person {
+  required string name = <span class="dv">1</span>;
+  required int32 id = <span class="dv">2</span>;
+  optional string email = <span class="dv">3</span>;
+
+  <span class="kw">enum</span> PhoneType {
+    MOBILE = <span class="dv">0</span>;
+    HOME = <span class="dv">1</span>;
+    WORK = <span class="dv">2</span>;
+  }
+
+  message PhoneNumber {
+    required string number = <span class="dv">1</span>;
+    optional PhoneType type = <span class="dv">2</span> [<span class="kw">default</span> = HOME];
+  }
+
+  repeated PhoneNumber phone = <span class="dv">4</span>;
+}
+
+message AddressBook {
+  repeated Person person = <span class="dv">1</span>;
+}</code></pre></div>
+</dd>
+<dt>Compiling Your Protocol Buffers <code class="fold">@</code></dt>
+<dd><ul>
+<li><a href="https://github.com/google/protobuf/releases/download/v2.6.1/protoc-2.6.1-win32.zip">protoc-2.6.1-win32.zip</a></li>
+<li><code>%.proto</code> &#8211;&gt; <code class="sourceCode bash"><span class="kw">protoc</span> -I=<span class="ot">$SRC_DIR</span> --cpp_out=<span class="ot">$DST_DIR</span> <span class="ot">$SRC_DIR</span>/addressbook.proto</code> &#8211;&gt; <code>%.pb.{h,cc}</code></li>
+<li>language support <code class="foldable">@</code>
+<ul>
+<li><code>--cpp_out</code></li>
+<li><code>--java_out</code></li>
+<li><code>--python_out</code></li>
+</ul></li>
+</ul>
+</dd>
+<dt>generated cpp code: addressbook.pb.{h,cc} <code class="fold">@</code></dt>
+<dd><dl>
+<dt>addressbook.pb.h <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Generated by the protocol buffer compiler.  DO NOT EDIT!</span>
+<span class="co">// source: addressbook.proto</span>
+
+<span class="ot">#ifndef PROTOBUF_addressbook_2eproto__INCLUDED</span>
+<span class="ot">#define PROTOBUF_addressbook_2eproto__INCLUDED</span>
+
+<span class="ot">#include &lt;string&gt;</span>
+
+<span class="ot">#include &lt;google/protobuf/stubs/common.h&gt;</span>
+
+<span class="ot">#if GOOGLE_PROTOBUF_VERSION &lt; 2006000</span>
+<span class="ot">#error This file was generated by a newer version of protoc which is</span>
+<span class="ot">#error incompatible with your Protocol Buffer headers.  Please update</span>
+<span class="ot">#error your headers.</span>
+<span class="ot">#endif</span>
+<span class="ot">#if 2006001 &lt; GOOGLE_PROTOBUF_MIN_PROTOC_VERSION</span>
+<span class="ot">#error This file was generated by an older version of protoc which is</span>
+<span class="ot">#error incompatible with your Protocol Buffer headers.  Please</span>
+<span class="ot">#error regenerate this file with a newer version of protoc.</span>
+<span class="ot">#endif</span>
+
+<span class="ot">#include &lt;google/protobuf/generated_message_util.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/message.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/repeated_field.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/extension_set.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/generated_enum_reflection.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/unknown_field_set.h&gt;</span>
+<span class="co">// @@protoc_insertion_point(includes)</span>
+
+<span class="kw">namespace</span> tutorial {
+
+<span class="co">// Internal implementation detail -- do not call these.</span>
+<span class="dt">void</span>  protobuf_AddDesc_addressbook_2eproto();
+<span class="dt">void</span> protobuf_AssignDesc_addressbook_2eproto();
+<span class="dt">void</span> protobuf_ShutdownFile_addressbook_2eproto();
+
+<span class="kw">class</span> Person;
+<span class="kw">class</span> Person_PhoneNumber;
+<span class="kw">class</span> AddressBook;
+
+<span class="kw">enum</span> Person_PhoneType {
+  Person_PhoneType_MOBILE = <span class="dv">0</span>,
+  Person_PhoneType_HOME = <span class="dv">1</span>,
+  Person_PhoneType_WORK = <span class="dv">2</span>
+};
+<span class="dt">bool</span> Person_PhoneType_IsValid(<span class="dt">int</span> value);
+<span class="dt">const</span> Person_PhoneType Person_PhoneType_PhoneType_MIN = Person_PhoneType_MOBILE;
+<span class="dt">const</span> Person_PhoneType Person_PhoneType_PhoneType_MAX = Person_PhoneType_WORK;
+<span class="dt">const</span> <span class="dt">int</span> Person_PhoneType_PhoneType_ARRAYSIZE = Person_PhoneType_PhoneType_MAX + <span class="dv">1</span>;
+
+<span class="dt">const</span> ::google::protobuf::EnumDescriptor* Person_PhoneType_descriptor();
+<span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; Person_PhoneType_Name(Person_PhoneType value) {
+  <span class="kw">return</span> ::google::protobuf::internal::NameOfEnum(
+    Person_PhoneType_descriptor(), value);
+}
+<span class="kw">inline</span> <span class="dt">bool</span> Person_PhoneType_Parse(
+    <span class="dt">const</span> ::std::string&amp; name, Person_PhoneType* value) {
+  <span class="kw">return</span> ::google::protobuf::internal::ParseNamedEnum&lt;Person_PhoneType&gt;(
+    Person_PhoneType_descriptor(), name, value);
+}
+<span class="co">// ===================================================================</span>
+
+<span class="kw">class</span> Person_PhoneNumber : <span class="kw">public</span> ::google::protobuf::Message {
+ <span class="kw">public</span>:
+  Person_PhoneNumber();
+  <span class="kw">virtual</span> ~Person_PhoneNumber();
+
+  Person_PhoneNumber(<span class="dt">const</span> Person_PhoneNumber&amp; from);
+
+  <span class="kw">inline</span> Person_PhoneNumber&amp; <span class="kw">operator</span>=(<span class="dt">const</span> Person_PhoneNumber&amp; from) {
+    CopyFrom(from);
+    <span class="kw">return</span> *<span class="kw">this</span>;
+  }
+
+  <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::UnknownFieldSet&amp; unknown_fields() <span class="dt">const</span> {
+    <span class="kw">return</span> _unknown_fields_;
+  }
+
+  <span class="kw">inline</span> ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    <span class="kw">return</span> &amp;_unknown_fields_;
+  }
+
+  <span class="dt">static</span> <span class="dt">const</span> ::google::protobuf::Descriptor* descriptor();
+  <span class="dt">static</span> <span class="dt">const</span> Person_PhoneNumber&amp; default_instance();
+
+  <span class="dt">void</span> Swap(Person_PhoneNumber* other);
+
+  <span class="co">// implements Message ----------------------------------------------</span>
+
+  Person_PhoneNumber* New() <span class="dt">const</span>;
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> Person_PhoneNumber&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> Person_PhoneNumber&amp; from);
+  <span class="dt">void</span> Clear();
+  <span class="dt">bool</span> IsInitialized() <span class="dt">const</span>;
+
+  <span class="dt">int</span> ByteSize() <span class="dt">const</span>;
+  <span class="dt">bool</span> MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  <span class="dt">void</span> SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span>;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) <span class="dt">const</span>;
+  <span class="dt">int</span> GetCachedSize() <span class="dt">const</span> { <span class="kw">return</span> _cached_size_; }
+  <span class="kw">private</span>:
+  <span class="dt">void</span> SharedCtor();
+  <span class="dt">void</span> SharedDtor();
+  <span class="dt">void</span> SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span>;
+  <span class="kw">public</span>:
+  ::google::protobuf::Metadata GetMetadata() <span class="dt">const</span>;
+
+  <span class="co">// nested types ----------------------------------------------------</span>
+
+  <span class="co">// accessors -------------------------------------------------------</span>
+
+  <span class="co">// required string number = 1;</span>
+  <span class="kw">inline</span> <span class="dt">bool</span> has_number() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_number();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kNumberFieldNumber = <span class="dv">1</span>;
+  <span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; number() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> set_number(<span class="dt">const</span> ::std::string&amp; value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_number(<span class="dt">const</span> <span class="dt">char</span>* value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_number(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size);
+  <span class="kw">inline</span> ::std::string* mutable_number();
+  <span class="kw">inline</span> ::std::string* release_number();
+  <span class="kw">inline</span> <span class="dt">void</span> set_allocated_number(::std::string* number);
+
+  <span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+  <span class="kw">inline</span> <span class="dt">bool</span> has_type() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_type();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kTypeFieldNumber = <span class="dv">2</span>;
+  <span class="kw">inline</span> ::tutorial::Person_PhoneType type() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> set_type(::tutorial::Person_PhoneType value);
+
+  <span class="co">// @@protoc_insertion_point(class_scope:tutorial.Person.PhoneNumber)</span>
+ <span class="kw">private</span>:
+  <span class="kw">inline</span> <span class="dt">void</span> set_has_number();
+  <span class="kw">inline</span> <span class="dt">void</span> clear_has_number();
+  <span class="kw">inline</span> <span class="dt">void</span> set_has_type();
+  <span class="kw">inline</span> <span class="dt">void</span> clear_has_type();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[<span class="dv">1</span>];
+  <span class="dt">mutable</span> <span class="dt">int</span> _cached_size_;
+  ::std::string* number_;
+  <span class="dt">int</span> type_;
+  <span class="kw">friend</span> <span class="dt">void</span>  protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_AssignDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_ShutdownFile_addressbook_2eproto();
+
+  <span class="dt">void</span> InitAsDefaultInstance();
+  <span class="dt">static</span> Person_PhoneNumber* default_instance_;
+};
+<span class="co">// -------------------------------------------------------------------</span>
+
+<span class="kw">class</span> Person : <span class="kw">public</span> ::google::protobuf::Message {
+ <span class="kw">public</span>:
+  Person();
+  <span class="kw">virtual</span> ~Person();
+
+  Person(<span class="dt">const</span> Person&amp; from);
+
+  <span class="kw">inline</span> Person&amp; <span class="kw">operator</span>=(<span class="dt">const</span> Person&amp; from) {
+    CopyFrom(from);
+    <span class="kw">return</span> *<span class="kw">this</span>;
+  }
+
+  <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::UnknownFieldSet&amp; unknown_fields() <span class="dt">const</span> {
+    <span class="kw">return</span> _unknown_fields_;
+  }
+
+  <span class="kw">inline</span> ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    <span class="kw">return</span> &amp;_unknown_fields_;
+  }
+
+  <span class="dt">static</span> <span class="dt">const</span> ::google::protobuf::Descriptor* descriptor();
+  <span class="dt">static</span> <span class="dt">const</span> Person&amp; default_instance();
+
+  <span class="dt">void</span> Swap(Person* other);
+
+  <span class="co">// implements Message ----------------------------------------------</span>
+
+  Person* New() <span class="dt">const</span>;
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> Person&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> Person&amp; from);
+  <span class="dt">void</span> Clear();
+  <span class="dt">bool</span> IsInitialized() <span class="dt">const</span>;
+
+  <span class="dt">int</span> ByteSize() <span class="dt">const</span>;
+  <span class="dt">bool</span> MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  <span class="dt">void</span> SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span>;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) <span class="dt">const</span>;
+  <span class="dt">int</span> GetCachedSize() <span class="dt">const</span> { <span class="kw">return</span> _cached_size_; }
+  <span class="kw">private</span>:
+  <span class="dt">void</span> SharedCtor();
+  <span class="dt">void</span> SharedDtor();
+  <span class="dt">void</span> SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span>;
+  <span class="kw">public</span>:
+  ::google::protobuf::Metadata GetMetadata() <span class="dt">const</span>;
+
+  <span class="co">// nested types ----------------------------------------------------</span>
+
+  <span class="kw">typedef</span> Person_PhoneNumber PhoneNumber;
+
+  <span class="kw">typedef</span> Person_PhoneType PhoneType;
+  <span class="dt">static</span> <span class="dt">const</span> PhoneType MOBILE = Person_PhoneType_MOBILE;
+  <span class="dt">static</span> <span class="dt">const</span> PhoneType HOME = Person_PhoneType_HOME;
+  <span class="dt">static</span> <span class="dt">const</span> PhoneType WORK = Person_PhoneType_WORK;
+  <span class="dt">static</span> <span class="kw">inline</span> <span class="dt">bool</span> PhoneType_IsValid(<span class="dt">int</span> value) {
+    <span class="kw">return</span> Person_PhoneType_IsValid(value);
+  }
+  <span class="dt">static</span> <span class="dt">const</span> PhoneType PhoneType_MIN =
+    Person_PhoneType_PhoneType_MIN;
+  <span class="dt">static</span> <span class="dt">const</span> PhoneType PhoneType_MAX =
+    Person_PhoneType_PhoneType_MAX;
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> PhoneType_ARRAYSIZE =
+    Person_PhoneType_PhoneType_ARRAYSIZE;
+  <span class="dt">static</span> <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::EnumDescriptor*
+  PhoneType_descriptor() {
+    <span class="kw">return</span> Person_PhoneType_descriptor();
+  }
+  <span class="dt">static</span> <span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; PhoneType_Name(PhoneType value) {
+    <span class="kw">return</span> Person_PhoneType_Name(value);
+  }
+  <span class="dt">static</span> <span class="kw">inline</span> <span class="dt">bool</span> PhoneType_Parse(<span class="dt">const</span> ::std::string&amp; name,
+      PhoneType* value) {
+    <span class="kw">return</span> Person_PhoneType_Parse(name, value);
+  }
+
+  <span class="co">// accessors -------------------------------------------------------</span>
+
+  <span class="co">// required string name = 1;</span>
+  <span class="kw">inline</span> <span class="dt">bool</span> has_name() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_name();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kNameFieldNumber = <span class="dv">1</span>;
+  <span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; name() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> set_name(<span class="dt">const</span> ::std::string&amp; value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_name(<span class="dt">const</span> <span class="dt">char</span>* value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_name(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size);
+  <span class="kw">inline</span> ::std::string* mutable_name();
+  <span class="kw">inline</span> ::std::string* release_name();
+  <span class="kw">inline</span> <span class="dt">void</span> set_allocated_name(::std::string* name);
+
+  <span class="co">// required int32 id = 2;</span>
+  <span class="kw">inline</span> <span class="dt">bool</span> has_id() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_id();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kIdFieldNumber = <span class="dv">2</span>;
+  <span class="kw">inline</span> ::google::protobuf::int32 id() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> set_id(::google::protobuf::int32 value);
+
+  <span class="co">// optional string email = 3;</span>
+  <span class="kw">inline</span> <span class="dt">bool</span> has_email() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_email();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kEmailFieldNumber = <span class="dv">3</span>;
+  <span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; email() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> set_email(<span class="dt">const</span> ::std::string&amp; value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_email(<span class="dt">const</span> <span class="dt">char</span>* value);
+  <span class="kw">inline</span> <span class="dt">void</span> set_email(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size);
+  <span class="kw">inline</span> ::std::string* mutable_email();
+  <span class="kw">inline</span> ::std::string* release_email();
+  <span class="kw">inline</span> <span class="dt">void</span> set_allocated_email(::std::string* email);
+
+  <span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+  <span class="kw">inline</span> <span class="dt">int</span> phone_size() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_phone();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kPhoneFieldNumber = <span class="dv">4</span>;
+  <span class="kw">inline</span> <span class="dt">const</span> ::tutorial::Person_PhoneNumber&amp; phone(<span class="dt">int</span> index) <span class="dt">const</span>;
+  <span class="kw">inline</span> ::tutorial::Person_PhoneNumber* mutable_phone(<span class="dt">int</span> index);
+  <span class="kw">inline</span> ::tutorial::Person_PhoneNumber* add_phone();
+  <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person_PhoneNumber &gt;&amp;
+      phone() <span class="dt">const</span>;
+  <span class="kw">inline</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person_PhoneNumber &gt;*
+      mutable_phone();
+
+  <span class="co">// @@protoc_insertion_point(class_scope:tutorial.Person)</span>
+ <span class="kw">private</span>:
+  <span class="kw">inline</span> <span class="dt">void</span> set_has_name();
+  <span class="kw">inline</span> <span class="dt">void</span> clear_has_name();
+  <span class="kw">inline</span> <span class="dt">void</span> set_has_id();
+  <span class="kw">inline</span> <span class="dt">void</span> clear_has_id();
+  <span class="kw">inline</span> <span class="dt">void</span> set_has_email();
+  <span class="kw">inline</span> <span class="dt">void</span> clear_has_email();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[<span class="dv">1</span>];
+  <span class="dt">mutable</span> <span class="dt">int</span> _cached_size_;
+  ::std::string* name_;
+  ::std::string* email_;
+  ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person_PhoneNumber &gt; phone_;
+  ::google::protobuf::int32 id_;
+  <span class="kw">friend</span> <span class="dt">void</span>  protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_AssignDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_ShutdownFile_addressbook_2eproto();
+
+  <span class="dt">void</span> InitAsDefaultInstance();
+  <span class="dt">static</span> Person* default_instance_;
+};
+<span class="co">// -------------------------------------------------------------------</span>
+
+<span class="kw">class</span> AddressBook : <span class="kw">public</span> ::google::protobuf::Message {
+ <span class="kw">public</span>:
+  AddressBook();
+  <span class="kw">virtual</span> ~AddressBook();
+
+  AddressBook(<span class="dt">const</span> AddressBook&amp; from);
+
+  <span class="kw">inline</span> AddressBook&amp; <span class="kw">operator</span>=(<span class="dt">const</span> AddressBook&amp; from) {
+    CopyFrom(from);
+    <span class="kw">return</span> *<span class="kw">this</span>;
+  }
+
+  <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::UnknownFieldSet&amp; unknown_fields() <span class="dt">const</span> {
+    <span class="kw">return</span> _unknown_fields_;
+  }
+
+  <span class="kw">inline</span> ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    <span class="kw">return</span> &amp;_unknown_fields_;
+  }
+
+  <span class="dt">static</span> <span class="dt">const</span> ::google::protobuf::Descriptor* descriptor();
+  <span class="dt">static</span> <span class="dt">const</span> AddressBook&amp; default_instance();
+
+  <span class="dt">void</span> Swap(AddressBook* other);
+
+  <span class="co">// implements Message ----------------------------------------------</span>
+
+  AddressBook* New() <span class="dt">const</span>;
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from);
+  <span class="dt">void</span> CopyFrom(<span class="dt">const</span> AddressBook&amp; from);
+  <span class="dt">void</span> MergeFrom(<span class="dt">const</span> AddressBook&amp; from);
+  <span class="dt">void</span> Clear();
+  <span class="dt">bool</span> IsInitialized() <span class="dt">const</span>;
+
+  <span class="dt">int</span> ByteSize() <span class="dt">const</span>;
+  <span class="dt">bool</span> MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  <span class="dt">void</span> SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span>;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) <span class="dt">const</span>;
+  <span class="dt">int</span> GetCachedSize() <span class="dt">const</span> { <span class="kw">return</span> _cached_size_; }
+  <span class="kw">private</span>:
+  <span class="dt">void</span> SharedCtor();
+  <span class="dt">void</span> SharedDtor();
+  <span class="dt">void</span> SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span>;
+  <span class="kw">public</span>:
+  ::google::protobuf::Metadata GetMetadata() <span class="dt">const</span>;
+
+  <span class="co">// nested types ----------------------------------------------------</span>
+
+  <span class="co">// accessors -------------------------------------------------------</span>
+
+  <span class="co">// repeated .tutorial.Person person = 1;</span>
+  <span class="kw">inline</span> <span class="dt">int</span> person_size() <span class="dt">const</span>;
+  <span class="kw">inline</span> <span class="dt">void</span> clear_person();
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kPersonFieldNumber = <span class="dv">1</span>;
+  <span class="kw">inline</span> <span class="dt">const</span> ::tutorial::Person&amp; person(<span class="dt">int</span> index) <span class="dt">const</span>;
+  <span class="kw">inline</span> ::tutorial::Person* mutable_person(<span class="dt">int</span> index);
+  <span class="kw">inline</span> ::tutorial::Person* add_person();
+  <span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person &gt;&amp;
+      person() <span class="dt">const</span>;
+  <span class="kw">inline</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person &gt;*
+      mutable_person();
+
+  <span class="co">// @@protoc_insertion_point(class_scope:tutorial.AddressBook)</span>
+ <span class="kw">private</span>:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[<span class="dv">1</span>];
+  <span class="dt">mutable</span> <span class="dt">int</span> _cached_size_;
+  ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person &gt; person_;
+  <span class="kw">friend</span> <span class="dt">void</span>  protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_AssignDesc_addressbook_2eproto();
+  <span class="kw">friend</span> <span class="dt">void</span> protobuf_ShutdownFile_addressbook_2eproto();
+
+  <span class="dt">void</span> InitAsDefaultInstance();
+  <span class="dt">static</span> AddressBook* default_instance_;
+};
+<span class="co">// ===================================================================</span>
+
+
+<span class="co">// ===================================================================</span>
+
+<span class="co">// Person_PhoneNumber</span>
+
+<span class="co">// required string number = 1;</span>
+<span class="kw">inline</span> <span class="dt">bool</span> Person_PhoneNumber::has_number() <span class="dt">const</span> {
+  <span class="kw">return</span> (_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000001u</span>) != <span class="dv">0</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_has_number() {
+  _has_bits_[<span class="dv">0</span>] |= <span class="bn">0x00000001u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::clear_has_number() {
+  _has_bits_[<span class="dv">0</span>] &amp;= ~<span class="bn">0x00000001u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::clear_number() {
+  <span class="kw">if</span> (number_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    number_-&gt;clear();
+  }
+  clear_has_number();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; Person_PhoneNumber::number() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.PhoneNumber.number)</span>
+  <span class="kw">return</span> *number_;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_number(<span class="dt">const</span> ::std::string&amp; value) {
+  set_has_number();
+  <span class="kw">if</span> (number_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    number_ = <span class="kw">new</span> ::std::string;
+  }
+  number_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set:tutorial.Person.PhoneNumber.number)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_number(<span class="dt">const</span> <span class="dt">char</span>* value) {
+  set_has_number();
+  <span class="kw">if</span> (number_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    number_ = <span class="kw">new</span> ::std::string;
+  }
+  number_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set_char:tutorial.Person.PhoneNumber.number)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_number(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size) {
+  set_has_number();
+  <span class="kw">if</span> (number_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    number_ = <span class="kw">new</span> ::std::string;
+  }
+  number_-&gt;assign(<span class="kw">reinterpret_cast</span>&lt;<span class="dt">const</span> <span class="dt">char</span>*&gt;(value), size);
+  <span class="co">// @@protoc_insertion_point(field_set_pointer:tutorial.Person.PhoneNumber.number)</span>
+}
+<span class="kw">inline</span> ::std::string* Person_PhoneNumber::mutable_number() {
+  set_has_number();
+  <span class="kw">if</span> (number_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    number_ = <span class="kw">new</span> ::std::string;
+  }
+  <span class="co">// @@protoc_insertion_point(field_mutable:tutorial.Person.PhoneNumber.number)</span>
+  <span class="kw">return</span> number_;
+}
+<span class="kw">inline</span> ::std::string* Person_PhoneNumber::release_number() {
+  clear_has_number();
+  <span class="kw">if</span> (number_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">return</span> NULL;
+  } <span class="kw">else</span> {
+    ::std::string* temp = number_;
+    number_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    <span class="kw">return</span> temp;
+  }
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_allocated_number(::std::string* number) {
+  <span class="kw">if</span> (number_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> number_;
+  }
+  <span class="kw">if</span> (number) {
+    set_has_number();
+    number_ = number;
+  } <span class="kw">else</span> {
+    clear_has_number();
+    number_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  <span class="co">// @@protoc_insertion_point(field_set_allocated:tutorial.Person.PhoneNumber.number)</span>
+}
+
+<span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+<span class="kw">inline</span> <span class="dt">bool</span> Person_PhoneNumber::has_type() <span class="dt">const</span> {
+  <span class="kw">return</span> (_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000002u</span>) != <span class="dv">0</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_has_type() {
+  _has_bits_[<span class="dv">0</span>] |= <span class="bn">0x00000002u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::clear_has_type() {
+  _has_bits_[<span class="dv">0</span>] &amp;= ~<span class="bn">0x00000002u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::clear_type() {
+  type_ = <span class="dv">1</span>;
+  clear_has_type();
+}
+<span class="kw">inline</span> ::tutorial::Person_PhoneType Person_PhoneNumber::type() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.PhoneNumber.type)</span>
+  <span class="kw">return</span> <span class="kw">static_cast</span>&lt; ::tutorial::Person_PhoneType &gt;(type_);
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person_PhoneNumber::set_type(::tutorial::Person_PhoneType value) {
+  assert(::tutorial::Person_PhoneType_IsValid(value));
+  set_has_type();
+  type_ = value;
+  <span class="co">// @@protoc_insertion_point(field_set:tutorial.Person.PhoneNumber.type)</span>
+}
+
+<span class="co">// -------------------------------------------------------------------</span>
+
+<span class="co">// Person</span>
+
+<span class="co">// required string name = 1;</span>
+<span class="kw">inline</span> <span class="dt">bool</span> Person::has_name() <span class="dt">const</span> {
+  <span class="kw">return</span> (_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000001u</span>) != <span class="dv">0</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_has_name() {
+  _has_bits_[<span class="dv">0</span>] |= <span class="bn">0x00000001u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_has_name() {
+  _has_bits_[<span class="dv">0</span>] &amp;= ~<span class="bn">0x00000001u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_name() {
+  <span class="kw">if</span> (name_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_-&gt;clear();
+  }
+  clear_has_name();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; Person::name() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.name)</span>
+  <span class="kw">return</span> *name_;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_name(<span class="dt">const</span> ::std::string&amp; value) {
+  set_has_name();
+  <span class="kw">if</span> (name_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = <span class="kw">new</span> ::std::string;
+  }
+  name_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set:tutorial.Person.name)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_name(<span class="dt">const</span> <span class="dt">char</span>* value) {
+  set_has_name();
+  <span class="kw">if</span> (name_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = <span class="kw">new</span> ::std::string;
+  }
+  name_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set_char:tutorial.Person.name)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_name(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size) {
+  set_has_name();
+  <span class="kw">if</span> (name_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = <span class="kw">new</span> ::std::string;
+  }
+  name_-&gt;assign(<span class="kw">reinterpret_cast</span>&lt;<span class="dt">const</span> <span class="dt">char</span>*&gt;(value), size);
+  <span class="co">// @@protoc_insertion_point(field_set_pointer:tutorial.Person.name)</span>
+}
+<span class="kw">inline</span> ::std::string* Person::mutable_name() {
+  set_has_name();
+  <span class="kw">if</span> (name_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = <span class="kw">new</span> ::std::string;
+  }
+  <span class="co">// @@protoc_insertion_point(field_mutable:tutorial.Person.name)</span>
+  <span class="kw">return</span> name_;
+}
+<span class="kw">inline</span> ::std::string* Person::release_name() {
+  clear_has_name();
+  <span class="kw">if</span> (name_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">return</span> NULL;
+  } <span class="kw">else</span> {
+    ::std::string* temp = name_;
+    name_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    <span class="kw">return</span> temp;
+  }
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_allocated_name(::std::string* name) {
+  <span class="kw">if</span> (name_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> name_;
+  }
+  <span class="kw">if</span> (name) {
+    set_has_name();
+    name_ = name;
+  } <span class="kw">else</span> {
+    clear_has_name();
+    name_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  <span class="co">// @@protoc_insertion_point(field_set_allocated:tutorial.Person.name)</span>
+}
+
+<span class="co">// required int32 id = 2;</span>
+<span class="kw">inline</span> <span class="dt">bool</span> Person::has_id() <span class="dt">const</span> {
+  <span class="kw">return</span> (_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000002u</span>) != <span class="dv">0</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_has_id() {
+  _has_bits_[<span class="dv">0</span>] |= <span class="bn">0x00000002u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_has_id() {
+  _has_bits_[<span class="dv">0</span>] &amp;= ~<span class="bn">0x00000002u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_id() {
+  id_ = <span class="dv">0</span>;
+  clear_has_id();
+}
+<span class="kw">inline</span> ::google::protobuf::int32 Person::id() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.id)</span>
+  <span class="kw">return</span> id_;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  <span class="co">// @@protoc_insertion_point(field_set:tutorial.Person.id)</span>
+}
+
+<span class="co">// optional string email = 3;</span>
+<span class="kw">inline</span> <span class="dt">bool</span> Person::has_email() <span class="dt">const</span> {
+  <span class="kw">return</span> (_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000004u</span>) != <span class="dv">0</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_has_email() {
+  _has_bits_[<span class="dv">0</span>] |= <span class="bn">0x00000004u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_has_email() {
+  _has_bits_[<span class="dv">0</span>] &amp;= ~<span class="bn">0x00000004u</span>;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_email() {
+  <span class="kw">if</span> (email_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    email_-&gt;clear();
+  }
+  clear_has_email();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::std::string&amp; Person::email() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.email)</span>
+  <span class="kw">return</span> *email_;
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_email(<span class="dt">const</span> ::std::string&amp; value) {
+  set_has_email();
+  <span class="kw">if</span> (email_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    email_ = <span class="kw">new</span> ::std::string;
+  }
+  email_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set:tutorial.Person.email)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_email(<span class="dt">const</span> <span class="dt">char</span>* value) {
+  set_has_email();
+  <span class="kw">if</span> (email_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    email_ = <span class="kw">new</span> ::std::string;
+  }
+  email_-&gt;assign(value);
+  <span class="co">// @@protoc_insertion_point(field_set_char:tutorial.Person.email)</span>
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_email(<span class="dt">const</span> <span class="dt">char</span>* value, size_t size) {
+  set_has_email();
+  <span class="kw">if</span> (email_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    email_ = <span class="kw">new</span> ::std::string;
+  }
+  email_-&gt;assign(<span class="kw">reinterpret_cast</span>&lt;<span class="dt">const</span> <span class="dt">char</span>*&gt;(value), size);
+  <span class="co">// @@protoc_insertion_point(field_set_pointer:tutorial.Person.email)</span>
+}
+<span class="kw">inline</span> ::std::string* Person::mutable_email() {
+  set_has_email();
+  <span class="kw">if</span> (email_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    email_ = <span class="kw">new</span> ::std::string;
+  }
+  <span class="co">// @@protoc_insertion_point(field_mutable:tutorial.Person.email)</span>
+  <span class="kw">return</span> email_;
+}
+<span class="kw">inline</span> ::std::string* Person::release_email() {
+  clear_has_email();
+  <span class="kw">if</span> (email_ == &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">return</span> NULL;
+  } <span class="kw">else</span> {
+    ::std::string* temp = email_;
+    email_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    <span class="kw">return</span> temp;
+  }
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::set_allocated_email(::std::string* email) {
+  <span class="kw">if</span> (email_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> email_;
+  }
+  <span class="kw">if</span> (email) {
+    set_has_email();
+    email_ = email;
+  } <span class="kw">else</span> {
+    clear_has_email();
+    email_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  <span class="co">// @@protoc_insertion_point(field_set_allocated:tutorial.Person.email)</span>
+}
+
+<span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+<span class="kw">inline</span> <span class="dt">int</span> Person::phone_size() <span class="dt">const</span> {
+  <span class="kw">return</span> phone_.size();
+}
+<span class="kw">inline</span> <span class="dt">void</span> Person::clear_phone() {
+  phone_.Clear();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::tutorial::Person_PhoneNumber&amp; Person::phone(<span class="dt">int</span> index) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.Person.phone)</span>
+  <span class="kw">return</span> phone_.Get(index);
+}
+<span class="kw">inline</span> ::tutorial::Person_PhoneNumber* Person::mutable_phone(<span class="dt">int</span> index) {
+  <span class="co">// @@protoc_insertion_point(field_mutable:tutorial.Person.phone)</span>
+  <span class="kw">return</span> phone_.Mutable(index);
+}
+<span class="kw">inline</span> ::tutorial::Person_PhoneNumber* Person::add_phone() {
+  <span class="co">// @@protoc_insertion_point(field_add:tutorial.Person.phone)</span>
+  <span class="kw">return</span> phone_.Add();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person_PhoneNumber &gt;&amp;
+Person::phone() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_list:tutorial.Person.phone)</span>
+  <span class="kw">return</span> phone_;
+}
+<span class="kw">inline</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person_PhoneNumber &gt;*
+Person::mutable_phone() {
+  <span class="co">// @@protoc_insertion_point(field_mutable_list:tutorial.Person.phone)</span>
+  <span class="kw">return</span> &amp;phone_;
+}
+
+<span class="co">// -------------------------------------------------------------------</span>
+
+<span class="co">// AddressBook</span>
+
+<span class="co">// repeated .tutorial.Person person = 1;</span>
+<span class="kw">inline</span> <span class="dt">int</span> AddressBook::person_size() <span class="dt">const</span> {
+  <span class="kw">return</span> person_.size();
+}
+<span class="kw">inline</span> <span class="dt">void</span> AddressBook::clear_person() {
+  person_.Clear();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::tutorial::Person&amp; AddressBook::person(<span class="dt">int</span> index) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_get:tutorial.AddressBook.person)</span>
+  <span class="kw">return</span> person_.Get(index);
+}
+<span class="kw">inline</span> ::tutorial::Person* AddressBook::mutable_person(<span class="dt">int</span> index) {
+  <span class="co">// @@protoc_insertion_point(field_mutable:tutorial.AddressBook.person)</span>
+  <span class="kw">return</span> person_.Mutable(index);
+}
+<span class="kw">inline</span> ::tutorial::Person* AddressBook::add_person() {
+  <span class="co">// @@protoc_insertion_point(field_add:tutorial.AddressBook.person)</span>
+  <span class="kw">return</span> person_.Add();
+}
+<span class="kw">inline</span> <span class="dt">const</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person &gt;&amp;
+AddressBook::person() <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(field_list:tutorial.AddressBook.person)</span>
+  <span class="kw">return</span> person_;
+}
+<span class="kw">inline</span> ::google::protobuf::RepeatedPtrField&lt; ::tutorial::Person &gt;*
+AddressBook::mutable_person() {
+  <span class="co">// @@protoc_insertion_point(field_mutable_list:tutorial.AddressBook.person)</span>
+  <span class="kw">return</span> &amp;person_;
+}
+
+
+<span class="co">// @@protoc_insertion_point(namespace_scope)</span>
+
+}  <span class="co">// namespace tutorial</span>
+
+<span class="ot">#ifndef SWIG</span>
+<span class="kw">namespace</span> google {
+<span class="kw">namespace</span> protobuf {
+
+<span class="kw">template</span> &lt;&gt; <span class="kw">struct</span> is_proto_enum&lt; ::tutorial::Person_PhoneType&gt; : ::google::protobuf::internal::true_type {};
+<span class="kw">template</span> &lt;&gt;
+<span class="kw">inline</span> <span class="dt">const</span> EnumDescriptor* GetEnumDescriptor&lt; ::tutorial::Person_PhoneType&gt;() {
+  <span class="kw">return</span> ::tutorial::Person_PhoneType_descriptor();
+}
+
+}  <span class="co">// namespace google</span>
+}  <span class="co">// namespace protobuf</span>
+<span class="ot">#endif  </span><span class="co">// SWIG</span>
+
+<span class="co">// @@protoc_insertion_point(global_scope)</span>
+
+<span class="ot">#endif  </span><span class="co">// PROTOBUF_addressbook_2eproto__INCLUDED</span></code></pre></div>
+</dd>
+<dt>addressbook.pb.cc <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Generated by the protocol buffer compiler.  DO NOT EDIT!</span>
+<span class="co">// source: addressbook.proto</span>
+
+<span class="ot">#define INTERNAL_SUPPRESS_PROTOBUF_FIELD_DEPRECATION</span>
+<span class="ot">#include &quot;addressbook.pb.h&quot;</span>
+
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="ot">#include &lt;google/protobuf/stubs/common.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/stubs/once.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/io/coded_stream.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/wire_format_lite_inl.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/descriptor.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/generated_message_reflection.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/reflection_ops.h&gt;</span>
+<span class="ot">#include &lt;google/protobuf/wire_format.h&gt;</span>
+<span class="co">// @@protoc_insertion_point(includes)</span>
+
+<span class="kw">namespace</span> tutorial {
+
+<span class="kw">namespace</span> {
+
+<span class="dt">const</span> ::google::protobuf::Descriptor* Person_descriptor_ = NULL;
+<span class="dt">const</span> ::google::protobuf::internal::GeneratedMessageReflection*
+  Person_reflection_ = NULL;
+<span class="dt">const</span> ::google::protobuf::Descriptor* Person_PhoneNumber_descriptor_ = NULL;
+<span class="dt">const</span> ::google::protobuf::internal::GeneratedMessageReflection*
+  Person_PhoneNumber_reflection_ = NULL;
+<span class="dt">const</span> ::google::protobuf::EnumDescriptor* Person_PhoneType_descriptor_ = NULL;
+<span class="dt">const</span> ::google::protobuf::Descriptor* AddressBook_descriptor_ = NULL;
+<span class="dt">const</span> ::google::protobuf::internal::GeneratedMessageReflection*
+  AddressBook_reflection_ = NULL;
+
+}  <span class="co">// namespace</span>
+
+
+<span class="dt">void</span> protobuf_AssignDesc_addressbook_2eproto() {
+  protobuf_AddDesc_addressbook_2eproto();
+  <span class="dt">const</span> ::google::protobuf::FileDescriptor* file =
+    ::google::protobuf::DescriptorPool::generated_pool()-&gt;FindFileByName(
+      <span class="st">&quot;addressbook.proto&quot;</span>);
+  GOOGLE_CHECK(file != NULL);
+  Person_descriptor_ = file-&gt;message_type(<span class="dv">0</span>);
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> Person_offsets_[<span class="dv">4</span>] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, email_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, phone_),
+  };
+  Person_reflection_ =
+    <span class="kw">new</span> ::google::protobuf::internal::GeneratedMessageReflection(
+      Person_descriptor_,
+      Person::default_instance_,
+      Person_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, _has_bits_[<span class="dv">0</span>]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person, _unknown_fields_),
+      <span class="dv">-1</span>,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      <span class="kw">sizeof</span>(Person));
+  Person_PhoneNumber_descriptor_ = Person_descriptor_-&gt;nested_type(<span class="dv">0</span>);
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> Person_PhoneNumber_offsets_[<span class="dv">2</span>] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person_PhoneNumber, number_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person_PhoneNumber, type_),
+  };
+  Person_PhoneNumber_reflection_ =
+    <span class="kw">new</span> ::google::protobuf::internal::GeneratedMessageReflection(
+      Person_PhoneNumber_descriptor_,
+      Person_PhoneNumber::default_instance_,
+      Person_PhoneNumber_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person_PhoneNumber, _has_bits_[<span class="dv">0</span>]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Person_PhoneNumber, _unknown_fields_),
+      <span class="dv">-1</span>,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      <span class="kw">sizeof</span>(Person_PhoneNumber));
+  Person_PhoneType_descriptor_ = Person_descriptor_-&gt;enum_type(<span class="dv">0</span>);
+  AddressBook_descriptor_ = file-&gt;message_type(<span class="dv">1</span>);
+  <span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> AddressBook_offsets_[<span class="dv">1</span>] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddressBook, person_),
+  };
+  AddressBook_reflection_ =
+    <span class="kw">new</span> ::google::protobuf::internal::GeneratedMessageReflection(
+      AddressBook_descriptor_,
+      AddressBook::default_instance_,
+      AddressBook_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddressBook, _has_bits_[<span class="dv">0</span>]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddressBook, _unknown_fields_),
+      <span class="dv">-1</span>,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      <span class="kw">sizeof</span>(AddressBook));
+}
+
+<span class="kw">namespace</span> {
+
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
+<span class="kw">inline</span> <span class="dt">void</span> protobuf_AssignDescriptorsOnce() {
+  ::google::protobuf::GoogleOnceInit(&amp;protobuf_AssignDescriptors_once_,
+                 &amp;protobuf_AssignDesc_addressbook_2eproto);
+}
+
+<span class="dt">void</span> protobuf_RegisterTypes(<span class="dt">const</span> ::std::string&amp;) {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Person_descriptor_, &amp;Person::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Person_PhoneNumber_descriptor_, &amp;Person_PhoneNumber::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    AddressBook_descriptor_, &amp;AddressBook::default_instance());
+}
+
+}  <span class="co">// namespace</span>
+
+<span class="dt">void</span> protobuf_ShutdownFile_addressbook_2eproto() {
+  <span class="kw">delete</span> Person::default_instance_;
+  <span class="kw">delete</span> Person_reflection_;
+  <span class="kw">delete</span> Person_PhoneNumber::default_instance_;
+  <span class="kw">delete</span> Person_PhoneNumber_reflection_;
+  <span class="kw">delete</span> AddressBook::default_instance_;
+  <span class="kw">delete</span> AddressBook_reflection_;
+}
+
+<span class="dt">void</span> protobuf_AddDesc_addressbook_2eproto() {
+  <span class="dt">static</span> <span class="dt">bool</span> already_here = <span class="kw">false</span>;
+  <span class="kw">if</span> (already_here) <span class="kw">return</span>;
+  already_here = <span class="kw">true</span>;
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
+    <span class="st">&quot;</span><span class="ch">\n\021</span><span class="st">addressbook.proto</span><span class="ch">\022\010</span><span class="st">tutorial</span><span class="ch">\&quot;</span><span class="st">\332</span><span class="ch">\001\n\006</span><span class="st">Person&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\022\014\n\004</span><span class="st">name</span><span class="ch">\030\001</span><span class="st"> </span><span class="ch">\002</span><span class="st">(</span><span class="ch">\t\022\n\n\002</span><span class="st">id</span><span class="ch">\030\002</span><span class="st"> </span><span class="ch">\002</span><span class="st">(</span><span class="ch">\005\022\r\n\005</span><span class="st">email</span><span class="ch">\030\003</span><span class="st"> </span><span class="ch">\001</span><span class="st">(&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\t\022</span><span class="st">+</span><span class="ch">\n\005</span><span class="st">phone</span><span class="ch">\030\004</span><span class="st"> </span><span class="ch">\003</span><span class="st">(</span><span class="ch">\0132\034</span><span class="st">.tutorial.Person.Phone&quot;</span>
+    <span class="st">&quot;Number</span><span class="ch">\032</span><span class="st">M</span><span class="ch">\n\013</span><span class="st">PhoneNumber</span><span class="ch">\022\016\n\006</span><span class="st">number</span><span class="ch">\030\001</span><span class="st"> </span><span class="ch">\002</span><span class="st">(</span><span class="ch">\t\022</span><span class="st">.</span><span class="ch">\n</span><span class="st">&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\004</span><span class="st">type</span><span class="ch">\030\002</span><span class="st"> </span><span class="ch">\001</span><span class="st">(</span><span class="ch">\0162\032</span><span class="st">.tutorial.Person.PhoneType:&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\004</span><span class="st">HOME</span><span class="ch">\&quot;</span><span class="st">+</span><span class="ch">\n\t</span><span class="st">PhoneType</span><span class="ch">\022\n\n\006</span><span class="st">MOBILE</span><span class="ch">\020\000\022\010\n\004</span><span class="st">HOME</span><span class="ch">\020\001</span><span class="st">&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\022\010\n\004</span><span class="st">WORK</span><span class="ch">\020\002\&quot;</span><span class="st">/</span><span class="ch">\n\013</span><span class="st">AddressBook</span><span class="ch">\022</span><span class="st"> </span><span class="ch">\n\006</span><span class="st">person</span><span class="ch">\030\001</span><span class="st"> </span><span class="ch">\003</span><span class="st">(&quot;</span>
+    <span class="st">&quot;</span><span class="ch">\0132\020</span><span class="st">.tutorial.Person&quot;</span>, <span class="dv">299</span>);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
+    <span class="st">&quot;addressbook.proto&quot;</span>, &amp;protobuf_RegisterTypes);
+  Person::default_instance_ = <span class="kw">new</span> Person();
+  Person_PhoneNumber::default_instance_ = <span class="kw">new</span> Person_PhoneNumber();
+  AddressBook::default_instance_ = <span class="kw">new</span> AddressBook();
+  Person::default_instance_-&gt;InitAsDefaultInstance();
+  Person_PhoneNumber::default_instance_-&gt;InitAsDefaultInstance();
+  AddressBook::default_instance_-&gt;InitAsDefaultInstance();
+  ::google::protobuf::internal::OnShutdown(&amp;protobuf_ShutdownFile_addressbook_2eproto);
+}
+
+<span class="co">// Force AddDescriptors() to be called at static initialization time.</span>
+<span class="kw">struct</span> StaticDescriptorInitializer_addressbook_2eproto {
+  StaticDescriptorInitializer_addressbook_2eproto() {
+    protobuf_AddDesc_addressbook_2eproto();
+  }
+} static_descriptor_initializer_addressbook_2eproto_;
+
+<span class="co">// ===================================================================</span>
+
+<span class="dt">const</span> ::google::protobuf::EnumDescriptor* Person_PhoneType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  <span class="kw">return</span> Person_PhoneType_descriptor_;
+}
+<span class="dt">bool</span> Person_PhoneType_IsValid(<span class="dt">int</span> value) {
+  <span class="kw">switch</span>(value) {
+    <span class="kw">case</span> <span class="dv">0</span>:
+    <span class="kw">case</span> <span class="dv">1</span>:
+    <span class="kw">case</span> <span class="dv">2</span>:
+      <span class="kw">return</span> <span class="kw">true</span>;
+    <span class="kw">default</span>:
+      <span class="kw">return</span> <span class="kw">false</span>;
+  }
+}
+
+<span class="ot">#ifndef _MSC_VER</span>
+<span class="dt">const</span> Person_PhoneType Person::MOBILE;
+<span class="dt">const</span> Person_PhoneType Person::HOME;
+<span class="dt">const</span> Person_PhoneType Person::WORK;
+<span class="dt">const</span> Person_PhoneType Person::PhoneType_MIN;
+<span class="dt">const</span> Person_PhoneType Person::PhoneType_MAX;
+<span class="dt">const</span> <span class="dt">int</span> Person::PhoneType_ARRAYSIZE;
+<span class="ot">#endif  </span><span class="co">// _MSC_VER</span>
+<span class="ot">#ifndef _MSC_VER</span>
+<span class="dt">const</span> <span class="dt">int</span> Person_PhoneNumber::kNumberFieldNumber;
+<span class="dt">const</span> <span class="dt">int</span> Person_PhoneNumber::kTypeFieldNumber;
+<span class="ot">#endif  </span><span class="co">// !_MSC_VER</span>
+
+Person_PhoneNumber::Person_PhoneNumber()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  <span class="co">// @@protoc_insertion_point(constructor:tutorial.Person.PhoneNumber)</span>
+}
+
+<span class="dt">void</span> Person_PhoneNumber::InitAsDefaultInstance() {
+}
+
+Person_PhoneNumber::Person_PhoneNumber(<span class="dt">const</span> Person_PhoneNumber&amp; from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  <span class="co">// @@protoc_insertion_point(copy_constructor:tutorial.Person.PhoneNumber)</span>
+}
+
+<span class="dt">void</span> Person_PhoneNumber::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = <span class="dv">0</span>;
+  number_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_ = <span class="dv">1</span>;
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+}
+
+Person_PhoneNumber::~Person_PhoneNumber() {
+  <span class="co">// @@protoc_insertion_point(destructor:tutorial.Person.PhoneNumber)</span>
+  SharedDtor();
+}
+
+<span class="dt">void</span> Person_PhoneNumber::SharedDtor() {
+  <span class="kw">if</span> (number_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> number_;
+  }
+  <span class="kw">if</span> (<span class="kw">this</span> != default_instance_) {
+  }
+}
+
+<span class="dt">void</span> Person_PhoneNumber::SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span> {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+<span class="dt">const</span> ::google::protobuf::Descriptor* Person_PhoneNumber::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  <span class="kw">return</span> Person_PhoneNumber_descriptor_;
+}
+
+<span class="dt">const</span> Person_PhoneNumber&amp; Person_PhoneNumber::default_instance() {
+  <span class="kw">if</span> (default_instance_ == NULL) protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">return</span> *default_instance_;
+}
+
+Person_PhoneNumber* Person_PhoneNumber::default_instance_ = NULL;
+
+Person_PhoneNumber* Person_PhoneNumber::New() <span class="dt">const</span> {
+  <span class="kw">return</span> <span class="kw">new</span> Person_PhoneNumber;
+}
+
+<span class="dt">void</span> Person_PhoneNumber::Clear() {
+  <span class="kw">if</span> (_has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; <span class="dv">3</span>) {
+    <span class="kw">if</span> (has_number()) {
+      <span class="kw">if</span> (number_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        number_-&gt;clear();
+      }
+    }
+    type_ = <span class="dv">1</span>;
+  }
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+  mutable_unknown_fields()-&gt;Clear();
+}
+
+<span class="dt">bool</span> Person_PhoneNumber::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+<span class="ot">#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure</span>
+  ::google::protobuf::uint32 tag;
+  <span class="co">// @@protoc_insertion_point(parse_start:tutorial.Person.PhoneNumber)</span>
+  <span class="kw">for</span> (;;) {
+    ::std::pair&lt; ::google::protobuf::uint32, <span class="dt">bool</span>&gt; p = input-&gt;ReadTagWithCutoff(<span class="dv">127</span>);
+    tag = p.first;
+    <span class="kw">if</span> (!p.second) <span class="kw">goto</span> handle_unusual;
+    <span class="kw">switch</span> (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      <span class="co">// required string number = 1;</span>
+      <span class="kw">case</span> <span class="dv">1</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">10</span>) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, <span class="kw">this</span>-&gt;mutable_number()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            <span class="kw">this</span>-&gt;number().data(), <span class="kw">this</span>-&gt;number().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            <span class="st">&quot;number&quot;</span>);
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">16</span>)) <span class="kw">goto</span> parse_type;
+        <span class="kw">break</span>;
+      }
+
+      <span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+      <span class="kw">case</span> <span class="dv">2</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">16</span>) {
+         parse_type:
+          <span class="dt">int</span> value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive&lt;
+                   <span class="dt">int</span>, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM&gt;(
+                 input, &amp;value)));
+          <span class="kw">if</span> (::tutorial::Person_PhoneType_IsValid(value)) {
+            set_type(<span class="kw">static_cast</span>&lt; ::tutorial::Person_PhoneType &gt;(value));
+          } <span class="kw">else</span> {
+            mutable_unknown_fields()-&gt;AddVarint(<span class="dv">2</span>, value);
+          }
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectAtEnd()) <span class="kw">goto</span> success;
+        <span class="kw">break</span>;
+      }
+
+      <span class="kw">default</span>: {
+      handle_unusual:
+        <span class="kw">if</span> (tag == <span class="dv">0</span> ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          <span class="kw">goto</span> success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        <span class="kw">break</span>;
+      }
+    }
+  }
+success:
+  <span class="co">// @@protoc_insertion_point(parse_success:tutorial.Person.PhoneNumber)</span>
+  <span class="kw">return</span> <span class="kw">true</span>;
+failure:
+  <span class="co">// @@protoc_insertion_point(parse_failure:tutorial.Person.PhoneNumber)</span>
+  <span class="kw">return</span> <span class="kw">false</span>;
+<span class="ot">#undef DO_</span>
+}
+
+<span class="dt">void</span> Person_PhoneNumber::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_start:tutorial.Person.PhoneNumber)</span>
+  <span class="co">// required string number = 1;</span>
+  <span class="kw">if</span> (has_number()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;number().data(), <span class="kw">this</span>-&gt;number().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;number&quot;</span>);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      <span class="dv">1</span>, <span class="kw">this</span>-&gt;number(), output);
+  }
+
+  <span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+  <span class="kw">if</span> (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      <span class="dv">2</span>, <span class="kw">this</span>-&gt;type(), output);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_end:tutorial.Person.PhoneNumber)</span>
+}
+
+::google::protobuf::uint8* Person_PhoneNumber::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_start:tutorial.Person.PhoneNumber)</span>
+  <span class="co">// required string number = 1;</span>
+  <span class="kw">if</span> (has_number()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;number().data(), <span class="kw">this</span>-&gt;number().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;number&quot;</span>);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        <span class="dv">1</span>, <span class="kw">this</span>-&gt;number(), target);
+  }
+
+  <span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+  <span class="kw">if</span> (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      <span class="dv">2</span>, <span class="kw">this</span>-&gt;type(), target);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_end:tutorial.Person.PhoneNumber)</span>
+  <span class="kw">return</span> target;
+}
+
+<span class="dt">int</span> Person_PhoneNumber::ByteSize() <span class="dt">const</span> {
+  <span class="dt">int</span> total_size = <span class="dv">0</span>;
+
+  <span class="kw">if</span> (_has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; (<span class="bn">0xffu</span> &lt;&lt; (<span class="dv">0</span> % <span class="dv">32</span>))) {
+    <span class="co">// required string number = 1;</span>
+    <span class="kw">if</span> (has_number()) {
+      total_size += <span class="dv">1</span> +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          <span class="kw">this</span>-&gt;number());
+    }
+
+    <span class="co">// optional .tutorial.Person.PhoneType type = 2 [default = HOME];</span>
+    <span class="kw">if</span> (has_type()) {
+      total_size += <span class="dv">1</span> +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(<span class="kw">this</span>-&gt;type());
+    }
+
+  }
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  <span class="kw">return</span> total_size;
+}
+
+<span class="dt">void</span> Person_PhoneNumber::MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  <span class="dt">const</span> Person_PhoneNumber* source =
+    ::google::protobuf::internal::dynamic_cast_if_available&lt;<span class="dt">const</span> Person_PhoneNumber*&gt;(
+      &amp;from);
+  <span class="kw">if</span> (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, <span class="kw">this</span>);
+  } <span class="kw">else</span> {
+    MergeFrom(*source);
+  }
+}
+
+<span class="dt">void</span> Person_PhoneNumber::MergeFrom(<span class="dt">const</span> Person_PhoneNumber&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  <span class="kw">if</span> (from._has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; (<span class="bn">0xffu</span> &lt;&lt; (<span class="dv">0</span> % <span class="dv">32</span>))) {
+    <span class="kw">if</span> (from.has_number()) {
+      set_number(from.number());
+    }
+    <span class="kw">if</span> (from.has_type()) {
+      set_type(from.type());
+    }
+  }
+  mutable_unknown_fields()-&gt;MergeFrom(from.unknown_fields());
+}
+
+<span class="dt">void</span> Person_PhoneNumber::CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">void</span> Person_PhoneNumber::CopyFrom(<span class="dt">const</span> Person_PhoneNumber&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">bool</span> Person_PhoneNumber::IsInitialized() <span class="dt">const</span> {
+  <span class="kw">if</span> ((_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000001</span>) != <span class="bn">0x00000001</span>) <span class="kw">return</span> <span class="kw">false</span>;
+
+  <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">void</span> Person_PhoneNumber::Swap(Person_PhoneNumber* other) {
+  <span class="kw">if</span> (other != <span class="kw">this</span>) {
+    std::swap(number_, other-&gt;number_);
+    std::swap(type_, other-&gt;type_);
+    std::swap(_has_bits_[<span class="dv">0</span>], other-&gt;_has_bits_[<span class="dv">0</span>]);
+    _unknown_fields_.Swap(&amp;other-&gt;_unknown_fields_);
+    std::swap(_cached_size_, other-&gt;_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Person_PhoneNumber::GetMetadata() <span class="dt">const</span> {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Person_PhoneNumber_descriptor_;
+  metadata.reflection = Person_PhoneNumber_reflection_;
+  <span class="kw">return</span> metadata;
+}
+
+
+<span class="co">// -------------------------------------------------------------------</span>
+
+<span class="ot">#ifndef _MSC_VER</span>
+<span class="dt">const</span> <span class="dt">int</span> Person::kNameFieldNumber;
+<span class="dt">const</span> <span class="dt">int</span> Person::kIdFieldNumber;
+<span class="dt">const</span> <span class="dt">int</span> Person::kEmailFieldNumber;
+<span class="dt">const</span> <span class="dt">int</span> Person::kPhoneFieldNumber;
+<span class="ot">#endif  </span><span class="co">// !_MSC_VER</span>
+
+Person::Person()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  <span class="co">// @@protoc_insertion_point(constructor:tutorial.Person)</span>
+}
+
+<span class="dt">void</span> Person::InitAsDefaultInstance() {
+}
+
+Person::Person(<span class="dt">const</span> Person&amp; from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  <span class="co">// @@protoc_insertion_point(copy_constructor:tutorial.Person)</span>
+}
+
+<span class="dt">void</span> Person::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = <span class="dv">0</span>;
+  name_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  id_ = <span class="dv">0</span>;
+  email_ = <span class="kw">const_cast</span>&lt; ::std::string*&gt;(&amp;::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+}
+
+Person::~Person() {
+  <span class="co">// @@protoc_insertion_point(destructor:tutorial.Person)</span>
+  SharedDtor();
+}
+
+<span class="dt">void</span> Person::SharedDtor() {
+  <span class="kw">if</span> (name_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> name_;
+  }
+  <span class="kw">if</span> (email_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    <span class="kw">delete</span> email_;
+  }
+  <span class="kw">if</span> (<span class="kw">this</span> != default_instance_) {
+  }
+}
+
+<span class="dt">void</span> Person::SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span> {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+<span class="dt">const</span> ::google::protobuf::Descriptor* Person::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  <span class="kw">return</span> Person_descriptor_;
+}
+
+<span class="dt">const</span> Person&amp; Person::default_instance() {
+  <span class="kw">if</span> (default_instance_ == NULL) protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">return</span> *default_instance_;
+}
+
+Person* Person::default_instance_ = NULL;
+
+Person* Person::New() <span class="dt">const</span> {
+  <span class="kw">return</span> <span class="kw">new</span> Person;
+}
+
+<span class="dt">void</span> Person::Clear() {
+  <span class="kw">if</span> (_has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; <span class="dv">7</span>) {
+    <span class="kw">if</span> (has_name()) {
+      <span class="kw">if</span> (name_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        name_-&gt;clear();
+      }
+    }
+    id_ = <span class="dv">0</span>;
+    <span class="kw">if</span> (has_email()) {
+      <span class="kw">if</span> (email_ != &amp;::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        email_-&gt;clear();
+      }
+    }
+  }
+  phone_.Clear();
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+  mutable_unknown_fields()-&gt;Clear();
+}
+
+<span class="dt">bool</span> Person::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+<span class="ot">#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure</span>
+  ::google::protobuf::uint32 tag;
+  <span class="co">// @@protoc_insertion_point(parse_start:tutorial.Person)</span>
+  <span class="kw">for</span> (;;) {
+    ::std::pair&lt; ::google::protobuf::uint32, <span class="dt">bool</span>&gt; p = input-&gt;ReadTagWithCutoff(<span class="dv">127</span>);
+    tag = p.first;
+    <span class="kw">if</span> (!p.second) <span class="kw">goto</span> handle_unusual;
+    <span class="kw">switch</span> (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      <span class="co">// required string name = 1;</span>
+      <span class="kw">case</span> <span class="dv">1</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">10</span>) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, <span class="kw">this</span>-&gt;mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            <span class="kw">this</span>-&gt;name().data(), <span class="kw">this</span>-&gt;name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            <span class="st">&quot;name&quot;</span>);
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">16</span>)) <span class="kw">goto</span> parse_id;
+        <span class="kw">break</span>;
+      }
+
+      <span class="co">// required int32 id = 2;</span>
+      <span class="kw">case</span> <span class="dv">2</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">16</span>) {
+         parse_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive&lt;
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32&gt;(
+                 input, &amp;id_)));
+          set_has_id();
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">26</span>)) <span class="kw">goto</span> parse_email;
+        <span class="kw">break</span>;
+      }
+
+      <span class="co">// optional string email = 3;</span>
+      <span class="kw">case</span> <span class="dv">3</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">26</span>) {
+         parse_email:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, <span class="kw">this</span>-&gt;mutable_email()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            <span class="kw">this</span>-&gt;email().data(), <span class="kw">this</span>-&gt;email().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            <span class="st">&quot;email&quot;</span>);
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">34</span>)) <span class="kw">goto</span> parse_phone;
+        <span class="kw">break</span>;
+      }
+
+      <span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+      <span class="kw">case</span> <span class="dv">4</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">34</span>) {
+         parse_phone:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_phone()));
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">34</span>)) <span class="kw">goto</span> parse_phone;
+        <span class="kw">if</span> (input-&gt;ExpectAtEnd()) <span class="kw">goto</span> success;
+        <span class="kw">break</span>;
+      }
+
+      <span class="kw">default</span>: {
+      handle_unusual:
+        <span class="kw">if</span> (tag == <span class="dv">0</span> ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          <span class="kw">goto</span> success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        <span class="kw">break</span>;
+      }
+    }
+  }
+success:
+  <span class="co">// @@protoc_insertion_point(parse_success:tutorial.Person)</span>
+  <span class="kw">return</span> <span class="kw">true</span>;
+failure:
+  <span class="co">// @@protoc_insertion_point(parse_failure:tutorial.Person)</span>
+  <span class="kw">return</span> <span class="kw">false</span>;
+<span class="ot">#undef DO_</span>
+}
+
+<span class="dt">void</span> Person::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_start:tutorial.Person)</span>
+  <span class="co">// required string name = 1;</span>
+  <span class="kw">if</span> (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;name().data(), <span class="kw">this</span>-&gt;name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;name&quot;</span>);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      <span class="dv">1</span>, <span class="kw">this</span>-&gt;name(), output);
+  }
+
+  <span class="co">// required int32 id = 2;</span>
+  <span class="kw">if</span> (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(<span class="dv">2</span>, <span class="kw">this</span>-&gt;id(), output);
+  }
+
+  <span class="co">// optional string email = 3;</span>
+  <span class="kw">if</span> (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;email().data(), <span class="kw">this</span>-&gt;email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;email&quot;</span>);
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      <span class="dv">3</span>, <span class="kw">this</span>-&gt;email(), output);
+  }
+
+  <span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;phone_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      <span class="dv">4</span>, <span class="kw">this</span>-&gt;phone(i), output);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_end:tutorial.Person)</span>
+}
+
+::google::protobuf::uint8* Person::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_start:tutorial.Person)</span>
+  <span class="co">// required string name = 1;</span>
+  <span class="kw">if</span> (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;name().data(), <span class="kw">this</span>-&gt;name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;name&quot;</span>);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        <span class="dv">1</span>, <span class="kw">this</span>-&gt;name(), target);
+  }
+
+  <span class="co">// required int32 id = 2;</span>
+  <span class="kw">if</span> (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(<span class="dv">2</span>, <span class="kw">this</span>-&gt;id(), target);
+  }
+
+  <span class="co">// optional string email = 3;</span>
+  <span class="kw">if</span> (has_email()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      <span class="kw">this</span>-&gt;email().data(), <span class="kw">this</span>-&gt;email().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      <span class="st">&quot;email&quot;</span>);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        <span class="dv">3</span>, <span class="kw">this</span>-&gt;email(), target);
+  }
+
+  <span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;phone_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        <span class="dv">4</span>, <span class="kw">this</span>-&gt;phone(i), target);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_end:tutorial.Person)</span>
+  <span class="kw">return</span> target;
+}
+
+<span class="dt">int</span> Person::ByteSize() <span class="dt">const</span> {
+  <span class="dt">int</span> total_size = <span class="dv">0</span>;
+
+  <span class="kw">if</span> (_has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; (<span class="bn">0xffu</span> &lt;&lt; (<span class="dv">0</span> % <span class="dv">32</span>))) {
+    <span class="co">// required string name = 1;</span>
+    <span class="kw">if</span> (has_name()) {
+      total_size += <span class="dv">1</span> +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          <span class="kw">this</span>-&gt;name());
+    }
+
+    <span class="co">// required int32 id = 2;</span>
+    <span class="kw">if</span> (has_id()) {
+      total_size += <span class="dv">1</span> +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          <span class="kw">this</span>-&gt;id());
+    }
+
+    <span class="co">// optional string email = 3;</span>
+    <span class="kw">if</span> (has_email()) {
+      total_size += <span class="dv">1</span> +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          <span class="kw">this</span>-&gt;email());
+    }
+
+  }
+  <span class="co">// repeated .tutorial.Person.PhoneNumber phone = 4;</span>
+  total_size += <span class="dv">1</span> * <span class="kw">this</span>-&gt;phone_size();
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;phone_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        <span class="kw">this</span>-&gt;phone(i));
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  <span class="kw">return</span> total_size;
+}
+
+<span class="dt">void</span> Person::MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  <span class="dt">const</span> Person* source =
+    ::google::protobuf::internal::dynamic_cast_if_available&lt;<span class="dt">const</span> Person*&gt;(
+      &amp;from);
+  <span class="kw">if</span> (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, <span class="kw">this</span>);
+  } <span class="kw">else</span> {
+    MergeFrom(*source);
+  }
+}
+
+<span class="dt">void</span> Person::MergeFrom(<span class="dt">const</span> Person&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  phone_.MergeFrom(from.phone_);
+  <span class="kw">if</span> (from._has_bits_[<span class="dv">0</span> / <span class="dv">32</span>] &amp; (<span class="bn">0xffu</span> &lt;&lt; (<span class="dv">0</span> % <span class="dv">32</span>))) {
+    <span class="kw">if</span> (from.has_name()) {
+      set_name(from.name());
+    }
+    <span class="kw">if</span> (from.has_id()) {
+      set_id(from.id());
+    }
+    <span class="kw">if</span> (from.has_email()) {
+      set_email(from.email());
+    }
+  }
+  mutable_unknown_fields()-&gt;MergeFrom(from.unknown_fields());
+}
+
+<span class="dt">void</span> Person::CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">void</span> Person::CopyFrom(<span class="dt">const</span> Person&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">bool</span> Person::IsInitialized() <span class="dt">const</span> {
+  <span class="kw">if</span> ((_has_bits_[<span class="dv">0</span>] &amp; <span class="bn">0x00000003</span>) != <span class="bn">0x00000003</span>) <span class="kw">return</span> <span class="kw">false</span>;
+
+  <span class="kw">if</span> (!::google::protobuf::internal::AllAreInitialized(<span class="kw">this</span>-&gt;phone())) <span class="kw">return</span> <span class="kw">false</span>;
+  <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">void</span> Person::Swap(Person* other) {
+  <span class="kw">if</span> (other != <span class="kw">this</span>) {
+    std::swap(name_, other-&gt;name_);
+    std::swap(id_, other-&gt;id_);
+    std::swap(email_, other-&gt;email_);
+    phone_.Swap(&amp;other-&gt;phone_);
+    std::swap(_has_bits_[<span class="dv">0</span>], other-&gt;_has_bits_[<span class="dv">0</span>]);
+    _unknown_fields_.Swap(&amp;other-&gt;_unknown_fields_);
+    std::swap(_cached_size_, other-&gt;_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Person::GetMetadata() <span class="dt">const</span> {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Person_descriptor_;
+  metadata.reflection = Person_reflection_;
+  <span class="kw">return</span> metadata;
+}
+
+
+<span class="co">// ===================================================================</span>
+
+<span class="ot">#ifndef _MSC_VER</span>
+<span class="dt">const</span> <span class="dt">int</span> AddressBook::kPersonFieldNumber;
+<span class="ot">#endif  </span><span class="co">// !_MSC_VER</span>
+
+AddressBook::AddressBook()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  <span class="co">// @@protoc_insertion_point(constructor:tutorial.AddressBook)</span>
+}
+
+<span class="dt">void</span> AddressBook::InitAsDefaultInstance() {
+}
+
+AddressBook::AddressBook(<span class="dt">const</span> AddressBook&amp; from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  <span class="co">// @@protoc_insertion_point(copy_constructor:tutorial.AddressBook)</span>
+}
+
+<span class="dt">void</span> AddressBook::SharedCtor() {
+  _cached_size_ = <span class="dv">0</span>;
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+}
+
+AddressBook::~AddressBook() {
+  <span class="co">// @@protoc_insertion_point(destructor:tutorial.AddressBook)</span>
+  SharedDtor();
+}
+
+<span class="dt">void</span> AddressBook::SharedDtor() {
+  <span class="kw">if</span> (<span class="kw">this</span> != default_instance_) {
+  }
+}
+
+<span class="dt">void</span> AddressBook::SetCachedSize(<span class="dt">int</span> size) <span class="dt">const</span> {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+<span class="dt">const</span> ::google::protobuf::Descriptor* AddressBook::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  <span class="kw">return</span> AddressBook_descriptor_;
+}
+
+<span class="dt">const</span> AddressBook&amp; AddressBook::default_instance() {
+  <span class="kw">if</span> (default_instance_ == NULL) protobuf_AddDesc_addressbook_2eproto();
+  <span class="kw">return</span> *default_instance_;
+}
+
+AddressBook* AddressBook::default_instance_ = NULL;
+
+AddressBook* AddressBook::New() <span class="dt">const</span> {
+  <span class="kw">return</span> <span class="kw">new</span> AddressBook;
+}
+
+<span class="dt">void</span> AddressBook::Clear() {
+  person_.Clear();
+  ::memset(_has_bits_, <span class="dv">0</span>, <span class="kw">sizeof</span>(_has_bits_));
+  mutable_unknown_fields()-&gt;Clear();
+}
+
+<span class="dt">bool</span> AddressBook::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+<span class="ot">#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure</span>
+  ::google::protobuf::uint32 tag;
+  <span class="co">// @@protoc_insertion_point(parse_start:tutorial.AddressBook)</span>
+  <span class="kw">for</span> (;;) {
+    ::std::pair&lt; ::google::protobuf::uint32, <span class="dt">bool</span>&gt; p = input-&gt;ReadTagWithCutoff(<span class="dv">127</span>);
+    tag = p.first;
+    <span class="kw">if</span> (!p.second) <span class="kw">goto</span> handle_unusual;
+    <span class="kw">switch</span> (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      <span class="co">// repeated .tutorial.Person person = 1;</span>
+      <span class="kw">case</span> <span class="dv">1</span>: {
+        <span class="kw">if</span> (tag == <span class="dv">10</span>) {
+         parse_person:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_person()));
+        } <span class="kw">else</span> {
+          <span class="kw">goto</span> handle_unusual;
+        }
+        <span class="kw">if</span> (input-&gt;ExpectTag(<span class="dv">10</span>)) <span class="kw">goto</span> parse_person;
+        <span class="kw">if</span> (input-&gt;ExpectAtEnd()) <span class="kw">goto</span> success;
+        <span class="kw">break</span>;
+      }
+
+      <span class="kw">default</span>: {
+      handle_unusual:
+        <span class="kw">if</span> (tag == <span class="dv">0</span> ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          <span class="kw">goto</span> success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        <span class="kw">break</span>;
+      }
+    }
+  }
+success:
+  <span class="co">// @@protoc_insertion_point(parse_success:tutorial.AddressBook)</span>
+  <span class="kw">return</span> <span class="kw">true</span>;
+failure:
+  <span class="co">// @@protoc_insertion_point(parse_failure:tutorial.AddressBook)</span>
+  <span class="kw">return</span> <span class="kw">false</span>;
+<span class="ot">#undef DO_</span>
+}
+
+<span class="dt">void</span> AddressBook::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_start:tutorial.AddressBook)</span>
+  <span class="co">// repeated .tutorial.Person person = 1;</span>
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;person_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      <span class="dv">1</span>, <span class="kw">this</span>-&gt;person(i), output);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_end:tutorial.AddressBook)</span>
+}
+
+::google::protobuf::uint8* AddressBook::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) <span class="dt">const</span> {
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_start:tutorial.AddressBook)</span>
+  <span class="co">// repeated .tutorial.Person person = 1;</span>
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;person_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        <span class="dv">1</span>, <span class="kw">this</span>-&gt;person(i), target);
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  <span class="co">// @@protoc_insertion_point(serialize_to_array_end:tutorial.AddressBook)</span>
+  <span class="kw">return</span> target;
+}
+
+<span class="dt">int</span> AddressBook::ByteSize() <span class="dt">const</span> {
+  <span class="dt">int</span> total_size = <span class="dv">0</span>;
+
+  <span class="co">// repeated .tutorial.Person person = 1;</span>
+  total_size += <span class="dv">1</span> * <span class="kw">this</span>-&gt;person_size();
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="kw">this</span>-&gt;person_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        <span class="kw">this</span>-&gt;person(i));
+  }
+
+  <span class="kw">if</span> (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  <span class="kw">return</span> total_size;
+}
+
+<span class="dt">void</span> AddressBook::MergeFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  <span class="dt">const</span> AddressBook* source =
+    ::google::protobuf::internal::dynamic_cast_if_available&lt;<span class="dt">const</span> AddressBook*&gt;(
+      &amp;from);
+  <span class="kw">if</span> (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, <span class="kw">this</span>);
+  } <span class="kw">else</span> {
+    MergeFrom(*source);
+  }
+}
+
+<span class="dt">void</span> AddressBook::MergeFrom(<span class="dt">const</span> AddressBook&amp; from) {
+  GOOGLE_CHECK_NE(&amp;from, <span class="kw">this</span>);
+  person_.MergeFrom(from.person_);
+  mutable_unknown_fields()-&gt;MergeFrom(from.unknown_fields());
+}
+
+<span class="dt">void</span> AddressBook::CopyFrom(<span class="dt">const</span> ::google::protobuf::Message&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">void</span> AddressBook::CopyFrom(<span class="dt">const</span> AddressBook&amp; from) {
+  <span class="kw">if</span> (&amp;from == <span class="kw">this</span>) <span class="kw">return</span>;
+  Clear();
+  MergeFrom(from);
+}
+
+<span class="dt">bool</span> AddressBook::IsInitialized() <span class="dt">const</span> {
+
+  <span class="kw">if</span> (!::google::protobuf::internal::AllAreInitialized(<span class="kw">this</span>-&gt;person())) <span class="kw">return</span> <span class="kw">false</span>;
+  <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="dt">void</span> AddressBook::Swap(AddressBook* other) {
+  <span class="kw">if</span> (other != <span class="kw">this</span>) {
+    person_.Swap(&amp;other-&gt;person_);
+    std::swap(_has_bits_[<span class="dv">0</span>], other-&gt;_has_bits_[<span class="dv">0</span>]);
+    _unknown_fields_.Swap(&amp;other-&gt;_unknown_fields_);
+    std::swap(_cached_size_, other-&gt;_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AddressBook::GetMetadata() <span class="dt">const</span> {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AddressBook_descriptor_;
+  metadata.reflection = AddressBook_reflection_;
+  <span class="kw">return</span> metadata;
+}
+
+
+<span class="co">// @@protoc_insertion_point(namespace_scope)</span>
+
+}  <span class="co">// namespace tutorial</span>
+
+<span class="co">// @@protoc_insertion_point(global_scope)</span></code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt>The Protocol Buffer API <code class="fold">@</code></dt>
+<dd><table>
+<tbody>
+<tr class="odd">
+<td align="left"><code>optional string email = 3;</code></td>
+<td align="left"><code>inline bool has_email() const;</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Commons
+<ul>
+<li><code>get_</code></li>
+<li><code>set_</code></li>
+<li><code>clean_</code>, un-sets the field back to its empty state</li>
+<li><code>has_</code>, required/optional both have this one</li>
+<li><code>mutable_</code>,</li>
+<li><code>_size</code> &lt;- repeated fields</li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/reference/cpp-generated">C++ Generated Code &#160;|&#160; Protocol Buffers &#160;|&#160; Google Developers</a></li>
+</ul></li>
+<li>Enums and Nested Classes
+<ul>
+<li>enums: <code>Person::PhoneType = {Person::HOME, Person::WORK}</code></li>
+<li>classes: <code>Person::PhoneNumber</code> -&gt; <code>Person_PhoneNumber</code></li>
+</ul></li>
+<li>Standard Message Methods
+<ul>
+<li><code>bool IsInitialized() const;</code></li>
+<li><code>string DebugString() const;</code></li>
+<li><code>void CopyFrom(const Person&amp; from);</code></li>
+<li><code>void Clear();</code></li>
+</ul></li>
+<li>Parsing and Serialization (<code>sting *</code> to contain binary bits.)
+<ul>
+<li><code>bool SerializeToString(string* output) const;</code></li>
+<li><code>bool ParseFromString(const string&amp; data);</code></li>
+<li><code>bool SerializeToOstream(ostream* output) const;</code></li>
+<li><code>bool ParseFromIstream(istream* input);</code></li>
+</ul></li>
+</ul>
+</dd>
+<dt>Writing A Message <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;fstream&gt;</span>
+<span class="ot">#include &lt;string&gt;</span>
+<span class="ot">#include &quot;addressbook.pb.h&quot;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="co">// This function fills in a Person message based on user input.</span>
+<span class="dt">void</span> PromptForAddress(tutorial::Person* person) {
+  cout &lt;&lt; <span class="st">&quot;Enter person ID number: &quot;</span>;
+  <span class="dt">int</span> id;
+  cin &gt;&gt; id;
+  person-&gt;set_id(id);
+  cin.ignore(<span class="dv">256</span>, <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>);
+  <span class="co">// &#27604;&#22914;&#21487;&#20197;&#36825;&#20040;&#29992;&#65306;cin.ignore(1024,&#39;\n&#39;)&#65292;&#36890;&#24120;&#25226;&#31532;&#19968;&#20010;&#21442;&#25968;&#35774;&#32622;&#24471;&#36275;&#22815;&#22823;&#65292;&#36825;&#26679;</span>
+  <span class="co">// &#23454;&#38469;&#19978;&#24635;&#26159;&#21482;&#26377;&#31532;&#20108;&#20010;&#21442;&#25968;&#39;\n&#39;&#36215;&#20316;&#29992;&#65292;&#25152;&#20197;&#36825;&#19968;&#21477;&#23601;&#26159;&#25226;&#22238;&#36710;&#65288;&#21253;&#25324;&#22238;&#36710;&#65289;&#20043;&#21069;&#30340;</span>
+  <span class="co">// &#25152;&#20197;&#23383;&#31526;&#20174;&#36755;&#20837;&#32531;&#20914;&#65288;&#27969;&#65289;&#20013;&#28165;&#38500;&#20986;&#21435;&#12290;</span>
+
+  cout &lt;&lt; <span class="st">&quot;Enter name: &quot;</span>;
+  getline(cin, *person-&gt;mutable_name());    <span class="co">// mutable_name</span>
+
+  cout &lt;&lt; <span class="st">&quot;Enter email address (blank for none): &quot;</span>;
+  string email;
+  getline(cin, email);
+  <span class="kw">if</span> (!email.empty()) {
+    person-&gt;set_email(email);
+  }
+
+  <span class="kw">while</span> (<span class="kw">true</span>) {
+    cout &lt;&lt; <span class="st">&quot;Enter a phone number (or leave blank to finish): &quot;</span>;
+    string number;
+    getline(cin, number);
+    <span class="kw">if</span> (number.empty()) {
+      <span class="kw">break</span>;
+    }
+
+    tutorial::Person::PhoneNumber* phone_number = person-&gt;add_phone();  <span class="co">// repeated</span>
+    phone_number-&gt;set_number(number);
+
+    cout &lt;&lt; <span class="st">&quot;Is this a mobile, home, or work phone? &quot;</span>;
+    string type;
+    getline(cin, type);
+    <span class="kw">if</span> (type == <span class="st">&quot;mobile&quot;</span>) {
+      phone_number-&gt;set_type(tutorial::Person::MOBILE);
+    } <span class="kw">else</span> <span class="kw">if</span> (type == <span class="st">&quot;home&quot;</span>) {
+      phone_number-&gt;set_type(tutorial::Person::HOME);
+    } <span class="kw">else</span> <span class="kw">if</span> (type == <span class="st">&quot;work&quot;</span>) {
+      phone_number-&gt;set_type(tutorial::Person::WORK);
+    } <span class="kw">else</span> {
+      cout &lt;&lt; <span class="st">&quot;Unknown phone type.  Using default.&quot;</span> &lt;&lt; endl;
+    }
+  }
+}
+
+<span class="co">// Main function:  Reads the entire address book from a file,</span>
+<span class="co">//   adds one person based on user input, then writes it back out to the same</span>
+<span class="co">//   file.</span>
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[]) {
+  <span class="co">// Verify that the version of the library that we linked against is</span>
+  <span class="co">// compatible with the version of the headers we compiled against.</span>
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  <span class="kw">if</span> (argc != <span class="dv">2</span>) {
+    cerr &lt;&lt; <span class="st">&quot;Usage:  &quot;</span> &lt;&lt; argv[<span class="dv">0</span>] &lt;&lt; <span class="st">&quot; ADDRESS_BOOK_FILE&quot;</span> &lt;&lt; endl;
+    <span class="kw">return</span> <span class="dv">-1</span>;
+  }
+
+  tutorial::AddressBook address_book;
+
+  {
+    <span class="co">// Read the existing address book.</span>
+    fstream input(argv[<span class="dv">1</span>], ios::in | ios::binary);
+    <span class="kw">if</span> (!input) {
+      cout &lt;&lt; argv[<span class="dv">1</span>] &lt;&lt; <span class="st">&quot;: File not found.  Creating a new file.&quot;</span> &lt;&lt; endl;
+    } <span class="kw">else</span> <span class="kw">if</span> (!address_book.ParseFromIstream(&amp;input)) {  <span class="co">// parse from stream</span>
+      cerr &lt;&lt; <span class="st">&quot;Failed to parse address book.&quot;</span> &lt;&lt; endl;
+      <span class="kw">return</span> <span class="dv">-1</span>;
+    }
+  }
+
+  <span class="co">// Add an address.</span>
+  PromptForAddress(address_book.add_person());
+
+  {
+    <span class="co">// Write the new address book back to disk.</span>
+    fstream output(argv[<span class="dv">1</span>], ios::out | ios::trunc | ios::binary);
+    <span class="kw">if</span> (!address_book.SerializeToOstream(&amp;output)) {
+      cerr &lt;&lt; <span class="st">&quot;Failed to write address book.&quot;</span> &lt;&lt; endl;
+      <span class="kw">return</span> <span class="dv">-1</span>;
+    }
+  }
+
+  <span class="co">// Optional:  Delete all global objects allocated by libprotobuf.</span>
+  google::protobuf::ShutdownProtobufLibrary();
+
+  <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+</dd>
+<dt>Reading A Message <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;fstream&gt;</span>
+<span class="ot">#include &lt;string&gt;</span>
+<span class="ot">#include &quot;addressbook.pb.h&quot;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="co">// Iterates though all people in the AddressBook and prints info about them.</span>
+<span class="dt">void</span> ListPeople(<span class="dt">const</span> tutorial::AddressBook&amp; address_book) {
+  <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; address_book.person_size(); i++) {
+    <span class="dt">const</span> tutorial::Person&amp; person = address_book.person(i);
+
+    cout &lt;&lt; <span class="st">&quot;Person ID: &quot;</span> &lt;&lt; person.id() &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">&quot;  Name: &quot;</span> &lt;&lt; person.name() &lt;&lt; endl;
+    <span class="kw">if</span> (person.has_email()) {
+      cout &lt;&lt; <span class="st">&quot;  E-mail address: &quot;</span> &lt;&lt; person.email() &lt;&lt; endl;
+    }
+
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; person.phone_size(); j++) {
+      <span class="dt">const</span> tutorial::Person::PhoneNumber&amp; phone_number = person.phone(j);
+
+      <span class="kw">switch</span> (phone_number.type()) {
+        <span class="kw">case</span> tutorial::Person::MOBILE:
+          cout &lt;&lt; <span class="st">&quot;  Mobile phone #: &quot;</span>;
+          <span class="kw">break</span>;
+        <span class="kw">case</span> tutorial::Person::HOME:
+          cout &lt;&lt; <span class="st">&quot;  Home phone #: &quot;</span>;
+          <span class="kw">break</span>;
+        <span class="kw">case</span> tutorial::Person::WORK:
+          cout &lt;&lt; <span class="st">&quot;  Work phone #: &quot;</span>;
+          <span class="kw">break</span>;
+      }
+      cout &lt;&lt; phone_number.number() &lt;&lt; endl;
+    }
+  }
+}
+
+<span class="co">// Main function:  Reads the entire address book from a file and prints all</span>
+<span class="co">//   the information inside.</span>
+<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span>* argv[]) {
+  <span class="co">// Verify that the version of the library that we linked against is</span>
+  <span class="co">// compatible with the version of the headers we compiled against.</span>
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  <span class="kw">if</span> (argc != <span class="dv">2</span>) {
+    cerr &lt;&lt; <span class="st">&quot;Usage:  &quot;</span> &lt;&lt; argv[<span class="dv">0</span>] &lt;&lt; <span class="st">&quot; ADDRESS_BOOK_FILE&quot;</span> &lt;&lt; endl;
+    <span class="kw">return</span> <span class="dv">-1</span>;
+  }
+
+  tutorial::AddressBook address_book;
+
+  {
+    <span class="co">// Read the existing address book.</span>
+    fstream input(argv[<span class="dv">1</span>], ios::in | ios::binary);      <span class="co">// fstream(path, flags)</span>
+    <span class="kw">if</span> (!address_book.ParseFromIstream(&amp;input)) {
+      cerr &lt;&lt; <span class="st">&quot;Failed to parse address book.&quot;</span> &lt;&lt; endl;
+      <span class="kw">return</span> <span class="dv">-1</span>;
+    }
+  }
+
+  ListPeople(address_book);
+
+  <span class="co">// Optional:  Delete all global objects allocated by libprotobuf.</span>
+  google::protobuf::ShutdownProtobufLibrary();
+
+  <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+</dd>
+<dt>Extending a Protocol Buffer <code class="fold">@</code></dt>
+<dd><p>&#19968;&#20123;&#24314;&#35758;&#12290;</p>
+<dl>
+<dt><a href="https://github.com/gperftools/gperftools">gperftools/gperftools: Main gperftools repository</a></dt>
+<dd><pre><code>gperftools
+----------
+(originally Google Performance Tools)
+
+The fastest malloc we&#8217;ve seen; works particularly well with threads
+and STL. Also: thread-friendly heap-checker, heap-profiler, and
+cpu-profiler.</code></pre>
+</dd>
+</dl>
+</dd>
+<dt>Advanced Usage <code class="fold">@</code></dt>
+<dd><p>Protocol buffers have uses that go beyond simple accessors and serialization. Be sure to explore the C++ API reference to see what else you can do with them.</p>
+<p>One key feature provided by protocol message classes is reflection. You can iterate over the fields of a message and manipulate their values without writing your code against any specific message type. One very useful way to use reflection is for converting protocol messages to and from other encodings, such as XML or JSON. A more advanced use of reflection might be to find differences between two messages of the same type, or to develop a sort of &#8220;regular expressions for protocol messages&#8221; in which you can write expressions that match certain message contents. If you use your imagination, it&#8217;s possible to apply Protocol Buffers to a much wider range of problems than you might initially expect!</p>
+<p>Reflection is provided by the <a href="https://developers.google.com/protocol-buffers/docs/reference/cpp/google.protobuf.message.html#Message.Reflection">Message::Reflection interface</a>.</p>
+</dd>
+</dl>
+</dd>
+<dt><a href="https://developers.google.com/protocol-buffers/docs/proto#simple">Language Guide &#160;|&#160; Protocol Buffers &#160;|&#160; Google Developers</a> <code class="fold">@</code></dt>
+<dd><dl>
+<dt>Defining A Message Type <code class="fold">@</code></dt>
+<dd><p>Specifying Field Types</p>
+<dl>
+<dt>Assigning Tags <code class="fold">@</code></dt>
+<dd><ul>
+<li>unique numbered tag</li>
+</ul>
+</dd>
+<dt>Specifying Field Rules <code class="fold">@</code></dt>
+<dd><p>three types</p>
+<ul>
+<li>required, {1}</li>
+<li>optional, {0,1}</li>
+<li>repeated, {0,}</li>
+</ul>
+<p><code>repeated int32 samples = 4 [packed=true];</code>, packed=true for efficiency. Google &#20542;&#21521;&#20110;&#21482;&#29992; optional &#21644; repeated&#12290;</p>
+</dd>
+</dl>
+<p>Adding More Message Types</p>
+<p>Adding Comments: <code>// one-line comment</code></p>
+<dl>
+<dt>Reserved Fields <code class="fold">@</code></dt>
+<dd><pre><code>message Foo {
+  reserved 2, 15, 9 to 11;
+  reserved &quot;foo&quot;, &quot;bar&quot;;
+}</code></pre>
+</dd>
+<dt>What&#8217;s Generated From Your <code>.proto</code>? <code class="fold">@</code></dt>
+<dd><ul>
+<li>.cc, .h</li>
+<li>.java</li>
+<li>etc</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>Scalar Value Types <code class="fold">@</code></dt>
+<dd><p>all types</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="25%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>.proto</code> Type</th>
+<th align="left">C++ Type</th>
+<th align="left">Java Type</th>
+<th align="left">Python Type</th>
+<th align="left">Go Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>double</code></td>
+<td align="left"><code>double</code></td>
+<td align="left"><code>double</code></td>
+<td align="left"><code>float</code></td>
+<td align="left"><code>*float64</code></td>
+</tr>
+<tr class="even">
+<td><code>float</code></td>
+<td align="left"><code>float</code></td>
+<td align="left"><code>float</code></td>
+<td align="left"><code>float</code></td>
+<td align="left"><code>*float32</code></td>
+</tr>
+<tr class="odd">
+<td><code>bool</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>boolean</code></td>
+<td align="left"><code>bool</code></td>
+<td align="left"><code>*bool</code></td>
+</tr>
+<tr class="even">
+<td><code>string</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>String</code></td>
+<td align="left"><code>str/unicode</code></td>
+<td align="left"><code>*string</code></td>
+</tr>
+<tr class="odd">
+<td><code>bytes</code></td>
+<td align="left"><code>string</code></td>
+<td align="left"><code>ByteString</code></td>
+<td align="left"><code>str</code></td>
+<td align="left"><code>[]byte</code></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p>&#27880;&#65306;string &#24517;&#39035;&#26159; utf-8 &#32534;&#30721;&#65292;&#25110;&#32773;&#21482;&#33021;&#26159; 7 bit &#30340; ascii&#12290;</p>
+<dl>
+<dt>Optional Fields And Default Values <code class="fold">@</code></dt>
+<dd><p>&#21482;&#26377; optional &#25165;&#35201;&#26377; default &#21602;&#65292;&#22240;&#20026;&#19981; optional &#30340;&#37117;&#35201;&#26174;&#24335;&#36171;&#20540;&#65311;&#35821;&#27861;&#22914;&#19979;&#65306;</p>
+<pre><code>optional int32 result_per_page = 3 [default = 10];
+
+// type-specific defaults
+//      string     &lt;-      &quot;&quot;,
+//      bool       &lt;-      false,
+//      number     &lt;-      0,</code></pre>
+</dd>
+<dt>Enumerations <code class="fold">@</code></dt>
+<dd><pre><code>message SearchRequest {
+  required string query = 1;
+  optional int32 page_number = 2;
+  optional int32 result_per_page = 3 [default = 10];
+  enum Corpus {
+    UNIVERSAL = 0;
+    WEB = 1;
+    IMAGES = 2;
+    LOCAL = 3;
+    NEWS = 4;
+    PRODUCTS = 5;
+    VIDEO = 6;
+  }
+  optional Corpus corpus = 4 [default = UNIVERSAL];
+}</code></pre>
+<pre><code>// &#22914;&#26524;&#19981; allow_alias &#30340;&#35805;&#65292;&#19981;&#33021;&#21516;&#26102;&#32473;&#21464;&#37327; STARTED &#21644; RUNNING &#36171;&#20540; 1
+enum EnumAllowingAlias {
+  option allow_alias = true;
+  UNKNOWN = 0;
+  STARTED = 1;
+  RUNNING = 1;
+}</code></pre>
+</dd>
+<dt>Using Other Message Types <code class="fold">@</code></dt>
+<dd><pre><code>message SearchResponse {
+  repeated Result result = 1;
+}
+
+message Result {
+  required string url = 1;
+  optional string title = 2;
+  repeated string snippets = 3;
+}</code></pre>
+</dd>
+<dt>Importing Definitions <code class="fold">@</code></dt>
+<dd><p><code>import &quot;myproject/other_protos.proto&quot;;</code></p>
+<p>&#26377;&#28857;&#22797;&#26434;&#30340;&#26159;&#21487;&#20197;&#25351;&#23450; public import&#12290;</p>
+</dd>
+<dt>Nested Types <code class="fold">@</code></dt>
+<dd><p>&#19981;&#35201;&#29992; group&#65292;&#29992; nested types&#12290;</p>
+<pre><code>message SearchResponse {
+  message Result {
+    required string url = 1;
+    optional string title = 2;
+    repeated string snippets = 3;
+  }
+  repeated Result result = 1;
+}</code></pre>
+</dd>
+</dl>
+<p>Updating A Message Type</p>
+<dl>
+<dt>Oneof <code class="fold">@</code></dt>
+<dd><p>If you have a message with many optional fields and where at most one field will be set at the same time, you can enforce this behavior and save memory by using the oneof feature.</p>
+</dd>
+</dl>
+</dd>
+<dt><a href="http://gashero.yeax.com/?p=108">&#24778;&#24070;&#20043;&#38745;&#40664; &#187; Blog Archive &#187; ProtoBuf&#24320;&#21457;&#32773;&#25351;&#21335; &#8211; &#38750;&#23448;&#26041;&#19981;&#23436;&#25972;&#29256;</a> <code class="fold">@</code></dt>
+<dd><dl>
+<dt>&#20195;&#30721;&#39118;&#26684;&#25351;&#23548; <code class="fold">@</code></dt>
+<dd><pre><code>message SongServerRequest {
+    required string song_name=1;
+}</code></pre>
+<p>&#20351;&#29992;&#36825;&#31181;&#21629;&#21517;&#26041;&#24335;&#24471;&#21040;&#30340;&#21517;&#23383;&#22914;&#19979;:</p>
+<pre><code>C++:
+    const string&amp; song_name() {...}
+    void set_song_name(const string&amp; x) {...}
+
+Java:
+    public String getSongName() {...}
+    public Builder setSongName(String v) {...}</code></pre>
+<pre><code>enum Foo {
+    FIRST_VALUE=1;
+    SECOND_VALUE=2;
+}</code></pre>
+<p>&#27599;&#20010;&#26522;&#20030;&#20540;&#26368;&#21518;&#20197;&#20998;&#21495;&#32467;&#23614;&#65292;&#32780;&#19981;&#26159;&#36887;&#21495;&#12290;</p>
+<p>&#22914;&#26524;&#20320;&#30340; .proto &#25991;&#20214;&#23450;&#20041;&#20102;RPC&#26381;&#21153;&#65292;&#20320;&#21487;&#20197;&#20351;&#29992;&#39558;&#39548;&#39118;&#26684;:</p>
+<pre><code>service FooService {
+    rpc GetSomething(FooRequest) returns (FooResponse);
+}</code></pre>
+</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p>&#19979;&#19968;&#27493;&#65306;</p>
+<dl>
+<dt>See caffe &#30340; proto &#23450;&#20041; <code class="fold">@</code></dt>
+<dd><p>include from include dir</p>
+<p><a href="https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto" class="uri">https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto</a></p>
+<p>&#36825;&#37324;&#27983;&#35272;&#19968;&#19979; caffe &#30340; proto &#23450;&#20041;&#12290;</p>
+<pre><code>syntax = &quot;proto2&quot;;
+
+package caffe;</code></pre>
+<dl>
+<dt>blob shape: <code>[dim]</code> <code class="fold">@</code></dt>
+<dd><pre><code>// Specifies the shape (dimensions) of a Blob.
+//      [n, k, h, w], etc
+message BlobShape {
+  repeated int64 dim = 1 [packed = true];
+}</code></pre>
+</dd>
+<dt>blob proto: <code>{shape, data, diff }</code> <code class="fold">@</code></dt>
+<dd><pre><code>// blob &#37324;&#38754;&#26377;
+//  -   &#32500;&#24230;&#20449;&#24687; shape&#65292;
+//  -   data&#65292;diff&#65292;double &#22411;&#30340; data&#65292;diff
+message BlobProto {
+  optional BlobShape shape = 7;
+  repeated float data = 5 [packed = true];
+  repeated float diff = 6 [packed = true];
+  repeated double double_data = 8 [packed = true];
+  repeated double double_diff = 9 [packed = true];
+
+  // 4D dimensions -- deprecated.  Use &quot;shape&quot; instead.
+  optional int32 num = 1 [default = 0];
+  optional int32 channels = 2 [default = 0];
+  optional int32 height = 3 [default = 0];
+  optional int32 width = 4 [default = 0];
+}</code></pre>
+</dd>
+<dt>blob proto vector: <code>[blob proto]</code> <code class="fold">@</code></dt>
+<dd><pre><code>// &#23601;&#26159;&#19968;&#20018; blob
+// The BlobProtoVector is simply a way to pass multiple blobproto instances
+// around.
+message BlobProtoVector {
+  repeated BlobProto blobs = 1;
+}</code></pre>
+</dd>
+<dt>datum <code class="fold">@</code></dt>
+<dd><pre><code>message Datum {
+  optional int32 channels = 1;
+  optional int32 height = 2;
+  optional int32 width = 3;
+  // the actual image data, in bytes
+  optional bytes data = 4;
+  optional int32 label = 5;
+  // Optionally, the datum could also hold float data.
+  repeated float float_data = 6;
+  // If true data contains an encoded image that need to be decoded
+  // &#40664;&#35748;&#19981; encode &#22270;&#29255;&#65288;&#19968;&#22534;&#20687;&#32032;&#20540;&#65289;
+  optional bool encoded = 7 [default = false];
+}</code></pre>
+</dd>
+<dt>filter <code class="fold">@</code></dt>
+<dd><pre><code>// filler &#26159;&#24178;&#22043;&#30340;&#65311;
+message FillerParameter {
+  // The filler type.
+  optional string type = 1 [default = &#39;constant&#39;];
+  optional float value = 2 [default = 0]; // the value in constant filler
+  optional float min = 3 [default = 0]; // the min value in uniform filler
+  optional float max = 4 [default = 1]; // the max value in uniform filler
+  optional float mean = 5 [default = 0]; // the mean value in Gaussian filler
+  optional float std = 6 [default = 1]; // the std value in Gaussian filler
+  // The expected number of non-zero output weights for a given input in
+  // Gaussian filler -- the default -1 means don&#39;t perform sparsification.
+  optional int32 sparse = 7 [default = -1];
+  // Normalize the filler variance by fan_in, fan_out, or their average.
+  // Applies to &#39;xavier&#39; and &#39;msra&#39; fillers.
+  enum VarianceNorm {
+    FAN_IN = 0;
+    FAN_OUT = 1;
+    AVERAGE = 2;
+  }
+  optional VarianceNorm variance_norm = 8 [default = FAN_IN];
+}</code></pre>
+</dd>
+<dt>net paramter <code class="fold">@</code></dt>
+<dd><pre><code>message NetParameter {
+  optional string name = 1; // consider giving the network a name
+  // DEPRECATED. See InputParameter. The input blobs to the network.
+  repeated string input = 3;
+  // DEPRECATED. See InputParameter. The shape of the input blobs.
+  repeated BlobShape input_shape = 8;
+
+  // 4D input dimensions -- deprecated.  Use &quot;input_shape&quot; instead.
+  // If specified, for each input blob there should be four
+  // values specifying the num, channels, height and width of the input blob.
+  // Thus, there should be a total of (4 * #input) numbers.
+  repeated int32 input_dim = 4;
+
+  // Whether the network will force every layer to carry out backward operation.
+  // If set False, then whether to carry out backward is determined
+  // automatically according to the net structure and learning rates.
+  optional bool force_backward = 5 [default = false];
+  // The current &quot;state&quot; of the network, including the phase, level, and stage.
+  // Some layers may be included/excluded depending on this state and the states
+  // specified in the layers&#39; include and exclude fields.
+  optional NetState state = 6;
+
+  // Print debugging information about results while running Net::Forward,
+  // Net::Backward, and Net::Update.
+  optional bool debug_info = 7 [default = false];
+
+  // The layers that make up the net.  Each of their configurations, including
+  // connectivity and behavior, is specified as a LayerParameter.
+  repeated LayerParameter layer = 100;  // ID 100 so layers are printed last.
+
+  // DEPRECATED: use &#39;layer&#39; instead.
+  repeated V1LayerParameter layers = 2;
+}</code></pre>
+</dd>
+<dt>solver parameter <code class="fold">@</code></dt>
+<dd><pre><code>// NOTE
+// Update the next available ID when you add a new SolverParameter field.
+//
+// SolverParameter next available ID: 41 (last added: type)
+message SolverParameter {
+  //////////////////////////////////////////////////////////////////////////////
+  // Specifying the train and test networks
+  //
+  // Exactly one train net must be specified using one of the following fields:
+  //     train_net_param, train_net, net_param, net
+  // One or more test nets may be specified using any of the following fields:
+  //     test_net_param, test_net, net_param, net
+  // If more than one test net field is specified (e.g., both net and
+  // test_net are specified), they will be evaluated in the field order given
+  // above: (1) test_net_param, (2) test_net, (3) net_param/net.
+  // A test_iter must be specified for each test_net.
+  // A test_level and/or a test_stage may also be specified for each test_net.
+  //////////////////////////////////////////////////////////////////////////////
+
+  // Proto filename for the train net, possibly combined with one or more
+  // test nets.
+  optional string net = 24;
+  // Inline train net param, possibly combined with one or more test nets.
+  optional NetParameter net_param = 25;
+
+  optional string train_net = 1; // Proto filename for the train net.
+  repeated string test_net = 2; // Proto filenames for the test nets.
+  optional NetParameter train_net_param = 21; // Inline train net params.
+  repeated NetParameter test_net_param = 22; // Inline test net params.
+
+  // The states for the train/test nets. Must be unspecified or
+  // specified once per net.
+  //
+  // By default, all states will have solver = true;
+  // train_state will have phase = TRAIN,
+  // and all test_state&#39;s will have phase = TEST.
+  // Other defaults are set according to the NetState defaults.
+  optional NetState train_state = 26;
+  repeated NetState test_state = 27;
+
+  // The number of iterations for each test net.
+  repeated int32 test_iter = 3;
+
+  // The number of iterations between two testing phases.
+  optional int32 test_interval = 4 [default = 0];
+  optional bool test_compute_loss = 19 [default = false];
+  // If true, run an initial test pass before the first iteration,
+  // ensuring memory availability and printing the starting value of the loss.
+  optional bool test_initialization = 32 [default = true];
+  optional float base_lr = 5; // The base learning rate
+  // the number of iterations between displaying info. If display = 0, no info
+  // will be displayed.
+  optional int32 display = 6;
+  // Display the loss averaged over the last average_loss iterations
+  optional int32 average_loss = 33 [default = 1];
+  optional int32 max_iter = 7; // the maximum number of iterations
+  // accumulate gradients over `iter_size` x `batch_size` instances
+  optional int32 iter_size = 36 [default = 1];
+
+  // The learning rate decay policy. The currently implemented learning rate
+  // policies are as follows:
+  //    - fixed: always return base_lr.
+  //    - step: return base_lr * gamma ^ (floor(iter / step))
+  //    - exp: return base_lr * gamma ^ iter
+  //    - inv: return base_lr * (1 + gamma * iter) ^ (- power)
+  //    - multistep: similar to step but it allows non uniform steps defined by
+  //      stepvalue
+  //    - poly: the effective learning rate follows a polynomial decay, to be
+  //      zero by the max_iter. return base_lr (1 - iter/max_iter) ^ (power)
+  //    - sigmoid: the effective learning rate follows a sigmod decay
+  //      return base_lr ( 1/(1 + exp(-gamma * (iter - stepsize))))
+  //
+  // where base_lr, max_iter, gamma, step, stepvalue and power are defined
+  // in the solver parameter protocol buffer, and iter is the current iteration.
+  optional string lr_policy = 8;
+  optional float gamma = 9; // The parameter to compute the learning rate.
+  optional float power = 10; // The parameter to compute the learning rate.
+  optional float momentum = 11; // The momentum value.
+  optional float weight_decay = 12; // The weight decay.
+  // regularization types supported: L1 and L2
+  // controlled by weight_decay
+  optional string regularization_type = 29 [default = &quot;L2&quot;];
+  // the stepsize for learning rate policy &quot;step&quot;
+  optional int32 stepsize = 13;
+  // the stepsize for learning rate policy &quot;multistep&quot;
+  repeated int32 stepvalue = 34;
+
+  // Set clip_gradients to &gt;= 0 to clip parameter gradients to that L2 norm,
+  // whenever their actual L2 norm is larger.
+  optional float clip_gradients = 35 [default = -1];
+
+  optional int32 snapshot = 14 [default = 0]; // The snapshot interval
+  optional string snapshot_prefix = 15; // The prefix for the snapshot.
+  // whether to snapshot diff in the results or not. Snapshotting diff will help
+  // debugging but the final protocol buffer size will be much larger.
+  optional bool snapshot_diff = 16 [default = false];
+  enum SnapshotFormat {
+    HDF5 = 0;
+    BINARYPROTO = 1;
+  }
+  optional SnapshotFormat snapshot_format = 37 [default = BINARYPROTO];
+  // the mode solver will use: 0 for CPU and 1 for GPU. Use GPU in default.
+  enum SolverMode {
+    CPU = 0;
+    GPU = 1;
+  }
+  optional SolverMode solver_mode = 17 [default = GPU];
+  // the device_id will that be used in GPU mode. Use device_id = 0 in default.
+  optional int32 device_id = 18 [default = 0];
+  // If non-negative, the seed with which the Solver will initialize the Caffe
+  // random number generator -- useful for reproducible results. Otherwise,
+  // (and by default) initialize using a seed derived from the system clock.
+  optional int64 random_seed = 20 [default = -1];
+
+  // type of the solver
+  optional string type = 40 [default = &quot;SGD&quot;];
+
+  // numerical stability for RMSProp, AdaGrad and AdaDelta and Adam
+  optional float delta = 31 [default = 1e-8];
+  // parameters for the Adam solver
+  optional float momentum2 = 39 [default = 0.999];
+
+  // RMSProp decay value
+  // MeanSquare(t) = rms_decay*MeanSquare(t-1) + (1-rms_decay)*SquareGradient(t)
+  optional float rms_decay = 38;
+
+  // If true, print information about the state of the net that may help with
+  // debugging learning problems.
+  optional bool debug_info = 23 [default = false];
+
+  // If false, don&#39;t save a snapshot after training finishes.
+  optional bool snapshot_after_train = 28 [default = true];
+
+  // DEPRECATED: old solver enum types, use string instead
+  enum SolverType {
+    SGD = 0;
+    NESTEROV = 1;
+    ADAGRAD = 2;
+    RMSPROP = 3;
+    ADADELTA = 4;
+    ADAM = 5;
+  }
+  // DEPRECATED: use type instead of solver_type
+  optional SolverType solver_type = 30 [default = SGD];
+}</code></pre>
+</dd>
+<dt>sover state <code class="fold">@</code></dt>
+<dd><pre><code>// A message that stores the solver snapshots
+message SolverState {
+  optional int32 iter = 1; // The current iteration
+  optional string learned_net = 2; // The file that stores the learned net.
+  repeated BlobProto history = 3; // The history for sgd solvers
+  optional int32 current_step = 4 [default = 0]; // The current step for learning rate
+}</code></pre>
+</dd>
+<dt>phase <code class="fold">@</code></dt>
+<dd><pre><code>enum Phase {
+   TRAIN = 0;
+   TEST = 1;
+}</code></pre>
+</dd>
+<dt>net state <code class="fold">@</code></dt>
+<dd><pre><code>message NetState {
+  optional Phase phase = 1 [default = TEST];
+  optional int32 level = 2 [default = 0];
+  repeated string stage = 3;
+}</code></pre>
+</dd>
+<dt>net state rule <code class="fold">@</code></dt>
+<dd><pre><code>message NetStateRule {
+  // Set phase to require the NetState have a particular phase (TRAIN or TEST)
+  // to meet this rule.
+  optional Phase phase = 1;
+
+  // Set the minimum and/or maximum levels in which the layer should be used.
+  // Leave undefined to meet the rule regardless of level.
+  optional int32 min_level = 2;
+  optional int32 max_level = 3;
+
+  // Customizable sets of stages to include or exclude.
+  // The net must have ALL of the specified stages and NONE of the specified
+  // &quot;not_stage&quot;s to meet the rule.
+  // (Use multiple NetStateRules to specify conjunctions of stages.)
+  repeated string stage = 4;
+  repeated string not_stage = 5;
+}</code></pre>
+</dd>
+<dt>param spec <code class="fold">@</code></dt>
+<dd><pre><code>// Specifies training parameters (multipliers on global learning constants,
+// and the name and other settings used for weight sharing).
+message ParamSpec {
+  // The names of the parameter blobs -- useful for sharing parameters among
+  // layers, but never required otherwise.  To share a parameter between two
+  // layers, give it a (non-empty) name.
+  optional string name = 1;
+
+  // Whether to require shared weights to have the same shape, or just the same
+  // count -- defaults to STRICT if unspecified.
+  optional DimCheckMode share_mode = 2;
+  enum DimCheckMode {
+    // STRICT (default) requires that num, channels, height, width each match.
+    STRICT = 0;
+    // PERMISSIVE requires only the count (num*channels*height*width) to match.
+    PERMISSIVE = 1;
+  }
+
+  // The multiplier on the global learning rate for this parameter.
+  optional float lr_mult = 3 [default = 1.0];
+
+  // The multiplier on the global weight decay for this parameter.
+  optional float decay_mult = 4 [default = 1.0];
+}</code></pre>
+</dd>
+<dt>layer parameter <code class="fold">@</code></dt>
+<dd><pre><code>// NOTE
+// Update the next available ID when you add a new LayerParameter field.
+//
+// LayerParameter next available layer-specific ID: 147 (last added: recurrent_param)
+message LayerParameter {
+  optional string name = 1; // the layer name
+  optional string type = 2; // the layer type
+  repeated string bottom = 3; // the name of each bottom blob
+  repeated string top = 4; // the name of each top blob
+
+  // The train / test phase for computation.
+  optional Phase phase = 10;
+
+  // The amount of weight to assign each top blob in the objective.
+  // Each layer assigns a default value, usually of either 0 or 1,
+  // to each top blob.
+  repeated float loss_weight = 5;
+
+  // Specifies training parameters (multipliers on global learning constants,
+  // and the name and other settings used for weight sharing).
+  repeated ParamSpec param = 6;
+
+  // The blobs containing the numeric parameters of the layer.
+  repeated BlobProto blobs = 7;
+
+  // Specifies whether to backpropagate to each bottom. If unspecified,
+  // Caffe will automatically infer whether each input needs backpropagation
+  // to compute parameter gradients. If set to true for some inputs,
+  // backpropagation to those inputs is forced; if set false for some inputs,
+  // backpropagation to those inputs is skipped.
+  //
+  // The size must be either 0 or equal to the number of bottoms.
+  repeated bool propagate_down = 11;
+
+  // Rules controlling whether and when a layer is included in the network,
+  // based on the current NetState.  You may specify a non-zero number of rules
+  // to include OR exclude, but not both.  If no include or exclude rules are
+  // specified, the layer is always included.  If the current NetState meets
+  // ANY (i.e., one or more) of the specified rules, the layer is
+  // included/excluded.
+  repeated NetStateRule include = 8;
+  repeated NetStateRule exclude = 9;
+
+  // Parameters for data pre-processing.
+  optional TransformationParameter transform_param = 100;
+
+  // Parameters shared by loss layers.
+  optional LossParameter loss_param = 101;
+
+  // Layer type-specific parameters.
+  //
+  // Note: certain layers may have more than one computational engine
+  // for their implementation. These layers include an Engine type and
+  // engine parameter for selecting the implementation.
+  // The default for the engine is set by the ENGINE switch at compile-time.
+  optional AccuracyParameter accuracy_param = 102;
+  optional ArgMaxParameter argmax_param = 103;
+  optional BatchNormParameter batch_norm_param = 139;
+  optional BiasParameter bias_param = 141;
+  optional ConcatParameter concat_param = 104;
+  optional ContrastiveLossParameter contrastive_loss_param = 105;
+  optional ConvolutionParameter convolution_param = 106;
+  optional CropParameter crop_param = 144;
+  optional DataParameter data_param = 107;
+  optional DropoutParameter dropout_param = 108;
+  optional DummyDataParameter dummy_data_param = 109;
+  optional EltwiseParameter eltwise_param = 110;
+  optional ELUParameter elu_param = 140;
+  optional EmbedParameter embed_param = 137;
+  optional ExpParameter exp_param = 111;
+  optional FlattenParameter flatten_param = 135;
+  optional HDF5DataParameter hdf5_data_param = 112;
+  optional HDF5OutputParameter hdf5_output_param = 113;
+  optional HingeLossParameter hinge_loss_param = 114;
+  optional ImageDataParameter image_data_param = 115;
+  optional InfogainLossParameter infogain_loss_param = 116;
+  optional InnerProductParameter inner_product_param = 117;
+  optional InputParameter input_param = 143;
+  optional LogParameter log_param = 134;
+  optional LRNParameter lrn_param = 118;
+  optional MemoryDataParameter memory_data_param = 119;
+  optional MVNParameter mvn_param = 120;
+  optional ParameterParameter parameter_param = 145;
+  optional PoolingParameter pooling_param = 121;
+  optional PowerParameter power_param = 122;
+  optional PReLUParameter prelu_param = 131;
+  optional PythonParameter python_param = 130;
+  optional RecurrentParameter recurrent_param = 146;
+  optional ReductionParameter reduction_param = 136;
+  optional ReLUParameter relu_param = 123;
+  optional ReshapeParameter reshape_param = 133;
+  optional ScaleParameter scale_param = 142;
+  optional SigmoidParameter sigmoid_param = 124;
+  optional SoftmaxParameter softmax_param = 125;
+  optional SPPParameter spp_param = 132;
+  optional SliceParameter slice_param = 126;
+  optional TanHParameter tanh_param = 127;
+  optional ThresholdParameter threshold_param = 128;
+  optional TileParameter tile_param = 138;
+  optional WindowDataParameter window_data_param = 129;
+}</code></pre>
+</dd>
+<dt>transformation parameter <code class="fold">@</code></dt>
+<dd><pre><code>// Message that stores parameters used to apply transformation
+// to the data layer&#39;s data
+message TransformationParameter {
+  // For data pre-processing, we can do simple scaling and subtracting the
+  // data mean, if provided. Note that the mean subtraction is always carried
+  // out before scaling.
+  optional float scale = 1 [default = 1];
+  // Specify if we want to randomly mirror data.
+  optional bool mirror = 2 [default = false];
+  // Specify if we would like to randomly crop an image.
+  optional uint32 crop_size = 3 [default = 0];
+  // mean_file and mean_value cannot be specified at the same time
+  optional string mean_file = 4;
+  // if specified can be repeated once (would substract it from all the channels)
+  // or can be repeated the same number of times as channels
+  // (would subtract them from the corresponding channel)
+  repeated float mean_value = 5;
+  // Force the decoded image to have 3 color channels.
+  optional bool force_color = 6 [default = false];
+  // Force the decoded image to have 1 color channels.
+  optional bool force_gray = 7 [default = false];
+}</code></pre>
+</dd>
+<dt>loss parameter <code class="fold">@</code></dt>
+<dd><pre><code>// Message that stores parameters shared by loss layers
+message LossParameter {
+  // If specified, ignore instances with the given label.
+  optional int32 ignore_label = 1;
+  // How to normalize the loss for loss layers that aggregate across batches,
+  // spatial dimensions, or other dimensions.  Currently only implemented in
+  // SoftmaxWithLoss layer.
+  enum NormalizationMode {
+    // Divide by the number of examples in the batch times spatial dimensions.
+    // Outputs that receive the ignore label will NOT be ignored in computing
+    // the normalization factor.
+    FULL = 0;
+    // Divide by the total number of output locations that do not take the
+    // ignore_label.  If ignore_label is not set, this behaves like FULL.
+    VALID = 1;
+    // Divide by the batch size.
+    BATCH_SIZE = 2;
+    // Do not normalize the loss.
+    NONE = 3;
+  }
+  optional NormalizationMode normalization = 3 [default = VALID];
+  // Deprecated.  Ignored if normalization is specified.  If normalization
+  // is not specified, then setting this to false will be equivalent to
+  // normalization = BATCH_SIZE to be consistent with previous behavior.
+  optional bool normalize = 2;
+}</code></pre>
+</dd>
+<dt>accuracy parameter <code class="fold">@</code></dt>
+<dd><pre><code>// Messages that store parameters used by individual layer types follow, in
+// alphabetical order.
+
+message AccuracyParameter {
+  // When computing accuracy, count as correct by comparing the true label to
+  // the top k scoring classes.  By default, only compare to the top scoring
+  // class (i.e. argmax).
+  optional uint32 top_k = 1 [default = 1];
+
+  // The &quot;label&quot; axis of the prediction blob, whose argmax corresponds to the
+  // predicted label -- may be negative to index from the end (e.g., -1 for the
+  // last axis).  For example, if axis == 1 and the predictions are
+  // (N x C x H x W), the label blob is expected to contain N*H*W ground truth
+  // labels with integer values in {0, 1, ..., C-1}.
+  optional int32 axis = 2 [default = 1];
+
+  // If specified, ignore instances with the given label.
+  optional int32 ignore_label = 3;
+}</code></pre>
+</dd>
+<dt>arg max paramater <code class="fold">@</code></dt>
+<dd><pre><code>message ArgMaxParameter {
+  // If true produce pairs (argmax, maxval)
+  optional bool out_max_val = 1 [default = false];
+  optional uint32 top_k = 2 [default = 1];
+  // The axis along which to maximise -- may be negative to index from the
+  // end (e.g., -1 for the last axis).
+  // By default ArgMaxLayer maximizes over the flattened trailing dimensions
+  // for each index of the first / num dimension.
+  optional int32 axis = 3;
+}</code></pre>
+</dd>
+<dt>conact parameter <code class="fold">@</code></dt>
+<dd><pre><code>message ConcatParameter {
+  // The axis along which to concatenate -- may be negative to index from the
+  // end (e.g., -1 for the last axis).  Other axes must have the
+  // same dimension for all the bottom blobs.
+  // By default, ConcatLayer concatenates blobs along the &quot;channels&quot; axis (1).
+  optional int32 axis = 2 [default = 1];
+
+  // DEPRECATED: alias for &quot;axis&quot; -- does not support negative indexing.
+  optional uint32 concat_dim = 1 [default = 1];
+}</code></pre>
+</dd>
+<dt>batch norm parameter <code class="fold">@</code></dt>
+<dd><pre><code>message BatchNormParameter {
+  // If false, accumulate global mean/variance values via a moving average. If
+  // true, use those accumulated values instead of computing mean/variance
+  // across the batch.
+  optional bool use_global_stats = 1;
+  // How much does the moving average decay each iteration?
+  optional float moving_average_fraction = 2 [default = .999];
+  // Small value to add to the variance estimate so that we don&#39;t divide by
+  // zero.
+  optional float eps = 3 [default = 1e-5];
+}</code></pre>
+</dd>
+<dt>bias parameter <code class="fold">@</code></dt>
+<dd><pre><code>message BiasParameter {
+  // The first axis of bottom[0] (the first input Blob) along which to apply
+  // bottom[1] (the second input Blob).  May be negative to index from the end
+  // (e.g., -1 for the last axis).
+  //
+  // For example, if bottom[0] is 4D with shape 100x3x40x60, the output
+  // top[0] will have the same shape, and bottom[1] may have any of the
+  // following shapes (for the given value of axis):
+  //    (axis == 0 == -4) 100; 100x3; 100x3x40; 100x3x40x60
+  //    (axis == 1 == -3)          3;     3x40;     3x40x60
+  //    (axis == 2 == -2)                   40;       40x60
+  //    (axis == 3 == -1)                                60
+  // Furthermore, bottom[1] may have the empty shape (regardless of the value of
+  // &quot;axis&quot;) -- a scalar bias.
+  optional int32 axis = 1 [default = 1];
+
+  // (num_axes is ignored unless just one bottom is given and the bias is
+  // a learned parameter of the layer.  Otherwise, num_axes is determined by the
+  // number of axes by the second bottom.)
+  // The number of axes of the input (bottom[0]) covered by the bias
+  // parameter, or -1 to cover all axes of bottom[0] starting from `axis`.
+  // Set num_axes := 0, to add a zero-axis Blob: a scalar.
+  optional int32 num_axes = 2 [default = 1];
+
+  // (filler is ignored unless just one bottom is given and the bias is
+  // a learned parameter of the layer.)
+  // The initialization for the learned bias parameter.
+  // Default is the zero (0) initialization, resulting in the BiasLayer
+  // initially performing the identity operation.
+  optional FillerParameter filler = 3;
+}</code></pre>
+</dd>
+<dt>contrastive loss parameter <code class="fold">@</code></dt>
+<dd><pre><code>message ContrastiveLossParameter {
+  // margin for dissimilar pair
+  optional float margin = 1 [default = 1.0];
+  // The first implementation of this cost did not exactly match the cost of
+  // Hadsell et al 2006 -- using (margin - d^2) instead of (margin - d)^2.
+  // legacy_version = false (the default) uses (margin - d)^2 as proposed in the
+  // Hadsell paper. New models should probably use this version.
+  // legacy_version = true uses (margin - d^2). This is kept to support /
+  // reproduce existing models and results
+  optional bool legacy_version = 2 [default = false];
+}</code></pre>
+</dd>
+<dt>convolution parameter <code class="fold">@</code></dt>
+<dd><pre><code>message ConvolutionParameter {
+  optional uint32 num_output = 1; // The number of outputs for the layer
+  optional bool bias_term = 2 [default = true]; // whether to have bias terms
+
+  // Pad, kernel size, and stride are all given as a single value for equal
+  // dimensions in all spatial dimensions, or once per spatial dimension.
+  repeated uint32 pad = 3; // The padding size; defaults to 0
+  repeated uint32 kernel_size = 4; // The kernel size
+  repeated uint32 stride = 6; // The stride; defaults to 1
+  // Factor used to dilate the kernel, (implicitly) zero-filling the resulting
+  // holes. (Kernel dilation is sometimes referred to by its use in the
+  // algorithme &#224; trous from Holschneider et al. 1987.)
+  repeated uint32 dilation = 18; // The dilation; defaults to 1
+
+  // For 2D convolution only, the *_h and *_w versions may also be used to
+  // specify both spatial dimensions.
+  optional uint32 pad_h = 9 [default = 0]; // The padding height (2D only)
+  optional uint32 pad_w = 10 [default = 0]; // The padding width (2D only)
+  optional uint32 kernel_h = 11; // The kernel height (2D only)
+  optional uint32 kernel_w = 12; // The kernel width (2D only)
+  optional uint32 stride_h = 13; // The stride height (2D only)
+  optional uint32 stride_w = 14; // The stride width (2D only)
+
+  optional uint32 group = 5 [default = 1]; // The group size for group conv
+
+  optional FillerParameter weight_filler = 7; // The filler for the weight
+  optional FillerParameter bias_filler = 8; // The filler for the bias
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 15 [default = DEFAULT];
+
+  // The axis to interpret as &quot;channels&quot; when performing convolution.
+  // Preceding dimensions are treated as independent inputs;
+  // succeeding dimensions are treated as &quot;spatial&quot;.
+  // With (N, C, H, W) inputs, and axis == 1 (the default), we perform
+  // N independent 2D convolutions, sliding C-channel (or (C/g)-channels, for
+  // groups g&gt;1) filters across the spatial axes (H, W) of the input.
+  // With (N, C, D, H, W) inputs, and axis == 1, we perform
+  // N independent 3D convolutions, sliding (C/g)-channels
+  // filters across the spatial axes (D, H, W) of the input.
+  optional int32 axis = 16 [default = 1];
+
+  // Whether to force use of the general ND convolution, even if a specific
+  // implementation for blobs of the appropriate number of spatial dimensions
+  // is available. (Currently, there is only a 2D-specific convolution
+  // implementation; for input blobs with num_axes != 2, this option is
+  // ignored and the ND implementation will be used.)
+  optional bool force_nd_im2col = 17 [default = false];
+}</code></pre>
+</dd>
+<dt>corp parameter</dt>
+<dd><pre><code>message CropParameter {
+  // To crop, elements of the first bottom are selected to fit the dimensions
+  // of the second, reference bottom. The crop is configured by
+  // - the crop `axis` to pick the dimensions for cropping
+  // - the crop `offset` to set the shift for all/each dimension
+  // to align the cropped bottom with the reference bottom.
+  // All dimensions up to but excluding `axis` are preserved, while
+  // the dimensions including and trailing `axis` are cropped.
+  // If only one `offset` is set, then all dimensions are offset by this amount.
+  // Otherwise, the number of offsets must equal the number of cropped axes to
+  // shift the crop in each dimension accordingly.
+  // Note: standard dimensions are N,C,H,W so the default is a spatial crop,
+  // and `axis` may be negative to index from the end (e.g., -1 for the last
+  // axis).
+  optional int32 axis = 1 [default = 2];
+  repeated uint32 offset = 2;
+}</code></pre>
+</dd>
+<dt>data parameter <code class="fold">@</code></dt>
+<dd><pre><code>message DataParameter {
+  enum DB {
+    LEVELDB = 0;
+    LMDB = 1;
+  }
+  // Specify the data source.
+  optional string source = 1;
+  // Specify the batch size.
+  optional uint32 batch_size = 4;
+  // The rand_skip variable is for the data layer to skip a few data points
+  // to avoid all asynchronous sgd clients to start at the same point. The skip
+  // point would be set as rand_skip * rand(0,1). Note that rand_skip should not
+  // be larger than the number of keys in the database.
+  // DEPRECATED. Each solver accesses a different subset of the database.
+  optional uint32 rand_skip = 7 [default = 0];
+  optional DB backend = 8 [default = LEVELDB];
+  // DEPRECATED. See TransformationParameter. For data pre-processing, we can do
+  // simple scaling and subtracting the data mean, if provided. Note that the
+  // mean subtraction is always carried out before scaling.
+  optional float scale = 2 [default = 1];
+  optional string mean_file = 3;
+  // DEPRECATED. See TransformationParameter. Specify if we would like to randomly
+  // crop an image.
+  optional uint32 crop_size = 5 [default = 0];
+  // DEPRECATED. See TransformationParameter. Specify if we want to randomly mirror
+  // data.
+  optional bool mirror = 6 [default = false];
+  // Force the encoded image to have 3 color channels
+  optional bool force_encoded_color = 9 [default = false];
+  // Prefetch queue (Number of batches to prefetch to host memory, increase if
+  // data access bandwidth varies).
+  optional uint32 prefetch = 10 [default = 4];
+}</code></pre>
+</dd>
+<dt>dropout parameter <code class="fold">@</code></dt>
+<dd><pre><code>message DropoutParameter {
+  optional float dropout_ratio = 1 [default = 0.5]; // dropout ratio
+}</code></pre>
+</dd>
+</dl>
+<pre><code>// DummyDataLayer fills any number of arbitrarily shaped blobs with random
+// (or constant) data generated by &quot;Fillers&quot; (see &quot;message FillerParameter&quot;).
+message DummyDataParameter {
+  // This layer produces N &gt;= 1 top blobs.  DummyDataParameter must specify 1 or N
+  // shape fields, and 0, 1 or N data_fillers.
+  //
+  // If 0 data_fillers are specified, ConstantFiller with a value of 0 is used.
+  // If 1 data_filler is specified, it is applied to all top blobs.  If N are
+  // specified, the ith is applied to the ith top blob.
+  repeated FillerParameter data_filler = 1;
+  repeated BlobShape shape = 6;
+
+  // 4D dimensions -- deprecated.  Use &quot;shape&quot; instead.
+  repeated uint32 num = 2;
+  repeated uint32 channels = 3;
+  repeated uint32 height = 4;
+  repeated uint32 width = 5;
+}
+
+message EltwiseParameter {
+  enum EltwiseOp {
+    PROD = 0;
+    SUM = 1;
+    MAX = 2;
+  }
+  optional EltwiseOp operation = 1 [default = SUM]; // element-wise operation
+  repeated float coeff = 2; // blob-wise coefficient for SUM operation
+
+  // Whether to use an asymptotically slower (for &gt;2 inputs) but stabler method
+  // of computing the gradient for the PROD operation. (No effect for SUM op.)
+  optional bool stable_prod_grad = 3 [default = true];
+}
+
+// Message that stores parameters used by ELULayer
+message ELUParameter {
+  // Described in:
+  // Clevert, D.-A., Unterthiner, T., &amp; Hochreiter, S. (2015). Fast and Accurate
+  // Deep Network Learning by Exponential Linear Units (ELUs). arXiv
+  optional float alpha = 1 [default = 1];
+}
+
+// Message that stores parameters used by EmbedLayer
+message EmbedParameter {
+  optional uint32 num_output = 1; // The number of outputs for the layer
+  // The input is given as integers to be interpreted as one-hot
+  // vector indices with dimension num_input.  Hence num_input should be
+  // 1 greater than the maximum possible input value.
+  optional uint32 input_dim = 2;
+
+  optional bool bias_term = 3 [default = true]; // Whether to use a bias term
+  optional FillerParameter weight_filler = 4; // The filler for the weight
+  optional FillerParameter bias_filler = 5; // The filler for the bias
+
+}
+
+// Message that stores parameters used by ExpLayer
+message ExpParameter {
+  // ExpLayer computes outputs y = base ^ (shift + scale * x), for base &gt; 0.
+  // Or if base is set to the default (-1), base is set to e,
+  // so y = exp(shift + scale * x).
+  optional float base = 1 [default = -1.0];
+  optional float scale = 2 [default = 1.0];
+  optional float shift = 3 [default = 0.0];
+}
+
+/// Message that stores parameters used by FlattenLayer
+message FlattenParameter {
+  // The first axis to flatten: all preceding axes are retained in the output.
+  // May be negative to index from the end (e.g., -1 for the last axis).
+  optional int32 axis = 1 [default = 1];
+
+  // The last axis to flatten: all following axes are retained in the output.
+  // May be negative to index from the end (e.g., the default -1 for the last
+  // axis).
+  optional int32 end_axis = 2 [default = -1];
+}
+
+// Message that stores parameters used by HDF5DataLayer
+message HDF5DataParameter {
+  // Specify the data source.
+  optional string source = 1;
+  // Specify the batch size.
+  optional uint32 batch_size = 2;
+
+  // Specify whether to shuffle the data.
+  // If shuffle == true, the ordering of the HDF5 files is shuffled,
+  // and the ordering of data within any given HDF5 file is shuffled,
+  // but data between different files are not interleaved; all of a file&#39;s
+  // data are output (in a random order) before moving onto another file.
+  optional bool shuffle = 3 [default = false];
+}
+
+message HDF5OutputParameter {
+  optional string file_name = 1;
+}
+
+message HingeLossParameter {
+  enum Norm {
+    L1 = 1;
+    L2 = 2;
+  }
+  // Specify the Norm to use L1 or L2
+  optional Norm norm = 1 [default = L1];
+}
+
+message ImageDataParameter {
+  // Specify the data source.
+  optional string source = 1;
+  // Specify the batch size.
+  optional uint32 batch_size = 4 [default = 1];
+  // The rand_skip variable is for the data layer to skip a few data points
+  // to avoid all asynchronous sgd clients to start at the same point. The skip
+  // point would be set as rand_skip * rand(0,1). Note that rand_skip should not
+  // be larger than the number of keys in the database.
+  optional uint32 rand_skip = 7 [default = 0];
+  // Whether or not ImageLayer should shuffle the list of files at every epoch.
+  optional bool shuffle = 8 [default = false];
+  // It will also resize images if new_height or new_width are not zero.
+  optional uint32 new_height = 9 [default = 0];
+  optional uint32 new_width = 10 [default = 0];
+  // Specify if the images are color or gray
+  optional bool is_color = 11 [default = true];
+  // DEPRECATED. See TransformationParameter. For data pre-processing, we can do
+  // simple scaling and subtracting the data mean, if provided. Note that the
+  // mean subtraction is always carried out before scaling.
+  optional float scale = 2 [default = 1];
+  optional string mean_file = 3;
+  // DEPRECATED. See TransformationParameter. Specify if we would like to randomly
+  // crop an image.
+  optional uint32 crop_size = 5 [default = 0];
+  // DEPRECATED. See TransformationParameter. Specify if we want to randomly mirror
+  // data.
+  optional bool mirror = 6 [default = false];
+  optional string root_folder = 12 [default = &quot;&quot;];
+}
+
+message InfogainLossParameter {
+  // Specify the infogain matrix source.
+  optional string source = 1;
+}
+
+message InnerProductParameter {
+  optional uint32 num_output = 1; // The number of outputs for the layer
+  optional bool bias_term = 2 [default = true]; // whether to have bias terms
+  optional FillerParameter weight_filler = 3; // The filler for the weight
+  optional FillerParameter bias_filler = 4; // The filler for the bias
+
+  // The first axis to be lumped into a single inner product computation;
+  // all preceding axes are retained in the output.
+  // May be negative to index from the end (e.g., -1 for the last axis).
+  optional int32 axis = 5 [default = 1];
+  // Specify whether to transpose the weight matrix or not.
+  // If transpose == true, any operations will be performed on the transpose
+  // of the weight matrix. The weight matrix itself is not going to be transposed
+  // but rather the transfer flag of operations will be toggled accordingly.
+  optional bool transpose = 6 [default = false];
+}
+
+message InputParameter {
+  // This layer produces N &gt;= 1 top blob(s) to be assigned manually.
+  // Define N shapes to set a shape for each top.
+  // Define 1 shape to set the same shape for every top.
+  // Define no shape to defer to reshaping manually.
+  repeated BlobShape shape = 1;
+}
+
+// Message that stores parameters used by LogLayer
+message LogParameter {
+  // LogLayer computes outputs y = log_base(shift + scale * x), for base &gt; 0.
+  // Or if base is set to the default (-1), base is set to e,
+  // so y = ln(shift + scale * x) = log_e(shift + scale * x)
+  optional float base = 1 [default = -1.0];
+  optional float scale = 2 [default = 1.0];
+  optional float shift = 3 [default = 0.0];
+}
+
+// Message that stores parameters used by LRNLayer
+message LRNParameter {
+  optional uint32 local_size = 1 [default = 5];
+  optional float alpha = 2 [default = 1.];
+  optional float beta = 3 [default = 0.75];
+  enum NormRegion {
+    ACROSS_CHANNELS = 0;
+    WITHIN_CHANNEL = 1;
+  }
+  optional NormRegion norm_region = 4 [default = ACROSS_CHANNELS];
+  optional float k = 5 [default = 1.];
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 6 [default = DEFAULT];
+}
+
+message MemoryDataParameter {
+  optional uint32 batch_size = 1;
+  optional uint32 channels = 2;
+  optional uint32 height = 3;
+  optional uint32 width = 4;
+}
+
+message MVNParameter {
+  // This parameter can be set to false to normalize mean only
+  optional bool normalize_variance = 1 [default = true];
+
+  // This parameter can be set to true to perform DNN-like MVN
+  optional bool across_channels = 2 [default = false];
+
+  // Epsilon for not dividing by zero while normalizing variance
+  optional float eps = 3 [default = 1e-9];
+}
+
+message ParameterParameter {
+  optional BlobShape shape = 1;
+}
+
+message PoolingParameter {
+  enum PoolMethod {
+    MAX = 0;
+    AVE = 1;
+    STOCHASTIC = 2;
+  }
+  optional PoolMethod pool = 1 [default = MAX]; // The pooling method
+  // Pad, kernel size, and stride are all given as a single value for equal
+  // dimensions in height and width or as Y, X pairs.
+  optional uint32 pad = 4 [default = 0]; // The padding size (equal in Y, X)
+  optional uint32 pad_h = 9 [default = 0]; // The padding height
+  optional uint32 pad_w = 10 [default = 0]; // The padding width
+  optional uint32 kernel_size = 2; // The kernel size (square)
+  optional uint32 kernel_h = 5; // The kernel height
+  optional uint32 kernel_w = 6; // The kernel width
+  optional uint32 stride = 3 [default = 1]; // The stride (equal in Y, X)
+  optional uint32 stride_h = 7; // The stride height
+  optional uint32 stride_w = 8; // The stride width
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 11 [default = DEFAULT];
+  // If global_pooling then it will pool over the size of the bottom by doing
+  // kernel_h = bottom-&gt;height and kernel_w = bottom-&gt;width
+  optional bool global_pooling = 12 [default = false];
+}
+
+message PowerParameter {
+  // PowerLayer computes outputs y = (shift + scale * x) ^ power.
+  optional float power = 1 [default = 1.0];
+  optional float scale = 2 [default = 1.0];
+  optional float shift = 3 [default = 0.0];
+}
+
+message PythonParameter {
+  optional string module = 1;
+  optional string layer = 2;
+  // This value is set to the attribute `param_str` of the `PythonLayer` object
+  // in Python before calling the `setup()` method. This could be a number,
+  // string, dictionary in Python dict format, JSON, etc. You may parse this
+  // string in `setup` method and use it in `forward` and `backward`.
+  optional string param_str = 3 [default = &#39;&#39;];
+  // Whether this PythonLayer is shared among worker solvers during data parallelism.
+  // If true, each worker solver sequentially run forward from this layer.
+  // This value should be set true if you are using it as a data layer.
+  optional bool share_in_parallel = 4 [default = false];
+}
+
+// Message that stores parameters used by RecurrentLayer
+message RecurrentParameter {
+  // The dimension of the output (and usually hidden state) representation --
+  // must be explicitly set to non-zero.
+  optional uint32 num_output = 1 [default = 0];
+
+  optional FillerParameter weight_filler = 2; // The filler for the weight
+  optional FillerParameter bias_filler = 3; // The filler for the bias
+
+  // Whether to enable displaying debug_info in the unrolled recurrent net.
+  optional bool debug_info = 4 [default = false];
+
+  // Whether to add as additional inputs (bottoms) the initial hidden state
+  // blobs, and add as additional outputs (tops) the final timestep hidden state
+  // blobs.  The number of additional bottom/top blobs required depends on the
+  // recurrent architecture -- e.g., 1 for RNNs, 2 for LSTMs.
+  optional bool expose_hidden = 5 [default = false];
+}
+
+// Message that stores parameters used by ReductionLayer
+message ReductionParameter {
+  enum ReductionOp {
+    SUM = 1;
+    ASUM = 2;
+    SUMSQ = 3;
+    MEAN = 4;
+  }
+
+  optional ReductionOp operation = 1 [default = SUM]; // reduction operation
+
+  // The first axis to reduce to a scalar -- may be negative to index from the
+  // end (e.g., -1 for the last axis).
+  // (Currently, only reduction along ALL &quot;tail&quot; axes is supported; reduction
+  // of axis M through N, where N &lt; num_axes - 1, is unsupported.)
+  // Suppose we have an n-axis bottom Blob with shape:
+  //     (d0, d1, d2, ..., d(m-1), dm, d(m+1), ..., d(n-1)).
+  // If axis == m, the output Blob will have shape
+  //     (d0, d1, d2, ..., d(m-1)),
+  // and the ReductionOp operation is performed (d0 * d1 * d2 * ... * d(m-1))
+  // times, each including (dm * d(m+1) * ... * d(n-1)) individual data.
+  // If axis == 0 (the default), the output Blob always has the empty shape
+  // (count 1), performing reduction across the entire input --
+  // often useful for creating new loss functions.
+  optional int32 axis = 2 [default = 0];
+
+  optional float coeff = 3 [default = 1.0]; // coefficient for output
+}
+
+// Message that stores parameters used by ReLULayer
+message ReLUParameter {
+  // Allow non-zero slope for negative inputs to speed up optimization
+  // Described in:
+  // Maas, A. L., Hannun, A. Y., &amp; Ng, A. Y. (2013). Rectifier nonlinearities
+  // improve neural network acoustic models. In ICML Workshop on Deep Learning
+  // for Audio, Speech, and Language Processing.
+  optional float negative_slope = 1 [default = 0];
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 2 [default = DEFAULT];
+}
+
+message ReshapeParameter {
+  // Specify the output dimensions. If some of the dimensions are set to 0,
+  // the corresponding dimension from the bottom layer is used (unchanged).
+  // Exactly one dimension may be set to -1, in which case its value is
+  // inferred from the count of the bottom blob and the remaining dimensions.
+  // For example, suppose we want to reshape a 2D blob &quot;input&quot; with shape 2 x 8:
+  //
+  //   layer {
+  //     type: &quot;Reshape&quot; bottom: &quot;input&quot; top: &quot;output&quot;
+  //     reshape_param { ... }
+  //   }
+  //
+  // If &quot;input&quot; is 2D with shape 2 x 8, then the following reshape_param
+  // specifications are all equivalent, producing a 3D blob &quot;output&quot; with shape
+  // 2 x 2 x 4:
+  //
+  //   reshape_param { shape { dim:  2  dim: 2  dim:  4 } }
+  //   reshape_param { shape { dim:  0  dim: 2  dim:  4 } }
+  //   reshape_param { shape { dim:  0  dim: 2  dim: -1 } }
+  //   reshape_param { shape { dim:  0  dim:-1  dim:  4 } }
+  //
+  optional BlobShape shape = 1;
+
+  // axis and num_axes control the portion of the bottom blob&#39;s shape that are
+  // replaced by (included in) the reshape. By default (axis == 0 and
+  // num_axes == -1), the entire bottom blob shape is included in the reshape,
+  // and hence the shape field must specify the entire output shape.
+  //
+  // axis may be non-zero to retain some portion of the beginning of the input
+  // shape (and may be negative to index from the end; e.g., -1 to begin the
+  // reshape after the last axis, including nothing in the reshape,
+  // -2 to include only the last axis, etc.).
+  //
+  // For example, suppose &quot;input&quot; is a 2D blob with shape 2 x 8.
+  // Then the following ReshapeLayer specifications are all equivalent,
+  // producing a blob &quot;output&quot; with shape 2 x 2 x 4:
+  //
+  //   reshape_param { shape { dim: 2  dim: 2  dim: 4 } }
+  //   reshape_param { shape { dim: 2  dim: 4 } axis:  1 }
+  //   reshape_param { shape { dim: 2  dim: 4 } axis: -3 }
+  //
+  // num_axes specifies the extent of the reshape.
+  // If num_axes &gt;= 0 (and axis &gt;= 0), the reshape will be performed only on
+  // input axes in the range [axis, axis+num_axes].
+  // num_axes may also be -1, the default, to include all remaining axes
+  // (starting from axis).
+  //
+  // For example, suppose &quot;input&quot; is a 2D blob with shape 2 x 8.
+  // Then the following ReshapeLayer specifications are equivalent,
+  // producing a blob &quot;output&quot; with shape 1 x 2 x 8.
+  //
+  //   reshape_param { shape { dim:  1  dim: 2  dim:  8 } }
+  //   reshape_param { shape { dim:  1  dim: 2  }  num_axes: 1 }
+  //   reshape_param { shape { dim:  1  }  num_axes: 0 }
+  //
+  // On the other hand, these would produce output blob shape 2 x 1 x 8:
+  //
+  //   reshape_param { shape { dim: 2  dim: 1  dim: 8  }  }
+  //   reshape_param { shape { dim: 1 }  axis: 1  num_axes: 0 }
+  //
+  optional int32 axis = 2 [default = 0];
+  optional int32 num_axes = 3 [default = -1];
+}
+
+message ScaleParameter {
+  // The first axis of bottom[0] (the first input Blob) along which to apply
+  // bottom[1] (the second input Blob).  May be negative to index from the end
+  // (e.g., -1 for the last axis).
+  //
+  // For example, if bottom[0] is 4D with shape 100x3x40x60, the output
+  // top[0] will have the same shape, and bottom[1] may have any of the
+  // following shapes (for the given value of axis):
+  //    (axis == 0 == -4) 100; 100x3; 100x3x40; 100x3x40x60
+  //    (axis == 1 == -3)          3;     3x40;     3x40x60
+  //    (axis == 2 == -2)                   40;       40x60
+  //    (axis == 3 == -1)                                60
+  // Furthermore, bottom[1] may have the empty shape (regardless of the value of
+  // &quot;axis&quot;) -- a scalar multiplier.
+  optional int32 axis = 1 [default = 1];
+
+  // (num_axes is ignored unless just one bottom is given and the scale is
+  // a learned parameter of the layer.  Otherwise, num_axes is determined by the
+  // number of axes by the second bottom.)
+  // The number of axes of the input (bottom[0]) covered by the scale
+  // parameter, or -1 to cover all axes of bottom[0] starting from `axis`.
+  // Set num_axes := 0, to multiply with a zero-axis Blob: a scalar.
+  optional int32 num_axes = 2 [default = 1];
+
+  // (filler is ignored unless just one bottom is given and the scale is
+  // a learned parameter of the layer.)
+  // The initialization for the learned scale parameter.
+  // Default is the unit (1) initialization, resulting in the ScaleLayer
+  // initially performing the identity operation.
+  optional FillerParameter filler = 3;
+
+  // Whether to also learn a bias (equivalent to a ScaleLayer+BiasLayer, but
+  // may be more efficient).  Initialized with bias_filler (defaults to 0).
+  optional bool bias_term = 4 [default = false];
+  optional FillerParameter bias_filler = 5;
+}
+
+message SigmoidParameter {
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 1 [default = DEFAULT];
+}
+
+message SliceParameter {
+  // The axis along which to slice -- may be negative to index from the end
+  // (e.g., -1 for the last axis).
+  // By default, SliceLayer concatenates blobs along the &quot;channels&quot; axis (1).
+  optional int32 axis = 3 [default = 1];
+  repeated uint32 slice_point = 2;
+
+  // DEPRECATED: alias for &quot;axis&quot; -- does not support negative indexing.
+  optional uint32 slice_dim = 1 [default = 1];
+}
+
+// Message that stores parameters used by SoftmaxLayer, SoftmaxWithLossLayer
+message SoftmaxParameter {
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 1 [default = DEFAULT];
+
+  // The axis along which to perform the softmax -- may be negative to index
+  // from the end (e.g., -1 for the last axis).
+  // Any other axes will be evaluated as independent softmaxes.
+  optional int32 axis = 2 [default = 1];
+}
+
+message TanHParameter {
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 1 [default = DEFAULT];
+}
+
+// Message that stores parameters used by TileLayer
+message TileParameter {
+  // The index of the axis to tile.
+  optional int32 axis = 1 [default = 1];
+
+  // The number of copies (tiles) of the blob to output.
+  optional int32 tiles = 2;
+}
+
+// Message that stores parameters used by ThresholdLayer
+message ThresholdParameter {
+  optional float threshold = 1 [default = 0]; // Strictly positive values
+}
+
+message WindowDataParameter {
+  // Specify the data source.
+  optional string source = 1;
+  // For data pre-processing, we can do simple scaling and subtracting the
+  // data mean, if provided. Note that the mean subtraction is always carried
+  // out before scaling.
+  optional float scale = 2 [default = 1];
+  optional string mean_file = 3;
+  // Specify the batch size.
+  optional uint32 batch_size = 4;
+  // Specify if we would like to randomly crop an image.
+  optional uint32 crop_size = 5 [default = 0];
+  // Specify if we want to randomly mirror data.
+  optional bool mirror = 6 [default = false];
+  // Foreground (object) overlap threshold
+  optional float fg_threshold = 7 [default = 0.5];
+  // Background (non-object) overlap threshold
+  optional float bg_threshold = 8 [default = 0.5];
+  // Fraction of batch that should be foreground objects
+  optional float fg_fraction = 9 [default = 0.25];
+  // Amount of contextual padding to add around a window
+  // (used only by the window_data_layer)
+  optional uint32 context_pad = 10 [default = 0];
+  // Mode for cropping out a detection window
+  // warp: cropped window is warped to a fixed size and aspect ratio
+  // square: the tightest square around the window is cropped
+  optional string crop_mode = 11 [default = &quot;warp&quot;];
+  // cache_images: will load all images in memory for faster access
+  optional bool cache_images = 12 [default = false];
+  // append root_folder to locate images
+  optional string root_folder = 13 [default = &quot;&quot;];
+}
+
+message SPPParameter {
+  enum PoolMethod {
+    MAX = 0;
+    AVE = 1;
+    STOCHASTIC = 2;
+  }
+  optional uint32 pyramid_height = 1;
+  optional PoolMethod pool = 2 [default = MAX]; // The pooling method
+  enum Engine {
+    DEFAULT = 0;
+    CAFFE = 1;
+    CUDNN = 2;
+  }
+  optional Engine engine = 6 [default = DEFAULT];
+}
+
+// DEPRECATED: use LayerParameter.
+message V1LayerParameter {
+  repeated string bottom = 2;
+  repeated string top = 3;
+  optional string name = 4;
+  repeated NetStateRule include = 32;
+  repeated NetStateRule exclude = 33;
+  enum LayerType {
+    NONE = 0;
+    ABSVAL = 35;
+    ACCURACY = 1;
+    ARGMAX = 30;
+    BNLL = 2;
+    CONCAT = 3;
+    CONTRASTIVE_LOSS = 37;
+    CONVOLUTION = 4;
+    DATA = 5;
+    DECONVOLUTION = 39;
+    DROPOUT = 6;
+    DUMMY_DATA = 32;
+    EUCLIDEAN_LOSS = 7;
+    ELTWISE = 25;
+    EXP = 38;
+    FLATTEN = 8;
+    HDF5_DATA = 9;
+    HDF5_OUTPUT = 10;
+    HINGE_LOSS = 28;
+    IM2COL = 11;
+    IMAGE_DATA = 12;
+    INFOGAIN_LOSS = 13;
+    INNER_PRODUCT = 14;
+    LRN = 15;
+    MEMORY_DATA = 29;
+    MULTINOMIAL_LOGISTIC_LOSS = 16;
+    MVN = 34;
+    POOLING = 17;
+    POWER = 26;
+    RELU = 18;
+    SIGMOID = 19;
+    SIGMOID_CROSS_ENTROPY_LOSS = 27;
+    SILENCE = 36;
+    SOFTMAX = 20;
+    SOFTMAX_LOSS = 21;
+    SPLIT = 22;
+    SLICE = 33;
+    TANH = 23;
+    WINDOW_DATA = 24;
+    THRESHOLD = 31;
+  }
+  optional LayerType type = 5;
+  repeated BlobProto blobs = 6;
+  repeated string param = 1001;
+  repeated DimCheckMode blob_share_mode = 1002;
+  enum DimCheckMode {
+    STRICT = 0;
+    PERMISSIVE = 1;
+  }
+  repeated float blobs_lr = 7;
+  repeated float weight_decay = 8;
+  repeated float loss_weight = 35;
+  optional AccuracyParameter accuracy_param = 27;
+  optional ArgMaxParameter argmax_param = 23;
+  optional ConcatParameter concat_param = 9;
+  optional ContrastiveLossParameter contrastive_loss_param = 40;
+  optional ConvolutionParameter convolution_param = 10;
+  optional DataParameter data_param = 11;
+  optional DropoutParameter dropout_param = 12;
+  optional DummyDataParameter dummy_data_param = 26;
+  optional EltwiseParameter eltwise_param = 24;
+  optional ExpParameter exp_param = 41;
+  optional HDF5DataParameter hdf5_data_param = 13;
+  optional HDF5OutputParameter hdf5_output_param = 14;
+  optional HingeLossParameter hinge_loss_param = 29;
+  optional ImageDataParameter image_data_param = 15;
+  optional InfogainLossParameter infogain_loss_param = 16;
+  optional InnerProductParameter inner_product_param = 17;
+  optional LRNParameter lrn_param = 18;
+  optional MemoryDataParameter memory_data_param = 22;
+  optional MVNParameter mvn_param = 34;
+  optional PoolingParameter pooling_param = 19;
+  optional PowerParameter power_param = 21;
+  optional ReLUParameter relu_param = 30;
+  optional SigmoidParameter sigmoid_param = 38;
+  optional SoftmaxParameter softmax_param = 39;
+  optional SliceParameter slice_param = 31;
+  optional TanHParameter tanh_param = 37;
+  optional ThresholdParameter threshold_param = 25;
+  optional WindowDataParameter window_data_param = 20;
+  optional TransformationParameter transform_param = 36;
+  optional LossParameter loss_param = 42;
+  optional V0LayerParameter layer = 1;
+}
+
+// DEPRECATED: V0LayerParameter is the old way of specifying layer parameters
+// in Caffe.  We keep this message type around for legacy support.
+message V0LayerParameter {
+  optional string name = 1; // the layer name
+  optional string type = 2; // the string to specify the layer type
+
+  // Parameters to specify layers with inner products.
+  optional uint32 num_output = 3; // The number of outputs for the layer
+  optional bool biasterm = 4 [default = true]; // whether to have bias terms
+  optional FillerParameter weight_filler = 5; // The filler for the weight
+  optional FillerParameter bias_filler = 6; // The filler for the bias
+
+  optional uint32 pad = 7 [default = 0]; // The padding size
+  optional uint32 kernelsize = 8; // The kernel size
+  optional uint32 group = 9 [default = 1]; // The group size for group conv
+  optional uint32 stride = 10 [default = 1]; // The stride
+  enum PoolMethod {
+    MAX = 0;
+    AVE = 1;
+    STOCHASTIC = 2;
+  }
+  optional PoolMethod pool = 11 [default = MAX]; // The pooling method
+  optional float dropout_ratio = 12 [default = 0.5]; // dropout ratio
+
+  optional uint32 local_size = 13 [default = 5]; // for local response norm
+  optional float alpha = 14 [default = 1.]; // for local response norm
+  optional float beta = 15 [default = 0.75]; // for local response norm
+  optional float k = 22 [default = 1.];
+
+  // For data layers, specify the data source
+  optional string source = 16;
+  // For data pre-processing, we can do simple scaling and subtracting the
+  // data mean, if provided. Note that the mean subtraction is always carried
+  // out before scaling.
+  optional float scale = 17 [default = 1];
+  optional string meanfile = 18;
+  // For data layers, specify the batch size.
+  optional uint32 batchsize = 19;
+  // For data layers, specify if we would like to randomly crop an image.
+  optional uint32 cropsize = 20 [default = 0];
+  // For data layers, specify if we want to randomly mirror data.
+  optional bool mirror = 21 [default = false];
+
+  // The blobs containing the numeric parameters of the layer
+  repeated BlobProto blobs = 50;
+  // The ratio that is multiplied on the global learning rate. If you want to
+  // set the learning ratio for one blob, you need to set it for all blobs.
+  repeated float blobs_lr = 51;
+  // The weight decay that is multiplied on the global weight decay.
+  repeated float weight_decay = 52;
+
+  // The rand_skip variable is for the data layer to skip a few data points
+  // to avoid all asynchronous sgd clients to start at the same point. The skip
+  // point would be set as rand_skip * rand(0,1). Note that rand_skip should not
+  // be larger than the number of keys in the database.
+  optional uint32 rand_skip = 53 [default = 0];
+
+  // Fields related to detection (det_*)
+  // foreground (object) overlap threshold
+  optional float det_fg_threshold = 54 [default = 0.5];
+  // background (non-object) overlap threshold
+  optional float det_bg_threshold = 55 [default = 0.5];
+  // Fraction of batch that should be foreground objects
+  optional float det_fg_fraction = 56 [default = 0.25];
+
+  // optional bool OBSOLETE_can_clobber = 57 [default = true];
+
+  // Amount of contextual padding to add around a window
+  // (used only by the window_data_layer)
+  optional uint32 det_context_pad = 58 [default = 0];
+
+  // Mode for cropping out a detection window
+  // warp: cropped window is warped to a fixed size and aspect ratio
+  // square: the tightest square around the window is cropped
+  optional string det_crop_mode = 59 [default = &quot;warp&quot;];
+
+  // For ReshapeLayer, one needs to specify the new dimensions.
+  optional int32 new_num = 60 [default = 0];
+  optional int32 new_channels = 61 [default = 0];
+  optional int32 new_height = 62 [default = 0];
+  optional int32 new_width = 63 [default = 0];
+
+  // Whether or not ImageLayer should shuffle the list of files at every epoch.
+  // It will also resize images if new_height or new_width are not zero.
+  optional bool shuffle_images = 64 [default = false];
+
+  // For ConcatLayer, one needs to specify the dimension for concatenation, and
+  // the other dimensions must be the same for all the bottom blobs.
+  // By default it will concatenate blobs along the channels dimension.
+  optional uint32 concat_dim = 65 [default = 1];
+
+  optional HDF5OutputParameter hdf5_output_param = 1001;
+}
+
+message PReLUParameter {
+  // Parametric ReLU described in K. He et al, Delving Deep into Rectifiers:
+  // Surpassing Human-Level Performance on ImageNet Classification, 2015.
+
+  // Initial value of a_i. Default is a_i=0.25 for all i.
+  optional FillerParameter filler = 1;
+  // Whether or not slope paramters are shared across channels.
+  optional bool channel_shared = 2 [default = false];
+}</code></pre>
+</dd>
+</dl>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

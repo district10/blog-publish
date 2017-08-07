@@ -1,0 +1,912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-11-28" />
+  <title>Selected Qt Code</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Selected Qt Code</h1>
+<h3 class="date">2015-11-28</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#selected-qt-code">Selected Qt Code</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="selected-qt-code">Selected Qt Code</h1>
+<p>TODO: merge to qt note.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">setFlags(ItemIsSelectable | ItemIsMovable);
+setAcceptsHoverEvents(<span class="kw">true</span>);
+
+penStyleComboBox = <span class="kw">new</span> <span class="ot">QComboBox</span>;
+<span class="co">// inline void QComboBox::addItem(const QString &amp;atext, const QVariant &amp;auserData) { insertItem(count(), atext, auserData); }</span>
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;Solid&quot;</span>), <span class="ot">Qt::</span>SolidLine);
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;Dash&quot;</span>), <span class="ot">Qt::</span>DashLine);
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;Dot&quot;</span>), <span class="ot">Qt::</span>DotLine);
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;Dash Dot&quot;</span>), <span class="ot">Qt::</span>DashDotLine);
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;Dash Dot Dot&quot;</span>), <span class="ot">Qt::</span>DashDotDotLine);
+penStyleComboBox-&gt;addItem(<span class="fu">tr</span>(<span class="st">&quot;None&quot;</span>), <span class="ot">Qt::</span>NoPen);
+
+penStyleLabel = <span class="kw">new</span> <span class="ot">QLabel</span>(<span class="fu">tr</span>(<span class="st">&quot;&amp;Pen Style:&quot;</span>));
+penStyleLabel-&gt;setBuddy(penStyleComboBox);
+
+<span class="fu">connect</span>(shapeComboBox, <span class="kw">SIGNAL</span>(activated(<span class="dt">int</span>)),
+        <span class="kw">this</span>, <span class="kw">SLOT</span>(shapeChanged()));
+<span class="fu">connect</span>(penWidthSpinBox, <span class="kw">SIGNAL</span>(valueChanged(<span class="dt">int</span>)),
+        <span class="kw">this</span>, <span class="kw">SLOT</span>(penChanged()));
+<span class="fu">connect</span>(penStyleComboBox, <span class="kw">SIGNAL</span>(activated(<span class="dt">int</span>)),
+        <span class="kw">this</span>, <span class="kw">SLOT</span>(penChanged()));
+<span class="fu">connect</span>(penCapComboBox, <span class="kw">SIGNAL</span>(activated(<span class="dt">int</span>)),
+        <span class="kw">this</span>, <span class="kw">SLOT</span>(penChanged()));
+<span class="fu">connect</span>(penJoinComboBox, <span class="kw">SIGNAL</span>(activated(<span class="dt">int</span>)),
+        <span class="kw">this</span>, <span class="kw">SLOT</span>(penChanged()));
+
+<span class="dt">void</span> Window::penChanged()
+{
+    <span class="dt">int</span> width = penWidthSpinBox-&gt;value();
+    <span class="co">// const int IdRole = Qt::UserRole;</span>
+    <span class="ot">Qt::</span>PenStyle style = <span class="ot">Qt::</span>PenStyle(penStyleComboBox-&gt;itemData(
+            penStyleComboBox-&gt;currentIndex(), IdRole).toInt());
+    <span class="ot">Qt::</span>PenCapStyle cap = <span class="ot">Qt::</span>PenCapStyle(penCapComboBox-&gt;itemData(
+            penCapComboBox-&gt;currentIndex(), IdRole).toInt());
+    <span class="ot">Qt::</span>PenJoinStyle join = <span class="ot">Qt::</span>PenJoinStyle(penJoinComboBox-&gt;itemData(
+            penJoinComboBox-&gt;currentIndex(), IdRole).toInt());
+
+    renderArea-&gt;setPen(<span class="ot">QPen</span>(<span class="ot">Qt::</span>blue, width, style, cap, join));
+}
+
+renderArea-&gt;setBrush(<span class="ot">QBrush</span>(<span class="ot">QPixmap</span>(<span class="st">&quot;:/images/brick.png&quot;</span>)));</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> setBackgroundRole(<span class="ot">QPalette::</span>ColorRole);
+<span class="ot">QPalette::</span>ColorRole backgroundRole() <span class="dt">const</span>;
+
+<span class="dt">void</span> RenderArea::paintEvent(<span class="ot">QPaintEvent</span> * <span class="co">/* event */</span>)
+{
+    <span class="dt">static</span> <span class="dt">const</span> <span class="ot">QPoint</span> points[<span class="dv">4</span>] = {
+        <span class="ot">QPoint</span>(<span class="dv">10</span>, <span class="dv">80</span>),
+        <span class="ot">QPoint</span>(<span class="dv">20</span>, <span class="dv">10</span>),
+        <span class="ot">QPoint</span>(<span class="dv">80</span>, <span class="dv">30</span>),
+        <span class="ot">QPoint</span>(<span class="dv">90</span>, <span class="dv">70</span>)
+    };
+
+    <span class="ot">QRect</span> rect(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">80</span>, <span class="dv">60</span>);
+
+    <span class="ot">QPainterPath</span> path;
+    path.moveTo(<span class="dv">20</span>, <span class="dv">80</span>);
+    path.lineTo(<span class="dv">20</span>, <span class="dv">30</span>);
+    path.cubicTo(<span class="dv">80</span>, <span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">80</span>, <span class="dv">80</span>);
+
+    <span class="dt">int</span> startAngle = <span class="dv">20</span> * <span class="dv">16</span>;
+    <span class="dt">int</span> arcLength = <span class="dv">120</span> * <span class="dv">16</span>;
+<span class="co">//!</span> [<span class="dv">8</span>]
+
+<span class="co">//!</span> [<span class="dv">9</span>]
+    <span class="ot">QPainter</span> painter(<span class="kw">this</span>);
+    painter.setPen(pen);
+    painter.setBrush(brush);
+    <span class="kw">if</span> (antialiased)
+        painter.setRenderHint(<span class="ot">QPainter::</span>Antialiasing, <span class="kw">true</span>);
+<span class="co">//!</span> [<span class="dv">9</span>]
+
+<span class="co">//!</span> [<span class="dv">10</span>]
+    <span class="kw">for</span> (<span class="dt">int</span> x = <span class="dv">0</span>; x &lt; width(); x += <span class="dv">100</span>) {
+        <span class="kw">for</span> (<span class="dt">int</span> y = <span class="dv">0</span>; y &lt; height(); y += <span class="dv">100</span>) {
+            painter.save();
+            painter.translate(x, y);
+<span class="co">//!</span> [<span class="dv">10</span>] <span class="co">//!</span> [<span class="dv">11</span>]
+            <span class="kw">if</span> (transformed) {
+                painter.translate(<span class="dv">50</span>, <span class="dv">50</span>);
+                painter.rotate(<span class="fl">60.0</span>);
+                painter.scale(<span class="fl">0.6</span>, <span class="fl">0.9</span>);
+                painter.translate(<span class="dv">-50</span>, <span class="dv">-50</span>);
+            }
+<span class="co">//!</span> [<span class="dv">11</span>]
+
+<span class="co">//!</span> [<span class="dv">12</span>]
+            <span class="kw">switch</span> (shape) {
+            <span class="kw">case</span> Line:
+                painter.drawLine(rect.bottomLeft(), rect.topRight());
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Points:
+                painter.drawPoints(points, <span class="dv">4</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Polyline:
+                painter.drawPolyline(points, <span class="dv">4</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Polygon:
+                painter.drawPolygon(points, <span class="dv">4</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Rect:
+                painter.drawRect(rect);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> RoundedRect:
+                painter.drawRoundedRect(rect, <span class="dv">25</span>, <span class="dv">25</span>, <span class="ot">Qt::</span>RelativeSize);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Ellipse:
+                painter.drawEllipse(rect);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Arc:
+                painter.drawArc(rect, startAngle, arcLength);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Chord:
+                painter.drawChord(rect, startAngle, arcLength);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Pie:
+                painter.drawPie(rect, startAngle, arcLength);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Path:
+                painter.drawPath(path);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Text:
+                painter.drawText(rect, <span class="ot">Qt::</span>AlignCenter, <span class="fu">tr</span>(<span class="st">&quot;Qt by</span><span class="ch">\n</span><span class="st">Digia&quot;</span><span class="co">)</span>);
+                <span class="kw">break</span>;
+            <span class="kw">case</span> Pixmap:
+                painter.drawPixmap(<span class="dv">10</span>, <span class="dv">10</span>, pixmap);
+            }
+<span class="co">//!</span> [<span class="dv">12</span>] <span class="co">//!</span> [<span class="dv">13</span>]
+            painter.restore();
+        }
+    }
+
+    painter.setRenderHint(<span class="ot">QPainter::</span>Antialiasing, <span class="kw">false</span>);
+    painter.setPen(palette().dark().color());
+    painter.setBrush(<span class="ot">Qt::</span>NoBrush);
+    painter.drawRect(<span class="ot">QRect</span>(<span class="dv">0</span>, <span class="dv">0</span>, width() - <span class="dv">1</span>, height() - <span class="dv">1</span>));
+}
+<span class="co">//!</span> [<span class="dv">13</span>]
+
+    mainLayout-&gt;setColumnStretch(<span class="dv">0</span>, <span class="dv">1</span>);
+    mainLayout-&gt;setColumnStretch(<span class="dv">3</span>, <span class="dv">1</span>);
+    mainLayout-&gt;addWidget(renderArea, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">4</span>);
+    mainLayout-&gt;addWidget(shapeLabel, <span class="dv">2</span>, <span class="dv">0</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(shapeComboBox, <span class="dv">2</span>, <span class="dv">1</span>);
+    mainLayout-&gt;addWidget(penWidthLabel, <span class="dv">3</span>, <span class="dv">0</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(penWidthSpinBox, <span class="dv">3</span>, <span class="dv">1</span>);
+    mainLayout-&gt;addWidget(penStyleLabel, <span class="dv">4</span>, <span class="dv">0</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(penStyleComboBox, <span class="dv">4</span>, <span class="dv">1</span>);
+    mainLayout-&gt;addWidget(penCapLabel, <span class="dv">3</span>, <span class="dv">2</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(penCapComboBox, <span class="dv">3</span>, <span class="dv">3</span>);
+    mainLayout-&gt;addWidget(penJoinLabel, <span class="dv">2</span>, <span class="dv">2</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(penJoinComboBox, <span class="dv">2</span>, <span class="dv">3</span>);
+    mainLayout-&gt;addWidget(brushStyleLabel, <span class="dv">4</span>, <span class="dv">2</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(brushStyleComboBox, <span class="dv">4</span>, <span class="dv">3</span>);
+    mainLayout-&gt;addWidget(otherOptionsLabel, <span class="dv">5</span>, <span class="dv">0</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(antialiasingCheckBox, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="ot">Qt::</span>AlignRight);
+    mainLayout-&gt;addWidget(transformationsCheckBox, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">Qt::</span>AlignRight);
+    setLayout(mainLayout);</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> Window::createCurveIcons()
+{
+    <span class="ot">QPixmap</span> pix(m_iconSize);
+    <span class="ot">QPainter</span> painter(&amp;pix);
+    <span class="ot">QLinearGradient</span> gradient(<span class="dv">0</span>,<span class="dv">0</span>, <span class="dv">0</span>, m_iconSize.height());
+    gradient.setColorAt(<span class="fl">0.0</span>, <span class="ot">QColor</span>(<span class="dv">240</span>, <span class="dv">240</span>, <span class="dv">240</span>));
+    gradient.setColorAt(<span class="fl">1.0</span>, <span class="ot">QColor</span>(<span class="dv">224</span>, <span class="dv">224</span>, <span class="dv">224</span>));
+    <span class="ot">QBrush</span> brush(gradient);
+    <span class="dt">const</span> <span class="ot">QMetaObject</span> &amp;mo = <span class="ot">QEasingCurve::</span>staticMetaObject;
+    <span class="ot">QMetaEnum</span> metaEnum = mo.enumerator(mo.indexOfEnumerator(<span class="st">&quot;Type&quot;</span>));
+    <span class="co">// Skip QEasingCurve::Custom</span>
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="ot">QEasingCurve::</span>NCurveTypes - <span class="dv">1</span>; ++i) {
+        painter.fillRect(<span class="ot">QRect</span>(<span class="ot">QPoint</span>(<span class="dv">0</span>, <span class="dv">0</span>), m_iconSize), brush);
+        <span class="ot">QEasingCurve</span> curve((<span class="ot">QEasingCurve::</span>Type)i);
+        painter.setPen(<span class="ot">QColor</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">255</span>, <span class="dv">64</span>));
+        <span class="dt">qreal</span> xAxis = m_iconSize.height()/<span class="fl">1.5</span>;
+        <span class="dt">qreal</span> yAxis = m_iconSize.width()/<span class="dv">3</span>;
+        painter.drawLine(<span class="dv">0</span>, xAxis, m_iconSize.width(),  xAxis);
+        painter.drawLine(yAxis, <span class="dv">0</span>, yAxis, m_iconSize.height());
+
+        <span class="dt">qreal</span> curveScale = m_iconSize.height()/<span class="dv">2</span>;
+
+        painter.setPen(<span class="ot">Qt::</span>NoPen);
+
+        <span class="co">// start point</span>
+        painter.setBrush(<span class="ot">Qt::</span>red);
+        <span class="ot">QPoint</span> start(yAxis, xAxis - curveScale * curve.valueForProgress(<span class="dv">0</span>));
+        painter.drawRect(start.x() - <span class="dv">1</span>, start.y() - <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>);
+
+        <span class="co">// end point</span>
+        painter.setBrush(<span class="ot">Qt::</span>blue);
+        <span class="ot">QPoint</span> end(yAxis + curveScale, xAxis - curveScale * curve.valueForProgress(<span class="dv">1</span>));
+        painter.drawRect(end.x() - <span class="dv">1</span>, end.y() - <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>);
+
+        <span class="ot">QPainterPath</span> curvePath;
+        curvePath.moveTo(start);
+        <span class="kw">for</span> (<span class="dt">qreal</span> t = <span class="dv">0</span>; t &lt;= <span class="fl">1.0</span>; t+=<span class="fl">1.0</span>/curveScale) {
+            <span class="ot">QPoint</span> to;
+            to.setX(yAxis + curveScale * t);
+            to.setY(xAxis - curveScale * curve.valueForProgress(t));
+            curvePath.lineTo(to);
+        }
+        painter.setRenderHint(<span class="ot">QPainter::</span>Antialiasing, <span class="kw">true</span>);
+        painter.strokePath(curvePath, <span class="ot">QColor</span>(<span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">32</span>));
+        painter.setRenderHint(<span class="ot">QPainter::</span>Antialiasing, <span class="kw">false</span>);
+        <span class="ot">QListWidgetItem</span> *item = <span class="kw">new</span> <span class="ot">QListWidgetItem</span>;
+        item-&gt;setIcon(<span class="ot">QIcon</span>(pix));
+        item-&gt;setText(metaEnum.key(i));
+        m_ui.easingCurvePicker-&gt;addItem(item);
+    }
+}
+
+<span class="dt">void</span> Window::startAnimation()
+{
+    m_anim-&gt;setStartValue(<span class="ot">QPointF</span>(<span class="dv">0</span>, <span class="dv">0</span>));
+    m_anim-&gt;setEndValue(<span class="ot">QPointF</span>(<span class="dv">100</span>, <span class="dv">100</span>));
+    m_anim-&gt;setDuration(<span class="dv">2000</span>);
+    m_anim-&gt;setLoopCount(<span class="dv">-1</span>); <span class="co">// forever</span>
+    m_anim-&gt;start();
+}
+
+<span class="ot">#ifndef ANIMATION_H</span>
+<span class="ot">#define ANIMATION_H</span>
+
+<span class="ot">#include &lt;QtGui&gt;</span>
+
+<span class="ot">#include &lt;QtCore/qpropertyanimation.h&gt;</span>
+
+<span class="kw">class</span> Animation : <span class="kw">public</span> <span class="ot">QPropertyAnimation</span> {
+<span class="kw">public</span>:
+    <span class="kw">enum</span> PathType {
+        LinearPath,
+        CirclePath,
+        NPathTypes
+    };
+    Animation(<span class="ot">QObject</span> *target, <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;prop)
+        : <span class="ot">QPropertyAnimation</span>(target, prop)
+    {
+        setPathType(LinearPath);
+    }
+
+    <span class="dt">void</span> setPathType(PathType pathType)
+    {
+        <span class="kw">if</span> (pathType &gt;= NPathTypes)
+            <span class="fu">qWarning</span>(<span class="st">&quot;Unknown pathType </span><span class="ch">%d</span><span class="st">&quot;</span>, pathType);
+
+        m_pathType = pathType;
+        m_path = <span class="ot">QPainterPath</span>();
+    }
+
+    <span class="dt">void</span> updateCurrentTime(<span class="dt">int</span> currentTime)
+    {
+        <span class="kw">if</span> (m_pathType == CirclePath) {
+            <span class="kw">if</span> (m_path.isEmpty()) {
+                <span class="ot">QPointF</span> to = endValue().toPointF();
+                <span class="ot">QPointF</span> from = startValue().toPointF();
+                m_path.moveTo(from);
+                m_path.addEllipse(<span class="ot">QRectF</span>(from, to));
+            }
+            <span class="dt">int</span> dura = duration();
+            <span class="dt">const</span> <span class="dt">qreal</span> progress = ((dura == <span class="dv">0</span>) ? <span class="dv">1</span> : ((((currentTime - <span class="dv">1</span>) % dura) + <span class="dv">1</span>) / <span class="dt">qreal</span>(dura)));
+
+            <span class="dt">qreal</span> easedProgress = easingCurve().valueForProgress(progress);
+            <span class="kw">if</span> (easedProgress &gt; <span class="fl">1.0</span>) {
+                easedProgress -= <span class="fl">1.0</span>;
+            } <span class="kw">else</span> <span class="kw">if</span> (easedProgress &lt; <span class="dv">0</span>) {
+                easedProgress += <span class="fl">1.0</span>;
+            }
+            <span class="ot">QPointF</span> pt = m_path.pointAtPercent(easedProgress);
+            updateCurrentValue(pt);
+            <span class="kw">emit</span> valueChanged(pt);
+        } <span class="kw">else</span> {
+            <span class="ot">QPropertyAnimation::</span>updateCurrentTime(currentTime);
+        }
+    }
+
+    <span class="ot">QPainterPath</span> m_path;
+    PathType m_pathType;
+};</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">QFontMetrics</span> metric(font());
+<span class="ot">QSize</span> size = metric.size(<span class="ot">Qt::</span>TextSingleLine, text);
+setPixmap(<span class="ot">QPixmap::</span>fromImage(image));
+
+<span class="dt">int</span> y = <span class="dv">5</span>;
+
+    <span class="kw">while</span> (!inputStream.atEnd()) {
+        <span class="ot">QString</span> word;
+        word = inputStream.readLine();
+        <span class="kw">if</span> (!word.isEmpty()) {
+            DragLabel *wordLabel = <span class="kw">new</span> DragLabel(word, <span class="kw">this</span>);
+            wordLabel-&gt;move(x, y);
+            wordLabel-&gt;show();
+            wordLabel-&gt;setAttribute(<span class="ot">Qt::</span>WA_DeleteOnClose);
+            x += wordLabel-&gt;width() + <span class="dv">2</span>;
+<span class="ot">#if defined(Q_WS_MAEMO_5) || defined(Q_WS_SIMULATOR)</span>
+            <span class="kw">if</span> (x &gt;= <span class="dv">345</span>) {
+<span class="ot">#else</span>
+            <span class="kw">if</span> (x &gt;= <span class="dv">245</span>) {
+<span class="ot">#endif</span>
+                x = <span class="dv">5</span>;
+                y += wordLabel-&gt;height() + <span class="dv">2</span>;
+            }
+        }
+    }
+<span class="co">//!</span> [<span class="dv">1</span>]
+
+
+<span class="dt">void</span> DragWidget::mousePressEvent(<span class="ot">QMouseEvent</span> *event)
+{
+<span class="co">//!</span> [<span class="dv">13</span>]
+<span class="co">//!</span> [<span class="dv">14</span>]
+    DragLabel *child = <span class="kw">static_cast</span>&lt;DragLabel*&gt;(childAt(event-&gt;pos()));
+    <span class="kw">if</span> (!child)
+        <span class="kw">return</span>;
+
+    <span class="ot">QPoint</span> hotSpot = event-&gt;pos() - child-&gt;pos();
+
+    <span class="ot">QByteArray</span> itemData;
+    <span class="ot">QDataStream</span> dataStream(&amp;itemData, <span class="ot">QIODevice::</span>WriteOnly);
+    dataStream &lt;&lt; child-&gt;labelText() &lt;&lt; <span class="ot">QPoint</span>(hotSpot);
+<span class="co">//!</span> [<span class="dv">14</span>]
+
+<span class="co">//!</span> [<span class="dv">15</span>]
+    <span class="ot">QMimeData</span> *mimeData = <span class="kw">new</span> <span class="ot">QMimeData</span>;
+    mimeData-&gt;setData(<span class="st">&quot;application/x-fridgemagnet&quot;</span><span class="co">,</span> itemData);
+    mimeData-&gt;setText(child-&gt;labelText());
+<span class="co">//!</span> [<span class="dv">15</span>]
+
+<span class="co">//!</span> [<span class="dv">16</span>]
+    <span class="ot">QDrag</span> *drag = <span class="kw">new</span> <span class="ot">QDrag</span>(<span class="kw">this</span>);
+    drag-&gt;setMimeData(mimeData);
+    drag-&gt;setPixmap(*child-&gt;pixmap());
+    drag-&gt;setHotSpot(hotSpot);
+
+    child-&gt;hide();
+<span class="co">//!</span> [<span class="dv">16</span>]
+
+<span class="co">//!</span> [<span class="dv">17</span>]
+    <span class="kw">if</span> (drag-&gt;exec(<span class="ot">Qt::</span>MoveAction | <span class="ot">Qt::</span>CopyAction, <span class="ot">Qt::</span>CopyAction) == <span class="ot">Qt::</span>MoveAction)
+        child-&gt;close();
+    <span class="kw">else</span>
+        child-&gt;show();
+}
+<span class="co">//!</span> [<span class="dv">17</span>]
+
+<span class="dt">void</span> DragWidget::dragMoveEvent(<span class="ot">QDragMoveEvent</span> *event)
+{
+    <span class="kw">if</span> (event-&gt;mimeData()-&gt;hasFormat(<span class="st">&quot;application/x-fridgemagnet&quot;</span><span class="co">)</span>) {
+        <span class="kw">if</span> (children().contains(event-&gt;source())) {
+            event-&gt;setDropAction(<span class="ot">Qt::</span>MoveAction);
+            event-&gt;accept();
+        } <span class="kw">else</span> {
+            event-&gt;acceptProposedAction();
+        }
+    } <span class="kw">else</span> <span class="kw">if</span> (event-&gt;mimeData()-&gt;hasText()) {
+        event-&gt;acceptProposedAction();
+    } <span class="kw">else</span> {
+        event-&gt;ignore();
+    }
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">(<span class="ot">QGraphicsView</span>)
+    FadeMessage widget;
+    widget.setWindowTitle(<span class="kw">QT_TRANSLATE_NOOP</span>(<span class="ot">QGraphicsView</span>, <span class="st">&quot;Popup Message with Effect&quot;</span>));
+<span class="ot">#if defined(Q_WS_S60) || defined(Q_WS_MAEMO_5)</span>
+    widget.showMaximized();
+<span class="ot">#else</span>
+    widget.setFixedSize(<span class="dv">400</span>, <span class="dv">600</span>);
+    widget.show();
+
+    m_animation = <span class="kw">new</span> <span class="ot">QPropertyAnimation</span>(m_effect, <span class="st">&quot;strength&quot;</span>, <span class="kw">this</span>);
+    m_animation-&gt;setDuration(<span class="dv">500</span>);
+    m_animation-&gt;setEasingCurve(<span class="ot">QEasingCurve::</span>InOutSine);
+    m_animation-&gt;setStartValue(<span class="dv">0</span>);
+    m_animation-&gt;setEndValue(<span class="dv">1</span>);
+
+     <span class="co">// QGraphicsPixmapItem class provides a pixmap item that you can add to a QGraphicsScene. More...</span>
+    <span class="ot">QGraphicsPixmapItem</span> *bg = m_scene.addPixmap(<span class="ot">QPixmap</span>(<span class="st">&quot;:/background.jpg&quot;</span>));
+    bg-&gt;setParentItem(parent);
+    bg-&gt;setZValue(<span class="dv">-1</span>);
+
+
+    <span class="ot">QGraphicsRectItem</span> *block = m_scene.addRect(<span class="dv">50</span>, <span class="dv">300</span>, sceneTextWidth, fh + <span class="dv">3</span>);
+
+       <span class="ot">QGraphicsTextItem</span> *text = m_scene.addText(sceneText, font);
+    text-&gt;setDefaultTextColor(<span class="ot">Qt::</span>white);
+    text-&gt;setPos(<span class="dv">50</span>, <span class="dv">300</span>);
+    block-&gt;setZValue(<span class="dv">2</span>);
+    block-&gt;hide();
+
+    text-&gt;setParentItem(block);
+
+        m_effect = <span class="kw">new</span> <span class="ot">QGraphicsColorizeEffect</span>;
+    m_effect-&gt;setColor(<span class="ot">QColor</span>(<span class="dv">122</span>, <span class="dv">193</span>, <span class="dv">66</span>));
+    m_effect-&gt;setStrength(<span class="dv">0</span>);
+    m_effect-&gt;setEnabled(<span class="kw">true</span>);
+    parent-&gt;setGraphicsEffect(m_effect);
+
+    <span class="ot">QPushButton</span> *press = <span class="kw">new</span> <span class="ot">QPushButton</span>;
+    press-&gt;setText(<span class="fu">tr</span>(<span class="st">&quot;Press me&quot;</span>));
+    <span class="fu">connect</span>(press, <span class="kw">SIGNAL</span>(clicked()), <span class="kw">SLOT</span>(togglePopup()));
+    m_scene.addWidget(press);
+
+    <span class="co">// -------------</span>
+    <span class="dt">void</span> ImageViewer::fitToWindow()
+<span class="co">//!</span> [<span class="dv">13</span>] <span class="co">//!</span> [<span class="dv">14</span>]
+{
+    <span class="dt">bool</span> fitToWindow = fitToWindowAct-&gt;isChecked();
+    scrollArea-&gt;setWidgetResizable(fitToWindow);
+    <span class="kw">if</span> (!fitToWindow) {
+        normalSize();
+    }
+    updateActions();
+}
+<span class="co">//!</span> [<span class="dv">14</span>]
+
+<span class="kw">Q_ASSERT</span>(imageLabel-&gt;pixmap());
+scaleFactor *= factor;
+imageLabel-&gt;resize(scaleFactor * imageLabel-&gt;pixmap()-&gt;size());
+
+adjustScrollBar(scrollArea-&gt;horizontalScrollBar(), factor);
+adjustScrollBar(scrollArea-&gt;verticalScrollBar(), factor);
+
+zoomInAct-&gt;setEnabled(scaleFactor &lt; <span class="fl">3.0</span>);
+zoomOutAct-&gt;setEnabled(scaleFactor &gt; <span class="fl">0.333</span>);
+
+scene.setStickyFocus(<span class="kw">true</span>); <span class="co">// bg to clear foucus</span>
+
+scene.setSceneRect(scene.itemsBoundingRect());
+
+<span class="ot">QGraphicsView</span> view(&amp;scene);
+view.scale(<span class="fl">0.5</span>, <span class="fl">0.5</span>);
+view.setRenderHints(view.renderHints() | <span class="ot">QPainter::</span>Antialiasing | <span class="ot">QPainter::</span>SmoothPixmapTransform);
+view.setBackgroundBrush(<span class="ot">QPixmap</span>(<span class="st">&quot;:/No-Ones-Laughing-3.jpg&quot;</span><span class="co">)</span>);
+view.setViewportUpdateMode(<span class="ot">QGraphicsView::</span>BoundingRectViewportUpdate);
+view.show();
+
+
+<span class="dt">void</span> CustomProxy::updateStep(<span class="dt">qreal</span> step)
+{
+    <span class="ot">QRectF</span> r = boundingRect();
+    setTransform(<span class="ot">QTransform</span>()
+                 .translate(r.width() / <span class="dv">2</span>, r.height() / <span class="dv">2</span>)
+                 .rotate(step * <span class="dv">30</span>, <span class="ot">Qt::</span>XAxis)
+                 .rotate(step * <span class="dv">10</span>, <span class="ot">Qt::</span>YAxis)
+                 .rotate(step * <span class="dv">5</span>, <span class="ot">Qt::</span>ZAxis)
+                 .scale(<span class="dv">1</span> + <span class="fl">1.5</span> * step, <span class="dv">1</span> + <span class="fl">1.5</span> * step)
+                 .translate(-r.width() / <span class="dv">2</span>, -r.height() / <span class="dv">2</span>));
+}
+
+<span class="dt">void</span> GraphWidget::shuffle()
+{
+    <span class="kw">foreach</span> (<span class="ot">QGraphicsItem</span> *item, scene()-&gt;items()) {
+        <span class="kw">if</span> (qgraphicsitem_cast&lt;Node *&gt;(item))
+            item-&gt;setPos(<span class="dv">-150</span> + <span class="fu">qrand</span>() % <span class="dv">300</span>, <span class="dv">-150</span> + <span class="fu">qrand</span>() % <span class="dv">300</span>);
+    }
+}
+
+<span class="co">//!</span> [<span class="dv">11</span>]
+<span class="ot">QVariant</span> Node::itemChange(GraphicsItemChange change, <span class="dt">const</span> <span class="ot">QVariant</span> &amp;value)
+{
+    <span class="kw">switch</span> (change) {
+    <span class="kw">case</span> ItemPositionHasChanged:
+        <span class="kw">foreach</span> (Edge *edge, edgeList)
+            edge-&gt;adjust();
+        graph-&gt;itemMoved();
+        <span class="kw">break</span>;
+    <span class="kw">default</span>:
+        <span class="kw">break</span>;
+    };
+
+    <span class="kw">return</span> <span class="ot">QGraphicsItem::</span>itemChange(change, value);
+}
+<span class="co">//!</span> [<span class="dv">11</span>]
+
+<span class="kw">if</span> (<span class="fu">qFuzzyCompare</span>(line.length(), <span class="dt">qreal</span>(<span class="fl">0.</span>)))
+    <span class="kw">return</span>;
+
+<span class="fu">qsrand</span>(<span class="ot">QTime</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>).secsTo(<span class="ot">QTime::</span>currentTime()));</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">saveAsMenu = <span class="kw">new</span> <span class="ot">QMenu</span>(<span class="fu">tr</span>(<span class="st">&quot;&amp;Save As&quot;</span>), <span class="kw">this</span>);
+<span class="kw">foreach</span> (<span class="ot">QAction</span> *action, saveAsActs)
+    saveAsMenu-&gt;addAction(action);
+
+fileMenu = <span class="kw">new</span> <span class="ot">QMenu</span>(<span class="fu">tr</span>(<span class="st">&quot;&amp;File&quot;</span>), <span class="kw">this</span>);
+fileMenu-&gt;addAction(openAct);
+fileMenu-&gt;addMenu(saveAsMenu);
+fileMenu-&gt;addAction(printAct);
+fileMenu-&gt;addSeparator();
+fileMenu-&gt;addAction(exitAct);
+
+<span class="dt">void</span> MainWindow::closeEvent(<span class="ot">QCloseEvent</span> *event)
+<span class="co">//!</span> [<span class="dv">1</span>] <span class="co">//!</span> [<span class="dv">2</span>]
+{
+    <span class="kw">if</span> (maybeSave()) {
+        event-&gt;accept();
+    } <span class="kw">else</span> {
+        event-&gt;ignore();
+    }
+}
+
+<span class="dt">bool</span> MainWindow::maybeSave()
+<span class="co">//!</span> [<span class="dv">17</span>] <span class="co">//!</span> [<span class="dv">18</span>]
+{
+    <span class="kw">if</span> (scribbleArea-&gt;isModified()) {
+       <span class="ot">QMessageBox::</span>StandardButton ret;
+       ret = <span class="ot">QMessageBox::</span>warning(<span class="kw">this</span>, <span class="fu">tr</span>(<span class="st">&quot;Scribble&quot;</span><span class="co">)</span>,
+                          <span class="fu">tr</span>(<span class="st">&quot;The image has been modified.</span><span class="ch">\n</span><span class="st">&quot;</span>
+                             <span class="st">&quot;Do you want to save your changes?&quot;</span><span class="co">)</span>,
+                          <span class="ot">QMessageBox::</span>Save | <span class="ot">QMessageBox::</span>Discard
+              | <span class="ot">QMessageBox::</span>Cancel);
+        <span class="kw">if</span> (ret == <span class="ot">QMessageBox::</span>Save) {
+            <span class="kw">return</span> saveFile(<span class="st">&quot;png&quot;</span><span class="co">)</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (ret == <span class="ot">QMessageBox::</span>Cancel) {
+            <span class="kw">return</span> <span class="kw">false</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="kw">true</span>;
+}
+
+<span class="kw">foreach</span> (<span class="ot">QByteArray</span> format, <span class="ot">QImageWriter::</span>supportedImageFormats()) {
+    <span class="ot">QString</span> text = <span class="fu">tr</span>(<span class="st">&quot;%1...&quot;</span><span class="co">)</span>.arg(<span class="ot">QString</span>(format).toUpper());
+
+    <span class="ot">QAction</span> *action = <span class="kw">new</span> <span class="ot">QAction</span>(text, <span class="kw">this</span>);
+    action-&gt;setData(format);
+    <span class="fu">connect</span>(action, <span class="kw">SIGNAL</span>(triggered()), <span class="kw">this</span>, <span class="kw">SLOT</span>(save()));
+    saveAsActs.append(action);
+}
+
+<span class="dt">void</span> MainWindow::save()
+<span class="co">//!</span> [<span class="dv">5</span>] <span class="co">//!</span> [<span class="dv">6</span>]
+{
+    <span class="ot">QAction</span> *action = <span class="fu">qobject_cast</span>&lt;<span class="ot">QAction</span> *&gt;(sender());
+    <span class="ot">QByteArray</span> fileFormat = action-&gt;data().toByteArray();
+    saveFile(fileFormat);
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> AddressBook::next()
+{
+    <span class="ot">QString</span> name = nameLine-&gt;text();
+    <span class="ot">QMap</span>&lt;<span class="ot">QString</span>, <span class="ot">QString</span>&gt;::iterator i = contacts.find(name);
+
+    <span class="kw">if</span> (i != contacts.end())
+        i++;
+
+    <span class="kw">if</span> (i == contacts.end())
+        i = contacts.begin();
+
+    nameLine-&gt;setText(i.key());
+    addressText-&gt;setText(i.value());
+}
+
+<span class="dt">void</span> AddressBook::previous()
+{
+    <span class="ot">QString</span> name = nameLine-&gt;text();
+    <span class="ot">QMap</span>&lt;<span class="ot">QString</span>, <span class="ot">QString</span>&gt;::iterator i = contacts.find(name);
+
+    <span class="kw">if</span> (i == contacts.end()){
+        nameLine-&gt;clear();
+        addressText-&gt;clear();
+        <span class="kw">return</span>;
+    }
+
+    <span class="kw">if</span> (i == contacts.begin())
+        i = contacts.end();
+
+    i--;
+    nameLine-&gt;setText(i.key());
+    addressText-&gt;setText(i.value());
+}
+<span class="co">//!</span> [previous() function]
+
+<span class="dt">void</span> RenderArea::transformPainter(<span class="ot">QPainter</span> &amp;painter)
+{
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; operations.size(); ++i) {
+        <span class="kw">switch</span> (operations[i]) {
+        <span class="kw">case</span> Translate:
+            painter.translate(<span class="dv">50</span>, <span class="dv">50</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> Scale:
+            painter.scale(<span class="fl">0.75</span>, <span class="fl">0.75</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> Rotate:
+            painter.rotate(<span class="dv">60</span>);
+            <span class="kw">break</span>;
+        <span class="kw">case</span> NoTransformation:
+        <span class="kw">default</span>:
+            ;
+        }
+    }
+}</code></pre></div>
+<pre><code>setMouseTracking(true);
+// To be able to show the appropiate tooltips while the user is moving the
+// cursor around, we need to enable mouse tracking for the widget.  If mouse
+// tracking is disabled (the default), the widget only receives mouse move
+// events when at least one mouse button is pressed while the mouse is being
+// moved. If mouse tracking is enabled, the widget receives mouse move events
+// even if no buttons are pressed.
+// QWidget::event() is the main event handler and receives all the widget&#39;s
+// events. Normally, we recommend reimplementing one of the specialized event
+// handlers instead of this function. But here we want to catch the
+// QEvent::ToolTip events, and since these are rather rare, there exists no
+// specific event handler. For that reason we reimplement the main event
+// handler, and the first thing we need to do is to determine the event&#39;s type:
+
+bool SortingBox::event(QEvent *event)
+{
+//! [5] //! [6]
+    // If the type is QEvent::ToolTip, we cast the event to a QHelpEvent,
+    // otherwise we propagate the event using the QWidget::event() function.
+    if (event-&gt;type() == QEvent::ToolTip) {
+        QHelpEvent *helpEvent = static_cast&lt;QHelpEvent *&gt;(event);
+        int index = itemAt(helpEvent-&gt;pos());
+        if (index != -1) {
+            // Note that the QToolTip::showText() function needs the event&#39;s
+            // position in global coordinates provided by
+            // QHelpEvent::globalPos().
+            QToolTip::showText(helpEvent-&gt;globalPos(), shapeItems[index].toolTip());
+        } else {
+            QToolTip::hideText();
+            event-&gt;ignore();
+        }
+        static int i = 0;
+
+        return true;
+    }
+    return QWidget::event(event);
+}
+
+
+newCircleButton = createToolButton(tr(&quot;New Circle&quot;),
+                                   QIcon(&quot;:/images/circle.png&quot;),
+                                   SLOT(createNewCircle()));
+
+QToolButton *SortingBox::createToolButton(const QString &amp;toolTip,
+                                          const QIcon &amp;icon, const char *member)
+{
+    QToolButton *button = new QToolButton(this);
+    button-&gt;setToolTip(toolTip);
+    button-&gt;setIcon(icon);
+    button-&gt;setIconSize(QSize(32, 32));
+    connect(button, SIGNAL(clicked()), this, member);
+
+    return button;
+}
+
+void SortingBox::moveItemTo(const QPoint &amp;pos)
+{
+    QPoint offset = pos - previousPosition;
+    itemInMotion-&gt;setPosition(itemInMotion-&gt;position() + offset);
+//! [18] //! [19]
+    previousPosition = pos;
+    update();
+}
+
+int SortingBox::updateButtonGeometry(QToolButton *button, int x, int y)
+{
+    QSize size = button-&gt;sizeHint();
+    //                           ref width
+    button-&gt;setGeometry(x - size.rwidth(), y - size.rheight(),
+                        size.rwidth(), size.rheight());
+
+    //  QStyle::pixelMetric() to determine the widget&#39;s preferred default spacing between its child widgets
+    return y - size.rheight()
+           - style()-&gt;pixelMetric(QStyle::PM_DefaultLayoutSpacing);
+}
+//! [20]
+
+qreal adjust = 0.5;
+return QRectF(-18 - adjust, -22 - adjust,
+              36 + adjust, 60 + adjust);</code></pre>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="fu">FILE</span>(GLOB_RECURSE HDRS_FILES *.h *.hpp)
+<span class="fu">FILE</span>(GLOB_RECURSE SRCS_FILES *.cpp *.c *.cxx)
+<span class="fu">FILE</span>(GLOB_RECURSE UI_FILES *.ui)
+<span class="fu">FILE</span>(GLOB CD_FILES *.cd)
+<span class="fu">FILE</span>(GLOB_RECURSE RSCS *.qrc)
+
+<span class="fu">QT4_WRAP_CPP</span>(MOC_SRCS <span class="dv">${HDRS_FILES}</span>)
+<span class="fu">QT4_ADD_RESOURCES</span>(RSC_SRCS <span class="dv">${RSCS}</span>)
+<span class="fu">QT4_WRAP_UI</span>(UI_HDRS <span class="dv">${UI_FILES}</span>)
+
+<span class="fu">SET</span>(FILES_TO_TRANSLATE <span class="dv">${FILES_TO_TRANSLATE}</span> <span class="dv">${SRCS_FILES}</span> <span class="dv">${UI_FILES}</span> <span class="dv">${HDRS_FILES}</span> PARENT_SCOPE)
+
+<span class="fu">SOURCE_GROUP</span>(<span class="st">&quot;UI Files&quot;</span> FILES <span class="dv">${UI_FILES}</span>)
+<span class="fu">SOURCE_GROUP</span>(<span class="st">&quot;Generated Files&quot;</span> FILES <span class="dv">${MOC_SRCS}</span> <span class="dv">${UI_HDRS}</span> <span class="dv">${RSC_SRCS}</span>)
+<span class="fu">SOURCE_GROUP</span>(<span class="st">&quot;Class Diagrams&quot;</span> FILES <span class="dv">${CD_FILES}</span> )
+<span class="fu">SOURCE_GROUP</span>(<span class="st">&quot;Resources&quot;</span> FILES <span class="dv">${RSCS}</span> )</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> Mouse::paint(<span class="ot">QPainter</span> *painter, <span class="dt">const</span> <span class="ot">QStyleOptionGraphicsItem</span> *, <span class="ot">QWidget</span> *)
+{
+    <span class="co">// Body</span>
+    painter-&gt;setBrush(color);
+    painter-&gt;drawEllipse(<span class="dv">-10</span>, <span class="dv">-20</span>, <span class="dv">20</span>, <span class="dv">40</span>);
+
+    <span class="co">// Eyes</span>
+    painter-&gt;setBrush(<span class="ot">Qt::</span>white);
+    painter-&gt;drawEllipse(<span class="dv">-10</span>, <span class="dv">-17</span>, <span class="dv">8</span>, <span class="dv">8</span>);
+    painter-&gt;drawEllipse(<span class="dv">2</span>, <span class="dv">-17</span>, <span class="dv">8</span>, <span class="dv">8</span>);
+
+    <span class="co">// Nose</span>
+    painter-&gt;setBrush(<span class="ot">Qt::</span>black);
+    painter-&gt;drawEllipse(<span class="ot">QRectF</span>(<span class="dv">-2</span>, <span class="dv">-22</span>, <span class="dv">4</span>, <span class="dv">4</span>));
+
+    <span class="co">// Pupils</span>
+    painter-&gt;drawEllipse(<span class="ot">QRectF</span>(<span class="fl">-8.0</span> + mouseEyeDirection, <span class="dv">-17</span>, <span class="dv">4</span>, <span class="dv">4</span>));
+    painter-&gt;drawEllipse(<span class="ot">QRectF</span>(<span class="fl">4.0</span> + mouseEyeDirection, <span class="dv">-17</span>, <span class="dv">4</span>, <span class="dv">4</span>));
+
+    <span class="co">// Ears</span>
+    painter-&gt;setBrush(scene()-&gt;collidingItems(<span class="kw">this</span>).isEmpty() ? <span class="ot">Qt::</span>darkYellow : <span class="ot">Qt::</span>red);
+    painter-&gt;drawEllipse(<span class="dv">-17</span>, <span class="dv">-12</span>, <span class="dv">16</span>, <span class="dv">16</span>);
+    painter-&gt;drawEllipse(<span class="dv">1</span>, <span class="dv">-12</span>, <span class="dv">16</span>, <span class="dv">16</span>);
+
+    <span class="co">// Tail</span>
+    <span class="ot">QPainterPath</span> path(<span class="ot">QPointF</span>(<span class="dv">0</span>, <span class="dv">20</span>));
+    path.cubicTo(<span class="dv">-5</span>, <span class="dv">22</span>, <span class="dv">-5</span>, <span class="dv">22</span>, <span class="dv">0</span>, <span class="dv">25</span>);
+    path.cubicTo(<span class="dv">5</span>, <span class="dv">27</span>, <span class="dv">5</span>, <span class="dv">32</span>, <span class="dv">0</span>, <span class="dv">30</span>);
+    path.cubicTo(<span class="dv">-5</span>, <span class="dv">32</span>, <span class="dv">-5</span>, <span class="dv">42</span>, <span class="dv">0</span>, <span class="dv">35</span>);
+    painter-&gt;setBrush(<span class="ot">Qt::</span>NoBrush);
+    painter-&gt;drawPath(path);
+}
+<span class="co">//!</span> [<span class="dv">3</span>]
+
+<span class="dt">void</span> Mouse::advance(<span class="dt">int</span> step)
+{
+    <span class="kw">if</span> (!step)
+        <span class="kw">return</span>;
+<span class="co">//!</span> [<span class="dv">4</span>]
+    <span class="co">// Don&#39;t move too far away</span>
+<span class="co">//!</span> [<span class="dv">5</span>]
+    <span class="ot">QLineF</span> lineToCenter(<span class="ot">QPointF</span>(<span class="dv">0</span>, <span class="dv">0</span>), mapFromScene(<span class="dv">0</span>, <span class="dv">0</span>));
+    <span class="kw">if</span> (lineToCenter.length() &gt; <span class="dv">150</span>) {
+        <span class="dt">qreal</span> angleToCenter = ::acos(lineToCenter.dx() / lineToCenter.length());
+        <span class="kw">if</span> (lineToCenter.dy() &lt; <span class="dv">0</span>)
+            angleToCenter = TwoPi - angleToCenter;
+        angleToCenter = normalizeAngle((Pi - angleToCenter) + Pi / <span class="dv">2</span>);
+
+        <span class="kw">if</span> (angleToCenter &lt; Pi &amp;&amp; angleToCenter &gt; Pi / <span class="dv">4</span>) {
+            <span class="co">// Rotate left</span>
+            angle += (angle &lt; -Pi / <span class="dv">2</span>) ? <span class="fl">0.25</span> : <span class="fl">-0.25</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (angleToCenter &gt;= Pi &amp;&amp; angleToCenter &lt; (Pi + Pi / <span class="dv">2</span> + Pi / <span class="dv">4</span>)) {
+            <span class="co">// Rotate right</span>
+            angle += (angle &lt; Pi / <span class="dv">2</span>) ? <span class="fl">0.25</span> : <span class="fl">-0.25</span>;
+        }
+    } <span class="kw">else</span> <span class="kw">if</span> (::sin(angle) &lt; <span class="dv">0</span>) {
+        angle += <span class="fl">0.25</span>;
+    } <span class="kw">else</span> <span class="kw">if</span> (::sin(angle) &gt; <span class="dv">0</span>) {
+        angle -= <span class="fl">0.25</span>;
+<span class="co">//!</span> [<span class="dv">5</span>] <span class="co">//!</span> [<span class="dv">6</span>]
+    }
+<span class="co">//!</span> [<span class="dv">6</span>]
+
+    <span class="co">// Try not to crash with any other mice</span>
+<span class="co">//!</span> [<span class="dv">7</span>]
+    <span class="ot">QList</span>&lt;<span class="ot">QGraphicsItem</span> *&gt; dangerMice = scene()-&gt;items(<span class="ot">QPolygonF</span>()
+                                                       &lt;&lt; mapToScene(<span class="dv">0</span>, <span class="dv">0</span>)
+                                                       &lt;&lt; mapToScene(<span class="dv">-30</span>, <span class="dv">-50</span>)
+                                                       &lt;&lt; mapToScene(<span class="dv">30</span>, <span class="dv">-50</span>));
+    <span class="kw">foreach</span> (<span class="ot">QGraphicsItem</span> *item, dangerMice) {
+        <span class="kw">if</span> (item == <span class="kw">this</span>)
+            <span class="kw">continue</span>;
+
+        <span class="ot">QLineF</span> lineToMouse(<span class="ot">QPointF</span>(<span class="dv">0</span>, <span class="dv">0</span>), mapFromItem(item, <span class="dv">0</span>, <span class="dv">0</span>));
+        <span class="dt">qreal</span> angleToMouse = ::acos(lineToMouse.dx() / lineToMouse.length());
+        <span class="kw">if</span> (lineToMouse.dy() &lt; <span class="dv">0</span>)
+            angleToMouse = TwoPi - angleToMouse;
+        angleToMouse = normalizeAngle((Pi - angleToMouse) + Pi / <span class="dv">2</span>);
+
+        <span class="kw">if</span> (angleToMouse &gt;= <span class="dv">0</span> &amp;&amp; angleToMouse &lt; Pi / <span class="dv">2</span>) {
+            <span class="co">// Rotate right</span>
+            angle += <span class="fl">0.5</span>;
+        } <span class="kw">else</span> <span class="kw">if</span> (angleToMouse &lt;= TwoPi &amp;&amp; angleToMouse &gt; (TwoPi - Pi / <span class="dv">2</span>)) {
+            <span class="co">// Rotate left</span>
+            angle -= <span class="fl">0.5</span>;
+<span class="co">//!</span> [<span class="dv">7</span>] <span class="co">//!</span> [<span class="dv">8</span>]
+        }
+<span class="co">//!</span> [<span class="dv">8</span>] <span class="co">//!</span> [<span class="dv">9</span>]
+    }
+<span class="co">//!</span> [<span class="dv">9</span>]
+
+    <span class="co">// Add some random movement</span>
+<span class="co">//!</span> [<span class="dv">10</span>]
+    <span class="kw">if</span> (dangerMice.size() &gt; <span class="dv">1</span> &amp;&amp; (<span class="fu">qrand</span>() % <span class="dv">10</span>) == <span class="dv">0</span>) {
+        <span class="kw">if</span> (<span class="fu">qrand</span>() % <span class="dv">1</span>)
+            angle += (<span class="fu">qrand</span>() % <span class="dv">100</span>) / <span class="fl">500.0</span>;
+        <span class="kw">else</span>
+            angle -= (<span class="fu">qrand</span>() % <span class="dv">100</span>) / <span class="fl">500.0</span>;
+    }
+<span class="co">//!</span> [<span class="dv">10</span>]
+
+<span class="co">//!</span> [<span class="dv">11</span>]
+    speed += (<span class="dv">-50</span> + <span class="fu">qrand</span>() % <span class="dv">100</span>) / <span class="fl">100.0</span>;
+
+    <span class="dt">qreal</span> dx = ::sin(angle) * <span class="dv">10</span>;
+    mouseEyeDirection = (<span class="fu">qAbs</span>(dx / <span class="dv">5</span>) &lt; <span class="dv">1</span>) ? <span class="dv">0</span> : dx / <span class="dv">5</span>;
+
+    setRotation(rotation() + dx);
+    setPos(mapToParent(<span class="dv">0</span>, -(<span class="dv">3</span> + sin(speed) * <span class="dv">3</span>)));
+}
+<span class="co">//!</span> [<span class="dv">11</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">QHashIterator</span>&lt;<span class="ot">QString</span>, <span class="dt">int</span>&gt; i(hash);
+<span class="kw">while</span> (i.hasNext()) {
+    i.next();
+    cout &lt;&lt; i.key() &lt;&lt; <span class="st">&quot;: &quot;</span> &lt;&lt; i.value() &lt;&lt; endl;
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">painter-&gt;setBrush(dragOver ? color.light(<span class="dv">130</span>) : color);</code></pre></div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#qt">qt</a></li>
+<li><a class="tzx-tag" href="tags.html/#code">code</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0071-selected-qt-code.md" title="6 insertions(+), 4 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0071-selected-qt-code.md" title="846 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0071-selected-qt-code.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 6,
+        deletions: 4
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 846,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

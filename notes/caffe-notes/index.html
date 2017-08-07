@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Caffe &#31508;&#35760;</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="../index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="caffe-&#31508;&#35760;">Caffe &#31508;&#35760;</h1>
+<h2 id="caffe-basic">caffe basic</h2>
+<p>installation, howto?? see yhlleo&#8217;s blog post: <a href="http://blog.csdn.net/YhL_Leo/article/details/50961542">Ubuntu14.04 &#23433;&#35013;CUDA7.5 + Caffe + cuDNN</a>.</p>
+<p><a href="https://github.com/BVLC/caffe">BVLC/caffe: Caffe: a fast open framework for deep learning.</a></p>
+<ul>
+<li><p><a href="pre.html" class="hide" title="pre.md">&#39044;&#22791;&#30693;&#35782;</a>&#65306;Linux + Python</p></li>
+<li><p><a href="tutorial.html" class="featured heart" title="tutorial.md">&#23448;&#32593;&#25945;&#31243;&#23548;&#35835;</a></p>
+<p>&#24517;&#35835;&#12290;Caffe &#22522;&#30784;&#12290;</p></li>
+<li><p><a href="protobuf.html" title="protobuf.md">protobuf</a></p></li>
+<li><p><a href="caffe-annotated.html" class="heart featured" title="caffe-annotated.md">annotated caffe source code</a></p></li>
+<li><p><a href="misc.html" class="flag" title="misc.md">&#26242;&#26410;&#24402;&#31867;&#31508;&#35760;</a></p>
+<p>I&#8217;m working on this right now.</p></li>
+<li><p><a href="wiki.html" title="wiki.md">wiki</a></p></li>
+</ul>
+<h2 id="caffe-&#20195;&#30721;">caffe &#20195;&#30721;</h2>
+<dl>
+<dt>My fork: <a href="https://github.com/district10/caffe-rc3">district10/caffe-rc3: Play with caffe.</a></dt>
+<dd><p>&#25105;&#27880;&#35299;&#36807;&#30340; notebook&#65306;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<ul>
+<li><dl>
+<dt><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/00-classification.ipynb" class="heart">00-classification.ipynb</a> <code class="fold">@</code></dt>
+<dd><pre><code>filters([n,k,h,w])----&gt;transpose(0,2,3,1)----&gt;filters([n,h,w,k])----&gt;feed into----&gt; vis_square</code></pre>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># the parameters are a list of [weights, biases]</span>
+filters <span class="op">=</span> net.params[<span class="st">&#39;conv1&#39;</span>][<span class="dv">0</span>].data
+vis_square(filters.transpose(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>))</code></pre></div>
+<p>refer to &#8230;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/01-learning-lenet.ipynb" class="heart">01-learning-lenet.ipynb</a> <code class="fold">@</code></dt>
+<dd><p>null.</p>
+<dl>
+<dt>blobs and params <code class="fold">@</code></dt>
+<dd><p><code>blob = {data, diff}</code>, shape: (batch size, feature dim, spatial dim)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># each output is (batch size, feature dim, spatial dim)</span>
+[(k, v.data.shape) <span class="cf">for</span> k, v <span class="op">in</span> solver.net.blobs.items()]
+
+<span class="co">#       [(&#39;data&#39;, (64, 1, 28, 28)),</span>
+<span class="co">#        (&#39;label&#39;, (64,)),</span>
+<span class="co">#        (&#39;conv1&#39;, (64, 20, 24, 24)),</span>
+<span class="co">#        (&#39;pool1&#39;, (64, 20, 12, 12)),</span>
+<span class="co">#        (&#39;conv2&#39;, (64, 50, 8, 8)),</span>
+<span class="co">#        (&#39;pool2&#39;, (64, 50, 4, 4)),</span>
+<span class="co">#        (&#39;ip1&#39;, (64, 500)),</span>
+<span class="co">#        (&#39;ip2&#39;, (64, 10)),</span>
+<span class="co">#        (&#39;loss&#39;, ())]</span></code></pre></div>
+<p><code>params = [weights, biases]</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># weights</span>
+[(k, v[<span class="dv">0</span>].data.shape) <span class="cf">for</span> k, v <span class="op">in</span> solver.net.params.items()]
+<span class="co">#       [(&#39;conv1&#39;, (20, 1, 5, 5)),</span>
+<span class="co">#        (&#39;conv2&#39;, (50, 20, 5, 5)),</span>
+<span class="co">#        (&#39;ip1&#39;, (500, 800)),</span>
+<span class="co">#        (&#39;ip2&#39;, (10, 500))]</span>
+
+<span class="co"># biases</span>
+[(k, v[<span class="dv">1</span>].data.shape) <span class="cf">for</span> k, v <span class="op">in</span> solver.net.params.items()]
+<span class="co">#       [(&#39;conv1&#39;, (20,)),</span>
+<span class="co">#       (&#39;conv2&#39;, (50,)),</span>
+<span class="co">#       (&#39;ip1&#39;, (500,)),</span>
+<span class="co">#       (&#39;ip2&#39;, (10,))]</span></code></pre></div>
+<dl>
+<dt>&#20851;&#20110;&#21367;&#31215;&#23618;&#30340;&#32500;&#24230;</dt>
+<dd><p>conv layer</p>
+<ul>
+<li>weights: <code>(4096, 9216)</code> -&gt; <code>[output, input]</code></li>
+<li>biases: <code>(4096,)</code> -&gt; <code>[output]</code></li>
+</ul>
+<p>fc-conv layer</p>
+<ul>
+<li>weights: <code>(4096, 256, 6, 6)</code> -&gt; <code>[output, input, h, w]</code></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>train net &amp; test net</dt>
+<dd><div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># train net</span>
+solver.net.forward()
+
+<span class="co"># test net (there can be more than one)</span>
+solver.test_nets[<span class="dv">0</span>].forward()
+<span class="co">#       {&#39;loss&#39;: array(2.4466583728790283, dtype=float32)}</span></code></pre></div>
+</dd>
+<dt>&#32500;&#24230;&#30340;&#25805;&#20316; <code class="fold">@</code></dt>
+<dd><p>&#36825;&#37096;&#20998;&#20320;&#38656;&#35201;&#29702;&#35299;&#22914;&#19979;&#30340;&#32500;&#24230;&#25805;&#20316;&#65306;<code>[n, k, h, w]</code> -&gt; <code>[n, k=1, h, w]</code> -&gt; <code>[n1, n2, h, w]</code> -&gt; <code>[n1, h, n2, w]</code>&#65292;&#20855;&#20307;&#30340;&#35299;&#37322;&#21487;&#20197;&#21442;&#32771;&#25105;&#30340; notebook&#12290;</p>
+<p>&#26174;&#31034;&#25152;&#26377;&#30340; filters&#65288;&#20849; 20 filters&#65289;&#12290;4 &#34892; 5 &#21015;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">imshow(solver.net.params[<span class="st">&#39;conv1&#39;</span>][<span class="dv">0</span>].diff[:, <span class="dv">0</span>].reshape(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)
+       .transpose(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>).reshape(<span class="dv">4</span><span class="op">*</span><span class="dv">5</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">5</span>), cmap<span class="op">=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/4x5.png" />
+
+</div>
+<p>&#21482;&#26174;&#31034;&#31532; 1 &#34892;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">imshow(solver.net.params[<span class="st">&#39;conv1&#39;</span>][<span class="dv">0</span>].diff[:<span class="dv">5</span>, <span class="dv">0</span>].reshape(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)
+    .transpose(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>).reshape(<span class="dv">1</span><span class="op">*</span><span class="dv">5</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">5</span>), cmap<span class="op">=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/4x1.png" />
+
+</div>
+<p>&#21491;&#19979;&#35282;&#30340; 2x3 &#20010; filters&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">imshow(solver.net.params[<span class="st">&#39;conv1&#39;</span>][<span class="dv">0</span>].diff[[<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">17</span>,<span class="dv">18</span>,<span class="dv">19</span>], <span class="dv">0</span>].reshape(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>)
+    .transpose(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>).reshape(<span class="dv">2</span><span class="op">*</span><span class="dv">5</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">5</span>), cmap<span class="op">=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/2x3.png" />
+
+</div>
+</dd>
+</dl>
+</dd>
+</dl></li>
+<li><p><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/02-brewing-logreg.ipynb">02-brewing-logreg.ipynb</a></p></li>
+<li><p><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/03-fine-tuning.ipynb">03-fine-tuning.ipynb</a></p></li>
+<li><p><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/net_surgery.ipynb">net_surgery.ipynb</a></p></li>
+<li><dl>
+<dt><a href="http://nbviewer.jupyter.org/github/district10/caffe-rc3/blob/master/examples/detection.ipynb">detection.ipynb</a> <code class="fold">@</code></dt>
+<dd><p>Let&#8217;s run detection on an image of a bicyclist riding a fish bike in the desert (from the ImageNet challenge&#8212;no joke).</p>
+<p>&#36825;&#20010;&#20363;&#23376;&#36305;&#19981;&#36215;&#26469;&#20102;&#12290;</p>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl>
+<hr />
+<h2 id="hed-&#36793;&#32536;&#26816;&#27979;">HED &#36793;&#32536;&#26816;&#27979;</h2>
+<dl>
+<dt>My fork: <a href="https://github.com/district10/hed">district10/hed</a></dt>
+<dd><p>&#36825;&#37324;&#26377;&#20004;&#20221;&#27880;&#37322;&#36807;&#30340;&#31508;&#35760;&#65306;</p>
+<ul>
+<li><p><a href="http://nbviewer.jupyter.org/github/district10/hed/blob/master/examples/hed/HED-tutorial.ipynb" class="heart">HED-tutorial.ipynb</a></p>
+<p>&#19968;&#20010;&#29992; pretrained &#30340; model &#26469;&#27979;&#35797;&#65292;&#24471;&#21040;&#36793;&#32536;&#32467;&#26524;&#22270;&#12290;&#36825;&#20010;&#20363;&#23376;&#36816;&#34892;&#36215;&#26469;&#24456;&#24555;&#12290;</p></li>
+<li><p><a href="http://nbviewer.jupyter.org/github/district10/hed/blob/master/examples/hed/solve.ipynb">solve.ipynb</a></p>
+<p>&#35757;&#32451; model&#12290;&#24403;&#28982;&#65292;&#35757;&#32451;&#36215;&#26469;&#24456;&#24930;&#12290;&#38656;&#35201; days&#65292;&#19981;&#26159; hours&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># make a bilinear interpolation kernel</span>
+<span class="co"># credit @longjon</span>
+<span class="kw">def</span> upsample_filt(size):
+    factor <span class="op">=</span> (size <span class="op">+</span> <span class="dv">1</span>) <span class="op">//</span> <span class="dv">2</span> <span class="co"># &#8216;//&#8217; &#30830;&#20445;&#20102;&#32467;&#26524;&#26159;&#25972;&#25968;&#65292;&#21644;&#8216;/&#8217;&#19981;&#19968;&#26679;</span>
+    <span class="cf">if</span> size <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">1</span>:
+        center <span class="op">=</span> factor <span class="op">-</span> <span class="dv">1</span>
+    <span class="cf">else</span>:
+        center <span class="op">=</span> factor <span class="op">-</span> <span class="fl">0.5</span>
+    og <span class="op">=</span> np.ogrid[:size, :size]
+    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">-</span> <span class="bu">abs</span>(og[<span class="dv">0</span>] <span class="op">-</span> center) <span class="op">/</span> factor) <span class="op">*</span> <span class="op">\</span>
+           (<span class="dv">1</span> <span class="op">-</span> <span class="bu">abs</span>(og[<span class="dv">1</span>] <span class="op">-</span> center) <span class="op">/</span> factor)
+
+<span class="co"># set parameters s.t. deconvolutional layers compute bilinear interpolation</span>
+<span class="co"># N.B. this is for deconvolution without groups</span>
+<span class="co"># N.B. &#21861;&#24847;&#24605;&#65311;&#65306;</span>
+<span class="co">#       Derived from the Latin (and italian) nota bene, meaning note well (take notice).&#65306;</span>
+<span class="co">#       It is used to draw the attention to a certain aspect.</span>
+<span class="kw">def</span> interp_surgery(net, layers):
+    <span class="cf">for</span> l <span class="op">in</span> layers:
+        m, k, h, w <span class="op">=</span> net.params[l][<span class="dv">0</span>].data.shape
+        <span class="cf">if</span> m <span class="op">!=</span> k:
+            <span class="bu">print</span> <span class="st">&#39;input + output channels need to be the same&#39;</span>
+            <span class="cf">raise</span>
+        <span class="cf">if</span> h <span class="op">!=</span> w:
+            <span class="bu">print</span> <span class="st">&#39;filters need to be square&#39;</span>
+            <span class="cf">raise</span>
+        filt <span class="op">=</span> upsample_filt(h)
+        <span class="co"># &#23545; layer l &#30340; weights &#36827;&#34892;&#35774;&#32622;&#65288;&#35774;&#32622;&#19968;&#20010; filter&#65289;</span>
+        net.params[l][<span class="dv">0</span>].data[<span class="bu">range</span>(m), <span class="bu">range</span>(k), :, :] <span class="op">=</span> filt</code></pre></div>
+<pre><code>image_data_param {
+    root_folder: &quot;../../data/HED-BSDS/&quot;
+    source: &quot;../../data/HED-BSDS/train_pair.lst&quot;
+    batch_size: 1
+    shuffle: true
+    new_height: 192
+    new_width: 193
+}</code></pre></li>
+</ul>
+</dd>
+</dl>
+<ul>
+<li><a href="https://github.com/torrvision/crfasrnn">torrvision/crfasrnn: This repository contains the source code for the semantic image segmentation method described in the ICCV 2015 paper: Conditional Random Fields as Recurrent Neural Networks. http://crfasrnn.torr.vision/</a></li>
+</ul>
+<hr />
+<ul>
+<li><p><a href="python-interface.html" class="hide" title="python-interface.md">python interface</a></p>
+<p>null.</p></li>
+<li><p><a href="matlab-interface.html" class="hide" title="matlab-interface.md">matlab interface</a></p>
+<p>null.</p></li>
+<li><p><a href="ml-index.html" class="heart" title="ml-index.md">ml intro</a></p></li>
+<li><p><a href="backpropagation.html" class="heart featured" title="backpropagation.md">Principles of training multi-layer neural network using backpropagation</a></p></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#34429;&#28982; GitHub &#29616;&#22312;&#25903;&#25345;&#26174;&#31034; <code>.ipynb</code> &#25991;&#20214;&#65292;&#25105;&#36824;&#26159;&#26356;&#21916;&#27426; jupyter &#25552;&#20379;&#30340; nbviewer &#38142;&#25509;&#12290;<a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

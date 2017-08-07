@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<p>Theano features: <code class="foldable">@</code></p>
+<ul>
+<li><strong>tight integration with NumPy</strong> &#8211; Use numpy.ndarray in Theano-compiled functions.</li>
+<li><strong>transparent use of a GPU</strong> &#8211; Perform data-intensive calculations up to 140x faster than with CPU.(float32 only)</li>
+<li><strong>efficient symbolic differentiation</strong> &#8211; Theano does your derivatives for function with one or many inputs.</li>
+<li>speed and stability optimizations &#8211; Get the right answer for log(1+x) even when x is really tiny.</li>
+<li><strong>dynamic C code generation</strong> &#8211; Evaluate expressions faster.</li>
+<li>extensive unit-testing and self-verification &#8211; Detect and diagnose many types of errors.</li>
+</ul>
+<p>Theano has been powering large-scale computationally intensive scientific investigations <strong>since 2007</strong>. But it is also approachable enough to be used in the classroom (University of Montreal&#8217;s deep learning/machine learning classes). <code class="fold">@</code></p>
+<ul>
+<li><p>You should learn some python. <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p></li>
+<li><p>Matrix <strong>conventions</strong> for machine learning <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<ul>
+<li><p>Every row is an example.</p></li>
+<li><p>numpy, <code>numpyarray.shape()</code>, <code>arr[ r, c ]</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> numpy.asarray([[<span class="dv">1</span>., <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])
+array([[ <span class="dv">1</span>.,  <span class="dv">2</span>.],
+       [ <span class="dv">3</span>.,  <span class="dv">4</span>.],
+       [ <span class="dv">5</span>.,  <span class="dv">6</span>.]])
+<span class="op">&gt;&gt;&gt;</span> numpy.asarray([[<span class="dv">1</span>., <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]]).shape
+(<span class="dv">3</span>, <span class="dv">2</span>)
+
+<span class="co"># get entry value</span>
+<span class="op">&gt;&gt;&gt;</span> numpy.asarray([[<span class="dv">1</span>., <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">5</span>, <span class="dv">6</span>]])[<span class="dv">2</span>, <span class="dv">0</span>]
+<span class="fl">5.0</span></code></pre></div></li>
+<li><p>broadcasting (cast as in <code>static_cast</code>, <code>const_cast</code>)</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> a <span class="op">=</span> numpy.asarray([<span class="fl">1.0</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>])
+<span class="op">&gt;&gt;&gt;</span> b <span class="op">=</span> <span class="fl">2.0</span>
+<span class="op">&gt;&gt;&gt;</span> a <span class="op">*</span> b <span class="co"># broadcasting b (a 0-d array) to same size of a</span>
+array([ <span class="dv">2</span>.,  <span class="dv">4</span>.,  <span class="dv">6</span>.])</code></pre></div>
+<p>see more at <a href="http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html">numpy user guide: basics broadcasting</a>.</p></li>
+</ul></li>
+<li><p>Basics <code class="foldable">@</code></p>
+<ul>
+<li><p>Baby Steps - Algebra <code class="fold">@</code></p>
+<ul>
+<li><p>Adding two Scalars</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano.tensor <span class="im">as</span> T
+<span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> function
+
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dscalar(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.dscalar(<span class="st">&#39;y&#39;</span>)
+
+    <span class="co">#    about type</span>
+    <span class="co">#    In Theano, all symbols must be **typed**</span>
+    <span class="co">#</span>
+    <span class="co">#        d         :   double</span>
+    <span class="co">#        dscalar   :   0-dim arrays (scalar) of doubles (d)</span>
+    <span class="co">#</span>
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(x)
+    <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;theano.tensor.var.TensorVariable&#39;</span><span class="op">&gt;</span>
+    <span class="op">&gt;&gt;&gt;</span> x.<span class="bu">type</span>
+    TensorType(float64, scalar)
+    <span class="op">&gt;&gt;&gt;</span> T.dscalar
+    TensorType(float64, scalar)
+    <span class="op">&gt;&gt;&gt;</span> x.<span class="bu">type</span> <span class="op">is</span> T.dscalar
+    <span class="va">True</span>
+
+<span class="op">&gt;&gt;&gt;</span> z <span class="op">=</span> x <span class="op">+</span> y
+
+    <span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> pp <span class="co"># pretty print</span>
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(pp(z))
+    (x <span class="op">+</span> y)
+
+        <span class="co"># powerful python `eval`</span>
+        <span class="op">&gt;&gt;&gt;</span> z.<span class="bu">eval</span>({x : <span class="fl">16.3</span>, y : <span class="fl">12.1</span>}) <span class="co"># value assignment</span>
+
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> function([x, y], z)
+
+    <span class="co"># f: function(input, output)</span>
+
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">2</span>, <span class="dv">3</span>)         <span class="co"># f([2,3]), [2,3] as the input</span>
+array(<span class="fl">5.0</span>)
+<span class="op">&gt;&gt;&gt;</span> numpy.allclose(f(<span class="fl">16.3</span>, <span class="fl">12.1</span>), <span class="fl">28.4</span>)
+<span class="va">True</span></code></pre></div></li>
+<li><p>Adding two Matrices</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dmatrix(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.dmatrix(<span class="st">&#39;y&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> z <span class="op">=</span> x <span class="op">+</span> y
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> function([x, y], z)
+
+    <span class="co"># matrix addition (version 1: python native, version 2: numpy)</span>
+
+    <span class="op">&gt;&gt;&gt;</span> f([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], [[<span class="dv">10</span>, <span class="dv">20</span>], [<span class="dv">30</span>, <span class="dv">40</span>]])
+    array([[ <span class="dv">11</span>.,  <span class="dv">22</span>.],
+           [ <span class="dv">33</span>.,  <span class="dv">44</span>.]])
+
+    <span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy
+    <span class="op">&gt;&gt;&gt;</span> f(numpy.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]), numpy.array([[<span class="dv">10</span>, <span class="dv">20</span>], [<span class="dv">30</span>, <span class="dv">40</span>]]))
+    array([[ <span class="dv">11</span>.,  <span class="dv">22</span>.],
+           [ <span class="dv">33</span>.,  <span class="dv">44</span>.]])</code></pre></div></li>
+<li><p>Notes</p>
+<p>The following types are available: <code class="fold">@</code></p>
+<ul>
+<li>scalar, vector, matrix, row, col, tensor3, tensor4</li>
+<li>b: byte</li>
+<li>w: word (16-bit integer)</li>
+<li>i: int (32-bit)</li>
+<li>l: long int (64-bit)</li>
+<li>f: float (32-bit)</li>
+<li>d: double (64-bit)</li>
+<li>c: complex</li>
+</ul></li>
+<li><p>Exercise</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> a <span class="op">=</span> theano.tensor.vector()          <span class="co"># declare variable</span>
+<span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> a <span class="op">+</span> a <span class="op">**</span> <span class="dv">10</span>                   <span class="co"># build symbolic expression</span>
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([a], out)       <span class="co"># compile function</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(f([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]))
+[    <span class="dv">0</span>.     <span class="dv">2</span>.  <span class="dv">1026</span>.]</code></pre></div>
+<p>Modify and execute this code to compute this expression: <code>a ** 2 + b ** 2 + 2 * a * b</code>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> __future__ <span class="im">import</span> absolute_import, print_function, division
+<span class="im">import</span> theano
+a <span class="op">=</span> theano.tensor.vector()              <span class="co"># declare variable</span>
+b <span class="op">=</span> theano.tensor.vector()  <span class="co"># declare variable</span>
+out <span class="op">=</span> a <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> b <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> a <span class="op">*</span> b       <span class="co"># build symbolic expression</span>
+f <span class="op">=</span> theano.function([a, b], out)        <span class="co"># compile function</span>
+<span class="bu">print</span>(f([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">4</span>, <span class="dv">5</span>]))                <span class="co"># prints [ 25.  49.]</span></code></pre></div></li>
+</ul></li>
+<li><p>refs and see also</p>
+<ul>
+<li><a href="http://deeplearning.net/software/theano/library/tensor/basic.html#libdoc-basic-tensor">Basic Tensor Functionality &#8212; Theano 0.8.0 documentation</a></li>
+</ul></li>
+<li><p>More Examples <code class="fold">@</code></p>
+<ul>
+<li><p>Logistic Function</p>
+<p><strong>erf, g(x) = 1/(1+e^(-x)) = (1+tanh(x/2))/2</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano.tensor <span class="im">as</span> T
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dmatrix(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> T.exp(<span class="op">-</span>x))
+<span class="op">&gt;&gt;&gt;</span> logistic <span class="op">=</span> theano.function([x], s)
+<span class="op">&gt;&gt;&gt;</span> logistic([[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>]])
+array([[ <span class="fl">0.5</span>       ,  <span class="fl">0.73105858</span>],
+       [ <span class="fl">0.26894142</span>,  <span class="fl">0.11920292</span>]])</code></pre></div></li>
+<li><p>Computing More than one Thing at the Same Time</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> a, b <span class="op">=</span> T.dmatrices(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>)        <span class="co"># &#27880;&#24847;&#36825;&#37324;: matrix-&gt;matrices</span>
+<span class="op">&gt;&gt;&gt;</span> diff <span class="op">=</span> a <span class="op">-</span> b
+<span class="op">&gt;&gt;&gt;</span> abs_diff <span class="op">=</span> <span class="bu">abs</span>(diff)
+<span class="op">&gt;&gt;&gt;</span> diff_squared <span class="op">=</span> diff<span class="op">**</span><span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([a, b], [diff, abs_diff, diff_squared])</code></pre></div></li>
+<li><p>Setting a Default Value for an Argument</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> In
+<span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> function
+<span class="op">&gt;&gt;&gt;</span> x, y <span class="op">=</span> T.dscalars(<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> z <span class="op">=</span> x <span class="op">+</span> y
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> function([x, In(y, value<span class="op">=</span><span class="dv">1</span>)], z)    <span class="co"># default value of y is 1</span>
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>)
+array(<span class="fl">34.0</span>)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>, <span class="dv">2</span>)
+array(<span class="fl">35.0</span>)
+
+<span class="co"># These parameters can be set positionally or by name, as in</span>
+<span class="co"># standard Python</span>
+<span class="op">&gt;&gt;&gt;</span> x, y, w <span class="op">=</span> T.dscalars(<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>, <span class="st">&#39;w&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> z <span class="op">=</span> (x <span class="op">+</span> y) <span class="op">*</span> w
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> function([x, In(y, value<span class="op">=</span><span class="dv">1</span>), In(w, value<span class="op">=</span><span class="dv">2</span>, name<span class="op">=</span><span class="st">&#39;w_by_name&#39;</span>)], z)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>)
+array(<span class="fl">68.0</span>)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>, <span class="dv">2</span>)
+array(<span class="fl">70.0</span>)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>, <span class="dv">0</span>, <span class="dv">1</span>)
+array(<span class="fl">33.0</span>)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>, w_by_name<span class="op">=</span><span class="dv">1</span>)
+array(<span class="fl">34.0</span>)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">33</span>, w_by_name<span class="op">=</span><span class="dv">1</span>, y<span class="op">=</span><span class="dv">0</span>)
+array(<span class="fl">33.0</span>)</code></pre></div></li>
+<li><p>Using Shared Variables</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> shared
+<span class="op">&gt;&gt;&gt;</span> state <span class="op">=</span> shared(<span class="dv">0</span>)           <span class="co"># shared value, like `static&#39; in c?</span>
+<span class="op">&gt;&gt;&gt;</span> inc <span class="op">=</span> T.iscalar(<span class="st">&#39;inc&#39;</span>)
+<span class="co">#                               return cur state</span>
+<span class="op">&gt;&gt;&gt;</span> accumulator <span class="op">=</span> function([inc], state, updates<span class="op">=</span>[(state, state<span class="op">+</span>inc)])
+
+    <span class="co"># get</span>
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(state.get_value())
+    <span class="dv">0</span>
+    <span class="op">&gt;&gt;&gt;</span> accumulator(<span class="dv">1</span>)
+    array(<span class="dv">0</span>)
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(state.get_value())
+    <span class="dv">1</span>
+    <span class="op">&gt;&gt;&gt;</span> accumulator(<span class="dv">300</span>)
+    array(<span class="dv">1</span>)
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(state.get_value())
+    <span class="dv">301</span>
+
+    <span class="co"># set</span>
+    <span class="op">&gt;&gt;&gt;</span> state.set_value(<span class="op">-</span><span class="dv">1</span>)
+    <span class="op">&gt;&gt;&gt;</span> accumulator(<span class="dv">3</span>)
+    array(<span class="op">-</span><span class="dv">1</span>)
+    <span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(state.get_value())
+    <span class="dv">2</span></code></pre></div></li>
+<li><p>Copying functions</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> new_state <span class="op">=</span> theano.shared(<span class="dv">0</span>)
+<span class="op">&gt;&gt;&gt;</span> new_accumulator <span class="op">=</span> accumulator.copy(swap<span class="op">=</span>{state:new_state})
+<span class="op">&gt;&gt;&gt;</span> new_accumulator(<span class="dv">100</span>)
+[array(<span class="dv">0</span>)]
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(new_state.get_value())
+<span class="dv">100</span></code></pre></div></li>
+<li><p>Using Random Numbers</p>
+<ul>
+<li><p>Brief Example</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> theano.tensor.shared_randomstreams <span class="im">import</span> RandomStreams
+<span class="im">from</span> theano <span class="im">import</span> function
+srng <span class="op">=</span> RandomStreams(seed<span class="op">=</span><span class="dv">234</span>)
+
+<span class="co"># &#21035;&#24536;&#20102;&#65292;rv: random variable</span>
+
+<span class="co"># a random stream of 2x2 matrices of draws from a uniform distribution</span>
+rv_u <span class="op">=</span> srng.uniform((<span class="dv">2</span>,<span class="dv">2</span>))
+<span class="co">#                                                  normal distribution</span>
+rv_n <span class="op">=</span> srng.normal((<span class="dv">2</span>,<span class="dv">2</span>))
+
+f <span class="op">=</span> function([], rv_u)              <span class="co"># no input, just grab out streamed value</span>
+g <span class="op">=</span> function([], rv_n, no_default_updates<span class="op">=</span><span class="va">True</span>)    <span class="co"># Not updating rv_n.rng</span>
+
+    <span class="co"># deps on update or not</span>
+    <span class="op">&gt;&gt;&gt;</span> f() <span class="op">!=</span> f() <span class="co"># different numbers from f_val0</span>
+    <span class="op">&gt;&gt;&gt;</span> g() <span class="op">!=</span> g() <span class="co"># same number everytime</span>
+
+nearly_zeros <span class="op">=</span> function([], rv_u <span class="op">+</span> rv_u <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> rv_u)
+
+    <span class="co"># &#36825;&#20010;&#29305;&#24615;&#30340;&#22909;&#22788;&#26159;&#65292;&#19981;&#29992;&#25226;&#36825;&#20010; generate &#30340;&#20540;&#23384;&#36215;&#26469;</span>
+    <span class="co"># &#19981;&#22909;&#22312;&#20110;&#65292;&#22914;&#26524;&#20320;&#24076;&#26395;&#23427;&#19981;&#19968;&#26679;&#65292;&#23601;&#24471;&#20998;&#21035; generate &#20877;&#36816;&#31639;</span></code></pre></div></li>
+<li><p>Seeding Streams</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> rng_val <span class="op">=</span> rv_u.rng.get_value(borrow<span class="op">=</span><span class="va">True</span>)   <span class="co"># Get the rng for rv_u</span>
+<span class="op">&gt;&gt;&gt;</span> rng_val.seed(<span class="dv">89234</span>)                         <span class="co"># seeds the generator</span>
+<span class="op">&gt;&gt;&gt;</span> rv_u.rng.set_value(rng_val, borrow<span class="op">=</span><span class="va">True</span>)    <span class="co"># Assign back seeded rng</span></code></pre></div></li>
+<li>Sharing Streams Between Functions</li>
+<li>Copying Random State Between Theano Graphs</li>
+<li>Other Random Distributions</li>
+<li><p>Other Implementations</p>
+<p>TODO: <a href="http://deeplearning.net/software/theano/tutorial/examples.html#using-random-numbers" class="uri">http://deeplearning.net/software/theano/tutorial/examples.html#using-random-numbers</a></p></li>
+</ul></li>
+<li><p>A Real Example: Logistic Regression</p>
+<p>&#20808;&#30475;&#30475; numpy &#25552;&#20379;&#30340;&#19968;&#20123; rand &#20989;&#25968;&#65306;</p>
+<ul>
+<li><p><code>numpy.random.rand(d0, d1, ..., dn)</code>, uniform distribubition, <code>[0, 1)</code></p></li>
+<li><p><code>numpy.random.randint(low, high=None, size=None)</code>, descrete uniform distrib, <code>[low, high)</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> np.random.randint(<span class="dv">2</span>, size<span class="op">=</span><span class="dv">10</span>)
+array([<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>])
+<span class="op">&gt;&gt;&gt;</span> np.random.randint(<span class="dv">1</span>, size<span class="op">=</span><span class="dv">10</span>)
+array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>])
+
+<span class="op">&gt;&gt;&gt;</span> np.random.randint(<span class="dv">5</span>, size<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">4</span>))
+array([[<span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>],
+       [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>]])</code></pre></div>
+<p>&#24403;&#27809; high &#30340;&#26102;&#20505;&#65292;&#20854;&#23454; low &#26159; high&#65292;0 &#26159; low&#8230;&#8230;&#36825; api &#20063;&#22826;&#24694;&#24515;&#20102;&#12290;</p>
+<p>&#20854;&#23454;&#21487;&#20197;&#20889;&#25104;&#20004;&#20010; api:</p>
+<ul>
+<li>numpy.random.randint(high, size=None), <code>[0, high)</code></li>
+<li>numpy.random.randint(low, high, size=None), <code>[low, high)</code></li>
+</ul>
+<p>&#21487;&#33021;&#22240;&#20026;&#36825;&#20010;&#25509;&#21475;&#22826;&#24694;&#24515;&#8230;&#8230;&#19979;&#38754;&#30340;&#20195;&#30721;&#29992;&#30340;&#26159; <code>low=..., high=...</code>.</p></li>
+<li><p><code>numpy.random.randn(d0, d1, ..., dn)</code>, normal distrib, &#27491;&#24577;&#20998;&#24067;&#65292;&#36820;&#22238;&#22810;&#32500;&#25968;&#32452;&#12290; <strong>dims: d0, d1, &#8230;, dn</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> np.random.randn()
+<span class="fl">2.1923875335537315</span> <span class="co">#random</span>
+
+<span class="co">#  N(3, 6.25=2.5^2) (you can use: sigma * np.random.randn(...) + mu)</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="fl">2.5</span> <span class="op">*</span> np.random.randn(<span class="dv">2</span>, <span class="dv">4</span>) <span class="op">+</span> <span class="dv">3</span>
+array([[<span class="op">-</span><span class="fl">4.49401501</span>,  <span class="fl">4.00950034</span>, <span class="op">-</span><span class="fl">1.81814867</span>,  <span class="fl">7.29718677</span>],  <span class="co">#random</span>
+       [ <span class="fl">0.39924804</span>,  <span class="fl">4.68456316</span>,  <span class="fl">4.99394529</span>,  <span class="fl">4.84057254</span>]]) <span class="co">#random</span></code></pre></div></li>
+</ul>
+w.r.t.
+<ul>
+<li>with respect to</li>
+<li>with regard to</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy
+<span class="im">import</span> theano
+<span class="im">import</span> theano.tensor <span class="im">as</span> T
+rng <span class="op">=</span> numpy.random
+
+N <span class="op">=</span> <span class="dv">400</span>                                   <span class="co"># training sample size</span>
+feats <span class="op">=</span> <span class="dv">784</span>                               <span class="co"># number of input variables</span>
+
+<span class="co"># generate a dataset: D = (input_values, target_class)</span>
+<span class="co">#</span>
+<span class="co">#   input:             [N, feats] of N(0, 1),</span>
+<span class="co">#   output:            [0, 2) -&gt; 0/1 (binary)</span>
+<span class="co">#</span>
+D <span class="op">=</span> (rng.randn(N, feats), rng.randint(size<span class="op">=</span>N, low<span class="op">=</span><span class="dv">0</span>, high<span class="op">=</span><span class="dv">2</span>))
+
+training_steps <span class="op">=</span> <span class="dv">10000</span>
+
+<span class="co"># Declare Theano symbolic variables</span>
+x <span class="op">=</span> T.matrix(<span class="st">&quot;x&quot;</span>)
+y <span class="op">=</span> T.vector(<span class="st">&quot;y&quot;</span>)
+
+<span class="co"># initialize the weight vector w randomly</span>
+<span class="co">#</span>
+<span class="co">#   this and the following bias variable b are shared so they</span>
+<span class="co">#   keep their values between training iterations (updates)</span>
+<span class="co">#</span>
+w <span class="op">=</span> theano.shared(rng.randn(feats), name<span class="op">=</span><span class="st">&quot;w&quot;</span>)
+
+<span class="co"># initialize the bias term</span>
+b <span class="op">=</span> theano.shared(<span class="dv">0</span>., name<span class="op">=</span><span class="st">&quot;b&quot;</span>)
+
+<span class="bu">print</span>(<span class="st">&quot;Initial model:&quot;</span>)
+<span class="bu">print</span>(w.get_value())
+<span class="bu">print</span>(b.get_value())
+
+<span class="co"># Construct Theano expression graph</span>
+p_1 <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> T.exp(<span class="op">-</span>T.dot(x, w) <span class="op">-</span> b))   <span class="co"># Probability that target = 1</span>
+prediction <span class="op">=</span> p_1 <span class="op">&gt;</span> <span class="fl">0.5</span>                    <span class="co"># The prediction thresholded</span>
+
+<span class="co"># Cross-entropy loss function</span>
+xent <span class="op">=</span> <span class="op">-</span>y <span class="op">*</span> T.log(p_1) <span class="op">-</span> (<span class="dv">1</span><span class="op">-</span>y) <span class="op">*</span> T.log(<span class="dv">1</span><span class="op">-</span>p_1)
+<span class="co"># The cost to minimize</span>
+cost <span class="op">=</span> xent.mean() <span class="op">+</span> <span class="fl">0.01</span> <span class="op">*</span> (w <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>()
+gw, gb <span class="op">=</span> T.grad(cost, [w, b])             <span class="co"># Compute the gradient of the cost</span>
+
+<span class="co"># w.r.t weight vector w and</span>
+<span class="co"># bias term b</span>
+<span class="co"># (we shall return to this in a</span>
+<span class="co"># following section of this tutorial)</span>
+
+<span class="co">#                                                    &#12300;train &#20989;&#25968;&#12301;</span>
+train <span class="op">=</span> theano.function(
+          <span class="co"># Compile, &#36825;&#37096;&#20998;&#24456;&#26377;&#24847;&#24605;&#65292;&#30452;&#25509;&#29992;&#20102; input&#65292;output &#21644; updates</span>
+          inputs<span class="op">=</span>[x,y],
+          outputs<span class="op">=</span>[prediction, xent],     <span class="co"># &#20004;&#20010;&#23450;&#20041;&#22909;&#30340; descrimination func</span>
+          <span class="co"># pairwise update, ((old1, new1), (old2, new2), ...)</span>
+          updates<span class="op">=</span>((w, w <span class="op">-</span> <span class="fl">0.1</span> <span class="op">*</span> gw), (b, b <span class="op">-</span> <span class="fl">0.1</span> <span class="op">*</span> gb)))
+
+<span class="co"># TODO1</span>
+
+<span class="co">#                                                    &#12300;predict &#20989;&#25968;&#12301;</span>
+predict <span class="op">=</span> theano.function(inputs<span class="op">=</span>[x], outputs<span class="op">=</span>prediction)
+
+<span class="co"># Train</span>
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(training_steps):     <span class="co"># loop 10000 times</span>
+    pred, err <span class="op">=</span> train(D, D)   <span class="co"># &#25968;&#25454;&#38598;&#65292;&#26679;&#26412;: D, label: D</span>
+
+<span class="bu">print</span>(<span class="st">&quot;Final model:&quot;</span>)
+<span class="bu">print</span>(w.get_value())
+<span class="bu">print</span>(b.get_value())
+<span class="bu">print</span>(<span class="st">&quot;target values for D:&quot;</span>)
+<span class="bu">print</span>(D)
+<span class="bu">print</span>(<span class="st">&quot;prediction on D:&quot;</span>)
+<span class="bu">print</span>(predict(D))</code></pre></div>
+<p><code>updates</code> (iterable over pairs <code>(shared_variable, new_expression)</code>. List, tuple or dict.) &#8211; expressions for new SharedVariable values.</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://deeplearning.net/software/theano/library/compile/function.html#function.function">function - defines theano.function &#8212; Theano 0.8.0 documentation</a></li>
+</ul></li>
+</ul></li>
+<li><p>Derivatives in Theano <a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> <code class="fold">@</code></p>
+<ul>
+<li><p>Computing Gradients</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano.tensor <span class="im">as</span> T
+<span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> theano <span class="im">import</span> pp
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dscalar(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> gy <span class="op">=</span> T.grad(y, x)
+<span class="co"># TODO? &#30475;&#19981;&#25026;&#36825;&#20010; output</span>
+<span class="op">&gt;&gt;&gt;</span> pp(gy)  <span class="co"># print out the gradient prior to optimization</span>
+<span class="co">&#39;((fill((x ** TensorConstant{2}), TensorConstant{1.0}) * TensorConstant{2}) * (x ** (TensorConstant{2} - TensorConstant{1})))&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x], gy)
+<span class="op">&gt;&gt;&gt;</span> f(<span class="dv">4</span>)
+array(<span class="fl">8.0</span>)
+<span class="op">&gt;&gt;&gt;</span> numpy.allclose(f(<span class="fl">94.2</span>), <span class="fl">188.4</span>)
+<span class="va">True</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dmatrix(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> T.<span class="bu">sum</span>(<span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> T.exp(<span class="op">-</span>x)))      <span class="co"># x is a matrix!</span>
+<span class="op">&gt;&gt;&gt;</span> gs <span class="op">=</span> T.grad(s, x)
+<span class="op">&gt;&gt;&gt;</span> dlogistic <span class="op">=</span> theano.function([x], gs)
+<span class="op">&gt;&gt;&gt;</span> dlogistic([[<span class="dv">0</span>, <span class="dv">1</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">2</span>]])
+array([[ <span class="fl">0.25</span>      ,  <span class="fl">0.19661193</span>],
+       [ <span class="fl">0.19661193</span>,  <span class="fl">0.10499359</span>]])</code></pre></div></li>
+<li><p>Computing the Jacobian ??</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano.tensor <span class="im">as</span> T
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> J, updates <span class="op">=</span> theano.scan( <span class="kw">lambda</span> i, y,x : T.grad(y[i], x),
+                              sequences<span class="op">=</span>T.arange(y.shape),
+                              non_sequences<span class="op">=</span>[y,x] )
+
+    <span class="co"># scan automatically concatenates all these rows, generating a</span>
+    <span class="co"># matrix which corresponds to the Jacobian</span>
+
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x], J, updates<span class="op">=</span>updates)
+<span class="op">&gt;&gt;&gt;</span> f([<span class="dv">4</span>, <span class="dv">4</span>])
+array([[ <span class="dv">8</span>.,  <span class="dv">0</span>.],
+       [ <span class="dv">0</span>.,  <span class="dv">8</span>.]])</code></pre></div></li>
+<li><p>Computing the Hessian</p>
+<p>The Hessian matrix can be considered related to the Jacobian matrix by <span class="math inline">\(H(f)(x)=J(&#8711;f)(x)H(f)(x)=J(&#8711;f)(x)\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> x <span class="op">**</span> <span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> cost <span class="op">=</span> y.<span class="bu">sum</span>()
+<span class="op">&gt;&gt;&gt;</span> gy <span class="op">=</span> T.grad(cost, x)
+<span class="op">&gt;&gt;&gt;</span> H, updates <span class="op">=</span> theano.scan( <span class="kw">lambda</span> i, gy,x : T.grad(gy[i], x),
+                              sequences<span class="op">=</span>T.arange(gy.shape),
+                              non_sequences<span class="op">=</span>[gy, x] )
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x], H, updates<span class="op">=</span>updates)
+<span class="op">&gt;&gt;&gt;</span> f([<span class="dv">4</span>, <span class="dv">4</span>])
+array([[ <span class="dv">2</span>.,  <span class="dv">0</span>.],
+       [ <span class="dv">0</span>.,  <span class="dv">2</span>.]])</code></pre></div></li>
+<li><p>Jacobian times a Vector</p>
+<p>Compared to evaluating the Jacobian and then doing the product, there are methods that compute the desired results while avoiding actual evaluation of the Jacobian. This can bring about significant performance gains. A description of one such algorithm can be found here:</p>
+<p>Barak A. Pearlmutter,<br />
+<em>&#8220;Fast Exact Multiplication by the Hessian&#8221;</em>,<br />
+Neural Computation, 1994</p>
+<ul>
+<li><p>R-operator</p>
+<p>The R operator is built to evaluate the product between a Jacobian and a vector, namely <span class="math inline">\(\frac{\partial f(x)}{\partial x} v\)</span>.</p>
+<p>The formulation can be extended even for x being a matrix, or a tensor in general, case in which also the Jacobian becomes a tensor and the product becomes some kind of tensor product. Because in practice we end up needing to compute such expressions in terms of weight matrices, Theano supports this more generic form of the operation. In order to evaluate the R-operation of expression y, with respect to x, multiplying the Jacobian with v you need to do something similar to this:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> W <span class="op">=</span> T.dmatrix(<span class="st">&#39;W&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> V <span class="op">=</span> T.dmatrix(<span class="st">&#39;V&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.dot(x, W)
+<span class="op">&gt;&gt;&gt;</span> JV <span class="op">=</span> T.Rop(y, W, V)
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([W, V, x], JV)
+<span class="op">&gt;&gt;&gt;</span> f([[<span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">1</span>, <span class="dv">1</span>]], [[<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">2</span>, <span class="dv">2</span>]], [<span class="dv">0</span>,<span class="dv">1</span>])
+array([ <span class="dv">2</span>.,  <span class="dv">2</span>.])</code></pre></div></li>
+<li><p>L-operator</p>
+<p>In similitude to the R-operator, the L-operator would compute a row vector times the Jacobian. The mathematical formula would be v . The L-operator is also supported for generic tensors (not only for vectors). Similarly, it can be implemented as follows:</p>
+<p>similitude, <code>[s&#618;'m&#618;l&#618;tju:d]</code>, n.&#30456;&#20284;&#65307;&#31867;&#20284;&#65307;&#30456;&#20223;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> W <span class="op">=</span> T.dmatrix(<span class="st">&#39;W&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> v <span class="op">=</span> T.dvector(<span class="st">&#39;v&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.dot(x, W)
+<span class="op">&gt;&gt;&gt;</span> VJ <span class="op">=</span> T.Lop(y, W, v)
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([v,x], VJ)
+<span class="op">&gt;&gt;&gt;</span> f([<span class="dv">2</span>, <span class="dv">2</span>], [<span class="dv">0</span>, <span class="dv">1</span>])
+array([[ <span class="dv">0</span>.,  <span class="dv">0</span>.],
+       [ <span class="dv">2</span>.,  <span class="dv">2</span>.]])</code></pre></div></li>
+<li><p>v, the point of evaluation</p>
+<p>differs between the L-operator and the R-operator.</p></li>
+</ul></li>
+<li><p>Hessian times a Vector</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> v <span class="op">=</span> T.dvector(<span class="st">&#39;v&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.<span class="bu">sum</span>(x <span class="op">**</span> <span class="dv">2</span>)
+<span class="op">&gt;&gt;&gt;</span> gy <span class="op">=</span> T.grad(y, x)
+<span class="op">&gt;&gt;&gt;</span> vH <span class="op">=</span> T.grad(T.<span class="bu">sum</span>(gy <span class="op">*</span> v), x)
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x, v], vH)
+<span class="op">&gt;&gt;&gt;</span> f([<span class="dv">4</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">2</span>])
+array([ <span class="dv">4</span>.,  <span class="dv">4</span>.])
+
+<span class="co"># or, making use of the R-operator:</span>
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> T.dvector(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> v <span class="op">=</span> T.dvector(<span class="st">&#39;v&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> T.<span class="bu">sum</span>(x <span class="op">**</span> <span class="dv">2</span>)
+<span class="op">&gt;&gt;&gt;</span> gy <span class="op">=</span> T.grad(y, x)
+<span class="op">&gt;&gt;&gt;</span> Hv <span class="op">=</span> T.Rop(gy, x, v)
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x, v], Hv)
+<span class="op">&gt;&gt;&gt;</span> f([<span class="dv">4</span>, <span class="dv">4</span>], [<span class="dv">2</span>, <span class="dv">2</span>])
+array([ <span class="dv">4</span>.,  <span class="dv">4</span>.])</code></pre></div></li>
+<li><p>Final Pointers</p>
+<ul>
+<li>The grad function works symbolically: it receives and returns Theano variables.</li>
+<li>grad can be compared to a macro since it can be applied repeatedly.</li>
+<li>Scalar costs only can be directly handled by grad. Arrays are handled through repeated applications.</li>
+<li>Built-in functions allow to compute efficiently vector times Jacobian and vector times Hessian.</li>
+<li>Work is in progress on the optimizations required to compute efficiently the full Jacobian and the Hessian matrix as well as the Jacobian times vector.</li>
+</ul></li>
+</ul></li>
+<li><p>Conditions <a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> <code class="fold">@</code></p>
+<ul>
+<li><p>IfElse vs Switch</p>
+<ul>
+<li>ifelse, binary, lazy</li>
+<li>switch, more general</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> theano <span class="im">import</span> tensor <span class="im">as</span> T
+<span class="im">from</span> theano.ifelse <span class="im">import</span> ifelse
+<span class="im">import</span> theano, time, numpy
+
+a,b <span class="op">=</span> T.scalars(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>)
+x,y <span class="op">=</span> T.matrices(<span class="st">&#39;x&#39;</span>, <span class="st">&#39;y&#39;</span>)
+
+z_switch <span class="op">=</span> T.switch(T.lt(a, b), T.mean(x), T.mean(y))
+z_lazy <span class="op">=</span> ifelse(T.lt(a, b), T.mean(x), T.mean(y))
+
+f_switch <span class="op">=</span> theano.function([a, b, x, y], z_switch,
+                           mode<span class="op">=</span>theano.Mode(linker<span class="op">=</span><span class="st">&#39;vm&#39;</span>))
+f_lazyifelse <span class="op">=</span> theano.function([a, b, x, y], z_lazy,
+                               mode<span class="op">=</span>theano.Mode(linker<span class="op">=</span><span class="st">&#39;vm&#39;</span>))
+
+val1 <span class="op">=</span> <span class="dv">0</span>.
+val2 <span class="op">=</span> <span class="dv">1</span>.
+big_mat1 <span class="op">=</span> numpy.ones((<span class="dv">10000</span>, <span class="dv">1000</span>))
+big_mat2 <span class="op">=</span> numpy.ones((<span class="dv">10000</span>, <span class="dv">1000</span>))
+
+n_times <span class="op">=</span> <span class="dv">10</span>
+
+tic <span class="op">=</span> time.clock()
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n_times):
+    f_switch(val1, val2, big_mat1, big_mat2)
+<span class="bu">print</span>(<span class="st">&#39;time spent evaluating both values </span><span class="sc">%f</span><span class="st"> sec&#39;</span> <span class="op">%</span> (time.clock() <span class="op">-</span> tic))
+
+tic <span class="op">=</span> time.clock()
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(n_times):
+    f_lazyifelse(val1, val2, big_mat1, big_mat2)    <span class="co"># faster</span>
+<span class="bu">print</span>(<span class="st">&#39;time spent evaluating one value </span><span class="sc">%f</span><span class="st"> sec&#39;</span> <span class="op">%</span> (time.clock() <span class="op">-</span> tic))</code></pre></div>
+<p>There is no automatic optimization replacing a switch with a broadcasted scalar to an ifelse, as this is not always faster.</p></li>
+</ul></li>
+<li><p>Loop <code class="fold">@</code></p>
+<ul>
+<li><p>Scan</p>
+<p>what is scan, scan vs for loop</p>
+<ul>
+<li>scan, recurrence, for looping</li>
+<li>reduction, map are scans</li>
+<li>scan is more than loop, and faster</li>
+<li>can alse computes gradients through sequential steps</li>
+<li>lower memory usage</li>
+</ul>
+<p>examples</p>
+<ul>
+<li><p>Scan Example:</p>
+<p><strong>Computing the sequence x(t) = tanh(x(t - 1).dot(W) + y(t).dot(U) + p(T - t).dot(V))</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> theano
+<span class="im">import</span> theano.tensor <span class="im">as</span> T
+<span class="im">import</span> numpy <span class="im">as</span> np
+
+<span class="co"># define tensor variables</span>
+X <span class="op">=</span> T.vector(<span class="st">&quot;X&quot;</span>)
+W <span class="op">=</span> T.matrix(<span class="st">&quot;W&quot;</span>)
+b_sym <span class="op">=</span> T.vector(<span class="st">&quot;b_sym&quot;</span>)
+U <span class="op">=</span> T.matrix(<span class="st">&quot;U&quot;</span>)
+Y <span class="op">=</span> T.matrix(<span class="st">&quot;Y&quot;</span>)
+V <span class="op">=</span> T.matrix(<span class="st">&quot;V&quot;</span>)
+P <span class="op">=</span> T.matrix(<span class="st">&quot;P&quot;</span>)
+
+results, updates <span class="op">=</span> theano.scan(<span class="kw">lambda</span> y, p, x_tm1: T.tanh(T.dot(x_tm1, W) <span class="op">+</span> T.dot(y, U) <span class="op">+</span> T.dot(p, V)),
+          sequences<span class="op">=</span>[Y, P[::<span class="op">-</span><span class="dv">1</span>]], outputs_info<span class="op">=</span>[X])
+compute_seq <span class="op">=</span> theano.function(inputs<span class="op">=</span>[X, W, Y, U, P, V], outputs<span class="op">=</span>results)
+
+<span class="co"># test values</span>
+x <span class="op">=</span> np.zeros((<span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+x <span class="op">=</span> <span class="dv">1</span>
+w <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+y <span class="op">=</span> np.ones((<span class="dv">5</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+y[<span class="dv">0</span>, :] <span class="op">=</span> <span class="op">-</span><span class="dv">3</span>
+u <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+p <span class="op">=</span> np.ones((<span class="dv">5</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+p[<span class="dv">0</span>, :] <span class="op">=</span> <span class="dv">3</span>
+v <span class="op">=</span> np.ones((<span class="dv">2</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+
+<span class="bu">print</span>(compute_seq(x, w, y, u, p, v))
+
+<span class="co"># comparison with numpy</span>
+x_res <span class="op">=</span> np.zeros((<span class="dv">5</span>, <span class="dv">2</span>), dtype<span class="op">=</span>theano.config.floatX)
+x_res <span class="op">=</span> np.tanh(x.dot(w) <span class="op">+</span> y.dot(u) <span class="op">+</span> p.dot(v))
+<span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):
+    x_res[i] <span class="op">=</span> np.tanh(x_res[i <span class="op">-</span> <span class="dv">1</span>].dot(w) <span class="op">+</span> y[i].dot(u) <span class="op">+</span> p[<span class="dv">4</span><span class="op">-</span>i].dot(v))
+<span class="bu">print</span>(x_res)
+
+[[<span class="op">-</span><span class="fl">0.99505475</span> <span class="op">-</span><span class="fl">0.99505475</span>]
+ [ <span class="fl">0.96471973</span>  <span class="fl">0.96471973</span>]
+ [ <span class="fl">0.99998585</span>  <span class="fl">0.99998585</span>]
+ [ <span class="fl">0.99998771</span>  <span class="fl">0.99998771</span>]
+ [ <span class="dv">1</span>.          <span class="dv">1</span>.        ]]
+[[<span class="op">-</span><span class="fl">0.99505475</span> <span class="op">-</span><span class="fl">0.99505475</span>]
+ [ <span class="fl">0.96471973</span>  <span class="fl">0.96471973</span>]
+ [ <span class="fl">0.99998585</span>  <span class="fl">0.99998585</span>]
+ [ <span class="fl">0.99998771</span>  <span class="fl">0.99998771</span>]
+ [ <span class="dv">1</span>.          <span class="dv">1</span>.        ]]</code></pre></div></li>
+<li><p>Scan Example: Computing norms of lines of X</p></li>
+<li><p>Scan Example: Computing norms of columns of X</p></li>
+<li><p>Scan Example: Computing trace of X</p></li>
+<li><p>Scan Example: Computing the sequence x(t) = x(t - 2).dot(U) + x(t - 1).dot(V) + tanh(x(t - 1).dot(W) + b)</p></li>
+<li><p>Scan Example: Computing the Jacobian of y = tanh(v.dot(A)) wrt x</p></li>
+<li><p>Scan Example: Accumulate number of loop during a scan</p></li>
+<li><p>Scan Example: Computing tanh(v.dot(W) + b) * d where d is binomial</p></li>
+<li><p>Scan Example: Computing pow(A, k)</p></li>
+<li><p>Scan Example: Calculating a Polynomial</p></li>
+</ul></li>
+<li><p>Exercise</p></li>
+</ul></li>
+<li><p>How Shape Information is Handled by Theano</p>
+<ol style="list-style-type: decimal">
+<li><p>shape is known in advance;</p></li>
+<li><p>know only the shape, not the actual value of a variable. (This is done with the <code>Op.infer_shape</code> method.)</p></li>
+</ol>
+<ul>
+<li><p>Shape Inference Problem</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> theano.tensor.matrix(<span class="st">&#39;x&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x], (x <span class="op">**</span> <span class="dv">2</span>).shape)
+<span class="op">&gt;&gt;&gt;</span> theano.printing.debugprint(f)
+MakeVector{dtype<span class="op">=</span><span class="st">&#39;int64&#39;</span>} [<span class="bu">id</span> A] <span class="st">&#39;&#39;</span>   <span class="dv">2</span>
+ <span class="op">|</span>Shape_i{<span class="dv">0</span>} [<span class="bu">id</span> B] <span class="st">&#39;&#39;</span>   <span class="dv">1</span>
+ <span class="op">|</span> <span class="op">|</span>x [<span class="bu">id</span> C]
+ <span class="op">|</span>Shape_i{<span class="dv">1</span>} [<span class="bu">id</span> D] <span class="st">&#39;&#39;</span>   <span class="dv">0</span>
+   <span class="op">|</span>x [<span class="bu">id</span> C]</code></pre></div>
+<p>&#36825;&#31181;&#22270;&#30340;&#35828;&#26126;&#35265; <a href="#theano-graph-printing">printing &#8211; Graph Printing and Symbolic Print Statement</a>.</p></li>
+<li><p>Specifing Exact Shape</p>
+<p><strong>1</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co">#             convolution 2dim</span>
+theano.tensor.nnet.conv2d( ...,
+                           image_shape<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">5</span>),
+                           filter_shape<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>) )</code></pre></div>
+<p><code>signal.conv.conv2d</code> performs a basic 2D convolution of the input with the given filters. The input parameter can be a single 2D image or a 3D tensor, containing a set of images. Similarly, filters can be a single 2D filter or a 3D tensor, corresponding to a set of 2D filters.</p>
+<p>Shape parameters are optional and will result in faster execution.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">theano.tensor.nnet.conv.conv2d( <span class="bu">input</span>, filters,
+                                image_shape<span class="op">=</span><span class="va">None</span>,
+                                filter_shape<span class="op">=</span><span class="va">None</span>,
+                                border_mode<span class="op">=</span><span class="st">&#39;valid&#39;</span>,
+                                subsample<span class="op">=</span>(<span class="dv">1</span>, <span class="dv">1</span>),
+                                <span class="op">**</span>kargs )</code></pre></div>
+<p>Deprecated, old conv2d interface. This function will build the symbolic graph for convolving a stack of input images with a set of filters. The implementation is modelled after Convolutional Neural Networks (CNN). It is simply a wrapper to the ConvOp but provides a much cleaner interface.</p>
+<p><strong>2</strong></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> theano
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> theano.tensor.matrix()
+<span class="op">&gt;&gt;&gt;</span> x_specify_shape <span class="op">=</span> theano.tensor.specify_shape(x, (<span class="dv">2</span>, <span class="dv">2</span>))
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> theano.function([x], (x_specify_shape <span class="op">**</span> <span class="dv">2</span>).shape)
+<span class="op">&gt;&gt;&gt;</span> theano.printing.debugprint(f)
+DeepCopyOp [<span class="bu">id</span> A] <span class="st">&#39;&#39;</span>   <span class="dv">0</span>
+ <span class="op">|</span>TensorConstant{(<span class="dv">2</span>,) of <span class="dv">2</span>} [<span class="bu">id</span> B]</code></pre></div></li>
+<li><p>Future Plans</p>
+<p>nil.</p></li>
+</ul></li>
+</ul></li>
+<li><p>Advanced <code class="fold">@</code></p>
+<ul>
+<li><p>Sparse <code class="fold">@</code></p>
+<ul>
+<li><p>Compressed Sparse Format</p>
+<ul>
+<li>Which format should I use?</li>
+</ul></li>
+<li><p>Handling Sparse in Theano</p>
+<ul>
+<li>To and Fro</li>
+<li>Properties and Construction</li>
+<li>Structured Operation</li>
+<li>Gradient</li>
+</ul></li>
+</ul></li>
+<li><p>Using the GPU <code class="fold">@</code></p>
+<ul>
+<li><p>CUDA backend</p>
+<ul>
+<li>Testing Theano with GPU</li>
+<li>Returning a Handle to Device-Allocated Data</li>
+<li>What Can Be Accelerated on the GPU</li>
+<li>Tips for Improving Performance on GPU</li>
+<li>GPU Async capabilities</li>
+<li><p>Changing the Value of Shared Variables</p>
+<ul>
+<li>Exercise</li>
+</ul></li>
+</ul></li>
+<li><p>GpuArray Backend</p>
+<ul>
+<li>Testing Theano with GPU</li>
+<li>Returning a Handle to Device-Allocated Data</li>
+<li>What Can be Accelerated on the GPU</li>
+<li>GPU Async Capabilities</li>
+</ul></li>
+<li>Software for Directly Programming a GPU</li>
+<li><p>Learning to Program with PyCUDA</p>
+<ul>
+<li>Exercise</li>
+<li>Exercise</li>
+</ul></li>
+<li><p>Note</p></li>
+</ul></li>
+<li><p>Using multiple GPUs <code class="fold">@</code></p>
+<ul>
+<li>Defining the context map</li>
+<li>A simple graph on two GPUs</li>
+<li>Explicit transfers of data</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://deeplearning.net/software/theano/tutorial/python-memory-management.html#python-memory-management">Python Memory Management &#8212; Theano 0.8.0 documentation</a></li>
+<li><a href="http://www.deeplearning.net/tutorial/lstm.html">LSTM Networks for Sentiment Analysis &#8212; DeepLearning 0.1 documentation</a></li>
+</ul>
+<dl>
+<dt>printing &#8211; Graph Printing and Symbolic Print Statement <code id="theano-graph-printing" class="tzx-anchor">@</code> <code class="fold">@</code></dt>
+<dd><p>&#21451;&#22909;&#30340;&#25171;&#21360;&#32467;&#26524;&#65306;</p>
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> theano.printing.pprint(prediction)
+<span class="co">&#39;gt((TensorConstant{1} / (TensorConstant{1} + exp(((-(x \\dot w)) - b)))),</span>
+<span class="co">TensorConstant{0.5})&#39;</span></code></pre></div>
+<p>&#35843;&#35797;&#25171;&#21360;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> theano.printing.debugprint(prediction)
+    Elemwise{gt,no_inplace} [@A] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>Elemwise{true_div,no_inplace} [@B] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span> <span class="op">|</span>DimShuffle{x} [@C] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span> <span class="op">|</span> <span class="op">|</span>TensorConstant{<span class="dv">1</span>} [@D]
+    <span class="op">|</span> <span class="op">|</span>Elemwise{add,no_inplace} [@E] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>   <span class="op">|</span>DimShuffle{x} [@F] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>   <span class="op">|</span> <span class="op">|</span>TensorConstant{<span class="dv">1</span>} [@D]
+    <span class="op">|</span>   <span class="op">|</span>Elemwise{exp,no_inplace} [@G] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>     <span class="op">|</span>Elemwise{sub,no_inplace} [@H] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>       <span class="op">|</span>Elemwise{neg,no_inplace} [@I] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>       <span class="op">|</span> <span class="op">|</span>dot [@J] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>       <span class="op">|</span>   <span class="op">|</span>x [@K]
+    <span class="op">|</span>       <span class="op">|</span>   <span class="op">|</span>w [@L]
+    <span class="op">|</span>       <span class="op">|</span>DimShuffle{x} [@M] <span class="st">&#39;&#39;</span>
+    <span class="op">|</span>         <span class="op">|</span>b [@N]
+    <span class="op">|</span>DimShuffle{x} [@O] <span class="st">&#39;&#39;</span>
+      <span class="op">|</span>TensorConstant{<span class="fl">0.5</span>} [@P]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> theano.printing.debugprint(predict)
+    Elemwise{Composite{GT(scalar_sigmoid((<span class="op">-</span>((<span class="op">-</span>i0) <span class="op">-</span> i1))), i2)}} [@A] <span class="st">&#39;&#39;</span>   <span class="dv">4</span>
+     <span class="op">|</span>CGemv{inplace} [@B] <span class="st">&#39;&#39;</span>   <span class="dv">3</span>
+     <span class="op">|</span> <span class="op">|</span>Alloc [@C] <span class="st">&#39;&#39;</span>   <span class="dv">2</span>
+     <span class="op">|</span> <span class="op">|</span> <span class="op">|</span>TensorConstant{<span class="fl">0.0</span>} [@D]
+     <span class="op">|</span> <span class="op">|</span> <span class="op">|</span>Shape_i{<span class="dv">0</span>} [@E] <span class="st">&#39;&#39;</span>   <span class="dv">1</span>
+     <span class="op">|</span> <span class="op">|</span>   <span class="op">|</span>x [@F]
+     <span class="op">|</span> <span class="op">|</span>TensorConstant{<span class="fl">1.0</span>} [@G]
+     <span class="op">|</span> <span class="op">|</span>x [@F]
+     <span class="op">|</span> <span class="op">|</span>w [@H]
+     <span class="op">|</span> <span class="op">|</span>TensorConstant{<span class="fl">0.0</span>} [@D]
+     <span class="op">|</span>InplaceDimShuffle{x} [@I] <span class="st">&#39;&#39;</span>   <span class="dv">0</span>
+     <span class="op">|</span> <span class="op">|</span>b [@J]
+     <span class="op">|</span>TensorConstant{(<span class="dv">1</span>,) of <span class="fl">0.5</span>} [@K]</code></pre></div>
+<p>graph&#30340;&#22270;&#29255;&#25171;&#21360;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> theano.printing.pydotprint(prediction, outfile<span class="op">=</span><span class="st">&quot;pics/logreg_pydotprint_prediction.png&quot;</span>, var_with_name_simple<span class="op">=</span><span class="va">True</span>)
+The output <span class="bu">file</span> <span class="op">is</span> available at pics<span class="op">/</span>logreg_pydotprint_prediction.png</code></pre></div>
+<div class="figure">
+<img src="http://deeplearning.net/software/theano/_images/logreg_pydotprint_prediction2.png" />
+
+</div>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://www.cnblogs.com/shouhuxianjian/p/4590231.html">Theano2.1.5-&#22522;&#30784;&#30693;&#35782;&#20043;&#25171;&#21360;&#20986;theano&#30340;&#22270; - &#20185;&#23432; - &#21338;&#23458;&#22253;</a></li>
+<li><a href="http://deeplearning.net/software/theano/tutorial/printing_drawing.html">Printing/Drawing Theano graphs &#8212; Theano 0.8.0 documentation</a></li>
+<li><a href="http://deeplearning.net/software/theano/library/printing.html#libdoc-printing">printing &#8211; Graph Printing and Symbolic Print Statement &#8212; Theano 0.8.0 documentation</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="http://deeplearning.net/software/theano/tutorial/">Tutorial &#8212; Theano 0.8.0 documentation</a>.<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p>see <a href="http://deeplearning.net/software/theano/tutorial/numpy.html#broadcasting">NumPy refresher &#8212; Theano 0.8.0 documentation</a>.<a href="#fnref2">&#8617;</a></p></li>
+<li id="fn3"><p><a href="http://deeplearning.net/software/theano/tutorial/gradients.html">Derivatives in Theano &#8212; Theano 0.8.0 documentation</a>.<a href="#fnref3">&#8617;</a></p></li>
+<li id="fn4"><p><a href="http://deeplearning.net/software/theano/tutorial/conditions.html">Conditions &#8212; Theano 0.8.0 documentation</a>.<a href="#fnref4">&#8617;</a></p></li>
+</ol>
+</div>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

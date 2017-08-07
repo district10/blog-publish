@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<!--
+    title: Principles of training multi-layer neural network using backpropagation
+-->
+<p>The project describes teaching process of multi-layer neural network employing <em>backpropagation</em> algorithm. To illustrate this process the three layer neural network with two inputs and one output,which is shown in the picture below, is used:</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img01.gif" />
+
+</div>
+<p>Each neuron is composed of two units. First unit <strong>adds products of weights coefficients and input signals</strong>. The second unit realise nonlinear function, called <strong>neuron activation function</strong>. Signal <span class="math inline">\(e\)</span> is adder output signal, and <span class="math inline">\(y = f(e)\)</span> is output signal of nonlinear element. Signal <span class="math inline">\(y\)</span> is also output signal of neuron.</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img01b.gif" />
+
+</div>
+<p>To teach the neural network we need training data set. The training data set consists of input signals (<span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> ) assigned with corresponding target (desired output) <span class="math inline">\(z\)</span>. The network training is an iterative process. In each iteration weights coefficients of nodes are modified using new data from training data set. Modification is calculated using algorithm described below: Each teaching step starts with forcing both input signals from training set. After this stage we can determine output signals values for each neuron in each network layer. Pictures below illustrate how signal is propagating through the network, Symbols <span class="math inline">\(w_{(x_m)n}\)</span> represent weights of connections between network input <span class="math inline">\(x_m\)</span> and neuron <span class="math inline">\(n\)</span> in input layer. Symbols <span class="math inline">\(y_n\)</span> represents output signal of neuron n.</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img02.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img03.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img04.gif" />
+
+</div>
+<p>Propagation of signals through the hidden layer. Symbols <span class="math inline">\(w_{mn}\)</span> represent weights of connections between output of neuron <span class="math inline">\(m\)</span> and input of neuron <span class="math inline">\(n\)</span> in the next layer.</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img05.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img06.gif" />
+
+</div>
+<p>Propagation of signals through the output layer.</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img07.gif" />
+
+</div>
+<p>In the next algorithm step the output signal of the network <span class="math inline">\(y\)</span> is compared with the desired output value (the target), which is found in training data set. The difference is called error signal <span class="math inline">\(d\)</span> of output layer neuron.</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img08.gif" />
+
+</div>
+<p>It is impossible to compute error signal for internal neurons directly, because output values of these neurons are unknown. For many years the effective method for training multiplayer networks has been unknown. Only in the middle eighties the backpropagation algorithm has been worked out. The idea is to propagate</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img09.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img10.gif" />
+
+</div>
+<p>The weights&#8217; coefficients <span class="math inline">\(w_{mn}\)</span> used to propagate errors back are equal to this used during computing output value. Only the direction of data flow is changed (signals are propagated from output to inputs one after the other). This technique is used for all network layers. If propagated errors came from few neurons they are added. The illustration is below:</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img11.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img12.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img13.gif" />
+
+</div>
+<p>When the error signal for each neuron is computed, the weights coefficients of each neuron input node may be modified. In formulas below <span class="math inline">\(\text{d}f(e)/\text{d}e\)</span> represents derivative of neuron activation function (which weights are modified).</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img14.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img15.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img16.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img17.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img18.gif" />
+
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/backpropagation/img19.gif" />
+
+</div>
+<p>Coefficient <span class="math inline">\(eta\)</span> affects network teaching speed. There are a few techniques to select this parameter. The first method is to start teaching process with large value of the parameter. While weights coefficients are being established the parameter is being decreased gradually. The second, more complicated, method starts teaching with small parameter value. During the teaching process the parameter is being increased when the teaching is advanced and then decreased again in the final stage. Starting teaching process with low parameter value enables to determine weights coefficients signs.</p>
+<p><strong>References</strong></p>
+<p>Ryszard Tadeusiewcz &#8220;Sieci neuronowe&#8221;, Krak&#243;w 1992</p>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="learing-ruby">Learing Ruby</h1>
+<h2 id="what-is-ruby-and-some-miscs">what is ruby and some miscs</h2>
+<ul>
+<li><a href="https://www.ruby-lang.org/en/">Ruby is&#8230;</a>
+<ul>
+<li>A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.</li>
+</ul></li>
+<li>Documentation
+<ul>
+<li><a href="http://tryruby.org/levels/1/challenges/0">Try Ruby in 15 minutes</a>: fun, but the web site works slowly. see <a href="http://gnat-tang-shared-image.qiniudn.com/201404-terrible-try-ruby.png">here</a></li>
+<li><a href="http://rubykoans.com/">Ruby Koans</a></li>
+<li><a href="https://www.ruby-lang.org/en/documentation/quickstart/">Ruby in Twenty Minutes</a></li>
+</ul></li>
+</ul>
+<h2 id="ruby-in-20-minutes">Ruby in 20 Minutes</h2>
+<ol style="list-style-type: decimal">
+<li><p>Run <code>irb</code> in your shell</p></li>
+<li><p>Simple Examples</p>
+<pre><code>&quot;hello world&quot;
+puts &quot;hello world&quot;
+3 + 2
+3 * 2
+3 ** 2
+Math.sqrt(9)</code></pre></li>
+<li>Modules Group Code by Topic</li>
+</ol>
+<ul>
+<li><code>Math</code>: built-in module, contains <code>sin()</code>, <code>cos()</code>, etc</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Defs</li>
+</ol>
+<ul>
+<li><p>first ruby function</p>
+<pre><code>def h
+puts &quot;Hello World!&quot;
+end
+h
+h()</code></pre></li>
+<li><p>second ruby function</p>
+<pre><code>def h(name = &quot;GNAT&quot;)
+puts &quot;Hello #{name.capitalize}&quot;
+end
+h(&quot;gnat&quot;)</code></pre></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Evoling into a greater</li>
+</ol>
+<pre><code>class Greeter
+  def initialize(name = &quot;World&quot;)
+    @name = name
+  end
+  def say_hi
+    puts &quot;Hi #{@name}!&quot;
+  end
+  def say_bye
+    puts &quot;Bye #{@name}, come back soon.&quot;
+  end
+end
+g = Greeter.new(&quot;Gnat&quot;)
+g.say_hi
+g.say_bye
+g.instance_methods
+g.instance_methods(false)
+g.respond_to?(&quot;name&quot;) # ==&gt; false
+g.respond_to?(&quot;say_hi&quot;) # ==&gt; true
+g.respond_to?(&quot;to_s&quot;) # ==&gt; true
+=&gt; true</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>A Better One ``` #!/usr/bin/env ruby</li>
+</ol>
+<p>class MegaGreeter attr_accessor :names</p>
+<p># Create the object def initialize(names = &#8220;World&#8221;) <span class="citation">@names</span> = names end</p>
+<p># Say hi to everybody def say_hi if <span class="citation">@names.nil</span>? puts &#8220;&#8230;&#8221; elsif <span class="citation">@names.respond_to</span>?(&#8220;each&#8221;) # <span class="citation">@names</span> is a list of some kind, iterate! <span class="citation">@names.each</span> do |name| puts &#8220;Hello #{name}!&#8221; end else puts &#8220;Hello #{<span class="citation">@names</span>}!&#8221; end end</p>
+<p># Say bye to everybody def say_bye if <span class="citation">@names.nil</span>? puts &#8220;&#8230;&#8221; elsif <span class="citation">@names.respond_to</span>?(&#8220;join&#8221;) # Join the list elements with commas puts &#8220;Goodbye #{<span class="citation">@names.join</span>(&#8221;, &#8220;)}. Come back soon!&#8221; else puts &#8220;Goodbye #{<span class="citation">@names</span>}. Come back soon!&#8221; end end</p>
+<p>end</p>
+<p>if <strong>FILE</strong> == $0 mg = MegaGreeter.new mg.say_hi mg.say_bye</p>
+<p># Change name to be &#8220;Zeke&#8221; mg.names = &#8220;Zeke&#8221; mg.say_hi mg.say_bye</p>
+<p># Change the name to an array of names mg.names = [&#8220;Albert&#8221;, &#8220;Brenda&#8221;, &#8220;Charles&#8221;, &#8220;Dave&#8221;, &#8220;Engelbert&#8221;] mg.say_hi mg.say_bye</p>
+<p># Change to nil mg.names = nil mg.say_hi mg.say_bye end ```</p>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

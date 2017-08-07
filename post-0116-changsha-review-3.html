@@ -1,0 +1,939 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2016-07-27" />
+  <title>&#38271;&#27801;&#39033;&#30446;&#24635;&#32467; 3</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#38271;&#27801;&#39033;&#30446;&#24635;&#32467; 3</h1>
+<h3 class="date">2016-07-27</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#38271;&#27801;&#39033;&#30446;&#24635;&#32467;-3-logger-&#27169;&#22359;&#21644;-utils-&#27169;&#22359;">&#38271;&#27801;&#39033;&#30446;&#24635;&#32467; 3 &#8211; Logger &#27169;&#22359;&#21644; Utils &#27169;&#22359;</a><ul>
+        <li><a href="#&#26085;&#24535;&#27169;&#22359;">&#26085;&#24535;&#27169;&#22359;</a></li>
+        <li><a href="#utils-&#27169;&#22359;">Utils &#27169;&#22359;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#38271;&#27801;&#39033;&#30446;&#24635;&#32467;-3-logger-&#27169;&#22359;&#21644;-utils-&#27169;&#22359;">&#38271;&#27801;&#39033;&#30446;&#24635;&#32467; 3 &#8211; Logger &#27169;&#22359;&#21644; Utils &#27169;&#22359;</h1>
+<p><a href="post-0113-changsha-review.html" style="font-size:80%; color: red;" title="post-0113-changsha-review.md">&#12304;&#22238;&#21040;&#30446;&#24405;&#12305;</a></p>
+<blockquote>
+<p>&#36825;&#26159;&#25972;&#20010;&#36719;&#20214;&#31995;&#32479;&#36890;&#29992;&#30340;&#37096;&#20998;&#65307;</p>
+</blockquote>
+<h2 id="&#26085;&#24535;&#27169;&#22359;">&#26085;&#24535;&#27169;&#22359;</h2>
+<blockquote>
+<p>&#25165;&#21457;&#29616;&#33258;&#24049;&#20043;&#21069;&#25226;&#36825;&#37096;&#20998;&#28304;&#30721;&#25972;&#20010;&#25552;&#21462;&#20986;&#26469;&#25918;&#22312; GitHub &#19978;&#30340;&#65306;<a href="https://github.com/district10/Logger">district10/Logger: A Simple Logger</a>&#12290;</p>
+</blockquote>
+<p>&#26085;&#24535;&#65288;logger&#65289;&#27169;&#22359;&#26159;&#39033;&#30446;&#36827;&#34892;&#21040;&#19968;&#27573;&#26102;&#38388;&#21518;&#25165;&#24320;&#21457;&#30340;&#65292;&#20294;&#25105;&#36824;&#26159;&#35201;&#25918;&#21040;&#20854;&#20182;&#27169;&#22359;&#20043;&#21069;&#35762;&#12290;</p>
+<p>&#31243;&#24207;&#22312;&#22810;&#32447;&#31243;&#12289;&#26377;&#32593;&#32476;&#36890;&#20449;&#26080;&#27861;&#29992;&#24120;&#35268;&#35774;&#32622;&#26029;&#28857;&#31561;&#26041;&#24335; debug &#30340;&#24773;&#20917;&#19979;&#65292;&#23454;&#29616;&#22810;&#20154;&#21442;&#19982;&#22810;&#27169;&#22359;&#30340;&#31995;&#32479;&#20195;&#30721;&#35843;&#35797;&#65292;&#21482;&#33021;&#36890;&#36807;&#26085;&#24535;&#27169;&#22359;&#12290;&#21482;&#26377;&#36825;&#31181;&#20302;&#32423;&#30340;&#25171;&#21360;&#26041;&#24335;&#25165;&#33021;&#21457;&#29616;&#31243;&#24207;&#36816;&#34892;&#20013;&#20986;&#29616;&#30340;&#38382;&#39064;&#12290;&#25105;&#20204;&#26159;&#36843;&#20110;&#26080;&#22856;&#65292;&#25165;&#35201;&#24324;&#36825;&#20040;&#19968;&#20010;&#26085;&#24535;&#27169;&#22359;&#65292;&#20889;&#24471;&#36807;&#31243;&#20013;&#30896;&#21040;&#35768;&#22810;&#40635;&#28902;&#65292;&#20294;&#32456;&#20110;&#26159;&#25630;&#23450;&#20102;~ &#65288;&#20294;&#29616;&#22312;&#25105;&#19981;&#20027;&#24352;&#33258;&#24049;&#20889; Logger &#27169;&#22359;&#12290;&#26377;&#27425;&#25105;&#30452;&#25509;&#20174; CloudCompare &#30340;&#28304;&#30721;&#37324;&#25187;&#23427;&#30340;&#26085;&#24535;&#27169;&#22359;&#65292;&#22823;&#27010;&#29992;&#20102;&#21322;&#23567;&#26102;&#23601;&#25630;&#23450;&#20102;==&#65292;&#23427;&#36824;&#26377;&#19968;&#20010;&#30028;&#38754;&#65292;&#36755;&#20986;&#25928;&#26524;&#20063;&#27604;&#36739;&#28385;&#24847;&#12290;&#65289;</p>
+<p>&#23427;&#30340;&#20351;&#29992;&#26041;&#27861;&#26159;&#65306;</p>
+<ul>
+<li><code class="sourceCode cpp">Logger::log( ) &lt;&lt; <span class="dv">3</span> &lt;&lt; <span class="st">&quot;is three.&quot;</span>;</code>&#65292;&#30452;&#25509;&#36755;&#20986;&#26085;&#24535;&#65307;</li>
+<li><code class="sourceCode cpp">Logger::log( <span class="dv">4</span> ) &lt;&lt; <span class="st">&quot;emphasized log.&quot;</span>; <span class="co">// 1..5</span></code>&#65292;&#35774;&#23450;&#26085;&#24535;&#31561;&#32423;&#65307;</li>
+<li><code class="sourceCode cpp">Logger::log( BCD::LMS::CONNECT, <span class="ot">QString</span>(<span class="st">&quot;&lt;QString&gt; remarks&quot;</span>) );</code>&#65292;&#26576;&#19968;&#20010;&#27169;&#22359;&#26576;&#19968;&#20010;&#20989;&#25968;&#36755;&#20986;&#30340;&#26085;&#24535;&#65292;&#20256;&#20837; QString &#31867;&#22411;&#65307;</li>
+<li><code class="sourceCode cpp">Logger::log( BCD::LMS::CONNECT, std::string(<span class="st">&quot;&lt;c++ string&gt; remarks&quot;</span>) );</code>&#65292;&#20256;&#20837; std::string &#31867;&#22411;&#65307;</li>
+<li><code class="sourceCode cpp">Logger::log( BCD::LMS::CONNECT, <span class="st">&quot;&lt;c style string&gt; remarks&quot;</span> );</code>&#65292;&#20256;&#20837; char * &#31867;&#22411;&#12290;</li>
+</ul>
+<p>&#19978;&#38754;&#30340; BCD &#26159;&#25105;&#20204;&#39033;&#30446;&#30340; namespace&#65288;BCD &#30340;&#24847;&#24605;&#26159; Bridge Crack Detection&#65292;&#26725;&#26753;&#35010;&#32541;&#26816;&#27979;&#65289;&#12290; <code>BCD::LMS::CONNECT</code> &#21017;&#25351;&#30340;&#26159; LMS &#37319;&#38598;&#27169;&#22359;&#30340; <code>connect</code> &#20989;&#25968;&#65292;&#25105;&#20204;&#22312;&#26085;&#24535;&#27169;&#22359;&#25552;&#21069;&#27880;&#20876;&#20102;&#21508;&#20010;&#27169;&#22359;&#30340;&#20989;&#25968;&#65292;&#25152;&#20197;&#21487;&#20197;&#30452;&#25509;&#36825;&#20040;&#29992;&#12290;&#20854;&#23454;&#21487;&#20197;&#30452;&#25509;&#20351;&#29992; C &#35821;&#35328;&#25552;&#20379;&#30340; <code>__FILE__</code> &#21644; <code>__FUNCTION__</code> &#26469;&#36827;&#34892;&#26085;&#24535;&#65292;&#25105;&#20204;&#25226;&#36825;&#20123;&#19996;&#35199;&#37117;&#25552;&#21069;&#23450;&#20041;&#22909;&#65292;&#26159;&#20026;&#20102;&#22312;&#20351;&#29992;&#30340;&#26102;&#20505;&#26041;&#20415;&#28857;&#65288;&#27605;&#31455; VS &#25552;&#20379;&#30340;&#20195;&#30721;&#34917;&#20840;&#21487;&#20197;&#35753;&#25105;&#20204;&#22312;&#20889; <code>BCD::LMS::</code> &#30340;&#26102;&#20505;&#23601;&#24377;&#20986;&#25152;&#26377;&#30340;&#20505;&#36873;&#39033;&#30446;&#65289;&#12290;</p>
+<p>&#26085;&#24535;&#27169;&#22359;&#26159;&#19968;&#20010;&#31867;&#65292;&#20351;&#29992;&#20102;&#35774;&#35745;&#27169;&#24335;&#20013;&#30340;<strong>&#21333;&#20363;&#27169;&#24335;</strong>&#12290;&#20026;&#20102;&#26174;&#31034;&#26041;&#20415;&#65292;&#25105;&#20204;&#30340;&#26085;&#24535;&#27169;&#22359;&#36755;&#20986;&#30340;&#26159; markdown &#26684;&#24335;&#30340;&#34920;&#26684;&#12290;&#19978;&#38754;&#25552;&#21040;&#30340; <a href="http://tangzx.qiniudn.com/post-0056-lms-chunk.html">LMS &#25968;&#25454;&#37327;</a> &#36825;&#31687;&#25991;&#31456;&#37324;&#30340;&#34920;&#26684;&#65292;&#20854;&#23454;&#23601;&#26159;&#25105;&#30452;&#25509;&#20174;&#26085;&#24535;&#25335;&#36125;&#36807;&#21435;&#65288;&#19968;&#34892;&#37117;&#27809;&#26377;&#20462;&#25913;&#65289;&#30340;&#26174;&#31034;&#25928;&#26524;&#12290;&#19979;&#38754;&#25226;&#25105;&#30340;&#23454;&#29616;&#36148;&#19968;&#19979;&#12290;</p>
+<p>&#39318;&#20808;&#65292;<strong>&#26085;&#24535;&#26159;&#20998;&#32423;&#30340;&#65292;&#25105;&#39044;&#35774;&#37324; 5 &#20010;&#31561;&#32423;&#65292;&#20174; 1 &#21040; 5 &#32039;&#35201;&#31243;&#24230;&#20197;&#27492;&#38477;&#20302;</strong>&#12290;&#40664;&#35748;&#26085;&#24535;&#31561;&#32423;&#26159; 3&#65288;<code>BCD::ActionInfo::LEVEL3</code>&#65289;&#65292;&#26085;&#24535;&#27169;&#22359;&#22312;&#30028;&#38754;&#19978;&#21644;&#25511;&#21046;&#21488;&#26174;&#31034;&#30340;&#26102;&#20505;&#21487;&#20197;&#40664;&#35748;&#36807;&#28388;&#25481;&#19968;&#20123;&#31561;&#32423;&#19981;&#22815;&#30340; log&#65288;&#34429;&#28982;&#25105;&#36825;&#37324;&#24182;&#27809;&#26377;&#36807;&#28388;&#65289;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#define LOG_FILTER_CONSOLE (  BCD::ActionInfo::LEVEL3  )</span>
+<span class="ot">#define LOG_FILTER_GUIVIEW (  BCD::ActionInfo::LEVEL5  )</span>
+<span class="ot">#define LOG_FILTER_ARCHIVE (  BCD::ActionInfo::LEVEL5  )</span></code></pre></div>
+<p>&#29992; <code>#define</code> &#23450;&#20041;&#24120;&#37327;&#22826; naive &#20102;&#65292;&#29992; const int &#23450;&#20041;&#24120;&#37327;&#22826;&#19981;&#24069;&#65292;&#25152;&#20197;&#25105;&#29992;&#20102;&#20256;&#35828;&#20013;&#30340; enum hack&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">enum</span> LOG_CONFIGS {
+    WIDTH_INDEX            =  <span class="dv">10</span>,
+    WIDTH_TYPE             =  <span class="dv">10</span>,
+    WIDTH_LEVEL            =   <span class="dv">5</span>,
+    WIDTH_REMARKS          =  <span class="dv">40</span>,
+    LOG_LEVEL_MAX          =   <span class="dv">9</span>,
+    LOG_LEVEL_MIN          =   <span class="dv">0</span>,
+    LOG_LEVEL_STEP         =   <span class="dv">5</span>,
+    LOG_LEVEL_DEFAULT      =   <span class="dv">4</span>,
+    LOG_ENTRY_OFFSET       =   <span class="dv">8</span>, <span class="co">// at most 2^8 actions of each type</span>
+};</code></pre></div>
+<p>&#25152;&#26377;&#30340;&#20989;&#25968;&#37117;&#35201;&#27880;&#20876;&#65292;&#20840;&#37096;&#20889;&#27515;&#22312;&#20195;&#30721;&#37324;&#12290;&#65288;&#24403;&#26102;&#21644;&#32452;&#20869;&#25104;&#21592;&#27807;&#36890;&#20102;&#22909;&#20037;==&#25165;&#25226;&#25152;&#26377;&#20154;&#30340;&#20989;&#25968;&#21517;&#25970;&#23450;&#19979;&#26469;&#12290;==&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">namespace</span> BCD {
+<span class="co">// types</span>
+<span class="kw">enum</span> TypeID {
+    TYPE_ARM,       <span class="co">// &#23545;&#24212; BCD::ARM::...</span>
+    TYPE_IMU,       <span class="co">// &#23545;&#24212; BCD::IUM::...</span>
+    TYPE_LMS,       <span class="co">// ...</span>
+    TYPE_MCU,
+    TYPE_UR,
+    ...
+};
+...
+
+<span class="co">// actions</span>
+<span class="kw">typedef</span> <span class="dt">int</span> ActionID;
+<span class="kw">typedef</span> <span class="kw">struct</span> {                  <span class="co">// &#31561;&#32423;&#21487;&#20197;&#29992;&#26469;&#36807;&#28388;</span>
+    <span class="kw">enum</span> Level {
+        LEVEL1,                   <span class="co">// fatal error</span>
+        LEVEL2,                   <span class="co">// important</span>
+        LEVEL3,                   <span class="co">// average</span>
+        LEVEL4,                   <span class="co">// below average</span>
+        LEVEL5                    <span class="co">// least significant</span>
+    } level;
+    <span class="ot">QString</span> info;
+} ActionInfo;
+
+<span class="co">// LMS</span>
+<span class="kw">namespace</span> LMS {
+<span class="kw">enum</span> Action {
+    LMS                           = TYPE_LMS&lt;&lt;LOG_ENTRY_OFFSET,
+    CONSTRUCT,
+
+    CONFIG_ADDRESS_PORT,
+    CONFIG_ACTIONS,
+
+    TURN_ON_READING,
+    TURN_OFF_READING,
+
+    ...
+};
+}  <span class="co">// namespace LMS</span>
+}  <span class="co">// namespace BCD</span></code></pre></div>
+<p>&#19978;&#38754;&#30340; <code class="sourceCode cpp">LMS = TYPE_LMS&lt;&lt;LOG_ENTRY_OFFSET,</code> &#30340;&#24847;&#24605;&#26159;&#27599;&#20010;&#27169;&#22359;&#37324;&#26368;&#22810;&#21487;&#20197;&#27880;&#20876; LOG_ENTRY_OFFSET &#20010;&#20989;&#25968;&#12290;&#26377;&#28857;&#38590;&#20197;&#35299;&#37322;&#65292;&#25152;&#20197;&#25105;&#19981;&#35299;&#37322;&#20855;&#20307;&#26159;&#21861;&#24847;&#24605;&#21862;&#128516;&#65292;&#25026; enum &#21644;&#20301;&#25805;&#20316;&#30340;&#20154;&#37117;&#25026;&#25105;&#21861;&#24847;&#24605;==&#12290;</p>
+<p>&#19979;&#38754;&#21040;&#20102;&#37325;&#28857;&#12290;<strong>&#27599;&#19968;&#26465;&#26085;&#24535;&#37117;&#26159; Log &#31867;&#30340;&#19968;&#20010;&#23454;&#20363;&#12290;</strong>&#37324;&#38754;&#21253;&#21547; log &#30340;&#31867;&#22411;&#65288;type&#65289;&#65292;id &#21495;&#65288;action&#65289;&#65292;&#22791;&#27880;&#20449;&#24687;&#65288;message&#65289;&#65292;&#26102;&#38388;&#25139;&#65288;timestamp&#65289;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> Log
+{
+<span class="kw">private</span>:
+    <span class="dt">static</span> size_t               counter;
+
+<span class="kw">public</span>:
+    BCD::TypeID                 type;
+    BCD::ActionID               action;
+    <span class="ot">QString</span>                     message;
+    <span class="dt">qint64</span>                      timestamp;
+
+<span class="kw">public</span>:
+    Log( ) {
+        type            =       BCD::TYPE_META;
+        action          =       (BCD::ActionID)<span class="dv">0</span>;
+        message         =       <span class="ot">QString</span>();
+        timestamp       =       <span class="dv">0</span>;
+    }
+
+    Log( BCD::TypeID tid, BCD::ActionID aid, <span class="ot">QString</span> msg=<span class="st">&quot;&quot;</span>, <span class="dt">qint64</span> ts=<span class="dv">0</span> )
+      : type( tid )
+      , action( aid )
+      , message( msg )
+      , timestamp( <span class="dv">0</span> == ts ? <span class="ot">QDateTime::</span>currentMSecsSinceEpoch() : ts ) { ++counter; }
+
+    <span class="dt">const</span> Log &amp;show( ) <span class="dt">const</span>;
+};</code></pre></div>
+<p>&#29616;&#22312;&#30475;&#36215;&#26469;&#36825;&#20010; Log &#24456;&#26126;&#26174;&#19981;&#24212;&#35813;&#32500;&#25252;&#19968;&#20010; <code>static size_t counter</code>&#65292;&#20294;&#29616;&#22312;&#25105;&#20204;&#19981;&#35752;&#35770;&#20854;&#20013;&#30340;&#19981;&#36275;&#65288;&#36825;&#37096;&#20998;&#30041;&#21040;&#26368;&#21518;&#19968;&#31687;&#24635;&#32467;&#65289;&#12290;</p>
+<p>&#20026;&#20102;&#35753; Log &#21487;&#20197;&#20351;&#29992; C++ &#30340;&#8220;&#27969;&#25805;&#20316;&#8221;&#65292;&#25105;&#37325;&#36733;&#20102;&#20004;&#20010;&#25805;&#20316;&#31526;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">QDataStream</span> &amp;<span class="kw">operator</span>&lt;&lt;( <span class="ot">QDataStream</span> &amp;out, <span class="dt">const</span> Log &amp;log )
+{
+    out &lt;&lt; (<span class="dt">int</span>)log.type
+        &lt;&lt; (<span class="dt">int</span>)log.action
+        &lt;&lt; log.message
+        &lt;&lt; log.timestamp;
+    <span class="kw">return</span> out;
+}
+
+<span class="ot">QDataStream</span> &amp;<span class="kw">operator</span>&gt;&gt;( <span class="ot">QDataStream</span>  &amp;in, Log &amp;log )
+{
+    <span class="dt">int</span> type, action;
+    in  &gt;&gt; type
+        &gt;&gt; action
+        &gt;&gt; log.message
+        &gt;&gt; log.timestamp;
+    log.type = (BCD::TypeID)type;
+    log.action = (BCD::ActionID)action;
+    <span class="kw">return</span> in;
+}</code></pre></div>
+<p>Logger &#29992;&#26469;&#29983;&#25104;&#21644;&#31649;&#29702; Log &#25104;&#21592;&#12290;&#22312;&#26085;&#24535;&#30340;&#36807;&#31243;&#20013;&#65292;&#24517;&#39035;&#19978;&#38145;&#65292;&#25152;&#20197;&#29992;&#20102; Qt &#30340; <code>QMutex</code>&#65292;&#26085;&#24535;&#20840;&#37096;&#23384;&#22312;&#19968;&#20010;&#38745;&#24577;&#30340; <code>QList&lt;Log&gt;</code> &#37324;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">namespace</span> BCD { <span class="kw">typedef</span> <span class="ot">QString</span> TypeInfo; }
+<span class="kw">class</span> Logger
+{
+<span class="kw">private</span>:
+    <span class="dt">static</span> <span class="ot">QMutex</span>           mutex;
+    <span class="dt">static</span> <span class="ot">QList</span>&lt;Log&gt;       logs;
+    <span class="dt">const</span> <span class="dt">static</span> <span class="ot">QString</span>    logPath;
+
+<span class="kw">private</span>:
+    <span class="kw">typedef</span> <span class="ot">QHash</span>&lt;BCD::TypeID, BCD::TypeInfo&gt; Type;
+    <span class="kw">typedef</span> <span class="ot">QHash</span>&lt;BCD::ActionID, BCD::ActionInfo&gt; Action;
+
+    <span class="co">// &#36825;&#19977;&#20010;&#38745;&#24577;&#20989;&#25968;&#26159;&#19968;&#20010;&#35774;&#35745;&#19978;&#30340;&#22833;&#35823;</span>
+    <span class="dt">static</span> <span class="dt">int</span> initActionInfoWidth( );
+    <span class="dt">static</span> Type initTypes( );
+    <span class="dt">static</span> Action initActions( );
+
+    <span class="dt">static</span> <span class="ot">QList</span>&lt;Log&gt; refresh( );
+    <span class="dt">static</span> <span class="dt">void</span> saveLogs( <span class="ot">QList</span>&lt;Log&gt; &amp;logs,
+                          BCD::ActionInfo::Level level );
+
+<span class="kw">public</span>:
+    <span class="dt">const</span> <span class="dt">static</span> <span class="dt">int</span> widthActionInfo;
+    <span class="dt">const</span> <span class="dt">static</span> Type types;
+    <span class="dt">const</span> <span class="dt">static</span> Action actions;
+
+<span class="kw">public</span>:
+    Logger( ) { <span class="co">/* Empty Logger Constructor */</span> }
+    ...
+}; <span class="co">// class Logger</span></code></pre></div>
+<p>QMutex &#20351;&#29992;&#30340;&#26102;&#20505;&#65292;&#21487;&#20197;&#29992; QMutexLocker &#26469;&#31616;&#20415;&#36825;&#20010;&#36807;&#31243;&#65288;&#36825;&#26679;&#20063;&#26356;&#19981;&#23481;&#26131;&#20986;&#38169;&#65289;&#12290;&#19968;&#33324;&#30340; mutex &#31867;&#24211;&#37117;&#25552;&#20379;&#36825;&#26679;&#19968;&#20010;&#21151;&#33021;&#65292;&#27604;&#22914; Boost &#37324;&#20063;&#26377; <code>boost::mutex::scoped_lock</code>&#65292;&#21644; Qt &#36825;&#20010; QMutexLocker &#23601;&#26159;&#31867;&#20284;&#23545;&#31561;&#30340;&#12290;&#25105;&#20204;&#20195;&#30721;&#37324;&#30340;&#23454;&#20363;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// &#36824;&#22312; class Logger &#37324;</span>
+<span class="dt">static</span> Log &amp;log( Log &amp;log )
+{
+    <span class="ot">QMutexLocker</span> locker( &amp;mutex );
+    logs.append( log.show() );
+    <span class="kw">return</span> log;
+}</code></pre></div>
+<p>&#20026;&#20160;&#20040; Qt &#36825; <code>QMutexLocker</code> &#25110;&#32773;&#35828; <code>boost::mutex::scoped_lock</code> &#33021;&#22815;&#33258;&#21160;&#38145;&#20303;&#21644;&#37322;&#25918; mutex &#21602;&#65311;&#20854;&#23454;&#24456;&#31616;&#21333;&#65292;&#22240;&#20026;&#23427;&#26159;&#19968;&#20010;&#23616;&#37096;&#21464;&#37327;&#65292;&#22312;&#26500;&#36896;&#30340;&#26102;&#20505;&#25343;&#20102; mutex &#30340;&#25351;&#38024;&#65292;&#26469;&#38145;&#20303;&#23427;&#65307;&#22312;&#26512;&#26500;&#30340;&#26102;&#20505;&#23601;&#20250;&#33258;&#21160;&#37322;&#25918;&#23427;&#12290;</p>
+<p>&#22240;&#20026;&#24456;&#22810;&#20195;&#30721;&#37117;&#26159;&#37325;&#22797;&#30340;&#65292;&#25105;&#36824;&#29992;&#20102;&#24456;&#22810;&#23439;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">    <span class="co">// generic log (meta programming, saved a lot of typing...)</span>
+<span class="ot">#define GENERIC_LOG_QSTRING(TYPE) </span>\
+<span class="ot">    static Log log( BCD::##TYPE::Action action, QString message = &quot;&quot; ) </span>\
+<span class="ot">    { </span>\
+<span class="ot">        QMutexLocker locker( &amp;mutex ); </span>\
+<span class="ot">        Log log( BCD::TYPE_##TYPE, action, message ); </span>\
+<span class="ot">        logs.append( log.show() ); </span>\
+<span class="ot">        return log; </span>\
+<span class="ot">    }</span>
+
+<span class="ot">#define GENERIC_LOG_STRING(TYPE) </span>\
+<span class="ot">       static Log log( BCD::##TYPE::Action action, std::string message ) </span>\
+<span class="ot">       { return log( action, QString( message.c_str() ) ); }</span>
+
+<span class="ot">#define GENERIC_LOG_CSTR(TYPE) </span>\
+<span class="ot">       static Log log( BCD::##TYPE::Action action, char *message ) </span>\
+<span class="ot">       { return log( action, QString( message ) ); }</span>
+
+       GENERIC_LOG_QSTRING(  LMS                    )
+       GENERIC_LOG_QSTRING(  MCU                    )
+       GENERIC_LOG_QSTRING(  UR                     )
+       ...
+
+       GENERIC_LOG_STRING(  LMS                    )
+       GENERIC_LOG_STRING(  MCU                    )
+       GENERIC_LOG_STRING(  UR                     )
+       ...
+
+       GENERIC_LOG_CSTR(  LMS                    )
+       GENERIC_LOG_CSTR(  MCU                    )
+       GENERIC_LOG_CSTR(  UR                     )
+       ...
+
+<span class="ot">#undef GENERIC_LOG_QSTRING</span>
+<span class="ot">#undef GENERIC_LOG_STRING</span>
+<span class="ot">#undef GENERIC_LOG_CSTR</span></code></pre></div>
+<p>&#20197;&#19978;&#26159;&#22836;&#25991;&#20214; logger.h&#65292;&#22312; logger.cpp &#37324;&#65292;&#25105;&#20204;&#39318;&#20808;&#35201;&#23454;&#20363;&#21270;&#37027;&#20123; static &#21464;&#37327;&#65288;&#22240;&#20026;&#20043;&#21069;&#27809;&#26377;&#29992;&#36807; static &#25104;&#21592;&#65292;&#21018;&#24320;&#22987;&#20889;&#36825;&#37096;&#20998;&#30340;&#26102;&#20505;&#65292;&#29359;&#20102;&#24456;&#22810;&#38169;&#35823;&#12290;&#22238;&#22836;&#26469;&#30475;&#65292;&#37027;&#30495;&#26159;&#22826;&#34850;&#20102;&#65289;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">using</span> <span class="kw">namespace</span> BCD;
+
+<span class="dt">const</span> Logger::Type Logger::types = Logger::initTypes();
+<span class="dt">const</span> Logger::Action Logger::actions = Logger::initActions();
+<span class="dt">const</span> <span class="ot">QString</span> Logger::logPath = <span class="ot">QString</span>().sprintf( LOG_OUTPATH_FORMAT,
+                                                   Util::ts( ) );
+<span class="dt">const</span> <span class="dt">int</span> Logger::widthActionInfo = Logger::initActionInfoWidth( );
+<span class="co">// &#20854;&#20013; initInfoWidth &#21482;&#26159;&#33719;&#24471;&#23383;&#31526;&#20018;&#30340;&#26368;&#22823;&#23485;&#24230;&#65292;&#20415;&#20110;&#23545;&#40784;&#65292;&#23454;&#29616;&#22914;&#19979;&#65306;</span>
+<span class="co">//  int Logger::initActionInfoWidth( )</span>
+<span class="co">//  {</span>
+<span class="co">//      int width = 0;</span>
+<span class="co">//      foreach ( const ActionInfo &amp;ai, actions.values() ) {</span>
+<span class="co">//          if ( ai.info.length() &gt; width ) {</span>
+<span class="co">//              width = ai.info.length();</span>
+<span class="co">//          }</span>
+<span class="co">//      }</span>
+<span class="co">//      return width;</span>
+<span class="co">//  }</span>
+
+size_t Log::counter = <span class="dv">0</span>;
+<span class="ot">QMutex</span> Logger::mutex;
+<span class="ot">QList</span>&lt;Log&gt; Logger::logs;</code></pre></div>
+<p>&#20854;&#23454;&#36825;&#37324;&#20063;&#26377;&#36807;&#24230;&#24037;&#31243;&#30340;&#23244;&#30097;&#65292;&#22240;&#20026; <code>initTypes()</code> &#31561;&#20989;&#25968;&#21482;&#29992;&#20102;&#19968;&#27425;&#65292;&#23436;&#20840;&#27809;&#26377;&#24517;&#35201;&#25918;&#21040; Logger &#31867;&#37324;&#38754;&#21435;&#65288;&#34429;&#28982;&#35774;&#32622;&#20102;&#36825;&#20123;&#20989;&#25968;&#20026; private &#38450;&#27490;&#20854;&#20182;&#20154;&#35843;&#29992;&#65289;&#65292;&#21482;&#35201;&#22312; cpp &#25991;&#20214;&#37324;&#29992;&#25991;&#20214;&#20316;&#29992;&#22495;&#30340; static &#20989;&#25968;&#23601;&#21487;&#20197;&#20102;&#12290;&#21363;&#25226;</p>
+<pre><code>// logger.cpp
+Logger::Type Logger::initTypes( )
+{
+    Type types;
+
+    types[  TYPE_ARM                   ] = QObject::tr(  &quot;ARM&quot;          );
+    types[  TYPE_IMU                   ] = QObject::tr(  &quot;IMU&quot;          );
+    types[  TYPE_LMS                   ] = QObject::tr(  &quot;LMS&quot;          );
+    types[  TYPE_MCU                   ] = QObject::tr(  &quot;MCU&quot;          );
+    types[  TYPE_UR                    ] = QObject::tr(  &quot;UR&quot;           );
+    ...
+
+    return types;
+}</code></pre>
+<p>&#25913;&#25104;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// logger.cpp</span>
+<span class="dt">static</span> Logger::Type initTypes( )
+{
+    Logger::Type types;
+
+    types[  TYPE_ARM                   ] = <span class="ot">QObject::</span>tr(  <span class="st">&quot;ARM&quot;</span>          );
+    types[  TYPE_IMU                   ] = <span class="ot">QObject::</span>tr(  <span class="st">&quot;IMU&quot;</span>          );
+    types[  TYPE_LMS                   ] = <span class="ot">QObject::</span>tr(  <span class="st">&quot;LMS&quot;</span>          );
+    types[  TYPE_MCU                   ] = <span class="ot">QObject::</span>tr(  <span class="st">&quot;MCU&quot;</span>          );
+    types[  TYPE_UR                    ] = <span class="ot">QObject::</span>tr(  <span class="st">&quot;UR&quot;</span>           );
+    ...
+
+    <span class="kw">return</span> types;
+}</code></pre></div>
+<p>&#21363;&#21487;&#12290;</p>
+<p>initActions &#20989;&#25968;&#27880;&#20876;&#20102;&#25152;&#26377; logger &#21487;&#20197;&#30452;&#25509;&#20351;&#29992;&#30340;&#20989;&#25968;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// logger.cpp</span>
+Logger::Action Logger::initActions( )
+{
+    Action actions;
+<span class="ot">#define ACTION(aid, level, info) </span>\
+<span class="ot">    actions[(int)aid]=actionInfo(ActionInfo::LEVEL##level,QObject::tr(info));</span>
+
+    <span class="co">/*</span>
+<span class="co">     * -- L M S --</span>
+<span class="co">     */</span>
+    ACTION( LMS::LMS,                               <span class="dv">1</span>, <span class="st">&quot;LMS generic&quot;</span> );
+    ACTION( LMS::CONSTRUCT,                         <span class="dv">1</span>, <span class="st">&quot;construct&quot;</span> );
+    ACTION( LMS::GEN_NEW_PATH,                      <span class="dv">1</span>, <span class="st">&quot;gen new path&quot;</span> );
+
+    ACTION( LMS::CONFIG_ADDRESS_PORT,               <span class="dv">1</span>, <span class="st">&quot;configure ip, port&quot;</span> );
+    ACTION( LMS::CONFIG_ACTIONS,                    <span class="dv">1</span>, <span class="st">&quot;configure actions&quot;</span> );
+    ACTION( LMS::CONFIG_AUTH_LEVELS,                <span class="dv">1</span>, <span class="st">&quot;configure auth levels&quot;</span> );
+    ACTION( LMS::CREATE_THREAD,                     <span class="dv">1</span>, <span class="st">&quot;create thread&quot;</span> );
+    ACTION( LMS::DETACH_THREAD,                     <span class="dv">1</span>, <span class="st">&quot;detach thread&quot;</span> );
+
+    ACTION( LMS::TURN_ON_READING,                   <span class="dv">1</span>, <span class="st">&quot;turn on READING&quot;</span> );
+    ACTION( LMS::TURN_OFF_READING,                  <span class="dv">1</span>, <span class="st">&quot;turn off READING&quot;</span> );
+    ACTION( LMS::POLLING_ONE,                       <span class="dv">1</span>, <span class="st">&quot;just polling one&quot;</span> );
+
+    ACTION( LMS::PARSE_PROFILE,                     <span class="dv">1</span>, <span class="st">&quot;parse profiles&quot;</span> );
+    ACTION( LMS::SAVE_PROFILES,                     <span class="dv">1</span>, <span class="st">&quot;save profiles&quot;</span> );
+    ACTION( LMS::CONFIG_BASEDIR,                    <span class="dv">1</span>, <span class="st">&quot;configure output base dir&quot;</span> );
+
+    ...
+
+<span class="ot">#undef ACTION</span>
+
+    <span class="kw">return</span> actions;
+}</code></pre></div>
+<p>&#26085;&#24535;&#22312;&#20445;&#23384;&#30340;&#26102;&#20505;&#65292;&#21487;&#33021;&#23384;&#22312;&#26102;&#38388;&#25139;&#30340;&#28151;&#20081;&#65288;&#20004;&#21488;&#30005;&#33041;&#30340;&#26085;&#24535;&#20998;&#21035;&#35760;&#24405;&#65292;&#20182;&#20204;&#30340;&#26102;&#38388;&#35774;&#23450;&#21487;&#33021;&#23384;&#22312;&#35823;&#24046;&#65292;&#24453;&#31243;&#24207;&#32467;&#26463;&#30340;&#26102;&#20505;&#65292;&#24037;&#25511;&#26426;&#30340;&#26085;&#24535;&#38500;&#20102;&#26412;&#22320;&#20445;&#23384;&#65292;&#36824;&#20250;&#36890;&#36807; TCP &#22238;&#20256;&#32473;&#39640;&#24615;&#33021;&#12290;&#39640;&#24615;&#33021;&#20250;&#20445;&#23384;&#25152;&#26377;&#26085;&#24535;&#65289;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// &#25353;&#29031;&#26102;&#38388;&#25139;&#25490;&#24207;</span>
+<span class="dt">bool</span> compare( <span class="dt">const</span> Log &amp;log1, <span class="dt">const</span> Log &amp;log2 ) {
+    <span class="kw">return</span> log1.timestamp &lt; log2.timestamp;
+}
+
+<span class="dt">void</span> Logger::saveLogs( <span class="ot">QList</span>&lt;Log&gt; &amp;logs, ActionInfo::Level level )
+{
+    <span class="kw">if</span> ( logs.isEmpty() ) { <span class="kw">return</span>; }
+
+    <span class="co">// &#19981;&#36807;&#25105;&#20204;&#23454;&#38469;&#20351;&#29992;&#20013;&#24182;&#27809;&#26377;&#25490;&#24207;&#65292;&#22240;&#20026;&#23427;&#19981;&#37027;&#20040;&#24517;&#35201;</span>
+    <span class="co">// qSort( logs.begin(), logs.end(), compare );</span>
+
+    <span class="co">// &#20250;&#20445;&#23384;&#25104; UTF-8 without BOM &#26684;&#24335;</span>
+    FILE *fp = fopen( <span class="fu">qPrintable</span>(logPath), <span class="st">&quot;a+&quot;</span> );
+    <span class="co">// &#36825;&#37324;&#26412;&#26469;&#26377;&#19968;&#20123; Debug &#20449;&#24687;&#65292;&#20294;&#26159;&#25918;&#21040;&#36825;&#37324;&#25105;&#25226;&#23427;&#20204;&#21435;&#25481;&#20102;</span>
+    <span class="kw">if</span> ( NULL == fp ) { <span class="kw">return</span>; }
+
+    <span class="dt">int</span> widthTimestamp = Util::ts2YYYYMMDD_HHMMSS_MS().length();
+    <span class="dt">static</span> size_t i = <span class="dv">0</span>;
+    <span class="kw">if</span> ( <span class="dv">0</span> == i ) {
+        <span class="co">// Markdown &#26684;&#24335;&#30340;&#34920;&#26684;&#30340;&#34920;&#26684;&#22836;&#65292;&#22240;&#20026;&#25105;&#24819;&#35753;&#34920;&#26684;&#22909;&#30475;&#28857;&#65292;&#25152;&#20197;&#35201;&#23545;&#34920;&#26684;&#36827;&#34892;</span>
+        <span class="co">// &#23545;&#40784;&#65292;&#36824;&#33457;&#20102;&#19981;&#23569;&#21151;&#22827;==</span>
+        <span class="co">// &#21407;&#35845;&#25105;&#22788;&#22899;&#24231;&#24378;&#36843;&#30151;&#12290;</span>
+<span class="ot">#define H(header, width) </span>\
+<span class="ot">     arg(&quot;&quot;, (##width-QObject::tr(##header).length())/2, &#39; &#39;) </span>\
+<span class="ot">    .arg(QObject::tr(##header)) </span>\
+<span class="ot">    .arg(&quot;&quot;, ##width-QObject::tr(##header).length()-(##width-QObject::tr(##header).length())/2, &#39; &#39;)</span>
+
+    <span class="co">// &#19978;&#38754;&#36825;&#19968;&#20010;&#34507;&#30140;&#30340;&#23439;&#65292;&#23601;&#26159;&#20026;&#20102;&#23454;&#29616; C &#35821;&#35328;&#23383;&#31526;&#20018;&#26684;&#24335;&#21270;&#20013;&#24212;&#35813;&#26377;&#32780;&#27809;&#26377;&#30340;&#23621;&#20013;&#23545;&#40784;</span>
+
+        fputs( <span class="fu">qPrintable</span>( <span class="ot">QString</span>( <span class="st">&quot;| </span><span class="ch">%1%</span><span class="st">2%3 &quot;</span>          <span class="co">// index</span>
+                                    <span class="st">&quot;| </span><span class="ch">%4%</span><span class="st">5%6 &quot;</span>          <span class="co">// timestamp</span>
+                                    <span class="st">&quot;| </span><span class="ch">%7%</span><span class="st">8%9 &quot;</span>          <span class="co">// log level</span>
+                                    <span class="st">&quot;| </span><span class="ch">%10%</span><span class="st">11%12 &quot;</span>       <span class="co">// type</span>
+                                    <span class="st">&quot;| </span><span class="ch">%13%</span><span class="st">14%15 &quot;</span>       <span class="co">// action</span>
+                                    <span class="st">&quot;| </span><span class="ch">%16%</span><span class="st">17%18 |</span><span class="ch">\n</span><span class="st">&quot;</span> )  <span class="co">// remarks</span>
+                                    .H( <span class="st">&quot;INDEX&quot;</span>,        WIDTH_INDEX )
+                                    .H( <span class="st">&quot;TIMESTAMP&quot;</span>, widthTimestamp )
+                                    .H( <span class="st">&quot;LEVEL&quot;</span>,        WIDTH_LEVEL )
+                                    .H( <span class="st">&quot;TYPE&quot;</span>,          WIDTH_TYPE )
+                                    .H( <span class="st">&quot;ACTION&quot;</span>,   widthActionInfo )
+                                    .H( <span class="st">&quot;REMARKS&quot;</span>,    WIDTH_REMARKS ) ), fp );
+
+<span class="ot">#undef H</span>
+        <span class="co">// &#26684;&#24335;&#23601;&#26159;&#36825;&#26679;&#65306;| idx | timestamp | level | type | action | remarks |</span>
+        fputs( <span class="ot">QString</span>( <span class="st">&quot;| :%1: | :%2: | :%3: | :%4: | :%5: | :%6: |</span><span class="ch">\n</span><span class="st">&quot;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, WIDTH_INDEX<span class="dv">-2</span>,     <span class="st">&#39;-&#39;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, widthTimestamp<span class="dv">-2</span>,  <span class="st">&#39;-&#39;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, WIDTH_LEVEL<span class="dv">-2</span>,     <span class="st">&#39;-&#39;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, WIDTH_TYPE<span class="dv">-2</span>,      <span class="st">&#39;-&#39;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, widthActionInfo<span class="dv">-2</span>, <span class="st">&#39;-&#39;</span> )
+                        .arg( <span class="st">&quot;&quot;</span>, WIDTH_REMARKS<span class="dv">-2</span>,   <span class="st">&#39;-&#39;</span> )
+                        .toStdString().c_str(), fp );
+    }  <span class="co">// header</span>
+
+    <span class="dt">int</span> i0 = i;
+    <span class="kw">foreach</span> ( <span class="dt">const</span> Log &amp;log, logs ) {
+        <span class="co">// current level</span>
+        ActionInfo::Level cl = actions.value(log.action).level;
+        <span class="kw">if</span> ( <span class="kw">true</span> || cl &lt;= level ) {
+            <span class="dt">int</span> len = strlen( <span class="fu">qPrintable</span>( types.value(log.type) ) );
+            fprintf( fp,
+                     <span class="st">&quot;| </span><span class="ch">%*i</span><span class="st"> &quot;</span>              <span class="co">// index</span>
+                     <span class="st">&quot;| </span><span class="ch">%*s</span><span class="st"> &quot;</span>              <span class="co">// timestamp</span>
+                     <span class="st">&quot;| </span><span class="ch">%*s%d%*s</span><span class="st"> &quot;</span>         <span class="co">// log level</span>
+                     <span class="st">&quot;| </span><span class="ch">%*s%s%*s</span><span class="st"> &quot;</span>         <span class="co">// type (aligned to center)</span>
+                     <span class="st">&quot;| </span><span class="ch">%-*s</span><span class="st"> &quot;</span>             <span class="co">// action</span>
+                     <span class="st">&quot;| </span><span class="ch">%*s</span><span class="st"> |</span><span class="ch">\n</span><span class="st">&quot;</span>,          <span class="co">// message</span>
+   <span class="co">/* index     */</span>   WIDTH_INDEX, ++i,
+   <span class="co">/* timestamp */</span>   widthTimestamp, <span class="fu">qPrintable</span>(Util::ts2YYYYMMDD_HHMMSS_MS(log.timestamp)),
+   <span class="co">/* log level */</span>   (WIDTH_LEVEL<span class="dv">-1</span>)/<span class="dv">2</span>, <span class="st">&quot;&quot;</span>, (<span class="dt">int</span>)actions.value(log.action).level<span class="dv">+1</span>, WIDTH_LEVEL-(WIDTH_LEVEL<span class="dv">-1</span>)/<span class="dv">2-1</span>, <span class="st">&quot;&quot;</span>,
+   <span class="co">/* type      */</span>   (WIDTH_TYPE-len)/<span class="dv">2</span>, <span class="st">&quot;&quot;</span>, <span class="fu">qPrintable</span>(types.value(log.type)), WIDTH_TYPE-len-(WIDTH_TYPE-len)/<span class="dv">2</span>, <span class="st">&quot;&quot;</span>,
+   <span class="co">/* action    */</span>   widthActionInfo, <span class="fu">qPrintable</span>(actions.value(log.action).info),
+   <span class="co">/* message   */</span>   WIDTH_REMARKS, log.message.isEmpty() ? <span class="st">&quot;&quot;</span> : <span class="fu">qPrintable</span>(log.message) );
+        }
+    }  <span class="co">// foreach</span>
+
+    fclose( fp );
+    log() &lt;&lt; <span class="st">&quot;Saving logs... done. (&quot;</span>
+          &lt;&lt; (i-i0) &lt;&lt; <span class="st">&quot;out of &quot;</span>
+          &lt;&lt; logs.size() &lt;&lt; <span class="st">&quot;logs )&quot;</span>;
+}
+
+<span class="ot">QList</span>&lt;Log&gt; Logger::refresh( )
+{
+    <span class="ot">QList</span>&lt;Log&gt; copy;
+
+    <span class="ot">QMutexLocker</span> locker( &amp;mutex );
+    <span class="kw">foreach</span> ( <span class="dt">const</span> Log &amp;log, logs ) {
+        copy.append( log );
+    }
+    logs.clear();
+
+    <span class="kw">return</span> copy;
+}
+
+<span class="co">// &#36824;&#35201;&#25353;&#29031;&#31561;&#32423;&#20445;&#23384;&#65292;&#21487;&#33021;&#19968;&#20123;&#20020;&#26102;&#30340;&#32423;&#21035;&#29305;&#21035;&#20302;&#30340;&#35843;&#35797;&#20449;&#24687;&#23601;&#19981;&#20445;&#23384;&#20102;&#12290;</span>
+<span class="dt">void</span> Logger::save( ActionInfo::Level level )
+{
+    <span class="ot">QList</span>&lt;Log&gt; &amp;logs = refresh();
+
+    <span class="kw">if</span> ( !Bundle::activated() ) {
+        saveLogs( logs, level );
+    } <span class="kw">else</span> {
+        <span class="co">// &#24037;&#25511;&#26426;&#35201;&#25226;&#26085;&#24535;&#22238;&#20256;&#32473;&#39640;&#24615;&#33021;&#35745;&#31639;&#26426;</span>
+        <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;Sending&quot;</span> &lt;&lt; logs.length() &lt;&lt; <span class="st">&quot;logs to MASTER...&quot;</span>;
+        <span class="ot">QByteArray</span> tx;
+        <span class="ot">QDataStream</span> out( &amp;tx, <span class="ot">QIODevice::</span>WriteOnly );
+        out.setVersion( <span class="ot">QDataStream::</span>Qt_4_8 );
+        out &lt;&lt; (<span class="dt">int</span>)Moderator::META__SAVE_LOG__VOID;
+        out &lt;&lt; logs.length();
+        <span class="kw">foreach</span> ( <span class="dt">const</span> Log &amp;log, logs ) {
+            out &lt;&lt; log;
+        }
+        Bundle::send( tx );
+        <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;Sending&quot;</span> &lt;&lt; logs.length() &lt;&lt; <span class="st">&quot;logs to MASTER... done.&quot;</span>;
+    }
+}
+
+<span class="dt">void</span> Logger::lazySave()
+{
+    <span class="ot">QList</span>&lt;Log&gt; logs = refresh();
+    saveLogs( logs, LOG_FILTER_ARCHIVE );
+}</code></pre></div>
+<h2 id="utils-&#27169;&#22359;">Utils &#27169;&#22359;</h2>
+<p>&#22240;&#20026;&#26377;&#24456;&#22810;&#32593;&#32476;&#25968;&#25454;&#38656;&#35201;&#22788;&#29702;&#65292;&#25152;&#20197;&#24314;&#20102;&#19968;&#20010; utils &#27169;&#22359;&#65292;&#25918;&#32622;&#19968;&#20123;&#36890;&#29992;&#30340;&#23383;&#33410;&#22788;&#29702;&#20989;&#25968;&#12290;</p>
+<p>&#39318;&#20808;&#65292;&#24341;&#20837; Qt &#30340;&#22836;&#25991;&#20214;&#21644;&#26085;&#24535;&#27169;&#22359;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#ifndef BYTESUTILS</span>
+<span class="ot">#define BYTESUTILS</span>
+<span class="ot">#include &lt;QtCore&gt;</span>
+<span class="ot">#include &quot;logger.h&quot;</span></code></pre></div>
+<p>&#31532;&#19968;&#20010; util&#65292;&#26159;&#20174;&#23383;&#31526;&#20018;&#35835;&#21462;&#23383;&#33410;&#20316;&#20026;&#21407;&#22987;&#25968;&#25454;&#12290;&#19968;&#33324;&#30340; COM &#20018;&#21475;&#21161;&#25163;&#37117;&#26377;&#31867;&#20284;&#30340;&#21151;&#33021;&#65292;&#25105;&#20204;&#21457;&#29616;&#27809;&#26377;&#36825;&#20010;&#20989;&#25968;&#24456;&#22810;&#26102;&#20505;&#35843;&#35797;&#36215;&#26469;&#24456;&#40635;&#28902;&#65292;&#25152;&#20197;&#38656;&#35201;&#36825;&#20040;&#19968;&#20010;&#20989;&#25968;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> e.g. <span class="st">&quot;0x34 0x48&quot;</span><span class="co"> </span>==&gt; <span class="bn">0x34</span> <span class="bn">0x48</span>
+<span class="ot">QByteArray</span> parseHexString( <span class="dt">const</span> <span class="ot">QString</span> &amp;hexstr )
+{
+    <span class="ot">QStringList</span> sl = hexstr.split(<span class="st">&quot; &quot;</span><span class="co">)</span>;
+    <span class="ot">QByteArray</span> ba;
+    <span class="kw">foreach</span> ( <span class="dt">const</span> <span class="ot">QString</span> &amp;str, sl ) {
+        <span class="dt">int</span> i = <span class="dv">0</span>;
+        sscanf_s( <span class="fu">qPrintable</span>( str ), <span class="st">&quot;0x</span><span class="ch">%x</span><span class="st">&quot;</span><span class="co">,</span> &amp;i );
+        ba.append((<span class="dt">quint8</span>)i);
+    }
+
+    <span class="kw">return</span> ba;
+}</code></pre></div>
+<p>&#36825;&#37324;&#30340; <code>qPrintable</code> &#23439;&#30495;&#26159;&#35814;&#35265;&#24680;&#26202;&#65281;&#22240;&#20026;&#21435;&#38271;&#27801;&#21442;&#19982;&#36825;&#20010;&#39033;&#30446;&#21069;&#23545; Qt &#24182;&#19981;&#29087;&#24713;&#65292;&#21018;&#24320;&#22987;&#25105;&#20204;&#20351;&#29992;&#30340;&#26159; <code>qstr.toStdString().c_str()</code>&#65292;&#20351;&#29992;&#36215;&#26469;&#30495;&#26159;&#40635;&#28902;&#12290;&#21518;&#26469;&#25165;&#21457;&#29616; Qt &#25552;&#20379;&#20102;&#36825;&#20040;&#19968;&#20010;&#23439;&#12290;</p>
+<p>&#26377;&#26102;&#20505;&#65292;&#36824;&#35201;&#25226;&#21407;&#22987;&#25968;&#25454;&#25171;&#21360;&#25104;&#21487;&#20197;&#30475;&#21040;&#30340;&#23383;&#31526;&#65292;&#23601;&#20889;&#20102; ba2hexstr &#20989;&#25968;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> <span class="ot">QByteArray</span> to Hex String, e.g. <span class="bn">0x34</span> <span class="bn">0x45</span> ==&gt; <span class="st">&quot;0x 34 0x45&quot;</span>
+<span class="ot">QString</span> ba2hexstr( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba,
+                   <span class="ot">QString</span> prefix <span class="co">/* = &quot;0x&quot; */</span>,
+                   <span class="ot">QString</span> postfix <span class="co">/* = &quot;&quot; */</span> )
+{
+    <span class="ot">QString</span> str;
+    <span class="kw">for</span> ( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; ba.length(); ++i ) {
+        str.append( <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%s%02x%s</span><span class="st">&quot;</span><span class="co">,</span>
+                                       <span class="fu">qPrintable</span>( prefix ),
+                                       (<span class="dt">uchar</span>)ba.at(i),
+                                       <span class="fu">qPrintable</span>( postfix ) ) );
+    }
+    <span class="kw">return</span> str;
+}</code></pre></div>
+<p>&#19978;&#38754;&#30340; <a href="http://tangzx.qiniudn.com/post-0056-lms-chunk.html">LMS &#25968;&#25454;&#37327;</a> &#36825;&#31687;&#25991;&#31456;&#37324;&#25171;&#21360;&#30340; LMS &#25968;&#25454;&#30340;&#27599;&#20010;&#23383;&#33410;&#23601;&#26159;&#36825;&#20040;&#26174;&#31034;&#20986;&#26469;&#30340;&#12290;</p>
+<p>&#26377;&#26102;&#20505;&#65292;&#25105;&#20204;&#35201;&#20687;&#20018;&#21475;&#21457;&#36865;&#19968;&#20010;&#25968;&#25454;&#65292;&#28982;&#21518;&#65292;&#31561;&#24453;&#22823;&#27010; 2 &#31186;&#38047;&#65292;&#31561;&#29616;&#26377;&#30340;&#25805;&#20316;&#23436;&#25104;&#21518;&#65292;&#20877;&#21457;&#36865;&#19979;&#19968;&#20010;&#20219;&#21153;&#12290;&#20030;&#20363;&#35828;&#65292;&#22914;&#19979;&#22270;&#65292;LMS &#19979;&#26041;&#26377;&#19968;&#20010;&#27493;&#36827;&#30005;&#26426;&#65288;&#32418;&#33394;&#26694;&#20986;&#26469;&#20102;&#65289;&#65292;LMS &#24037;&#20316;&#30340;&#26102;&#20505;&#65292;&#23601;&#38656;&#35201;&#36830;&#32493;&#20570;&#19977;&#20010;&#21160;&#20316;&#65292;&#28982;&#32780;&#27493;&#36827;&#30005;&#26426;&#19981;&#33021;&#21453;&#39304;&#35828;&#8220;&#36825;&#20010;&#21160;&#20316;&#25805;&#20316;&#23436;&#25104;&#20102;&#8221;&#65292;&#25105;&#20204;&#22909;&#36827;&#34892;&#22238;&#35843;&#25805;&#20316;&#12290;&#25152;&#20197;&#65292;&#25105;&#20204;&#21482;&#33021;&#20272;&#35745;&#19968;&#20010;&#26102;&#38388;&#38388;&#38548;&#65292;&#25554;&#20837;&#21040;&#36825;&#19977;&#20010;&#25805;&#20316;&#35843;&#29992;&#20043;&#38388;&#12290;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/2016-07-26_10-21-40.png" alt="&#20808;&#36870;&#26102;&#38024;&#36716; 15 &#24230;&#65292;&#20877;&#39034;&#26102;&#38024;&#36716; 120 &#24230;&#65292;&#20877;&#36870;&#26102;&#38024;&#36716; 15 &#24230;&#65292;&#20013;&#38388;&#37117;&#38656;&#35201;&#31561;&#24453;&#19978;&#19968;&#20010;&#25805;&#20316;&#23436;&#25104;&#65292;&#25165;&#33021;&#36827;&#34892;&#19979;&#19968;&#27493;&#12290;" />
+<p class="caption">&#20808;&#36870;&#26102;&#38024;&#36716; 15 &#24230;&#65292;&#20877;&#39034;&#26102;&#38024;&#36716; 120 &#24230;&#65292;&#20877;&#36870;&#26102;&#38024;&#36716; 15 &#24230;&#65292;&#20013;&#38388;&#37117;&#38656;&#35201;&#31561;&#24453;&#19978;&#19968;&#20010;&#25805;&#20316;&#23436;&#25104;&#65292;&#25165;&#33021;&#36827;&#34892;&#19979;&#19968;&#27493;&#12290;</p>
+</div>
+<p>&#36825;&#23601;&#26159; <code>delay_ms</code> &#20989;&#25968;&#65292;&#23427;&#33021;&#23558;&#32447;&#31243;&#26242;&#20572;&#19968;&#23450;&#30340;&#27627;&#31186;&#25968;&#65292;&#32780;&#19981;&#24433;&#21709;&#20027;&#30028;&#38754;&#30340;&#28040;&#24687;&#24490;&#29615;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> delay msecs
+<span class="dt">void</span> delay_ms( <span class="dt">const</span> <span class="dt">quint16</span> &amp;t )
+{
+    <span class="ot">QTime</span> dieTime = <span class="ot">QTime::</span>currentTime().addMSecs(t);
+    <span class="kw">while</span>( <span class="ot">QTime::</span>currentTime() &lt; dieTime ) {
+        <span class="ot">QCoreApplication::</span>processEvents( <span class="ot">QEventLoop::</span>AllEvents, <span class="dv">100</span> );
+    }
+}</code></pre></div>
+<p>&#19979;&#38754;&#20004;&#20010;&#27604;&#36739;&#31616;&#21333;&#65292;&#23601;&#26159;&#35282;&#24230;&#21644;&#24359;&#24230;&#30340;&#36716;&#21270;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> rad2deg( <span class="dt">const</span> <span class="dt">double</span> &amp;r ) { <span class="kw">return</span> r / M_PI * <span class="fl">180.0</span>; }
+<span class="dt">double</span> deg2rad( <span class="dt">const</span> <span class="dt">double</span> &amp;d ) { <span class="kw">return</span> d * M_PI / <span class="fl">180.0</span>; }</code></pre></div>
+<p>&#19979;&#38754;&#26159;&#20960;&#20010;&#26102;&#38388;&#25139;&#20989;&#25968;&#12290;&#26102;&#38388;&#25139;&#25105;&#20204;&#20351;&#29992;&#30340;&#26159; Qt &#30340; <code>QDateTime::currentMSecsSinceEpoch()</code>&#65292;&#22240;&#20026;&#23427;&#33021;&#26126;&#30830;&#34920;&#31034;&#19968;&#20010;&#26102;&#38388;&#28857;&#65292;&#32780;&#19988;&#31934;&#24230;&#26159;&#27627;&#31186;&#65292;&#23427;&#23454;&#38469;&#19978;&#26159;&#19968;&#20010; int64_t &#25972;&#22411;&#12290;&#35805;&#35828;&#25105;&#30456;&#20876;&#36824;&#26377;&#19968;&#20010;&#25130;&#22270;&#65306;</p>
+<div class="figure">
+<img src="https://img3.doubanio.com/view/photo/photo/public/p2255334335.jpg" />
+
+</div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">QString</span> Util::ts2HHMMSS_MS( <span class="dt">qint64</span> ts<span class="co">/* =0 */</span> )
+{
+    <span class="ot">QDateTime</span> dt = ts2dt( ts );
+    <span class="kw">return</span> <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">.</span><span class="ch">%03d</span><span class="st">&quot;</span>  <span class="co">// e.g. 01:23:45.678</span>
+                            , dt.time().hour()
+                            , dt.time().minute()
+                            , dt.time().second()
+                            , dt.time().msec() );
+}
+
+<span class="ot">QString</span> Util::ts2YYYYMMDD_HHMMSS_MS( <span class="dt">qint64</span> ts<span class="co">/*=0*/</span>
+    , <span class="dt">const</span> <span class="dt">char</span> *format<span class="co">/*=&quot;%4d/%02d/%02d %02d:%02d:%02d.%03d&quot;*/</span> )
+{
+    <span class="ot">QDateTime</span> dt = ts2dt( ts );
+    <span class="kw">return</span> <span class="ot">QString</span>().sprintf( format
+                            , dt.date().year()
+                            , dt.date().month()
+                            , dt.date().day()
+                            , dt.time().hour()
+                            , dt.time().minute()
+                            , dt.time().second()
+                            , dt.time().msec() );
+}
+
+<span class="dt">qint64</span> timestamp( )
+{
+    <span class="kw">return</span> <span class="ot">QDateTime::</span>currentMSecsSinceEpoch();
+}
+
+<span class="ot">QString</span> timestampstr( )
+{
+    <span class="dt">qint64</span> dt = <span class="ot">QDateTime::</span>currentMSecsSinceEpoch();
+    <span class="kw">return</span> timestampstr( dt );
+}
+
+<span class="ot">QString</span> timestampstr( <span class="dt">const</span> <span class="dt">qint64</span> &amp;dt )
+{
+    <span class="ot">QString</span> str;
+    str.sprintf( <span class="st">&quot;</span><span class="ch">%lld</span><span class="st">&quot;</span>, dt );
+    <span class="kw">return</span> str;
+}</code></pre></div>
+<p>&#20043;&#21069;&#25105;&#36824;&#23545;&#27604;&#36807; <code>clock_t</code>&#12289;<code>time_t</code>&#65292;&#21457;&#29616;&#36824;&#26159; Qt &#30340; <code>currentMSecsSinceEpoch</code> &#22909;&#65306; <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<ul>
+<li><code>clock_t</code> &#26681;&#26412;&#19981;&#26159;&#26102;&#38388;&#25139;&#65292;&#26102;&#38388;&#30340; span &#22826;&#30701;&#65292;&#21482;&#33021;&#29992;&#26469;&#23545;&#27604;&#26102;&#38388;&#20808;&#21518;&#65292;&#32780;&#19981;&#26159;&#30495;&#27491;&#30340;&#8220;&#32426;&#24405;&#8221;&#26102;&#38388;&#65307;</li>
+<li><code>time_t</code> &#21644; Linux &#19978;&#24120;&#29992;&#30340; <code>date +%s</code> &#24212;&#35813;&#31561;&#20215;&#65292;&#19981;&#36807;&#26102;&#38388;&#31934;&#24230;&#26159;&#31186;&#65292;&#19981;&#22815;&#31934;&#30830;&#65307;</li>
+<li><code>QDateTime</code> &#21644; <code>time_t</code> &#31867;&#20284;&#65292;&#20294;&#26159;&#31934;&#24230;&#36798;&#21040;&#20102;&#27627;&#31186;&#65292;&#25152;&#20197;&#23427;&#26368;&#22909;&#12290;</li>
+</ul>
+<p>&#22312; COM &#32534;&#31243;&#65288;&#20018;&#21475;&#32534;&#31243;&#65289;&#20013;&#65292;&#32463;&#24120;&#38656;&#35201;&#22788;&#29702;&#19968;&#20010; word &#30340;&#25968;&#25454;&#65288;&#20004;&#20010;&#23383;&#33410;&#65289;&#65292;&#25152;&#20197;&#20889;&#20102;&#20960;&#20010;&#23383;&#33410;&#25805;&#20316;&#65292;&#29992;&#26469;&#33719;&#21462;&#39640;&#20301;&#12289;&#20302;&#20301;&#65292;&#25226;&#20004;&#20010;&#23383;&#33410;&#21512;&#24182;&#20026;&#19968;&#20010; word&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> get higher byte
+<span class="dt">quint8</span> high( <span class="dt">const</span> <span class="dt">quint16</span> &amp;letter )
+{
+    <span class="kw">return</span> (<span class="dt">quint8</span>)(letter&gt;&gt;<span class="dv">8</span> &amp; <span class="bn">0xFF</span>);
+}
+
+<span class="co">//!</span> get lower byte
+<span class="dt">quint8</span> low( <span class="dt">const</span> <span class="dt">quint16</span> &amp;letter )
+{
+    <span class="kw">return</span> (<span class="dt">quint8</span>)(letter &amp; <span class="bn">0xFF</span>);
+}
+
+<span class="co">//!</span> patch two bytes
+<span class="dt">quint16</span> highlow( <span class="dt">const</span> <span class="dt">quint8</span> &amp;high, <span class="dt">const</span> <span class="dt">quint8</span> &amp;low )
+{
+    <span class="dt">quint16</span> hl = <span class="dv">0</span>;
+    hl |= (<span class="dt">quint16</span>)high &lt;&lt; <span class="dv">8</span>;
+    hl |= low;
+    <span class="kw">return</span> hl;
+}</code></pre></div>
+<p>&#39640;&#20301;&#21644;&#20302;&#20301;&#25105;&#20063;&#26159;&#22312;&#38271;&#27801;&#25165; GET &#21040;&#30340;&#27010;&#24565;&#12290;&#37027;&#26102;&#20505;&#25105;&#36824;&#22312;&#30475; CSAPP&#65292;&#21018;&#30475;&#21040; two&#8217;s complement&#12290;&#20018;&#21475;&#25968;&#25454;&#32463;&#24120;&#20250;&#20940;&#20081;&#65292;&#25152;&#20197;&#36890;&#24120;&#37117;&#35201;&#26657;&#39564;&#65292;&#20018;&#21475;&#21161;&#25163;&#37324;&#65292;&#36890;&#24120;&#20063;&#26377;&#19968;&#20010;&#36873;&#39033;&#65292;&#38656;&#35201;&#20320;&#35774;&#32622;&#21040;&#24213;&#26657;&#39564;&#26159; CRC16 &#26657;&#39564;&#26159;&#12304;&#39640;&#20301;&#22312;&#21069;&#12305;&#65292;&#36824;&#26159;&#12304;&#20302;&#20301;&#22312;&#21069;&#12305;&#12290;&#33258;&#24049;&#21457;&#36865;&#20986;&#21435;&#30340;&#25968;&#25454;&#65292;&#20063;&#35201;&#21152;&#19978;&#26657;&#39564;&#30340;&#20004;&#20010;&#23383;&#33410;&#25165;&#21487;&#20197;&#12290; &#21542;&#21017;&#23545;&#26041;&#20063;&#20250;&#35748;&#20026;&#25968;&#25454;&#8220;&#24050;&#25439;&#22351;&#8221;&#12290;&#36825;&#20010;&#20195;&#30721;&#30001;&#38271;&#27801;&#22823;&#23398;&#30340;&#21016;&#21338;&#22763;&#25552;&#20379;&#30340; MFC &#31243;&#24207;&#20462;&#25913;&#32780;&#26469;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> generate CRC16 checksum
+<span class="dt">quint16</span> genCRC16( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">int</span> length <span class="co">/* = -1 */</span> )
+{
+    <span class="dt">quint16</span> crc = <span class="bn">0xFFFF</span>;
+
+    <span class="dt">int</span> len;
+    <span class="kw">if</span> ( length &gt; ba.length() || ba.length() == <span class="dv">0</span> ) {
+        <span class="kw">return</span> <span class="dv">0</span>;
+    } <span class="kw">else</span> <span class="kw">if</span> ( <span class="dv">-1</span> == length ) {
+        len = ba.length();
+    } <span class="kw">else</span> {
+        len = length;
+    }
+
+    <span class="kw">for</span> ( <span class="dt">int</span> cnt = <span class="dv">0</span>; cnt &lt; len; ++cnt ) {
+        <span class="dt">int</span> i;
+        crc ^= (<span class="dt">quint8</span>)ba.at(cnt);
+
+        <span class="kw">for</span> ( i = <span class="dv">0</span>; i &lt; <span class="dv">8</span>; ++i ) {
+            <span class="kw">if</span> ( crc &amp; <span class="bn">0x01</span> ) {
+                crc &gt;&gt;= <span class="dv">1</span>;
+                crc ^= <span class="bn">0xA001</span>;       <span class="co">// magical...</span>
+            } <span class="kw">else</span> {
+                crc &gt;&gt;= <span class="dv">1</span>;
+            }
+        }
+    }
+
+    <span class="kw">return</span> crc;
+}</code></pre></div>
+<p>&#39318;&#20808;&#33719;&#21462;&#25910;&#21040;&#30340;&#25968;&#25454;&#65288;&#25105;&#20204;&#25226;&#25152;&#26377;&#30340;&#21407;&#22987;&#25968;&#25454;&#37117;&#23384;&#22312; QByteArray &#37324;&#65292;&#32780;&#19981;&#26159; <code>char *</code> &#20160;&#20040;&#30340;&#37324;&#65289;&#30340;&#26368;&#21518;&#20004;&#20010;&#23383;&#33410;&#65292;&#28982;&#21518;&#25226;&#23427;&#25972;&#21512;&#25104;&#19968;&#20010; quint16&#65288;word&#65289;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> get last <span class="dv">2</span> bytes then patch to uint16
+<span class="dt">quint16</span> getCRC16( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba )
+{
+    <span class="kw">if</span> ( ba.length() &lt; <span class="dv">2</span> ) {
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+
+    <span class="dt">quint8</span>  low  = ba.at( ba.length() - <span class="dv">2</span> ); <span class="co">// LSB first</span>
+    <span class="dt">quint8</span>  high = ba.at( ba.length() - <span class="dv">1</span> );
+    <span class="dt">quint16</span> hl = highlow( high, low );
+    <span class="kw">return</span> hl;
+}</code></pre></div>
+<p>&#32473;&#33258;&#24049;&#35201;&#21457;&#36865;&#30340;&#25968;&#25454;&#21152;&#19978;&#26657;&#39564;&#23383;&#33410;&#65292;&#25105;&#20204;&#30340;&#32422;&#23450;&#26159;&#12304;&#20302;&#20301;&#22312;&#21069;&#12305;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> patch CRC16 tail
+<span class="dt">void</span> patchCRC16Tail( <span class="ot">QByteArray</span> &amp;data )
+{
+    <span class="dt">quint16</span> crc = genCRC16( data );
+    data.append( low(crc) );  <span class="co">// low first</span>
+    data.append( high(crc) );
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> check <span class="kw">if</span> crc16 passed
+<span class="dt">bool</span> crc16Passed( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba )
+{
+    <span class="kw">if</span> ( getCRC16( ba ) == genCRC16(ba, ba.length()<span class="dv">-2</span>) ) {
+        <span class="kw">return</span> <span class="kw">true</span>;
+    } <span class="kw">else</span> {
+        <span class="kw">return</span> <span class="kw">false</span>;
+    }
+}</code></pre></div>
+<p>&#28982;&#21518;&#23601;&#26159;&#25226;&#24471;&#21040;&#30340;&#21407;&#22987;&#25968;&#25454;&#36716;&#21270;&#20026;&#30456;&#24212;&#30340; double&#65292;int &#31561;&#31867;&#22411;&#65292;&#36825;&#37096;&#20998;&#22312;&#32534;&#30721;&#22120;&#27169;&#22359;&#12289;UR &#27169;&#22359;&#37324;&#24212;&#29992;&#24456;&#22810;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">quint16</span> parse2BytesToUInt16( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> cursor, <span class="dt">bool</span> doit <span class="co">/* = true */</span> )
+{
+    <span class="kw">if</span> ( cursor + <span class="dv">1</span> &gt;= ba.length() ) {
+        Logger::log( BCD::META::META, <span class="st">&quot;Error parse 2 bytes to Uint16&quot;</span> );
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+
+    <span class="kw">if</span> ( !doit ) {
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+
+    <span class="dt">quint16</span> num = <span class="dv">0</span>;
+    num  = (<span class="dt">quint16</span>)(ba.at(cursor + <span class="dv">0</span>)) &lt;&lt; <span class="dv">8</span>; <span class="co">// MSB first</span>
+    num |= (<span class="dt">quint8</span>)ba.at(cursor + <span class="dv">1</span>);
+    <span class="kw">return</span> num;
+}
+
+<span class="dt">quint32</span> parse4BytesToUInt32( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> cursor )
+{
+    <span class="kw">if</span> ( cursor + <span class="dv">3</span> &gt;= ba.length() ) {
+         Logger::log( BCD::META::META, <span class="st">&quot;Error parse 4 bytes to Uint32&quot;</span> );
+         <span class="kw">return</span> <span class="dv">0</span>;
+    }
+
+    <span class="dt">quint32</span> num = <span class="dv">0</span>;
+    <span class="dt">quint16</span> low  = parse2BytesToUInt16( ba, cursor + <span class="dv">0</span> );  <span class="co">// LSB first</span>
+    <span class="dt">quint16</span> high = parse2BytesToUInt16( ba, cursor + <span class="dv">2</span> );
+    num |= (<span class="dt">quint32</span>)low;
+    num |= ((<span class="dt">quint32</span>)high &lt;&lt; <span class="dv">16</span>);
+
+    <span class="co">//QByteArray tmp = ba.mid( 0, 4 );</span>
+    <span class="co">//qDebug() &lt;&lt; ba2hexstr( tmp ) &lt;&lt; &quot; : &quot; &lt;&lt; num;</span>
+    <span class="kw">return</span> num;
+}
+
+<span class="dt">quint64</span> parse8BytesToUInt64( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> cursor )
+{
+    <span class="kw">if</span> ( cursor + <span class="dv">7</span> &gt;= ba.length() ) {
+        Logger::log( BCD::META::META, <span class="st">&quot;Error parse 8 bytes to uint64&quot;</span> );
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+
+    <span class="dt">quint64</span> i = <span class="dv">0</span>;
+    i |= ba.at( cursor + <span class="dv">0</span> ) &lt;&lt; <span class="dv">56</span>;
+    i |= ba.at( cursor + <span class="dv">1</span> ) &lt;&lt; <span class="dv">48</span>;
+    i |= ba.at( cursor + <span class="dv">2</span> ) &lt;&lt; <span class="dv">40</span>;
+    i |= ba.at( cursor + <span class="dv">3</span> ) &lt;&lt; <span class="dv">32</span>;
+    i |= ba.at( cursor + <span class="dv">4</span> ) &lt;&lt; <span class="dv">24</span>;
+    i |= ba.at( cursor + <span class="dv">5</span> ) &lt;&lt; <span class="dv">16</span>;
+    i |= ba.at( cursor + <span class="dv">6</span> ) &lt;&lt;  <span class="dv">8</span>;
+    i |= ba.at( cursor + <span class="dv">7</span> ) &lt;&lt;  <span class="dv">0</span>;
+    <span class="kw">return</span> i;
+}
+
+<span class="dt">int</span> parse4Bytes2Int4UR( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> beg )
+{
+    <span class="kw">if</span> ( beg + <span class="dv">3</span> &gt;= ba.length() ) {
+        Logger::log( BCD::META::META, <span class="st">&quot;Error parse 8 bytes to int 4ur&quot;</span> );
+        <span class="kw">return</span> <span class="fl">0.0</span>;
+    }
+
+    <span class="dt">int</span> i = <span class="dv">0</span>;
+    <span class="dt">char</span> *ii = (<span class="dt">char</span> *)&amp;i;
+    *ii |= ba.at(beg + <span class="dv">3</span>); ++ii;
+    *ii |= ba.at(beg + <span class="dv">2</span>); ++ii;
+    *ii |= ba.at(beg + <span class="dv">1</span>); ++ii;
+    *ii |= ba.at(beg + <span class="dv">0</span>);
+    <span class="kw">return</span> i;
+}
+
+<span class="co">// &#20026;&#20102;&#35753; UR &#27169;&#22359;&#30340;&#20195;&#30721;&#22909;&#30475;&#28857;&#65292;&#28155;&#21152;&#20102;&#19968;&#20010;&#21442;&#25968;&#65292;&#24403;&#23427;&#20026; true &#30340;&#26102;&#20505;&#65292;&#21487;&#20197;&#8220;&#20599;&#25042;&#8221;&#19981; parse&#12290;</span>
+<span class="dt">double</span> parse8Bytes2Double4UR( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> beg, <span class="dt">bool</span> parse )
+{
+    <span class="kw">if</span> ( beg + <span class="dv">7</span> &gt;= ba.length() ) {
+        Logger::log( BCD::META::META, <span class="st">&quot;Error parse 8 bytes to double 4 ur&quot;</span> );
+        <span class="kw">return</span> <span class="fl">0.0</span>;
+    }
+
+    <span class="kw">if</span> ( !parse ) { <span class="kw">return</span> <span class="fl">0.0</span>; }
+
+    <span class="co">// &#21487;&#20197;&#30475;&#21040;&#20869;&#23384;&#37324;&#23383;&#33410;&#24207;&#21644;&#32593;&#32476;&#25910;&#21040;&#30340;&#23383;&#33410;&#24207;&#26159;&#19968;&#26679;&#30340;&#65292;</span>
+    <span class="co">// &#37492;&#20110;&#22823;&#37096;&#20998;&#25805;&#20316;&#31995;&#32479;&#21253;&#25324; Windows &#37117;&#26159; small endian&#65292;</span>
+    <span class="co">// &#37027;&#25105;&#20204;&#30340;&#32593;&#32476;&#23383;&#33410;&#24207;&#24212;&#35813;&#20063;&#26159; small endian</span>
+    <span class="co">// &#65288;&#20294;&#25105;&#19981;&#20445;&#35777;&#21834;&#8230;&#8230;&#25105;&#26089;&#24536;&#35760;&#20102;==&#65289;</span>
+    <span class="dt">double</span> d = <span class="fl">0.0</span>;
+    <span class="dt">char</span> *dd = (<span class="dt">char</span> *)&amp;d;
+    *dd |= ba.at(beg + <span class="dv">0</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">1</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">2</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">3</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">4</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">5</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">6</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">7</span>);
+    <span class="kw">return</span> d;
+}
+
+<span class="dt">double</span> parse8BytesToDouble( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;ba, <span class="dt">quint16</span> beg, <span class="dt">bool</span> parse <span class="co">/*=true*/</span> )
+{
+    <span class="kw">if</span> ( beg + <span class="dv">7</span> &gt;= ba.length() ) {
+        Logger::log( BCD::META::META, <span class="st">&quot;Error parse 8 bytes to double&quot;</span> );
+        <span class="kw">return</span> <span class="fl">0.0</span>;
+    }
+
+    <span class="kw">if</span> ( !parse ) {
+        <span class="kw">return</span> <span class="fl">0.0</span>;
+    }
+
+    <span class="dt">double</span> d = <span class="fl">0.0</span>;
+    <span class="dt">char</span> *dd = (<span class="dt">char</span> *)&amp;d;
+    *dd |= ba.at(beg + <span class="dv">7</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">6</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">5</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">4</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">3</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">2</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">1</span>); ++dd;
+    *dd |= ba.at(beg + <span class="dv">0</span>);
+    <span class="kw">return</span> d;
+}
+
+<span class="co">// &#29616;&#22312;&#30475;&#65292;&#25105;&#20063;&#19981;&#30693;&#36947;&#20026;&#20160;&#20040; unsigned &#36716;&#21270;&#25104; signed &#35201;&#33258;&#24049;&#21028;&#26029;&#65292;</span>
+<span class="co">// &#20294;&#32943;&#23450;&#26159;&#26222;&#36890;&#30340; cast &#20986;&#20102;&#38382;&#39064;&#65292;&#25105;&#25165;&#36825;&#20040;&#8220;&#29609;&#8221;&#30340;&#12290;&#22810;&#20111;&#20102;&#24403;&#26102;&#33258;&#24049;</span>
+<span class="co">// &#30475;&#20102; CSAPP&#12290;</span>
+<span class="dt">qint16</span> us2s( <span class="dt">const</span> <span class="dt">quint16</span> &amp;us )
+{
+    <span class="dt">qint16</span> s = <span class="dv">0</span>;
+
+    <span class="kw">if</span> ( us &gt; <span class="bn">0x7FFF</span> ) {          <span class="co">// neg&#65292;&#35753;&#25105;&#29616;&#22312;&#20889;&#25105;&#23601;&#25913;&#25104; us&gt;&gt;15 &amp; 0x1</span>
+        s = us &amp; <span class="bn">0x7FFF</span> - <span class="bn">0x8000</span>;
+    } <span class="kw">else</span> {                      <span class="co">// pos</span>
+        s = us;
+    }
+
+    <span class="kw">return</span> s;
+}</code></pre></div>
+<p>&#19979;&#38754;&#36825;&#20010;&#32431;&#31929;&#26159;&#29992;&#26469;&#35843;&#35797;&#23383;&#33410;&#20102;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> pretty print bytes
+<span class="ot">QString</span> bytes2bits( <span class="dt">char</span> *c, <span class="dt">quint8</span> n )
+{
+    <span class="dt">char</span> *w = c;
+    <span class="ot">QString</span> str;
+
+    <span class="kw">for</span> ( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">8</span> * n; ++i ) {
+       <span class="dt">int</span> j = i / <span class="dv">8</span>;
+       <span class="dt">int</span> k = i % <span class="dv">8</span>;
+
+       <span class="kw">if</span> ( (*(w+n<span class="dv">-1</span>-j)&gt;&gt;(<span class="dv">7</span>-k)) &amp; <span class="bn">0x01</span> == <span class="dv">1</span> ) {
+           str.append(<span class="st">&quot;1&quot;</span><span class="co">)</span>;
+       } <span class="kw">else</span> {
+           str.append(<span class="st">&quot;0&quot;</span><span class="co">)</span>;
+       }
+
+       <span class="kw">if</span> ( k == <span class="dv">7</span> &amp;&amp; j != n<span class="dv">-1</span> ) {
+           str.append(<span class="st">&quot;, &quot;</span><span class="co">)</span>;
+       }
+    }
+    <span class="kw">return</span> str;
+}
+
+<span class="co">// &#21487;&#20197;&#30475;&#21040;&#36825;&#26159; big endian&#65292;&#36825;&#24212;&#35813;&#26159;&#20018;&#21475;&#36890;&#20449;&#29992;&#21040;&#30340;</span>
+<span class="ot">QByteArray</span> word2ByteArray( <span class="dt">const</span> <span class="dt">qint16</span> &amp;data )
+{
+    <span class="ot">QByteArray</span> ba;
+    ba.append( high(data) );
+    ba.append( low(data) );
+    <span class="kw">return</span> ba;
+}
+
+<span class="ot">QByteArray</span> patchAddrLength( <span class="dt">const</span> <span class="dt">quint16</span> &amp;addr, <span class="dt">const</span> <span class="dt">quint16</span> &amp;length )
+{
+    <span class="ot">QByteArray</span> ba;
+    <span class="co">// addr</span>
+    ba.append( high(addr) );
+    ba.append( low(addr) );
+    <span class="co">// length</span>
+    ba.append( high(length) );
+    ba.append( low(length) );
+
+    <span class="kw">return</span> ba;
+}
+
+<span class="ot">QByteArray</span> bytes2Bits( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;bytes, <span class="dt">const</span> <span class="dt">quint16</span> &amp;bitNum )
+{
+    <span class="ot">QByteArray</span> bits;
+
+    <span class="kw">if</span> ( bitNum &gt; <span class="dv">8</span> * bytes.length() ) {
+        <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;bytes2bits wrong.&quot;</span><span class="co">;</span>
+        <span class="kw">return</span> bits;
+    }
+
+    <span class="kw">for</span> ( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; bitNum; ++i ) {
+        bits.append( (<span class="dt">quint8</span>)( <span class="bn">0x1</span> &amp; bytes.at((<span class="dt">quint16</span>)i/<span class="dv">8</span>) &gt;&gt; i%<span class="dv">8</span> ) );
+    }
+
+    <span class="kw">return</span> bits;
+}
+
+<span class="ot">QString</span> parseBits2String( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;bits )
+{
+    <span class="ot">QString</span> str;
+    <span class="kw">foreach</span> ( <span class="dt">const</span> <span class="dt">quint8</span> &amp;c, bits ) {
+        str.append( c == <span class="dv">0</span> ? <span class="st">&quot;0 &quot;</span> : <span class="st">&quot;1 &quot;</span> );
+    }
+    <span class="kw">return</span> str;
+}</code></pre></div>
+<hr />
+<p><a href="post-0117-changsha-review-4.html" style="font-size:80%; color: red;" title="post-0117-changsha-review-4.md">&#12304;&#19979;&#19968;&#33410;&#65306;&#38271;&#27801;&#39033;&#30446;&#24635;&#32467; 4 &#8211; &#20256;&#24863;&#22120;&#27169;&#22359;&#36873;&#35762;&#65288;LMS &#21644; IMU &#21644; UR&#65289;&#12305;</a></p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#35265; <a href="http://dvorak4tzx.lofter.com/post/1d4021c8_7911622">clock_t &#19981;&#26159;&#26102;&#38388; - dvorak4tzx</a>&#12290;<a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#review">review</a></li>
+<li><a class="tzx-tag" href="tags.html/#project">project</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0116-changsha-review-3.md" title="3 insertions(+), 1 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0116-changsha-review-3.md" title="988 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0116-changsha-review-3.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 3,
+        deletions: 1
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 988,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2016-05-09" />
+  <title>Learning Lua</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Learning Lua</h1>
+<h3 class="date">2016-05-09</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#learning-lua">Learning Lua</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="learning-lua">Learning Lua</h1>
+<p><a href="https://github.com/4ker/lua-style-guide">4ker/lua-style-guide: Olivine Labs Lua Style Guide</a></p>
+<p><a href="http://www.coppeliarobotics.com/helpFiles/en/luaCrashCourse.htm">Lua crash course</a></p>
+<p><a href="https://love2d.org/wiki/Category:Software">Category:Software - LOVE</a></p>
+<ul>
+<li><p>love.exe</p>
+<ul>
+<li><p>win portable: <a href="http://whudoc.qiniudn.com/2016/love-0.10.1-win64.7z" class="uri">http://whudoc.qiniudn.com/2016/love-0.10.1-win64.7z</a></p></li>
+<li><p>linux src: <a href="http://whudoc.qiniudn.com/2016/love-0.10.1-linux-src.tar.gz" class="uri">http://whudoc.qiniudn.com/2016/love-0.10.1-linux-src.tar.gz</a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">tar</span> -xvf love-0.10.1-linux-src.tar.gz
+<span class="kw">cd</span> love-0.10.1
+<span class="kw">sudo</span> apt-get install -y libsdl2-dev
+<span class="kw">sudo</span> apt-get install -y libopenal1 libopenal-dev
+<span class="kw">sudo</span> apt-get install -y libmodplug-dev
+<span class="kw">sudo</span> apt-get install -y libvorbis-dev libvorbisfile3
+<span class="kw">sudo</span> apt-get install -y libtheora-dev
+<span class="kw">sudo</span> apt-get install -y libphysfs-dev
+<span class="kw">sudo</span> apt-get install -y libluajit-dev
+<span class="kw">sudo</span> apt-get install -y lua5.2
+<span class="kw">sudo</span> apt-get install -y luarocks
+<span class="kw">sudo</span> apt-get install -y libluajit-5.1-dev libluajit-5.1-common
+<span class="kw">sudo</span> apt-get install -y libmpg123-dev
+<span class="kw">./configure</span>
+<span class="kw">make</span>
+<span class="kw">sudo</span> make install
+<span class="kw">love</span> --version</code></pre></div></li>
+</ul></li>
+<li><p><code>hello.lua</code> -&gt; <code>main.lua</code> -&gt; <code>main.zip</code> -&gt; <code>hello.love</code></p>
+<dl>
+<dt><code>hello.lua</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode lua"><code class="sourceCode lua"><span class="kw">function</span> love<span class="ot">.</span>draw<span class="ot">()</span>
+    love<span class="ot">.</span>graphics<span class="ot">.</span>print<span class="ot">(</span><span class="st">&quot;Hello World!&quot;</span><span class="ot">,</span> <span class="dv">400</span><span class="ot">,</span> <span class="dv">300</span><span class="ot">)</span>
+<span class="kw">end</span></code></pre></div>
+</dd>
+</dl></li>
+<li><p><code class="sourceCode bash"><span class="kw">./path/to/love.exe</span> hello.love</code></p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/love-hello.png" />
+
+</div>
+<p>like <code>getchar()</code> hack for windows: <code>&quot;C:\Program Files\LOVE\love.exe&quot; --console</code></p></li>
+<li><p>via makefile, see <a href="https://github.com/district10/mari0">district10/mari0: Mario + Portal game in L&#214;VE</a>.</p></li>
+<li><p>executable</p>
+<p><a href="http://windows.microsoft.com/en-hk/windows/compress-uncompress-files-zip-files#1TC=windows-7">Compress and uncompress files (zip files) - Windows Help</a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># win</span>
+<span class="kw">copy</span> /b love.exe+SuperGame.love SuperGame.exe</code></pre></div>
+<p>win, create a <code>lovec.bat</code>: <code class="sourceCode bash"><span class="kw">copy</span> /b love.exe+%1 <span class="st">&quot;%~n1.exe&quot;</span></code></p>
+<p>linux: <code class="sourceCode bash"><span class="kw">cat</span> love.exe SuperGame.love <span class="kw">&gt;</span> SuperGame.exe</code> ```</p></li>
+<li><a href="https://github.com/TannerRogalsky/love.js">TannerRogalsky/love.js: L&#214;VE ported to the web using Emscripten</a></li>
+<li><a href="https://bitbucket.org/TannerRogalsky/love/src">TannerRogalsky / love / source / &#8212; Bitbucket</a></li>
+<li><a href="https://studio.zerobrane.com/download?not-this-time">Download - ZeroBrane Studio - Lua IDE/editor/debugger for Windows, Mac OSX, and Linux</a></li>
+<li><a href="https://github.com/LewisJEllis/awesome-lua">LewisJEllis/awesome-lua: A curated list of quality Lua packages and resources.</a></li>
+<li><a href="http://www.cnblogs.com/stephen-liu74/archive/2012/07/20/2460634.html">Step By Step(C&#35843;&#29992;Lua) - Stephen_Liu - &#21338;&#23458;&#22253;</a></li>
+<li><a href="http://blog.codingnow.com/2013/01/binding_c_object_for_lua.html">&#20113;&#39118;&#30340; BLOG: &#20026; Lua &#32465;&#23450; C/C++ &#23545;&#35937;</a></li>
+<li><a href="https://github.com/4ker/lua-pong">4ker/lua-pong: Very simple example of a game engine written in C and game logic written in Lua.</a></li>
+<li><a href="https://github.com/4ker/lua-pong/blob/master/engine.c">lua-pong/engine.c at master &#183; 4ker/lua-pong</a></li>
+<li><a href="https://github.com/4ker/lua-pong/blob/master/pong.lua">lua-pong/pong.lua at master &#183; 4ker/lua-pong</a></li>
+<li><p><a href="http://www.cnblogs.com/tfanalysis/articles/4108188.html">&#22312;Ubuntu&#31995;&#32479;&#19979;&#23433;&#35013;luci&#30340;&#27493;&#39588;&#21644;&#27880;&#24847;&#20107;&#39033; - Merlin-magic - &#21338;&#23458;&#22253;</a></p></li>
+</ul>
+<p><a href="https://github.com/4ker/luapp">4ker/luapp: Using lua in C++ style. Build system is CMake.</a> &#9829;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://love2d.org/wiki/Getting_Started">Getting Started - LOVE</a></li>
+<li><a href="https://github.com/MisterDA/love-release">MisterDA/love-release: Lua script that makes L&#214;VE game release easier</a></li>
+<li><a href="https://bitbucket.org/rude/love/downloads">rude / love / Downloads &#8212; Bitbucket</a></li>
+<li><a href="https://github.com/love2d-community/awesome-love2d">love2d-community/awesome-love2d: A curated list of amazingly awesome L&#214;VE libraries, resources and shiny things.</a></li>
+<li><a href="http://tylerneylon.com/a/learn-lua/">Learn Lua in 15 Minutes</a></li>
+<li><a href="https://github.com/LuaDist/lua">LuaDist/lua: The Lua programming language with CMake based build</a>, my fork: <a href="https://github.com/4ker/lua">4ker/lua: The Lua programming language with CMake based build</a></li>
+<li><a href="https://github.com/LewisJEllis/awesome-lua">LewisJEllis/awesome-lua: A curated list of quality Lua packages and resources.</a></li>
+<li><a href="https://github.com/vinniefalco/LuaBridge/issues">Issues &#183; vinniefalco/LuaBridge</a></li>
+<li><a href="https://github.com/ToyAuthor/luapp">ToyAuthor/luapp: Using lua in C++ style. Build system is CMake.</a> &#9829;</li>
+<li><a href="https://github.com/davidsiaw/luacppinterface">davidsiaw/luacppinterface: A Simple C++ Interface to Lua</a></li>
+<li><a href="http://sol2.readthedocs.io/en/latest/tutorial/all-the-things.html">tutorial: quick &#8216;n&#8217; dirty &#8212; Sol 2.5.2 documentation</a></li>
+<li><a href="https://github.com/ThePhD/sol2">ThePhD/sol2: Sol v2.0 - a C++ &lt;-&gt; Lua API wrapper with advanced features and top notch performance - is here, and it&#8217;s great! Documentation:</a></li>
+</ul>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#learning">learning</a></li>
+<li><a class="tzx-tag" href="tags.html/#lua">lua</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0101-learning-lua.md" title="2 insertions(+), 2 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0101-learning-lua.md" title="104 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0101-learning-lua.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 2,
+        deletions: 2
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 104,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

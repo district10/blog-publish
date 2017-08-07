@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-10-25" />
+  <meta name="keywords" content="c" />
+  <title>C &#35821;&#35328;&#30340; argc&#12289;argv &#24178;&#22043;&#30340;&#65311;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">C &#35821;&#35328;&#30340; argc&#12289;argv &#24178;&#22043;&#30340;&#65311;</h1>
+<h3 class="date">2015-10-25</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#c-&#35821;&#35328;&#30340;-argcargv-&#24178;&#22043;&#30340;">C &#35821;&#35328;&#30340; argc&#12289;argv &#24178;&#22043;&#30340;&#65311;</a><ul>
+        <li><a href="#&#28304;&#25991;&#20214;">&#28304;&#25991;&#20214;</a></li>
+        <li><a href="#&#32534;&#35793;&#21518;&#35843;&#29992;">&#32534;&#35793;&#21518;&#35843;&#29992;</a></li>
+        <li><a href="#&#24635;&#32467;">&#24635;&#32467;</a></li>
+        <li><a href="#&#38468;">&#38468;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="c-&#35821;&#35328;&#30340;-argcargv-&#24178;&#22043;&#30340;">C &#35821;&#35328;&#30340; argc&#12289;argv &#24178;&#22043;&#30340;&#65311;</h1>
+<p>&#20197;&#19968;&#20010;&#20363;&#23376;&#65292;&#35828;&#26126; c &#35821;&#35328;&#20013;&#20256;&#20837; main &#20989;&#25968;&#30340; argc&#65292;argv &#26159;&#20160;&#20040;&#19996;&#35199;&#12290;</p>
+<h2 id="&#28304;&#25991;&#20214;">&#28304;&#25991;&#20214;</h2>
+<p>argcargv.c</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
+
+<span class="dt">int</span> main( <span class="dt">int</span> argc, <span class="dt">char</span> **argv )
+{
+    <span class="dt">int</span> a = atoi( argv[<span class="dv">1</span>] );
+    <span class="dt">int</span> b = atoi( argv[<span class="dv">2</span>] );
+    printf( <span class="st">&quot;a + b = %d + %d = %d</span><span class="ch">\n</span><span class="st">&quot;</span>, a, b, a+b );
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="&#32534;&#35793;&#21518;&#35843;&#29992;">&#32534;&#35793;&#21518;&#35843;&#29992;</h2>
+<dl>
+<dt>&#23545;&#20110; Linux &#24179;&#21488;:</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># &#32534;&#35793;</span>
+$ <span class="kw">gcc</span> argcargv.c -o argcargv
+
+<span class="co"># &#36816;&#34892;</span>
+$ <span class="kw">./argcargv</span> 5 7
+<span class="kw">a</span> + b = 5 + 7 = 12</code></pre></div>
+</dd>
+<dt>&#23545;&#20110; Windows:</dt>
+<dd><p>&#20808;&#21040; <code>C:/Windows/System32</code> &#25991;&#20214;&#22841;&#19979;&#21019;&#24314;&#19968;&#20010;&#25991;&#20214; <code>mycl.bat</code>&#65306; <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">@echo</span> off
+<span class="kw">%comspec%</span> /c <span class="st">&quot;&quot;</span>c:\Program Files (x86)\<span class="kw">Microsoft</span> Visual Studio 10.0\VC\vcvarsall.bat<span class="st">&quot; amd64 &amp;&amp; cl.exe %*&quot;</span></code></pre></div>
+<p>&#20877;&#21040;&#28304;&#30721;&#25991;&#20214;&#22841;&#19979;&#65292;&#25353;&#20303; Shift &#8211; &#40736;&#26631;&#21491;&#38190; &#8211; &#22312;&#27492;&#22788;&#25171;&#24320;&#21629;&#20196;&#31383;&#21475;&#65288;W&#65289;&#65292;&#22312; cmd &#20013;&#36755;&#20837;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># &#32534;&#35793;</span>
+$ <span class="kw">mycl</span> argcargv.c
+
+<span class="co"># &#36816;&#34892;</span>
+$ <span class="kw">./argcargv</span> 5 7
+<span class="kw">a</span> + b = 5 + 7 = 12</code></pre></div>
+</dd>
+</dl>
+<h2 id="&#24635;&#32467;">&#24635;&#32467;</h2>
+<p>&#23601;&#26159;&#22312;&#31243;&#24207;&#36816;&#34892;&#30340;&#26102;&#20505;&#20256;&#36882;&#21442;&#25968;&#12290;&#22240;&#20026; c &#35821;&#35328;&#20013;&#27809;&#26377;&#8220;StringList&#8221;&#31867;&#22411;&#65292;&#25152;&#20197;&#21482;&#33021;&#29992; <code>**char</code><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> &#25226;&#21629;&#20196;&#34892;&#21442;&#25968;&#20256;&#36882;&#32473;&#31243;&#24207;&#12290;</p>
+<p>&#36825;&#37324;&#25918;&#19968;&#27573; <a href="https://github.com/district10/cmake-bcp/blob/master/src/main.cpp">Boost bcp &#35299;&#26512;&#21629;&#20196;&#34892;&#30340;&#28304;&#30721;</a>&#20379;&#22823;&#23478;&#20307;&#20250;&#20307;&#20250;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">1</span>; i &lt; argc; ++i)
+{
+    <span class="kw">if</span>(<span class="dv">0</span> == std::strcmp(<span class="st">&quot;-h&quot;</span>, argv[i])
+       || <span class="dv">0</span> == std::strcmp(<span class="st">&quot;--help&quot;</span>, argv[i]))
+    {
+        show_usage();
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="kw">if</span>(<span class="dv">0</span> == std::strcmp(<span class="st">&quot;-v&quot;</span>, argv[i])
+       || <span class="dv">0</span> == std::strcmp(<span class="st">&quot;--version&quot;</span>, argv[i]))
+    {
+        ...
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    ...
+    <span class="kw">else</span> <span class="kw">if</span>(<span class="dv">0</span> == std::strcmp(<span class="st">&quot;--svn&quot;</span>, argv[i]))
+    {
+        papp-&gt;enable_svn_mode();
+    }
+    ...
+    <span class="kw">else</span> <span class="kw">if</span>(<span class="dv">0</span> == std::strncmp(<span class="st">&quot;--boost=&quot;</span>, argv[i], <span class="dv">8</span>))
+    {
+        papp-&gt;set_boost_path(argv[i] + <span class="dv">8</span>);
+    }
+    <span class="kw">else</span> <span class="kw">if</span>(<span class="dv">0</span> == std::strncmp(<span class="st">&quot;--namespace=&quot;</span>, argv[i], <span class="dv">12</span>))
+    {
+        papp-&gt;set_namespace(argv[i] + <span class="dv">12</span>);
+    }
+    ...
+    <span class="kw">else</span> <span class="kw">if</span>(argv[i][<span class="dv">0</span>] == <span class="st">&#39;-&#39;</span>)
+    {
+        std::cout &lt;&lt; <span class="st">&quot;Error: Unknown argument &quot;</span> &lt;&lt; argv[i] &lt;&lt; std::endl;
+        show_usage();
+        <span class="kw">return</span> <span class="dv">1</span>;
+    }
+    <span class="kw">else</span>
+    {
+        positional_args.push_back(argv[i]);
+    }
+}</code></pre></div>
+<h2 id="&#38468;">&#38468;</h2>
+<p>TODO: &#19968;&#20123; C/C++ &#21629;&#20196;&#34892;&#35299;&#26512;&#30340;&#24211;&#12290;</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#22914;&#26524;&#20320;&#30340; VS2010&#26159; Express &#29256;&#26412;&#65292;&#24212;&#35813;&#21482;&#33021;&#32534;&#35793; 32 &#20301;&#31243;&#24207;&#65292;&#24471;&#25226; <code>amd64</code> &#25913;&#25104; <code>x86</code>&#12290;<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p>&#22240;&#20026;&#36825;&#26679;&#19968;&#20010;&#25351;&#21521; <code>*char</code>&#65288;&#36825;&#37324;&#25226;&#23427;&#30475;&#25104; string &#20063;&#21487;&#20197;&#65289;&#30340;&#25351;&#38024;&#26080;&#27861;&#30693;&#36947;&#23427;&#30340;&#20010;&#25968;&#65292;&#25152;&#20197;&#38500;&#20102; argv&#65292;&#36824;&#35201;&#26377;&#19968;&#20010; int &#22411;&#30340; argc&#12290;&#20320;&#30693;&#36947;&#20026;&#20160;&#20040;&#22312; C &#35821;&#35328;&#37324;&#20989;&#25968;&#22768;&#26126; <code>void some_function(int arr[3])</code> &#21644; <code>void some_function(int arr[])</code> &#26159;&#19968;&#26679;&#30340;&#25226;&#65311;&#65288;&#19981;&#30693;&#36947;&#30340;&#35805;&#8230;&#8230;&#33258;&#24049;&#21435;&#32763;&#20070;&#8230;&#8230;&#65289;</p>
+<p>&#22312; C# &#21644; Java &#37324;&#65292;&#23601;&#21482;&#38656;&#35201;&#29992; <code>String[] args</code> &#21363;&#21487;&#12290;&#22240;&#20026;&#36825;&#20123;&#35821;&#35328;&#26377;&#36825;&#26679;&#30340;&#8220;StringList&#8221;&#31867;&#22411;&#12290;<a href="#fnref2">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#c">c</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0008-argc-argv-in-c.md" title="129 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0008-argc-argv-in-c.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 129,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

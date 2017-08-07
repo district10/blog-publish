@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning TypeScript</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="learning-typescript">Learning TypeScript</h1>
+<p>&#26412;&#25991;&#20027;&#35201;&#21442;&#32771;&#20102;</p>
+<ul>
+<li>&#23448;&#32593;&#65306;<a href="http://www.typescriptlang.org/">TypeScript - JavaScript that scales.</a></li>
+<li>&#23448;&#26041;&#25991;&#26723;&#65306;<a href="https://www.typescriptlang.org/docs/tutorial.html">Quick start &#183; TypeScript</a></li>
+<li>&#19968;&#26412;&#24320;&#28304;&#20070;&#12298;Deep Dive&#12299;&#65306;<a href="https://www.gitbook.com/book/basarat/typescript/details">TypeScript Deep Dive &#183; GitBook</a></li>
+</ul>
+<p>TypeScript &#26159;&#21861;&#20040;&#65311;&#21500;&#22312;&#21738;&#20799;&#65311;</p>
+<ul>
+<li><dl>
+<dt>Starts and ends with JavaScript <code class="fold">@</code></dt>
+<dd><p>TypeScript starts from the same syntax and semantics that millions of JavaScript developers know today. Use existing JavaScript code, incorporate popular JavaScript libraries, and call TypeScript code from JavaScript.</p>
+<p>TypeScript compiles to clean, simple JavaScript code which runs on any browser, in Node.js, or in any JavaScript engine that supports ECMAScript 3 (or newer).</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Strong tools for large apps <code class="fold">@</code></dt>
+<dd><p>Types enable JavaScript developers to use highly-productive development tools and practices like static checking and code refactoring when developing JavaScript applications.</p>
+<p>Types are optional, and type inference allows a few type annotations to make a big difference to the static verification of your code. Types let you define interfaces between software components and gain insights into the behavior of existing JavaScript libraries.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>State of the art JavaScript <code class="fold">@</code></dt>
+<dd><p>TypeScript offers support for the latest and evolving JavaScript features, including those from ECMAScript 2015 and future proposals, like async functions and decorators, to help build robust components.</p>
+<p>These features are available at development time for high-confidence app development, but are compiled into simple JavaScript that targets ECMAScript 3 (or newer) environments.</p>
+</dd>
+</dl></li>
+</ul>
+<p>&#23433;&#35013;&#65306;<code>npm install -g typescript</code>&#12290;&#65288;Nodejs &#21040;&#23448;&#26041;&#19979;&#36733;&#21363;&#21487;&#65292;&#23244;&#24323; npm &#24930;&#65292;&#21487;&#20197;&#29992; cnpm&#12290;&#65289;</p>
+<dl>
+<dt>tsc &#36816;&#34892;&#25928;&#26524; <code class="fold">@</code></dt>
+<dd><p>tsc&#65306;typescript compiler</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">tsc</span>
+<span class="kw">Version</span> 2.0.3
+<span class="kw">Syntax</span>:   tsc [options] [file ...]
+
+<span class="kw">Examples</span>: tsc hello.ts
+          <span class="kw">tsc</span> --outFile file.js file.ts
+          <span class="kw">tsc</span> @args.txt
+
+<span class="kw">Options</span>:
+ <span class="kw">--allowJs</span>                           Allow javascript files to be compiled.
+ <span class="kw">--allowSyntheticDefaultImports</span>      Allow default imports from modules with no
+                                     <span class="kw">default</span> export. This does not affect code emit, just typechecking.
+ <span class="kw">--allowUnreachableCode</span>              Do not report errors on unreachable code.
+ <span class="kw">--allowUnusedLabels</span>                 Do not report errors on unused labels.
+ <span class="kw">--baseUrl</span>                           Base directory to resolve non-absolute module names.
+ <span class="kw">-d</span>, --declaration                   Generates corresponding <span class="st">&#39;.d.ts&#39;</span> file.
+ <span class="kw">--experimentalDecorators</span>            Enables experimental support for ES7 decorators.
+ <span class="kw">--forceConsistentCasingInFileNames</span>  Disallow inconsistently-cased references to the same file.
+ <span class="kw">-h</span>, --help                          Print this message.
+ <span class="kw">--init</span>                              Initializes a TypeScript project and creates a tsconfig.json file.
+ <span class="kw">--jsx</span> KIND                          Specify JSX code generation: <span class="st">&#39;preserve&#39;</span> or <span class="st">&#39;react&#39;</span>
+ <span class="kw">--lib</span>                               Specify library files to be included in the compilation:
+                                       <span class="st">&#39;es5&#39;</span> <span class="st">&#39;es6&#39;</span> <span class="st">&#39;es2015&#39;</span> <span class="st">&#39;es7&#39;</span> <span class="st">&#39;es2016&#39;</span>
+                                       <span class="st">&#39;es2017&#39;</span> <span class="st">&#39;dom&#39;</span> <span class="st">&#39;webworker&#39;</span> <span class="st">&#39;scripthost&#39;</span>
+                                       <span class="st">&#39;es2015.core&#39;</span> <span class="st">&#39;es2015.collection&#39;</span>
+                                       <span class="st">&#39;es2015.generator&#39;</span> <span class="st">&#39;es2015.iterable&#39;</span>
+                                       <span class="st">&#39;es2015.promise&#39;</span> <span class="st">&#39;es2015.proxy&#39;</span>
+                                       <span class="st">&#39;es2015.reflect&#39;</span> <span class="st">&#39;es2015.symbol&#39;</span>
+                                       <span class="st">&#39;es2015.symbol.wellknown&#39;</span>
+                                       <span class="st">&#39;es2016.array.include&#39;</span> <span class="st">&#39;es2017.object&#39;</span>
+                                       <span class="st">&#39;es2017.sharedmemory&#39;</span>
+ <span class="kw">--mapRoot</span> LOCATION                  Specify the location where debugger should
+                                     <span class="kw">locate</span> map files instead of generated locations.
+ <span class="kw">--maxNodeModuleJsDepth</span>              The maximum dependency depth to search
+                                     <span class="kw">under</span> node_modules and load JavaScript files
+ <span class="kw">-m</span> KIND, --module KIND              Specify module code generation: <span class="st">&#39;commonjs&#39;</span>, <span class="st">&#39;amd&#39;</span>, <span class="st">&#39;system&#39;</span>, <span class="st">&#39;umd&#39;</span> or <span class="st">&#39;es2015&#39;</span>
+ <span class="kw">--moduleResolution</span>                  Specify module resolution strategy: <span class="st">&#39;node&#39;</span> (Node.js) <span class="kw">or</span> <span class="st">&#39;classic&#39;</span> (TypeScript pre-1.6)<span class="kw">.</span>
+ <span class="kw">--newLine</span> NEWLINE                   Specify the end of line sequence to be used when emitting files: <span class="st">&#39;CRLF&#39;</span> (dos) <span class="kw">or</span> <span class="st">&#39;LF&#39;</span> (unix)<span class="kw">.</span>
+ <span class="kw">--noEmit</span>                            Do not emit outputs.
+ <span class="kw">--noEmitOnError</span>                     Do not emit outputs if any errors were reported.
+ <span class="kw">--noFallthroughCasesInSwitch</span>        Report errors for fallthrough cases in switch statement.
+ <span class="kw">--noImplicitAny</span>                     Raise error on expressions and declarations with an implied <span class="st">&#39;any&#39;</span> type.
+ <span class="kw">--noImplicitReturns</span>                 Report error when not all code paths in function return a value.
+ <span class="kw">--noImplicitThis</span>                    Raise error on <span class="st">&#39;this&#39;</span> expressions with an implied <span class="st">&#39;any&#39;</span> type.
+ <span class="kw">--noImplicitUseStrict</span>               Do not emit <span class="st">&#39;use strict&#39;</span> directives in module output.
+ <span class="kw">--noUnusedLocals</span>                    Report errors on unused locals.
+ <span class="kw">--noUnusedParameters</span>                Report errors on unused parameters.
+ <span class="kw">--outDir</span> DIRECTORY                  Redirect output structure to the directory.
+ <span class="kw">--outFile</span> FILE                      Concatenate and emit output to single file.
+ <span class="kw">--preserveConstEnums</span>                Do not erase const enum declarations in generated code.
+ <span class="kw">--pretty</span>                            Stylize errors and messages using color and context. (experimental)
+ <span class="kw">-p</span> DIRECTORY, --project DIRECTORY   Compile the project in the given directory.
+ <span class="kw">--reactNamespace</span>                    Specify the object invoked for createElement and __spread when targeting <span class="st">&#39;react&#39;</span> JSX emit
+ <span class="kw">--removeComments</span>                    Do not emit comments to output.
+ <span class="kw">--rootDir</span> LOCATION                  Specify the root directory of input files. Use to control the output directory structure with --outDir.
+ <span class="kw">--skipLibCheck</span>                      Skip type checking of declaration files.
+ <span class="kw">--sourceMap</span>                         Generates corresponding <span class="st">&#39;.map&#39;</span> file.
+ <span class="kw">--sourceRoot</span> LOCATION               Specify the location where debugger should locate TypeScript files instead of source locations.
+ <span class="kw">--strictNullChecks</span>                  Enable strict null checks.
+ <span class="kw">--suppressImplicitAnyIndexErrors</span>    Suppress noImplicitAny errors for indexing objects lacking index signatures.
+ <span class="kw">-t</span> VERSION, --target VERSION        Specify ECMAScript target version: <span class="st">&#39;ES3&#39;</span> (default), <span class="st">&#39;ES5&#39;</span>, <span class="kw">or</span> <span class="st">&#39;ES2015&#39;</span>
+ <span class="kw">--traceResolution</span>                   Enable tracing of the name resolution process.
+ <span class="kw">--types</span>                             Type declaration files to be included in compilation.
+ <span class="kw">-v</span>, --version                       Print the compiler<span class="st">&#39;s version.</span>
+<span class="st"> -w, --watch                         Watch input files.</span>
+<span class="st"> @&lt;file&gt;                             Insert command line options and files from a file.</span></code></pre></div>
+<p>&#20351;&#29992;&#26041;&#27861;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">tsc</span> helloworld.ts</code></pre></div>
+<p>&#28982;&#21518;&#23601;&#29983;&#25104;&#20102; helloworld.js &#25991;&#20214;&#12290;</p>
+</dd>
+</dl>
+<p>&#24037;&#27442;&#21892;&#20854;&#20107;&#65292;&#24517;&#20808;&#21033;&#20854;&#22120;&#12290;&#32534;&#36753;&#22120;&#30340;&#36873;&#25321;&#65306;</p>
+<ul>
+<li><a href="https://code.visualstudio.com/?utm_expid=101350005-28.R1T8FshdTBWEfZjY0s7XKQ.0&amp;utm_referrer=http%3A%2F%2Fwww.typescriptlang.org%2F">Visual Studio Code - Code Editing. Redefined</a></li>
+<li><a href="http://alm.tools/">ALM Tools for TypeScript</a></li>
+</ul>
+<p>&#22312;&#36825;&#20010;&#25945;&#31243;&#37324;&#65292;&#25105;&#29992;&#20102; Visual Studio Code&#12290;</p>
+<h2 id="&#39318;&#20808;&#29087;&#24713;-visual-studio-code">&#39318;&#20808;&#29087;&#24713; Visual Studio Code</h2>
+<p>Visual Studio Code &#26159;&#19968;&#20010;&#21487;&#20197;&#36816;&#34892;&#22312; Mac OS X&#12289;Windows &#21644; Linux &#20043;&#19978;&#30340;&#65292;&#38024;&#23545;&#20110;&#32534;&#20889;&#29616;&#20195; Web &#21644;&#20113;&#24212;&#29992;&#30340;&#36328;&#24179;&#21488;&#28304;&#20195;&#30721;&#32534;&#36753;&#22120;&#12290;&#19979;&#25991;&#31616;&#31216; VSC&#12290;</p>
+<p>&#20808;&#35828;&#26126;&#19968;&#19979;&#26412;&#25991;&#23545;&#24555;&#25463;&#38190;&#30340;&#34920;&#36798;&#65288;&#30340; conventions&#65289;&#65306;</p>
+<ul>
+<li><code>C-X</code> &#34920;&#31034; Control+X</li>
+<li><code>S-X</code> &#34920;&#31034; Shift+X&#65292;&#20854;&#23454;&#23601;&#26159;&#22823;&#20889;&#23383;&#27597;&#8220;X&#8221;</li>
+<li><code>C-S-X</code> &#34920;&#31034; Control+Shift+X</li>
+<li><code>C-K X</code> &#34920;&#31034; Control+K &#20877; X</li>
+<li><code>C-Space</code> &#34920;&#31034; Control+Space</li>
+</ul>
+<h3 id="&#23433;&#35013;&#25554;&#20214;">&#23433;&#35013;&#25554;&#20214;</h3>
+<p>&#28857;&#20987;&#12304;&#25193;&#23637;&#12305;&#65292;&#25110;&#32773; <code>C-S-X</code> &#25171;&#24320;&#23427;&#12290;&#25105;&#23433;&#35013;&#20102; C++Intellisense&#65292;D3.js snippets&#65292;C/C++&#65292; Vim &#36825;&#20960;&#20010;&#25193;&#23637;&#12290;</p>
+<p>&#23433;&#35013;&#23436;&#27605;&#21518;&#65292;&#38656;&#35201;&#37325;&#21551; VSC&#12290;</p>
+<h3 id="tips">Tips</h3>
+<ul>
+<li><p><code>html5:&lt;TAB&gt;</code> &#33258;&#21160;&#22635;&#20805; html5 &#27169;&#26495;</p></li>
+<li><p>&#22914;&#26524;&#21518;&#38754;&#22312; Visual Studio Code &#20013;&#36816;&#34892; typescript &#30340;&#26102;&#20505;&#65292;&#35828;&#29256;&#26412;&#20914;&#31361;&#65292;&#38656;&#35201;&#21040;&#8220;&#39318;&#36873;&#39033;&#8211;&#24037;&#20316;&#21306;&#8221;&#65292;&#29992;&#33258;&#24049;&#30340;&#35774;&#32622;&#35206;&#30422;&#21407;&#26377;&#30340;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="er">//</span> <span class="er">&#25351;&#23450;&#21253;&#21547;&#35201;&#20351;&#29992;&#30340;</span> <span class="er">tsserver</span> <span class="er">&#21644;</span> <span class="er">lib*.d.ts</span> <span class="er">&#25991;&#20214;&#30340;&#25991;&#20214;&#22841;&#36335;&#24452;&#12290;</span>
+    <span class="dt">&quot;typescript.tsdk&quot;</span><span class="fu">:</span> <span class="st">&quot;node_modules/typescript/lib&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#21442;&#32771;&#36825;&#31687;&#25991;&#31456;&#65306;<a href="http://stackoverflow.com/questions/39505048/version-mismatch-between-tsc-compiler-and-vs-codes-language-service">vscode - Version mismatch between tsc compiler and VS Code&#8217;s language service - Stack Overflow</a>&#12290;</p></li>
+</ul>
+<h3 id="markdown-&#25991;&#20214;&#30340;&#32534;&#36753;">Markdown &#25991;&#20214;&#30340;&#32534;&#36753;</h3>
+<p>&#29992;&#8220;&#25991;&#20214; &#8211; &#25171;&#24320;&#25991;&#20214;&#22841;&#8221;&#25171;&#24320;&#19968;&#20010;&#25991;&#20214;&#22841;&#65292;&#28982;&#21518;&#26032;&#24314; <code>README.md</code>&#65288;&#20809;&#26631;&#31227;&#21160;&#21040;&#25991;&#20214;&#26641;&#19978;&#38754;&#65292;&#26377;&#8220;&#26032;&#24314;&#8221;&#25353;&#38062;&#65289;&#12290;</p>
+<p>&#22312;&#36825;&#37324;&#20889; Markdown&#12290;&#29992; <code>C-K V</code> &#39044;&#35272;&#12290;&#65288;&#25105;&#23433;&#35013;&#20102; Vim &#25554;&#20214;&#21518;&#65292;&#38656;&#35201;&#22312; Insert-mode &#25165;&#33021;&#20351;&#29992;&#36825;&#20010;&#24555;&#25463;&#38190;&#12290;&#65289;</p>
+<p>&#29992; <code>C-S-V</code> &#20999;&#25442; HTML &#21644; Markdown &#28304;&#30721;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#35797;&#35797;&#20195;&#30721;&#39640;&#20142;</span>
+<span class="kw">let</span> x<span class="op">;</span></code></pre></div>
+<p>&#25105;&#20204;&#36824;&#21487;&#20197;&#33258;&#24049;&#35774;&#23450; CSS&#65292;&#36824;&#21487;&#20197;&#21033;&#29992; task.json &#33258;&#24049;&#25351;&#23450; markdown &#21040; html &#30340;&#36716;&#21270;&#65292;&#21442;&#32771;&#25991;&#26723;&#26159; <a href="https://code.visualstudio.com/Docs/languages/markdown">Markdown editing with Visual Studio Code</a>&#12290;&#19981;&#36807;&#25105;&#24456;&#23569;&#39044;&#35272;&#65292;&#23601;&#19981;&#22312;&#36825;&#37324;&#33457;&#26102;&#38388;&#20102;&#12290;</p>
+<h3 id="&#26032;&#24314;&#19968;&#20010;-tsconfig-&#25991;&#20214;">&#26032;&#24314;&#19968;&#20010; tsconfig &#25991;&#20214;</h3>
+<p>&#26032;&#24314;&#25991;&#20214;&#65292;&#25991;&#20214;&#21517;&#20026; <code>tsconfig.json</code>&#65292;&#28982;&#21518;&#25171;&#24320;&#65292;&#36755;&#20837; <code>{}</code>&#65292;&#28982;&#21518;&#22238;&#36710;&#12290;&#36825;&#26159; ts &#30340;&#37197;&#32622;&#25991;&#20214;&#65292;&#26377;&#20195;&#30721;&#34917;&#20840;&#65292;&#27604;&#22914;&#36755;&#20837; &#8220;compiler&#8221;&#65292;&#23601;&#26377;&#20195;&#30721;&#25552;&#31034;&#65292;&#28982;&#21518;&#19978;&#19979;&#31227;&#21160;&#65292;&#36873;&#20013; compilerOptions&#65292;&#22238;&#36710;&#65292;&#34917;&#20840;&#20102;&#19968;&#20010; <code>:{}</code>&#12290;&#36824;&#21487;&#20197;&#29992; <code>C-Space</code> &#20195;&#30721;&#34917;&#20840;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es5&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;amd&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;sourceMap&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#36825;&#20010;&#25991;&#20214;&#65292;&#20027;&#35201;&#36824;&#26159;&#35201;&#21644; gulp &#21512;&#20316;&#12290;&#65288;gulpfile.js &#37324;&#30340;&#65306;<code>var tsProject = ts.createProject(&quot;tsconfig.json&quot;);</code>&#65292;&#19979;&#25991;&#26377;&#35814;&#32454;&#35762;&#12290;&#65289;</p>
+<h3 id="&#26032;&#24314;&#19968;&#20010;-typescript-&#25991;&#20214;">&#26032;&#24314;&#19968;&#20010; TypeScript &#25991;&#20214;</h3>
+<p>&#21516;&#29702;&#26032;&#24314;&#25991;&#20214;&#65292;&#25991;&#20214;&#21517;&#20026; &#8220;Hello.ts&#8221;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> x <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span>
+<span class="kw">let</span> y <span class="op">=</span> <span class="va">x</span>.<span class="at">charAt</span>(<span class="st">&quot;b&quot;</span>)</code></pre></div>
+<p>&#21457;&#29616;&#25552;&#31034;&#20195;&#30721;&#38169;&#35823;&#12290;&#36825;&#23601;&#26159; TypeScript &#36825; Type &#30340;&#24847;&#20041;&#12290;</p>
+<p><code>C-S-B</code> &#28982;&#21518;&#12304;&#37197;&#32622;&#20219;&#21153;&#36816;&#34892;&#31243;&#24207;&#12305;&#65292;&#28857;&#20987;&#37027;&#20010;&#26032;&#24314; typescript &#24037;&#31243;&#65292;&#20110;&#26159;&#29983;&#25104;&#20102; <code>.vscode/tasks.json</code> &#25991;&#20214;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span>
+    <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span>
+    <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;tsc&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;isShellCommand&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+    <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;-p&quot;</span><span class="ot">,</span> <span class="st">&quot;.&quot;</span><span class="ot">]</span><span class="fu">,</span>
+    <span class="dt">&quot;showOutput&quot;</span><span class="fu">:</span> <span class="st">&quot;silent&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;problemMatcher&quot;</span><span class="fu">:</span> <span class="st">&quot;$tsc&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#25991;&#26723;&#22312;&#36825;&#37324;&#65306;<a href="http://code.visualstudio.com/docs/editor/tasks">Tasks in Visual Studio Code</a>&#12290;</p>
+<p>&#25226;&#37027;&#20010; args &#30340;&#20869;&#23481;&#28165;&#31354;&#25104; <code>args: []</code>&#65292;&#20445;&#23384;&#12290;&#28982;&#21518;&#22238;&#21040; HelloWorld.ts&#65292;<code>C-S-B</code>&#12290;</p>
+<div class="figure">
+<img src="https://lh5.googleusercontent.com/LQfYjEPwUAFJZciR-NpauyxTF0w_62Kkv6Z8Dv25vSuTPR9ocIb0Dwbw6f4epiPp4PE-WcesIQuhI7oaVLt0Hqco0Y7G4_p9GYuVFhyF_5c6IcBiYRecjZiNcX-GvxVStrRgqOw" />
+
+</div>
+<p>&#21457;&#29616;&#29983;&#25104;&#20102; HelloWorld.js &#21644; HelloWorld.js.map &#25991;&#20214;&#12290;</p>
+<p>&#65288;sourceMap &#20027;&#35201;&#26159;&#29992;&#26469; debug &#24050;&#32463; uglify &#30340; JS &#20195;&#30721;&#65306;<a href="https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">Introduction to JavaScript Source Maps - HTML5 Rocks</a>&#12290;&#65289;</p>
+<p><code>C-S-B</code> &#26159;&#38024;&#23545;&#25972;&#20010;&#24037;&#31243;&#30340;&#65292;&#25152;&#20197;&#26080;&#25152;&#35859;&#26159;&#22312;&#21738;&#20010;&#25991;&#20214;&#37324;&#25353;&#19979;&#36825;&#20010;&#24555;&#25463;&#38190;&#12290;&#20320;&#21487;&#20197;&#25226; B &#29702;&#35299;&#20026; Run Build Task&#12290;</p>
+<p>&#30475; <a href="https://www.typescriptlang.org/docs/tutorial.html">Quick start &#183; TypeScript</a> &#26469;&#24555;&#36895;&#20837;&#38376;&#12290;&#36825;&#31687;&#25991;&#31456;&#20171;&#32461;&#20102; TypeScript &#30340; Hello World &#31243;&#24207;&#30340;&#32534;&#20889;&#12289;&#36816;&#34892;&#65292;&#20197;&#21450; Visual Studio Code &#30340;&#20351;&#29992;&#12290;</p>
+<dl>
+<dt>&#28857;&#20987;&#28857;&#24320;&#36825;&#37096;&#20998;&#31508;&#35760; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Student <span class="op">{</span>
+    <span class="dt">fullName</span><span class="op">:</span> string<span class="op">;</span>
+    <span class="at">constructor</span>(<span class="kw">public</span> firstName<span class="op">,</span> <span class="kw">public</span> middleInitial<span class="op">,</span> <span class="kw">public</span> lastName) <span class="op">{</span>
+        <span class="kw">this</span>.<span class="at">fullName</span> <span class="op">=</span> firstName <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> middleInitial <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> lastName<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">interface</span> Person <span class="op">{</span>
+    <span class="dt">firstName</span><span class="op">:</span> string<span class="op">;</span>
+    <span class="dt">lastName</span><span class="op">:</span> string<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">greeter</span>(person <span class="op">:</span> Person) <span class="op">{</span>
+    <span class="cf">return</span> <span class="st">&quot;Hello, &quot;</span> <span class="op">+</span> <span class="va">person</span>.<span class="at">firstName</span> <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> <span class="va">person</span>.<span class="at">lastName</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> user <span class="op">=</span> <span class="kw">new</span> <span class="at">Student</span>(<span class="st">&quot;Jane&quot;</span><span class="op">,</span> <span class="st">&quot;M.&quot;</span><span class="op">,</span> <span class="st">&quot;User&quot;</span>)<span class="op">;</span>
+
+<span class="va">document</span>.<span class="va">body</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="at">greeter</span>(user)<span class="op">;</span></code></pre></div>
+<p>&#29992; tsc &#32534;&#35793;&#29983;&#25104; greeter.js&#65292;&#28982;&#21518;&#20877;&#39029;&#38754;&#20013;&#24341;&#20837;&#23427;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;&lt;title&gt;</span>TypeScript Greeter<span class="kw">&lt;/title&gt;&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;greeter.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+</dd>
+</dl>
+<h3 id="&#24120;&#29992;&#24555;&#25463;&#38190;">&#24120;&#29992;&#24555;&#25463;&#38190;</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">&#25353;&#38190;</th>
+<th align="center">&#20316;&#29992;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">F12</td>
+<td align="center">&#36716;&#21040;&#23450;&#20041;</td>
+</tr>
+<tr class="even">
+<td align="center"><code>C-S-P</code></td>
+<td align="center">&#25171;&#24320; Command Palette</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#21629;&#20196;&#34892;">&#21629;&#20196;&#34892;</h3>
+<p>&#36825;&#37096;&#20998;&#21442;&#32771;&#65306;<a href="https://code.visualstudio.com/docs/editor/integrated-terminal">Integrated Terminal in Visual Studio Code</a>&#12290;</p>
+<p><code>C-`</code> &#21487;&#20197;&#25171;&#24320;&#21629;&#20196;&#34892;&#12290;&#22914;&#26524;&#24555;&#25463;&#38190;&#20914;&#31361;&#20102;&#65292;&#21487;&#20197;&#30452;&#25509;&#21040;&#12304;&#26597;&#30475; &#8211; &#38598;&#25104;&#32456;&#31471;&#12305;&#25171;&#24320;&#12290;</p>
+<p>The shell used defaults to <code>$SHELL</code> on Linux and OS X, and <code>%COMSPEC%</code> on Windows. These can be overridden manually by setting <code>terminal.integrated.shell.*</code> in settings. Arguments can be passed to the terminal shell on Linux and OS X using the <code>terminal.integrated.shellArgs.*</code> settings.</p>
+<p>&#21442;&#32771;&#25991;&#29486;</p>
+<ul>
+<li><a href="https://blogs.msdn.microsoft.com/typescript/2015/04/30/using-typescript-in-visual-studio-code/">Using TypeScript in Visual Studio Code | TypeScript</a></li>
+<li><a href="https://www.typescriptlang.org/docs/tutorial.html">Quick start &#183; TypeScript</a></li>
+<li><a href="https://github.com/Microsoft/TypeScript/tree/master/doc">TypeScript/doc at master &#183; Microsoft/TypeScript</a></li>
+</ul>
+<h2 id="typescript-the-language">TypeScript the Language</h2>
+<p>&#31616;&#35201;&#20171;&#32461;&#20102; TypeScript &#21644; VSC&#12290;&#19979;&#38754;&#20171;&#32461;&#36825;&#20010;&#35821;&#35328;&#12290;</p>
+<h3 id="&#31616;&#20171;">&#31616;&#20171;</h3>
+<p>TypeScript &#30340;&#24847;&#20041;&#65306;</p>
+<ul>
+<li>&#25552;&#20379;&#20102;&#19968;&#20010; optional &#30340; type system&#65288;type &#21487;&#20197;&#25552;&#39640; agility <code>[&#601;'d&#658;&#618;l&#601;t&#618;]</code>&#65292;&#20063;&#26377;&#21161;&#20110;&#29983;&#25104;&#25991;&#26723;&#65289;</li>
+<li>&#25552;&#20379;&#20102;&#19968;&#20010;&#21487;&#29992;&#30340; JavaScript &#26631;&#20934;</li>
+</ul>
+<p>&#32780;&#19988;&#65292;TypeScript &#21487;&#20197; implicit&#65292;&#20063;&#21487;&#20197; explicit&#12290;&#23427;&#30340; Type &#26159; structural &#30340;&#65292;&#31867;&#20284;&#20110; duty typing&#65288;&#20320;&#34920;&#29616;&#24471;&#26159;&#20010;&#40493;&#23376;&#65292;&#37027;&#20320;&#23601;&#26159;&#19968;&#20010;&#40493;&#23376;&#65289;&#12290;&#27604;&#22914; <code>{name: string}</code> &#19968;&#23450;&#26159;&#19968;&#20010; <code>{name: string, id: number}</code>&#12290;</p>
+<p>&#20877;&#65292;&#36825;&#31181; type &#30340;&#35268;&#33539;&#65292;&#21482;&#26159;&#19968;&#31181;&#24314;&#35758;&#65292;&#19981;&#31649;&#26377;&#22810;&#23569; type &#38169;&#35823;&#65292;javascript &#20381;&#26087;&#21487;&#20197;&#39034;&#21033;&#29983;&#25104;&#12290;</p>
+<dl>
+<dt>Types can be ambient <code class="fold">@</code></dt>
+<dd><p>&#36825;&#20010;&#25105;&#27809;&#26377;&#25026;&#12290;&#65288;&#26159;&#35828; TypeScript &#25552;&#20379;&#30340;&#29983;&#24577;&#65292;&#20801;&#35768;&#20174;&#20854;&#20182;&#24211;&#23548;&#20837;&#65311;&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#19981;&#34892;</span>
+<span class="at">$</span>(<span class="st">&#39;.awesome&#39;</span>).<span class="at">show</span>()<span class="op">;</span> <span class="co">// Error: cannot find name `$`</span>
+
+<span class="co">// &#21487;&#20197;</span>
+declare <span class="kw">var</span> $<span class="op">:</span>any<span class="op">;</span>
+<span class="at">$</span>(<span class="st">&#39;.awesome&#39;</span>).<span class="at">show</span>()<span class="op">;</span> <span class="co">// Okay!</span>
+
+<span class="co">// &#21487;&#20197;</span>
+declare <span class="kw">var</span> $<span class="op">:{</span>
+    (<span class="dt">selector</span><span class="op">:</span>string)<span class="op">=&gt;</span>any<span class="op">;</span>
+<span class="op">};</span>
+<span class="at">$</span>(<span class="st">&#39;.awesome&#39;</span>).<span class="at">show</span>()<span class="op">;</span> <span class="co">// Okay!</span>
+<span class="at">$</span>(<span class="dv">123</span>).<span class="at">show</span>()<span class="op">;</span> <span class="co">// Error: selector needs to be a string</span></code></pre></div>
+<p>We will discuss the details of creating TypeScript definitions for existing JavaScript in detail later once you know more about TypeScript (e.g.&#160;stuff like interface and the any).</p>
+</dd>
+<dt>&#36824;&#26377;&#65292;&#26377;&#20102; TypeScript&#65292;&#20320;&#21487;&#20197;&#20139;&#21463;&#26126;&#22825;&#30340;&#26631;&#20934;&#12290; <code class="fold">@</code></dt>
+<dd><p>&#27604;&#22914;&#21487;&#20197;&#29992; class &#20851;&#38190;&#23383;&#65292;&#36824;&#21487;&#20197;&#29992; fat arrow &#23450;&#20041;&#20989;&#25968;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#31867;</span>
+<span class="kw">class</span> Point <span class="op">{</span>
+    <span class="at">constructor</span>(<span class="kw">public</span> <span class="dt">x</span><span class="op">:</span> number<span class="op">,</span> <span class="kw">public</span> <span class="dt">y</span><span class="op">:</span> number) <span class="op">{</span>
+    <span class="op">}</span>
+    <span class="at">add</span>(<span class="dt">point</span><span class="op">:</span> Point) <span class="op">{</span>
+        <span class="cf">return</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="va">point</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="va">point</span>.<span class="at">y</span>)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> p1 <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span>
+<span class="kw">var</span> p2 <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span>
+<span class="kw">var</span> p3 <span class="op">=</span> <span class="va">p1</span>.<span class="at">add</span>(p2)<span class="op">;</span> <span class="co">// {x:10,y:30}</span>
+
+<span class="co">// fat arrow</span>
+<span class="kw">var</span> inc <span class="op">=</span> (x)<span class="op">=&gt;</span>x<span class="dv">+1</span><span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<p>&#26368;&#21518;&#65292;TypeScript &#26159; JavaScript &#30340;&#36229;&#38598;&#65288;&#29978;&#33267;&#26159;&#23427;&#26085;&#21518;&#26631;&#20934;&#30340;&#36229;&#38598;&#65289;&#12290;&#22914;&#26524;&#20320;&#35201;&#23398;&#22909; TypeScript&#65292;&#20320;&#20063;&#24471;&#20102;&#35299; JavaScript&#12290;The good parts and the pit falls&#12290;</p>
+<h3 id="js-&#21644;-ts&#22909;&#19982;&#22351;">JS &#21644; TS&#65292;&#22909;&#19982;&#22351;</h3>
+<p>&#20960;&#28857;&#20869;&#23481;&#65306;</p>
+<ul>
+<li><p><code>null</code> &#21644; <code>undefined</code></p></li>
+<li><dl>
+<dt><code>this</code> &#30340;&#20316;&#29992;&#22495; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">foo</span>()<span class="op">;</span> <span class="co">// logs out the global e.g. `window` in browsers&#65292;&#36825;&#37324;&#30340;&#38382;&#39064;&#22312;&#20110;&#65306;&#27809;&#26377;&#20989;&#25968;&#32423;&#21035;&#30340;&#20316;&#29992;&#22495;</span>
+<span class="kw">let</span> bar <span class="op">=</span> <span class="op">{</span>
+  foo
+<span class="op">}</span>
+<span class="va">bar</span>.<span class="at">foo</span>()<span class="op">;</span> <span class="co">// Logs out `bar` as `foo` was called on `bar`&#65292;&#36825;&#37324;&#30340;&#38382;&#39064;&#22312;&#20110;&#65306;&#20316;&#29992;&#22495;&#22826;&#23481;&#26131;&#34987;&#20837;&#20405;</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>closure &#20197;&#21450;&#23427;&#30340;&#20316;&#29992; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">createCounter</span>() <span class="op">{</span>
+    <span class="kw">let</span> val <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="cf">return</span> <span class="op">{</span>
+        <span class="at">increment</span>() <span class="op">{</span> val<span class="op">++</span> <span class="op">},</span>
+            <span class="at">getVal</span>() <span class="op">{</span> <span class="cf">return</span> val <span class="op">}</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">let</span> counter <span class="op">=</span> <span class="at">createCounter</span>()<span class="op">;</span>
+<span class="va">counter</span>.<span class="at">increment</span>()<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="va">counter</span>.<span class="at">getVal</span>())<span class="op">;</span> <span class="co">// 1</span>
+<span class="va">counter</span>.<span class="at">increment</span>()<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="va">counter</span>.<span class="at">getVal</span>())<span class="op">;</span> <span class="co">// 2</span></code></pre></div>
+<p>&#20854;&#23454;&#26159;&#23553;&#35013;&#20102;&#19968;&#20010;&#29366;&#24577;&#12290;</p>
+</dd>
+</dl></li>
+</ul>
+<h3 id="gulpbrowserify-&#21644;-typescript">Gulp&#65292;Browserify &#21644; TypeScript &#9829;&#65039;</h3>
+<p>&#36825;&#37096;&#20998;&#21442;&#32771;&#20102; <a href="https://www.typescriptlang.org/docs/handbook/gulp.html">Gulp &#183; TypeScript</a>&#12290;</p>
+<p>&#39318;&#20808;&#26032;&#24314;&#20004;&#20010;&#25991;&#20214;&#22841; <code>src</code> &#21644; <code>dist</code> &#20316;&#20026;&#36755;&#20837;&#36755;&#20986;&#25991;&#20214;&#22841;&#12290;</p>
+<dl>
+<dt>&#28982;&#21518; <code>npm init</code> &#26032;&#24314;&#19968;&#20010; npm &#24037;&#31243;&#65292;&#29983;&#25104; package.json&#12290; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">npm</span> init
+$ <span class="kw">cat</span> package.json
+<span class="kw">{</span>
+  <span class="st">&quot;name&quot;</span>: <span class="st">&quot;miniproj&quot;</span>,
+  <span class="st">&quot;version&quot;</span>: <span class="st">&quot;1.0.0&quot;</span>,
+  <span class="st">&quot;description&quot;</span>: <span class="st">&quot;A Minimal Project to Demonstrate How To Use Gulp with Visual Studio Code &amp; TypeScript&quot;</span>,
+  <span class="st">&quot;main&quot;</span>: <span class="st">&quot;dist/main.js&quot;</span>,
+  <span class="st">&quot;scripts&quot;</span>: <span class="kw">{</span>
+    <span class="st">&quot;test&quot;</span>: <span class="st">&quot;echo </span><span class="dt">\&quot;</span><span class="st">Error: no test specified</span><span class="dt">\&quot;</span><span class="st"> &amp;&amp; exit 1&quot;</span>
+  <span class="kw">}</span>,
+  <span class="st">&quot;author&quot;</span>: <span class="st">&quot;Tang zhixiong&quot;</span>,
+  <span class="st">&quot;license&quot;</span>: <span class="st">&quot;ISC&quot;</span>
+<span class="kw">}</span></code></pre></div>
+</dd>
+<dt>&#28982;&#21518;&#23433;&#35013;&#19968;&#19979;&#20381;&#36182;&#12290; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">npm</span> install -g gulp-cli
+$ <span class="kw">npm</span> install --save-dev typescript gulp gulp-typescript</code></pre></div>
+</dd>
+<dt>&#19968;&#20010; TypeScript &#25991;&#20214;&#65306;src/main.ts&#12290; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">hello</span>(compiler<span class="op">:</span> string) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Hello from </span><span class="sc">${</span>compiler<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>
+<span class="op">}</span>
+<span class="at">hello</span>(<span class="st">&quot;TypeScript&quot;</span>)<span class="op">;</span></code></pre></div>
+<p>&#32534;&#20889; gulpfile.js&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> ts <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-typescript&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> tsProject <span class="op">=</span> <span class="va">ts</span>.<span class="at">createProject</span>(<span class="st">&quot;tsconfig.json&quot;</span>)<span class="op">;</span>
+
+<span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;default&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">tsProject</span>.<span class="at">src</span>()
+        .<span class="at">pipe</span>(<span class="at">tsProject</span>())
+        .<span class="va">js</span>.<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&quot;dist&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>&#28982;&#21518;&#32534;&#35793;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">gulp</span>
+$ <span class="kw">node</span> dist/main.js
+<span class="kw">Hello</span> from TypeScript</code></pre></div>
+</dd>
+<dt>&#27169;&#22359;&#21270;&#30340;&#24605;&#24819;&#65292;&#31532;&#20108;&#20010; ts &#25991;&#20214;&#65306;src/greet.ts&#12290; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="im">export</span> <span class="kw">function</span> <span class="at">sayHello</span>(name<span class="op">:</span> string) <span class="op">{</span>
+    <span class="cf">return</span> <span class="vs">`Hello from </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">, via module export. wathing... Really.`</span><span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>&#20877;&#23433;&#35013;&#19968;&#28857;&#24037;&#20855;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">npm</span> install --save-dev browserify tsify vinyl-source-stream
+<span class="kw">npm</span> install --save-dev watchify gulp-util
+<span class="kw">npm</span> install --save-dev gulp-uglify vinyl-buffer gulp-sourcemaps</code></pre></div>
+</dd>
+<dt>&#26368;&#21518;&#65292;&#29992; gulpfile.js &#26469;&#37197;&#32622; gulp &#26469;&#20570;&#33258;&#21160;&#21270;&#30340;&#24037;&#20316;&#12290; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> browserify <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;browserify&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> source <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;vinyl-source-stream&#39;</span>)<span class="op">;</span>
+<span class="kw">var</span> watchify <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;watchify&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> tsify <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;tsify&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> gutil <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-util&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> watch <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-watch&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> paths <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">statics</span><span class="op">:</span> [<span class="st">&#39;src/*.html&#39;</span><span class="op">,</span> <span class="st">&#39;src/statics/*.css&#39;</span><span class="op">,</span> <span class="st">&#39;src/statics/*.js&#39;</span>]<span class="op">,</span>
+    <span class="dt">mdsrcs</span><span class="op">:</span> [<span class="st">&#39;src/*.md&#39;</span><span class="op">,</span> <span class="st">&#39;README.txt&#39;</span>]
+<span class="op">};</span>
+<span class="kw">var</span> execSync <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;child_process&#39;</span>).<span class="at">execSync</span><span class="op">;</span>
+<span class="kw">var</span> run <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;gulp-run&#39;</span>)<span class="op">;</span>
+<span class="kw">var</span> rename <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;gulp-rename&#39;</span>)<span class="op">;</span>
+
+<span class="kw">var</span> watchedBrowserify <span class="op">=</span> <span class="at">watchify</span>(<span class="at">browserify</span>(<span class="op">{</span>
+    <span class="dt">basedir</span><span class="op">:</span> <span class="st">&#39;.&#39;</span><span class="op">,</span>
+    <span class="dt">debug</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span>
+    <span class="dt">entries</span><span class="op">:</span> [<span class="st">&#39;src/main.ts&#39;</span>]<span class="op">,</span>
+    <span class="dt">cache</span><span class="op">:</span> <span class="op">{},</span>
+    <span class="dt">packageCache</span><span class="op">:</span> <span class="op">{}</span>
+<span class="op">}</span>).<span class="at">plugin</span>(tsify))<span class="op">;</span>
+
+<span class="co">// HTML &#25991;&#20214;&#30452;&#25509;&#25335;&#36125;&#36807;&#21435;&#65292;&#21487;&#20197;&#22312;&#21629;&#20196;&#34892;&#30452;&#25509;&#36816;&#34892; gulp copy-html</span>
+<span class="co">// &#26469;&#25191;&#34892;&#36825;&#20010; task</span>
+<span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;copy-statics&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">gulp</span>.<span class="at">src</span>(<span class="va">paths</span>.<span class="at">statics</span>)
+        .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&quot;dist&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;md2html&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="co">// return watch(paths.mdsrcs, { ignoreInitial: true })</span>
+    <span class="cf">return</span> <span class="va">gulp</span>.<span class="at">src</span>(<span class="va">paths</span>.<span class="at">mdsrcs</span>)
+            .<span class="at">pipe</span>(<span class="at">run</span>(<span class="st">&quot;perl tools/drawer.pl&quot;</span>))
+            .<span class="at">pipe</span>(<span class="at">run</span>(<span class="st">&quot;pandoc --ascii --template src/statics/html.template&quot;</span>))
+            .<span class="at">pipe</span>(<span class="at">rename</span>(<span class="kw">function</span> (path) <span class="op">{</span> <span class="va">path</span>.<span class="at">extname</span> <span class="op">=</span> <span class="st">&quot;.html&quot;</span> <span class="op">}</span>))
+            .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&quot;dist&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;doc&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">watch</span>(<span class="va">paths</span>.<span class="at">mdsrcs</span><span class="op">,</span> <span class="op">{</span> <span class="dt">ignoreInitial</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)
+            .<span class="at">pipe</span>(<span class="at">run</span>(<span class="st">&quot;perl tools/drawer.pl&quot;</span>))
+            .<span class="at">pipe</span>(<span class="at">run</span>(<span class="st">&quot;pandoc --ascii --template src/statics/html.template&quot;</span>))
+            .<span class="at">pipe</span>(<span class="at">rename</span>(<span class="kw">function</span> (path) <span class="op">{</span> <span class="va">path</span>.<span class="at">extname</span> <span class="op">=</span> <span class="st">&quot;.html&quot;</span> <span class="op">}</span>))
+            .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&quot;dist&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">bundle</span>() <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;pwd: &quot;</span><span class="op">+</span><span class="at">execSync</span>(<span class="st">&#39;pwd&#39;</span>).<span class="at">toString</span>())<span class="op">;</span>
+    <span class="cf">return</span> watchedBrowserify
+        .<span class="at">bundle</span>()
+        .<span class="at">pipe</span>(<span class="at">source</span>(<span class="st">&#39;bundle.js&#39;</span>))
+        .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&quot;dist&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// &#25509;&#21475;&#26159;&#65306;gulp.task(name [, deps] [, fn])</span>
+<span class="co">//</span>
+<span class="co">// &#21644; C++ &#30340;&#40664;&#35748;&#21442;&#25968;&#19981;&#19968;&#26679;&#30340;&#26159;&#65292;fn &#20986;&#29616;&#30340;&#26102;&#20505;&#65292;deps &#19981;&#35201;&#27714;&#20026;&#31354;&#65292;&#20063;&#23601;&#26159;&#35828;</span>
+<span class="co">// &#36825;&#20010;&#25509;&#21475;&#21253;&#25324; gulp.task( name, fn ) &#30340;&#24773;&#20917;&#12290;</span>
+<span class="co">//</span>
+<span class="co">// default &#26159;&#40664;&#35748;&#25191;&#34892;&#30340; task</span>
+<span class="co">//</span>
+<span class="co">// gulp &#30340;&#25991;&#26723;&#65292;&#22312;&#36825;&#37324;&#65306;</span>
+<span class="co">//      https://github.com/gulpjs/gulp/blob/master/docs/API.md</span>
+<span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;default&quot;</span><span class="op">,</span> [<span class="st">&quot;copy-statics&quot;</span><span class="op">,</span> <span class="st">&quot;md2html&quot;</span>]<span class="op">,</span> bundle)<span class="op">;</span>
+<span class="va">watchedBrowserify</span>.<span class="at">on</span>(<span class="st">&quot;update&quot;</span><span class="op">,</span> bundle)<span class="op">;</span>
+<span class="va">watchedBrowserify</span>.<span class="at">on</span>(<span class="st">&quot;log&quot;</span><span class="op">,</span> <span class="va">gutil</span>.<span class="at">log</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>gulp &#21608;&#36793;&#26377;&#35768;&#22810;&#24037;&#20855;&#21487;&#20197;&#20351;&#29992;&#12290; <code class="fold">@</code></dt>
+<dd><ul>
+<li><p><a href="https://github.com/hparra/gulp-rename">hparra/gulp-rename: Rename files easily</a></p></li>
+<li><dl>
+<dt><a href="https://github.com/rvagg/through2">rvagg/through2: Tiny wrapper around Node streams2 Transform to avoid explicit subclassing noise</a> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">fs</span>.<span class="at">createReadStream</span>(<span class="st">&#39;ex.txt&#39;</span>)
+  .<span class="at">pipe</span>(<span class="at">through2</span>(<span class="kw">function</span> (chunk<span class="op">,</span> enc<span class="op">,</span> callback) <span class="op">{</span>
+    <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">chunk</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>)
+      <span class="cf">if</span> (chunk[i] <span class="op">==</span> <span class="dv">97</span>)
+        chunk[i] <span class="op">=</span> <span class="dv">122</span> <span class="co">// swap &#39;a&#39; for &#39;z&#39;</span>
+
+    <span class="kw">this</span>.<span class="at">push</span>(chunk)
+
+    <span class="at">callback</span>()
+   <span class="op">}</span>))
+  .<span class="at">pipe</span>(<span class="va">fs</span>.<span class="at">createWriteStream</span>(<span class="st">&#39;out.txt&#39;</span>))</code></pre></div>
+</dd>
+</dl></li>
+<li><p>&#20026;&#20102;&#26356;&#22909;&#30340;&#37197;&#21512; watch&#65292;&#21152;&#24555;&#24037;&#20316;&#27969;&#31243;&#65292;&#36824;&#20197;&#32473;&#27983;&#35272;&#22120;&#35013;&#19978; <a href="https://addons.mozilla.org/en-US/firefox/addon/auto-reload/">Auto Reload :: Add-ons for Firefox</a> &#25554;&#20214;&#12290;Chrome &#19978;&#24212;&#35813;&#20063;&#26377;&#31867;&#20284;&#30340;&#24037;&#20855;&#12290;</p></li>
+</ul>
+</dd>
+</dl>
+<h3 id="typescript-&#30340;&#27010;&#35272;&#29305;&#24615;">TypeScript &#30340;&#27010;&#35272;&#29305;&#24615;</h3>
+<dl>
+<dt>Classes <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Point <span class="op">{</span>
+    <span class="dt">x</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="dt">y</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="at">constructor</span>(<span class="dt">x</span><span class="op">:</span> number<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> number) <span class="op">{</span>
+        <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span>
+        <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span>
+    <span class="op">}</span>
+    <span class="at">add</span>(<span class="dt">point</span><span class="op">:</span> Point) <span class="op">{</span>
+        <span class="cf">return</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="va">point</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="va">point</span>.<span class="at">y</span>)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> p1 <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span>
+<span class="kw">var</span> p2 <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span>
+<span class="kw">var</span> p3 <span class="op">=</span> <span class="va">p1</span>.<span class="at">add</span>(p2)<span class="op">;</span> <span class="co">// {x:10,y:30}</span></code></pre></div>
+<dl>
+<dt>&#32487;&#25215;&#65288;Inheritance&#65289;&#65306;<code>extends</code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Point3D <span class="kw">extends</span> Point <span class="op">{</span>
+    <span class="dt">z</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="at">constructor</span>(<span class="dt">x</span><span class="op">:</span> number<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> number<span class="op">,</span> <span class="dt">z</span><span class="op">:</span> number) <span class="op">{</span>
+        <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span>
+        <span class="kw">this</span>.<span class="at">z</span> <span class="op">=</span> z<span class="op">;</span>
+    <span class="op">}</span>
+    <span class="at">add</span>(<span class="dt">point</span><span class="op">:</span> Point3D) <span class="op">{</span>
+        <span class="kw">var</span> point2D <span class="op">=</span> <span class="kw">super</span>.<span class="at">add</span>(point)<span class="op">;</span>
+        <span class="cf">return</span> <span class="kw">new</span> <span class="at">Point3D</span>(<span class="va">point2D</span>.<span class="at">x</span><span class="op">,</span> <span class="va">point2D</span>.<span class="at">y</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">z</span> <span class="op">+</span> <span class="va">point</span>.<span class="at">z</span>)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+<dt>&#38745;&#24577;&#21464;&#37327;/&#20989;&#25968;&#65306;statics <code class="fold">@</code></dt>
+<dd><p>&#21644; Java &#19968;&#26679;&#65292;&#21487;&#20197;&#30452;&#25509;&#21021;&#22987;&#21270;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Something <span class="op">{</span>
+    <span class="kw">static</span> instances <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="at">constructor</span>() <span class="op">{</span>
+        <span class="va">Something</span>.<span class="at">instances</span><span class="op">++;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> s1 <span class="op">=</span> <span class="kw">new</span> <span class="at">Something</span>()<span class="op">;</span>
+<span class="kw">var</span> s2 <span class="op">=</span> <span class="kw">new</span> <span class="at">Something</span>()<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="va">Something</span>.<span class="at">instances</span>)<span class="op">;</span> <span class="co">// 2</span></code></pre></div>
+</dd>
+<dt>&#35775;&#38382;&#25511;&#21046;&#65306;Access Modifiers <code class="fold">@</code></dt>
+<dd><table>
+<thead>
+<tr class="header">
+<th align="center">accessible on</th>
+<th align="center">public</th>
+<th align="center">private</th>
+<th align="center">protected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">class instances</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">no</td>
+</tr>
+<tr class="even">
+<td align="center">class</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr class="odd">
+<td align="center">class children</td>
+<td align="center">yes</td>
+<td align="center">no</td>
+<td align="center">yes</td>
+</tr>
+</tbody>
+</table>
+<p>&#31616;&#21333;&#35828;&#65292;&#21644; C++ &#30340; access modifiers &#19968;&#26679;&#65292;public &#26159;&#8220;&#21521;&#20840;&#19990;&#30028;&#8221;&#20844;&#24320;&#65292; protected &#26159;&#8220;&#21482;&#21521;&#23401;&#23376;&#8221;&#20844;&#24320;&#65292;private &#26159;&#8220;&#19981;&#21521;&#20219;&#20309;&#20154;&#8221;&#20844;&#24320;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> FooBase <span class="op">{</span>
+    <span class="kw">public</span> <span class="dt">x</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="kw">private</span> <span class="dt">y</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="kw">protected</span> <span class="dt">z</span><span class="op">:</span> number<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// EFFECT ON INSTANCES</span>
+<span class="kw">var</span> foo <span class="op">=</span> <span class="kw">new</span> <span class="at">FooBase</span>()<span class="op">;</span>
+<span class="va">foo</span>.<span class="at">x</span><span class="op">;</span> <span class="co">// okay</span>
+<span class="va">foo</span>.<span class="at">y</span><span class="op">;</span> <span class="co">// ERROR : private</span>
+<span class="va">foo</span>.<span class="at">z</span><span class="op">;</span> <span class="co">// ERROR : protected</span>
+
+<span class="co">// EFFECT ON CHILD CLASSES</span>
+<span class="kw">class</span> FooChild <span class="kw">extends</span> FooBase <span class="op">{</span>
+    <span class="at">constructor</span>() <span class="op">{</span>
+      <span class="kw">super</span>()<span class="op">;</span>
+        <span class="kw">this</span>.<span class="at">x</span><span class="op">;</span> <span class="co">// okay</span>
+        <span class="kw">this</span>.<span class="at">y</span><span class="op">;</span> <span class="co">// ERROR: private</span>
+        <span class="kw">this</span>.<span class="at">z</span><span class="op">;</span> <span class="co">// okay</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+<dt>&#25277;&#35937;&#31867;&#65306;Abstract <code class="fold">@</code></dt>
+<dd><p>&#23601;&#26159;&#26377;&#19968;&#20123;&#27809;&#26377;&#23454;&#29616;&#30340;&#20989;&#25968;&#12290;&#31216;&#20043;&#20026;&#25509;&#21475;&#12290;&#19981;&#21487;&#23454;&#20363;&#21270;&#12290;</p>
+</dd>
+<dt>Constructor is optional <code class="fold">@</code></dt>
+<dd><p>&#21644; C++ &#19968;&#26679;&#65292;&#32534;&#35793;&#22120;&#25552;&#20379;&#40664;&#35748;&#30340;&#26500;&#36896;&#20989;&#25968;&#12290;</p>
+</dd>
+<dt>Define using constructor <code class="fold">@</code></dt>
+<dd><p>&#19968;&#31181;&#35821;&#27861;&#31958;&#25226;&#12290;&#22909;&#22788;&#26159;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Foo <span class="op">{</span>
+    <span class="dt">x</span><span class="op">:</span> number<span class="op">;</span>
+    <span class="at">constructor</span>(<span class="dt">x</span><span class="op">:</span>number) <span class="op">{</span>
+        <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>&#20063;&#21487;&#20197;&#20889;&#25104;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Foo <span class="op">{</span>
+    <span class="at">constructor</span>(<span class="kw">public</span> <span class="dt">x</span><span class="op">:</span>number) <span class="op">{</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+<dt>Property initializer <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Foo <span class="op">{</span>
+    members <span class="op">=</span> []<span class="op">;</span>  <span class="co">// Initialize directly</span>
+    <span class="at">add</span>(x) <span class="op">{</span>
+        <span class="kw">this</span>.<span class="va">members</span>.<span class="at">push</span>(x)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>&#27604; C++ &#26041;&#20415;&#22826;&#22810;&#65288;C++ &#36824;&#38656;&#35201;&#22312;&#31867;&#30340;&#22806;&#38754;&#23450;&#20041;&#19968;&#36941;&#12290;&#65289;&#12290;&#21644; Java &#31867;&#20284;&#12290;</p>
+</dd>
+</dl>
+</dd>
+<dt>Arrow Functions <code class="fold">@</code></dt>
+<dd><p>&#20063;&#34987;&#31216;&#20026;&#65288;lovingly called&#65289;fat arrow&#65288;&#22240;&#20026; <code>-&gt;</code> &#26159; thin arrow&#65292;&#25152;&#20197; <code>=&gt;</code> &#26159; fat arrow&#65289;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> inc <span class="op">=</span> (x)<span class="op">=&gt;</span>x<span class="dv">+1</span><span class="op">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Person <span class="op">{</span>
+    <span class="at">constructor</span>(<span class="kw">public</span> <span class="dt">age</span><span class="op">:</span>number) <span class="op">{}</span>
+    growOld <span class="op">=</span> () <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="kw">this</span>.<span class="at">age</span><span class="op">++;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+<span class="kw">var</span> person <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="dv">1</span>)<span class="op">;</span>
+<span class="at">setTimeout</span>(<span class="va">person</span>.<span class="at">growOld</span><span class="op">,</span><span class="dv">1000</span>)<span class="op">;</span>
+<span class="at">setTimeout</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="va">person</span>.<span class="at">age</span>)<span class="op">;</span> <span class="op">},</span><span class="dv">2000</span>)<span class="op">;</span> <span class="co">// 2</span></code></pre></div>
+<p>&#38656;&#35201;&#23567;&#24515;&#30340;&#26159;&#32487;&#25215;&#38142;&#26465;&#19978;&#30340; b &#21644; d &#20844;&#29992;&#19968;&#20010; this&#65292;&#25152;&#20197; d &#21644; b &#30340;&#26041;&#27861;&#21487;&#33021;&#20914;&#31361;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Adder <span class="op">{</span>
+<span class="co">// This function is now safe to pass around</span>
+    add <span class="op">=</span> (<span class="dt">b</span><span class="op">:</span> string)<span class="op">:</span> string <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="cf">return</span> <span class="kw">this</span>.<span class="at">a</span> <span class="op">+</span> b<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+<span class="kw">class</span> ExtendedAdder <span class="kw">extends</span> Adder <span class="op">{</span>
+    <span class="co">// Create a copy of parent before creating our own</span>
+    <span class="kw">private</span> superAdd <span class="op">=</span> <span class="kw">this</span>.<span class="at">add</span><span class="op">;</span>
+    <span class="co">// Now create our override</span>
+    add <span class="op">=</span> (<span class="dt">b</span><span class="op">:</span> string)<span class="op">:</span> string <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="cf">return</span> <span class="kw">this</span>.<span class="at">superAdd</span>(b)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>&#19978;&#38754;&#20914;&#31361;&#30340;&#26041;&#27861;&#26159;&#20808;&#25226; super &#30340;&#20989;&#25968;&#20445;&#23384;&#36215;&#26469;&#12290;&#20063;&#21487;&#20197;&#29992;&#19981;&#21516;&#30340;&#20989;&#25968;&#21517;&#12290;&#36825;&#26679;&#23601;&#19981;&#29992;&#25285;&#24515;&#26080;&#27861;&#20174;&#23545;&#35937;&#30340; <code>_proto_</code> &#25214;&#21040;&#21512;&#36866;&#30340;&#20989;&#25968;&#20102;&#12290;</p>
+</dd>
+<dt>Rest &#21442;&#25968;&#65306;<code>...</code> <code class="fold">@</code></dt>
+<dd><pre><code>TODO</code></pre>
+</dd>
+<dt>let&#65306;&#20316;&#29992;&#22495; <code class="fold">@</code></dt>
+<dd><pre><code>TODO</code></pre>
+</dd>
+<dt>const&#65306;&#19981;&#21487;&#20462;&#25913;&#30340;&#21464;&#37327; <code class="fold">@</code></dt>
+<dd><pre><code>TODO</code></pre>
+</dd>
+<dt>Destructuring <code class="fold">@</code></dt>
+<dd><pre><code>todo</code></pre>
+<p>&#35299;&#32806;&#12290;</p>
+</dd>
+<dt>Classes <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+<dt>for of&#65292;&#27880;&#24847; JS &#20013;&#30340; for in &#26159; for &#20102;&#19979;&#26631;&#65288;&#20854;&#23454;&#26159; key&#65289; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+<dt>Iterators <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+<dt>Template String <code class="sourceCode javascript"><span class="vs">`</span><span class="sc">${</span><span class="dv">1+1</span><span class="sc">}</span><span class="vs"> is two.`</span></code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+<p>&#19968;&#20010;&#29305;&#28857;&#26159;&#21487;&#20197;&#36328;&#34892;&#65292;&#31867;&#20284;&#20110; Python &#30340; <code>&quot;&quot;&quot;</code> &#23383;&#31526;&#20018;&#12290;&#36824;&#21487;&#20197; interpolate &#21464;&#37327;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> lyrics <span class="op">=</span> <span class="st">&#39;Never gonna give you up&#39;</span><span class="op">;</span>
+<span class="kw">var</span> html <span class="op">=</span> <span class="vs">`&lt;div&gt;</span><span class="sc">${</span>lyrics<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></code></pre></div>
+<p>Tagged Templates</p>
+<p>You can place a function (called a tag) before the template string and it gets the opportunity to pre process the template string literals plus the values of all the placeholder expressions and return a result. A few notes:</p>
+<ul>
+<li>All the static literals are passed in as an array for the first argument.</li>
+<li>All the values of the placeholders expressions are passed in as the remaining arguments. Most commonly you would just use rest parameters to convert these into an array as well.</li>
+</ul>
+<p>Here is an example where we have a tag function (named htmlEscape) that escapes the html from all the placeholders:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> say <span class="op">=</span> <span class="st">&quot;a bird in hand &gt; two in the bush&quot;</span><span class="op">;</span>
+<span class="kw">var</span> html <span class="op">=</span> htmlEscape <span class="vs">`&lt;div&gt; I would just like to say : </span><span class="sc">${</span>say<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span>
+
+<span class="co">// a sample tag function</span>
+<span class="kw">function</span> <span class="at">htmlEscape</span>(literals<span class="op">,</span> ...<span class="at">placeholders</span>) <span class="op">{</span>
+    <span class="kw">let</span> result <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span>
+
+    <span class="co">// interleave the literals with the placeholders</span>
+    <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">placeholders</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+        result <span class="op">+=</span> literals[i]<span class="op">;</span>
+        result <span class="op">+=</span> placeholders[i]
+            .<span class="at">replace</span>(<span class="ss">/&amp;/g</span><span class="op">,</span> <span class="st">&#39;&amp;amp;&#39;</span>)
+            .<span class="at">replace</span>(<span class="ss">/&quot;/g</span><span class="op">,</span> <span class="st">&#39;&amp;quot;&#39;</span>)
+            .<span class="at">replace</span>(<span class="ss">/&#39;/g</span><span class="op">,</span> <span class="st">&#39;&amp;#39;&#39;</span>)
+            .<span class="at">replace</span>(<span class="ss">/&lt;/g</span><span class="op">,</span> <span class="st">&#39;&amp;lt;&#39;</span>)
+            .<span class="at">replace</span>(<span class="ss">/&gt;/g</span><span class="op">,</span> <span class="st">&#39;&amp;gt;&#39;</span>)<span class="op">;</span>
+    <span class="op">}</span>
+
+    <span class="co">// add the last literal</span>
+    result <span class="op">+=</span> literals[<span class="va">literals</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span>
+    <span class="cf">return</span> result<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+<dt>spread <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+<p>&#21487;&#20197;&#29992;&#26469;&#26367;&#20195; apply</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#36825;&#26679;&#30340;&#26041;&#27861;&#22826;&#19985;</span>
+<span class="kw">function</span> <span class="at">foo</span>(x<span class="op">,</span> y<span class="op">,</span> z) <span class="op">{</span> <span class="op">}</span>
+<span class="kw">var</span> args <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span>
+<span class="va">foo</span>.<span class="at">apply</span>(<span class="kw">null</span><span class="op">,</span> args)<span class="op">;</span>
+
+<span class="co">// &#36825;&#26679;&#22909;&#30475;</span>
+<span class="kw">function</span> <span class="at">foo</span>(x<span class="op">,</span> y<span class="op">,</span> z) <span class="op">{</span> <span class="op">}</span>
+<span class="kw">var</span> args <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span>
+<span class="at">foo</span>(...<span class="at">args</span>)<span class="op">;</span></code></pre></div>
+<p>&#20854;&#23454;&#23601;&#26159; destructureing&#12290;</p>
+</dd>
+<dt>Enums <code class="fold">@</code></dt>
+<dd><p>&#21644; C++&#12289;Java &#24182;&#27809;&#26377;&#20160;&#20040;&#19981;&#21516;&#12290;&#38500;&#20102; Enum &#30340;&#23450;&#20041;&#21487;&#20197;&#20998;&#25955;&#65292;&#20043;&#22806;&#12290;</p>
+</dd>
+<dt>Promise &#9829;&#65039; <code class="fold">@</code></dt>
+<dd><p>&#22823;&#22823;&#36991;&#20813;&#20102; call-back hell&#65292;&#25152;&#20197; TypeScript &#31038;&#21306;&#29992; 4 &#20010;&#65292;&#32780;&#19981;&#26159; 2 &#20010;&#31354;&#26684;&#26469;&#32553;&#36827;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> promise <span class="op">=</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve<span class="op">,</span> reject) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="co">// the resolve / reject functions control the fate of the promise</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>&#19968;&#20010; promise&#65292;&#35201;&#19981;&#34987; fulfilled&#65292;&#35201;&#19981;&#34987; rejected&#12290;</p>
+<dl>
+<dt>Subscribing to the fate of the promise <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#22240;&#20026; resolve &#20102;&#65292;&#25152;&#20197;&#23601; then &#21679;</span>
+<span class="kw">const</span> promise <span class="op">=</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve<span class="op">,</span> reject) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="at">resolve</span>(<span class="dv">123</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">promise</span>.<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I get called:&#39;</span><span class="op">,</span> res <span class="op">===</span> <span class="dv">123</span>)<span class="op">;</span> <span class="co">// I get called: true</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">promise</span>.<span class="at">catch</span>((err) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="co">// This is never called</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// &#22240;&#20026; reject &#20102;&#65292;&#25152;&#20197;&#19981;&#33021; then&#65292;&#26368;&#21518;&#34987; catch</span>
+<span class="kw">const</span> promise <span class="op">=</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve<span class="op">,</span> reject) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="at">reject</span>(<span class="kw">new</span> <span class="at">Error</span>(<span class="st">&quot;Something awful happened&quot;</span>))<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">promise</span>.<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="co">// This is never called</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">promise</span>.<span class="at">catch</span>((err) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I get called:&#39;</span><span class="op">,</span> <span class="va">err</span>.<span class="at">message</span>)<span class="op">;</span> <span class="co">// I get called: &#39;Something awful happened&#39;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<p>Promise Shortcuts</p>
+<ul>
+<li>Quickly creating an already resolved promise : Promise.resolve(result)</li>
+<li>Quickly creating an already rejected promise : Promise.reject(error)</li>
+</ul>
+<dl>
+<dt>Chain-ability of Promises <code class="fold">@</code></dt>
+<dd><p>The chain-ability of promises is the heart of the benefit that promises provide. Once you have a promise, from that point on, you use the then function to create a chain of promises.</p>
+<ul>
+<li><dl>
+<dt>If you return a promise from any function in the chain, .then is only called once the value is resolved <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">Promise</span>.<span class="at">resolve</span>(<span class="dv">123</span>)
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// 123</span>
+        <span class="cf">return</span> <span class="dv">456</span><span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// 456</span>
+        <span class="cf">return</span> <span class="va">Promise</span>.<span class="at">resolve</span>(<span class="dv">123</span>)<span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// 123 : Notice that this `this` is called with the resolved value</span>
+        <span class="cf">return</span> <span class="va">Promise</span>.<span class="at">resolve</span>(<span class="dv">123</span>)<span class="op">;</span>
+    <span class="op">}</span>)</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>you can aggregate the error handling of any preceding portion of the chain with a single catch <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">Promise</span>.<span class="at">reject</span>(<span class="kw">new</span> <span class="at">Error</span>(<span class="st">&#39;something bad happened&#39;</span>))
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// not called</span>
+        <span class="cf">return</span> <span class="dv">456</span><span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// not called</span>
+        <span class="cf">return</span> <span class="va">Promise</span>.<span class="at">resolve</span>(<span class="dv">123</span>)<span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">then</span>((res) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(res)<span class="op">;</span> <span class="co">// not called</span>
+        <span class="cf">return</span> <span class="va">Promise</span>.<span class="at">resolve</span>(<span class="dv">123</span>)<span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">catch</span>((err) <span class="op">=&gt;</span> <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(<span class="va">err</span>.<span class="at">message</span>)<span class="op">;</span> <span class="co">// something bad happened</span>
+    <span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>the catch actually returns a new promise (effectively creating a new promise chain): <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"></code></pre></div>
+</dd>
+</dl></li>
+<li>Any synchronous errors thrown in a then (or catch) result in the returned promise to fail</li>
+</ul>
+</dd>
+</dl>
+<p>&#36825;&#37096;&#20998;&#22826;&#37325;&#35201;&#65306;</p>
+<p><a href="https://basarat.gitbooks.io/typescript/content/docs/promise.html">Promise &#183; TypeScript Deep Dive</a></p>
+</dd>
+<dt>Generators <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+<dt>Async await <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+<dt>Template String <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">todo</code></pre></div>
+</dd>
+</dl>
+<h3 id="iife-&#30340;&#22909;&#22788;whats-up-with-the-iife">IIFE &#30340;&#22909;&#22788;&#65292;Whats up with the IIFE</h3>
+<p>&#23601;&#26159;&#21487;&#20197;&#33719;&#24471;&#32487;&#25215;&#38142;&#26465;&#19978;&#38754;&#30340; super&#12290;</p>
+<p>&#23545;&#35937;&#30340;&#23646;&#24615; <code>_proto_</code> &#23545;&#24212;&#20989;&#25968;&#30340; <code>prototype</code>&#12290;&#23545;&#35937;&#35843;&#29992;&#26041;&#27861;&#30340;&#26102;&#20505;&#65292;&#20174;&#33258;&#24049;&#30340;&#23646;&#24615;&#25214;&#65292;&#25214;&#19981;&#21040;&#23601;&#20174; <code>_proto_</code> &#25214;&#65292; <code>_proto_</code> &#19978;&#38754;&#20063;&#27809;&#26377;&#65292;&#23601;&#20174; <code>_proto_</code> &#30340; <code>_proto_</code> &#25214;&#12290;&#30452;&#21040; <code>_proto_</code> &#20026; undefined &#20026;&#27490;&#12290;</p>
+<h3 id="typescript-&#24037;&#31243;">TypeScript &#24037;&#31243;</h3>
+<dl>
+<dt>Compilation Context <code class="fold">@</code></dt>
+<dd><p>&#36825;&#37324;&#20027;&#35201;&#20851;&#20110;&#26159; tsconfig.json &#30340;&#32534;&#20889;&#12290;</p>
+<p>The compilation context is basically just a fancy term for <strong>grouping of the files that TypeScript will parse and analyze</strong> to determine what is valid and what isn&#8217;t. Along with the information about which files, the compilation context contains information about which compiler options. A great way to define this logical grouping (we also like to use the term project) is using a tsconfig.json file.</p>
+<p>&#32534;&#35793;&#36873;&#39033;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es5&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;declaration&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;noImplicitAny&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;removeComments&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span>
+        <span class="dt">&quot;noLib&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#38656;&#35201;&#22788;&#29702;&#30340;&#25991;&#20214;&#65292;&#30452;&#25509;&#25351;&#26126;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;files&quot;</span><span class="fu">:</span><span class="ot">[</span>
+        <span class="st">&quot;./some/file.ts&quot;</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#38656;&#35201;&#22788;&#29702;&#30340;&#25991;&#20214;&#65292;&#25110;&#32773; include/exclude &#30446;&#24405;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;include&quot;</span><span class="fu">:</span><span class="ot">[</span>
+        <span class="st">&quot;./folder/**/*&quot;</span>
+    <span class="ot">]</span><span class="fu">,</span>
+    <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span><span class="ot">[</span>
+        <span class="st">&quot;./folder/**/*.spec.ts&quot;</span><span class="ot">,</span>
+        <span class="st">&quot;./folder/someSubFolder&quot;</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+</dd>
+<dt>Declaration Spaces <code class="fold">@</code></dt>
+<dd><p>There are two declaration spaces in TypeScript: The variable declaration space and the type declaration space. These concepts are explored below.</p>
+<p>&#20854;&#23454;&#35828;&#30340;&#26159; TS &#30340;&#20004;&#20010;&#21629;&#21517;&#31354;&#38388;&#65292;&#38656;&#35201;&#35760;&#20303;&#30340;&#26159;&#21464;&#37327;&#21644;&#31867;&#22411;&#26159;&#20998;&#24320;&#30340;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#20004;&#32773;&#26681;&#26412;&#19981;&#20250;&#28151;&#28102;</span>
+<span class="kw">class</span> Foo <span class="op">{</span> <span class="op">}</span>
+<span class="kw">var</span> Bar <span class="op">=</span> Foo<span class="op">;</span>
+<span class="kw">var</span> bar<span class="op">:</span> Bar<span class="op">;</span> <span class="co">// ERROR: &quot;cannot find name &#39;Bar&#39;&quot;</span></code></pre></div>
+<p>&#37492;&#20110;&#36825;&#26679;&#30340;&#21407;&#22240;&#65292;&#21487;&#20197;&#29992; namespace &#21644;&#27169;&#22359;&#21270;&#30340;&#24605;&#24819;&#26469;&#23450;&#20041;&#31867;&#22411;&#12290;&#20351;&#29992;&#30340;&#26102;&#20505;&#65292;&#20877; import&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">namespace importing <span class="op">{</span>
+    <span class="im">export</span> <span class="kw">class</span> Foo <span class="op">{</span> <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="im">import</span> Bar <span class="op">=</span> <span class="va">importing</span>.<span class="at">Foo</span><span class="op">;</span>
+<span class="kw">var</span> bar<span class="op">:</span> Bar<span class="op">;</span> <span class="co">// Okay</span></code></pre></div>
+<p>&#31867;&#22411;&#21487;&#20197;&#25512;&#21040;&#65288;capturing&#65289;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">class</span> Foo <span class="op">{</span>
+  <span class="dt">foo</span><span class="op">:</span> number<span class="op">;</span> <span class="co">// some member whose type we want to capture</span>
+<span class="op">}</span>
+
+<span class="co">// Purely to capture type</span>
+declare <span class="kw">let</span> _foo<span class="op">:</span> Foo<span class="op">;</span>
+
+<span class="co">// Same as before</span>
+<span class="kw">let</span> bar<span class="op">:</span> <span class="kw">typeof</span> <span class="va">_foo</span>.<span class="at">foo</span><span class="op">;</span></code></pre></div>
+<p>&#36825;&#31181;&#25512;&#23548;&#21487;&#20197;&#25226; const &#23646;&#24615;&#20063;&#25343;&#21040;&#12290;</p>
+</dd>
+<dt>Modules <code class="fold">@</code></dt>
+<dd><p>&#26377;&#20004;&#31181; modules&#65306;</p>
+<ol style="list-style-type: decimal">
+<li><p>Global Modules</p></li>
+<li><p>File Module&#65292;&#20063;&#21483; external modules</p>
+<p>&#22914;&#26524;&#22312;&#25991;&#20214;&#37324; global module &#30340;&#37096;&#20998;&#29992;&#20102; import &#21644; export&#65292;&#36825;&#20010;&#25991;&#20214;&#30340;&#23601;&#34987;&#26694;&#21040;&#20102; file module&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="im">import</span> <span class="op">{</span>foo<span class="op">}</span> <span class="im">from</span> <span class="st">&quot;./foo&quot;</span><span class="op">;</span>
+<span class="kw">var</span> bar <span class="op">=</span> foo<span class="op">;</span> <span class="co">// allowed</span></code></pre></div></li>
+</ol>
+<dl>
+<dt>&#25512;&#33616;&#20351;&#29992; file modules&#65292;&#32780;&#36991;&#20813;&#27745;&#26579;&#20840;&#23616;&#21464;&#37327; <code class="fold">@</code></dt>
+<dd><p>global modules &#36890;&#24120;&#26159;&#24456;&#31967;&#31957;&#30340;&#65292;&#23588;&#20854;&#22312;&#36719;&#20214;&#35268;&#27169;&#36798;&#21040;&#19968;&#23450;&#31243;&#24230;&#30340;&#26102;&#20505;&#12290;file modules &#25110;&#32773;&#35828; external modules &#21017;&#26159;&#19981;&#38169;&#30340;&#38548;&#31163;&#25163;&#27573;&#12290;&#19979;&#38754;&#20174;&#20960;&#26041;&#38754;&#30475;&#30475; external modules&#12290;</p>
+<dl>
+<dt>File lookup</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="im">import</span> foo <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;foo&#39;</span>)<span class="op">;</span>
+<span class="im">import</span> foo <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;./foo&#39;</span>)<span class="op">;</span>      <span class="co">// &#30456;&#23545;&#36335;&#24452;</span></code></pre></div>
+<p>Tells the TypeScript compiler to look for a TypeScript file at the relative location <code>./foo.ts</code> or <code>./foo.d.ts</code> with respect to the current file.</p>
+</dd>
+<dt>Compiler Module Option <code class="fold">@</code></dt>
+<dd><p><code>import foo = require('foo');</code> &#20250;&#24341;&#20837;&#27169;&#22359;&#12290;&#20294;&#27169;&#22359;&#30340;&#24341;&#20837;&#26377;&#22909;&#20960;&#31181;&#65306;</p>
+<ul>
+<li><code>--module commonjs</code> or</li>
+<li><code>--module amd</code> or</li>
+<li><code>--module umd</code> or</li>
+<li><code>--module system</code></li>
+</ul>
+<p>&#25512;&#33616; commonjs&#65292;&#22240;&#20026;&#21644;&#21518;&#31471;&#30340; nodejs &#21644;&#21069;&#31471;&#30340; webpack &#19968;&#26679;&#12290;</p>
+</dd>
+</dl>
+</dd>
+<dt>globals.d.ts <code class="fold">@</code></dt>
+<dd><p>Nevertheless it is convenient to have some files just with type declarations (for smaller projects preferably one called globals.d.ts) in the global namespace to make it easy to have some types just magically available for consumption in all your TypeScript code. For any code that is going to generate JavaScript we still recommend using file modules.</p>
+<p>globals.d.ts is great for adding extensions to lib.d.ts</p>
+<p>&#36825;&#20010;&#19996;&#35199;&#65292;&#21442;&#32771;&#65306;<a href="https://basarat.gitbooks.io/typescript/content/docs/types/lib.d.ts.html">lib.d.ts &#183; TypeScript Deep Dive</a>&#12290;</p>
+</dd>
+</dl>
+<p>d.ts &#31867;&#22411;&#23450;&#20041;&#25991;&#20214;&#65292;&#25105;&#24863;&#35273;&#29616;&#22312;&#23545;&#25105;&#30340;&#29992;&#22788;&#23601;&#26159;&#32534;&#36753;&#22120;&#30340;&#26234;&#33021;&#25552;&#31034; d.ts &#26159;&#23545;&#29616;&#26377;&#30340;. js &#30340;&#23450;&#20041;&#65292;&#20363;&#22914;&#20160;&#20040;&#20989;&#25968;&#20256;&#20837;&#20160;&#20040;&#31867;&#22411;&#30340;&#21442;&#25968;&#65292;&#36820;&#22238;&#20160;&#20040;&#31867;&#22411;&#30340;&#20540;&#65292;&#27604;&#22914; jquery.d.ts</p>
+<p>&#25152;&#20197;&#24341;&#20837; d.ts &#30340;&#26102;&#20505;&#29992;&#30340;&#26159; <code>/// &lt;reference path='typings/tsd.d.ts' /&gt;</code>&#65292;&#36824;&#21487;&#20197;&#19968;&#23618;&#19968;&#23618;&#22320;&#24341;&#20837; d.ts &#25991;&#20214;&#12290;</p>
+<p>main.ts &#20013;&#24341;&#20837; ./typings/tsd.d.ts&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/// </span><span class="kw">&lt;reference</span><span class="ot"> path=</span><span class="dt">&#39;typings/tsd.d.ts&#39;</span><span class="ot"> </span><span class="kw">/&gt;</span></code></pre></div>
+<p>tsd.d.ts &#24341;&#20837; ./typings/jquery/jquery.d.ts &#21644; ./typings/three/three.d.ts&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/// </span><span class="kw">&lt;reference</span><span class="ot"> path=</span><span class="dt">&quot;jquery/jquery.d.ts&quot;</span><span class="ot"> </span><span class="kw">/&gt;</span>
+<span class="co">/// </span><span class="kw">&lt;reference</span><span class="ot"> path=</span><span class="dt">&quot;threejs/three.d.ts&quot;</span><span class="ot"> </span><span class="kw">/&gt;</span></code></pre></div>
+</dd>
+<dt>Namespaces <code class="fold">@</code></dt>
+<dd><p>&#19977;&#21477;&#35805;&#27010;&#25324;&#65306;</p>
+<ol style="list-style-type: decimal">
+<li>&#22768;&#26126;&#30340;&#26102;&#20505;&#21644; C++ &#31867;&#20284;</li>
+<li>&#37324;&#38754;&#30340;&#21464;&#37327;&#21644;&#20989;&#25968;&#37117;&#35201; export</li>
+<li>&#21487;&#20197;&#23884;&#22871;&#65288;nested&#65289;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">namespace Utility <span class="op">{</span>
+    <span class="im">export</span> <span class="kw">function</span> <span class="at">log</span>(msg) <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">log</span>(msg)<span class="op">;</span>
+    <span class="op">}</span>
+    <span class="im">export</span> <span class="kw">function</span> <span class="at">error</span>(msg) <span class="op">{</span>
+        <span class="va">console</span>.<span class="at">error</span>(msg)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="co">// usage</span>
+<span class="va">Utility</span>.<span class="at">log</span>(<span class="st">&#39;Call me&#39;</span>)<span class="op">;</span>
+<span class="va">Utility</span>.<span class="at">error</span>(<span class="st">&#39;maybe!&#39;</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<h3 id="nodejs-&#36895;&#25104;">NodeJS &#36895;&#25104;</h3>
+<p>TypeScript has had first class support for NodeJS since inception&#65288;&#36215;&#21021;&#65307;&#33719;&#24471;&#23398;&#20301;&#65292;&#12298;&#30423;&#26790;&#31354;&#38388;&#12299;&#65289;. Here&#8217;s how to get setup with a NodeJS project in TypeScript:</p>
+<ul>
+<li>Add node.d.ts (<code class="sourceCode bash"><span class="kw">npm</span> install @types/node --save-dev</code>) to your compilation context.</li>
+<li>Compile with <code>--module</code> set to &#8220;commonjs&#8221;.</li>
+<li>Add node to the global resolution by simply adding it to types in your tsconfig.</li>
+</ul>
+<p>So your tsconfig will look like:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+        <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;types&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+            <span class="st">&quot;node&quot;</span>
+        <span class="ot">]</span>
+    <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#36825;&#26679;&#20320;&#23601;&#21487;&#20197;&#20351;&#29992; nodejs &#30340;&#19968;&#20123;&#19996;&#35199;&#20102;&#65292;&#27604;&#22914;&#35201;&#20351;&#29992; <code>fs</code> &#27169;&#22359;&#65306;<code class="sourceCode javascript"><span class="im">import</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>))</code></p>
+<p>&#21152;&#19978; browserify&#65292;&#20320;&#20063;&#21487;&#20197;&#24320;&#21457;&#32593;&#39029;&#21069;&#31471;&#20102;&#12290;</p>
+<h3 id="&#27983;&#35272;&#22120;&#36895;&#25104;">&#27983;&#35272;&#22120;&#36895;&#25104;</h3>
+<p>&#36825;&#37096;&#20998;&#29992;&#30340; webpack&#12290;&#25105;&#20934;&#22791;&#29992; browserify&#12290;&#25152;&#20197;&#30053;&#36807;&#12290;</p>
+<h2 id="typescript-&#30340;-type-system">TypeScript &#30340; Type System</h2>
+<ul>
+<li><dl>
+<dt>JS Migration Guide <code class="fold">@</code></dt>
+<dd><p>&#20808;&#20174;&#26032;&#24314; tsconfig.json &#24320;&#22987;&#65292;&#28982;&#21518;&#19981;&#26029;&#21435;&#25481; any &#26631;&#31614;&#12290;</p>
+<p>&#20027;&#35201;&#26159; <a href="http://definitelytyped.org/guides/best-practices.html">Best practices | DefinitelyTyped</a>&#65292;&#36825;&#20010;&#32593;&#31449;&#25552;&#20379;&#20102;&#24456;&#22810; <code>*.d.ts</code> &#25991;&#20214;&#65292;&#27604;&#22914; jquery.d.ts&#12290;</p>
+</dd>
+</dl></li>
+<li><span class="citation">@types</span></li>
+<li>Ambient Declarations
+<ul>
+<li>Declaration Files</li>
+<li>Variables</li>
+</ul></li>
+<li>Interfaces</li>
+<li>lib.d.ts</li>
+<li>Functions</li>
+<li>Type Assertion</li>
+<li>Freshness</li>
+<li>Type Guard</li>
+<li>String Literal Type</li>
+<li>Readonly</li>
+<li>Type Inference</li>
+<li>Type Compatibility</li>
+<li>Never Type</li>
+<li>Discriminated Unions</li>
+</ul>
+<hr />
+<h2 id="todo">TODO</h2>
+<ul>
+<li>&#25214;&#19968;&#20010; d3.js &#30340; ts &#24037;&#31243;&#65306;<a href="https://github.com/4ker/three.ts">4ker/three.ts at gh-pages</a></li>
+<li>&#25214;&#19968;&#20010; angular &#30340; ts &#24037;&#31243;&#65306;<a href="https://github.com/4ker/Angular2-JumpStart">4ker/Angular2-JumpStart: Angular 2 and TypeScript JumpStart example</a></li>
+<li>&#35797;&#19968;&#19979; Ajax &#21644; jQuery &#30340;&#32593;&#32476;&#36890;&#20449;</li>
+<li>material design.</li>
+</ul>
+<p><a href="https://github.com/district10/TryTypeScript">district10/TryTypeScript: Try Some TypeScript.</a></p>
+<p><a href="https://github.com/typings/typings">typings/typings: The TypeScript Definition Manager</a></p>
+<hr />
+<p>refs and see also</p>
+<ul>
+<li><a href="http://www.2gua.info/post/59?utm_source=tuicool&amp;utm_medium=referral">&#29916;&#22253;&#32789;&#35835; - &#25171;&#36896;TypeScript&#30340;Visual Studio Code&#24320;&#21457;&#29615;&#22659;</a></li>
+<li><a href="http://www.runoob.com/angularjs/angularjs-tutorial.html">AngularJS &#25945;&#31243; | &#33756;&#40479;&#25945;&#31243;</a></li>
+</ul>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

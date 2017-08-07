@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-03-28" />
+  <title>More About Vim | Vim &#26434;&#35760;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">More About Vim | Vim &#26434;&#35760;</h1>
+<h3 class="date">2014-03-28</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#more-about-vim-vim-&#26434;&#35760;">More About Vim | Vim &#26434;&#35760;</a><ul>
+        <li><a href="#&#34917;&#34917;&#19981;&#22815;&#29992;&#30340;-vimmorevim">&#34917;&#34917;&#19981;&#22815;&#29992;&#30340; Vim</a></li>
+        <li><a href="#vim-&#25342;&#36951;">Vim &#25342;&#36951;</a><ul>
+        <li><a href="#esc"><code>ESC</code>, <code>:</code></a></li>
+        <li><a href="#d-c-y"><code>D</code>, <code>C</code>, <code>Y</code></a></li>
+        <li><a href="#x-p"><code>X</code>, <code>P</code></a></li>
+        <li><a href="#w-b-e"><code>W</code>, <code>B</code>, <code>E</code></a></li>
+        <li><a href="#f-t-i-."><code>F</code>, <code>T</code>, <code>I</code>, <code>;</code>, <code>.</code></a></li>
+        <li><a href="#g-0-h-m-l"><code>G</code>, <code>|</code>, <code>0</code>, <code>^</code>, <code>$</code>, <code>H</code>, <code>M</code>, <code>L</code>, <code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>[[</code>, <code>]]</code></a></li>
+        <li><a href="#section"><code>/</code>, <code>?</code></a></li>
+        <li><a href="#m"><code>m</code>, <code>`</code>, <code>'</code></a></li>
+        <li><a href="#misc">MISC</a></li>
+        </ul></li>
+        <li><a href="#&#20320;&#24819;&#35201;&#20960;&#20010;&#21098;&#36148;&#26495;vim-&#23601;&#32473;&#20320;&#20960;&#20010;">&#20320;&#24819;&#35201;&#20960;&#20010;&#21098;&#36148;&#26495;&#65292;Vim &#23601;&#32473;&#20320;&#20960;&#20010;</a><ul>
+        <li><a href="#&#20174;-yydd-&#36827;&#38454;&#21040;-xyy-xdd">1. &#20174; <code>yy</code>&#65292;<code>dd</code> &#36827;&#38454;&#21040; <code>&quot;xyy</code> <code>&quot;xdd</code></a></li>
+        <li><a href="#&#19968;&#23450;&#35760;&#20303;&#31995;&#32479;&#31383;&#21475;&#31649;&#29702;&#22120;&#30340;&#21098;&#36148;&#26495;">2. &#19968;&#23450;&#35760;&#20303;&#31995;&#32479;&#65288;&#31383;&#21475;&#31649;&#29702;&#22120;&#65289;&#30340;&#21098;&#36148;&#26495;&#65306;<code>+</code></a></li>
+        <li><a href="#&#20174;-xyy-&#21040;-xyy">3. &#20174; <code>&quot;xyy</code> &#21040; <code>&quot;Xyy</code></a></li>
+        <li><a href="#&#20174;-&#21040;">4. &#20174; <code>+</code> &#21040; <code>*</code></a></li>
+        </ul></li>
+        <li><a href="#&#26434;&#19971;&#26434;&#20843;&#25216;&#33021;">&#26434;&#19971;&#26434;&#20843;&#25216;&#33021;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="more-about-vim-vim-&#26434;&#35760;">More About Vim | Vim &#26434;&#35760;</h1>
+<p>&#25509;&#35302; Linux &#21518;&#19981;&#24471;&#19981;&#38754;&#23545;&#30340;&#36873;&#25321;&#26159; <code>Emacs &#36824;&#26159; Vim&#65311;</code>&#65292;&#37027;&#26102;&#25105;&#36873;&#20102; Emacs&#12290;</p>
+<p>&#21518;&#26469;&#25105;&#30344;&#20381;&#20102; Vim&#12290;</p>
+<p>&#27491;&#22914; Dvorak &#20174;&#35774;&#35745;&#19978;&#23436;&#34384; QWERTY&#65292;Vim &#20174;&#35774;&#35745;&#19978;&#20063;&#36229;&#36234;&#20102; Emacs&#12290;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> &#23588;&#20854;&#19968;&#28857;&#65292;Vim &#19981;&#21344;&#29992; <kbd>Control</kbd>&#65292;&#25152;&#20197;&#19968;&#33324;&#19981;&#20250;&#21644;&#20854;&#20182;&#20307;&#31995;&#20914;&#31361;&#65292;&#25152;&#20197;&#25152;&#20197;&#23427;&#33021;&#22312; Visual Studio &#37324;&#37197;&#21512; Visual Studio&#12289;&#22312; Qt Creator &#37324;&#37197;&#21512; Qt Creator&#65292;&#22312;&#27983;&#35272;&#22120;&#37324;&#37197;&#21512;&#19968;&#33324;&#30340;&#25991;&#26412;&#32534;&#36753;&#26694;&#12290;<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<p>&#19979;&#38754;&#26159;&#25105;&#20043;&#21069;&#21457;&#22312;&#31616;&#20070;&#19978;&#20960;&#31687;&#20851;&#20110; Vim &#30340;&#25991;&#31456;&#12290;</p>
+<h2 id="&#34917;&#34917;&#19981;&#22815;&#29992;&#30340;-vimmorevim">&#34917;&#34917;&#19981;&#22815;&#29992;&#30340; Vim<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></h2>
+<p>&#26377;&#20123;&#19996;&#35199;&#26159;&#36867;&#19981;&#25481;&#30340;&#65292;&#27604;&#22914;&#22312; Linux &#19978;&#23601;&#35201;&#29992; Vim&#12290;</p>
+<p>&#36890;&#24120;&#25105;&#29992; Emacs &#25110;&#32773; Geany&#12289;Gedit&#65292;&#20294;&#37027;&#22825;&#36305;&#21040;&#21018;&#35013;&#26426;&#30340; Debian &#19978;&#65292;&#19968;&#19979;&#23601; 2 &#20102;&#65306;&#27809;&#26377; Emacs&#12289;Geany&#12289;&#25110;&#32773; Gedit&#65292;&#21482;&#26377; vi&#8230;&#8230; &#21448;&#21152;&#19978;&#25105;&#29992; <a href="https://github.com/district10/neo_keyboard_layout">Neo-extended DVPE</a> &#38190;&#30424;&#24067;&#23616;&#65292;&#23621;&#28982;&#27809;&#27861;&#21024;&#38500;&#23383;&#31526;&#65281;&#65281;&#65281;</p>
+<p>&#26368;&#21518;&#21482;&#33021;&#29992; <code class="sourceCode bash"><span class="kw">echo</span></code>&#12289;<code class="sourceCode bash"><span class="kw">&gt;&gt;</span></code> &#36861;&#21152;&#30340;&#26041;&#24335;&#32473; <code>sources.list</code> &#28155;&#21152;&#20102;&#20960;&#20010;&#28304;&#12290;</p>
+<p>&#30475;&#26469;&#65292;&#21482;&#30693;&#36947; Vim &#30340;&#19977;&#20010;&#29366;&#24577;&#26159;&#19981;&#22815;&#30340;&#12290;</p>
+<p>&#37027;&#23601;&#22810;&#23398;&#19968;&#28857;&#65292;Here is a cheat sheet&#65306;<a href="http://overapi.com/static/cs/vim-brain.png"><strong>vim-brain</strong></a></p>
+<ul>
+<li><code>ESC</code></li>
+<li>Navigation: <code>h</code>, <code>j</code>, <code>k</code>, <code>l</code></li>
+<li><code>D</code>, <code>dd</code>, <code>dw</code>: delete to end of line, delete current line, delete current word</li>
+<li><code>x</code>, <code>X</code>: delete current char, delete previous char</li>
+<li><code>y</code>, <code>yy</code>: yank, yank line</li>
+<li><code>p</code>, <code>P</code>: paste after, paste before</li>
+<li><code>r</code>: replace current char</li>
+<li><code>u</code>, <kbd>Ctrl</kbd> + <kbd>r</kbd>: undo, redo</li>
+<li><code>~</code>, <code>g~iw</code>, <code>gUiw</code>, <code>guiw</code>: switch case</li>
+</ul>
+<p>Vim &#34917;&#20064;&#23436;&#27605;&#65292;&#30446;&#27979;&#19977;&#24180;&#20043;&#20869;&#22815;&#29992;&#20102;&#12290;(&#25105;&#36825;&#26159;&#22312;&#40657; vim &#21527;&#65311;&#65289;</p>
+<p>2014-03-28</p>
+<h2 id="vim-&#25342;&#36951;">Vim &#25342;&#36951;</h2>
+<h3 id="esc"><code>ESC</code>, <code>:</code></h3>
+<ul>
+<li><code>ESC</code> (stop insert)</li>
+<li><code>:</code> (command)</li>
+<li><code>u</code> (undo)</li>
+<li><code>&lt;c-r&gt;</code> (redo)</li>
+<li><code>:wq</code>, <code>:q</code>, <code>:cq</code>, <code>q!</code>, <code>ZZ</code>, <code>ZQ</code> (quit)</li>
+<li><code>:e</code> (rewind)</li>
+</ul>
+<h3 id="d-c-y"><code>D</code>, <code>C</code>, <code>Y</code></h3>
+<ul>
+<li><code>d</code> (delete)</li>
+<li><code>c</code> (change)</li>
+<li><code>y</code> (yank (copy))</li>
+</ul>
+<h3 id="x-p"><code>X</code>, <code>P</code></h3>
+<ul>
+<li><code>x</code> (delete a char)</li>
+<li><code>p</code> (paste)</li>
+</ul>
+<h3 id="w-b-e"><code>W</code>, <code>B</code>, <code>E</code></h3>
+<ul>
+<li><code>w</code> (word, forword word)</li>
+<li><code>b</code> (word, backword word)</li>
+<li><code>e</code> (word, forword to end of word)</li>
+</ul>
+<h3 id="f-t-i-."><code>F</code>, <code>T</code>, <code>I</code>, <code>;</code>, <code>.</code></h3>
+<ul>
+<li><code>f</code> (move forward on)</li>
+<li><code>t</code> (move forward to)</li>
+<li><p><code>i</code> (scope)</p></li>
+<li><code>;</code> (repeat same direction)</li>
+<li><code>,</code> (opposite direction)</li>
+<li><p><code>.</code> (repeat change)</p></li>
+</ul>
+<h3 id="g-0-h-m-l"><code>G</code>, <code>|</code>, <code>0</code>, <code>^</code>, <code>$</code>, <code>H</code>, <code>M</code>, <code>L</code>, <code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>[[</code>, <code>]]</code></h3>
+<ul>
+<li><code>G</code> (last(or <em>n</em>th) line)</li>
+<li><code>|</code> (column)</li>
+<li><code>0</code> (line begin)</li>
+<li><code>^</code> (char begin)</li>
+<li><p><code>$</code> (line end)</p></li>
+<li><code>H</code> (high, window top)</li>
+<li><code>M</code> (middle)</li>
+<li><p><code>L</code> (low)</p></li>
+<li><code>(</code> (sentence)</li>
+<li><code>{</code> (paragraph)</li>
+<li><p><code>[[</code> (section)</p></li>
+<li><code>+</code> (next line beg)</li>
+<li><p><code>-</code> (previous line beg)</p></li>
+</ul>
+<h3 id="section"><code>/</code>, <code>?</code></h3>
+<ul>
+<li><code>/</code> (reg query forward)</li>
+<li><code>?</code> (reg query backward)</li>
+<li><code>#</code> (query current word, backward)</li>
+<li><code>*</code> (query current word, forward)</li>
+<li><code>n</code> (next)</li>
+<li><code>N</code> (previous)</li>
+</ul>
+<h3 id="m"><code>m</code>, <code>`</code>, <code>'</code></h3>
+<ul>
+<li><code>m</code> (mark a position, tag it)</li>
+<li><code>`</code> (move back on last change)</li>
+<li><code>''</code> (move back to line beginning of last change)</li>
+</ul>
+<h3 id="misc">MISC</h3>
+<p><code>:s/old/new</code></p>
+<p>My Emacs will come back soon with Evil-mode INSIDE~</p>
+<p>&#22806;&#65292;&#31616;&#21333;&#30340;&#20462;&#25913;&#19968;&#20010;&#25991;&#26723;&#65292;&#29992; <code class="sourceCode bash"><span class="kw">vim</span> -u NONE</code>&#65292;&#36825;&#26679;&#21551;&#21160;&#26356;&#24555;&#12290;</p>
+<p>2015-01-02</p>
+<h2 id="&#20320;&#24819;&#35201;&#20960;&#20010;&#21098;&#36148;&#26495;vim-&#23601;&#32473;&#20320;&#20960;&#20010;">&#20320;&#24819;&#35201;&#20960;&#20010;&#21098;&#36148;&#26495;&#65292;Vim &#23601;&#32473;&#20320;&#20960;&#20010;</h2>
+<h3 id="&#20174;-yydd-&#36827;&#38454;&#21040;-xyy-xdd">1. &#20174; <code>yy</code>&#65292;<code>dd</code> &#36827;&#38454;&#21040; <code>&quot;xyy</code> <code>&quot;xdd</code></h3>
+<p>&#20854;&#20013;&#30340; x &#26159;&#8220;&#21098;&#36148;&#26495;&#8221;&#21517;&#31216;&#65292;&#21333;&#23383;&#27597;&#12290;&#29992;&#36825;&#20010;&#65292;&#23601;&#21487;&#20197;&#38543;&#22788;&#31896;&#36148;&#33267;&#23569; 26 &#27573;&#20195;&#30721;&#29255;&#27573;&#12290;&#37197;&#21512; mark &#20351;&#29992;&#65292;&#25928;&#26524;&#26356;&#20339;&#12290;</p>
+<h3 id="&#19968;&#23450;&#35760;&#20303;&#31995;&#32479;&#31383;&#21475;&#31649;&#29702;&#22120;&#30340;&#21098;&#36148;&#26495;">2. &#19968;&#23450;&#35760;&#20303;&#31995;&#32479;&#65288;&#31383;&#21475;&#31649;&#29702;&#22120;&#65289;&#30340;&#21098;&#36148;&#26495;&#65306;<code>+</code></h3>
+<p>&#20174;&#27983;&#35272;&#22120;&#22797;&#21046;&#65292;&#30452;&#25509;&#29992; <code>&quot;+p</code> &#23601;&#21487;&#20197;&#31896;&#36148;&#21040; vim &#32456;&#31471;&#65292;&#22797;&#21046;&#20986;&#21435;&#29992; <code>&quot;+yy</code>&#12290;</p>
+<p>&#20110;&#26159;&#21487;&#20197;&#24555;&#20048;&#22320;&#22797;&#21046;&#31896;&#36148;&#20102;&#12290;</p>
+<h3 id="&#20174;-xyy-&#21040;-xyy">3. &#20174; <code>&quot;xyy</code> &#21040; <code>&quot;Xyy</code></h3>
+<p>&#21069;&#32773;&#25226;&#24403;&#21069;&#34892; <code class="sourceCode bash"><span class="kw">&gt;</span></code> &#21040; <code>x</code>&#65292;&#21518;&#32773;&#25226;&#24403;&#21069;&#34892; <code class="sourceCode bash"><span class="kw">&gt;&gt;</span></code> &#21040; <code>X</code>&#12290;&#36825;&#23601;&#26159;&#22823;&#23567;&#20889;&#30340;&#21306;&#21035;&#65281;</p>
+<p>&#20294;&#27880;&#24847; <code>x</code> &#21644; <code>X</code> &#20854;&#23454;&#26159;&#19968;&#20010; register&#65292;&#22240;&#20026; <code>&quot;xp</code> &#21644; <code>&quot;Xp</code> &#26159;&#19968;&#26679;&#30340;&#12290;</p>
+<p><code>&quot;0p</code>&#65306;&#24573;&#30053;&#37027;&#20123; d &#25481;&#30340;&#19996;&#35199;&#65288;&#25105;&#30495;&#30340;&#19981;&#26159;&#24819;&#31896;&#36148;&#23427;&#20204;&#65289;&#65292;&#19987;&#27880;&#20110;&#31896;&#36148; <code>y</code> &#20102;&#30340;&#20869;&#23481;&#12290;</p>
+<p>&#19968;&#23450;&#35760;&#24471;&#30475;&#36825;&#20010;&#65306;</p>
+<pre class="plain"><code> ID  Df  %Dev    Lambda
+    1   0   0.000000    0.313682
+    2   1   0.023113    0.304332
+    3   1   0.044869    0.295261
+    4   1   0.065347    0.286460
+    5   1   0.084623    0.277922
+    6   1   0.102767    0.269638
+    7   1   0.119845    0.261601</code></pre>
+<p>&#22312; Refs &#30340;&#38142;&#25509;&#37324;&#65292;naught101 &#35828;&#65306;</p>
+<blockquote>
+<p>This is totally key. I haven&#8217;t noticed until now that registers are the same as macro buffers. This means you can just <strong>store all your macros in text, yank them, and run them</strong>. Pretty cool, and a little bit weird. Very Vim.</p>
+</blockquote>
+<h3 id="&#20174;-&#21040;">4. &#20174; <code>+</code> &#21040; <code>*</code></h3>
+<p>&#21152;&#21495;&#23492;&#23384;&#22120;&#37324;&#23384;&#20102; <kbd>Control-C</kbd> &#30340;&#20869;&#23481;&#65292;&#20056;&#21495;&#23492;&#23384;&#22120;&#37324;&#23384;&#20102;&#40736;&#26631;&#36873;&#20013;&#30340;&#20869;&#23481;&#12290;</p>
+<p>&#20320;&#25110;&#35768;&#30097;&#38382;&#20056;&#21495;&#26377;&#20160;&#20040;&#29992;&#65292;&#25105;&#20030;&#20010;&#20363;&#23376;&#65306;</p>
+<p>&#29992; Vim &#32534;&#36753;&#19968;&#27573;&#25991;&#23383;&#30340;&#26102;&#20505;&#65292;&#19981;&#31227;&#21160;&#20809;&#26631;&#65292;&#29992;&#40736;&#26631;&#36873;&#25321;&#24403;&#21069;&#25991;&#26723;&#37324;&#20320;&#24819;&#35201; copy &#30340;&#25991;&#23383;&#30452;&#25509;&#31896;&#36148;&#12290;</p>
+<p>2015-02-13</p>
+<hr />
+<p>Refs</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/1497958/how-to-use-vim-registers">vi - How to use vim registers? - Stack Overflow</a></li>
+</ul>
+<hr />
+<p>&#19981;&#20687; Emacs&#65292;Vim &#20960;&#20046;&#19981;&#38656;&#35201;&#37197;&#32622;&#23601;&#33021;&#24456;&#22909;&#22320;&#20351;&#29992;&#12290;&#20294;&#20063;&#26377;&#19968;&#20010;&#22320;&#26041;&#65292;&#30830;&#23454;&#38656;&#35201;&#37197;&#32622;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/pics/vim-default.png" />
+
+</div>
+<p>&#38500;&#27492;&#20043;&#22806;&#65292;Vim &#24456;&#23436;&#32654;&#12290;</p>
+<h2 id="&#26434;&#19971;&#26434;&#20843;&#25216;&#33021;">&#26434;&#19971;&#26434;&#20843;&#25216;&#33021;</h2>
+<pre class="plain"><code>;; set text width
+;; ;    :set tw=80
+;; ;    :set fo+=m ; &#20013;&#25991;&#33258;&#21160;&#37325;&#25490;
+gq[motion]
+
+;; captitorize current word, &#36825;&#37324;&#29992;&#30340; ` &#23492;&#23384;&#22120;&#65292;&#24403;&#28982;&#36824;&#21487;&#20197;&#26159;&#20854;&#20182;&#20219;&#24847;&#23383;&#27597;
+m`b~``</code></pre>
+<p>Control + R &#8594; <code>reg</code>(<code>*</code>, <code>=</code>, etc)</p>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://dvorak4tzx.lofter.com/post/1d4021c8_84b3717">&#22825;&#19979;&#32477;&#25216;&#65292;&#21807;&#19968;&#38656;&#35201; default &#32780;&#19981;&#26159; default &#30340;&#19996;&#35199;&#65292;&#25152;&#20197;&#20320;&#24471;&#35760;&#20303;&#65281;</a></li>
+</ol>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#24403;&#28982;&#65292;&#36824;&#35848;&#19981;&#19978;&#23436;&#34384;&#12290;<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p>&#22914;&#26524;&#20320;&#19981;&#30693;&#36947; ACE &#32534;&#36753;&#22120;&#65292;&#21487;&#20197;&#21435;&#26597;&#26597;&#12290;&#23427;&#25903;&#25345;&#27983;&#35272;&#22120;&#20013;&#20351;&#29992; Vim &#32534;&#36753;&#27169;&#24335;&#12290;<a href="#fnref2">&#8617;</a></p></li>
+<li id="fn3"><p>&#26412;&#25991;&#26368;&#21021;&#30340;&#26412;&#24847;&#26159;&#35201;&#40657; Vim&#12290;&#32618;&#36807;&#32618;&#36807;&#65292;&#24863;&#35874; Vim &#25327;&#25937;&#25105;&#30340;&#23567;&#25287;&#25351;&#12290; Vim &#26159;&#20010;&#20255;&#22823;&#30340;&#32534;&#36753;&#22120;&#65292;&#25105;&#19981;&#35813;&#40657;&#23427;&#12290;<a href="#fnref3">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#vim">vim</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0047-more-about-vim.md" title="232 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0047-more-about-vim.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 232,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

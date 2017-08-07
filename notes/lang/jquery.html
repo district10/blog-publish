@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning jQuery</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="learning-jquery">Learning jQuery</h1>
+<div class="tzx-fright">
+<p><a href="https://book.douban.com/subject/24669823/"><img src="https://img1.doubanio.com/mpic/s27104238.jpg" alt="Learning jQuery - Fourth Edition (&#35910;&#29923;)" /></a></p>
+</div>
+<p>jQuery is a powerful JavaScript library that can enhance your websites regardless of your background. In this book, creators of the popular jQuery learning resource, <a href="http://book.learningjquery.com/">jQuery Books</a>, share their knowledge, experience, and enthusiasm about jQuery to help you get the most from the library and to <strong>make your web applications shine</strong>. For designers, jQuery leverages existing CSS and HTML skills, allowing you to dynamically find and change any aspect of a page. This book provides a gentle introduction to jQuery concepts, allowing you to add interactions and animations to your pages-even if previous attempts at writing JavaScript have left you baffled (&#36855;&#24785;). For programmers, jQuery offers an open-source, standards-compliant, unobtrusive (<code>['&#652;n&#601;b'tr&#650;s&#618;v]</code>, &#19981;&#21776;&#31361;&#30340;&#65307;&#35878;&#34394;&#30340;) approach to writing complex JavaScript applications. This book will <strong>guide you past the pitfalls</strong> associated with AJAX, events, effects, and advanced JavaScript language features, as well as provide you with a reference to the jQuery library to return to again and again. This book begins with a tutorial to jQuery, followed by an examination of common, real-world client-side problems, and solutions for each of them. A detailed reference rounds off the book, making it an invaluable resource for answers to all your jQuery questions. Who this book is written for This book is for web designers who want to create interactive elements for their designs, and for developers who want to create the best user interface for their web applications. The reader will need the basics of HTML and CSS, and should be comfortable with the syntax of JavaScript. No knowledge of jQuery is assumed, nor is experience with any other JavaScript libraries required.</p>
+<h2 id="getting-started">Getting Started</h2>
+<dl>
+<dt>Words</dt>
+<dd><ol>
+<li>WWW</li>
+<li>CSS</li>
+<li>jQuery</li>
+</ol>
+</dd>
+<dt>What jQuery does</dt>
+<dd><ol>
+<li>Access elements in a document: <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.content&#39;</span>).<span class="at">find</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span></code></li>
+<li>Modify the appearance of a web page: <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;ul &gt; li:first&#39;</span>).<span class="at">addClass</span>(<span class="st">&#39;active&#39;</span>)<span class="op">;</span></code></li>
+<li>Alter the content of a document: <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;#container&#39;</span>).<span class="at">append</span>(<span class="st">&#39;&lt;a href=&quot;more.html&quot;&gt;more&lt;/a&gt;);&#39;</span></code></li>
+<li><p>Respond to a user&#8217;s interaction:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;button.show-details&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;div.details&#39;</span>).<span class="at">show</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div></li>
+<li>Animate changes being made to a document: <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.details&#39;</span>).<span class="at">slideDown</span>()<span class="op">;</span></code></li>
+<li>Retrieve information from a server without refreshing a page: <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.details&#39;</span>).<span class="at">load</span>(<span class="st">&#39;more.html #content&#39;</span>)<span class="op">;</span></code></li>
+<li><p>Simplify common JavaScript tasks:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">each</span>(obj<span class="op">,</span> <span class="kw">function</span>(key<span class="op">,</span> value) <span class="op">{</span>
+    total <span class="op">+=</span> value<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div></li>
+</ol>
+</dd>
+<dt>Why jQuery works well</dt>
+<dd><ol>
+<li>Leverage knowledge of CSS</li>
+<li>Support extensions</li>
+<li>Abstract away browser quirks</li>
+<li>Always work with sets</li>
+<li>Allow multiple actions in one line</li>
+</ol>
+</dd>
+<dt>Development Tools</dt>
+<dd><ol>
+<li>Firebug</li>
+</ol>
+</dd>
+<dd><ol>
+<li>Chrome Developer Tools</li>
+</ol>
+</dd>
+</dl>
+<h2 id="selecting-elements">Selecting Elements</h2>
+<dl>
+<dt><code class="sourceCode javascript"><span class="at">$</span>()</code></dt>
+<dd><ol>
+<li>tag name: <code class="sourceCode css">p <span class="kw">{</span> <span class="kw">}</span></code></li>
+<li>id: <code class="sourceCode css"><span class="fl">#id</span> <span class="kw">{</span> <span class="kw">}</span></code></li>
+<li>class: <code class="sourceCode css"><span class="fl">.class</span> <span class="kw">{</span> <span class="kw">}</span></code></li>
+<li>more CSS selectors
+<ol style="list-style-type: lower-roman">
+<li><code class="sourceCode css"><span class="fl">#selected-plays</span> &gt; li <span class="kw">{</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode css"><span class="fl">#selected-plays</span> li<span class="dv">:not</span>(<span class="fl">.horizontal</span>)</code></li>
+</ol></li>
+<li>attribute selectors
+<ol style="list-style-type: lower-roman">
+<li><code class="sourceCode css">img<span class="ch">[alt]</span> <span class="kw">{</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode css">a<span class="ch">[href^=</span><span class="st">&quot;mailto:&quot;</span><span class="ch">]</span></code>
+<ul>
+<li><code>^=</code> (start with)</li>
+<li><code>$=</code> (end with)</li>
+<li><code>*=</code> (contains)</li>
+</ul></li>
+</ol></li>
+<li>custom selectors
+<ol style="list-style-type: lower-roman">
+<li><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.horizontal:eq(1)&#39;</span>)</code> (0-based) <em>vs.</em> <code class="sourceCode css">div<span class="dv">:nth-child</span>(1)</code> (1-based)</li>
+<li><code class="sourceCode css">tr<span class="dv">:</span>even</code></li>
+<li><code class="sourceCode css">tr<span class="dv">:nth-child</span>(odd)</code></li>
+<li><code class="sourceCode css">tr<span class="dv">:</span>contains(Henry)</code></li>
+<li><code class="sourceCode css">nth-child(f(n))</code>, n-&gt;<code>{0..INF}</code>, f(n)-&gt;<code>{1..INF, -INF..-1}</code></li>
+</ol></li>
+<li>form selectors
+<ol style="list-style-type: lower-roman">
+<li><code class="sourceCode css">input<span class="ch">[type=</span><span class="st">&quot;radio&quot;</span><span class="ch">]</span><span class="dv">:checked</span></code></li>
+<li><code class="sourceCode css">input<span class="ch">[type=</span><span class="st">&quot;password&quot;</span><span class="ch">]</span></code></li>
+</ol></li>
+</ol>
+</dd>
+<dt>DOM traversal methods</dt>
+<dd><ol>
+<li><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;tr&#39;</span>)</code> == <code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;tr&#39;</span><span class="op">,</span> <span class="kw">this</span>)</code> -&gt; <code class="sourceCode javascript"><span class="at">$</span>(<span class="kw">this</span>).<span class="at">find</span>(tr)</code></li>
+<li><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;tr&#39;</span>).<span class="at">filter</span>(<span class="st">&#39;:even&#39;</span>).<span class="at">addClass</span>(<span class="st">&#39;alt&#39;</span>)<span class="op">;</span></code></li>
+<li><p>example</p>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">a<span class="fl">.external</span> <span class="kw">{</span>
+    <span class="kw">background:</span> <span class="dt">#fff</span> <span class="dt">url(</span>images/external<span class="dt">.</span>png<span class="dt">)</span> <span class="dt">no-repeat</span> <span class="dt">100%</span> <span class="dt">2px</span><span class="kw">;</span>
+    <span class="kw">padding-right:</span> <span class="dt">16px</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;a&#39;</span>).<span class="at">filter</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">hostname</span> <span class="op">&amp;&amp;</span> <span class="kw">this</span>.<span class="at">hostname</span> <span class="op">!=</span> <span class="va">location</span>.<span class="at">hostname</span><span class="op">;</span>
+<span class="op">}</span>).<span class="at">addClass</span>(<span class="st">&#39;external&#39;</span>)<span class="op">;</span></code></pre></div></li>
+<li><code class="sourceCode javascript"><span class="at">next</span>()</code>, <code class="sourceCode javascript"><span class="at">nextAll</span>()</code>, <code class="sourceCode javascript"><span class="at">nextAll</span>().<span class="at">addBack</span>()</code>, <code class="sourceCode javascript"><span class="at">parent</span>()</code>, <code class="sourceCode javascript"><span class="at">parent</span>().<span class="at">children</span>()</code>,</li>
+<li><p>chaining</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;td:contains(Henry)&#39;</span>)
+    .<span class="at">parent</span>()
+    .<span class="at">find</span>(<span class="st">&#39;td:eq(1)&#39;</span>)           <span class="co">// Find the 2nd descendant cell</span>
+        .<span class="at">addClass</span>(<span class="st">&#39;highlight&#39;</span>)
+        .<span class="at">end</span>()                  <span class="co">// Return to the parent</span>
+    .<span class="at">find</span>(<span class="st">&#39;td:eq(2)&#39;</span>)           <span class="co">// Find the 3rd descendant cell</span>
+        .<span class="at">addClass</span>(<span class="st">&#39;highlight&#39;</span>)<span class="op">;</span></code></pre></div></li>
+<li><p><code class="sourceCode javascript"><span class="at">$</span>().<span class="at">get</span>(<span class="dv">0</span>)</code> == <code class="sourceCode javascript"><span class="at">$</span>()[<span class="dv">0</span>]</code></p></li>
+</ol>
+</dd>
+</dl>
+<h2 id="handling-events">Handling Events</h2>
+<dl>
+<dt>callback functions</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">doStuff</span>() <span class="op">{</span>
+    <span class="co">// ...</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">// *eval* a function when onload
+<span class="kw">&lt;body</span><span class="ot"> onload=</span><span class="st">&quot;doStuff();&quot;</span><span class="kw">&gt;</span></code></pre></div>
+<p>or</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> doStuff<span class="op">;</span></code></pre></div>
+</dd>
+<dt>document ready:</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// ...</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// same but shorter</span>
+<span class="at">$</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// ...</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="at">jQuery</span>(document).<span class="at">ready</span>(<span class="kw">function</span>($) <span class="op">{</span>
+    <span class="co">// here, we can use $ like normal!</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>actions:</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>().<span class="at">on</span>( <span class="st">&#39;click&#39;</span><span class="op">,</span> cb )
+
+<span class="at">$</span>().<span class="at">addClass</span>(<span class="st">&#39;className&#39;</span>)<span class="op">;</span>
+<span class="at">$</span>().<span class="at">removeClass</span>(<span class="st">&#39;className&#39;</span>)<span class="op">;</span>
+<span class="at">$</span>().<span class="at">removeClass</span>().<span class="at">addClass</span>(<span class="st">&#39;className&#39;</span>)<span class="op">;</span> <span class="co">// remove all, then add one</span>
+
+<span class="at">$</span>().<span class="at">toggleClass</span>(<span class="st">&#39;className&#39;</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode javascript"><span class="at">$</span>(<span class="kw">this</span>)</code>, <code class="sourceCode javascript"><span class="kw">this</span></code>:</dt>
+<dd><p>The jQuery constructor accepts a 2nd parameter called <strong>context</strong> which can be used to override the context of the selection.</p>
+<p><code class="sourceCode javascript"><span class="at">jQuery</span>(<span class="st">&quot;img&quot;</span><span class="op">,</span> <span class="kw">this</span>)<span class="op">;</span></code> &#8211;&gt; <code class="sourceCode javascript"><span class="at">jQuery</span>(<span class="kw">this</span>).<span class="at">find</span>(<span class="st">&quot;img&quot;</span>)<span class="op">;</span></code></p>
+<ul>
+<li><code>this</code>, &#34920;&#31034;&#24403;&#21069;&#30340;&#19978;&#19979;&#25991;&#23545;&#35937;&#26159;&#19968;&#20010; <strong>html &#23545;&#35937;</strong>&#65292;&#21487;&#20197;&#35843;&#29992; html &#23545;&#35937;&#25152;&#25317;&#26377;&#30340;&#23646;&#24615;&#65292;&#26041;&#27861;;</li>
+<li><code>$(this)</code>, &#20195;&#34920;&#30340;&#19978;&#19979;&#25991;&#23545;&#35937;&#26159;&#19968;&#20010; jQuery &#30340;&#19978;&#19979;&#25991;&#23545;&#35937;&#65292;&#21487;&#20197;&#35843;&#29992; jQuery &#30340;&#26041;&#27861;&#21644;&#23646;&#24615;&#20540;</li>
+</ul>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/306583/this-selector-and-children">javascript - $(this) selector and children? - Stack Overflow</a></li>
+<li><a href="http://www.cnblogs.com/iceWolf/archive/2009/08/27/1555138.html">Jquery&#20013;&#30340;this&#19982;$(this) - Chris.gong - &#21338;&#23458;&#22253;</a></li>
+</ul>
+</dd>
+<dt>Event propagation</dt>
+<dd><div class="figure">
+<img src="http://whudoc.qiniudn.com/event-propagation.png" alt="capturing (to leaf) &amp; bubbling (to root)" />
+<p class="caption">capturing (to leaf) &amp; bubbling (to root)</p>
+</div>
+<ol>
+<li>event bubbling</li>
+<li>event bubbles up</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>().<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="cf">if</span> (<span class="va">event</span>.<span class="at">target</span> <span class="op">==</span> <span class="kw">this</span>) <span class="op">{</span>
+        <span class="co">// ...</span>
+        <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+        <span class="va">event</span>.<span class="at">stopPropagation</span>()<span class="op">;</span>
+    <span class="op">}</span>
+
+    <span class="co">// return &lt;propagate?&gt;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// event.target is a html object, if (event.target == this) ...</span>
+<span class="op">:?</span> <span class="at">$</span>(<span class="va">event</span>.<span class="at">target</span>).<span class="at">is</span>(<span class="st">&#39;button&#39;</span>)<span class="op">;</span>
+:<span class="op">?</span> <span class="at">$</span>(<span class="va">event</span>.<span class="at">target</span>).<span class="at">hasClass</span>(<span class="st">&#39;className&#39;</span>)<span class="op">;</span>
+
+<span class="at">$</span>().<span class="at">hover</span>(<span class="kw">function</span>()<span class="op">{</span>
+    <span class="co">// entering</span>
+<span class="op">},</span> <span class="kw">function</span>()<span class="op">{</span>
+    <span class="co">// leaving</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// remove an event handler</span>
+<span class="at">$</span>().<span class="at">off</span>(<span class="st">&#39;click&#39;</span>)<span class="op">;</span> <span class="co">// &#36825;&#31181;&#23601;&#25226;&#25152;&#26377;&#30340; handler &#37117; remove &#20102;</span>
+
+<span class="at">$</span>().<span class="at">on</span>(<span class="st">&#39;click.namespace&#39;</span><span class="op">,</span> cb)<span class="op">;</span> <span class="co">// event can be *named* to a namespace</span>
+<span class="at">$</span>().<span class="at">on</span>(event<span class="op">,</span> target<span class="op">,</span> cb)<span class="op">;</span>
+
+<span class="co">// remove event handler</span>
+<span class="at">$</span>().<span class="at">off</span>(<span class="st">&#39;click.namespace&#39;</span>)<span class="op">;</span>
+
+<span class="at">$</span>().<span class="at">one</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> cb)<span class="op">;</span>
+
+<span class="at">$</span>().<span class="at">trigger</span>(<span class="st">&#39;click&#39;</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode javascript"><span class="va">event</span>.<span class="at">stopPropagation</span>()<span class="op">;</span></code> <em>vs.</em> <code class="sourceCode javascript"><span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></code></dt>
+<dd><p>&#26377;&#28857;&#19981;&#19968;&#26679;&#12290;</p>
+<p><code class="sourceCode javascript"><span class="cf">return</span> <span class="kw">false</span></code> calls both</p>
+<ul>
+<li><code class="sourceCode javascript"><span class="va">event</span>.<span class="at">preventDefault</span>()</code> and</li>
+<li><code class="sourceCode javascript"><span class="va">event</span>.<span class="at">stopPropagation</span>()</code></li>
+</ul>
+<p><code class="sourceCode javascript">preventDefault</code> <code class="sourceCode javascript"><span class="va">event</span>.<span class="at">stopPropagation</span>()</code></p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model/Examples#Example_5:_Event_Propagation">Examples - Web API &#25509;&#21475; | MDN</a></li>
+</ul>
+</dd>
+<dt>kbds</dt>
+<dd><ul>
+<li><a id="switcher-dents" href="http://tangzx.qiniudn.com/dents.html">dents</a></li>
+<li><a id="switcher-notes" href="http://tangzx.qiniudn.com/notes.html">notes</a></li>
+<li><a id="switcher-links" href="http://tangzx.qiniudn.com/links.html">links</a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+
+    <span class="kw">var</span> triggers <span class="op">=</span> <span class="op">{</span>
+        <span class="dt">D</span><span class="op">:</span> <span class="st">&#39;dents&#39;</span><span class="op">,</span>
+        <span class="dt">N</span><span class="op">:</span> <span class="st">&#39;notes&#39;</span><span class="op">,</span>
+        <span class="dt">L</span><span class="op">:</span> <span class="st">&#39;links&#39;</span>
+    <span class="op">};</span>
+
+    <span class="at">$</span>(document).<span class="at">keyup</span>(<span class="kw">function</span>(event) <span class="op">{</span>
+        <span class="kw">var</span> key <span class="op">=</span> <span class="va">String</span>.<span class="at">fromCharCode</span>(<span class="va">event</span>.<span class="at">which</span>)<span class="op">;</span>
+        <span class="cf">if</span> (key <span class="kw">in</span> triggers) <span class="op">{</span>
+            <span class="at">$</span>(<span class="st">&#39;#switcher-&#39;</span> <span class="op">+</span> triggers[key]).<span class="at">click</span>()<span class="op">;</span>
+        <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p><code>mousedown</code>, <code>mouseup</code></p>
+<p>&#19981;&#31649;&#29992;&#19981;&#29992; jQuery&#65292;&#37117;&#26159;&#35201;&#22788;&#29702; event &#37324;&#38754;&#30340; which&#12290;</p>
+</dd>
+</dl>
+<h2 id="styling-and-animating">Styling and Animating</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// get one</span>
+.<span class="at">css</span>(<span class="st">&#39;property&#39;</span>) <span class="co">// returns &quot;value&quot;</span>
+
+<span class="co">// get multi</span>
+.<span class="at">css</span>([<span class="st">&#39;p1&#39;</span><span class="op">,</span> <span class="st">&#39;p2&#39;</span>]) <span class="co">// returns {&#39;p1&#39;: &#39;v1&#39;, &#39;p2&#39;: &#39;v2&#39;}</span>
+
+<span class="co">// set multi</span>
+.<span class="at">css</span>(<span class="op">{</span>
+    <span class="dt">k</span><span class="op">:</span> v
+    ...
+<span class="op">}</span>)
+
+<span class="co">// example</span>
+<span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="kw">var</span> $speech <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;div.speech&#39;</span>)<span class="op">;</span>
+    <span class="at">$</span>(<span class="st">&#39;#switcher-large&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span>
+        <span class="kw">var</span> num <span class="op">=</span> <span class="at">parseFloat</span>(<span class="va">$speech</span>.<span class="at">css</span>(<span class="st">&#39;fontSize&#39;</span>))<span class="op">;</span>
+        num <span class="op">*=</span> <span class="fl">1.4</span><span class="op">;</span>
+        <span class="va">$speech</span>.<span class="at">css</span>(<span class="st">&#39;fontSize&#39;</span><span class="op">,</span> num <span class="op">+</span> <span class="st">&#39;px&#39;</span>)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)
+
+<span class="co">// parseFloat &#26159; js built-in&#12290;</span></code></pre></div>
+<dl>
+<dt>&#29992; jQuery &#30340; <code class="sourceCode javascript">.<span class="at">css</span></code> &#30340;&#22909;&#22788;&#65311;</dt>
+<dd><p>&#20877;&#19981;&#29992;&#19968;&#20010;&#19968;&#20010;&#25163;&#24037;&#22788;&#29702;&#20860;&#23481;&#24615;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">-webkit-property-name<span class="dv">:</span> value;
+-moz-property-name<span class="dv">:</span> value;
+-ms-property-name<span class="dv">:</span> value;
+-o-property-name<span class="dv">:</span> value;
+property-name<span class="dv">:</span> value;</code></pre></div>
+<p><code class="sourceCode javascript">.<span class="at">css</span>(<span class="st">&#39;propertyName&#39;</span><span class="op">,</span> <span class="st">&#39;value&#39;</span>)</code></p>
+</dd>
+<dt>Effects</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">hide</span>()<span class="op">;</span> <span class="at">show</span>()<span class="op">;</span> <span class="co">// default -&gt; 400ms</span>
+<span class="at">hide</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span>   <span class="co">// slow    -&gt; 600ms</span>
+<span class="at">show</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span>   <span class="co">// fast    -&gt; 200ms</span>
+<span class="at">show</span>(<span class="dv">850</span>)<span class="op">;</span>      <span class="co">// specified</span></code></pre></div>
+</dd>
+</dl>
+<p>more effects</p>
+<ul>
+<li><code class="sourceCode javascript"><span class="at">fadeIn</span>()</code>, (show)</li>
+<li><code class="sourceCode javascript"><span class="at">fadeOut</span>()</code>, (hide)</li>
+<li><code class="sourceCode javascript"><span class="at">fadeTo</span>(<span class="st">&#39;fast&#39;</span><span class="op">,</span> <span class="fl">0.8</span>)</code></li>
+<li><code class="sourceCode javascript"><span class="at">slideUp</span>()</code>, (hide)&#65292;&#36825;&#20004;&#20010;&#19968;&#23450;&#35201;&#21306;&#20998;&#22909;&#65281;&#25289;&#19979;&#26469;&#23601;&#26159;&#30475;&#21040;&#20102;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="at">slideDown</span>()</code>, (show)&#65292;&#25289;&#19978;&#21435;&#23601;&#26159;&#25910;&#36215;&#26469;&#12290;</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;a.more&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>(event) <span class="op">{</span>
+    <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+    <span class="cf">if</span> (<span class="va">$firstPara</span>.<span class="at">is</span>(<span class="st">&#39;:hidden&#39;</span>)) <span class="op">{</span>
+        <span class="va">$firstPara</span>.<span class="at">fadeIn</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span>
+        <span class="at">$</span>(<span class="kw">this</span>).<span class="at">text</span>(<span class="st">&#39;read less&#39;</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="va">$firstPara</span>.<span class="at">fadeOut</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span>
+        <span class="at">$</span>(<span class="kw">this</span>).<span class="at">text</span>(<span class="st">&#39;read more&#39;</span>)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">};</span></code></pre></div>
+<dl>
+<dt>cerating custom animations</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// 1</span>
+.<span class="at">animate</span>(<span class="op">{</span>
+    <span class="dt">property1</span><span class="op">:</span> <span class="st">&#39;value1&#39;</span><span class="op">,</span>
+    <span class="dt">property2</span><span class="op">:</span> <span class="st">&#39;value2&#39;</span>
+<span class="op">},</span> duration<span class="op">,</span> easing<span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">alert</span>(<span class="st">&#39;The animation is finished.&#39;</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// 2</span>
+.<span class="at">animate</span>(<span class="op">{</span>properties<span class="op">},</span> <span class="op">{</span>options<span class="op">}</span>)<span class="op">;</span>
+<span class="co">/*</span>
+<span class="co">    options, e.g.:</span>
+<span class="co">        duration: &#39;value&#39;,</span>
+<span class="co">        easing: &#39;value&#39;,</span>
+<span class="co">        specialEasing: {</span>
+<span class="co">            property1: &#39;easing1&#39;,</span>
+<span class="co">            property2: &#39;easing2&#39;</span>
+<span class="co">        },</span>
+<span class="co">        queue: true,</span>
+<span class="co">        step: callback,</span>
+<span class="co">        complete: function() {</span>
+<span class="co">            alert(&#39;The animation is finished.&#39;);</span>
+<span class="co">        }</span>
+<span class="co">*/</span></code></pre></div>
+<p>For example, adjusting the <code>left</code> property will have no effect on the matching elements unless those elements have their CSS position set to <code>relative</code> or <code>absolute</code>. The default CSS position for all block-level elements is <code>static</code>, which accurately describes how those elements will remain if we try to move them without first changing their position value.</p>
+</dd>
+</dl>
+<h2 id="positioning-with-css">Positioning with CSS</h2>
+<p>position</p>
+<ul>
+<li>static</li>
+<li>absolute</li>
+<li>relative</li>
+<li>fixed</li>
+</ul>
+<p><code>position: absolute;</code></p>
+<ul>
+<li><code>top: 50px;</code></li>
+<li><code>bottom: 50px;</code></li>
+<li><code>left: 50px;</code></li>
+<li><code>right: 50px;</code></li>
+</ul>
+<dl>
+<dt>relative</dt>
+<dd><p>For example, if you have three paragraphs on your web page, and the third has a &#8220;position: relative&#8221; style placed on it, it&#8217;s position will be offset based on it&#8217;s current location.</p>
+<pre class="htlm"><code>&lt;p&gt;Paragraph 1.&lt;/p&gt;
+&lt;p&gt;Paragraph 2.&lt;/p&gt;
+&lt;p style=&quot;position: relative;left: 2em;&quot;&gt;Paragraph 3.&lt;/p&gt;</code></pre>
+<p>In the above example, the third paragraph will be positioned 2em from the left side of the container element, but will still be below the first two paragraphs. It would remain in the normal flow of the document, and just be offset slightly. If you changed it to position: absolute; anything following it would display on top of it, because it would no longer be in the normal flow of the document.</p>
+<p>fixed: my <code>footer</code> in this page, is fixed.</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/10426497/position-relative-vs-position-absolute">css - Position Relative vs Position Absolute? - Stack Overflow</a></li>
+<li><a href="http://webdesign.about.com/od/advancedcss/a/aa061307.htm">Absolute vs.&#160;Relative - Explaining CSS Positioning</a></li>
+<li><a href="http://stackoverflow.com/questions/4457790/difference-between-style-positionabsolute-and-style-positionrelative">css - Difference between style = &#8220;position:absolute&#8221; and style = &#8220;position:relative&#8221; - Stack Overflow</a> &#9829;</li>
+<li><a href="http://www.yorku.ca/nmw/facs1939f13/week02/css_relVSabsVSfixed.html">Static vs Relative vs Absolute vs Fixed Positioning</a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$switcher</span>.<span class="at">css</span>(<span class="op">{</span>
+    <span class="dt">position</span><span class="op">:</span> <span class="st">&#39;relative&#39;</span>
+<span class="op">}</span>).<span class="at">animate</span>(<span class="op">{</span>
+    <span class="dt">borderWidth</span><span class="op">:</span> <span class="st">&#39;5px&#39;</span><span class="op">,</span>
+    <span class="dt">left</span><span class="op">:</span> paraWidth <span class="op">-</span> switcherWidth<span class="op">,</span>
+    <span class="dt">height</span><span class="op">:</span> <span class="st">&#39;+=20px&#39;</span>
+<span class="op">},</span> <span class="st">&#39;slow&#39;</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>Simultaneous <em>vs.</em> queued effects</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">$switcher
+    .<span class="at">css</span>(<span class="op">{</span><span class="dt">position</span><span class="op">:</span> <span class="st">&#39;relative&#39;</span><span class="op">}</span>)
+    .<span class="at">animate</span>(<span class="op">{</span><span class="dt">left</span><span class="op">:</span> paraWidth <span class="op">-</span> switcherWidth<span class="op">},</span> <span class="st">&#39;slow&#39;</span>)
+    .<span class="at">animate</span>(<span class="op">{</span><span class="dt">height</span><span class="op">:</span> <span class="st">&#39;+=20px&#39;</span><span class="op">},</span> <span class="st">&#39;slow&#39;</span>)
+    .<span class="at">animate</span>(<span class="op">{</span><span class="dt">borderWidth</span><span class="op">:</span> <span class="st">&#39;5px&#39;</span><span class="op">},</span> <span class="st">&#39;slow&#39;</span>)<span class="op">;</span>
+
+<span class="co">// queued</span>
+$switcher
+    .<span class="at">css</span>(<span class="op">{</span><span class="dt">position</span><span class="op">:</span> <span class="st">&#39;relative&#39;</span><span class="op">}</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;fast&#39;</span><span class="op">,</span> <span class="fl">0.5</span>)
+    .<span class="at">animate</span>(<span class="op">{</span><span class="dt">left</span><span class="op">:</span> paraWidth <span class="op">-</span> switcherWidth<span class="op">},</span> <span class="st">&#39;slow&#39;</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;slow&#39;</span><span class="op">,</span> <span class="fl">1.0</span>)
+    .<span class="at">slideUp</span>(<span class="st">&#39;slow&#39;</span>)
+    .<span class="at">slideDown</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span>
+
+<span class="co">// sync</span>
+$switcher
+    .<span class="at">css</span>(<span class="op">{</span><span class="dt">position</span><span class="op">:</span> <span class="st">&#39;relative&#39;</span><span class="op">}</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;fast&#39;</span><span class="op">,</span> <span class="fl">0.5</span>)
+    .<span class="at">animate</span>(<span class="op">{</span>
+        <span class="dt">left</span><span class="op">:</span> paraWidth <span class="op">-</span> switcherWidth
+    <span class="op">},</span> <span class="op">{</span>
+        <span class="dt">duration</span><span class="op">:</span> <span class="st">&#39;slow&#39;</span><span class="op">,</span>
+        <span class="dt">queue</span><span class="op">:</span> <span class="kw">false</span>
+    <span class="op">}</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;slow&#39;</span><span class="op">,</span> <span class="fl">1.0</span>)
+    .<span class="at">slideUp</span>(<span class="st">&#39;slow&#39;</span>)
+
+$switcher
+    .<span class="at">css</span>(<span class="op">{</span><span class="dt">position</span><span class="op">:</span> <span class="st">&#39;relative&#39;</span><span class="op">}</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;fast&#39;</span><span class="op">,</span> <span class="fl">0.5</span>)
+    .<span class="at">animate</span>(<span class="op">{</span>
+        <span class="dt">left</span><span class="op">:</span> paraWidth <span class="op">-</span> switcherWidth
+    <span class="op">},</span> <span class="op">{</span>
+        <span class="dt">duration</span><span class="op">:</span> <span class="st">&#39;slow&#39;</span><span class="op">,</span>
+        <span class="dt">queue</span><span class="op">:</span> <span class="kw">false</span>
+    <span class="op">}</span>)
+    .<span class="at">fadeTo</span>(<span class="st">&#39;slow&#39;</span><span class="op">,</span> <span class="fl">1.0</span>)
+    .<span class="at">slideUp</span>(<span class="st">&#39;slow&#39;</span>)
+    .<span class="at">queue</span>(<span class="kw">function</span>(next) <span class="op">{</span>
+        <span class="va">$switcher</span>.<span class="at">css</span>(<span class="op">{</span><span class="dt">backgroundColor</span><span class="op">:</span> <span class="st">&#39;#f00&#39;</span><span class="op">}</span>)<span class="op">;</span>
+        <span class="at">next</span>()<span class="op">;</span>
+    <span class="op">}</span>)
+    .<span class="at">slideDown</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<div class="tzx-drawer" shy="">
+<dl>
+<dt><a href="http://api.jquery.com/category/effects/">Effects | jQuery API Documentation</a></dt>
+<dd><p>The jQuery library provides several techniques for adding animation to a web page. These include simple, standard animations that are frequently used, and the ability to craft sophisticated custom effects.</p>
+<p>&#23448;&#32593;&#30340; API &#34920;&#31034;&#20026; <code>.animate( properties [, duration ] [, easing ] [, complete ] )</code>&#65292;&#20854;&#23454;&#24212;&#35813;&#26159;&#65306; <code>.animate( properties [, duration [, easing [, complete ]]] )</code> &#25165;&#23545;&#12290;&#24403;&#28982;&#65292;&#19981;&#24517;&#35745;&#36739;&#12290;</p>
+</dd>
+</dl>
+</div>
+<dl>
+<dt>Effects</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;p&#39;</span>).<span class="at">eq</span>(<span class="dv">2</span>)
+    .<span class="at">css</span>(<span class="st">&#39;border&#39;</span><span class="op">,</span> <span class="st">&#39;1px solid #333&#39;</span>)
+    .<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span>
+        <span class="kw">var</span> $clickedItem <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>)<span class="op">;</span>
+        <span class="va">$clickedItem</span>.<span class="at">next</span>().<span class="at">slideDown</span>(<span class="st">&#39;slow&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span>
+            <span class="va">$clickedItem</span>.<span class="at">slideUp</span>(<span class="st">&#39;slow&#39;</span>)<span class="op">;</span>
+        <span class="op">}</span>)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<p>Effects on a single set of elements are:</p>
+<ul>
+<li>Simultaneous when applied as multiple properties in <strong>a single <code>animate()</code> method</strong></li>
+<li>Queued when applied in <strong>a chain of methods</strong>, <strong>unless the queue option is set to <code>false</code></strong></li>
+</ul>
+<p>Effects on multiple sets of elements are:</p>
+<ul>
+<li>Simultaneous by default</li>
+<li>Queued when applied within the callback of another effect or within the callback of the <code>.queue()</code> method</li>
+</ul>
+<h2 id="manipulating-the-dom">Manipulating the DOM</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.chapter a&#39;</span>).<span class="at">attr</span>(<span class="op">{</span>
+    <span class="dt">rel</span><span class="op">:</span> <span class="st">&#39;external&#39;</span><span class="op">,</span>
+    <span class="dt">title</span><span class="op">:</span> <span class="st">&#39;Learn more at Wikipedia&#39;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>To set a unique id value for each link, we can harness another feature of jQuery methods such as <code>.css()</code> and <code>.each()</code> &#8212; <strong>value callbacks</strong>.</p>
+<p>value callbacks &#23601;&#26159;&#35828;&#35774;&#32622;&#30340;&#19981;&#26159; value&#65292;&#32780;&#26159;&#19968;&#20010; callback &#20989;&#25968;&#65292;&#21487;&#20197; eval &#24471;&#21040; value&#12290;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;div.chapter a[href*=&quot;wikipedia&quot;]&#39;</span>).<span class="at">attr</span>(<span class="op">{</span>
+        <span class="dt">rel</span><span class="op">:</span> <span class="st">&#39;external&#39;</span><span class="op">,</span>
+        <span class="dt">title</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+            <span class="cf">return</span> <span class="st">&#39;Learn more about &#39;</span> <span class="op">+</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">text</span>()
+                    <span class="op">+</span> <span class="st">&#39; at Wikipedia.&#39;</span><span class="op">;</span>
+        <span class="op">},</span>
+        <span class="dt">id</span><span class="op">:</span> <span class="kw">function</span>(index<span class="op">,</span> oldValue) <span class="op">{</span>
+            <span class="cf">return</span> <span class="st">&#39;wikilink-&#39;</span> <span class="op">+</span> index<span class="op">;</span>
+        <span class="op">}</span>
+        <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>The <code>.attr()</code> and <code>.prop()</code> methods are very powerful tools, and with them we can make targeted changes to the document.</p>
+<p>&#21035;&#24536;&#20102;&#26377;&#20123;&#20154;&#19981;&#29992;&#25110;&#32773;&#26377;&#20123;&#20154;&#30340;&#27983;&#35272;&#22120;&#19981;&#25903;&#25345; javascript&#65292;&#25152;&#20197;&#19981;&#35201;&#25226;&#32593;&#39029;&#30340;&#20869;&#23481;&#65292;&#37117;&#25918;&#21040; js &#37324;&#26469;&#23454;&#29616;&#12290;</p>
+<p><code class="sourceCode html">$(&#39;<span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#top&quot;</span><span class="kw">&gt;</span>back to top<span class="kw">&lt;/a&gt;</span>&#39;).insertAfter(&#39;div.chapter p&#39;)</code>, &#27599;&#19968;&#20010; p &#37117;&#28155;&#21152;</p>
+<p>inserts &amp; pendtos</p>
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">insertBefore</span>()</code> adds content outside of and before existing elements</li>
+<li><code class="sourceCode javascript">.<span class="at">prependTo</span>()</code> adds content inside of and before existing elements</li>
+<li><code class="sourceCode javascript">.<span class="at">appendTo</span>()</code> adds content inside of and after existing elements</li>
+<li><code class="sourceCode javascript">.<span class="at">insertAfter</span>()</code> adds content outside of and after existing elements</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> $notes <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;&lt;ol id=&quot;notes&quot;&gt;&lt;/ol&gt;&#39;</span>).<span class="at">insertBefore</span>(<span class="st">&#39;#footer&#39;</span>)<span class="op">;</span>
+<span class="at">$</span>(<span class="st">&#39;span.footnote&#39;</span>).<span class="at">each</span>(<span class="kw">function</span>(index) <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;&lt;sup&gt;&#39;</span> <span class="op">+</span> (index <span class="op">+</span> <span class="dv">1</span>) <span class="op">+</span> <span class="st">&#39;&lt;/sup&gt;&#39;</span>).<span class="at">insertBefore</span>(<span class="kw">this</span>)<span class="op">;</span>
+    <span class="at">$</span>(<span class="kw">this</span>).<span class="at">appendTo</span>($notes).<span class="at">wrap</span>(<span class="st">&#39;&lt;li&gt;&lt;/li&gt;&#39;</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<dl>
+<dt>Insertion method callbacks</dt>
+<dd><p><code class="sourceCode javascript">[ <span class="st">&#39;&lt;sup&gt;&#39;</span><span class="op">,</span> index <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&#39;&lt;/sup&gt;&#39;</span> ].<span class="at">join</span>(<span class="st">&#39;&#39;</span>)</code></p>
+</dd>
+<dt>coping elements</dt>
+<dd><p><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;div.chapter p:eq(0)&#39;</span>).<span class="at">clone</span>().<span class="at">insertBefore</span>(<span class="st">&#39;div.chapter&#39;</span>)<span class="op">;</span></code></p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">$clonedCopy
+    .<span class="at">addClass</span>(<span class="st">&#39;pulled&#39;</span>)
+    .<span class="at">find</span>(<span class="st">&#39;span.drop&#39;</span>)
+        .<span class="at">html</span>(<span class="st">&#39;&amp;hellip;&#39;</span>)
+        .<span class="at">end</span>()
+    .<span class="at">prependTo</span>($parentParagraph)<span class="op">;</span></code></pre></div>
+<ul>
+<li>wrap
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">wrap</span>()</code></li>
+<li><code class="sourceCode javascript">.<span class="at">wrapAll</span>()</code></li>
+<li><code class="sourceCode javascript">.<span class="at">wrapInner</span>()</code></li>
+</ul></li>
+<li>contents
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">html</span>()</code></li>
+<li><code class="sourceCode javascript">.<span class="at">text</span>()</code></li>
+</ul></li>
+<li>replacements
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">replaceAll</span>()</code></li>
+<li><code class="sourceCode javascript">.<span class="at">replaceWith</span>()</code></li>
+</ul></li>
+<li>removes
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">empty</span>()</code>, remove all children</li>
+<li><code class="sourceCode javascript">.<span class="at">remove</span>()</code>, remove matched (current?)</li>
+<li><code class="sourceCode javascript">.<span class="at">detach</span>()</code></li>
+</ul></li>
+</ul>
+</dd>
+<dt>aJax</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#letter-a a&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>(event) <span class="op">{</span>
+        <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+        <span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">load</span>(<span class="st">&#39;a.html&#39;</span>)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">load</span>(<span class="st">&#39;.html&#39;</span>)
+<span class="va">$</span>.<span class="at">getScript</span>(<span class="st">&#39;.js&#39;</span>)<span class="op">;</span>
+<span class="va">$</span>.<span class="at">getJSON</span>(<span class="st">&#39;.json&#39;</span>)<span class="op">;</span>
+<span class="va">$</span>.<span class="at">get</span>(<span class="st">&#39;.xml&#39;</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">html</span>(html)<span class="op">;</span>
+
+<span class="co">// $.get(url, callback)</span>
+<span class="va">$</span>.<span class="at">get</span>(<span class="st">&quot;demo_ajax_load.txt&quot;</span><span class="op">,</span> <span class="kw">function</span>(result)<span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&quot;div&quot;</span>).<span class="at">html</span>(result)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="co">// $.get(url, query)</span>
+<span class="va">$</span>.<span class="at">get</span>(<span class="st">&quot;test.php&quot;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;John&quot;</span><span class="op">,</span> <span class="dt">time</span><span class="op">:</span> <span class="st">&quot;2pm&quot;</span> <span class="op">}</span> )<span class="op">;</span>
+
+<span class="co">// $.post(URL,data,callback);</span>
+<span class="va">$</span>.<span class="at">post</span>(<span class="st">&quot;demo_test_post.asp&quot;</span><span class="op">,</span> <span class="op">{</span>
+    <span class="dt">name</span><span class="op">:</span><span class="st">&quot;Donald Duck&quot;</span><span class="op">,</span>
+    <span class="dt">city</span><span class="op">:</span><span class="st">&quot;Duckburg&quot;</span>
+<span class="op">},</span> <span class="kw">function</span>(data<span class="op">,</span>status)<span class="op">{</span>
+    <span class="at">alert</span>(<span class="st">&quot;Data: &quot;</span> <span class="op">+</span> data <span class="op">+</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Status: &quot;</span> <span class="op">+</span> status)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="at">$</span>(elem).<span class="at">empty</span>()<span class="op">;</span>
+<span class="at">$</span>(elem).<span class="at">append</span>(<span class="at">$</span>(elem2))
+
+<span class="kw">var</span> formValues <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">serialize</span>()<span class="op">;</span>
+
+<span class="at">$</span>(<span class="st">&#39;#letter-f form&#39;</span>).<span class="at">submit</span>(<span class="kw">function</span>(event) <span class="op">{</span>
+    <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+    <span class="kw">var</span> formValues <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">serialize</span>()<span class="op">;</span>
+    <span class="va">$</span>.<span class="at">get</span>(<span class="st">&#39;f.php&#39;</span><span class="op">,</span> formValues<span class="op">,</span> <span class="kw">function</span>(data) <span class="op">{</span>
+        <span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">html</span>(data)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">var</span> $loading <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;&lt;div id=&quot;loading&quot;&gt;Loading...&lt;/div&gt;&#39;</span>).<span class="at">insertBefore</span>(<span class="st">&#39;#dictionary&#39;</span>)<span class="op">;</span>
+<span class="at">$</span>(document).<span class="at">ajaxStart</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="va">$loading</span>.<span class="at">show</span>()<span class="op">;</span>
+<span class="op">}</span>).<span class="at">ajaxStop</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="va">$loading</span>.<span class="at">hide</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">hide</span>().<span class="at">load</span>(<span class="st">&#39;a.html&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="kw">this</span>).<span class="at">fadeIn</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="va">$</span>.<span class="at">get</span>(<span class="st">&#39;z.php&#39;</span><span class="op">,</span> requestData<span class="op">,</span> <span class="kw">function</span>(data) <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">html</span>(data)<span class="op">;</span>
+<span class="op">}</span>).<span class="at">fail</span>(<span class="kw">function</span>(jqXHR) <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>)
+        .<span class="at">html</span>(<span class="st">&#39;An error occurred: &#39;</span> <span class="op">+</span> <span class="va">jqXHR</span>.<span class="at">status</span>)
+        .<span class="at">append</span>(<span class="va">jqXHR</span>.<span class="at">responseText</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="at">$</span>(<span class="st">&#39;h3.term&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="kw">this</span>).<span class="at">siblings</span>(<span class="st">&#39;.definition&#39;</span>).<span class="at">slideToggle</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>Security limitations</dt>
+<dd><ul>
+<li>js</li>
+<li>iframe</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;script&#39;</span>))
+    .<span class="at">attr</span>(<span class="st">&#39;src&#39;</span><span class="op">,</span> <span class="st">&#39;http://example.com/example.js&#39;</span>)
+    .<span class="at">appendTo</span>(<span class="st">&#39;head&#39;</span>)<span class="op">;</span>
+
+<span class="va">jQuery</span>.<span class="at">parseJSON</span>(obj)</code></pre></div>
+<p>Cross-origin resource sharing A more recent technique that has been drafted into a W3C specification is Cross-Origin Resource Sharing (CORS). This technique requires sending a custom HTTP header from one domain that the other domain expects. The receiving domain must send back an Access-Control-Allow-Origin response header to the requester saying that the domain is accepted. For more information about CORS, visit <a href="http://www.w3.org/TR/cors" class="uri">http://www.w3.org/TR/cors</a>.</p>
+<div class="tzx-drawer" shy="">
+<dl>
+<dt><a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross-origin resource sharing - Wikipedia, the free encyclopedia</a></dt>
+<dd><p>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g.&#160;fonts) on a web page to be requested from another domain outside the domain from which the resource originated.</p>
+<p>&#8220;Cross-domain&#8221; AJAX requests are forbidden by default because of their ability to perform advanced requests (POST, PUT, DELETE and other types of HTTP requests, along with specifying custom HTTP headers) that introduce many cross-site scripting security issues.</p>
+<dl>
+<dt>Simple example</dt>
+<dd><p>This is generally not appropriate when using the same-origin security policy. When a CORS-compatible browser attempts to make a cross-origin request:</p>
+<ol style="list-style-type: decimal">
+<li><p>The browser sends the OPTIONS request with an Origin HTTP header. The value of this header is the domain that served the parent page. When a page from http://www.foo.com attempts to access a user&#8217;s data in <code>bar.com</code>, the following request header would be sent to <code>bar.com</code>:</p>
+<pre><code>Origin: http://www.foo.com</code></pre></li>
+<li><p>The server may respond with:</p></li>
+</ol>
+<ul>
+<li><p>An Access-Control-Allow-Origin (ACAO) header in its response indicating which origin sites are allowed. For example:</p>
+<pre><code>Access-Control-Allow-Origin: http://www.foo.com</code></pre></li>
+<li><p>An error page if the server does not allow the cross-origin request</p></li>
+<li><p>An <code>Access-Control-Allow-Origin (ACAO)</code> header with a wildcard that allows all domains:</p>
+<pre><code>Access-Control-Allow-Origin: *</code></pre></li>
+</ul>
+</dd>
+</dl>
+<p>To illustrate, the following table gives an overview of typical outcomes for checks against the URL <code>http://www.example.com/dir/page.html</code>.</p>
+<table>
+<colgroup>
+<col width="52%" />
+<col width="10%" />
+<col width="36%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Compared URL</td>
+<td>Outcome</td>
+<td align="left">Reason</td>
+</tr>
+<tr class="even">
+<td align="left">http://www.example.com/dir/page2.html</td>
+<td>Success</td>
+<td align="left">Same protocol, host and port</td>
+</tr>
+<tr class="odd">
+<td align="left">http://www.example.com/dir2/other.html</td>
+<td>Success</td>
+<td align="left">Same protocol, host and port</td>
+</tr>
+<tr class="even">
+<td align="left">http://username:password@www.example.com/dir2/other.html</td>
+<td>Success</td>
+<td align="left">Same protocol, host and port</td>
+</tr>
+<tr class="odd">
+<td align="left">http://www.example.com:81/dir/other.html</td>
+<td>Failure</td>
+<td align="left">Same protocol and host but different port</td>
+</tr>
+<tr class="even">
+<td align="left">https://www.example.com/dir/other.html</td>
+<td>Failure</td>
+<td align="left">Different protocol</td>
+</tr>
+<tr class="odd">
+<td align="left">http://en.example.com/dir/other.html</td>
+<td>Failure</td>
+<td align="left">Different host</td>
+</tr>
+<tr class="even">
+<td align="left">http://example.com/dir/other.html</td>
+<td>Failure</td>
+<td align="left">Different host (exact match required)</td>
+</tr>
+<tr class="odd">
+<td align="left">http://v2.www.example.com/dir/other.html</td>
+<td>Failure</td>
+<td align="left">Different host (exact match required)</td>
+</tr>
+<tr class="even">
+<td align="left">http://www.example.com:80/dir/other.html</td>
+<td>Depends</td>
+<td align="left">Port explicit. Depends on implementation in browser.</td>
+</tr>
+</tbody>
+</table>
+<p>Relaxing the same-origin policy</p>
+<ul>
+<li>document.domain property</li>
+<li>Cross-Origin Resource Sharing</li>
+<li>Cross-document messaging</li>
+<li>JSONP</li>
+<li>WebSockets</li>
+</ul>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Same-origin_policy">Same-origin policy - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://www.w3.org/TR/cors/">Cross-Origin Resource Sharing</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+</dd>
+<dt>Using JSONP for remote data</dt>
+<dd><dl>
+<dt>A PHP implementation of the JSONP technique is quite simple:</dt>
+<dd><div class="sourceCode"><pre class="sourceCode php"><code class="sourceCode php"><span class="kw">&lt;?php</span>
+    <span class="fu">print</span><span class="ot">(</span><span class="kw">$_GET</span><span class="ot">[</span><span class="st">&#39;callback&#39;</span><span class="ot">]</span> .<span class="st">&#39;(&#39;</span>. <span class="kw">$data</span> .<span class="st">&#39;)&#39;</span><span class="ot">);</span>
+<span class="kw">?&gt;</span></code></pre></div>
+</dd>
+<dt>low-level ajax method</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">ajax</span>(<span class="op">{</span>
+    <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;a.html&#39;</span><span class="op">,</span>
+    <span class="dt">success</span><span class="op">:</span> <span class="kw">function</span>(data) <span class="op">{</span>
+        <span class="at">$</span>(<span class="st">&#39;#dictionary&#39;</span>).<span class="at">html</span>(data)<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p><a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax() | jQuery API Documentation</a></p>
+</dd>
+<dt>modifying default options</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">ajaxSetup</span>(<span class="op">{</span>
+    <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;a.html&#39;</span><span class="op">,</span>
+    <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;POST&#39;</span><span class="op">,</span>
+    <span class="dt">dataType</span><span class="op">:</span> <span class="st">&#39;html&#39;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+</dd>
+</dl>
+<h2 id="using-plugins">Using Plugins</h2>
+<dl>
+<dt><a href="http://malsup.com/jquery/cycle/">JQuery Cycle Plugin</a></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#books&#39;</span>).<span class="at">cycle</span>()<span class="op">;</span>
+<span class="op">}</span>)</code></pre></div>
+</dd>
+<dt>Specifying plugin method parameters</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#books&#39;</span>).<span class="at">cycle</span>(<span class="op">{</span>
+        <span class="dt">timeout</span><span class="op">:</span> <span class="dv">2000</span><span class="op">,</span>
+        <span class="dt">speed</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span>
+        <span class="dt">pause</span><span class="op">:</span> <span class="kw">true</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>Modifying parameter defaults</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="va">fn</span>.<span class="va">cycle</span>.<span class="va">defaults</span>.<span class="at">timeout</span> <span class="op">=</span> <span class="dv">10000</span><span class="op">;</span>
+<span class="va">$</span>.<span class="va">fn</span>.<span class="va">cycle</span>.<span class="va">defaults</span>.<span class="at">random</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></code></pre></div>
+<p>Custom selectors</p>
+</dd>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// api</span>
+<span class="va">$</span>.<span class="at">expr</span>[<span class="st">&#39;:&#39;</span>].<span class="at">test</span> <span class="op">=</span> <span class="kw">function</span>(obj<span class="op">,</span> index<span class="op">,</span> meta<span class="op">,</span> stack)<span class="op">{</span>
+    <span class="co">// obj - is a current DOM element</span>
+    <span class="co">// index - the current loop index in stack</span>
+    <span class="co">// meta - meta data about your selector</span>
+    <span class="co">// stack - stack of all elements to loop</span>
+
+    <span class="co">// Return true to include current element</span>
+    <span class="co">// Return false to explude current element</span>
+<span class="op">};</span>
+
+<span class="co">// Usage:</span>
+<span class="at">$</span>(<span class="st">&#39;.someClasses:test&#39;</span>).<span class="at">doSomething</span>()<span class="op">;</span>
+
+<span class="co">// demo</span>
+<span class="va">$</span>.<span class="at">expr</span>[<span class="st">&#39;:&#39;</span>].<span class="at">withRel</span> <span class="op">=</span> <span class="kw">function</span>(obj)<span class="op">{</span>
+  <span class="kw">var</span> $this <span class="op">=</span> <span class="at">$</span>(obj)<span class="op">;</span>
+  <span class="cf">return</span> (<span class="va">$this</span>.<span class="at">attr</span>(<span class="st">&#39;rel&#39;</span>) <span class="op">!=</span> <span class="st">&#39;&#39;</span>)<span class="op">;</span>
+<span class="op">};</span>
+
+<span class="co">// Usage:</span>
+<span class="at">$</span>(<span class="st">&#39;a:withRel&#39;</span>).<span class="at">css</span>(<span class="st">&#39;background-color&#39;</span><span class="op">,</span> <span class="st">&#39;yellow&#39;</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// method 1</span>
+<span class="va">$</span>.<span class="at">expr</span>[<span class="st">&#39;:&#39;</span>].<span class="at">selector</span> <span class="op">=</span> <span class="kw">function</span>(elem<span class="op">,</span> idx<span class="op">,</span> matches<span class="op">,</span> set)<span class="op">{</span>...<span class="op">}</span>
+
+<span class="co">// method 2</span>
+<span class="va">$</span>.<span class="at">extend</span>(<span class="va">$</span>.<span class="at">expr</span>(<span class="st">&#39;:&#39;</span>)<span class="op">,{</span>
+    <span class="dt">selector</span><span class="op">:</span> <span class="kw">function</span>(elem<span class="op">,</span> idx<span class="op">,</span> matches<span class="op">,</span> set)<span class="op">{</span>...<span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://jquery-howto.blogspot.jp/2009/06/custom-jquery-selectors.html">jQuery Howto: Custom jQuery selectors</a></li>
+<li><a href="http://malsup.com/jquery/expr/">jQuery Custom [:] Expression Test</a></li>
+</ul>
+</dd>
+<dt><a href="https://github.com/js-cookie/js-cookie">js-cookie/js-cookie: A simple, lightweight JavaScript API for handling browser cookies</a></dt>
+<dd><p><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">cookie</span>(<span class="st">&#39;cyclePaused&#39;</span><span class="op">,</span> <span class="st">&#39;y&#39;</span><span class="op">,</span> <span class="op">{</span><span class="dt">path</span><span class="op">:</span> <span class="st">&#39;/&#39;</span><span class="op">,</span> <span class="dt">expires</span><span class="op">:</span> <span class="dv">7</span><span class="op">}</span>)</code></p>
+</dd>
+<dt><a href="http://jqueryui.com/">jQuery UI</a></dt>
+<dd><p>jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you&#8217;re building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice.</p>
+<p><a href="http://api.jqueryui.com/easings/">Easings | jQuery UI API Documentation</a></p>
+<p><code class="sourceCode javascript"><span class="va">$books</span>.<span class="at">find</span>(<span class="st">&#39;.title&#39;</span>).<span class="at">resizable</span>()<span class="op">;</span></code></p>
+<p>Other jQuery UI interactions include Draggable, Droppable, and Sortable. Like Resizable, they are highly configurable.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;&lt;div id=&quot;slider&quot;&gt;&lt;/div&gt;&#39;</span>).<span class="at">slider</span>(<span class="op">{</span>
+    <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span>
+    <span class="dt">max</span><span class="op">:</span> <span class="at">$</span>(<span class="st">&#39;#books li&#39;</span>).<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>
+<span class="op">}</span>).<span class="at">appendTo</span>($controls)<span class="op">;</span>
+
+<span class="kw">var</span> $books <span class="op">=</span> <span class="at">$</span>(<span class="st">&#39;#books&#39;</span>).<span class="at">cycle</span>(<span class="op">{</span>
+    <span class="dt">timeout</span><span class="op">:</span> <span class="dv">2000</span><span class="op">,</span>
+    <span class="dt">speed</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span>
+    <span class="dt">pause</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span>
+    <span class="dt">before</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+        <span class="at">$</span>(<span class="st">&#39;#slider&#39;</span>).<span class="at">slider</span>(<span class="st">&#39;value&#39;</span><span class="op">,</span> <span class="at">$</span>(<span class="st">&#39;#books li&#39;</span>).<span class="at">index</span>(<span class="kw">this</span>))<span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+<h2 id="developing-plugins">Developing Plugins</h2>
+<p>Immediately Invoked Function Expression (IIFE), looks like this:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+    <span class="co">// ...</span>
+<span class="op">}</span>)(jQuery)<span class="op">;</span></code></pre></div>
+<div class="tzx-drawer" shy="">
+<dl>
+<dt><a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression">Immediately-invoked function expression - Wikipedia, the free encyclopedia</a></dt>
+<dd><p>An immediately-invoked function expression (or IIFE, pronounced &#8220;iffy&#8221;) is a JavaScript design pattern which produces a lexical scope using JavaScript&#8217;s function scoping. Immediately-invoked function expressions can be used to avoid variable hoisting from within blocks, protect against polluting the global environment and simultaneously allow public access to methods while retaining privacy for variables defined within the function. This pattern has been referred to as a <strong>self-executing anonymous function</strong>, but Ben Alman introduced the term IIFE as a more semantically accurate term for the pattern, shortly after its discussion arose on comp.lang.javascript.</p>
+<p>An initial parenthesis is one case where the automatic semicolon insertion (ASI) in JavaScript can cause problems; the expression is instead interpreted as a call to the last term on the preceding line. In some styles that omit optional semicolons, the semicolon is placed in front of the parenthesis, and is known as a defensive semicolon. For example:</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">a <span class="op">=</span> b <span class="op">+</span> c
+<span class="op">;</span>(<span class="kw">function</span>() <span class="op">{</span>
+  <span class="co">// code</span>
+<span class="op">}</span>)()<span class="op">;</span></code></pre></div>
+<p>&#8230;to avoid being parsed as c(&#8230;).</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> v<span class="op">,</span> getValue<span class="op">;</span>
+v <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+getValue <span class="op">=</span> (<span class="kw">function</span>(x) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> x<span class="op">;</span> <span class="op">};</span>
+<span class="op">}</span>)(v)<span class="op">;</span>
+v <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+
+<span class="at">getValue</span>()<span class="op">;</span> <span class="co">// 1</span></code></pre></div>
+<p>Here the function passes v as an argument and is invoked immediately, preserving the inner function&#8217;s execution context.</p>
+<p>IIFEs are also useful for establishing private methods for accessible functions while still exposing some properties for later use.[15] The following example comes from Alman&#8217;s post on IIFEs.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> counter <span class="op">=</span> (<span class="kw">function</span>()<span class="op">{</span>
+    <span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+
+    <span class="cf">return</span> <span class="op">{</span>
+        <span class="dt">get</span><span class="op">:</span> <span class="kw">function</span>()<span class="op">{</span> <span class="cf">return</span> i<span class="op">;</span> <span class="op">},</span>
+        <span class="dt">set</span><span class="op">:</span> <span class="kw">function</span>( val )<span class="op">{</span> i <span class="op">=</span> val<span class="op">;</span> <span class="op">},</span>
+        <span class="dt">increment</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="op">++</span>i<span class="op">;</span> <span class="op">}</span>
+    <span class="op">};</span>
+<span class="op">}</span>)()<span class="op">;</span>
+
+<span class="co">// &#39;counter&#39; is an object with properties, which in this case happen to be</span>
+<span class="co">// methods.</span>
+
+<span class="va">counter</span>.<span class="at">get</span>()<span class="op">;</span> <span class="co">// 0</span>
+<span class="va">counter</span>.<span class="at">set</span>( <span class="dv">3</span> )<span class="op">;</span>
+<span class="va">counter</span>.<span class="at">increment</span>()<span class="op">;</span> <span class="co">// 4</span>
+<span class="va">counter</span>.<span class="at">increment</span>()<span class="op">;</span> <span class="co">// 5</span></code></pre></div>
+<p>If we attempt to access counter.i from the global environment, it will be undefined as it is enclosed within the invoked function and is not a property of counter. Likewise, if we attempt to access i it will result in an error as we have not declared i in the global environment.</p>
+<p>In lambda-calculus, this construct was referred to as &#8220;redex&#8221;, for reducible expression, see Reduction strategy (code optimization).</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Reduction_strategy_(lambda_calculus)">Reduction strategy (lambda calculus) - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Reduction_strategy_(code_optimization)">Reduction strategy (code optimization) - Wikipedia, the free encyclopedia</a></li>
+</ul>
+</dd>
+</dl>
+</div>
+<dl>
+<dt>Adding new global functions</dt>
+<dd><p>e.g.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">ajax</span>()
+<span class="va">$</span>.<span class="at">each</span>()
+<span class="va">$</span>.<span class="at">map</span>()
+<span class="va">$</span>.<span class="at">grep</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+
+    <span class="va">$</span>.<span class="at">sum</span> <span class="op">=</span> <span class="kw">function</span>(array) <span class="op">{</span>
+        <span class="kw">var</span> total <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+        <span class="va">$</span>.<span class="at">each</span>(array<span class="op">,</span> <span class="kw">function</span>(index<span class="op">,</span> value) <span class="op">{</span>
+            value <span class="op">=</span> <span class="va">$</span>.<span class="at">trim</span>(value)<span class="op">;</span>
+            value <span class="op">=</span> <span class="at">parseFloat</span>(value) <span class="op">||</span> <span class="dv">0</span><span class="op">;</span>
+            total <span class="op">+=</span> value<span class="op">;</span>
+        <span class="op">}</span>)<span class="op">;</span>
+        <span class="cf">return</span> total<span class="op">;</span>
+    <span class="op">};</span>
+
+    <span class="va">$</span>.<span class="at">average</span> <span class="op">=</span> <span class="kw">function</span>(array) <span class="op">{</span>
+        <span class="cf">if</span> (<span class="va">$</span>.<span class="at">isArray</span>(array)) <span class="op">{</span>
+            <span class="cf">return</span> <span class="va">$</span>.<span class="at">sum</span>(array) / <span class="va">array</span>.<span class="at">length</span><span class="op">;</span>
+        <span class="op">}</span>
+        <span class="cf">return</span> <span class="st">&#39;&#39;</span><span class="op">;</span>
+    <span class="op">};</span>
+
+<span class="op">}</span>)(jQuery)<span class="op">;</span></code></pre></div>
+<p>Extending the global jQuery object We can also employ an alternate syntax in defining our functions using the <code>$.extend()</code> function:</p>
+<p>The options object, Default parameter values</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+    <span class="va">$</span>.<span class="va">fn</span>.<span class="at">shadow</span> <span class="op">=</span> <span class="kw">function</span>(opts) <span class="op">{</span>
+    <span class="kw">var</span> defaults <span class="op">=</span> <span class="op">{</span>
+        <span class="dt">copies</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+        <span class="dt">opacity</span><span class="op">:</span> <span class="fl">0.1</span>
+    <span class="op">};</span>
+    <span class="kw">var</span> options <span class="op">=</span> <span class="va">$</span>.<span class="at">extend</span>(defaults<span class="op">,</span> opts)<span class="op">;</span>
+        <span class="co">// ...</span>
+    <span class="op">};</span>
+<span class="op">}</span>)(jQuery)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>Customizable defaults</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+    <span class="va">$</span>.<span class="va">fn</span>.<span class="at">shadow</span> <span class="op">=</span> <span class="kw">function</span>(opts) <span class="op">{</span>
+        <span class="kw">var</span> options <span class="op">=</span> <span class="va">$</span>.<span class="at">extend</span>(<span class="op">{},</span> <span class="va">$</span>.<span class="va">fn</span>.<span class="va">shadow</span>.<span class="at">defaults</span><span class="op">,</span> opts)<span class="op">;</span>
+        <span class="co">// ...</span>
+    <span class="op">};</span>
+    <span class="va">$</span>.<span class="va">fn</span>.<span class="va">shadow</span>.<span class="at">defaults</span> <span class="op">=</span> <span class="op">{</span>
+        <span class="co">// ...</span>
+    <span class="op">}</span></code></pre></div>
+</dd>
+<dt>Combining filtering and striping</dt>
+<dd><p><code>$(this).children(':nth-child(4)').text() == topic;</code></p>
+</dd>
+<dt>More selectors and traversal methods</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+
+    <span class="va">$</span>.<span class="at">extend</span>(<span class="va">$</span>.<span class="at">expr</span>[<span class="st">&#39;:&#39;</span>]<span class="op">,</span> <span class="op">{</span>
+        <span class="dt">group</span><span class="op">:</span> <span class="kw">function</span>(element<span class="op">,</span> index<span class="op">,</span> matches<span class="op">,</span> set) <span class="op">{</span>
+            <span class="kw">var</span> num <span class="op">=</span> <span class="at">parseInt</span>(matches[<span class="dv">3</span>]<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span>
+            <span class="cf">if</span> (<span class="at">isNaN</span>(num)) <span class="op">{</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="op">}</span>
+            <span class="cf">return</span> index <span class="op">%</span> (num <span class="op">*</span> <span class="dv">2</span>) <span class="op">&lt;</span>num<span class="op">;</span>
+        <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)(jQuery)<span class="op">;</span></code></pre></div>
+<p>Especially with client-side scripting, developers can easily fall into the traps of premature optimization and micro-optimization. These pitfalls can cause us to spend countless hours tweaking our code to shave milliseconds off of JavaScript execution.</p>
+<ul>
+<li><code>$('input:eq(1)')</code> faster than <code>$('input').eq(1)</code></li>
+<li><code>next()</code>, <code>parent()</code>, <code>filter()</code>, <code>find()</code>,</li>
+<li><code>end()</code>, <code>addBack()</code>,</li>
+<li><code>if (event.type == 'mouseenter') {</code></li>
+</ul>
+</dd>
+<dt>Event delegation</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+
+    <span class="at">$</span>(<span class="st">&#39;#gallery&#39;</span>).<span class="at">on</span>(<span class="st">&#39;mouseenter mouseleave&#39;</span><span class="op">,</span> <span class="st">&#39;div.photo&#39;</span><span class="op">,</span> <span class="kw">function</span>(event) <span class="op">{</span>
+        <span class="kw">var</span> $details <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>).<span class="at">find</span>(<span class="st">&#39;.details&#39;</span>)<span class="op">;</span>
+        <span class="cf">if</span> (<span class="va">event</span>.<span class="at">type</span> <span class="op">==</span> <span class="st">&#39;mouseenter&#39;</span>) <span class="op">{</span>
+            <span class="va">$details</span>.<span class="at">fadeTo</span>(<span class="st">&#39;fast&#39;</span><span class="op">,</span> <span class="fl">0.7</span>)<span class="op">;</span>
+        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+            <span class="va">$details</span>.<span class="at">fadeOut</span>(<span class="st">&#39;fast&#39;</span>)<span class="op">;</span>
+        <span class="op">}</span>
+    <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>Throttling (<code>['&#952;r&#596;tli&#331;]</code>, &#33410;&#27969;) events</dt>
+<dd><p><a href="http://learn.jquery.com/events/event-extensions/">jQuery Event Extensions | jQuery Learning Center</a></p>
+<p>Determining the animation state: <code>if (!$image.is(':animated') || event.type == 'mouseleave')</code></p>
+<p>Halting a running animation</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// stop the current animation, then make another one</span>
+<span class="at">$</span>(<span class="kw">this</span>).<span class="at">find</span>(<span class="st">&#39;img&#39;</span>).<span class="at">stop</span>().<span class="at">animate</span>(...)<span class="op">;</span></code></pre></div>
+<p><code>.stop()</code> method by default halts animations at their current position To mitigate this type of problem, the <code>.stop()</code> method can accept two Boolean ( true / false ) arguments, the second of which is known as <code>goToEnd</code>. If we set this argument to true , the current animation not only stops, but also jumps immediately to the final value.</p>
+<p>Another jQuery method, <code>.finish()</code>, is available for halting animations. It&#8217;s similar to <code>.stop(true, true)</code> in that it clears all queued animations and jumps the current animation to the final value. However, unlike <code>.stop(true, true)</code>, it jumps all the queued animations to their final values as well.</p>
+</dd>
+<dt>Using global effect properties</dt>
+<dd><p><code>$.fx</code></p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;#fx-toggle&#39;</span>).<span class="at">show</span>().<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="va">$</span>.<span class="va">fx</span>.<span class="at">off</span> <span class="op">=</span> <span class="op">!</span><span class="va">$</span>.<span class="va">fx</span>.<span class="at">off</span><span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p><strong>Each time an animation method is called, jQuery goes through the following steps to determine the duration of the effect, in this order:</strong></p>
+<ul>
+<li>It checks if <code class="sourceCode javascript"><span class="va">$</span>.<span class="va">fx</span>.<span class="at">off</span></code> is true. If so, it sets the duration to 0 .</li>
+<li>It checks if the duration passed is a number. If so, it sets the duration to that number of milliseconds.</li>
+<li>It checks if the duration pass matches one of the property keys of the <code class="sourceCode javascript"><span class="va">$</span>.<span class="va">fx</span>.<span class="at">speeds</span></code> object. If so, it sets the duration to the value of the property.</li>
+<li>If the duration is not set by any of the above checks, it sets the duration to the value of <code class="sourceCode javascript"><span class="va">$</span>.<span class="va">fx</span>.<span class="va">speeds</span>.<span class="at">_default</span></code>.</li>
+</ul>
+<p><code class="sourceCode javascript"><span class="va">$</span>.<span class="va">fx</span>.<span class="va">speeds</span>.<span class="at">_default</span> <span class="op">=</span> <span class="dv">250</span><span class="op">;</span></code></p>
+<p><code>$.fx.speeds.crawl = 1200</code></p>
+</dd>
+</dl>
+<hr />
+<ul>
+<li>Multiproperty easing</li>
+<li>Taking fine-grained control of animations</li>
+</ul>
+<p>The requestAnimationFrame() approach to animations is usually preferable to setTimeout(). However, because of potential conflicts when the two are used in the same code, requestAnimationFrame() is not implemented in the jQuery core library.</p>
+<h2 id="advanced-dom-manipulation">Advanced DOM Manipulation</h2>
+<dl>
+<dt>progressive enhancement.</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(document).<span class="at">ready</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="at">$</span>(<span class="st">&#39;#my-data th a&#39;</span>).<span class="at">click</span>(<span class="kw">function</span>(event) <span class="op">{</span>
+        <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+        <span class="at">$</span>(<span class="st">&#39;#my-data tbody&#39;</span>).<span class="at">load</span>(<span class="at">$</span>(<span class="kw">this</span>).<span class="at">attr</span>(<span class="st">&#39;href&#39;</span>))<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</dd>
+<dt>graceful degradation.</dt>
+<dd><pre><code>$(document).ready(function() {
+    var $table1 = $(&#39;#t-1&#39;);
+    var $headers = $table1.find(&#39;thead th&#39;).slice(1);
+    $headers
+        .wrapInner(&#39;&lt;a href=&quot;#&quot;&gt;&lt;/a&gt;&#39;)
+        .addClass(&#39;sort&#39;);
+});</code></pre>
+</dd>
+<dt>supply a comparator function to the .sort() method:</dt>
+<dd><pre><code>arr.sort(function(a,b) {
+    if (a &lt; b) { return -1; }
+    if (a &gt; b) { return  1; }
+    return 0;
+});</code></pre>
+</dd>
+</dl>
+<p>then apply this <code>.sort()</code> method to our table rows.</p>
+<dl>
+<dt>Using HTML5 custom data attributes</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;table</span><span class="ot"> id=</span><span class="st">&quot;t-2&quot;</span><span class="ot"> class=</span><span class="st">&quot;sortable&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;thead&gt;</span>
+        <span class="kw">&lt;tr&gt;</span>
+            <span class="kw">&lt;th&gt;&lt;/th&gt;</span>
+            <span class="kw">&lt;th</span><span class="ot"> data-sort=</span><span class="st">&#39;{&quot;key&quot;:&quot;title&quot;}&#39;</span><span class="kw">&gt;</span>Title<span class="kw">&lt;/th&gt;</span>
+            <span class="kw">&lt;th</span><span class="ot"> data-sort=</span><span class="st">&#39;{&quot;key&quot;:&quot;authors&quot;}&#39;</span><span class="kw">&gt;</span>Author(s)<span class="kw">&lt;/th&gt;</span>
+            <span class="kw">&lt;th</span><span class="ot"> data-sort=</span><span class="st">&#39;{&quot;key&quot;:&quot;publishedYM&quot;}&#39;</span><span class="kw">&gt;</span>Publish Date<span class="kw">&lt;/th&gt;</span>
+            <span class="kw">&lt;th</span><span class="ot"> data-sort=</span><span class="st">&#39;{&quot;key&quot;:&quot;price&quot;}&#39;</span><span class="kw">&gt;</span>Price<span class="kw">&lt;/th&gt;</span>
+        <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;/thead&gt;</span>
+    <span class="kw">&lt;tbody&gt;</span>
+        <span class="kw">&lt;tr</span><span class="ot"> data-book=</span><span class="st">&#39;</span>
+<span class="st">                {</span>
+<span class="st">                    &quot;img&quot;:&quot;2862_OS.jpg&quot;,</span>
+<span class="st">                    &quot;title&quot;:&quot;DRUPAL 7&quot;,</span>
+<span class="st">                    &quot;authors&quot;:&quot;MERCER DAVID&quot;,</span>
+<span class="st">                    &quot;published&quot;:&quot;September 2010&quot;,</span>
+<span class="st">                    &quot;price&quot;:44.99,</span>
+<span class="st">                    &quot;publishedYM&quot;:&quot;2010-09&quot;</span>
+<span class="st">                }&#39;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;td&gt;&lt;img</span><span class="ot"> src=</span><span class="st">&quot;images/2862_OS.jpg&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Drupal 7&quot;</span><span class="kw">&gt;&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>Drupal 7<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>David Mercer<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>September 2010<span class="kw">&lt;/td&gt;</span>
+            <span class="kw">&lt;td&gt;</span>$44.99<span class="kw">&lt;/td&gt;</span>
+        <span class="kw">&lt;/tr&gt;</span>
+    <span class="co">&lt;!-- code continues --&gt;</span>
+    <span class="kw">&lt;/tbody&gt;</span>
+<span class="kw">&lt;/table&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">$headers</span>.<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>(event) <span class="op">{</span>
+    <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+    <span class="kw">var</span> $header <span class="op">=</span> <span class="at">$</span>(<span class="kw">this</span>)<span class="op">,</span>
+    sortKey <span class="op">=</span> <span class="va">$header</span>.<span class="at">data</span>(<span class="st">&#39;sort&#39;</span>).<span class="at">key</span><span class="op">,</span>
+    sortDirection <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+    <span class="cf">if</span> (<span class="va">$header</span>.<span class="at">hasClass</span>(<span class="st">&#39;sorted-asc&#39;</span>)) <span class="op">{</span>
+        sortDirection <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>
+    <span class="op">}</span>
+    <span class="va">rows</span>.<span class="at">sort</span>(<span class="kw">function</span>(a<span class="op">,</span> b) <span class="op">{</span>
+        <span class="kw">var</span> keyA <span class="op">=</span> <span class="at">$</span>(a).<span class="at">data</span>(<span class="st">&#39;book&#39;</span>)[sortKey]<span class="op">;</span>
+        <span class="kw">var</span> keyB <span class="op">=</span> <span class="at">$</span>(b).<span class="at">data</span>(<span class="st">&#39;book&#39;</span>)[sortKey]<span class="op">;</span>
+        <span class="cf">if</span> (keyA <span class="op">&lt;</span> keyB) <span class="cf">return</span> <span class="op">-</span>sortDirection<span class="op">;</span>
+        <span class="cf">if</span> (keyA <span class="op">&gt;</span> keyB) <span class="cf">return</span> sortDirection<span class="op">;</span>
+        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>Sorting and building rows with JSON</p>
+<p>Although we are lovingly crafting our table rows by hand with these two functions, JavaScript template systems such as Mustache (https://github.com/janl/mustache.js) and Handlebars (http://handlebarsjs.com/) could do a lot of the string processing and concatenation for us. Using templates can be especially beneficial as the size and complexity of a project grows.</p>
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">prepRows</span>(rows) <span class="op">{</span>
+    <span class="va">$</span>.<span class="at">each</span>(rows<span class="op">,</span> <span class="kw">function</span>(i<span class="op">,</span> row) <span class="op">{</span>
+        <span class="kw">var</span> authors <span class="op">=</span> []<span class="op">,</span>
+        authorsFormatted <span class="op">=</span> []<span class="op">;</span>
+        rows[i].<span class="at">titleFormatted</span> <span class="op">=</span> <span class="va">row</span>.<span class="at">title</span><span class="op">;</span>
+        rows[i].<span class="at">title</span> <span class="op">=</span> <span class="va">row</span>.<span class="va">title</span>.<span class="at">toUpperCase</span>()<span class="op">;</span>
+        <span class="va">$</span>.<span class="at">each</span>(<span class="va">row</span>.<span class="at">authors</span><span class="op">,</span> <span class="kw">function</span>(j<span class="op">,</span> auth) <span class="op">{</span>
+            authors[j] <span class="op">=</span> <span class="va">auth</span>.<span class="at">last_name</span> <span class="op">+</span> <span class="st">&#39; &#39;</span> <span class="op">+</span> <span class="va">auth</span>.<span class="at">first_name</span><span class="op">;</span>
+            authorsFormatted[j] <span class="op">=</span> <span class="va">auth</span>.<span class="at">first_name</span> <span class="op">+</span> <span class="st">&#39; &#39;</span>
+            <span class="op">+</span> <span class="va">auth</span>.<span class="at">last_name</span><span class="op">;</span>
+        <span class="op">}</span>)<span class="op">;</span>
+        rows[i].<span class="at">authorsFormatted</span> <span class="op">=</span> <span class="va">authorsFormatted</span>.<span class="at">join</span>(<span class="st">&#39;, &#39;</span>)<span class="op">;</span>
+        rows[i].<span class="at">authors</span> <span class="op">=</span> <span class="va">authors</span>.<span class="at">join</span>(<span class="st">&#39; &#39;</span>).<span class="at">toUpperCase</span>()<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+    <span class="cf">return</span> rows<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<table>
+<colgroup>
+<col width="24%" />
+<col width="23%" />
+<col width="51%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Hook type</td>
+<td align="left">Method altered</td>
+<td align="left">Example usage</td>
+</tr>
+<tr class="even">
+<td align="left"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">attrHooks</span></code></td>
+<td align="left"><code class="sourceCode javascript">.<span class="at">attr</span>()</code></td>
+<td align="left">Prevents the type attribute of an element from being changed.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">cssHooks</span></code></td>
+<td align="left"><code class="sourceCode javascript">.<span class="at">css</span>()</code></td>
+<td align="left">Provides special handling for opacity in Internet Explorer.</td>
+</tr>
+<tr class="even">
+<td align="left"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">propHooks</span></code></td>
+<td align="left"><code class="sourceCode javascript">.<span class="at">prop</span>()</code></td>
+<td align="left">Corrects the behavior of the selected property in Safari.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">valHooks</span></code></td>
+<td align="left"><code class="sourceCode javascript">.<span class="at">val</span>()</code></td>
+<td align="left">Allows radio buttons and checkboxes to report a consistent value across browsers.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">(<span class="kw">function</span>($) <span class="op">{</span>
+    <span class="kw">var</span> div <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>)<span class="op">;</span>
+    <span class="va">$</span>.<span class="va">support</span>.<span class="at">textShadow</span> <span class="op">=</span> <span class="va">div</span>.<span class="va">style</span>.<span class="at">textShadow</span> <span class="op">===</span> <span class="st">&#39;&#39;</span><span class="op">;</span>
+    <span class="va">$</span>.<span class="va">support</span>.<span class="at">filter</span> <span class="op">=</span> <span class="va">div</span>.<span class="va">style</span>.<span class="at">filter</span> <span class="op">===</span> <span class="st">&#39;&#39;</span><span class="op">;</span>
+    div <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+    <span class="cf">if</span> (<span class="va">$</span>.<span class="va">support</span>.<span class="at">textShadow</span>) <span class="op">{</span>
+        <span class="va">$</span>.<span class="va">cssHooks</span>.<span class="at">glowColor</span> <span class="op">=</span> <span class="op">{</span>
+            <span class="dt">set</span><span class="op">:</span> <span class="kw">function</span>(elem<span class="op">,</span> value) <span class="op">{</span>
+                <span class="cf">if</span> (value <span class="op">==</span> <span class="st">&#39;none&#39;</span>) <span class="op">{</span>
+                    <span class="va">elem</span>.<span class="va">style</span>.<span class="at">textShadow</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span>
+                <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+                    <span class="va">elem</span>.<span class="va">style</span>.<span class="at">textShadow</span> <span class="op">=</span> <span class="st">&#39;0 0 2px &#39;</span> <span class="op">+</span> value<span class="op">;</span>
+                <span class="op">}</span>
+            <span class="op">}</span>
+        <span class="op">};</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="va">$</span>.<span class="va">cssHooks</span>.<span class="at">glowColor</span> <span class="op">=</span> <span class="op">{</span>
+            <span class="dt">set</span><span class="op">:</span> <span class="kw">function</span>(elem<span class="op">,</span> value) <span class="op">{</span>
+                <span class="cf">if</span> (value <span class="op">==</span> <span class="st">&#39;none&#39;</span>) <span class="op">{</span>
+                    <span class="va">elem</span>.<span class="va">style</span>.<span class="at">filter</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span>
+                <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+                    <span class="va">elem</span>.<span class="va">style</span>.<span class="at">zoom</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+                    <span class="va">elem</span>.<span class="va">style</span>.<span class="at">filter</span> <span class="op">=</span> <span class="st">&#39;progid:DXImageTransform.Microsoft&#39;</span>
+                                      <span class="op">+</span> <span class="st">&#39;.Glow(Strength=2, Color=&#39;</span> <span class="op">+</span> value <span class="op">+</span> <span class="st">&#39;);&#39;</span><span class="op">;</span>
+                <span class="op">}</span>
+            <span class="op">}</span>
+        <span class="op">};</span>
+    <span class="op">}</span>
+<span class="op">}</span>)(jQuery)<span class="op">;</span></code></pre></div>
+<p><a href="https://github.com/brandonaaron/jquery-cssHooks" class="uri">https://github.com/brandonaaron/jquery-cssHooks</a></p>
+<h2 id="advanced-ajax">Advanced Ajax</h2>
+<pre><code>$(document).ready(function() {
+    var $ajaxForm = $(&#39;#ajax-form&#39;),
+    $response = $(&#39;#response&#39;);
+    $ajaxForm.on(&#39;submit&#39;, function(event) {
+        event.preventDefault();
+        $response.load(&#39;http://api.jquery.com/ #content&#39;,
+        $ajaxForm.serialize());
+    });
+});
+
+$.ajax({
+    url: &#39;http://book.learningjquery.com/api/&#39;,
+    dataType: &#39;jsonp&#39;,
+    data: {
+        title: $(&#39;#title&#39;).val()
+    },
+    success: function(data) {
+        console.log(data);
+    }
+});
+
+$ajaxForm.on(&#39;submit&#39;, function(event) {
+    event.preventDefault();
+    $.ajax({
+        url: &#39;http://book.learningjquery.com/api/&#39;,
+        dataType: &#39;jsonp&#39;,
+        data: {
+            title: $(&#39;#title&#39;).val()
+        },
+        success: response,
+            error: function() {
+            $response.html(failed);
+        }
+    });
+});</code></pre>
+<dl>
+<dt>Ajax promises</dt>
+<dd><p>Using the promise&#8217;s methods, we can rewrite our <code>$.ajax()</code> call to replace the success and error callbacks with an alternate syntax:</p>
+</dd>
+</dl>
+<pre><code>$.ajax({
+    url: &#39;http://book.learningjquery.com/api/&#39;,
+    dataType: &#39;jsonp&#39;,
+    data: {
+        title: $(&#39;#title&#39;).val()
+    },
+    timeout: 15000
+})
+.done(response)
+.fail(function() {
+    $response.html(failed);
+});</code></pre>
+<pre><code>$ajaxForm.on(&#39;submit&#39;, function(event) {
+    event.preventDefault();
+    $response.addClass(&#39;loading&#39;).empty();
+    $.ajax({
+        url: &#39;http://book.learningjquery.com/api/&#39;,
+        dataType: &#39;jsonp&#39;,
+        data: {
+            title: $(&#39;#title&#39;).val()
+        },
+        timeout: 15000
+    })
+    .done(response)
+    .fail(function() {
+        $response.html(failed);
+    })
+    .always(function() {
+        $response.removeClass(&#39;loading&#39;);
+    });
+});</code></pre>
+<ul>
+<li>Caching responses</li>
+<li>Throttling Ajax requests</li>
+</ul>
+<p>Adding Ajax prefilters</p>
+<pre><code>$.ajaxPrefilter(function(options) {
+    if (/\.yml$/.test(options.url)) {
+        return &#39;yaml&#39;; // set datatype to yaml
+    }
+});</code></pre>
+<p>Defining alternate transports</p>
+<p><a href="http://www.verious.com/tool/is-my-image-loaded" class="uri">http://www.verious.com/tool/is-my-image-loaded</a></p>
+<h2 id="append-a-javascript-closures">Append A, JavaScript Closures</h2>
+<p>Handling interactions between closures</p>
+<p>When a reference to an inner function finds its way outside of the scope in which the function was defined, this creates a closure on that function. We call variables that are neither parameters nor local to the inner function&#8217;s free variables, and the environment of the outer function call closes them. Essentially, the fact that the function refers to a local variable in the outer function grants the variable a stay of execution. The memory is not released when the function completes, as it is still needed by the closure.</p>
+<p>The fact that most jQuery code is inside a function body is useful, because this can protect against some namespace collisions. For example, it is this feature that allows us to use jQuery.noConflict() to free up the $ shortcut for other libraries while still being able to define the shortcut locally for use within our .ready() handler.</p>
+<pre><code>$(document).ready(function() {
+    for (var i = 0; i &lt; 5; i++) {
+        (function(value) {
+            $(&#39;&lt;div&gt;Print &#39; + value + &#39;&lt;/div&gt;&#39;)
+                .click(function() {
+                    console.log(value);
+                }).insertBefore(&#39;#results&#39;);
+        })(i);
+    }
+});</code></pre>
+<pre><code>$(document).ready(function() {
+    for (var i = 0; i &lt; 5; i++) {
+        $(&#39;&lt;div&gt;Print &#39; + i + &#39;&lt;/div&gt;&#39;)
+            .on(&#39;click&#39;, {value: i}, function(event) {
+                console.log(event.data.value);
+            }).insertBefore(&#39;#results&#39;);
+    }
+});</code></pre>
+<h2 id="append-b-testing-javascript-with-qunit">Append B, Testing JavaScript with QUnit</h2>
+<p><a href="http://qunitjs.com/" class="uri">http://qunitjs.com/</a></p>
+<p>Introduction to unit testing ( http://qunitjs.com/intro/ ) &#8226; QUnit Cookbook ( http://qunitjs.com/cookbook/ ) &#8226; The jQuery Test-Driven Development article by Elijah Manor ( http://msdn. microsoft.com/en-us/scriptjunkie/ff452703.aspx ) &#8226; The Unit Testing Best Practices article by Bob McCune ( http://www. bobmccune.com/2006/12/09/unit-testing-best-practices/ ) Many books on the topic also exist, such as Test Driven Development: By Exam</p>
+<h2 id="append-c-quick-ref">append c, quick ref</h2>
+<p>Selector expressions</p>
+<ul>
+<li>Simple CSS</li>
+<li>Position among siblings</li>
+<li>Position among matched elements</li>
+<li>Attributes</li>
+<li>Forms</li>
+<li>Miscellaneous selectors</li>
+</ul>
+<p>DOM traversal methods</p>
+<ul>
+<li>Filtering</li>
+<li>Descendants</li>
+<li>Siblings</li>
+<li>Ancestors</li>
+<li>Collection manipulation</li>
+<li>Working with selected elements</li>
+</ul>
+<p>Event methods</p>
+<ul>
+<li>Binding</li>
+<li>Shorthand binding</li>
+<li>Triggering</li>
+<li>Shorthand triggering</li>
+<li>Utility</li>
+</ul>
+<p>Effect methods</p>
+<ul>
+<li>Predefined effects</li>
+</ul>
+<p>Ajax methods</p>
+<ul>
+<li>Issuing requests</li>
+<li>Request monitoring</li>
+<li>Configuration</li>
+<li>Utilities</li>
+</ul>
+<p>Deferred objects</p>
+<ul>
+<li><code>$.Deferred</code>&#8230;</li>
+</ul>
+<hr />
+<h2 id="misc-notes">Misc Notes</h2>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">Attribute Contains Word Selector [name<span class="op">~=</span><span class="st">&quot;value&quot;</span>]</code></pre></div>
+<dl>
+<dt><a href="http://www.ruanyifeng.com/blog/2011/07/jquery_fundamentals.html">jQuery&#35774;&#35745;&#24605;&#24819; - &#38446;&#19968;&#23792;&#30340;&#32593;&#32476;&#26085;&#24535;</a></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;a:first&#39;</span>) <span class="co">//&#36873;&#25321;&#32593;&#39029;&#20013;&#31532;&#19968;&#20010;a&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;tr:odd&#39;</span>) <span class="co">//&#36873;&#25321;&#34920;&#26684;&#30340;&#22855;&#25968;&#34892;</span>
+<span class="at">$</span>(<span class="st">&#39;div:visible&#39;</span>) <span class="co">//&#36873;&#25321;&#21487;&#35265;&#30340;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div:gt(2)&#39;</span>) <span class="co">// &#36873;&#25321;&#25152;&#26377;&#30340;div&#20803;&#32032;&#65292;&#38500;&#20102;&#21069;&#19977;&#20010;</span>
+<span class="at">$</span>(<span class="st">&#39;#myForm :input&#39;</span>) <span class="co">// &#36873;&#25321;&#34920;&#21333;&#20013;&#30340;input&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div:animated&#39;</span>) <span class="co">// &#36873;&#25321;&#24403;&#21069;&#22788;&#20110;&#21160;&#30011;&#29366;&#24577;&#30340;div&#20803;&#32032;</span>
+
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">has</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span> <span class="co">// &#36873;&#25321;&#21253;&#21547;p&#20803;&#32032;&#30340;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">not</span>(<span class="st">&#39;.myClass&#39;</span>)<span class="op">;</span> <span class="co">//&#36873;&#25321;class&#19981;&#31561;&#20110;myClass&#30340;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">filter</span>(<span class="st">&#39;.myClass&#39;</span>)<span class="op">;</span> <span class="co">//&#36873;&#25321;class&#31561;&#20110;myClass&#30340;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">first</span>()<span class="op">;</span> <span class="co">//&#36873;&#25321;&#31532;1&#20010;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">eq</span>(<span class="dv">5</span>)<span class="op">;</span> <span class="co">//&#36873;&#25321;&#31532;6&#20010;div&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">next</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span> <span class="co">//&#36873;&#25321;div&#20803;&#32032;&#21518;&#38754;&#30340;&#31532;&#19968;&#20010;p&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">parent</span>()<span class="op">;</span> <span class="co">//&#36873;&#25321;div&#20803;&#32032;&#30340;&#29238;&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">closest</span>(<span class="st">&#39;form&#39;</span>)<span class="op">;</span> <span class="co">//&#36873;&#25321;&#31163;div&#26368;&#36817;&#30340;&#37027;&#20010;form&#29238;&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">children</span>()<span class="op">;</span> <span class="co">//&#36873;&#25321;div&#30340;&#25152;&#26377;&#23376;&#20803;&#32032;</span>
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>).<span class="at">siblings</span>()<span class="op">;</span> <span class="co">//&#36873;&#25321;div&#30340;&#21516;&#32423;&#20803;&#32032;</span>
+
+<span class="at">$</span>(<span class="st">&#39;div&#39;</span>)
+    .<span class="at">find</span>(<span class="st">&#39;h3&#39;</span>)
+        .<span class="at">eq</span>(<span class="dv">2</span>)
+            .<span class="at">html</span>(<span class="st">&#39;Hello&#39;</span>)
+            .<span class="at">end</span>()              <span class="co">//&#36864;&#22238;&#21040;&#36873;&#20013;&#25152;&#26377;&#30340;h3&#20803;&#32032;&#30340;&#37027;&#19968;&#27493;</span>
+        .<span class="at">eq</span>(<span class="dv">0</span>)                  <span class="co">//&#36873;&#20013;&#31532;&#19968;&#20010;h3&#20803;&#32032;</span>
+            .<span class="at">html</span>(<span class="st">&#39;World&#39;</span>)<span class="op">;</span>     <span class="co">//&#23558;&#23427;&#30340;&#20869;&#23481;&#25913;&#20026;World</span>
+
+.<span class="at">html</span>() &#21462;&#20986;&#25110;&#35774;&#32622;html&#20869;&#23481;
+.<span class="at">text</span>() &#21462;&#20986;&#25110;&#35774;&#32622;text&#20869;&#23481;<span class="vs">```</span>
+<span class="vs">.attr() &#21462;&#20986;&#25110;&#35774;&#32622;&#26576;&#20010;&#23646;&#24615;&#30340;&#20540;</span>
+<span class="vs">.width() &#21462;&#20986;&#25110;&#35774;&#32622;&#26576;&#20010;&#20803;&#32032;&#30340;&#23485;&#24230;</span>
+<span class="vs">.height() &#21462;&#20986;&#25110;&#35774;&#32622;&#26576;&#20010;&#20803;&#32032;&#30340;&#39640;&#24230;</span>
+<span class="vs">.val() &#21462;&#20986;&#26576;&#20010;&#34920;&#21333;&#20803;&#32032;&#30340;&#20540;</span>
+
+<span class="vs">// &#36820;&#22238;&#30340;&#20803;&#32032;&#19981;&#19968;&#26679;</span>
+<span class="vs">$(&#39;div&#39;).insertAfter($(&#39;p&#39;));</span>
+<span class="vs">$(&#39;p&#39;).after($(&#39;div&#39;));</span></code></pre></div>
+<p>&#22797;&#21046;&#20803;&#32032;&#20351;&#29992; <code>.clone()</code>&#12290;&#21024;&#38500;&#20803;&#32032;&#20351;&#29992; <code>.remove()</code> &#21644; <code>.detach()</code>&#12290;&#20004;&#32773;&#30340;&#21306;&#21035;&#22312;&#20110;&#65292;&#21069;&#32773;&#19981;&#20445;&#30041;&#34987;&#21024;&#38500;&#20803;&#32032;&#30340;&#20107;&#20214;&#65292;&#21518;&#32773;&#20445;&#30041;&#65292;&#26377;&#21033;&#20110;&#37325;&#26032;&#25554;&#20837;&#25991;&#26723;&#26102;&#20351;&#29992;&#12290;&#28165;&#31354;&#20803;&#32032;&#20869;&#23481;&#65288;&#20294;&#26159;&#19981;&#21024;&#38500;&#35813;&#20803;&#32032;&#65289;&#20351;&#29992;<code>.empty()</code>&#12290;</p>
+<p>&#24120;&#29992;&#30340;&#24037;&#20855;&#26041;&#27861;&#26377;&#20197;&#19979;&#20960;&#31181;&#65306;</p>
+<ul>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">trim</span>()</code> &#21435;&#38500;&#23383;&#31526;&#20018;&#20004;&#31471;&#30340;&#31354;&#26684;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">each</span>()</code> &#36941;&#21382;&#19968;&#20010;&#25968;&#32452;&#25110;&#23545;&#35937;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">inArray</span>()</code> &#36820;&#22238;&#19968;&#20010;&#20540;&#22312;&#25968;&#32452;&#20013;&#30340;&#32034;&#24341;&#20301;&#32622;&#12290;&#22914;&#26524;&#35813;&#20540;&#19981;&#22312;&#25968;&#32452;&#20013;&#65292;&#21017;&#36820;&#22238;-1&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">grep</span>()</code> &#36820;&#22238;&#25968;&#32452;&#20013;&#31526;&#21512;&#26576;&#31181;&#26631;&#20934;&#30340;&#20803;&#32032;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">extend</span>()</code> &#23558;&#22810;&#20010;&#23545;&#35937;&#65292;&#21512;&#24182;&#21040;&#31532;&#19968;&#20010;&#23545;&#35937;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">makeArray</span>()</code> &#23558;&#23545;&#35937;&#36716;&#21270;&#20026;&#25968;&#32452;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">type</span>()</code> &#21028;&#26029;&#23545;&#35937;&#30340;&#31867;&#21035;&#65288;&#20989;&#25968;&#23545;&#35937;&#12289;&#26085;&#26399;&#23545;&#35937;&#12289;&#25968;&#32452;&#23545;&#35937;&#12289;&#27491;&#21017;&#23545;&#35937;&#31561;&#31561;&#65289;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">isArray</span>()</code> &#21028;&#26029;&#26576;&#20010;&#21442;&#25968;&#26159;&#21542;&#20026;&#25968;&#32452;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">isEmptyObject</span>()</code> &#21028;&#26029;&#26576;&#20010;&#23545;&#35937;&#26159;&#21542;&#20026;&#31354;&#65288;&#19981;&#21547;&#26377;&#20219;&#20309;&#23646;&#24615;&#65289;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">isFunction</span>()</code> &#21028;&#26029;&#26576;&#20010;&#21442;&#25968;&#26159;&#21542;&#20026;&#20989;&#25968;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">isPlainObject</span>()</code> &#21028;&#26029;&#26576;&#20010;&#21442;&#25968;&#26159;&#21542;&#20026;&#29992;&#8220;{}&#8221;&#25110;&#8220;new Object&#8221;&#24314;&#31435;&#30340;&#23545;&#35937;&#12290;</li>
+<li><code class="sourceCode javascript"><span class="va">$</span>.<span class="at">support</span>()</code> &#21028;&#26029;&#27983;&#35272;&#22120;&#26159;&#21542;&#25903;&#25345;&#26576;&#20010;&#29305;&#24615;&#12290;</li>
+</ul>
+<p>events:</p>
+<ul>
+<li><code class="sourceCode javascript">.<span class="at">blur</span>()</code> &#34920;&#21333;&#20803;&#32032;&#22833;&#21435;&#28966;&#28857;&#12290;</li>
+<li><code class="sourceCode javascript">.<span class="at">change</span>()</code> &#34920;&#21333;&#20803;&#32032;&#30340;&#20540;&#21457;&#29983;&#21464;&#21270;</li>
+<li><code class="sourceCode javascript">.<span class="at">click</span>()</code> &#40736;&#26631;&#21333;&#20987;</li>
+<li><code class="sourceCode javascript">.<span class="at">dblclick</span>()</code> &#40736;&#26631;&#21452;&#20987;</li>
+<li><code class="sourceCode javascript">.<span class="at">focus</span>()</code> &#34920;&#21333;&#20803;&#32032;&#33719;&#24471;&#28966;&#28857;</li>
+<li><code class="sourceCode javascript">.<span class="at">focusin</span>()</code> &#23376;&#20803;&#32032;&#33719;&#24471;&#28966;&#28857;</li>
+<li><code class="sourceCode javascript">.<span class="at">focusout</span>()</code> &#23376;&#20803;&#32032;&#22833;&#21435;&#28966;&#28857;</li>
+<li><code class="sourceCode javascript">.<span class="at">hover</span>()</code> &#21516;&#26102;&#20026;mouseenter&#21644;mouseleave&#20107;&#20214;&#25351;&#23450;&#22788;&#29702;&#20989;&#25968;</li>
+<li><code class="sourceCode javascript">.<span class="at">keydown</span>()</code> &#25353;&#19979;&#38190;&#30424;&#65288;&#38271;&#26102;&#38388;&#25353;&#38190;&#65292;&#21482;&#36820;&#22238;&#19968;&#20010;&#20107;&#20214;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">keypress</span>()</code> &#25353;&#19979;&#38190;&#30424;&#65288;&#38271;&#26102;&#38388;&#25353;&#38190;&#65292;&#23558;&#36820;&#22238;&#22810;&#20010;&#20107;&#20214;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">keyup</span>()</code> &#26494;&#24320;&#38190;&#30424;</li>
+<li><code class="sourceCode javascript">.<span class="at">load</span>()</code> &#20803;&#32032;&#21152;&#36733;&#23436;&#27605;</li>
+<li><code class="sourceCode javascript">.<span class="at">mousedown</span>()</code> &#25353;&#19979;&#40736;&#26631;</li>
+<li><code class="sourceCode javascript">.<span class="at">mouseenter</span>()</code> &#40736;&#26631;&#36827;&#20837;&#65288;&#36827;&#20837;&#23376;&#20803;&#32032;&#19981;&#35302;&#21457;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">mouseleave</span>()</code> &#40736;&#26631;&#31163;&#24320;&#65288;&#31163;&#24320;&#23376;&#20803;&#32032;&#19981;&#35302;&#21457;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">mousemove</span>()</code> &#40736;&#26631;&#22312;&#20803;&#32032;&#20869;&#37096;&#31227;&#21160;</li>
+<li><code class="sourceCode javascript">.<span class="at">mouseout</span>()</code> &#40736;&#26631;&#31163;&#24320;&#65288;&#31163;&#24320;&#23376;&#20803;&#32032;&#20063;&#35302;&#21457;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">mouseover</span>()</code> &#40736;&#26631;&#36827;&#20837;&#65288;&#36827;&#20837;&#23376;&#20803;&#32032;&#20063;&#35302;&#21457;&#65289;</li>
+<li><code class="sourceCode javascript">.<span class="at">mouseup</span>()</code> &#26494;&#24320;&#40736;&#26631;</li>
+<li><code class="sourceCode javascript">.<span class="at">ready</span>()</code> DOM&#21152;&#36733;&#23436;&#25104;</li>
+<li>`.resize() &#27983;&#35272;&#22120;&#31383;&#21475;&#30340;&#22823;&#23567;&#21457;&#29983;&#25913;&#21464;</li>
+<li>`.scroll() &#28378;&#21160;&#26465;&#30340;&#20301;&#32622;&#21457;&#29983;&#21464;&#21270;</li>
+<li>`.select() &#29992;&#25143;&#36873;&#20013;&#25991;&#26412;&#26694;&#20013;&#30340;&#20869;&#23481;</li>
+<li>`.submit() &#29992;&#25143;&#36882;&#20132;&#34920;&#21333;</li>
+<li>`.toggle() &#26681;&#25454;&#40736;&#26631;&#28857;&#20987;&#30340;&#27425;&#25968;&#65292;&#20381;&#27425;&#36816;&#34892;&#22810;&#20010;&#20989;&#25968;</li>
+<li>`.unload() &#29992;&#25143;&#31163;&#24320;&#39029;&#38754;</li>
+</ul>
+<p>&#20197;&#19978;&#36825;&#20123;&#20107;&#20214;&#22312; jQuery &#20869;&#37096;&#65292;&#37117;&#26159; <code>.bind()</code> &#30340;&#20415;&#25463;&#26041;&#24335;&#12290;&#20351;&#29992; <code>.bind()</code> &#21487;&#20197;&#26356;&#28789;&#27963;&#22320;&#25511;&#21046;&#20107;&#20214;&#65292;&#27604;&#22914;&#20026;&#22810;&#20010;&#20107;&#20214;&#32465;&#23450;&#21516;&#19968;&#20010;&#20989;&#25968;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&#39;input&#39;</span>).<span class="at">bind</span>(
+&#12288;&#12288;<span class="st">&#39;click change&#39;</span><span class="op">,</span> <span class="co">//&#21516;&#26102;&#32465;&#23450;click&#21644;change&#20107;&#20214;</span>
+&#12288;&#12288;<span class="at">function</span>() <span class="op">{</span>
+&#12288;&#12288;&#12288;&#12288;<span class="at">alert</span>(<span class="st">&#39;Hello&#39;</span>)<span class="op">;</span>
+&#12288;&#12288;<span class="op">}</span>
+)<span class="op">;</span></code></pre></div>
+<p>&#26377;&#26102;&#65292;&#20320;&#21482;&#24819;&#35753;&#20107;&#20214;&#36816;&#34892;&#19968;&#27425;&#65292;&#36825;&#26102;&#21487;&#20197;&#20351;&#29992; <code>.one()</code> &#26041;&#27861;&#12290;</p>
+<p><code>one</code> &#26159; <code>on</code> &#30340;&#25193;&#23637;</p>
+<p>&#25152;&#26377;&#30340;&#20107;&#20214;&#22788;&#29702;&#20989;&#25968;&#65292;&#37117;&#21487;&#20197;&#25509;&#21463;&#19968;&#20010;&#20107;&#20214;&#23545;&#35937;&#65288;event object&#65289;&#20316;&#20026;&#21442;&#25968;, &#36825;&#20010;&#20107;&#20214;&#23545;&#35937;&#26377;&#19968;&#20123;&#24456;&#26377;&#29992;&#30340;&#23646;&#24615;&#21644;&#26041;&#27861;&#65306;</p>
+<ul>
+<li>event.pageX &#20107;&#20214;&#21457;&#29983;&#26102;&#65292;&#40736;&#26631;&#36317;&#31163;&#32593;&#39029;&#24038;&#19978;&#35282;&#30340;&#27700;&#24179;&#36317;&#31163;</li>
+<li>event.pageY &#20107;&#20214;&#21457;&#29983;&#26102;&#65292;&#40736;&#26631;&#36317;&#31163;&#32593;&#39029;&#24038;&#19978;&#35282;&#30340;&#22402;&#30452;&#36317;&#31163;</li>
+<li>event.type &#20107;&#20214;&#30340;&#31867;&#22411;&#65288;&#27604;&#22914;click&#65289;</li>
+<li>event.which &#25353;&#19979;&#20102;&#21738;&#19968;&#20010;&#38190;</li>
+<li>event.data &#22312;&#20107;&#20214;&#23545;&#35937;&#19978;&#32465;&#23450;&#25968;&#25454;&#65292;&#28982;&#21518;&#20256;&#20837;&#20107;&#20214;&#22788;&#29702;&#20989;&#25968;</li>
+<li>event.target &#20107;&#20214;&#38024;&#23545;&#30340;&#32593;&#39029;&#20803;&#32032;</li>
+<li>event.preventDefault() &#38459;&#27490;&#20107;&#20214;&#30340;&#40664;&#35748;&#34892;&#20026;&#65288;&#27604;&#22914;&#28857;&#20987;&#38142;&#25509;&#65292;&#20250;&#33258;&#21160;&#25171;&#24320;&#26032;&#39029;&#38754;&#65289;</li>
+<li>event.stopPropagation() &#20572;&#27490;&#20107;&#20214;&#21521;&#19978;&#23618;&#20803;&#32032;&#20882;&#27873;</li>
+</ul>
+<p>&#26377;&#20004;&#31181;&#26041;&#27861;&#65292;&#21487;&#20197;&#33258;&#21160;&#35302;&#21457;&#19968;&#20010;&#20107;&#20214;&#12290;&#19968;&#31181;&#26159;&#30452;&#25509;&#20351;&#29992;&#20107;&#20214;&#20989;&#25968;&#65292;&#21478;&#19968;&#31181;&#26159;&#20351;&#29992; <code>.trigger()</code> &#25110; <code>.triggerHandler()</code>&#12290;</p>
+<ul>
+<li><code>$('a').click();</code></li>
+<li><code>$('a').trigger('click');</code></li>
+</ul>
+</dd>
+<dt><a href="http://www.ruanyifeng.com/blog/2011/08/jquery_best_practices.html">jQuery&#26368;&#20339;&#23454;&#36341; - &#38446;&#19968;&#23792;&#30340;&#32593;&#32476;&#26085;&#24535;</a></dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>&#20351;&#29992;&#26368;&#26032;&#29256;&#26412;&#30340;jQuery</p></li>
+<li><p>&#29992;&#23545;&#36873;&#25321;&#22120;</p></li>
+</ol>
+<ul>
+<li>&#65288;1&#65289;&#26368;&#24555;&#30340;&#36873;&#25321;&#22120;&#65306;id&#36873;&#25321;&#22120;&#21644;&#20803;&#32032;&#26631;&#31614;&#36873;&#25321;&#22120;</li>
+<li>&#65288;2&#65289;&#36739;&#24930;&#30340;&#36873;&#25321;&#22120;&#65306;class&#36873;&#25321;&#22120;</li>
+<li>&#65288;3&#65289;&#26368;&#24930;&#30340;&#36873;&#25321;&#22120;&#65306;&#20266;&#31867;&#36873;&#25321;&#22120;&#21644;&#23646;&#24615;&#36873;&#25321;&#22120;</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>&#29702;&#35299;&#23376;&#20803;&#32032;&#21644;&#29238;&#20803;&#32032;&#30340;&#20851;&#31995;</li>
+</ol>
+<p><code>$parent.find('.child')</code>, &#36825;&#26465;&#26159;&#26368;&#24555;&#30340;&#35821;&#21477;&#12290;<code>.find()</code> &#26041;&#27861;&#20250;&#35843;&#29992;&#27983;&#35272;&#22120;&#30340;&#21407;&#29983;&#26041;&#27861;&#65288;getElementById&#65292;getElementByName&#65292;getElementByTagName&#31561;&#31561;&#65289;&#65292;&#25152;&#20197;&#36895;&#24230;&#36739;&#24555;&#12290;</p>
+<p><code>$('#parent &gt; .child')</code>, jQuery &#20869;&#37096;&#20351;&#29992; Sizzle &#24341;&#25806;&#65292;&#22788;&#29702;&#21508;&#31181;&#36873;&#25321;&#22120;&#12290;Sizzle&#24341;&#25806;&#30340;&#36873;&#25321;&#39034;&#24207;&#26159;&#20174;&#21491;&#21040;&#24038;&#65292;&#25152;&#20197;&#36825;&#26465;&#35821;&#21477;&#26159;&#20808;&#36873;.child&#65292;&#28982;&#21518;&#20877;&#19968;&#20010;&#20010;&#36807;&#28388;&#20986;&#29238;&#20803;&#32032; <code>#parent</code>&#65292;&#36825;&#23548;&#33268;&#23427;&#27604;&#26368;&#24555;&#30340;&#24418;&#24335;&#22823;&#32422;&#24930;70%&#12290;</p>
+<pre><code>$(&#39;a&#39;).click(function(){
+    alert(this.id); // alert($(this).attr(&#39;id&#39;));
+});</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>&#19981;&#35201;&#36807;&#24230;&#20351;&#29992;jQuery</p></li>
+<li><p>&#20570;&#22909;&#32531;&#23384;</p></li>
+<li><p>&#20351;&#29992;&#38142;&#24335;&#20889;&#27861;</p></li>
+</ol>
+<p>&#37319;&#29992;&#38142;&#24335;&#20889;&#27861;&#26102;&#65292;jQuery&#33258;&#21160;&#32531;&#23384;&#27599;&#19968;&#27493;&#30340;&#32467;&#26524;&#65292;&#22240;&#27492;&#27604;&#38750;&#38142;&#24335;&#20889;&#27861;&#35201;&#24555;&#12290;</p>
+<ol start="7" style="list-style-type: decimal">
+<li>&#20107;&#20214;&#30340;&#22996;&#25176;&#22788;&#29702;&#65288;Event Delegation&#65289;</li>
+</ol>
+<pre><code>// better
+$(&quot;table&quot;).on(&quot;click&quot;, &quot;td&quot;, function(){
+    $(this).toggleClass(&quot;click&quot;);
+});
+
+// better than better
+$(document).on(&quot;click&quot;, &quot;td&quot;, function(){
+    $(this).toggleClass(&quot;click&quot;);
+});
+
+// cancel event binding
+$(document).off(&quot;click&quot;, &quot;td&quot;);</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>&#23569;&#25913;&#21160; DOM &#32467;&#26500;</li>
+</ol>
+<ul>
+<li>&#22914;&#26524;&#35201;&#25554;&#20837;&#22810;&#20010;&#20803;&#32032;&#65292;&#23601;&#20808;&#25226;&#23427;&#20204;&#21512;&#24182;&#65292;&#28982;&#21518;&#20877;&#19968;&#27425;&#24615;&#25554;&#20837;&#12290;</li>
+<li>&#22914;&#26524;&#20320;&#35201;&#23545;&#19968;&#20010;DOM&#20803;&#32032;&#36827;&#34892;&#22823;&#37327;&#22788;&#29702;&#65292;&#24212;&#35813;&#20808;&#29992;.detach()&#26041;&#27861;&#65292;&#25226;&#36825;&#20010;&#20803;&#32032;&#20174;DOM&#20013;&#21462;&#20986;&#26469;&#65292;&#22788;&#29702;&#23436;&#27605;&#20197;&#21518;&#65292;&#20877;&#37325;&#26032;&#25554;&#22238;&#25991;&#26723;&#12290;</li>
+</ul>
+<ol start="9" style="list-style-type: decimal">
+<li><p>&#27491;&#30830;&#22788;&#29702;&#24490;&#29615;</p></li>
+<li><p>&#23613;&#37327;&#23569;&#29983;&#25104;jQuery&#23545;&#35937;</p></li>
+</ol>
+<p>&#27599;&#24403;&#20320;&#20351;&#29992;&#19968;&#27425;&#36873;&#25321;&#22120;&#65288;&#27604;&#22914; <code>$('#id')</code> &#65289;&#65292;&#23601;&#20250;&#29983;&#25104;&#19968;&#20010;jQuery&#23545;&#35937;&#12290;jQuery&#23545;&#35937;&#26159;&#19968;&#20010;&#24456;&#24222;&#22823;&#30340;&#23545;&#35937;&#65292;&#24102;&#26377;&#24456;&#22810;&#23646;&#24615;&#21644;&#26041;&#27861;&#65292;&#20250;&#21344;&#29992;&#19981;&#23569;&#36164;&#28304;&#12290;&#25152;&#20197;&#65292;&#23613;&#37327;&#23569;&#29983;&#25104;jQuery&#23545;&#35937;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> $text <span class="op">=</span> <span class="at">$</span>(<span class="st">&quot;#text&quot;</span>)<span class="op">;</span>
+
+<span class="kw">var</span> $ts <span class="op">=</span> <span class="va">$text</span>.<span class="at">text</span>()<span class="op">;</span>
+<span class="kw">var</span> $ts <span class="op">=</span> <span class="va">$</span>.<span class="at">text</span>($text)<span class="op">;</span> <span class="co">// faster</span></code></pre></div>
+<ol start="11" style="list-style-type: decimal">
+<li>&#36873;&#25321;&#20316;&#29992;&#22495;&#38142;&#26368;&#30701;&#30340;&#26041;&#27861;</li>
+</ol>
+<p>&#31532;&#20108;&#27573;&#20195;&#30721;&#35835;&#21462;&#21464;&#37327;a&#30340;&#26102;&#20505;&#65292;&#19981;&#29992;&#21069;&#24448;&#19978;&#19968;&#23618;&#20316;&#29992;&#22495;&#65292;&#25152;&#20197;&#35201;&#27604;&#31532;&#19968;&#27573;&#20195;&#30721;&#24555;&#20116;&#20845;&#20493;&#12290;</p>
+<p>&#21516;&#29702;&#65292;&#22312;&#35843;&#29992;&#23545;&#35937;&#26041;&#27861;&#30340;&#26102;&#20505;&#65292;closure&#27169;&#24335;&#35201;&#27604;prototype&#27169;&#24335;&#26356;&#24555;&#12290;</p>
+<p>prototype&#27169;&#24335;&#65306;</p>
+<pre><code>var X = function(name){ this.name = name; }
+X.prototype.get_name = function() { return this.name; };</code></pre>
+<p>closure&#27169;&#24335;&#65306;</p>
+<pre><code>var Y = function(name) {
+    var y = { name: name };
+    return { &#39;get_name&#39;: function() { return y.name; } };
+};</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>&#20351;&#29992;Pub/Sub&#27169;&#24335;&#31649;&#29702;&#20107;&#20214;</li>
+</ol>
+<p>&#32780;&#35201;&#25913;&#29992;&#20107;&#20214;&#35302;&#21457;&#30340;&#24418;&#24335;</p>
+<pre><code>$.trigger(&quot;DO_SOMETHING_DONE&quot;);
+
+$(document).on(&quot;DO_SOMETHING_DONE&quot;, function(){
+    doSomethingElse(); }
+);</code></pre>
+<p>&#36824;&#21487;&#20197;&#32771;&#34385;&#20351;&#29992;deferred&#23545;&#35937;&#12290;</p>
+</dd>
+</dl>
+<p><a href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">jQuery&#30340;deferred&#23545;&#35937;&#35814;&#35299; - &#38446;&#19968;&#23792;&#30340;&#32593;&#32476;&#26085;&#24535;</a></p>
+<hr />
+<p><a href="http://jqfundamentals.com/chapter/javascript-basics">jQuery Fundamentals :: JavaScript Basics</a></p>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

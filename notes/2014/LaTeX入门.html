@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="latex-&#20837;&#38376;">LaTeX &#20837;&#38376;</h1>
+<h3 id="&#21021;&#35782;-latex">&#21021;&#35782; LaTeX</h3>
+<p>TODO&#65306;LaTeX &#30340;&#24847;&#20041;&#65292;&#29992;&#36884;&#65292;&#23433;&#35013;</p>
+<p><strong>&#32534;&#35793; tex &#25991;&#26723;</strong></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">xelatex</span> gougu.tex % &#21021;&#27425;&#32534;&#35793;
+<span class="kw">bibtex</span> gougu.aux % &#29983;&#25104;&#24341;&#29992;
+<span class="kw">xelatex</span> gougu.tex % &#20877;&#27425;&#32534;&#35793;&#65292;&#28155;&#21152;&#24341;&#29992;</code></pre></div>
+<p><strong>&#19968;&#20123; tex &#28304;&#30721;&#31034;&#20363;</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\maketitle <span class="co">% &#29983;&#25104; title</span>
+\tableofcontents <span class="co">% &#29983;&#25104; TOC&#65288;&#38656;&#35201;&#33267;&#23569;&#32534;&#35793;&#20004;&#27425;&#65289;</span>
+\usepackage{graphicx} <span class="co">% &#20351;&#29992;&#23439;&#21253;</span>
+\includegraphics[width=3cm]{input.pdf} <span class="co">% &#36824;&#21487;&#20351;&#29992;&#20854;&#20182;&#22270;&#29255;&#26684;&#24335;&#65306;.png, .jpg, .eps &#31561;</span>
+\hline <span class="co">% horizontal line &#65288;&#29992;&#20110;&#34920;&#26684;&#65289;</span>
+
+<span class="co">% &#29615;&#22659;</span>
+\begin{figure}[ht] <span class="co">% Here Top&#65288;&#22270;&#29255;&#28014;&#21160;&#30340;&#20301;&#32622;&#35774;&#23450;&#65289;</span>
+  \centering
+  \includegraphics[scale=0.6]{xiantu.pdf} \caption{&#36825;&#26159;&#22270;&#29255;&#30340;&#35828;&#26126;&#12290;} <span class="co">% xiantu.pdf &#26159;&#22270;&#29255;&#65292;&#36824;&#21487;&#20351;&#29992;&#20854;&#20182;&#26684;&#24335;</span>
+  \label{fig:xiantu} <span class="co">% label &#29992;&#20110;&#25991;&#20013;&#30340;&#35828;&#26126;&#24341;&#29992;</span>
+\end{figure}</code></pre></div>
+<h3 id="&#19968;&#20123;&#23439;&#21253;&#30340;&#35828;&#26126;">&#19968;&#20123;&#23439;&#21253;&#30340;&#35828;&#26126;</h3>
+<ul>
+<li>fontenc % font encoding</li>
+<li>fontspec</li>
+<li>ccfonts % concrete</li>
+</ul>
+<p>**&#29992;&#33521;&#25991;&#23383;&#31526;&#25351;&#23450;&#24076;&#33098;&#23383;&#31526;</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\usepackage[greek,english]{babel}
+\greektext{abcde}</code></pre></div>
+<p>TODO&#65306;fontenc&#65292;inputenc</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">Q\@.E\@.D\@. &#21363;&#8220;&#35777;&#26126;&#23436;&#27605;&#8221;&#12290; <span class="co">% \@. &#65288;&#38450;&#27490;&#32553;&#20889;&#23383;&#27597;&#20013;&#30340; period &#34987;&#35748;&#20026;&#26159;&#21477;&#23376;&#32467;&#23614; fullstop&#65289;</span>
+
+\CJKsetecglue{} <span class="co">% set e(nglish) c(hinese) glue to &quot;no glue&quot;</span>
+
+\phantom{&#21999;} <span class="co">% &#21344;&#20301;&#65292;&#20294;&#26159;&#19981;&#26174;&#31034;&#20869;&#23481;</span>
+\vphantom <span class="co">% &#31867;&#20284; \phantom</span>
+\hphantom <span class="co">% &#31867;&#20284; \phantom</span>
+
+\\ <span class="co">% linebreak, &#20063;&#21487;&#20351;&#29992; `\linebreak`</span>
+\par
+
+{\You {\emph should} emphasis it.}
+\textit{
+You {\emph should} emphasis it.}
+\newcommand\Emph{\textbf}
+\underline <span class="co">% make text appeared with an underline</span>
+
+\S
+\dag
+\ddag <span class="co">% double dagger</span>
+\texttrademark <span class="co">% &#19981;&#24102; text &#26159;&#25991;&#26412;&#27169;&#24335;&#21644;&#25968;&#23398;&#27169;&#24335;&#36890;&#29992;&#30340;</span>
+
+<span class="co">% symbol</span>
+\symbol{&#39;\$} <span class="co">% WYSIWYG</span>
+\symbol{&#39;Z}
+\symbol{&quot;6a} <span class="co">% #hex&#65288;16 &#36827;&#21046;&#65289;</span>
+\symbol{&#39;07} <span class="co">% #oct&#65288;8 &#36827;&#21046;&#65289;</span>
+
+<span class="co">% font family</span>
+\textrm{text in Roman Family} \rmfamily
+\textsf{text in Sans Serif font Family} \sffamily
+\texttt{text in Typewritter font family} \ttfamily <span class="co">% t(ypewritter) t(ext)</span>
+<span class="co">% font shape</span>
+\textup{text in Upright shape} \upshape
+\textit{text in Italic shape} \itshape
+\textsl{text in Slanted shape} \slshape
+\textsc{text in Small Capital} \scshape <span class="co">% small caption</span>
+<span class="co">% font series</span>
+\textmd{median text} \mdseries
+\textbf{bold face} \bfseries
+<span class="co">% default setup</span>
+\rmfamily\mdseries\upshape
+
+<span class="co">% CJK font family</span>
+{\CJKfamily{hei}&#36825;&#26159;&#40657;&#20307;}
+{\CJKfamily{kai}&#36825;&#26159;&#26999;&#20070;}
+{\CJKfamily{song}&#36825;&#26159;&#23435;&#20307;}
+{\CJKfamily{fs}&#36825;&#26159;&#20223;&#23435;}
+
+{\songti &#23435;&#20307;}
+{\heiti &#40657;&#20307;}
+{\fangsong &#20223;&#23435;}
+{\kaishu &#26999;&#20070;}</code></pre></div>
+<p><strong>&#20851;&#20110;&#23383;&#20307;</strong></p>
+<ul>
+<li>New Font Selection Scheme (NFSS)</li>
+<li>&#23383;&#20307;&#32534;&#30721;
+<ol style="list-style-type: decimal">
+<li>OT1</li>
+<li>T1</li>
+<li>OML</li>
+<li>OMS</li>
+<li>OMX</li>
+<li>U</li>
+<li>etc.</li>
+</ol></li>
+<li>&#23383;&#20307;&#26063;
+<ol style="list-style-type: decimal">
+<li>cmr</li>
+<li>cmss</li>
+<li>cmtt</li>
+<li>cmm</li>
+<li>cmsy</li>
+<li>cmex</li>
+</ol></li>
+<li>&#23383;&#20307;&#31995;&#21015;
+<ol style="list-style-type: decimal">
+<li>m</li>
+<li>b</li>
+<li>bx</li>
+<li>sb</li>
+<li>c</li>
+</ol></li>
+<li>&#23383;&#20307;&#24418;&#29366;
+<ol style="list-style-type: decimal">
+<li>n</li>
+<li>it</li>
+<li>sl</li>
+<li>sc</li>
+</ol></li>
+</ul>
+<p><strong>Set Font</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% Set font --- method 1</span>
+\fontencoding{OT1}\fontfamily{pzc}\fontseries{mb}\fontshape{it}\fontsize{14}{17} <span class="co">% size, line</span>
+\selectfont <span class="co">% &#20351;&#20854;&#29983;&#25928;</span>
+So far so good
+<span class="co">% Set font --- method 2</span>
+\usefont{T1}{pbk}{db}{n} <span class="co">% &#32534;&#30721;&#65292;&#26063;&#65292;&#31995;&#21015;&#65292;&#24418;&#29366;</span>
+Not too bad</code></pre></div>
+<p><strong>txfonts</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\documentclass{article}
+\usepackage{txfonts} <span class="co">% free, excellent</span>
+\begin{document}
+\end{document}</code></pre></div>
+<p><strong>fontspec</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% \setmainfont[&lt;optional&gt;]{&lt;font-name&gt;}</span>
+<span class="co">% setmainfont, setsansfont, setmonofont</span>
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Verdana}
+\setmonofont{Courier New}</code></pre></div>
+<p><strong>fonts</strong></p>
+<ul>
+<li>Type 1</li>
+<li>TrueType</li>
+<li>OpenType</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% size of font</span>
+\tiny
+\scriptsize
+\footnotesize
+\small
+\large
+\Large
+\LARGE
+\huge
+\Huge
+<span class="co">% chinese font size</span>
+\zihao{0} <span class="co">% &#21021;&#21495;</span>
+\zihao{-0} <span class="co">% &#23567;&#21021;&#21495;</span>
+\zihao{5} <span class="co">% &#20116;&#21495; (c5size)</span>
+\zihao{-5} <span class="co">% &#23567;&#20116;&#21495; (cs5size)</span>
+<span class="co">% default font size</span>
+\normalfont <span class="co">% 10pt, or c5size(CTeX)</span>
+<span class="co">% line</span>
+\linespread{&lt;&#22240;&#23376;&gt;} <span class="co">% &#22522;&#26412;&#34892;&#36317;&#30340;&#20493;&#25968;</span>
+\setstretch <span class="co">% spacing</span>
+\singlespacing
+\onehalfspacing
+\doublespacing</code></pre></div>
+<p><strong>Dimensions</strong></p>
+<ul>
+<li><code>pt</code> point</li>
+<li><code>pc</code> pica (12 pt)</li>
+<li><code>in</code> inch (72.27 pt, 72 bp)</li>
+<li><code>bp</code> big point</li>
+<li><code>cm</code> centimeter (2.54 cm = 1 in)</li>
+<li><code>mm</code> millimeter</li>
+<li><code>dd</code> didot point</li>
+<li><code>cc</code> cicero</li>
+<li><code>sp</code> scaled point (65536 sp = 1 pt)</li>
+<li><code>em</code> M &#30340;&#23485;&#24230;&#65288;&#31561;&#20110; <code>\quad</code>&#65289;</li>
+<li><code>ex</code> x &#30340;&#39640;&#24230;</li>
+<li><code>en</code></li>
+</ul>
+<p><strong>Spaces</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% &#19981;&#21487;&#25442;&#34892;&#30340;&#27700;&#24179;&#38388;&#36317;</span>
+\thinspace \, <span class="co">% for numbers: 1\,234\,567\,890</span>
+\negthinspace \!
+\enspace <span class="co">% 0.5 em</span>
+\nobreakable ~ <span class="co">% tie, for names: Donald~E. Knuth</span>
+
+<span class="co">% &#21487;&#20197;&#25442;&#34892;&#30340;&#27700;&#24179;&#38388;&#36317;</span>
+\quad <span class="co">% 1 em</span>
+\qquad <span class="co">% 2 em</span>
+\enskip <span class="co">% 0.5 em</span>
+\  <span class="co">% &#31354;&#26684;</span>
+<span class="co">% hspace</span>
+\hspace{2em} <span class="co">% Space\hspace{1cm}1\,cm, </span>
+\hspace*{1cm}Text
+\hspace{2em plus 1em minus 0.25 em}
+left\hspace{\fill}middle\hfill right <span class="co">% align to left, middle, right</span>
+left\hspace{\stretch{2}}middle\hspace{\fill}right
+
+\hrulefill <span class="co">% &#19979;&#21010;&#32447;</span>
+\dotfill <span class="co">% &#28857;</span>
+<span class="co">% length</span>
+\setlength{\parindent}{8em}
+\addtolength{\parindent}{2em}
+\newlength\mylen <span class="co">% new a length</span></code></pre></div>
+<p><strong>Boxs</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% mbox makebox</span>
+\mbox{cannot be broken}
+\makebox[1em]{\textbullet}text
+\makebox[5cm][s]{some text} <span class="co">% &#23485;&#24230;&#65292;&#20301;&#32622;&#65288;clrs: center, left, right, stretched&#65289;</span>
+\makebox[0pt][l]{abc}xyz <span class="co">% overlap</span>
+abc\llap{xyz} <span class="co">% llap&#65288;&#26356;&#39640;&#23618;&#30340;&#34920;&#36798;&#26041;&#24335;&#65289;</span>
+\rlap{abc}xyz <span class="co">% rlap</span>
+<span class="co">% fbox framebox</span>
+\fbox <span class="co">% \setlength{\fboxsep}{2pt}, \framebox % &#27604; \fbox &#24378;&#65292;&#21487;&#33258;&#23450;&#20041;</span>
+\fboxrule{0.4pt} (default)
+<span class="co">% sbox savebox</span>
+\sbox \savebox
+\newsavebox{\mybox}
+\sbox{\mybox}{a box made by me}
+\usebox{\mybox}
+<span class="co">% set box param</span>
+\settowidth{10pt}{content}
+\settoheight{10pt}{content}
+\settodepth{10pt}{content}
+<span class="co">% get box param</span>
+\wd{\fbox}
+\ht{\mbox}
+\dp{\mybox}
+\framebox[2\width]{&#25991;&#23383;&#23485;&#24230;&#20004;&#20493;&#30340;&#23485;} <span class="co">% width, height, depth, totalheight</span></code></pre></div>
+<p><strong>Alignment</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\indent <span class="co">% generate an indent (\parindent)</span>
+<span class="co">% &#27573;&#33853;</span>
+\parskip <span class="co">% 0pt plus 1pt</span>
+\setlength{\parskip}{0pt}
+\raggedright <span class="co">% &#21491;&#20391;&#19981;&#23545;&#40784;</span>
+\raggedleft
+\centering
+
+\begin{center} <span class="co">% or `flushright`, `flushleft`</span>
+&#23621;&#20013;
+\end{center}</code></pre></div>
+<p><strong>MISC</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% hyphenation &#25918;&#21040;&#23548;&#35328;&#21306;</span>
+\hyphenation{man-u-script com-pu-ter gym-na-sium}
+
+<span class="co">% Lettrine &#39318;&#23383;&#27597;&#36229;&#22823;&#22810;&#34892;&#25928;&#26524;</span>
+\usepackage{lettrine}
+\lettrine{S}{tay} hungry, stay foolish
+
+<span class="co">% shapepar</span>
+\usepackage{shapepar}
+\heartpar{&#36825;&#19968;&#27573;&#25991;&#23383;&#20250;&#21464;&#25104;&#24515;&#24418;} 
+
+<span class="co">% syntonly</span>
+\usepackage{syntonly} <span class="co">% syntax only</span>
+\syntaxonly</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% quote</span>
+\begin{quote}
+  quot
+\end{quote}
+<span class="co">% quotation &#27573;&#39318;&#32553;&#36827;</span>
+\begin{quotation}
+  Better for multiparagraph quotation
+\end{quotation}
+<span class="co">% verse</span>
+\begin{verse}
+  For Poetry
+\end{verse}
+<span class="co">% abstract</span>
+\begin{abstract} <span class="co">% article, report</span>
+  Abstract goes here <span class="co">% \abstractname &#25688;&#35201;&#21517;&#31216;</span>
+  <span class="co">% \CTEXoptions[abstractname={&#25688;\quad &#35201;}]</span>
+\end{abstract}</code></pre></div>
+<p><strong>Lists</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% enumerate</span>
+\begin{enumerate} <span class="co">% numbered</span>
+  \item one
+  \item two
+\end{enumerate}
+
+\begin{enumerate}
+  \item &#20013;&#25991;
+  \item[1a.] &#27721;&#35821; <span class="co">% set &quot;bullet&quot; by hand</span>
+\end{enumerate}
+
+<span class="co">% itemize</span>
+\begin{itemize} <span class="co">% bullet</span>
+  \item not one
+  \item not two
+\end{itemize}
+
+<span class="co">% description</span>
+\begin{description} <span class="co">%</span>
+  \item[\tau] Greek alphabet \tau
+\end{description}
+
+<span class="co">% &#25163;&#21160;&#35774;&#32622;</span>
+<span class="co">% counter</span>
+\item This is number\theenumi <span class="co">% enumi, enumii, enumiii, enumiv</span>
+\arabic{enumi}
+\alph{enumi}
+\roman{enumi}
+\Alph{enumi}
+
+<span class="co">% reset</span>
+\renewcommand\theenumi{\roman{enumi}}
+\renewcommand\labelenumi{\theenumi}
+
+<span class="co">% &#39029;&#30721;&#20063;&#26159;&#19968;&#20010; counter</span>
+\thepage <span class="co">% current page number</span>
+
+<span class="co">% define your own counter</span>
+\newcounter{mycnt}
+\setcounter{mycnt}{0}
+\renewcommand\themycnt{\arabic{mycnt}}
+\stepcounter{mycnt}\themycnt
+\addtocounter{mycnt}{-1}
+
+<span class="co">% amsmath</span>
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+
+<span class="co">% &#23450;&#21046;&#21015;&#34920;&#29615;&#22659;</span>
+<span class="co">% general list</span>
+\begin{list} <span class="co">% \list{&#26631;&#31614;}{&#35774;&#32622;&#21629;&#20196;}</span>
+\item
+\end{list}
+
+\newcounter{mylist}
+\begin{list}{\#\themylist}{\usecounter{mylist}}
+  \item &#20013;&#25991;
+  \item English
+\end{list}
+
+<span class="co">% &#25110;&#32773;&#20351;&#29992; enumitem &#21253;</span>
+\usepackage{enumitem}
+\begin{enumerate}[itemsep=0pt,parset=0pt,label=(\arabic*)] <span class="co">% set up</span>
+  \item &#20013;&#25991;
+  \item English
+\end{enumerate}</code></pre></div>
+<p><strong>Theorem</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\usepackage{theorem}
+<span class="co">% theorem</span>
+\newtheorm{thm}{&#23450;&#29702;} <span class="co">% &#8220;&#23450;&#29702;&#8221; &#26159;&#23450;&#29702;&#26631;&#39064;</span>
+\begin{thm}
+  &#19968;&#20010;&#23450;&#29702;
+\end{thm}
+\begin{thm}[&#21246;&#32929;&#23450;&#29702;]
+  &#19968;&#20010;&#26377;&#21517;&#23383;&#30340;&#23450;&#29702;
+\end{thm}
+<span class="co">% lemma</span>
+\newtheorm{lemma}{&#24341;&#29702;}[chapter] <span class="co">% &#25353;&#31456;</span>
+\begin{lemma}
+   ...
+\end{lemma}
+<span class="co">% proposition</span>
+\newtheorm{prop}[thm]{&#21629;&#39064;} <span class="co">% thm &#26159;&#32534;&#21495;&#30340;&#26041;&#24335;</span>
+\begin{prop}
+  ...
+\end{prop}
+
+<span class="co">% &#35774;&#32622; theorem &#26684;&#24335;</span>
+\usepackage{theorem}
+\theoremstyle{changebreak}
+\theoremheaderfont{\sffamily\bfseries}
+\theorembodyfont{\normalfont}
+\newtheorem{definition}{&#23450;&#20041;}[chapter]
+\theoremstyle
+
+<span class="co">% &#25110;&#32773;&#26356;&#24378;&#22823;&#30340; `ntheorem` &#23439;&#21253;&#65292;&#25110;&#32773; `amsthm`</span>
+\usepackage{amsthm}
+\renewcommand\proofname{&#35777;&#26126;}
+\renewcommand\qedsymbol{\ensuremath{\Box}} <span class="co">% &#35777;&#26126;&#23436;&#27605;&#65288;Q.E.D&#65289;</span></code></pre></div>
+<p><strong>Verbatim</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% verbatim&#65306;\ver&lt;&#31526;&#21495;&gt;&lt;&#25220;&#24405;&#20869;&#23481;&gt;&lt;&#31526;&#21495;&gt;</span>
+\verb&quot;\LaTeX&quot;
+\verb!\LaTeX!
+\verb*!1 2  3   4! <span class="co">% *&#65288;&#26174;&#31034;&#31354;&#26684;&#65289;</span>
+
+<span class="co">% &#20351;&#29992;&#29615;&#22659;</span>
+\begin{verbatim}
+  #!usr/bin/env perl
+  ...
+\end{verbatim}
+\begin{verbatim*}
+   ...
+\end{verbatim*}
+
+<span class="co">% &#20351;&#29992;&#23439;&#21253;</span>
+\usepackage{fancyvrb}
+\SaveVerb{myverb}|shit[({=-+[/})|
+\fbox{&#22871;&#20013; \UseVerb{myverb}}
+
+<span class="co">% &#31243;&#24207;&#39640;&#20142;</span>
+\usepackage{listings}
+\begin{lstlisting}[language=C]
+  ...
+\end{lstlisting}
+\lstset{ <span class="co">% &#25972;&#20307;&#35774;&#32622;</span>
+  column=flexible <span class="co">% &#31561;&#20110; lstset{flexiblecolumns}</span>
+  commentstyle=\rmfamily\itshape}</code></pre></div>
+<p><strong>tabbing</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\begin{tabbing}
+  &#26684;&#24335;\hspace{3em} \= &#20316;&#32773; \kill <span class="co">% be killed&#65292;&#36825;&#19968;&#34892;&#19981;&#20250;&#26174;&#31034;</span>
+  Plain \TeX \&gt; &#39640;&#24503;&#32435; \\ <span class="co">% \\ &#20197;&#25442;&#34892;</span>
+  \LaTeX \&gt; Leslie Lamport <span class="co">% &#26368;&#21518;&#19968;&#34892;&#19981;&#29992;&#25442;&#34892;</span>
+\end{tabbing}</code></pre></div>
+<p><strong>footnote</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\footnote{This is a footnote}
+\footnote[1]{This is another footnote} <span class="co">% &#33050;&#27880;&#31526;&#21495;&#26159; thefootnote</span>
+
+\begin{minipage}{8em} <span class="co">% &#23545;&#24212;&#22320;&#65292;&#26159; thempfootnote</span>
+  &#36825;&#26159;&#19968;&#20010;&#23567;&#39029;&#29615;&#22659;\footnote{&#33050;&#27880;&#12290;}&#20013;&#30340;&#33050;&#27880;
+\end{minipage}
+
+\renewcommand\thefootnote{\fnsymbol{footnote}}
+\renewcommand\thefootnote{\textcircled{\arabic{footnote}}}
+
+<span class="co">% &#26356;&#22909;&#30340;&#26041;&#27861;</span>
+\usepackage{pifont}
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}} <span class="co">% &#38451;&#25991;&#24102;&#22280;&#25968;&#23383;&#20174; 171 &#24320;&#22987;</span>
+
+<span class="co">% footnotemark footnotetext</span>
+\begin{tabular}{r|r} <span class="co">% right-align, right-align</span>
+  &#33258;&#21464;&#37327; &amp; &#22240;&#21464;&#37327;\footnotemark \\ \hline <span class="co">% &#28155;&#21152;&#33050;&#27880;&#26631;&#35760;</span>
+  $x$ &amp; $y$ 
+\end{tabular}
+\footnotetext{$y=x^2$&#12290;} <span class="co">% &#28155;&#21152;&#33050;&#27880;&#20869;&#23481;</span>
+
+<span class="co">% &#36793;&#27880; \marginpar</span>
+&#26377;&#36793;&#27880;&#30340;&#25991;&#23383;\marginpar[\hfill &#24038; $\rightarrow$]{\leftarrow &#21491;}
+\reversemarginpar
+\normalmarginpar
+\marginparwidth <span class="co">% &#23485;&#24230;</span>
+\marginparsep <span class="co">% &#38388;&#38548;&#65292;&#29992; setlength &#35774;&#32622;</span></code></pre></div>
+<p><strong>space</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\vspace{&lt;&#38271;&#24230;&gt;}
+\vfill <span class="co">% &#21363; \vspace{\fill}</span>
+<span class="co">% skip</span>
+\smallskip <span class="co">% smallskipmount</span>
+\medskip <span class="co">% medskipmount</span>
+\bigskip <span class="co">% bigskipmount</span>
+<span class="co">% bottom</span>
+\raggedbottom
+\flushbottom
+
+\parbox[&lt;&#20301;&#32622;&gt;][&lt;&#39640;&#24230;&gt;][&lt;&#20869;&#23481;&#20301;&#32622;&gt;]{&lt;Width&gt;}{&lt;Content&gt;}
+&#21069;&#27839;\parbox{2em}{&#19981;&#25645;&#21518;&#35821;}&#12290; <span class="co">% &#19968;&#20010;&#26377;&#36259;&#30340;&#20363;&#23376;</span>
+\parbox[t]{2em}{Content} <span class="co">% top bounded</span>
+\parbox[b]{2em}{Content} <span class="co">% bottom bounded</span>
+\parbox[c]{2em}{Content} <span class="co">% center aligened</span>
+\parbox[s]{2em}{Content} <span class="co">% stretched</span></code></pre></div>
+<div class="figure">
+<img src="001.png" alt="&#21069;&#35328;&#19981;&#25645;&#21518;&#35821;" />
+<p class="caption">&#21069;&#35328;&#19981;&#25645;&#21518;&#35821;</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% rule</span>
+\rule[&lt;&#21319;&#39640;&#36317;&#31163;&gt;]{&lt;Width&gt;}{&lt;Height}
+\rule{1pt}{1em}Middle\rule{1p}
+\rule[-0.1em]{1em}{1em} &#21487;&#29992;&#20316; Q.E.D.
+<span class="co">% struct</span>
+\fbox{\strut---}\qquad</code></pre></div>
+<p><strong>title page</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\title{&#26434;&#35848;&#21246;&#32929;&#23450;&#29702;\thanks{&#24863;&#35874;&#26576;&#26576;&#23545;&#26412;&#25991;&#30340;&#22823;&#21147;&#25903;&#25345;}} <span class="co">% &#29983;&#25104;&#29305;&#27530;&#30340;&#24863;&#35874;&#33050;&#27880;</span>
+\author{&#24352;&#19977;&#22312;&#24038;\\&#19977;&#26126;&#22530; \and &#26446;&#22235;&#22312;&#21491;\\&#22235;&#21512;&#38498;}
+\data\today <span class="co">% &#21487;&#20197;&#30465;&#30053;</span></code></pre></div>
+<p>% &#35774;&#32622;&#26684;&#24335;</p>
+<div class="figure">
+<img src="002.png" alt="CTEXOptions" />
+<p class="caption">CTEXOptions</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">&#23618;&#27425;</th>
+<th align="center">&#21517;&#31216;</th>
+<th align="center">&#21629;&#20196;</th>
+<th align="center">&#35828;&#26126;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">-1</td>
+<td align="center">part</td>
+<td align="center"><code>\part</code></td>
+<td align="center">&#21487;&#36873;&#30340;&#26368;&#39640;&#23618;</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">chapter</td>
+<td align="center"><code>\chapter</code></td>
+<td align="center">report, book &#30340;&#26368;&#39640;&#23618;</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">section</td>
+<td align="center"><code>\section</code></td>
+<td align="center">article &#30340;&#26368;&#39640;&#23618;</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">subsection</td>
+<td align="center"><code>\subsection</code></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">subsubsubsection</td>
+<td align="center"><code>\subsubsubsection</code></td>
+<td align="center">report, book</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">paragraph</td>
+<td align="center"><code>\paragraph</code></td>
+<td align="center">&#19981;&#32534;&#21495;&#65292;&#19981;&#29983;&#25104;&#30446;&#24405;</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">subparagraph</td>
+<td align="center"><code>\subparagraph</code> &#19981;&#32534;&#21495;&#65292;&#19981;&#29983;&#25104;&#30446;&#24405;</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% &#20840;&#20070;</span>
+\frontmatter <span class="co">% &#20070;&#30340;&#21069;&#27573;</span>
+\mainmatter <span class="co">% &#20070;&#30340;&#27491;&#25991;&#65292;&#39029;&#30721;&#37325;&#26032;&#35745;&#25968;</span>
+\backmatter <span class="co">% &#20070;&#30340;&#21518;&#27573;&#65292;&#19981;&#32534;&#21495;</span>
+
+\clearpage
+\include{lang-natural} <span class="co">% &#24341;&#20837; lang-natural.tex &#25991;&#26723;</span>
+\include{a-complex-table}
+\includeonly{lang-natural} <span class="co">% &#21487;&#20197;&#22312; preamble &#35774;&#32622;&#21482;&#24341;&#20837;&#26576;&#19968;&#31456;</span></code></pre></div>
+<p><strong>&#19968;&#20010;&#20363;&#23376;</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% main.tex</span>
+\documentclass{ctexart}
+\input{preamble} <span class="co">% &#22797;&#26434;&#30340;&#23548;&#35328;&#21306;</span>
+\begin{document}
+  ...
+\end{document}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% a-complex-table.tex</span>
+...
+\endinput <span class="co">% &#20572;&#27490;&#23548;&#20986;</span>
+&#36825;&#26159;&#19968;&#20010;&#22797;&#26434;&#30340;&#34920;&#26684;&#65292;&#26368;&#22909;&#20174; main.tex &#20013;&#20998;&#31163;&#20986;&#26469;&#12290;
+&#35831;&#30452;&#25509;&#32534;&#35793;&#20027;&#25991;&#26723;&#65306;
+  xelatex main.tex</code></pre></div>
+<p><strong>&#35774;&#32622; CTeX</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% \CTEXsetup[&lt;key&gt;=&lt;value&gt;,etc.]{&lt;&#23545;&#35937;&#31867;&#22411;&gt;}</span>
+<span class="co">% &#23545;&#35937;&#31867;&#22411;&#65306;part, chapter, section, subsection, subsubsection, paragraph, subparagraph</span>
+\CTEXsetup[name={&#31532;&#65292;&#33410;}]{section} <span class="co">% &#21464;&#25104; &#8220;&#31532; 1 &#33410;&#8221; &#36825;&#26679;</span>
+\CTEXsetup[number={\chinese{section}}]{section} <span class="co">% &#21464;&#25104; &#8220;&#31532;&#19968;&#33410;&#8221; &#36825;&#26679;</span>
+\CTEXsetup[format={\raggedright\bfseries}]{section}
+<span class="co">% nameformat</span>
+<span class="co">% numberformat</span>
+<span class="co">% titleformat</span>
+<span class="co">% aftername&#65292;&#31456;&#33410;&#21517;&#19982;&#21518;&#38754;&#26631;&#39064;&#38388;&#30340;&#20869;&#23481;</span>
+\CEXsetup[aftername={\\vspace{2em}}]{part}
+<span class="co">% beforeskip, afterskip &#21069;&#21518;&#30340; skip &#36317;&#31163;</span>
+<span class="co">% indent &#31456;&#33410;&#26631;&#39064;&#30340;&#32553;&#36827;&#38271;&#24230;</span>
+
+<span class="co">% &#22686;&#21152;&#26684;&#24335;</span>
+\CTEXsetup[titleformat+={\fansong}]{subsection} <span class="co">% &#24605;&#32771; &#8220;=&#8221; &#19982; &#8220;+=&#8221; &#30340;&#21306;&#21035;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\documentclass[a4paper,titlepage]{article} <span class="co">% &#26631;&#39064;&#21333;&#29420;&#25104;&#39029;</span>
+<span class="co">% a4paper, a5paper, b5paper, letterpaper, leagalpaper, executivepaper</span>
+<span class="co">% landscape &#27178;&#21521;&#32440;&#24352;</span>
+<span class="co">% oneside, twoside</span>
+<span class="co">% 10pt, 11pt, 12pt</span>
+<span class="co">% onecolumn, twocolumn</span>
+<span class="co">% titlepage, notitlepage</span>
+<span class="co">% openany, openright&#65288;&#27599;&#31456;&#20174;&#22855;&#25968;&#39029;&#24320;&#22987;&#65289;</span>
+<span class="co">% leqno &#20844;&#24335;&#24038;&#36793;&#32534;&#21495;</span>
+<span class="co">% fleqn &#20844;&#24335;&#24038;&#23545;&#40784;&#65292;&#22266;&#23450;&#38271;&#24230;&#65288;&#40664;&#35748;&#23621;&#20013;&#65289;</span>
+<span class="co">% draft &#32534;&#35793;&#20986;&#30340; pdf &#26377;&#25552;&#31034;</span>
+<span class="co">% final &#65288;&#40664;&#35748;&#20540;&#65289;</span>
+<span class="co">% openbib</span></code></pre></div>
+<h3 id="ctexart-ctexrep-ctexbook">CTEXart, CTEXrep, CTEXbook</h3>
+<p><code>article</code>, <code>report</code>, <code>book</code> <em>vs.</em> <strong><code>ctexart</code></strong>, <strong><code>ctexrep</code></strong>, <strong><code>ctexbook</code></strong> % ctex.sty, ctexcap.sty</p>
+<p><strong>ctexcap.sty</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\documentclass{ltxdoc}
+\usepackage{ctexcap}
+\zihao{5}
+\begin{document}
+  ...
+\end{document}</code></pre></div>
+<p><strong>ctex.sty</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\documentclass{moderncv} <span class="co">% &#31616;&#21382;</span>
+\usepackage{ctex}
+\zihao{-4}
+\begin{document}
+  ...
+\end{document}</code></pre></div>
+<p><strong>About UTF-8</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\XeTeXinputencoding &quot;GBK&quot; <span class="co">% XeTeX &#22788;&#29702;&#38750; UTF-8 &#32534;&#30721;&#25991;&#26723;</span>
+<span class="co">% ctexutf8, ctexcaputf8 % &#31867;&#20284; documentclass[UTF-8]{ctexart} &#20043;&#31867;</span>
+<span class="co">% ctexartutf8, ctexreputf8, ctexbookutf8</span></code></pre></div>
+<p><strong>Geometry</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\paperwidth \hoffset
+\paperheight \voffset
+\topmargin
+\headhight \headsep
+\textheight \textwidth
+\marginparsep <span class="co">% &#36793;&#27880;&#30340; sep</span>
+\marginparwidth
+\footskip <span class="co">% &#20026;&#20160;&#20040;&#19981;&#26159; footsep&#65311;&#22240;&#20026;&#26368;&#21518;&#19968;&#34892;&#26159;&#21464;&#21270;&#30340;&#65292;&#32780; footnote &#36319;&#22312;&#32039;&#36319;&#24403;&#39029;&#26368;&#21518;&#19968;&#34892;&#65292;&#29992;&#19968;&#20010; skip &#26469;&#20998;&#38548;</span>
+
+<span class="co">% Set geometry method 1</span>
+\usepackage[a4paper,left=3cm,right=3cm]{geometry}
+
+<span class="co">% Set geometry method 2</span>
+\usepackage{geometry}
+\geometry{a4paper,left=3cm,right=3cm} <span class="co">% &#21491;&#36793;&#36317;</span></code></pre></div>
+<div class="figure">
+<img src="003.png" alt="&#35774;&#32622;Geometry" />
+<p class="caption">&#35774;&#32622;Geometry</p>
+</div>
+<p><strong>Page Style</strong></p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\pagenumbering{roman}
+
+<span class="co">% Page style:</span>
+<span class="co">%            empty&#65306;&#26080; head&#65292;footnote</span>
+<span class="co">%            plain&#65306;&#26080; head&#65292;footnote &#20026;&#23621;&#20013;&#39029;&#30721;</span>
+<span class="co">%            headings&#65306;&#26080; footnote&#65292;head &#26159;&#31456;&#33410;&#21517;</span>
+<span class="co">%            myheadings&#65306;&#27809;&#26377; footnote&#65292;head &#26159;&#39029;&#25968;&#21644;&#33258;&#23450;&#20041;&#20869;&#23481;</span>
+
+\pagestyle{&lt;&#39118;&#26684;&gt;} <span class="co">% &#35774;&#32622;&#25972;&#20307;</span>
+\thispagestyle{&lt;&#39118;&#26684;&gt;} <span class="co">% &#35774;&#32622;&#26412;&#39029;</span>
+
+\documentclass{article}
+\pagetsyle{headings}
+
+<span class="co">% &#22823;&#24133;&#22270;&#29255;&#65292;&#24403;&#21069;&#39029;&#20351;&#29992; plain &#39118;&#26684;</span>
+\begin{figure}[p]
+  \thispagestyle{plain}
+  ...
+\end{figure}</code></pre></div>
+<div class="figure">
+<img src="004.png" alt="&#39029;&#38754;&#39118;&#26684;" />
+<p class="caption">&#39029;&#38754;&#39118;&#26684;</p>
+</div>
+<p><strong>fancyhdr</strong></p>
+<div class="figure">
+<img src="005.png" alt="Fancyhdr" />
+<p class="caption">Fancyhdr</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\lhead{&lt;contents&gt;} \chead{&lt;c&gt;} \rhead{&lt;c&gt;}
+\lfoot{&lt;contents&gt;} \cfoot{&lt;c&gt;} \rfoot{&lt;c&gt;}
+\fancyhead[&lt;&#20301;&#32622;&gt;]{&lt;c&gt;} <span class="co">% E/O + L/C/R, even/odd page number</span>
+\fancyfoot[&lt;&#20301;&#32622;&gt;]{&lt;c&gt;} <span class="co">% E/O + L/C/R, left/center,right</span>
+\fancyhf[&lt;&#20301;&#32622;&gt;]{&lt;c&gt;} <span class="co">% H/F + E/O + L/C/R</span>
+
+<span class="co">% Example:</span>
+\documentclass[twoside]{ctexrep}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{\thepage}
+\fancyhead[CO]{&#24352;&#19977;}
+\fancyhead[CE]{&#35770;&#35821;&#35328;}
+\fancyfoot[RO,LE]{$\heartsuit$}
+
+<span class="co">% \leftmark \rightmark &#36890;&#24120;&#23601;&#26159;&#8220;&#31456;&#8221;&#8220;&#33410;&#8221;&#21517;</span>
+\fancyhead[LE,RO]{\slshape \rightmark}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot[C]{\thepage}
+
+<span class="co">% &#37325;&#26032;&#23450;&#20041;&#39118;&#26684;</span>
+\renewcommand\headrulewidth{0.6pt} <span class="co">% default: 0.4pt</span>
+\renewcommand\footrulewidth{0.6pt} <span class="co">% default: 0.4pt</span>
+
+\fancypagestyle{plain}{<span class="co">%</span>
+  \fancyhf{}
+  \cfoot{--\textit{\thepage}--} <span class="co">% &#39029;&#30721;&#24418;&#29366;</span>
+  \renewcommand\headrulewidth{0pt}
+  \renewcommand\footrulewidth{0pt}
+}
+
+<span class="co">% columns</span>
+\documentclass[twocolumn]{article}
+<span class="co">%    \onecolumn</span>
+<span class="co">%    \twocolumn</span></code></pre></div>
+<p><strong>Macro</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>command</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\boldface{boldfaced text}</code></pre></div></li>
+<li><p>environment</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\begin{tabular}
+  ...
+\end{tabular}</code></pre></div></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% \newcommand&lt;&#21629;&#20196;&gt;[&lt;&#21442;&#25968;&#20010;&#25968;&gt;][&lt;&#39318;&#20010;&#21442;&#25968;&#40664;&#35748;&#20540;&gt;]{&#20855;&#20307;&#23450;&#20041;}</span>
+\newcommand\PRC{People&#39;s Republic of \emph{China}}
+\newcommand\drives[2]{#1 drives #2} <span class="co">% \loves{Driver}{car} === driver drives car</span>
+\newcommand\does[3][drives]{#2 #1 #3} <span class="co">% \does{driver}{car} ===&gt; driver drives car, \does{like}{I}{fish} ===&gt; I like fish</span>
+
+<span class="co">% renewcommand &#21644; &#21602;&#25105;command&#31867;&#20284;&#65292;&#20294;&#26159;&#29992;&#20110;&#37325;&#23450;&#20041;</span>
+\renewcommand\abstractname{&#20869;&#23481;&#31616;&#20171;}
+
+<span class="co">% providecommand &#25552;&#20379;&#19968;&#20010;&#31616;&#21333;&#29256;&#26412;&#65292;&#26377;&#21035;&#30340;&#29256;&#26412;&#65292;&#27492;&#29256;&#26412;&#23601;&#34987;&#26367;&#20195;</span>
+\providecommand\url[1]{\texttt{#1}} <span class="co">% &#19968;&#20010;&#31616;&#21333;&#30340; URL &#23454;&#29616;&#65292;&#21482;&#26159;&#24597;&#27809;&#26377;&#36825;&#20010;&#21629;&#20196;&#65288;&#20294;&#26159;&#26009;&#24819;&#24212;&#35813;&#26377;&#65292;&#25152;&#20197;&#21482;&#25552;&#20379;&#19968;&#20010;&#8220;&#31616;&#38475;&#8221;&#30340;&#23454;&#29616;&#65289;</span>
+
+<span class="co">% &#25110;&#32773;&#20004;&#32773;&#32452;&#21512;&#20986;&#29616;</span>
+\providecommand \renewcommand <span class="co">% &#19981;&#31649;&#20043;&#21069;&#26159;&#21542;&#26377;&#23450;&#20041;&#65292;&#37117;&#23450;&#20041;&#19968;&#20010;&#26032; command</span></code></pre></div>
+<p>A complex example</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\newcommand\Emph[1]{\emph{#1}}
+\newcommand\setEmph[1]{<span class="co">%</span>
+  \renewcommand\setEmph[1]{<span class="co">%</span>
+    #1{##1}}}</code></pre></div>
+<p>TODO&#65306;&#36825;&#37096;&#20998;&#33258;&#24049;&#23454;&#36341;&#19968;&#19979;</p>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex"><span class="co">% command vs. environment</span>
+{\quote ... \endquote}
+\begin{quote}
+  ...
+\end{quote}
+
+\newenvironment{&lt;&#29615;&#22659;&#21517;&gt;}[&lt;&#21442;&#25968;&#20010;&#25968;&gt;][&lt;&#39318;&#21442;&#25968;&#40664;&#35748;&#20540;&gt;]{&#29615;&#22659;&#21069;&#23450;&#20041;}{&lt;&#29615;&#22659;&#21518;&#23450;&#20041;&gt;}
+\renewenvironment{&lt;&#29615;&#22659;&#21517;&gt;}[&lt;&#21442;&#25968;&#20010;&#25968;&gt;][&lt;&#39318;&#21442;&#25968;&#40664;&#35748;&#20540;&gt;]{&#29615;&#22659;&#21069;&#23450;&#20041;}{&lt;&#29615;&#22659;&#21518;&#23450;&#20041;&gt;}
+
+\newenvironment{myabstract}[1][&#25688;&#35201;] <span class="co">%</span>
+  {\small
+    \begin{center}\bfseries #1\end{center} 
+    \begin{quotation}} <span class="co">% &#29615;&#22659;&#21069;&#23450;&#20041;</span>
+  {\end{quotation}} <span class="co">% &#29615;&#22659;&#21518;&#23450;&#20041;&#65288;&#36825;&#37324;&#19981;&#33021;&#20351;&#29992;&#29615;&#22659;&#21442;&#25968;&#65289;</span></code></pre></div>
+<p>&#21016;&#28023;&#27915;&#30340;&#19968;&#27573;&#24635;&#32467;&#65306;</p>
+<blockquote>
+<p>&#23450;&#20041;&#21629;&#20196;&#21644;&#29615;&#22659;&#26159;&#36827;&#34892; LaTeX &#26684;&#24335;&#23450;&#21046;&#12289;&#25171;&#25104;&#20869;&#23481;&#19982;&#26684;&#24335;&#20998;&#31163;&#30446;&#26631;&#30340;&#21033;&#22120;&#12290;&#20351;&#29992;&#33258;&#23450;&#20041;&#30340;&#21629;&#20196;&#21644;&#29615;&#22659;&#25226;&#23383;&#20307;&#12289;&#23383;&#21495;&#12289;&#32553;&#36827;&#12289;&#23545;&#40784;&#12289;&#38388;&#36317;&#31561;&#21508;&#31181;&#29712;&#32454;&#30340;&#20869;&#23481;&#21253;&#35013;&#36215;&#26469;&#65292;&#36171;&#20197;&#19968;&#20010;&#26377;&#24847;&#20041;&#30340;&#21517;&#23383;&#65292;&#21487;&#20197;&#20351;&#25991;&#26723;&#32467;&#26500;&#28165;&#26224;&#12289;&#20195;&#30721;&#25972;&#27905;&#12289;&#26131;&#20110;&#32500;&#25252;&#12290;&#22312;&#20351;&#29992;&#23439;&#23450;&#20041;&#30340;&#21151;&#33021;&#26102;&#65292;&#35201;&#32508;&#21512;&#21033;&#29992;&#21508;&#31181;&#24050;&#26377;&#30340;&#21629;&#20196;&#12289;&#29615;&#22659;&#12289;&#21464;&#37327;&#31561;&#21151;&#33021;&#65292;&#20107;&#23454;&#19978;&#65292;&#21069;&#38754;&#25152;&#20171;&#32461;&#30340;&#38271;&#24230;&#21464;&#37327;&#19982;&#30418;&#23376;&#65292;&#23383;&#20307;&#23383;&#21495;&#31561;&#20869;&#23481;&#65292;&#22823;&#22810;<strong>&#24182;&#19981;&#30452;&#25509;&#20986;&#29616;&#22312;&#27491;&#25991;&#20013;</strong>&#65292;&#32780;&#20027;&#35201;&#29992;&#22312;&#23454;&#29616;&#21508;&#31181;&#32467;&#26500;&#30011;&#24471;&#23439;&#23450;&#20041;&#37324;&#12290;</p>
+</blockquote>
+<h3 id="&#33258;&#21160;&#21270;&#24037;&#20855;">&#33258;&#21160;&#21270;&#24037;&#20855;</h3>
+<div class="sourceCode"><pre class="sourceCode tex"><code class="sourceCode latex">\tableofcontents <span class="co">% &#33267;&#23569;&#32534;&#35793;&#20004;&#27425;&#25165;&#20986;&#29616;&#30446;&#24405;</span>
+\listoffigures
+\listoftables</code></pre></div>
+<div class="figure">
+<img src="006.png" alt="Table-of-Contents" />
+<p class="caption">Table-of-Contents</p>
+</div>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

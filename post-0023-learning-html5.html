@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-04-19" />
+  <title>Learning HTML5</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Learning HTML5</h1>
+<h3 class="date">2014-04-19</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#learning-html5">Learning HTML5</a><ul>
+        <li><a href="#html5-introduction">HTML5 Introduction</a></li>
+        <li><a href="#html5-new-elements">HTML5 New Elements</a></li>
+        <li><a href="#html5-graphics">HTML5 Graphics</a></li>
+        <li><a href="#html5-media">HTML5 Media</a></li>
+        <li><a href="#html5-apis">HTML5 APIs</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="learning-html5">Learning HTML5</h1>
+<h2 id="html5-introduction">HTML5 Introduction</h2>
+<dl>
+<dt>What is HTML5?</dt>
+<dd><ul>
+<li>latest standard for HTML</li>
+<li>designed to replace both HTML 4, XHTML, and the HTML DOM Level 2</li>
+<li>designed to deliver rich content without the need for additional plugins</li>
+<li>cross-platform</li>
+</ul>
+</dd>
+<dt>How Did HTML5 Get Started?</dt>
+<dd><p>cooperation between <code>W3C</code> and <code>WHATWG</code><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+</dd>
+</dl>
+<dl>
+<dt>DOCTYPE declaration</dt>
+<dd><p>only one and it is very simple: <code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></code></p>
+</dd>
+</dl>
+<p>Example</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span>
+<span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;title&gt;</span>Title of the document<span class="kw">&lt;/title&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
+        Content of the document......
+    <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<dl>
+<dt>New Features</dt>
+<dd><ul>
+<li>The <code class="sourceCode html"><span class="kw">&lt;canvas&gt;</span></code> element for 2D drawing</li>
+<li>The <code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code> and <code class="sourceCode html"><span class="kw">&lt;audio&gt;</span></code> elements for media playback</li>
+<li>Support for local storage</li>
+<li>New content-specific elements
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;article&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;footer&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;header&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;nav&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;section&gt;</span></code></li>
+</ul></li>
+<li>New form controls, like <code class="sourceCode html">calendar</code>, <code class="sourceCode html">date</code>, <code class="sourceCode html">time</code>, <code class="sourceCode html">email</code>, <code class="sourceCode html">url</code>, <code class="sourceCode html">search</code></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html5-new-elements">HTML5 New Elements</h2>
+<dl>
+<dt>Why new elements?</dt>
+<dd><ul>
+<li>Today, several elements in HTML 4.01 are <strong>obsolete</strong>, never used, or not used the way they were intended. All those elements are <strong>removed or re-written</strong> in HTML5.</li>
+<li>new elements for <strong>drawing graphics</strong>, <strong>displaying media content</strong>, for better <strong>page structure</strong> and better <strong>form handling</strong>, and several <strong>new APIs for drag and drop</strong>, for finding your geological location, for <strong>storing local data</strong>, <strong>and more</strong>.</li>
+</ul>
+</dd>
+</dl>
+<p>The New <code class="sourceCode html"><span class="kw">&lt;canvas&gt;</span></code> Element</p>
+<p>New Media Elements</p>
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;audio&gt;</span></code> : Defines sound or music content</li>
+<li><code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code>: Defines video or movie content</li>
+<li><code class="sourceCode html"><span class="kw">&lt;source&gt;</span></code>: Defines sources for <code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code> and <code class="sourceCode html"><span class="kw">&lt;audio&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;track&gt;</span></code>: Defines tracks for <code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code> and <code class="sourceCode html"><span class="kw">&lt;audio&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;embed&gt;</span></code>: Defines containers for external applications (like plug-ins)</li>
+</ul>
+<p>New Form Elements</p>
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;datalist&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;keygen&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;output&gt;</span></code></li>
+</ul>
+<p>New Semantic/Structural Elements</p>
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;header&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;hgroup&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;nav&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;section&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;main&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;article&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;aside&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;footer&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;details&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;summary&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;figure&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;figcaption&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;mark&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;time&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;bdi&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;wbr&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;dialog&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;command&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;meter&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;progress&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;ruby&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;rt&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;rp&gt;</span></code></li>
+</ul>
+<p>Removed Elements</p>
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;acronym&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;applet&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;basefont&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;big&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;center&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;dir&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;font&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;frame&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;frameset&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;noframes&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;strike&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;tt&gt;</span></code></li>
+</ul>
+<p>HTML5 Semantic Elements</p>
+<dl>
+<dt>Semantic Elements</dt>
+<dd><p>A semantic element <strong>clearly describes its meaning to both the browser and the developer</strong></p>
+<ul>
+<li>non-semantic elements like <code class="sourceCode html"><span class="kw">&lt;div&gt;</span></code> and <code class="sourceCode html"><span class="kw">&lt;span&gt;</span></code> tells nothing about its content.</li>
+<li>semantic elements: <code class="sourceCode html"><span class="kw">&lt;form&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;table&gt;</span></code>, and <code class="sourceCode html"><span class="kw">&lt;img&gt;</span></code>, clearly defines its content.</li>
+</ul>
+</dd>
+</dl>
+<p>New Semantic Elements in HTML5</p>
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;header&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;nav&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;section&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;article&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;aside&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;figure&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;figcaption&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;footer&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;details&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;summary&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;mark&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;time&gt;</span></code></li>
+</ul>
+<p>HTML5 Forms</p>
+<p>HTML5 <code class="sourceCode html"><span class="kw">&lt;input&gt;</span></code> Types</p>
+<ul>
+<li><code>color</code>: <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;color&quot;</span><span class="ot"> name=</span><span class="st">&quot;favcolor&quot;</span><span class="kw">&gt;</span></code></li>
+<li><code>date</code>, <code>datetime</code>, <code>datetime-local</code>: <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;datetime-local&quot;</span><span class="ot"> name=</span><span class="st">&quot;name&quot;</span><span class="kw">&gt;</span></code></li>
+<li><code>number</code>: <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;number&quot;</span><span class="ot"> name=</span><span class="st">&quot;quantity&quot;</span><span class="ot"> min=</span><span class="st">&quot;1&quot;</span><span class="ot"> max=</span><span class="st">&quot;5&quot;</span><span class="kw">&gt;</span></code></li>
+<li><code>range</code>(slider): <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;range&quot;</span><span class="ot"> name=</span><span class="st">&quot;points&quot;</span><span class="ot"> min=</span><span class="st">&quot;1&quot;</span><span class="ot"> max=</span><span class="st">&quot;10&quot;</span><span class="kw">&gt;</span></code></li>
+<li><code>search</code>, <code>tel</code>(telephone num), <code>time</code>, <code>url</code>, <code>week</code>, <code>month</code></li>
+</ul>
+<p>HTML5 Form Elements</p>
+<dl>
+<dt><code class="sourceCode html"><span class="kw">&lt;datalist&gt;</span></code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> list=</span><span class="st">&quot;browsers&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;datalist</span><span class="ot"> id=</span><span class="st">&quot;browsers&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;Internet Explorer&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;Firefox&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;Chrome&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;Opera&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;Safari&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/datalist&gt;</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode html"><span class="kw">&lt;keygen&gt;</span></code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;demo_keygen.asp&quot;</span><span class="ot"> method=</span><span class="st">&quot;get&quot;</span><span class="kw">&gt;</span>
+    Username: <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;usr_name&quot;</span><span class="kw">&gt;</span>
+    Encryption: <span class="kw">&lt;keygen</span><span class="ot"> name=</span><span class="st">&quot;security&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode html"><span class="kw">&lt;output&gt;</span></code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;form</span><span class="ot"> oninput=</span><span class="st">&quot;x.value=parseInt(a.value)+parseInt(b.value)&quot;</span><span class="kw">&gt;</span>0
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;range&quot;</span><span class="ot">  id=</span><span class="st">&quot;a&quot;</span><span class="ot"> value=</span><span class="st">&quot;50&quot;</span><span class="kw">&gt;</span>100 +
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;number&quot;</span><span class="ot"> id=</span><span class="st">&quot;b&quot;</span><span class="ot"> value=</span><span class="st">&quot;50&quot;</span><span class="kw">&gt;</span>=
+    <span class="kw">&lt;output</span><span class="ot"> name=</span><span class="st">&quot;x&quot;</span><span class="ot"> for=</span><span class="st">&quot;a b&quot;</span><span class="kw">&gt;&lt;/output&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div>
+<form oninput="x.value=parseInt(a.value)+parseInt(b.value)">
+0 <input type="range"  id="a" value="50">100 + <input type="number" id="b" value="50">=
+<output name="x" for="a b">
+</output>
+</form>
+</dd>
+<dt>HTML5 Form Attributes</dt>
+<dd><ul>
+<li>New attributes for <code class="sourceCode html"><span class="kw">&lt;form&gt;</span></code>: <code>autocomplete</code>, <code>novalidate</code></li>
+<li>New attributes for <code class="sourceCode html"><span class="kw">&lt;input&gt;</span></code>: <code class="sourceCode css">autocomplete</code> <code class="sourceCode css">autofocus</code> <code class="sourceCode css">form</code> <code class="sourceCode css">formaction</code> <code class="sourceCode css">formenctype</code> <code class="sourceCode css">formmethod</code> <code class="sourceCode css">formnovalidate</code> <code class="sourceCode css">formtarget</code> <code class="sourceCode css">height</code> <code class="sourceCode css">width</code> <code class="sourceCode css">list</code> <code class="sourceCode css">min</code> <code class="sourceCode css">max</code> <code class="sourceCode css">multiple</code> <code class="sourceCode css">pattern (regexp)</code> <code class="sourceCode css">placeholder</code></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;input&gt;</span></code> formmethod Attribute</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;demo_form.asp&quot;</span><span class="ot"> method=</span><span class="st">&quot;get&quot;</span><span class="kw">&gt;</span>
+    First name: <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;fname&quot;</span><span class="kw">&gt;&lt;br&gt;</span>
+    Last name:  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;lname&quot;</span><span class="kw">&gt;&lt;br&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> value=</span><span class="st">&quot;Submit&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> formmethod=</span><span class="st">&quot;post&quot;</span><span class="ot"> formaction=</span><span class="st">&quot;demo_post.asp&quot;</span>
+<span class="ot">    value=</span><span class="st">&quot;Submit using POST&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html5-graphics">HTML5 Graphics</h2>
+<dl>
+<dt><code class="sourceCode html"><span class="kw">&lt;Canvas&gt;</span></code></dt>
+<dd><p>only a container for graphics, you must use a script to actually draw the graphics</p>
+</dd>
+<dt>HTML5 Inline SVG</dt>
+<dd><p>What is SVG?</p>
+<ul>
+<li>SVG stands for <strong>Scalable Vector Graphics</strong></li>
+<li>SVG is used to <strong>define vector-based graphics</strong> for the Web</li>
+<li>SVG <strong>defines the graphics in XML format</strong></li>
+<li>SVG graphics do <strong>NOT lose any quality</strong> when zoomed or resized</li>
+<li>Every element and every attribute in SVG files can be <strong>animated</strong></li>
+<li>SVG is a <strong>W3C recommendation</strong></li>
+</ul>
+<p>SVG Advantages</p>
+<ul>
+<li>SVG images can be created and edited with any text editor</li>
+<li>SVG images can be searched, indexed, scripted, and compressed</li>
+<li>SVG images are scalable</li>
+<li>SVG images can be printed with high quality at any resolution</li>
+<li>SVG images are zoomable (without degradation)</li>
+</ul>
+<p>Differences Between SVG and Canvas</p>
+<ul>
+<li>SVG is a language for describing 2D graphics in XML.</li>
+<li>Canvas draws 2D graphics, on the fly (with a JavaScript).</li>
+<li>SVG is XML based, which means that every element is available within the SVG DOM. You can attach JavaScript event handlers for an element.</li>
+</ul>
+<p>Comparison of Canvas and SVG</p>
+</dd>
+</dl>
+<h2 id="html5-media">HTML5 Media</h2>
+<dl>
+<dt>HTML5 Video</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;video</span><span class="ot"> width=</span><span class="st">&quot;512&quot;</span><span class="ot"> height=</span><span class="st">&quot;288&quot;</span><span class="ot"> controls</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">&quot;game-of-throne.mp4&quot;</span><span class="ot"> type=</span><span class="st">&quot;video/mp4&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">&quot;fallback.ogg&quot;</span><span class="ot"> type=</span><span class="st">&quot;video/ogg&quot;</span><span class="kw">&gt;</span>
+    Your browser does not support the video tag.
+<span class="kw">&lt;/video&gt;</span></code></pre></div>
+<!--
+<source src="http://whudoc.qiniudn.com/game-of-throne.mp4" type="video/mp4">
+-->
+<video width="512" height="288" controls>
+<source src="game-of-throne.mov" type="video/mov">
+<p>Your browser does not support the video tag. </video></p>
+<p>Video Formats and Browser Support: MP4, WebM, and Ogg</p>
+<ul>
+<li>MIME Types for Video Formats
+<ul>
+<li>MP4: <code>video/mp4</code></li>
+<li>WebM: <code>video/webm</code></li>
+<li>Ogg: <code>video/ogg</code></li>
+</ul></li>
+<li>HTML5 <code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code>, DOM Methods and Properties
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;video&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;source&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;track&gt;</span></code>: define text tracks in media player</li>
+</ul></li>
+</ul>
+</dd>
+<dt>HTML5 Audio</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;audio</span><span class="ot"> controls</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">&quot;horse.ogg&quot;</span><span class="ot"> type=</span><span class="st">&quot;audio/ogg&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">&quot;horse.mp3&quot;</span><span class="ot"> type=</span><span class="st">&quot;audio/mpeg&quot;</span><span class="kw">&gt;</span>
+    Your browser does not support the audio element.
+<span class="kw">&lt;/audio&gt;</span></code></pre></div>
+<audio controls>
+<source src="crab.wav" type="audio/ogg">
+</audio>
+<p>Audio Formats and Browser Support: MP3, Wav, and Ogg</p>
+<ul>
+<li>MIME Types for Audio Formats
+<ul>
+<li>MP3: <code>audio/mpeg</code></li>
+<li>Ogg: <code>audio/ogg</code></li>
+<li>Wav: <code>audio/wav</code></li>
+</ul></li>
+<li>HTML5 Audio Tags: <code class="sourceCode html"><span class="kw">&lt;audio&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;source&gt;</span></code></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html5-apis">HTML5 APIs</h2>
+<dl>
+<dt>HTML5 Geolocation</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script&gt;</span>
+<span class="kw">var</span> x <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;demo&quot;</span>)<span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">getLocation</span>( ) <span class="op">{</span>
+    <span class="cf">if</span> ( <span class="va">navigator</span>.<span class="at">geolocation</span> ) <span class="op">{</span>
+        <span class="va">navigator</span>.<span class="va">geolocation</span>.<span class="at">getCurrentPosition</span>( showPosition )<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+        <span class="va">x</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;Geolocation is not supported by this browser.&quot;</span><span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">showPosition</span>(position) <span class="op">{</span>
+    <span class="va">x</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;Latitude: &quot;</span>  <span class="op">+</span> <span class="va">position</span>.<span class="va">coords</span>.<span class="at">latitude</span> <span class="op">+</span>
+              <span class="st">&quot;&lt;br&gt;Longitude: &quot;</span> <span class="op">+</span> <span class="va">position</span>.<span class="va">coords</span>.<span class="at">longitude</span><span class="op">;</span>
+<span class="op">}</span>
+<span class="op">&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
+<ul>
+<li>Handling Errors and Rejections</li>
+<li><p>Displaying the Result in a Map</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">showPosition</span>(position) <span class="op">{</span>
+    <span class="kw">var</span> latlon <span class="op">=</span> <span class="va">position</span>.<span class="va">coords</span>.<span class="at">latitude</span> <span class="op">+</span> <span class="st">&quot;,&quot;</span>
+               <span class="op">+</span> <span class="va">position</span>.<span class="va">coords</span>.<span class="at">longitude</span><span class="op">;</span>
+    <span class="kw">var</span> img_url <span class="op">=</span> <span class="st">&quot;http://maps.googleapis.com/maps/api/staticmap?center=&quot;</span>
+                <span class="op">+</span> latlon <span class="op">+</span> <span class="st">&quot;&amp;zoom=14&amp;size=400x300&amp;sensor=false&quot;</span><span class="op">;</span>
+    <span class="va">document</span>.<span class="at">getElementById</span>( <span class="st">&quot;mapholder&quot;</span> ).<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;&lt;img src=&#39;&quot;</span>
+                                                     <span class="op">+</span> img_url <span class="op">+</span> <span class="st">&quot;&#39;&gt;&quot;</span><span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<ul>
+<li><code class="sourceCode javascript"><span class="at">getCurrentPosition</span>()</code></li>
+<li><code class="sourceCode javascript"><span class="at">watchPosition</span>()</code></li>
+</ul></li>
+</ul>
+</dd>
+<dt>HTML5 Drag and Drop</dt>
+<dd><p>Make an Element Draggable(default): <code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> draggable=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span></code>, see <a href="http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_draganddrop">example</a></p>
+</dd>
+<dt>HTML5 Web Storage</dt>
+<dd><p>With HTML5, web pages can store data locally within the user&#8217;s browser. Earlier, this was done with <code>cookies</code>. However, Web Storage is <strong>more secure and faster</strong>. The data is not included with every server request, but used ONLY when asked for. It is also possible to store large amounts of data, without affecting the website&#8217;s performance.</p>
+<ul>
+<li>The data is stored in <code>name/value</code> pairs, and a web page can only access data stored by itself.</li>
+<li>Unlike cookies, the storage limit is far larger (at least 5MB) and information is never transferred to the server.</li>
+<li>HTML5 Web Storage Objects
+<ul>
+<li>window.localStorage - stores data with no expiration date</li>
+<li>code.sessionStorage - stores data for one session (data is lost when the tab is closed)</li>
+<li><p>The localStorage Object</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// Store</span>
+<span class="va">localStorage</span>.<span class="at">setItem</span>( <span class="st">&quot;lastname&quot;</span><span class="op">,</span> <span class="st">&quot;Smith&quot;</span> )<span class="op">;</span>
+<span class="co">// Retrieve</span>
+<span class="va">document</span>.<span class="at">getElementById</span>( <span class="st">&quot;result&quot;</span> ).<span class="at">innerHTML</span> <span class="op">=</span>
+    <span class="va">localStorage</span>.<span class="at">getItem</span>( <span class="st">&quot;lastname&quot;</span> )<span class="op">;</span>
+<span class="co">// Store</span>
+<span class="va">localStorage</span>.<span class="at">lastname</span> <span class="op">=</span> <span class="st">&quot;Smith&quot;</span><span class="op">;</span>
+<span class="co">// Retrieve</span>
+<span class="va">document</span>.<span class="at">getElementById</span>( <span class="st">&quot;result&quot;</span> ).<span class="at">innerHTML</span> <span class="op">=</span>
+    <span class="va">localStorage</span>.<span class="at">lastname</span><span class="op">;</span>
+<span class="va">localStorage</span>.<span class="at">removeItem</span>( <span class="st">&quot;lastname&quot;</span> )<span class="op">;</span></code></pre></div></li>
+<li><p>The sessionStorage Object</p></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<p><a href="http://www.w3schools.com/html/html5_app_cache.asp">HTML5 Application Cache</a></p>
+<dl>
+<dt>What is Application Cache?</dt>
+<dd><p>HTML5 introduces <code>application cache</code>, which means that a web application is cached, and accessible without an internet connection.</p>
+<p>3 advantages: <code>Offline browsing</code>, <code>Speed</code>, <code>Reduced server load</code></p>
+<p>HTML5 Cache Manifest Example</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML<span class="dt">&gt;</span>
+<span class="kw">&lt;html</span><span class="ot"> manifest=</span><span class="st">&quot;demo.appcache&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;body&gt;</span>
+The content of the document......
+<span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<dl>
+<dt>The Manifest File</dt>
+<dd>a simple text file, which tells the browser what to cache (and what to never cache)
+</dd>
+<dd>has three sessions: <code>CACHE MANIFEST</code> + <code>NETWORK</code> + <code>FALLBACK</code>
+</dd>
+</dl>
+<p>Updating the Cache</p>
+<dl>
+<dt>HTML5 Web Workers</dt>
+<dd>When executing scripts in an HTML page, the page becomes unresponsive until the script is finished.
+</dd>
+<dd>A web worker is a JavaScript that runs in the background, independently of other scripts, without affecting the performance of the page. You can continue to do whatever you want: clicking, selecting things, etc., while the web worker runs in the background.
+</dd>
+<dt><a href="http://www.w3schools.com/html/html5_serversentevents.asp">HTML5 Server-Sent Events</a></dt>
+<dd>Server-Sent Events - One Way Messaging
+</dd>
+<dd>A server-sent event is when a web page automatically gets updates from a server.
+</dd>
+<dd>This was also possible before, but the web page would have to ask if any updates were available. With server-sent events, the updates come automatically.
+</dd>
+</dl>
+</dd>
+</dl>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://www.w3schools.com/html/default.asp">W3C School</a></li>
+<li><a href="http://www.w3schools.com/html/html5_intro.asp">HTML5 Introduction</a></li>
+<li><a href="http://www.w3schools.com/html/html5_new_elements.asp">HTML5 New Elements</a></li>
+<li><a href="http://www.w3schools.com/html/html5_semantic_elements.asp">HTML5 Semantic Elements</a></li>
+<li><a href="http://www.w3schools.com/html/html5_form_input_types.asp">HTML5 <code class="sourceCode html"><span class="kw">&lt;input&gt;</span></code> Types</a></li>
+<li><a href="http://www.w3schools.com/html/html5_form_elements.asp">HTML5 Form Elements</a></li>
+<li><a href="http://www.w3schools.com/html/html5_canvas.asp">HTML5 <code class="sourceCode html"><span class="kw">&lt;Canvas&gt;</span></code></a></li>
+<li><a href="http://www.w3schools.com/tags/ref_canvas.asp">Canvas Reference</a></li>
+<li><a href="http://www.w3schools.com/html/html5_svg.asp">HTML5 Inline SVG</a></li>
+</ol>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Web Hypertext Application Technology Working Group (WHATWG)<a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#html5">html5</a></li>
+<li><a class="tzx-tag" href="tags.html/#docs">docs</a></li>
+<li><a class="tzx-tag" href="tags.html/#readings">readings</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0023-learning-html5.md" title="444 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0023-learning-html5.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 444,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

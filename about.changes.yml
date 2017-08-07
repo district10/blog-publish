@@ -1,0 +1,53 @@
+---
+tzx-changes:
+  - hash: 1bd02c3cf07bc4238cbfbd850f76453dfffdfd7e
+    datetime: 1492694888
+    insertions: 4
+    deletions: 0
+  - hash: 8b3aa6e124806cbe8f73d3ec40c867ee50e7ff9b
+    datetime: 1491145416
+    insertions: 13
+    deletions: 2
+  - hash: 666a203d1ed48c1124badf95a1c6ff21532038ee
+    datetime: 1483501152
+    insertions: 0
+    deletions: 4
+  - hash: 61077a6fadb01039c2fca3798052ba3525c7d279
+    datetime: 1481993176
+    insertions: 2
+    deletions: 2
+  - hash: 7c4a147bcd8e20a5b6a5697133433f20186a02d4
+    datetime: 1481557459
+    insertions: 6
+    deletions: 0
+  - hash: ccdcca6ef1e92c2699ffb244b7fa7b25fcf7ed78
+    datetime: 1481259854
+    insertions: 4
+    deletions: 3
+  - hash: 44ea5fda790fd0d35f4d39db2df5f0524671e4ea
+    datetime: 1480673716
+    insertions: 25
+    deletions: 30
+  - hash: c95f698b2cc077f38981f1c36a03ac934703d302
+    datetime: 1480339044
+    insertions: 2
+    deletions: 1
+  - hash: a3bb7bb8e1b1ead95f98cd57ddcf0f78d620b6a6
+    datetime: 1480326026
+    insertions: 13
+    deletions: 0
+  - hash: 636f56822f2517ef8ee75037248355d265ff62ec
+    datetime: 1480303020
+    insertions: 1
+    deletions: 0
+  - hash: 1638ca77726ae4f187c3e9d604271c132661ba43
+    datetime: 1480262736
+    insertions: 5
+    deletions: 5
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 86
+    deletions: 0
+
+tzx-filename: _pages/about.md
+...

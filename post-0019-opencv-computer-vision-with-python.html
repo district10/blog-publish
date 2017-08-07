@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-02-23" />
+  <meta name="keywords" content="computer vision, python, readings" />
+  <title>OpenCV Computer Vision with Python</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">OpenCV Computer Vision with Python</h1>
+<h3 class="date">2014-02-23</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#opencv-computer-vision-with-python">OpenCV Computer Vision with Python</a><ul>
+        <li><a href="#setting-up-opencv">Setting up OpenCV</a></li>
+        <li><a href="#handing-files-cameras-and-guis">Handing Files, Cameras, and GUIs</a></li>
+        <li><a href="#filtering-images">Filtering Images</a></li>
+        <li><a href="#tracking-faces-with-haar-cascades">Tracking Faces with Haar Cascades</a></li>
+        <li><a href="#detecting-foregroundbackground-regions-and-depth">Detecting Foreground/Background Regions and Depth</a></li>
+        <li><a href="#appendix-a-integrating-with-pygame">Appendix A: Integrating with Pygame</a></li>
+        <li><a href="#appendix-b-generating-haar-cascades-for-custom-targets">Appendix B: Generating Haar Cascades for Custom Targets</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="opencv-computer-vision-with-python">OpenCV Computer Vision with Python</h1>
+<p>&#36825;&#26159;&#19968;&#31687;&#35835;&#20070;&#31508;&#35760;&#12290;</p>
+<h2 id="setting-up-opencv">Setting up OpenCV</h2>
+<p>Related Libs</p>
+<p><code>NumPy</code>, <code>SciPy</code>, <code>OpenNI</code> (optional), <code>SenorKinect</code> (optional)</p>
+<p>Different OS</p>
+<ul>
+<li>Windows XP, Windows Vista, Windows 7, or Windows 8</li>
+<li>Mas OS X Snow, Leopard, Lion, Montain Lion</li>
+<li>Ubuntu 12.04</li>
+<li>Other Unix-like Systems</li>
+</ul>
+<p>Sample codes</p>
+<ul>
+<li>Download from <a href="http://www.packtpub.com/opencv-computer-vision-with-python/book">Packtpub Publishing</a></li>
+<li>Or my archive: <a href="http://gnat-tang-shared-image.qiniudn.com/blog-OpenCV_Computer_Vision_with_Python.7z">OpenCV_Computer_Vision_with_Python.7z</a></li>
+<li>Also, the author-maintained homepage: <a href="http://nummist.com/opencv/">Joseph Howse&#8217;s Page</a></li>
+</ul>
+<h2 id="handing-files-cameras-and-guis">Handing Files, Cameras, and GUIs</h2>
+<p><strong>Basic I/O Scripts</strong></p>
+<p>Reading/Writing an Image file</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> cv2
+image <span class="op">=</span> cv2.imread(<span class="st">&#39;/data/pic/lena.jpg&#39;</span>)
+image_gray <span class="op">=</span> cv2.imread(<span class="st">&#39;/data/pic/lena.jpg&#39;</span>, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+cv2.imwrite(<span class="st">&#39;Lena.png&#39;</span>, image)
+cv2.imwrite(<span class="st">&#39;Lena_gray.png&#39;</span>, image_gray)</code></pre></div>
+<p>Converting between an image and raw bytes</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> cv2, numpy, os
+randomByteArray <span class="op">=</span> <span class="bu">bytearray</span>(os.urandom(<span class="dv">120000</span>))
+flatNumpyArray <span class="op">=</span> numpy.array(randomByteArray)
+grayImage <span class="op">=</span> flatNumpyArray.reshape(<span class="dv">300</span>, <span class="dv">400</span>)
+cv2.imwrite(<span class="st">&#39;RandomGray.png&#39;</span>, grayImage)
+bgrImage <span class="op">=</span> flatNumpyArray.reshape(<span class="dv">100</span>, <span class="dv">400</span>, <span class="dv">3</span>)
+cv2.imwrite(<span class="st">&#39;RandomBGR.png&#39;</span>, bgrImage)</code></pre></div>
+<p>Reading/Writing a video file</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> cv2
+videoCapture <span class="op">=</span> cv2.VideoCapture(<span class="st">&#39;/data/ac-demo.avi&#39;</span>)
+fps       <span class="op">=</span> videoCapture.get(cv2.cv.CV_CAP_PROP_FPS)
+size <span class="op">=</span> (<span class="bu">int</span>(videoCapture.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH)),
+        <span class="bu">int</span>(videoCapture.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)))
+videoWriter <span class="op">=</span> cv2.VideoWriter(<span class="st">&#39;MyOutputVideo.avi&#39;</span>,
+                              cv2.cv.CV_FOURCC(<span class="st">&#39;I&#39;</span>, <span class="st">&#39;4&#39;</span>, <span class="st">&#39;2&#39;</span>, <span class="st">&#39;0&#39;</span>),
+                              fps,
+                              size)
+success, frame <span class="op">=</span> videoCapture.read()
+<span class="cf">while</span> success: <span class="co"># Loop until there are no more frames</span>
+    videoWriter.write(frame)
+    success, frame <span class="op">=</span> videoCapture.read()
+
+<span class="co"># &#36825;&#27573;&#20195;&#30721;&#25105;&#22833;&#36133;&#20102;&#8230;&#8230;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cv2.cv.CV_FOURCC(<span class="st">&#39;T&#39;</span>,<span class="st">&#39;H&#39;</span>,<span class="st">&#39;E&#39;</span>,<span class="st">&#39;O&#39;</span>): Ogg<span class="op">-</span>Vorbis, <span class="op">*</span>.ogv
+cv2.cv.CV_FOURCC(<span class="st">&#39;F&#39;</span>,<span class="st">&#39;L&#39;</span>,<span class="st">&#39;V&#39;</span>,<span class="st">&#39;1&#39;</span>): Flash video, <span class="op">*</span>.flv
+cv2.cv.CV_FOURCC(<span class="st">&#39;M&#39;</span>,<span class="st">&#39;J&#39;</span>,<span class="st">&#39;P&#39;</span>,<span class="st">&#39;G&#39;</span>): motion<span class="op">-</span>JPEG, <span class="op">*</span>.avi
+cv2.cv.CV_FOURCC(<span class="st">&#39;P&#39;</span>,<span class="st">&#39;I&#39;</span>,<span class="st">&#39;M&#39;</span>,<span class="st">&#39;1&#39;</span>): MPEG<span class="dv">-1</span>, <span class="op">*</span>.avi
+cv2.cv.CV_FOURCC(<span class="st">&#39;I&#39;</span>,<span class="st">&#39;4&#39;</span>,<span class="st">&#39;2&#39;</span>,<span class="st">&#39;0&#39;</span>): uncompressed YUV, <span class="op">*</span>.avi</code></pre></div>
+<p>Capturing camera frames</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> cv2
+cameraCapture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)
+fps <span class="op">=</span> <span class="dv">30</span> <span class="co"># an assuption</span>
+size <span class="op">=</span> (<span class="bu">int</span>(cameraCapture.get(cv2.cv.CV_CAP_PROP_FRAME_WIDTH)),
+        <span class="bu">int</span>(cameraCapture.get(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT)))
+<span class="bu">print</span> <span class="st">&quot;size: &quot;</span>, size
+videoWriter <span class="op">=</span> cv2.VideoWriter(<span class="st">&#39;MyOutputVid.avi&#39;</span>,
+                               cv2.cv.CV_FOURCC(<span class="st">&#39;M&#39;</span>,<span class="st">&#39;J&#39;</span>,<span class="st">&#39;P&#39;</span>,<span class="st">&#39;G&#39;</span>),fps, size)
+success, frame <span class="op">=</span> cameraCapture.read()
+numFramesRemaining <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> fps <span class="op">-</span> <span class="dv">1</span>
+<span class="cf">while</span> success <span class="op">and</span> numFramesRemaining <span class="op">&gt;</span> <span class="dv">0</span>:
+    videoWriter.write(frame)
+    success, frame <span class="op">=</span> cameraCapture.read()
+    numFramesRemaining <span class="op">-=</span> <span class="dv">1</span>
+    <span class="bu">print</span> <span class="bu">str</span>(numFramesRemaining)
+<span class="co"># &#20877;&#27425;&#22833;&#36133;</span></code></pre></div>
+<p>Displaying camera frames in a window</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> cv2
+clicked <span class="op">=</span> <span class="va">False</span>
+<span class="kw">def</span> onMouse(event, x, y, flags, param):
+    <span class="kw">global</span> clicked
+    <span class="cf">if</span> event <span class="op">==</span> cv2.cv.CV_EVENT_LBUTTONUP:
+        clicked <span class="op">=</span> <span class="va">True</span>
+cameraCapture <span class="op">=</span> cv2.VideoCapture(<span class="dv">0</span>)
+cv2.namedWindow(<span class="st">&#39;MyWindow&#39;</span>)
+cv2.setMouseCallback(<span class="st">&#39;MyWindow&#39;</span>, onMouse)
+<span class="bu">print</span> <span class="st">&#39;Showing camera feed. Click window or press any key to stop.&#39;</span>
+success, frame <span class="op">=</span> cameraCapture.read()
+<span class="cf">while</span> success <span class="op">and</span> cv2.waitKey(<span class="dv">1</span>) <span class="op">==</span> <span class="op">-</span><span class="dv">1</span> <span class="op">and</span> <span class="op">not</span> clicked:
+    cv2.imshow(<span class="st">&#39;MyWindow&#39;</span>, frame)
+    success, frame <span class="op">=</span> cameraCapture.read()
+cv2.destroyWindow(<span class="st">&#39;MyWindow&#39;</span>)
+<span class="co"># &#32456;&#20110;&#20986;&#26469;&#19968;&#27425;&#8230;&#8230;</span></code></pre></div>
+<p><code>cv2.cv.CV_EVENT_</code></p>
+<pre class="plain"><code>              MOUSEMOVE
+LBUTTONUP     MBUTTONUP     RBUTTONUP
+LBUTTONDOWN   MBUTTONDOWN   RBUTTONDOWN
+LBUTTONDBCLK  MBUTTONDBCLK  RBUTTONDBCLK</code></pre>
+<p><strong>Project concept</strong></p>
+<p>We will develop an interactive application that <code>performs face tracking and image</code>, and manipulations on camera input in real time.</p>
+<p><code>extensible</code> and <code>reusable</code></p>
+<p><strong>An object-oriented design</strong></p>
+<p>Python applications can be written in a purely <strong>procedural</strong> style. This is often done with small applications like our basic I/O scripts, discussed previously. However, from now on, we will use an object-oriented style because it <strong>promotes modularity and extensibility.</strong></p>
+<ul>
+<li>Abstracting a video stream &#8211; managers.CaptureManager, <a href="http://gnat-tang-shared-image.qiniudn.com/file_managers.py">managers.py</a></li>
+<li>Abstracting a window and keyboard &#8211; managers.WindowManager</li>
+<li>Applying everything &#8211; cameo.Cameo, <a href="http://gnat-tang-shared-image.qiniudn.com/file_cameo.py">cameo.py</a></li>
+</ul>
+<p>Python Knowledge</p>
+<ul>
+<li><code class="sourceCode python"><span class="va">self</span>._attribute1</code>: protected, start with <code>_</code></li>
+<li><code class="sourceCode python"><span class="va">self</span>.__attribute2</code>: private, start with <code>__</code></li>
+</ul>
+<h2 id="filtering-images">Filtering Images</h2>
+<ol style="list-style-type: decimal">
+<li>Creating modules</li>
+</ol>
+<p>reuseable modules: <code>filters.py</code>, <code>utils.py</code></p>
+<p>Channel mixing &#8211; seeing in Technicolor</p>
+<dl>
+<dt>channel mixing</dt>
+<dd><p><strong>remapping</strong> colors to <strong>simulate</strong> some other, smaller color space inside RGB or BGR</p>
+</dd>
+<dt>Color Spaces</dt>
+<dd><ul>
+<li>RC (red, cyan): <code>red</code> + <code>cyan</code> <span class="math inline">\(\to\)</span> <code>gray</code></li>
+<li>RGV (red, green, value): <code>red</code> + <code>green</code> <span class="math inline">\(\not\to\)</span> <code>gray</code>, so we need <code>value</code></li>
+<li>CMV (cyan, magenta, value): still, <code>cyan</code> + <code>magenta</code> <span class="math inline">\(\not\to\)</span> <code>gray</code></li>
+</ul>
+</dd>
+</dl>
+<p>Simulating RC color space</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Pseudocode:</span>
+<span class="co">#     dst.b = dst.g = 0.5 * (src.b + src.g)</span>
+<span class="co">#     dst.r = src.r</span>
+<span class="co"># Python OpenCV Code:</span>
+b, g, r <span class="op">=</span> cv2.split(src)
+cv2.addWeighted(b, <span class="fl">0.5</span>, g, <span class="fl">0.5</span>, <span class="dv">0</span>, b)
+cv2.merge((b, b, r), dst)</code></pre></div>
+<p>Simulating <code>RGV</code> color space</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Pseudocode:</span>
+<span class="co">#     dst.b = min(src.b, src.g, src.r),</span>
+<span class="co">#     dst.g = src.g,</span>
+<span class="co">#     dst.r = src.r</span>
+<span class="co"># Python code:</span>
+b, g, r <span class="op">=</span> cv2.split(src)
+cv2.<span class="bu">min</span>(b, g, b)
+cv2.<span class="bu">min</span>(b, r, b)
+cv2.merge((b, g, r), dst)</code></pre></div>
+<p>Simulating <code>CMV</code> color space</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Pseudocode:</span>
+<span class="co">#     dst.b = max(src.b, src.g, src.r),</span>
+<span class="co">#     dst.g = src.g,</span>
+<span class="co">#     dst.r = src.r</span></code></pre></div>
+<dl>
+<dt>Curves &#8211; bending color space</dt>
+<dd><p>Curves are another technique for remapping colors.</p>
+<pre><code> dst.r = funcR(src.r)
+ dst.g = funcG(src.g)
+ dst.b = funcB(src.b)</code></pre>
+</dd>
+</dl>
+<p>cubic spline interpolation, or</p>
+<ul>
+<li>linear</li>
+<li>nearest</li>
+<li>zero</li>
+<li>slinear(spherical)</li>
+<li>quadratic</li>
+<li>cubic</li>
+</ul>
+<p>Formulating a curve</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> createCurveFunc(points):
+   <span class="co">&quot;&quot;&quot;Return a function derived from control points.&quot;&quot;&quot;</span>
+   <span class="cf">if</span> points <span class="op">is</span> <span class="va">None</span>:
+       <span class="cf">return</span> <span class="va">None</span>
+   numPoints <span class="op">=</span> <span class="bu">len</span>(points)
+   <span class="cf">if</span> numPoints <span class="op">&lt;</span> <span class="dv">2</span>:
+       <span class="cf">return</span> <span class="va">None</span>
+   xs, ys <span class="op">=</span> <span class="bu">zip</span>(<span class="op">*</span>points)
+   <span class="cf">if</span> numPoints <span class="op">&lt;</span> <span class="dv">4</span>:
+       kind <span class="op">=</span> <span class="st">&#39;linear&#39;</span>
+       <span class="co"># &#39;quadratic&#39; is not implemented.</span>
+   <span class="cf">else</span>:
+       kind <span class="op">=</span> <span class="st">&#39;cubic&#39;</span>
+   <span class="cf">return</span> scipy.interpolate.interp1d(xs, ys, kind, bounds_error <span class="op">=</span> <span class="va">False</span>)</code></pre></div>
+<p><strong>Caching</strong> and applying a curve</p>
+<p>in <code>utils.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># def createLookupArray(func, length = 256)</span>
+<span class="co">#     min(max(0, func_i), length - 1) # ensure fun_i &#187; [0, length - 1]</span>
+<span class="co"># def applyLookupArray(lookupArray, src, dst)</span>
+<span class="co">#     dst[:] = lookupArray[src]</span>
+<span class="kw">def</span> createCompositeFunc(func0, func1):
+        <span class="co">&quot;&quot;&quot;Return a composite of two functions.&quot;&quot;&quot;</span>
+        <span class="cf">if</span> func0 <span class="op">is</span> <span class="va">None</span>:
+            <span class="cf">return</span> func1
+        <span class="cf">if</span> func1 <span class="op">is</span> <span class="va">None</span>:
+            <span class="cf">return</span> func0
+        <span class="cf">return</span> <span class="kw">lambda</span> x: func0(func1(x))
+<span class="co"># Misc:</span>
+flatView <span class="op">=</span> array.view()
+flatView.shape <span class="op">=</span> array.size
+<span class="co"># numpy.view only owns a reference to the data, not a copy</span></code></pre></div>
+<p>Designing object-oriented curve filters</p>
+<p><a href="http://www.prime-junta.net/pont/How_to/100_Curves_and_Films/_Curves_and_films.html"><strong>Emulating photo films</strong></a></p>
+<ul>
+<li>Emulating <strong>Kodak Portra</strong> (&#33014;&#21367;), a broad highlight range: warm(amber) color, cooler(blue) shadow</li>
+<li>Emulating <strong>Fuji Provia</strong> (&#33014;&#21367;), strong contrast and is slightly cool throughout most tones</li>
+<li>Emulating <strong>Fuji Velvia</strong>, deep shadows and vivid colors</li>
+<li>Emulating <strong>cross-processing</strong></li>
+</ul>
+<p>Highlighting edges</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cv2.medianBlur(src, blurKsize)
+cv2.Laplacian(graySrc, cv2.cv.CV_8U, graySrc, ksize <span class="op">=</span> edgeKsize)
+normalizedInverseAlpha <span class="op">=</span> (<span class="fl">1.0</span> <span class="op">/</span> <span class="dv">255</span>) <span class="op">*</span> (<span class="dv">255</span> <span class="op">-</span> graySrc)
+channels <span class="op">=</span> cv2.split(src)
+<span class="cf">for</span> channel <span class="op">in</span> channels:
+    channel[:] <span class="op">=</span> channel <span class="op">*</span> normalizedInverseAlpha
+cv2.merge(channels, dst)</code></pre></div>
+<p>Custom kernels &#8211; getting convoluted</p>
+<dl>
+<dt>kernel</dt>
+<dd><p>convolution matrix, it mixes up or convolutes the pixels in a region.</p>
+<pre><code>  kernel = numpy.array([[-1, -1, -1],
+                        [-1,  9, -1],
+                        [-1, -1, -1]])</code></pre>
+</dd>
+</dl>
+<h2 id="tracking-faces-with-haar-cascades">Tracking Faces with Haar Cascades</h2>
+<p>Conceptualizing Haar cascades</p>
+<p><code>image data</code> <span class="math inline">\(\to\)</span> <code>features</code> (e.g.&#160;Haar-like features) <span class="math inline">\(\to\)</span> <code>cascade</code> (collection of features)</p>
+<dl>
+<dt>cascade</dt>
+<dd><p>Two images that differ only in scale should be capable of yielding similar features, albeit for different window sizes. Thus, it is useful to generate features for multiple window sizes. Such <strong>a collection of features</strong> is called a cascade.</p>
+<p><strong>a Haar cascade is scale-invariant</strong> or, in other words, robust to changes in scale</p>
+</dd>
+</dl>
+<p>Getting Haar cascade data</p>
+<ul>
+<li>in OpenCV example code</li>
+<li>or, my archive: <a href="http://gnat-tang-shared-image.qiniudn.com/file_haarcascades.7z">haarcascades from opencv 2.4.8</a></li>
+</ul>
+<p>Defining a face as a hierarchy of rectangles</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">class</span> Face(<span class="bu">object</span>):
+    <span class="co">&quot;&quot;&quot;Data on facial features: face, eyes, nose, mouth.&quot;&quot;&quot;</span>
+    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):
+        <span class="va">self</span>.faceRect <span class="op">=</span> <span class="va">None</span>
+        <span class="va">self</span>.leftEyeRect <span class="op">=</span> <span class="va">None</span>
+        <span class="va">self</span>.rightEyeRect <span class="op">=</span> <span class="va">None</span>
+        <span class="va">self</span>.noseRect <span class="op">=</span> <span class="va">None</span>
+        <span class="va">self</span>.mouthRect <span class="op">=</span> <span class="va">None</span></code></pre></div>
+<p>Tracing, cutting, and pasting rectangles</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> outlineRect(image, rect, color):
+    <span class="cf">if</span> rect <span class="op">is</span> <span class="va">None</span>:
+        <span class="cf">return</span>
+    x, y, w, h <span class="op">=</span> rect
+    cv2.rectangle(image, (x, y), (x<span class="op">+</span>w, y<span class="op">+</span>h), color)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">cv2.INTER_NEAREST
+cv2.INTER_LINEAR <span class="co"># bilinear interpolation (the default)</span>
+cv2.INTER_AREA
+cv2.INTER_CUBIC <span class="co"># bicubic interpolation over a 4 x 4 pixel neighborhood</span>
+cv2.INTER_LANCZOS4 <span class="co"># This is Lanczos interpolation over an 8 x 8 pixel neighborhood, the highest-cost, highest-quality approach</span></code></pre></div>
+<p><span class="math display">\[L(x) = \begin{cases} \operatorname{sinc}(x)\, \operatorname{sinc}(x/a) &amp; \text{if}\;\; -a &lt; x &lt; a\\ 0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Lanczos-windows.svg/300px-Lanczos-windows.svg.png" alt="Lanczos windows for a = 1, 2, 3." />
+<p class="caption">Lanczos windows for a = 1, 2, 3.</p>
+</div>
+<p>Equivalently,</p>
+<p><span class="math display">\[L(x) = \begin{cases} 1  &amp; \text{if}\;\; x = 0\\ \quad &amp; \\ \displaystyle \frac{a \sin(\pi x) \sin(\pi x / a)}{\pi^2 x^2} &amp; \text{if}\;\; 0 &lt; |x| &lt; a \\ \quad &amp; \\ 0 &amp; \text{otherwise} \end{cases}\]</span></p>
+<p>Adding more utility functions</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> isGray(image):
+    <span class="co">&quot;&quot;&quot;Return True if the image has one channel per pixel.&quot;&quot;&quot;</span>
+    <span class="cf">return</span> image.ndim <span class="op">&lt;</span> <span class="dv">3</span>
+<span class="kw">def</span> widthHeightDividedBy(image, divisor):
+    <span class="co">&quot;&quot;&quot;Return an image&#39;s dimensions, divided by a value.&quot;&quot;&quot;</span>
+    h, w <span class="op">=</span> image.shape[:<span class="dv">2</span>]
+    <span class="cf">return</span> (w<span class="op">/</span>divisor, h<span class="op">/</span>divisor)</code></pre></div>
+<ul>
+<li>Tracking faces</li>
+<li>Modifying the application
+<ul>
+<li>Swapping faces in one camera feed</li>
+<li>Copying faces between camera feeds</li>
+</ul></li>
+<li>Summary</li>
+</ul>
+<h2 id="detecting-foregroundbackground-regions-and-depth">Detecting Foreground/Background Regions and Depth</h2>
+<p>dvorak4tzx:</p>
+<blockquote>
+<p>I dont have Kinect camera, so pass this chapter, and that&#8217;s all the book covers</p>
+</blockquote>
+<h2 id="appendix-a-integrating-with-pygame">Appendix A: Integrating with Pygame</h2>
+<h2 id="appendix-b-generating-haar-cascades-for-custom-targets">Appendix B: Generating Haar Cascades for Custom Targets</h2>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://book.douban.com/subject/24669825/">OpenCV Computer Vision with Python</a></li>
+<li><a href="http://nummist.com/opencv/">Joseph Howse(the author)&#8217;s webpage</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lanczos_resampling">Lanczos resampling - Wikipedia, the free encyclopedia</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#computer vision">computer vision</a></li>
+<li><a class="tzx-tag" href="tags.html/#python">python</a></li>
+<li><a class="tzx-tag" href="tags.html/#readings">readings</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/&#8230;post-0019-opencv-computer-vision-with-python.md" title="410 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "&#8230;post-0019-opencv-computer-vision-with-python.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 410,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

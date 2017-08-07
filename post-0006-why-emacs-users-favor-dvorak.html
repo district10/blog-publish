@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-02-19" />
+  <meta name="keywords" content="emacs, dvorak" />
+  <title>&#20026;&#20160;&#20040; Emacs &#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#20026;&#20160;&#20040; Emacs &#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;</h1>
+<h3 class="date">2015-02-19</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#20026;&#20160;&#20040;-emacs-&#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;">&#20026;&#20160;&#20040; Emacs &#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;</a><ul>
+        <li><a href="#&#21442;&#32771;&#36164;&#26009;">&#21442;&#32771;&#36164;&#26009;</a></li>
+        <li><a href="#&#27491;&#25991;">&#27491;&#25991;</a><ul>
+        <li><a href="#several-points-from-refs">Several Points from Refs</a></li>
+        <li><a href="#&#20026;&#20160;&#20040;&#31243;&#24207;&#21592;&#38656;&#35201;&#24503;&#27779;&#22799;&#20811;">&#20026;&#20160;&#20040;&#31243;&#24207;&#21592;&#38656;&#35201;&#24503;&#27779;&#22799;&#20811;</a></li>
+        <li><a href="#extended-programmer-dvorakdvpe_github"><a href="https://github.com/district10/extended-programmer-dvorak">Extended Programmer Dvorak</a></a></li>
+        <li><a href="#&#35780;&#27979;-qwertydvpdvpe">&#35780;&#27979; qwerty&#65292;dvp&#65292;dvpe</a></li>
+        <li><a href="#how-to-get-it">How To Get It?</a></li>
+        </ul></li>
+        <li><a href="#&#38468;">&#38468;</a></li>
+        <li><a href="#koan">Koan</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#20026;&#20160;&#20040;-emacs-&#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;">&#20026;&#20160;&#20040; Emacs &#29992;&#25143;&#29233;&#24503;&#27779;&#22799;&#20811;</h1>
+<p>&#65288;&#21407;&#36733;&#20110;&#31616;&#20070;&#65292;&#29616;&#22312;&#25644;&#36816;&#21040;&#33258;&#24049;&#30340;&#21338;&#23458;&#19978;&#12290;&#65289;</p>
+<p>&#36825;&#31687;&#25991;&#31456;&#35762;&#36848;&#20102;&#25105;&#33258;&#24049;&#22312;&#29992;&#30340; dvorak&#65288;&#24503;&#27779;&#22799;&#20811;&#65289;&#38190;&#30424;&#24067;&#23616;&#12290;&#25105;&#20174;&#22823;&#19977;&#20197;&#26469;&#19968;&#30452;&#20351;&#29992;&#23427;&#65292;&#36825;&#20063;&#26159;&#36825;&#20010;&#21338;&#23458;&#65292;&#20197;&#21450;&#25105;&#30340; id &#21483; dvorak4tzx &#30340;&#20027;&#35201;&#21407;&#22240;&#12290; Dvorak &#21644; vim &#19968;&#26679;&#65292;&#20174;&#35774;&#35745;&#19978;&#65292;&#23601;&#23436;&#20840;&#26159;&#36229;&#21069;&#65292;&#32780;&#19988;&#36229;&#36234;&#20854;&#23427;&#30340;&#12290;</p>
+<h2 id="&#21442;&#32771;&#36164;&#26009;">&#21442;&#32771;&#36164;&#26009;</h2>
+<p>&#24314;&#35758;&#20808;&#35835;&#36825;&#20123;</p>
+<ol>
+<li>&#20160;&#20040;&#26159;&#24503;&#27779;&#22799;&#20811;: <a href="http://zh.wikipedia.org/wiki/%E5%BE%B7%E6%B2%83%E5%A4%8F%E5%85%8B%E9%8D%B5%E7%9B%A4">&#32500;&#22522;&#30334;&#31185;</a>, <a href="http://baike.baidu.com/view/1410112.htm">&#30334;&#24230;&#30334;&#31185;</a></li>
+<li><a href="http://www.cnblogs.com/zhangshenjia/archive/2012/04/11/qwerty_dvorak_colemak.html">&#35828;&#35828; qwerty&#12289;dvorak&#12289;colemak &#19977;&#31181;&#38190;&#30424;&#24067;&#23616;</a></li>
+<li><a href="http://www.kaufmann.no/roland/dvorak/">Programmer Dvorak Keyboard Layout</a></li>
+<li>About Neo: <a href="http://www.neo-layout.org/">Neo &#23448;&#26041;</a>, <a href="https://en.wikipedia.org/wiki/Keyboard_layout#Neo">Wikipedia: neo</a></li>
+<li><a href="http://blog.jobbole.com/64959/">Steve Yegge&#65306;&#32534;&#31243;&#30340;&#32942;&#33039;&#23567;&#31192;&#23494;</a></li>
+<li><a href="http://www.oschina.net/news/56704/keyboards">&#38190;&#30424;&#21490;&#19978;&#30340; 12 &#20010;&#20856;&#33539;</a></li>
+<li><a href="http://www.jianshu.com/p/9d79e9a80173#">&#21407;&#26469;&#25105;&#20204;&#27599;&#22825;&#37117;&#22312;&#29992;&#30340;&#38190;&#30424;&#65292;&#31455;&#26159;&#19968;&#20010;&#31934;&#24515;&#35851;&#21010;&#30340;&#12300;&#21453;&#20154;&#31867;&#12301;&#35774;&#35745;&#65311; - &#31616;&#20070;</a></li>
+</ol>
+<h2 id="&#27491;&#25991;">&#27491;&#25991;</h2>
+<h3 id="several-points-from-refs">Several Points from Refs</h3>
+<ol style="list-style-type: decimal">
+<li>&#30446;&#21069;&#65292;&#19990;&#30028;&#19978;&#26368;&#24555;&#30340;&#33521;&#25991;&#25171;&#23383;&#36895;&#24230;&#26159;&#22312; Dvorak &#38190;&#30424;&#19978;&#21019;&#36896;&#30340;&#12290;&#20294; Dvorak &#38190;&#30424;&#27809;&#26377;&#27969;&#34892;&#36215;&#26469;&#65292;&#19990;&#30028;&#19978;&#26368;&#36890;&#29992;&#30340;&#38190;&#30424;&#36824;&#26159; QWERTY &#38190;&#30424;&#12290;</li>
+<li>&#23398;&#26415;&#30028;&#23545;&#36825;&#20010;&#20107;&#20214;&#23384;&#22312;&#20105;&#35770;&#12290;&#26377;&#20154;&#35748;&#20026;&#65292;&#36825;&#34920;&#26126;&#24066;&#22330;&#23384;&#22312;&#32570;&#38519;&#65292;&#30001;&#20110;&#29992;&#25143;&#30340;&#24816;&#24615;&#65292;&#26080;&#27861;&#25512;&#24191;&#26356;&#26377;&#25928;&#29575;&#30340;&#25216;&#26415;&#12290;&#20294;&#20063;&#26377;&#20154;&#19981;&#21516;&#24847;&#36825;&#31181;&#35828;&#27861;&#65292;&#35748;&#20026; Dvorak &#26377;&#26356;&#24555;&#30340;&#25171;&#23383;&#36895;&#24230;&#32431;&#31929;&#26159;&#19968;&#31181;&#31070;&#35805;&#65292;&#27809;&#26377;&#20219;&#20309;&#35777;&#25454;&#21487;&#20197;&#34920;&#26126;&#65292; Dvorak &#38190;&#30424;&#26174;&#33879;&#22320;&#24555;&#20110; QWERTY &#38190;&#30424;&#12290;</li>
+<li>&#20272;&#35745;&#26576;&#20010;&#31243;&#24207;&#21592;&#21457;&#29616;&#29992; dvorak &#24067;&#23616;&#24456;&#29245;&#65292;&#23601;&#23558;&#20043;&#21464;&#24471;&#26356;&#21152;&#26497;&#38480;&#12290;&#20110;&#26159;&#20986;&#26469;&#36825;&#20040;&#19968;&#20010; <a href="http://www.kaufmann.no/roland/dvorak/">Programmer Dvorak Keyboard Layout</a>, &#23427;&#21253;&#25324;dvorak &#38190;&#30424;&#30340;&#25152;&#26377;&#32570;&#28857;, &#20294;&#20248;&#21270;&#20102;&#31243;&#24207;&#20013;&#24120;&#29992;&#31526;&#21495;&#22914; <kbd>$</kbd><kbd>;</kbd><kbd>(</kbd><kbd>)</kbd><kbd>{</kbd><kbd>}</kbd><kbd>[</kbd><kbd>]</kbd><kbd>=</kbd> &#31561;&#65292;&#29992;&#26469; coding &#24040;&#29245;&#12290;</li>
+<li>Neo &#36890;&#36807;&#21152;&#20837;&#19968;&#20010; Level &#25226; <kbd>Enter</kbd>&#65292;<kbd>Backspace</kbd>&#65292;&#26041;&#21521;&#38190;&#31561;&#21152;&#20837;&#21040;&#20102;&#25163;&#25351;&#19979;&#65292;&#20877;&#20063;&#19981;&#29992;&#21491;&#25163;&#23567;&#25351;&#21435;&#25720;&#22238;&#36710;&#21024;&#38500;&#20102;&#12290; &#20877;&#19981;&#29992;&#20026; Emacs&#65292;Vim &#34507;&#30140;&#30340;&#26041;&#21521;&#24555;&#25463;&#38190;&#24551;&#24833;&#20102;&#65288;&#26041;&#21521;&#24555;&#25463;&#36825;&#20010;&#24819;&#27861;&#26174;&#28982;&#24456;&#22909;&#65292;&#20294;&#26159;&#20004;&#32773;&#23454;&#29616;&#37117;&#30053;&#34507;&#30140;&#65292;&#29992; neo &#36825;&#31181;&#26356;&#24213;&#23618;&#30340;&#26041;&#24335;&#30340;&#20248;&#28857;&#26159;&#26174;&#32780;&#26131;&#35265;&#30340;&#65289;&#12290;</li>
+</ol>
+<p>&#20851;&#20110; dvorak &#38190;&#30424;&#30340;&#25928;&#29575;&#65292;&#36824;&#21487;&#20197;&#21442;&#32771;&#25105;&#30340;&#21478;&#19968;&#31687; post&#65306;<a href="post-0032-dvorak.html">Dvorak &#38190;&#30424;&#24067;&#23616;&#65288;&#28436;&#35762;&#31295;&#65289;</a>&#12290;</p>
+<h3 id="&#20026;&#20160;&#20040;&#31243;&#24207;&#21592;&#38656;&#35201;&#24503;&#27779;&#22799;&#20811;">&#20026;&#20160;&#20040;&#31243;&#24207;&#21592;&#38656;&#35201;&#24503;&#27779;&#22799;&#20811;</h3>
+<ol style="list-style-type: decimal">
+<li>&#32534;&#31243;&#26041;&#20415;</li>
+<li>&#25163;&#25351;&#19981;&#30140;</li>
+<li><p>&#32437;&#23567;&#20247;&#65292;&#20063;&#26159;&#19990;&#30028;&#31532;&#20108;&#22823;&#38190;&#30424;&#24067;&#23616;&#32676;&#20307;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/homework/qwerty-dvorak.png" alt="Qwerty-Dvorak.PNG" />
+<p class="caption">Qwerty-Dvorak.PNG</p>
+</div></li>
+<li>&#38190;&#30424;&#26159;&#33258;&#24049;&#29992;&#30340;&#65292;&#25442;&#20102;&#24067;&#23616;&#20320;&#25171;&#20986;&#26469;&#30340;&#20063;&#19981;&#26159;&#28779;&#26143;&#25991;</li>
+<li><p>Neo&#65292;&#19981;&#33021;&#26356;&#36190;</p></li>
+</ol>
+<h3 id="extended-programmer-dvorakdvpe_github"><a href="https://github.com/district10/extended-programmer-dvorak">Extended Programmer Dvorak</a></h3>
+<p>&#26681;&#25454; Dvorak &#30340;&#20960;&#20010;&#32570;&#28857;&#65288;&#30456;&#27604; qwerty &#20960;&#20046;&#21487;&#20197;&#24573;&#30053;&#65289;&#65292;&#25105;&#23450;&#21046;&#20102;&#20248;&#21270;&#30340; Programmer Dvorak&#65292;&#32654;&#20854;&#21517;&#26352;: <strong>Extended Programmer Dvorak</strong> &#22914;&#22270;&#65306;&#65288;dvpe0.2&#65292;&#26087;&#29256;&#26412;&#65289;</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/DVORAK_PROGRAMMER_EXTENDED0.2.png" alt="DVPE v0.2" />
+<p class="caption">DVPE <em>v0.2</em></p>
+</div>
+<ul>
+<li>&#19968;&#20123;&#35828;&#26126;&#65306;
+<ul>
+<li>&#21442;&#32771; <a href="http://norvig.com/mayzner.html"><strong>English Letter Frequency Counts</strong></a>, &#20316;&#32773;&#26159; <a href="http://norvig.com/"><strong>Peter Norvig</strong></a></li>
+<li>&#20851;&#20110;&#25353;&#38190;&#20462;&#25913;&#30340;&#35828;&#26126;&#35265;&#25105;&#30340; <a href="https://github.com/district10/extended-programmer-dvorak#why"><strong>github/extended-programmer-dvorak</strong></a></li>
+</ul></li>
+</ul>
+<h3 id="&#35780;&#27979;-qwertydvpdvpe">&#35780;&#27979; qwerty&#65292;dvp&#65292;dvpe</h3>
+<ol style="list-style-type: decimal">
+<li><strong>&#35828;&#26126;</strong></li>
+</ol>
+<p>&#22312; <a href="https://github.com/pa7/Keyboard-Heatmap">pa7 &#30340; Keyboard-Heatmap</a> &#22522;&#30784;&#19978;&#25105;&#28155;&#21152;&#20102;&#25105;&#30340; dvpe &#24067;&#23616;&#65292;&#21487;&#20197;&#21040; <a href="https://github.com/district10/Keyboard-Heatmap"><strong>Github: district10 / Keyboard-Heatmap</strong></a> &#19979;&#36733;&#65292;&#25110;&#32773;<a href="https://github.com/district10/Keyboard-Heatmap/archive/master.zip">&#30452;&#25509;&#19979;&#36733;</a> &#35299;&#21387;&#21518;&#29992;&#27983;&#35272;&#22120;&#25171;&#24320; <code>index.html</code>&#65292;&#25110;&#32773;&#30452;&#25509;&#35775;&#38382; <a href="http://tangzhixiong.com/Keyboard-Heatmap/" class="uri">http://tangzhixiong.com/Keyboard-Heatmap/</a>&#65306;</p>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/tool.png" alt="Heatmap" />
+<p class="caption">Heatmap</p>
+</div>
+<ul>
+<li><strong>&#26469;&#27979;&#35797;&#19981;&#21516;&#24067;&#23616;&#19979;&#30340;&#28909;&#21306;&#12290;&#27979;&#35797;&#29992;&#21040;&#30340;&#25991;&#20214;&#26377;&#65306;</strong>
+<ul>
+<li><a href="http://www.gnu.org/software/octave/doc/interpreter/">GNU <strong>Octave</strong> Docs</a></li>
+<li><a href="http://www.gutenberg.org/files/1260/1260.txt"><strong>Jane</strong> Eyre</a>: 1,070,329 bytes</li>
+<li><a href="http://www.gutenberg.org/cache/epub/12299/pg12299.txt">The Mechanical Properties of <strong>Wood</strong>&#8230;</a>: 395,712 bytes</li>
+<li><a href="http://www.giadamusic.com/download">giada src <strong>cpp</strong> file</a>:419,831 bytes Got it by&#65306;<code class="sourceCode bash"><span class="kw">for</span> <span class="kw">i</span> in *.cpp<span class="kw">;</span> <span class="kw">do</span> <span class="kw">cat</span> <span class="ot">$i</span> <span class="kw">&gt;&gt;</span> ../giada_whole.txt<span class="kw">;</span> <span class="kw">done</span></code>, or you can use my archive <a href="http://gnat-tang-shared-image.qiniudn.com/giada_whole.txt">giada_src_cpp_whole.txt</a></li>
+<li><a href="http://jianshu.io/p/a710e7656ddb">Geoprocessing with python</a> &#37324;&#30340; <a href="http://gnat-tang-archive.qiniudn.com/geoprocessing_with_python_whole.txt"><strong>python</strong> &#20195;&#30721;</a>, 30,154 bytes</li>
+</ul></li>
+<li><strong>&#27979;&#35797;&#32467;&#26524;</strong>&#65288;&#39034;&#24207;&#65306;qwerty - dvorak - neodvpe&#65289;</li>
+</ul>
+<h4 id="octave">Octave</h4>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/aa.octave_qwerty.png" alt="octave - qwerty" />
+<p class="caption">octave - qwerty</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/ab.octave_dvp.png" alt="octave - dvp" />
+<p class="caption">octave - dvp</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/dvpe0.2_jane.png" alt="octive - dvpe" />
+<p class="caption">octive - dvpe</p>
+</div>
+<h4 id="jane">Jane</h4>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/ba.jane_qwerty.png" alt="Jane - qwerty" />
+<p class="caption">Jane - qwerty</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/bb.jane_dvp.png" alt="Jane - dvp" />
+<p class="caption">Jane - dvp</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/dvpe0.2_jane.png" alt="Jane - dvpe" />
+<p class="caption">Jane - dvpe</p>
+</div>
+<h4 id="wood">Wood</h4>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/ca.wood_qwerty.png" alt="Wood - qwerty" />
+<p class="caption">Wood - qwerty</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/cb.wood_dvp.png" alt="Wood - dvp" />
+<p class="caption">Wood - dvp</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/dvpe0.2_wood.png" alt="Wood - dvpe" />
+<p class="caption">Wood - dvpe</p>
+</div>
+<h4 id="c">C++</h4>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/da.cpp_qwerty.png" alt="C++ - qwerty&#65306;c++ &#31243;&#24207;&#20013;&#26377;&#22826;&#22810;&#30340;&#31526;&#21495;&#65292;&#23548;&#33268; qwerty &#31616;&#30452;&#27809;&#27861;&#29992;" />
+<p class="caption">C++ - qwerty&#65306;c++ &#31243;&#24207;&#20013;&#26377;&#22826;&#22810;&#30340;&#31526;&#21495;&#65292;&#23548;&#33268; qwerty &#31616;&#30452;&#27809;&#27861;&#29992;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/db.cpp_dvp.png" alt="C++ - dvp" />
+<p class="caption">C++ - dvp</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/dvpe0.2._cpp.png" alt="C++ - dvpe" />
+<p class="caption">C++ - dvpe</p>
+</div>
+<h4 id="python">Python</h4>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/ea.python_qwerty.png" alt="Python - qwerty" />
+<p class="caption">Python - qwerty</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-archive.qiniudn.com/eb.python_dvp.png" alt="Python - dvp" />
+<p class="caption">Python - dvp</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/dvpe0.2_python.png" alt="Python - dvpe" />
+<p class="caption">Python - dvpe</p>
+</div>
+<ul>
+<li><strong>&#24635;&#32467;</strong>
+<ul>
+<li>qwerty &#19981;&#35770;&#22312;&#25991;&#23398;&#23567;&#35828;&#12289;&#31185;&#25216;&#31867;&#25991;&#31456;&#65292;c++&#12289;python &#20195;&#30721;&#30340;&#36755;&#20837;&#19978;&#65292;&#21644;&#24503;&#27779;&#22799;&#20811;&#37117;&#19981;&#22312;&#19968;&#20010;&#23618;&#27425;&#65307;</li>
+<li>dvpe &#25928;&#26524;&#27604; dvp &#31245;&#22909;&#12290;</li>
+</ul></li>
+</ul>
+<h3 id="how-to-get-it">How To Get It?</h3>
+<ol style="list-style-type: decimal">
+<li><strong>For windows Users</strong>
+<ul>
+<li>I made one by <a href="http://www.microsoft.com/en-sg/download/details.aspx?id=22339">Windows Keyboard Layout Creator 1.4</a>,</li>
+<li>Download my keyboard layout installer here: <a href="http://gnat-tang-shared-image.qiniudn.com/dvpe-v3.7z"><strong>dvpe0.3 for windows (installation guide inside)</strong></a>&#12290;</li>
+<li>&#26368;&#36817;&#29992; AHK &#33050;&#26412;&#37325;&#20889;&#20102;&#19968;&#20010;&#65292;&#25928;&#26524;&#20986;&#22855;&#22320;&#22909;
+<ul>
+<li>&#28304;&#30721;&#65306;<a href="https://github.com/district10/neo_keyboard_layout/blob/master/neo4win/neo.ahk" class="uri">https://github.com/district10/neo_keyboard_layout/blob/master/neo4win/neo.ahk</a></li>
+<li>&#20108;&#36827;&#21046;&#65306;&#21040; <a href="https://github.com/district10/neo_keyboard_layout/blob/master/neo4win/" class="uri">https://github.com/district10/neo_keyboard_layout/blob/master/neo4win/</a> &#19979;&#36733;</li>
+</ul></li>
+</ul></li>
+</ol>
+<ul>
+<li><a href="https://github.com/district10/extended-programmer-dvorak"><strong>For Linux Users</strong></a></li>
+</ul>
+<h2 id="&#38468;">&#38468;</h2>
+<ol style="list-style-type: decimal">
+<li>&#19968;&#24320;&#22987;&#19981;&#36866;&#24212;&#26159;&#27491;&#24120;&#30340;&#65292;&#35831;&#26242;&#26102;&#24573;&#30053;&#25351;&#27861;&#30340;&#19981;&#29087;&#24713;&#65292;&#20307;&#20250;&#20854; rhythm &#22909;&#22312;&#21738;&#20799;</li>
+<li><p>&#21018;&#30475; <a href="http://sachachua.com">Sacha Chua</a> <a href="http://v.youku.com/v_show/id_XNzA4MTYzNjQ0.html"><strong>&#37319;&#35775; Xah Lee</strong></a>&#65292;Sacha &#35828;&#65306;</p>
+<blockquote>
+<p>&#8220;it&#8217;s funny that how the keyboard influences how we work&#8221; , &#8220;dvorak&#8221; blah blah blah, &#8220;the third level of the neo layout, apparently is really good for programming. Eh, more layout, eh, and more code. Oh, back to Emacs&#8221;&#65288;20&#65306;10&#65289;</p>
+</blockquote>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/29284-caa7365f38529250.png" />
+
+</div></li>
+<li>&#20026;&#20102;&#26356;&#22909;&#30340;&#36755;&#20837;&#20013;&#25991;&#65292;&#20570;&#20102;&#21333;&#23383;&#36755;&#20837;&#27861;&#65306;<a href="https://github.com/district10/gat">gat</a>&#12290;&#26242;&#26102;&#21482;&#33021;&#22312; Emacs &#37324;&#20351;&#29992;&#12290;<code>2014-04-27</code></li>
+<li><p><a href="https://github.com/district10/neo_keyboard_layout">dvpe0.3</a> &#21457;&#24067; (a.k.a. neo-extended dvpe)&#12290;<code>2014-03-18</code> &#20063;&#25903;&#25345; qwerty &#21644; programmer dvorak &#24067;&#23616; (Level 3 &#19968;&#33268;)</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/neo-dvpe-L1.svg" alt="Level 1" />
+<p class="caption">Level 1</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/neo-dvpe-L2.svg" alt="Level 2" />
+<p class="caption">Level 2</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/neo-L3.svg" alt="Level 3" />
+<p class="caption">Level 3</p>
+</div></li>
+</ol>
+<h2 id="koan">Koan</h2>
+<blockquote>
+<p>Steve Yegge&#65292;Sacha Chua &#21644; Xah Lee&#65288;&#26446;&#26432;&#65289;&#37117;&#26159; dvorak &#31881;&#19997;&#21834;&#12290;</p>
+</blockquote>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#emacs">emacs</a></li>
+<li><a class="tzx-tag" href="tags.html/#dvorak">dvorak</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/e22a85b34c044c9978d69a7889a734c735d6acd2/_posts/post-0006-why-emacs-users-favor-dvorak.md" title="1 insertions(+), 1 deletions(-)">1492694877</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0006-why-emacs-users-favor-dvorak.md" title="219 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0006-why-emacs-users-favor-dvorak.md";
+var tzxChanges = [
+    {
+        hash: "e22a85b34c044c9978d69a7889a734c735d6acd2",
+        datetime: "1492694877",
+        insertions: 1,
+        deletions: 1
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 219,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

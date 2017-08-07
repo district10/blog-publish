@@ -1,0 +1,13 @@
+---
+tzx-changes:
+  - hash: e22a85b34c044c9978d69a7889a734c735d6acd2
+    datetime: 1492694877
+    insertions: 1
+    deletions: 1
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 219
+    deletions: 0
+
+tzx-filename: _posts/post-0006-why-emacs-users-favor-dvorak.md
+...

@@ -1,0 +1,21 @@
+---
+tzx-changes:
+  - hash: ac52fa9bcb1a5f5f959ef8351632fbccb70cfe07
+    datetime: 1497423130
+    insertions: 8
+    deletions: 0
+  - hash: 666a203d1ed48c1124badf95a1c6ff21532038ee
+    datetime: 1483501152
+    insertions: 11
+    deletions: 15
+  - hash: 7019374ee6d41c9a9c59bb2694fd29039f8e137f
+    datetime: 1482312333
+    insertions: 12
+    deletions: 11
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 92
+    deletions: 0
+
+tzx-filename: _pages/quotes.md
+...

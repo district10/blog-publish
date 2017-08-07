@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&#21338;&#23458;&#25688;&#35760;&#20043; yhlleo</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h1 id="&#21338;&#23458;&#25688;&#35760;&#20043;-yhlleo">&#21338;&#23458;&#25688;&#35760;&#20043; yhlleo</h1>
+<p>&#21338;&#23458;&#22320;&#22336;</p>
+<ul>
+<li><a href="http://blog.csdn.net/yhl_leo" class="featured">&#25991;&#31456;&#21015;&#34920; - yhl_leo - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://115.159.156.28/">yhl&#8217;s blog &#8211; Better and better.</a></li>
+</ul>
+<h2 id="pdftex-etc">pdftex, etc</h2>
+<dl>
+<dt>Package pdftex.def Error: PDF mode expected, but DVI mode detected!</dt>
+<dd><ul>
+<li>latex -&gt; <code>*.eps</code>, etc</li>
+<li>pdftex -&gt; <code>*.pdf</code>, <code>*.jpg</code>, etc</li>
+</ul>
+</dd>
+<dt>&#20851;&#20110;OpenCV&#22270;&#20687;&#25805;&#20316;&#30340;&#40664;&#35748;&#21442;&#25968;&#38382;&#39064;</dt>
+<dd><p>wrapAffine</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// C++</span>
+<span class="dt">void</span> warpAffine(
+    InputArray src,
+    OutputArray dst,
+    InputArray M,
+    Size dsize,
+    <span class="dt">int</span> flags=INTER_LINEAR,
+    <span class="dt">int</span> borderMode=BORDER_CONSTANT,
+    <span class="dt">const</span> Scalar&amp; borderValue=Scalar())</code></pre></div>
+<p>&#20854;&#20013;&#65292;<code>M</code> &#26159;&#19968;&#20010; 2x3&#30340;&#36716;&#25442;&#30697;&#38453;&#65292;&#20851;&#20110;&#33719;&#21462;&#26041;&#27861;&#65292;&#21487;&#20351;&#29992;getRotationMatrix2D()&#20989;&#25968;</p>
+<p><span class="math display">\[
+    dst(x,y) = src(
+        M_{11}x+M_{12}y+M_{13},
+        M_{21}x+M_{22}y+M_{23})
+\]</span></p>
+<p>&#20960;&#31181;&#20869;&#25554;&#26041;&#27861;&#21508;&#26377;&#20248;&#21155;&#65292;&#21452;&#32447;&#24615;&#25554;&#20540;&#21487;&#20197;&#35270;&#20026;&#19968;&#20010;&#25240;&#20013;&#36873;&#25321;&#65292;&#21363;&#35745;&#31639;&#37327;&#19981;&#31639;&#24456;&#22823;&#65288;&#27604;&#22522;&#20110;&#21306;&#22495;&#21644;&#37051;&#22495;&#22359;&#30340;&#26041;&#27861;&#23567;&#24456;&#22810;&#65289;&#65292;&#25928;&#26524;&#20063;&#36807;&#24471;&#21435;&#65288;&#19968;&#33324;&#27604;&#26368;&#37051;&#36817;&#25554;&#20540;&#26356;&#22909;&#65289;&#65292;&#28304;&#30721;&#32534;&#20889;&#32773;&#22823;&#27010;&#26159;&#22522;&#20110;&#27492;&#32771;&#34385;&#65292;&#23558;&#20854;&#35774;&#32622;&#20026;&#40664;&#35748;&#21442;&#25968;&#65292;&#20294;&#26159;&#38024;&#23545;&#26576;&#20123;&#20855;&#20307;&#30340;&#24212;&#29992;&#65292;&#32477;&#19981;&#26159;&#26368;&#20339;&#36873;&#25321;&#65292;&#20363;&#22914;&#23545;&#20108;&#20540;&#22270;&#20687;&#36827;&#34892;&#26059;&#36716;&#65292;&#25105;&#20204;&#24076;&#26395;&#26059;&#36716;&#21518;&#30340;&#22270;&#20687;&#20173;&#28982;&#26159;&#20108;&#20540;&#30340;&#65292;&#37027;&#36873;&#25321;&#26368;&#20020;&#36817;&#25554;&#20540;&#21487;&#33021;&#23601;&#26356;&#21512;&#36866;&#12290;&#20851;&#20110;&#36793;&#30028;&#22806;&#25512;&#27169;&#24335;&#65292;&#36825;&#37324;&#36148;&#19978;OpenCV&#23448;&#26041;&#25991;&#26723;&#65306;Adding borders to your images&#12290;</p>
+<p>&#20363;&#22914;&#23384;&#20648;JPEG&#22270;&#20687;&#65292;&#22270;&#20687;&#21387;&#32553;&#36136;&#37327;&#40664;&#35748;&#35774;&#32622;&#20026;95&#65288;&#33539;&#22260;&#20026;0<sub>100&#65292;&#25968;&#20540;&#36234;&#22823;&#36136;&#37327;&#36234;&#22909;&#65289;&#65292;&#23384;&#20648;&#20026;PNG&#26102;&#65292;&#21387;&#32553;&#32423;&#21035;&#40664;&#35748;&#20026;3&#65288;0</sub>9 &#36234;&#22823;&#21387;&#32553;&#36234;&#21385;&#23475;&#65289;&#12290;</p>
+</dd>
+<dt>&#27714;&#35299;&#26059;&#36716;&#22270;&#20687;&#30340;&#26368;&#22823;&#20869;&#25509;&#30697;&#24418;</dt>
+<dd><p>small fix</p>
+</dd>
+<dt>bash: <code>./*.py</code> Permission denied</dt>
+<dd><ul>
+<li><code class="sourceCode bash"><span class="kw">chmod</span> +x demo.py</code></li>
+<li><code class="sourceCode bash"><span class="kw">python</span> demo.py</code></li>
+</ul>
+</dd>
+<dt>ubuntu 14.04 gcc/g++&#29256;&#26412;&#38477;&#20302;</dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>install</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install -y gcc-4.7
+<span class="kw">sudo</span> apt-get install -y g++-4.7</code></pre></div></li>
+<li><p>symlink</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> /usr/bin
+<span class="kw">sudo</span> rm -r gcc
+<span class="kw">sudo</span> ln -sf gcc-4.7 gcc
+<span class="kw">sudo</span> rm -r g++
+<span class="kw">sudo</span> ln -sf g++-4.7 g++</code></pre></div></li>
+</ol>
+</dd>
+<dt>uchar</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">char</span> <span class="dt">uchar</span>;
+
+<span class="ot">#define CHAR_BIT      8         </span><span class="co">/* number of bits in a char */</span>
+<span class="ot">#define SCHAR_MIN   (-128)      </span><span class="co">/* minimum signed char value */</span>
+<span class="ot">#define SCHAR_MAX     127       </span><span class="co">/* maximum signed char value */</span>
+<span class="ot">#define UCHAR_MAX     0xff      </span><span class="co">/* maximum unsigned char value */</span></code></pre></div>
+</dd>
+<dt>caffe</dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>cuDNN downgrade to v3!</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> lib64/
+<span class="kw">sudo</span> cp lib* /usr/local/cuda/lib64/
+<span class="kw">cd</span> ../include/
+<span class="kw">sudo</span> cp cudnn.h /usr/local/cuda/include/
+<span class="kw">cd</span> /usr/local/cuda/lib64/
+<span class="kw">sudo</span> rm -r libcudnn.so libcudnn.so.7.0
+<span class="kw">sudo</span> ln -sf libcudnn.so.7.0.64 libcudnn.so.7.0
+<span class="kw">sudo</span> ln -sf libcudnn.so.7.0 libcudnn.so
+<span class="kw">sudo</span> ldconfig</code></pre></div></li>
+<li><p>OpenCV 3</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pkg-config</span> --modversion opencv</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dt">LIBRARIES </span><span class="ch">+=</span><span class="st"> glog gflags protobuf leveldb snappy </span><span class="ch">\</span>
+<span class="st">        lmdb boost_system hdf5_hl hdf5 m </span><span class="ch">\</span>
+<span class="st">        opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs</span></code></pre></div></li>
+<li><p>build caffe via make</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> clean
+
+<span class="kw">make</span> all -j12
+<span class="kw">make</span> distribute
+<span class="kw">make</span> pycaffe
+<span class="kw">make</span> matcaffe</code></pre></div></li>
+</ol>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51646781">Package pdftex.def Error: PDF mode expected, but DVI mode detected! - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51559490" class="featured">&#20851;&#20110;OpenCV&#22270;&#20687;&#25805;&#20316;&#30340;&#40664;&#35748;&#21442;&#25968;&#38382;&#39064; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51510432">&#27714;&#35299;&#26059;&#36716;&#22270;&#20687;&#30340;&#26368;&#22823;&#20869;&#25509;&#30697;&#24418; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51427242">ubuntu 14.04 gcc/g++&#29256;&#26412;&#38477;&#20302; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51416540">Tensorflow MNIST&#27973;&#23618;&#31070;&#32463;&#32593;&#32476;&#30340;&#35299;&#37322;&#21644;&#31572;&#22797; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51377490">C/C++ uchar&#30340;&#19968;&#20010;&#26377;&#36259;&#29992;&#27861; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51371936">Caffe &#24037;&#31243;&#30340;&#19968;&#20123;&#32534;&#35793;&#38169;&#35823;&#20197;&#21450;&#35299;&#20915;&#26041;&#26696; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="object-detection">Object Detection</h2>
+<p>&#25105;&#35762;&#35299;&#30340;&#20869;&#23481;&#20027;&#35201;&#20998;&#20026;&#19977;&#37096;&#20998;&#27010;&#25324;&#20026; BBS&#65292;&#22522;&#20110;&#28145;&#24230;&#23398;&#20064;&#30446;&#26631;&#26816;&#27979;&#30340;&#32972;&#26223;&#65292;&#20960;&#20010;&#36817;&#20960;&#24180;&#30340;&#27604;&#36739;&#32463;&#20856;&#30340;&#21367;&#31215;&#31070;&#32463;&#32593;&#32476;&#65292;&#20197;&#21450;&#26368;&#21518;&#30340;&#24635;&#32467;&#12290;</p>
+<p>TODO</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51597496" class="featured">Object Detection: To Be Higher Accuracy and Faster - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="super-pixel">Super Pixel</h2>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51386993">OpenCV &#22522;&#20110;&#36229;&#20687;&#32032;&#20998;&#21106;&#30340;&#22270;&#20687;&#21306;&#22495;&#36873;&#21462;&#26041;&#27861;&#21450;&#28304;&#30721; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="qimage-cvmat">QImage &lt;&#8211;&gt; cv::Mat</h2>
+<dl>
+<dt>cv::Mat2QImage</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">QImage</span> cvMat2QImage(<span class="dt">const</span> cv::Mat&amp; mat)
+{
+    <span class="co">// 8-bits unsigned, NO. OF CHANNELS = 1</span>
+    <span class="kw">if</span>(mat.type() == CV_8UC1)
+    {
+        <span class="ot">QImage</span> image(mat.cols, mat.rows, <span class="ot">QImage::</span>Format_Indexed8);
+        <span class="co">// Set the color table (used to translate colour indexes to qRgb values)</span>
+        image.setColorCount(<span class="dv">256</span>);
+        <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">256</span>; i++)
+        {
+            image.setColor(i, <span class="fu">qRgb</span>(i, i, i));
+        }
+        <span class="co">// Copy input Mat</span>
+        <span class="dt">uchar</span> *pSrc = mat.data;
+        <span class="kw">for</span>(<span class="dt">int</span> row = <span class="dv">0</span>; row &lt; mat.rows; row ++)
+        {
+            <span class="dt">uchar</span> *pDest = image.scanLine(row);
+            memcpy(pDest, pSrc, mat.cols);
+            pSrc += mat.step;
+        }
+        <span class="kw">return</span> image;
+    }
+    <span class="co">// 8-bits unsigned, NO. OF CHANNELS = 3</span>
+    <span class="kw">else</span> <span class="kw">if</span>(mat.type() == CV_8UC3)
+    {
+        <span class="co">// Copy input Mat</span>
+        <span class="dt">const</span> <span class="dt">uchar</span> *pSrc = (<span class="dt">const</span> <span class="dt">uchar</span>*)mat.data;
+        <span class="co">// Create QImage with same dimensions as input Mat</span>
+        <span class="ot">QImage</span> image(pSrc, mat.cols, mat.rows, mat.step, <span class="ot">QImage::</span>Format_RGB888);
+        <span class="kw">return</span> image.rgbSwapped();
+    }
+    <span class="kw">else</span> <span class="kw">if</span>(mat.type() == CV_8UC4)
+    {
+        <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;CV_8UC4&quot;</span>;
+        <span class="co">// Copy input Mat</span>
+        <span class="dt">const</span> <span class="dt">uchar</span> *pSrc = (<span class="dt">const</span> <span class="dt">uchar</span>*)mat.data;
+        <span class="co">// Create QImage with same dimensions as input Mat</span>
+        <span class="ot">QImage</span> image(pSrc, mat.cols, mat.rows, mat.step, <span class="ot">QImage::</span>Format_ARGB32);
+        <span class="kw">return</span> image.copy();
+    }
+    <span class="kw">else</span>
+    {
+        <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;ERROR: Mat could not be converted to QImage.&quot;</span>;
+        <span class="kw">return</span> <span class="ot">QImage</span>();
+    }
+}</code></pre></div>
+</dd>
+<dt>QImage2cv::Mat</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::Mat QImage2cvMat(<span class="ot">QImage</span> image)
+{
+    cv::Mat mat;
+    <span class="fu">qDebug</span>() &lt;&lt; image.format();
+    <span class="kw">switch</span>(image.format())
+    {
+    <span class="kw">case</span> <span class="ot">QImage::</span>Format_ARGB32<span class="ot">:</span>
+    <span class="kw">case</span> <span class="ot">QImage::</span>Format_RGB32<span class="ot">:</span>
+    <span class="kw">case</span> <span class="ot">QImage::</span>Format_ARGB32_Premultiplied<span class="ot">:</span>
+        mat = cv::Mat(image.height(), image.width(), CV_8UC4, (<span class="dt">void</span>*)image.constBits(), image.bytesPerLine());
+        <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="ot">QImage::</span>Format_RGB888<span class="ot">:</span>
+        mat = cv::Mat(image.height(), image.width(), CV_8UC3, (<span class="dt">void</span>*)image.constBits(), image.bytesPerLine());
+        cv::cvtColor(mat, mat, CV_BGR2RGB);
+        <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="ot">QImage::</span>Format_Indexed8<span class="ot">:</span>
+        mat = cv::Mat(image.height(), image.width(), CV_8UC1, (<span class="dt">void</span>*)image.constBits(), image.bytesPerLine());
+        <span class="kw">break</span>;
+    }
+    <span class="kw">return</span> mat;
+}</code></pre></div>
+</dd>
+<dt>Youdao dict</dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>download <a href="http://codown.youdao.com/cidian/linux/youdao-dict_1.1.0-0-ubuntu_amd64.deb">youdao ubuntu amd64 deb file</a></p></li>
+<li><p>install it (dpkg -&gt; debian packge)</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> dpkg -i *.deb</code></pre></div></li>
+</ol>
+</dd>
+<dt>LMDB</dt>
+<dd><p>Official site: <a href="http://lmdb.readthedocs.io/en/release/" class="uri">http://lmdb.readthedocs.io/en/release/</a></p>
+<ol style="list-style-type: decimal">
+<li><p>install</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install libffi-dev python-dev build-essential
+<span class="kw">sudo</span> pip install lmdb</code></pre></div></li>
+<li><p>check</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pip</span> show lmdb</code></pre></div></li>
+</ol>
+</dd>
+<dt>LaTeX bold</dt>
+<dd><div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex">\textbf{yhlleo}
+\mathbf{yhlleo}
+\textbf{\theta}_i
+\mathbf{\theta}_i
+\pmb{\theta}_i</code></pre></div>
+<p>&#23545;&#20110;&#31867;&#20284;&#24076;&#33098;&#23383;&#31526;&#30340;&#29305;&#27530;&#23383;&#31526;&#26159;&#19981;&#20801;&#35768;&#20351;&#29992; <code>\textbf{}</code> &#30340;&#26041;&#24335;&#21152;&#31895;&#30340;&#65292;&#32534;&#35793;&#20250;&#25253;&#38169;&#12290;&#23545;&#20110;&#29305;&#27530;&#23383;&#31526;&#30340;&#21152;&#31895;&#35201;&#20351;&#29992; <code>\pmb{}</code> &#30340;&#26041;&#27861;&#65292;<code>\mathbf{}</code> &#27809;&#26377;&#20316;&#29992;&#12290;</p>
+</dd>
+<dt>dir listing via c/c++</dt>
+<dd><p>source code: <a href="https://github.com/yhlleo/FindFilesWithinFolder/blob/master/FindFiles.cpp">FindFilesWithinFolder/FindFiles.cpp at master &#183; yhlleo/FindFilesWithinFolder</a>.</p>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51029382" class="featured">Qt QImage&#19982;OpenCV Mat&#36716;&#25442; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/liyuanbhu/article/details/46662115">QImage &#19982; cv::Mat &#20043;&#38388;&#30340;&#30456;&#20114;&#36716;&#25442; - Ivan &#30340;&#19987;&#26639; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51280087">Tensorflow 0.8.0 &#23433;&#35013;&#37197;&#32622;&#26041;&#27861; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51302546">Ubuntu &#23433;&#35013;&#26377;&#36947;&#35789;&#20856; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51305403">LMDB installation - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50997822">LaTeX &#21152;&#31895; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51009608" class="featured">C/C++ &#33719;&#21462;&#25991;&#20214;&#22841;&#19979;&#30340;&#25152;&#26377;&#25991;&#20214;&#21015;&#34920; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="&#37197;&#32622;&#26381;&#21153;&#22120;-ssh-&#30331;&#38470;">&#37197;&#32622;&#26381;&#21153;&#22120; SSH &#30331;&#38470;</h2>
+<dl>
+<dt>&#29992;&#25143;&#30340;&#28155;&#21152;&#21644;&#26435;&#38480;&#30340;&#37197;&#32622;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> useradd -r -m -s /bin/bash yhlleo
+<span class="kw">sudo</span> vi /etc/sudoers
+<span class="co"># add this line: `yhlleo ALL=(ALL:ALL) ALL&#39;</span></code></pre></div>
+</dd>
+<dt>ssh &#26381;&#21153;&#22120;&#30340;&#23433;&#35013;&#12289;&#37197;&#32622;&#21644;&#20351;&#29992;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install openssh-server
+<span class="kw">sudo</span> service ssh start
+<span class="kw">sudo</span> service ssh restart</code></pre></div>
+<p><code class="sourceCode bash"><span class="kw">sudo</span> vi /etc/ssh/sshd_config</code></p>
+<pre><code>#ListenAddress :: # &#19981;&#35201;&#21462;&#28040;&#27880;&#37322;, &#22240;&#20026;&#36825;&#26679;&#30340;&#35805;&#65292;ip &#25913;&#20102;&#21518; ssh &#23601;&#30331;&#38470;&#19981;&#36827;&#21435;&#20102;&#12290;
+AllowUsers yhlleo
+PermitRootLogin yes</code></pre>
+</dd>
+<dt>&#20351;&#29992; ssh &#36830;&#25509;&#21040;&#26381;&#21153;&#22120;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ssh</span> yhlleo@192.168.1.108</code></pre></div>
+</dd>
+<dt>&#20854;&#20182;&#31508;&#35760;</dt>
+<dd><dl>
+<dt>&#29992; scp &#20256;&#36882;&#65288;&#25335;&#36125;&#65289;&#25991;&#20214;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">scp</span> /path/to/local/file tzx@192.168.1.108:~/Downloads/
+<span class="kw">scp</span> tzx@192.168.1.108:~/Downloads/file ./</code></pre></div>
+</dd>
+<dt>&#31471;&#21475;&#37325;&#26144;&#23556;</dt>
+<dd><p>&#25226;&#36828;&#31243;&#26381;&#21153;&#22120;&#19978;&#21482;&#33021;&#26412;&#22320;&#25171;&#24320;&#30340;&#31471;&#21475; 8889 &#26144;&#23556;&#21040;&#26412;&#26426;&#31471;&#21475; 8888&#65292;&#36825;&#26679;&#23601;&#33021;&#36890;&#36807; <code>localhost:8888</code> &#35775;&#38382;&#26381;&#21153;&#22120;&#19978;&#30340; 8889 &#31471;&#21475;&#20102;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ssh</span> -N -f -L localhost:8888:localhost:8889 tzx@192.168.1.108</code></pre></div>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/51285545">Ubuntu 14.04 &#36828;&#31243;&#30331;&#24405;&#26381;&#21153;&#22120; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://tangzx.qiniudn.com/post-0109-remote-jupyter.html">Remote Jupyter</a></li>
+<li><a href="http://www.cnblogs.com/chen1987lei/archive/2010/12/02/1894768.html">Ubuntu&#19979;SSH&#35774;&#32622; - BradyChen - &#21338;&#23458;&#22253;</a></li>
+</ul>
+<h2 id="caffe-cuda-cudnn-etc">Caffe, Cuda, cuDNN, etc</h2>
+<dl>
+<dt>install cuda caffe cuDNN</dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>pre</p>
+<ul>
+<li>ubuntu 14.04</li>
+<li><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+<span class="kw">sudo</span> apt-get install --no-install-recommends libboost-all-dev
+<span class="kw">sudo</span> apt-get install libopenblas-dev liblapack-dev libatlas-base-dev
+<span class="kw">sudo</span> apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</code></pre></div></li>
+</ul></li>
+<li><p>nvidia driver</p></li>
+<li><p>cuda lib</p>
+<p>via deb package</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> dpkg -i *cuda*.deb
+<span class="kw">sudo</span> apt-get update
+<span class="kw">sudo</span> apt-get install cuda</code></pre></div>
+<p>set env var</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">PATH=</span>/usr/local/cuda-7.5/bin:<span class="ot">$PATH</span>
+<span class="kw">export</span> <span class="ot">LD_LIBRARY_PATH=</span>/usr/local/cuda-7.5/lib64:<span class="ot">$LD_LIBRARY_PATH</span></code></pre></div></li>
+<li><p>caffe</p>
+<p>git clone, make</p></li>
+<li><p>cuDNN</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> tar xvf cudnn-7.0-linux-x64-v3.0-prod.tgz
+
+<span class="kw">cd</span> cuda/include
+<span class="kw">sudo</span> cp *.h /usr/local/include/
+<span class="kw">cd</span> ../lib64
+<span class="kw">sudo</span> cp lib* /usr/local/lib/
+<span class="kw">cd</span> /usr/local/lib
+<span class="kw">sudo</span> chmod +r libcudnn.so.4.0.4
+<span class="kw">sudo</span> ln -sf libcudnn.so.4.0.4 libcudnn.so.4
+<span class="kw">sudo</span> ln -sf libcudnn.so.4 libcudnn.so
+<span class="kw">sudo</span> ldconfig</code></pre></div></li>
+<li><p>done</p></li>
+</ol>
+</dd>
+<dt>pycaffe &amp; fast-rcnn</dt>
+<dd><ol style="list-style-type: decimal">
+<li><p>install deps</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> apt-get install python-skimage python-protobuf python-yaml
+<span class="kw">sudo</span> pip install easydict</code></pre></div></li>
+<li><p>install opencv3</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mkdir</span> build
+<span class="kw">cd</span> build/
+<span class="kw">cmake</span> -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D WITH_V4L=ON -D WITH_QT=ON -D WITH_OPENGL=ON ..
+<span class="kw">make</span>
+
+<span class="kw">sudo</span> make install
+<span class="kw">sudo</span> /bin/bash -c <span class="st">&#39;echo &quot;/usr/local/lib&quot; &gt; /etc/ld.so.conf.d/opencv.conf&#39;</span>
+<span class="kw">sudo</span> ldconfig
+<span class="kw">sudo</span> apt-get update</code></pre></div></li>
+<li><p>set env var</p>
+<p>add these links to <code>~/.bashrc</code> or <code>~/.zshrc</code> or <code>/etc/profile</code>:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">PYTHONPATH=${HOME}</span>/caffe/python:<span class="ot">$PYTHONPATH</span>
+<span class="kw">export</span> <span class="ot">MATLABPATH=${HOME}</span>/caffe/matlab:<span class="ot">$MATLABPATH</span>
+<span class="kw">export</span> <span class="ot">LD_LIBRARY_PATH=${HOME}</span>/caffe/build/lib:<span class="ot">$LD_LIBRARY_PATH</span>
+<span class="kw">export</span> <span class="ot">PATH=</span>/usr/local/cuda-7.5/bin:<span class="ot">$PATH</span>
+<span class="kw">export</span> <span class="ot">LD_LIBRARY_PATH=</span>/usr/local/lib/:<span class="ot">$LD_LIBRARY_PATH</span></code></pre></div></li>
+<li><p>modify Makefile.config</p>
+<p>use yhlleo&#8217;s config: <a href="https://github.com/yhlleo/caffe.Makefile.config">yhlleo/caffe.Makefile.config: My Makefile.config of caffe.</a>, or rbg&#8217;s: <a href="http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/Makefile.config" class="uri">http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/Makefile.config</a>.</p></li>
+<li><p><code class="sourceCode makefile">make pycaffe</code></p></li>
+<li><p>test with rbg&#8217;s code</p>
+<p>repo: <a href="https://github.com/rbgirshick/py-faster-rcnn" class="featured">rbgirshick/py-faster-rcnn: Faster R-CNN (Python implementation) &#8211; see https://github.com/ShaoqingRen/faster_rcnn for the official MATLAB version</a>.</p></li>
+</ol>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50961542" class="featured">Ubuntu14.04 &#23433;&#35013;CUDA7.5 + Caffe + cuDNN - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50967820" class="featured">pycaffe &#37197;&#32622; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="black-image-etc">black image, etc</h2>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50904358">&#20840;&#40657;&#22270;&#20687;&#21435;&#38500; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50912208">&#35841;&#21435;&#24320;&#20250;&#65311; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="auto-etc">auto, etc</h2>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50865552">C++ decltype&#31867;&#22411;&#35828;&#26126;&#31526; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50864612">C++ auto&#31867;&#22411;&#35828;&#26126;&#31526; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50864565">C&#21644;C++ const&#30340;&#22768;&#26126;&#24046;&#24322; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50864210">C++ constexpr&#31867;&#22411;&#35828;&#26126;&#31526; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50848051" class="featured">&#35745;&#31639;&#26426;&#35270;&#35273;&#24037;&#20855;&#12289;&#20195;&#30721;&#21512;&#38598; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50789265">C/C++ &#22312;&#22788;&#29702;&#25991;&#20214;&#25152;&#22312;&#36335;&#24452;&#19979;&#21019;&#24314;&#23376;&#30446;&#24405; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50782792">C/C++ &#22270;&#20687;&#20108;&#36827;&#21046;&#23384;&#20648;&#19982;&#35835;&#21462; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="cifar-10-datasets">CIFAR-10 datasets</h2>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/50801226">&#20223;&#29031;CIFAR-10&#25968;&#25454;&#38598;&#26684;&#24335;&#65292;&#21046;&#20316;&#33258;&#24049;&#30340;&#25968;&#25454;&#38598; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<h2 id="c">C++</h2>
+<dl>
+<dt>&#32531;&#20914;&#21306;</dt>
+<dd><dl>
+<dt><code class="sourceCode cpp">std::endl</code> &#21487;&#20197;&#21047;&#26032;&#65292;&#23545;&#27604; <code>\n</code>&#65292;<code>std::flush</code> &#21644; <code>std::ends</code> &#31867;&#20284;&#20294;&#19981;&#21516;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">std::cout &lt;&lt; <span class="st">&quot;Hello world!&quot;</span> &lt;&lt; std::flush; <span class="co">// flushes the buffer; adds no data</span>
+std::cout &lt;&lt; <span class="st">&quot;Hello world!&quot;</span> &lt;&lt; std::ends;  <span class="co">// inserts a null, then flushes the buffer</span>
+std::cout &lt;&lt; <span class="st">&quot;Hello world!&quot;</span> &lt;&lt; std::endl;  <span class="co">// inserts a newline, then flushes the buffer</span></code></pre></div>
+</dd>
+<dt>&#21047;&#26032;&#25152;&#26377;&#36755;&#20986;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">std::cout &lt;&lt; std::unitbuf &lt;&lt; <span class="st">&quot;first&quot;</span> &lt;&lt; <span class="st">&quot;second&quot;</span> &lt;&lt; std::nounitbuf;
+<span class="co">// equal to the follow:</span>
+std::cout &lt;&lt; <span class="st">&quot;first&quot;</span> &lt;&lt; std::flush &lt;&lt; <span class="st">&quot;second&quot;</span> &lt;&lt; std::flush;</code></pre></div>
+</dd>
+<dt><code class="sourceCode cpp">tie</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/* the library ties std::cin and std::cout */</span>
+std::cin.tie( &amp;std::cout );
+ostream *old_tie = std::cin.tie();
+
+<span class="co">/*</span>
+<span class="co">    break tie to std::cout, std::cout no longer flushed</span>
+<span class="co">    when std::cin is read</span>
+<span class="co">*/</span>
+std::cin.tie( <span class="dv">0</span> );
+
+<span class="co">/* restablish normal tie between std::cin and std::cout */</span>
+std::cin.tie( old_tie );</code></pre></div>
+</dd>
+</dl>
+</dd>
+<dt>&#23481;&#22120;</dt>
+<dd><p><code>vector</code>, <code>list</code>, <code>deque</code></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">list&lt;string&gt; sList(sVec.begin(), sVec.end());
+
+<span class="co">// calculate the midpoint in the vector</span>
+vector&lt;string&gt;::iterator mid = sVec.begin() + sVec.size() / <span class="dv">2</span>;
+
+<span class="co">// also can initialize with a pointer</span>
+<span class="dt">char</span> *words[] = {<span class="st">&quot;first&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;third&quot;</span>, <span class="st">&quot;forth&quot;</span>};
+<span class="dt">int</span> sizeOfWords = <span class="kw">sizeof</span>(words) / (<span class="kw">sizeof</span>(words[<span class="dv">0</span>]));
+vector&lt;string&gt; word2(words, words + sizeOfWords);</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">const</span> list&lt;<span class="dt">int</span>&gt;::size_type listSize = <span class="dv">64</span>; <span class="co">// also can be: int listSize = 64</span>
+list&lt;std::string&gt; lstr(listSize, <span class="st">&quot;str&quot;</span>);  <span class="co">// 64 strings, each is str</span>
+
+vector&lt;<span class="dt">int</span>&gt; iVec(listSize); <span class="co">// 64 ints, each initialized to 0</span></code></pre></div>
+<ul>
+<li><code class="sourceCode cpp">c.begin()</code></li>
+<li><code class="sourceCode cpp">c.end()</code></li>
+<li><code class="sourceCode cpp">c.rbegin()</code></li>
+<li><code class="sourceCode cpp">c.rend()</code></li>
+<li><code class="sourceCode cpp">c.cbegin()</code></li>
+<li><code class="sourceCode cpp">c.cend()</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// insert an element</span>
+vector&lt;string&gt; sVec;
+string str(<span class="st">&quot;Insert&quot;</span>);
+<span class="co">// warning: inserting anywhere but at the end of a vector is an expensive operation</span>
+sVec.insert(sVec.begin(), str);</code></pre></div>
+<p>TODO</p>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/47734479">C++ &#36755;&#20986;&#32531;&#20914;&#21306;&#30340;&#31649;&#29702; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/47759729">C++ &#23481;&#22120;&#65288;&#19968;&#65289;&#65306;&#39034;&#24207;&#23481;&#22120;&#31616;&#20171; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<p><a href="http://blog.csdn.net/YhL_Leo/article/details/47707679">Opencv &#19977;&#27425;&#26679;&#26465;&#26354;&#32447; (Cubic Spline) &#25554;&#20540; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></p>
+<p><a href="http://blog.csdn.net/YhL_Leo/article/details/47683127">Opencv Mat &#30340;&#19977;&#31181;&#24120;&#29992;&#31867;&#22411;&#31616;&#20171; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></p>
+<h2 id="opencv-yaml-&#21644;-xml-&#26684;&#24335;&#25991;&#20214;&#25805;&#20316;&#35814;&#35299;">Opencv YAML &#21644; XML &#26684;&#24335;&#25991;&#20214;&#25805;&#20316;&#35814;&#35299;</h2>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/YhL_Leo/article/details/47660943" class="heart">Opencv YAML &#21644; XML &#26684;&#24335;&#25991;&#20214;&#25805;&#20316;&#35814;&#35299; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+</ul>
+<p><a href="http://blog.csdn.net/YhL_Leo/article/details/47617553">Android &#32534;&#35793;&#29615;&#22659;&#37197;&#32622; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></p>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

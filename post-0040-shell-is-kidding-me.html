@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-02-13" />
+  <title>&#35753; Shell &#21898;&#20320;&#22238;&#23478;&#21507;&#39277;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#35753; Shell &#21898;&#20320;&#22238;&#23478;&#21507;&#39277;</h1>
+<h3 class="date">2015-02-13</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#35753;-shell-&#21898;&#20320;&#22238;&#23478;&#21507;&#39277;">&#35753; Shell &#21898;&#20320;&#22238;&#23478;&#21507;&#39277;</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#35753;-shell-&#21898;&#20320;&#22238;&#23478;&#21507;&#39277;">&#35753; Shell &#21898;&#20320;&#22238;&#23478;&#21507;&#39277;</h1>
+<p>&#25105;&#24050;&#32463;&#19981;&#30693;&#36947;&#26159;&#21738;&#22825;&#22312;&#21738;&#20010;&#32593;&#31449;&#30475;&#21040;&#30340;&#36825;&#20010; tip&#65292;&#22312; <code>.zshrc</code> &#21152;&#20102;&#36825;&#21477;&#35805;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cowsay</span> -f <span class="ot">$(</span><span class="kw">ls</span> /usr/share/cowsay/cows <span class="kw">|</span> <span class="kw">shuf</span> -n 1 <span class="kw">|</span> <span class="kw">cut</span> -d. -f1<span class="ot">)</span> <span class="ot">$(</span><span class="kw">whatis</span> <span class="ot">$(</span><span class="kw">ls</span> /bin<span class="ot">)</span> <span class="kw">2&gt;</span>/dev/null <span class="kw">|</span> <span class="kw">shuf</span> -n 1<span class="ot">)</span></code></pre></div>
+<p>&#19979;&#27425;&#25171;&#24320; Shell &#23601;&#20250;&#26377;&#20010;&#23567;&#21160;&#29289;&#20687;&#20320;&#38382;&#22909;&#65292;&#23601;&#20687;&#36825;&#26679;&#65306;</p>
+<pre class="tzx-plain"><code>                         __________________________________
+                        &lt; dd (1) - convert and copy a file &gt;
+                         ----------------------------------
+                           \         ,        ,
+                            \       /(        )`
+                             \      \ \___   / |
+                                    /- _  `-/  &#39;
+                                   (/\/ \ \   /\
+                                   / /   | `    \
+                                   O O   ) /    |
+                                   `-^--&#39;`&lt;     &#39;
+                                  (_.)  _  )   /
+                                   `.___/`    /
+                                     `-----&#39; /
+                        &lt;----.     __ / __   \
+                        &lt;----|====O)))==) \) /====
+                        &lt;----&#39;    `--&#39; `.__,&#39; \
+                                     |        |
+                                      \       /
+                                ______( (_  / \______
+                              ,&#39;  ,-----&#39;   |        \
+                              `--{__________)        \/
+</code></pre>
+<p>&#19981;&#36807;&#65292;&#28982;&#21518;&#23601;&#34987;&#38647;&#21040;&#20102;&#12290;</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/cowsay.jpg" alt="cowsay &#20320;&#19981;&#35201;&#65288;&#31361;&#28982;&#65289;&#36825;&#20040;&#37325;&#21475;&#8230;&#8230;" />
+<p class="caption">cowsay &#20320;&#19981;&#35201;&#65288;&#31361;&#28982;&#65289;&#36825;&#20040;&#37325;&#21475;&#8230;&#8230;</p>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#shell">shell</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0040-shell-is-kidding-me.md" title="48 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0040-shell-is-kidding-me.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 48,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

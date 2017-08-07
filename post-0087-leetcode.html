@@ -1,0 +1,1071 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2016-03-02" />
+  <title>Leet Code</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+<style>.tzx-tabs ul li a:hover {    border-bottom: none;}pre {    font-size: 80%;}</style>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Leet Code</h1>
+<h3 class="date">2016-03-02</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#leet-code">Leet Code</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="leet-code">Leet Code</h1>
+<p>This post is terrible, Please check out <a href="http://tangzx.qiniudn.com/notes/lang/algo.html" class="uri">http://tangzx.qiniudn.com/notes/lang/algo.html</a> &#128516;.</p>
+<pre><code>&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Leet Code Intro](#tab11)
+-   [F.A.Q.](#tab12)
+-   [Term Uses](#tab13)
+
+&lt;div id=&quot;tab11&quot;&gt;
+LeetCode OJ is a platform for preparing technical coding interviews. Pick from
+an expanding library of more than 190 questions, code and submit your solution
+to see if you have solved it correctly. It is that easy!
+
+Our platform currently supports a total of 9 languages: C, C++, Java, Python,
+C#, JavaScript, Ruby, Bash, MySQL.
+&lt;/div&gt;
+
+&lt;div id=&quot;tab12&quot;&gt;
+What does `[1,null,2,3]` mean in binary tree representation?
+
+:   The input `[1,null,2,3]` represents the serialized format of a binary tree
+    using level order traversal, where null signifies a path terminator where
+    no node exists below. StefanPochmann made an interesting tree visualizer
+    tool.  Check out some examples below.
+&lt;/div&gt;
+
+&lt;div id=&quot;tab13&quot;&gt;
+This Agreement was last modified on February 10, 2014.
+
+Please read these Terms and Conditions (&quot;Agreement&quot;, &quot;Terms of Service&quot;)
+carefully before using leetcode.com (&quot;the Site&quot;) operated by LeetCode (&quot;us&quot;,
+&quot;we&quot;, or &quot;our&quot;). This Agreement sets forth the legally binding terms and
+conditions for your use of the Site at leetcode.com.
+
+By accessing or using the Site in any manner, including, but not limited to,
+visiting or browsing the Site or contributing content or other materials to the
+Site, you agree to be bound by these Terms and Conditions. Capitalized terms
+are defined in this Agreement.
+&lt;/div&gt;
+&lt;/div&gt;
+
+---
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Tenth Line](#tab1q1)
+-   [Tenth Line (Bash)](#tab1a1)
+
+&lt;div id=&quot;tab1q1&quot;&gt;
+[Tenth Line | LeetCode OJ](https://leetcode.com/problems/tenth-line/)
+
+:   How would you print just the 10th line of a file?
+
+    For example, assume that file.txt has the following content:
+
+        Line 1
+        Line 2
+        Line 3
+        Line 4
+        Line 5
+        Line 6
+        Line 7
+        Line 8
+        Line 9
+        Line 10
+
+    Your script should output the tenth line, which is:
+
+        Line 10
+&lt;/div&gt;
+
+~~~ {#tab1a1 .bash}
+// failed
+cat file.txt | head -n 10 | tail -n 1
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Single Number](#tab1q2)
+-   [Single Number (C)](#tab1a2)
+
+&lt;div id=&quot;tab1q2&quot;&gt;
+[Single Number | LeetCode OJ](https://leetcode.com/problems/single-number/)
+
+:   Given an array of integers, every element appears twice except for one.
+    Find that single one.
+
+    Note
+      ~ Your algorithm should have a linear runtime complexity. Could you
+        implement it without using extra memory?
+&lt;/div&gt;
+
+~~~ {#tab1a2 .c}
+int compare( void *a, void *b ) {
+    return *(int *)a - *(int *)b;
+}
+
+int singleNumber(int* nums, int numsSize) {
+    qsort( nums, numsSize, sizeof(int), compare );
+    for (int i = 0; i + 1 &lt; numsSize; i += 2 ) {
+        if ( nums[i] != nums[i+1] ) {
+            return nums[i];
+        }
+    }
+    return nums[numsSize-1];
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Self Crossing (Median)](#tab1q3)
+-   [Self Crossing (C)](#tab1a3)
+-   [Self Crossing (Better C)](#line129)
+
+&lt;div id=&quot;tab1q3&quot;&gt;
+[Self Crossing | LeetCode OJ](https://leetcode.com/problems/self-crossing/)
+
+:   You are given an array `x` of `n` positive numbers. You start at point `(0,0)`
+    and moves `x[0]` metres to the north, then `x[1]` metres to the west,
+    `x[2]` metres to the south, `x[3]` metres to the east and so on. In other
+    words, after each move your direction changes counter-clockwise.
+
+    Write a one-pass algorithm with `O(1)` extra space to determine, if your
+    path crosses itself, or not.
+
+    Example 1
+
+    :   Given `x = [2, 1, 1, 2]`,
+
+            &#9484;&#9472;&#9472;&#9472;&#9488;
+            &#9474;   &#9474;
+            &#9492;&#9472;&#9472;&#9472;&#9532;&#9472;&#9472;&gt;
+                &#9474;
+
+        Return `true` (self crossing)
+
+    Example 2
+
+    :   Given x = [1, 2, 3, 4],
+
+            &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+            &#9474;      &#9474;
+            &#9474;
+            &#9474;
+            &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&gt;
+
+        Return `false` (not self crossing)
+
+    Example 3
+
+    :   Given `x = [1, 1, 1, 1]`,
+
+            &#9484;&#9472;&#9472;&#9472;&#9488;
+            &#9474;   &#9474;
+            &#9492;&#9472;&#9472;&#9472;&#9532;&gt;
+
+        Return `true` (self crossing)
+&lt;/div&gt;
+
+~~~ {#tab1a3 .c}
+bool isPerfectCollapsing( int cur, int len, int *data )
+{
+    while ( cur &lt; len ) {
+        if ( data[cur] &lt; data[cur-2] ) {
+            ++cur;
+        } else { return false; }
+    }
+    return true;
+}
+
+bool isPerfect( int *data, int len )
+{
+    if ( len &lt;= 2 ) { return true; }
+    if ( len &gt;= 5 &amp;&amp; data[3]==data[1] &amp;&amp; data[0]+data[4]&gt;=data[2] ) {
+        return false;
+    }
+    int cur = 2;
+    while ( cur &lt; len ) {
+        // perfect expanding
+        if ( data[cur] &gt; data[cur-2] ) {
+            ++cur;
+        } else {
+            if ( cur == 2 || cur == 3 ) {
+                return isPerfectCollapsing( ++cur, len, data );
+            } else {
+                if ( data[cur]+data[cur-4] &gt;= data[cur-2] ) {
+                    ++cur;
+                    if ( cur &lt; len ) {
+                        if ( data[cur]+data[cur-4] &gt;= data[cur-2] ) {
+                            return false;
+                        } else { return isPerfectCollapsing(++cur, len, data); }
+                    } else { return true; }
+                } else { return isPerfectCollapsing(++cur, len, data); }
+            }
+        }
+    }
+    return true; // perfect expanding
+}
+
+bool isSelfCrossing( int *x, int xSize ) {
+    return !isPerfect( x, xSize );
+}
+~~~
+
+~~~ {#line129 .c}
+/*          =   a l l    c a s e s   =
+
+    case 1     case 2: expanding   case 3: collapsing
+                    (global)           (local)
+                 (not crossing)   (may not crossing)
+
+   &lt;------+     +------------+      +---------+
+          |     |            |      |         |
+          |     |  +-----+   |      |  +---+  |
+          |     |  |     |   |      |  |   |  :
+          #     |  |     #   |      |  v   |  :
+                |  |         |      |      |
+                |  +---------+      +------+
+                |
+                +---------&gt;
+
+    case 4: failed expanding
+
+     +----+
+     |    |
+     |  &lt;----[2]----^     [2]: second failure
+     |    #         |
+     |             [1]    [1]: first  failure
+     |              |
+     +--------------+
+
+    case 5: failed expanding &amp; then collapsing
+
+     +----+
+     |    |
+     |    |  +------+
+     |    #  | [C]  |     [C]: may be perfectly collapsed
+     |       +---&gt;  |
+     |              |
+     +--------------+
+
+    case 6: failed expanding
+
+        +---+
+        |   |
+        |   |
+        |   #
+        |
+      &lt;---[2]----+        [2]: second failure
+        |        |
+        |       [1]       [1]: first  failure
+        |        |
+        +--------+
+
+    case 7: failed expanding &amp; then collapsing
+
+        +------+
+        |      |
+        |      #
+        |
+        |  +-----------+
+        |  |  +-----+  |
+        |  |  +--&gt;  | [1] [1]: failure
+        |  |        |  |
+        |  +--------+  |
+        +--------------+
+
+   *notice: case 3 = case 6 + case 7
+
+    case 8: docking!
+
+        +-------+
+        |       |
+        |       +
+        |
+        |       ^
+        |       |
+        +-------+
+
+#: starting point
+*/
+
+// case 3
+bool isPerfectCollapsing( int cur, int len, int *data )
+{
+    while ( cur &lt; len ) {
+        if ( data[cur] &lt; data[cur-2] ) {
+            ++cur;
+        } else { return false; }
+    }
+    return true;
+}
+
+bool isPerfect( int *data, int len )
+{
+    // case 1
+    if ( len &lt;= 2 ) { return true; }
+    // case 8
+    if ( len &gt;= 5 &amp;&amp;
+         data[3]==data[1] &amp;&amp;
+         data[2]&lt;=data[0]+data[4] )
+    {
+        return false;
+    }
+
+    int cur = 2;
+    while ( cur &lt; len &amp;&amp; data[cur] &gt; data[cur-2] ) {
+        ++cur;
+    }
+    if ( cur == len || cur == len-1 ) {
+        // case 2: perfect expanding
+        return true;
+    }
+
+    // collapsed!
+    if ( cur == 2 || cur == 3 ) {
+        // case 3
+        return isPerfectCollapsing( ++cur, len, data );
+    }
+
+    if ( data[cur]+data[cur-4] &gt;= data[cur-2] ) {                    // case 4/5
+        if ( ++cur &lt; len ) {
+            if ( data[cur]+data[cur-4] &gt;= data[cur-2] ) {            // case 4
+                return false;
+            } else { return isPerfectCollapsing(++cur, len, data); } // case 5
+        } else { return true; }
+    } else { return isPerfectCollapsing(++cur, len, data); }         // case 6/7
+}
+
+bool isSelfCrossing( int *x, int xSize ) {
+    return !isPerfect( x, xSize );
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Remove Duplicates from Sorted Array (Easy)](#dup-q1)
+-   [Remove Duplicates from Sorted Array (C)](#dup-a1)
+
+&lt;div id=&quot;dup-q1&quot;&gt;
+[Remove Duplicates from Sorted Array | LeetCode OJ](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
+
+:   Given a sorted array, remove the duplicates in place such that each element
+    appear only once and return the new length.
+
+    Do not allocate extra space for another array, you must do this in place
+    with constant memory.
+
+    For example
+
+    :   Given input array `nums = [1,1,2]`,
+
+        Your function should return `length = 2`, with the first two elements
+        of nums being `1` and `2` respectively. It doesn&#39;t matter what you
+        leave beyond the new length.
+&lt;/div&gt;
+
+~~~ {#dup-a1 .c}
+int removeDuplicates(int* nums, int numsSize) {
+    int cnt=0;
+    for( int i = 0; i &lt; numsSize;  ) {
+        int j=1;
+        while(nums[i+j]==nums[i]) {
+            ++j;
+        }
+        nums[cnt]=nums[i];
+        i+=j;
+        ++cnt;
+    }
+    return cnt;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Power of Three (Easy)](#line231)
+-   [Power of Three (C)](#line232)
+
+&lt;div id=&quot;line231&quot;&gt;
+[Power of Three | LeetCode OJ](https://leetcode.com/problems/power-of-three/)
+
+:   Given an integer, write a function to determine if it is a power of three.
+
+    Follow up
+      ~ Could you do it without using any loop / recursion?
+&lt;/div&gt;
+
+~~~ {#line232 .c}
+bool isPowerOfThree(int n) {
+    if ( n &lt;= 0 ) {
+        return false;
+    }
+    int p = log2( n ) / log2( 3 );
+    return (int)pow(3, p) == n;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Balanced Binary Tree (Easy)](#line259)
+-   [Balanced Binary Tree (C)](#line260)
+
+&lt;div id=&quot;line259&quot;&gt;
+[Balanced Binary Tree | LeetCode OJ](https://leetcode.com/problems/balanced-binary-tree/)
+
+:   Given a binary tree, determine if it is height-balanced.
+
+    For this problem, a height-balanced binary tree is defined as a binary tree
+    in which the depth of the two subtrees of every node never differ by more
+    than 1.
+&lt;/div&gt;
+
+~~~ {#line260 .c}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int depth( struct TreeNode* tree ) {
+    if ( !tree ) {
+        return 0;
+    }
+    if ( !(tree-&gt;left) &amp;&amp; !(tree-&gt;right) ) {
+        return 1;
+    }
+    if ( tree-&gt;left &amp;&amp; !(tree-&gt;right) ) {
+        return depth( tree-&gt;left ) + 1;
+    }
+    if ( tree-&gt;right &amp;&amp; !(tree-&gt;left) ) {
+        return depth( tree-&gt;right ) + 1;
+    }
+
+    int dl = depth( tree-&gt;left );
+    int dr = depth( tree-&gt;right );
+    return 1 + (dl &lt; dr ? dr : dl);
+}
+
+bool isBalanced(struct TreeNode* root) {
+    if ( !root ) { return true; }
+    int dl = depth(root-&gt;left);
+    int dr = depth(root-&gt;right);
+    // printf(&quot;dl:%d, dr:%d&quot;, dl, dr);
+    if ( abs(dl-dr) &gt; 1 ) {
+        return false;
+    }
+    return isBalanced( root-&gt;left ) &amp;&amp; isBalanced( root-&gt;right );
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Maximum Depth of Binary Tree (Easy)](#line314)
+-   [Maximum Depth of Binary Tree (C)](#line315)
+
+&lt;div id=&quot;line314&quot;&gt;
+[Maximum Depth of Binary Tree | LeetCode OJ](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+:   Given a binary tree, find its maximum depth.
+
+    The maximum depth is the number of nodes along the longest path from the
+    root node down to the farthest leaf node.
+&lt;/div&gt;
+
+~~~ {#line315 .c}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+int depth( struct TreeNode* tree ) {
+    if ( !tree ) {
+        return 0;
+    }
+    if ( !(tree-&gt;left) &amp;&amp; !(tree-&gt;right) ) {
+        return 1;
+    }
+    if ( tree-&gt;left &amp;&amp; !(tree-&gt;right) ) {
+        return depth( tree-&gt;left ) + 1;
+    }
+    if ( tree-&gt;right &amp;&amp; !(tree-&gt;left) ) {
+        return depth( tree-&gt;right ) + 1;
+    }
+
+    int dl = depth( tree-&gt;left );
+    int dr = depth( tree-&gt;right );
+    return 1 + (dl &lt; dr ? dr : dl);
+}
+
+int maxDepth(struct TreeNode* root) {
+    return depth( root );
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Minimum Depth of Binary Tree (Easy)](#line360)
+-   [Minimum Depth of Binary Tree (C)](#line361)
+
+&lt;div id=&quot;line360&quot;&gt;
+[Minimum Depth of Binary Tree | LeetCode OJ](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
+
+:   Given a binary tree, find its minimum depth.
+
+    The minimum depth is the number of nodes along the shortest path from the
+    root node down to the nearest leaf node.
+&lt;/div&gt;
+
+~~~ {#line361 .c}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+int minDepth(struct TreeNode* root) {
+    if ( !root ) {
+        return 0;
+    }
+    if ( !(root-&gt;left) &amp;&amp; !(root-&gt;right) ) {
+        return 1;
+    }
+    if ( !(root-&gt;left) &amp;&amp; (root-&gt;right) ) {
+        return 1 + minDepth(root-&gt;right);
+    }
+    if ( !(root-&gt;right) &amp;&amp; (root-&gt;left) ) {
+        return 1 + minDepth(root-&gt;left);
+    }
+
+    int dl = minDepth( root-&gt;left );
+    int dr = minDepth( root-&gt;right );
+    return 1 + (dl &lt; dr ? dl : dr);
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Bulb Switch (Median)](#line403)
+-   [Bulb Switch (C)](#line404)
+
+&lt;div id=&quot;line403&quot;&gt;
+[Bulb Switcher | LeetCode OJ](https://leetcode.com/problems/bulb-switcher/)
+
+:   There are `n` bulbs that are initially off. You first turn on all the bulbs.
+    Then, you turn off every second bulb. On the third round, you toggle every
+    third bulb (turning on if it&#39;s off or turning off if it&#39;s on). For the `i`th
+    round, you toggle every `i` bulb. For the nth round, you only toggle the last
+    bulb. Find how many bulbs are on after `n` rounds.
+
+    Example
+
+    :   Given `n = 3`.
+
+        * At first, the three bulbs are `[off, off, off]`.
+        * After first round, the three bulbs are `[on, on, on]`.
+        * After second round, the three bulbs are `[on, off, on]`.
+        * After third round, the three bulbs are `[on, off, off]`.
+
+        So you should return `1`, because there is only one bulb is on.
+&lt;/div&gt;
+
+~~~ {#line404 .c}
+// how to?
+int hit( int n )
+{
+    int cnt = 1;
+    for( int i = 2; i &lt; n; ++i ) {
+        if ( n%i==0 ) { ++cnt; }
+    }
+    return cnt;
+}
+
+int bulbSwitch(int n) {
+    if ( n == 0 || n == 1 ) { return n; }
+    int cnt = n;
+    for( int i = 2; i &lt;=n ; ++i ) {
+        if ( hit(i)%2!=0 ) {
+            cnt -= n/i;
+        } else {
+            cnt += n/i;
+        }
+    }
+    return cnt;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Implement Queue using Stacks (Easy)](#line450)
+-   [Implement Queue using Stacks (C)](#line451)
+
+&lt;div id=&quot;line450&quot;&gt;
+[Implement Queue using Stacks | LeetCode OJ](https://leetcode.com/problems/implement-queue-using-stacks/)
+
+:   Implement the following operations of a queue using stacks.
+
+    * `push(x)` -- Push element `x` to the back of queue.
+    * `pop()` -- Removes the element from in front of queue.
+    * `peek()` -- Get the front element.
+    * `empty()` -- Return whether the queue is empty.
+
+    Notes
+      ~ You must use only standard operations of a stack -- which means only
+        push to top, peek/pop from top, size, and is empty operations are valid.
+      ~ Depending on your language, stack may not be supported natively. You
+        may simulate a stack by using a list or deque (double-ended queue), as
+        long as you use only standard operations of a stack.
+      ~ You may assume that all operations are valid (for example, no pop or
+        peek operations will be called on an empty queue).
+&lt;/div&gt;
+
+~~~ {#line451 .c}
+typedef struct {
+    int *data;
+    int front;
+    int back;
+    // [ -- :front: --data-- :back: --]
+} Queue;
+
+/* Create a queue */
+void queueCreate(Queue *queue, int maxSize) {
+    queue-&gt;data = (int *)malloc( sizeof(int)*maxSize );
+    queue-&gt;front = 0;
+    queue-&gt;back = -1;
+}
+
+/* Push element x to the back of queue */
+void queuePush(Queue *queue, int element) {
+    queue-&gt;data[++(queue-&gt;back)] = element;
+}
+
+/* Removes the element from front of queue */
+void queuePop(Queue *queue) {
+    ++(queue-&gt;front);
+}
+
+/* Get the front element */
+int queuePeek(Queue *queue) {
+    return queue-&gt;data[queue-&gt;front];
+}
+
+/* Return whether the queue is empty */
+bool queueEmpty(Queue *queue) {
+    return queue-&gt;front &gt; queue-&gt;back;
+}
+
+/* Destroy the queue */
+void queueDestroy(Queue *queue) {
+    free( queue-&gt;data );
+    queue-&gt;front = 0;
+    queue-&gt;back = -1;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Implement Stack using Queues (Easy)](#line516)
+-   [Implement Stack using Queues (C)](#line517)
+
+&lt;div id=&quot;line516&quot;&gt;
+[Implement Stack using Queues | LeetCode OJ](https://leetcode.com/problems/implement-stack-using-queues/)
+
+:   Implement the following operations of a stack using queues.
+
+    * `push(x)` -- Push element `x` onto stack.
+    * `pop()` -- Removes the element on top of the stack.
+    * `top()` -- Get the top element.
+    * `empty()` -- Return whether the stack is empty.
+
+    Notes
+      ~ You must use only standard operations of a queue -- which means only
+        push to back, peek/pop from front, size, and is empty operations are
+        valid.
+      ~ Depending on your language, queue may not be supported natively. You
+        may simulate a queue by using a list or deque (double-ended queue), as
+        long as you use only standard operations of a queue.
+      ~ You may assume that all operations are valid (for example, no pop or
+        top operations will be called on an empty stack).
+&lt;/div&gt;
+
+~~~ {#line517 .c}
+typedef struct {
+    int *data;
+    int cursor;
+} Stack;
+
+/* Create a stack */
+void stackCreate(Stack *stack, int maxSize) {
+    stack-&gt;data = (int *)malloc( sizeof(int)*maxSize );
+    stack-&gt;cursor = -1;
+}
+
+/* Push element x onto stack */
+void stackPush(Stack *stack, int element) {
+    stack-&gt;data[++(stack-&gt;cursor)] = element;
+}
+
+/* Removes the element on top of the stack */
+void stackPop(Stack *stack) {
+    --(stack-&gt;cursor);
+}
+
+/* Get the top element */
+int stackTop(Stack *stack) {
+    return stack-&gt;data[stack-&gt;cursor];
+}
+
+/* Return whether the stack is empty */
+bool stackEmpty(Stack *stack) {
+    return stack-&gt;cursor &lt; 0;
+}
+
+/* Destroy the stack */
+void stackDestroy(Stack *stack) {
+    free( stack-&gt;data );
+    stack-&gt;cursor = -1;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Binary Search Tree Iterator (Median)](#line576)
+-   [Binary Search Tree Iterator (C)](#line577)
+
+&lt;div id=&quot;line576&quot;&gt;
+[Binary Search Tree Iterator | LeetCode OJ](https://leetcode.com/problems/binary-search-tree-iterator/)
+
+:   Implement an iterator over a binary search tree (BST). Your iterator will
+    be initialized with the root node of a BST.
+
+    Calling `next()` will return the next smallest number in the BST.
+
+    Note
+      ~ `next()` and `hasNext()` should run in average `O(1)` time and uses
+        `O(h)` memory, where `h` is the height of the tree.
+&lt;/div&gt;
+
+~~~ {#line577 .c}
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+struct BSTIterator {
+    struct TreeNode *root;
+    int count;
+    int cursor;
+    int *data;
+}; 
+
+int count( struct TreeNode *root )
+{
+    if ( !root ) { return 0; }
+    if ( !(root-&gt;left) ) { return 1+count(root-&gt;right); }
+    if ( !(root-&gt;right) ) { return 1+count(root-&gt;left); }
+    return 1 + count(root-&gt;left) + count(root-&gt;right);
+}
+
+void traverse( struct TreeNode *root, struct BSTIterator *iter )
+{
+    if( !root ) { return; }
+    traverse( root-&gt;left, iter );
+    iter-&gt;data[(iter-&gt;cursor)++] = root-&gt;val;
+    traverse( root-&gt;right, iter );
+}
+
+struct BSTIterator *bstIteratorCreate(struct TreeNode *root) {
+    struct BSTIterator *iter = malloc( sizeof(struct BSTIterator) );
+    iter-&gt;root = root;
+    iter-&gt;count = count(root);
+    iter-&gt;data = (int *)malloc( sizeof(int)*iter-&gt;count );
+    iter-&gt;cursor = 0;
+    traverse( root, iter );
+    iter-&gt;cursor = 0;
+    return iter;
+}
+
+/** @return whether we have a next smallest number */
+bool bstIteratorHasNext(struct BSTIterator *iter) {
+    return iter-&gt;cursor &lt; iter-&gt;count;
+}
+
+/** @return the next smallest number */
+int bstIteratorNext(struct BSTIterator *iter) {
+    return iter-&gt;data[(iter-&gt;cursor)++];
+}
+
+/** Deallocates memory previously allocated for the iterator */
+void bstIteratorFree(struct BSTIterator *iter) {
+    free( iter-&gt;data );
+}
+
+/**
+ * Your BSTIterator will be called like this:
+ * struct BSTIterator *i = bstIteratorCreate(root);
+ * while (bstIteratorHasNext(i)) printf(&quot;%d\n&quot;, bstIteratorNext(i));
+ * bstIteratorFree(i);
+ */
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Binary Tree Inorder Traversal (Median)](#line658)
+-   [Binary Tree Inorder Traversal (C)](#line659)
+
+&lt;div id=&quot;line658&quot;&gt;
+[Binary Tree Inorder Traversal | LeetCode OJ](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+
+:   Given a binary tree, return the inorder traversal of its nodes&#39; values.
+
+    For example
+
+    :   Given binary tree `{1,#,2,3}`,
+
+               1
+                \
+                 2
+                /
+               3
+
+        return `[1,3,2]`.
+&lt;/div&gt;
+
+~~~ {#line659 .c}
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+/**
+ * Return an array of size *returnSize.
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+int count( struct TreeNode *root )
+{
+    if ( !root ) { return 0; }
+    return 1+count(root-&gt;right)+count(root-&gt;left);
+}
+
+void traverse( struct TreeNode *root, int *data, int *cursor )
+{
+    if ( !root ) { return; }
+    traverse( root-&gt;left, data, cursor );
+    data[(*cursor)++] = root-&gt;val;
+    traverse( root-&gt;right, data, cursor );
+}
+
+int* inorderTraversal(struct TreeNode* root, int* returnSize) {
+    *returnSize = count( root );
+    int *data = malloc( sizeof(int)*(*returnSize) );
+    int cursor = 0;
+    traverse( root, data, &amp;cursor );
+    return data;
+}
+~~~
+&lt;/div&gt;
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Segments](#line891)
+-   [Segments (C)](#line892)
+
+&lt;div id=&quot;line891&quot;&gt;
+[OpenJudge - 4114:Segments](http://bailian.openjudge.cn/practice/4114/)
+
+:   &#24635;&#26102;&#38388;&#38480;&#21046;:
+      ~ 1000ms
+    &#20869;&#23384;&#38480;&#21046;:
+      ~ 65536kB
+    &#25551;&#36848;
+      ~ Given n segments in the two dimensional space, write a program, which
+        determines if there exists a line such that after projecting these
+        segments on it, all projected segments have at least one point in
+        common.
+    &#36755;&#20837;
+      ~ Input begins with a number T showing the number of test cases and then,
+        T test cases follow. Each test case begins with a line containing a
+        positive integer n &#8804; 100 showing the number of segments. After that, n
+        lines containing four real numbers x1 y1 x2 y2 follow, in which (x1,
+        y1) and (x2, y2) are the coordinates of the two endpoints for one of
+        the segments.
+    &#36755;&#20986;
+      ~ For each test case, your program must output &quot;Yes!&quot;, if a line with
+        desired property exists and must output &quot;No!&quot; otherwise. You must
+        assume that two floating point numbers a and b are equal if |a - b| &lt;
+        10-8.
+    &#26679;&#20363;&#36755;&#20837;
+      ~ ```plain
+        3
+        2
+        1.0 2.0 3.0 4.0
+        4.0 5.0 6.0 7.0
+        3
+        0.0 0.0 0.0 1.0
+        0.0 1.0 0.0 2.0
+        1.0 1.0 2.0 1.0
+        3
+        0.0 0.0 0.0 1.0
+        0.0 2.0 0.0 3.0
+        1.0 1.0 2.0 1.0
+        ```
+    &#26679;&#20363;&#36755;&#20986;
+      ~ ```plain
+        Yes!
+        Yes!
+        No!
+        ```
+    &#26469;&#28304;
+      ~ Amirkabir University of Technology Local Contest 2006
+&lt;/div&gt;
+
+~~~ {#line892 .c}
+// todo
+~~~
+&lt;/div&gt;
+
+---
+
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [Roman to Integer (Easy)](#)
+-   [](#)
+
+&lt;div id=&quot;p95line952&quot;&gt;
+Given a roman numeral, convert it to an integer.
+
+Input is guaranteed to be within the range from 1 to 3999.
+&lt;/div&gt;
+
+~~~ {#p99line948 .c}
+bool falling( const char *cur, const char *next )
+{
+    return char2int(cur) &gt;= char2int(next);
+}
+
+int char2int( const char *c )
+{
+    switch ( *c ) {
+        case &#39;I&#39;: return 1;
+        case &#39;V&#39;: return 5;
+        case &#39;X&#39;: return 10;
+        case &#39;L&#39;: return 50;
+        case &#39;C&#39;: return 100;
+        case &#39;D&#39;: return 500;
+        case &#39;M&#39;: return 1000;
+        default: return 0;
+    }
+}
+
+int romanToInt(char* s) {
+    if ( !*s ) { return 0; }
+
+    int result = 0;
+    while( *s ) {
+        if ( *(s+1) ) {
+            if ( falling(s, s+1) ) {
+                result += char2int(s);
+            } else {
+                result -= char2int(s);
+            }
+            ++s;
+        } else {
+            result += char2int(s);
+            return result;
+        }
+    }
+}
+```
+&lt;/div&gt;
+
+&lt;!--
+&lt;div class=&quot;tzx-tabs&quot;&gt;
+-   [](#)
+-   [](#)
+
+&lt;div id=&quot;&quot;&gt;
+&lt;/div&gt;
+
+~~~ {# .c}
+~~~
+&lt;/div&gt;
+
+[OpenJudge - G:I Love this Game!](http://www.bailian.openjudge.cn/2015finalexam/G/)
+--&gt;</code></pre>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#leetcode">leetcode</a></li>
+<li><a class="tzx-tag" href="tags.html/#programming">programming</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0087-leetcode.md" title="44 insertions(+), 40 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0087-leetcode.md" title="1019 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0087-leetcode.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 44,
+        deletions: 40
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 1019,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

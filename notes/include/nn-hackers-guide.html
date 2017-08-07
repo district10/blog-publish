@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<!--
+    [Hacker's guide to Neural Networks](file:///C:/Users/cvrs/Desktop/guide.htm)
+-->
+<p>My personal experience with Neural Networks is that everything became much clearer when I started ignoring full-page, dense derivations of backpropagation equations and just started writing code. Thus, this tutorial will contain very little math (I don&#8217;t believe it is necessary and it can sometimes even obfuscate simple concepts).</p>
+<ul>
+<li><dl>
+<dt>Chapter 1: Real-valued Circuits <code class="fold">@</code></dt>
+<dd><p>&#30475;&#25104;&#38376;&#30005;&#36335;&#65292;&#19981;&#21482;&#26159; <code>{0, 1}</code>&#65292;&#26356;&#26159; real values &#22312;&#32447;&#36335;&#19978; flow&#12290;&#38500;&#20102; <code>AND</code>&#65292;<code>OR</code>&#65292;<code>NOT</code> &#36824;&#26377; binary gates &#22914; <code>*</code> (multiply), <code>+</code> (add), <code>max</code>&#65292; unary gates &#27604;&#22914; <code>exp</code>&#65292;&#31561;&#31561;&#12290;</p>
+<dl>
+<dt>Base Case: Single Gate in the Circuit <code class="fold">@</code></dt>
+<dd><p>base case&#65292;&#19968;&#20010;&#31616;&#21333;&#30340; single gate in the circuit&#12290;&#36827;&#34892; f(x,y) = x*y &#30340;&#25805;&#20316;&#65292; javascript &#20195;&#30721;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> forwardMultiplyGate <span class="op">=</span> <span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span>
+  <span class="cf">return</span> x <span class="op">*</span> y<span class="op">;</span>
+<span class="op">};</span>
+<span class="at">forwardMultiplyGate</span>(<span class="op">-</span><span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">;</span> <span class="co">// returns -6. Exciting.</span></code></pre></div>
+<p>&#25105;&#20204;&#30340;&#30446;&#26631;&#26159;&#35753;&#23427;&#30340;&#36755;&#20986;&#21464;&#22823;&#12290;&#36825;&#37324;&#26377;&#19977;&#20010;&#31574;&#30053;&#65306;</p>
+<ul>
+<li><dl>
+<dt>Strategy #1: Random Local Search <code class="fold">@</code></dt>
+<dd><p>&#38543;&#26426;&#22312;&#21608;&#22260;&#25214;&#28857;&#65292;&#28982;&#21518;&#30475;&#26159;&#21542;&#26356;&#22823;&#65292;&#26356;&#22823;&#23601;&#35760;&#24405;&#19979;&#26469;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// circuit with single gate for now</span>
+<span class="kw">var</span> forwardMultiplyGate <span class="op">=</span> <span class="kw">function</span>(x<span class="op">,</span> y) <span class="op">{</span> <span class="cf">return</span> x <span class="op">*</span> y<span class="op">;</span> <span class="op">};</span>
+<span class="kw">var</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// some input values</span>
+
+<span class="co">// try changing x,y randomly small amounts and keep track of what works best</span>
+<span class="kw">var</span> tweak_amount <span class="op">=</span> <span class="fl">0.01</span><span class="op">;</span>
+<span class="kw">var</span> best_out <span class="op">=</span> <span class="op">-</span><span class="kw">Infinity</span><span class="op">;</span>
+<span class="kw">var</span> best_x <span class="op">=</span> x<span class="op">,</span> best_y <span class="op">=</span> y<span class="op">;</span>
+<span class="cf">for</span>(<span class="kw">var</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> <span class="dv">100</span><span class="op">;</span> k<span class="op">++</span>) <span class="op">{</span>
+  <span class="kw">var</span> x_try <span class="op">=</span> x <span class="op">+</span> tweak_amount <span class="op">*</span> (<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">;</span> <span class="co">// tweak x a bit</span>
+  <span class="kw">var</span> y_try <span class="op">=</span> y <span class="op">+</span> tweak_amount <span class="op">*</span> (<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">;</span> <span class="co">// tweak y a bit</span>
+  <span class="kw">var</span> out <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x_try<span class="op">,</span> y_try)<span class="op">;</span>
+  <span class="cf">if</span>(out <span class="op">&gt;</span> best_out) <span class="op">{</span>
+    <span class="co">// best improvement yet! Keep track of the x and y</span>
+    best_out <span class="op">=</span> out<span class="op">;</span>
+    best_x <span class="op">=</span> x_try<span class="op">,</span> best_y <span class="op">=</span> y_try<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Stategy #2: Numerical Gradient <code class="fold">@</code></dt>
+<dd><p>&#27714;&#20986;&#25968;&#20540;&#26799;&#24230;&#12290;&#8706;f(x,y)/&#8706;x = (f(x+h,y)&#8722;f(x,y))/h&#65292;&#36825;&#37324;&#30340; h &#26159;&#19968;&#20010; tweak amount&#12290;Javascript &#20195;&#30721;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+<span class="kw">var</span> out <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// -6</span>
+<span class="kw">var</span> h <span class="op">=</span> <span class="fl">0.0001</span><span class="op">;</span>
+
+<span class="co">// &#23545; x &#30340;&#20559;&#23548;</span>
+<span class="kw">var</span> xph <span class="op">=</span> x <span class="op">+</span> h<span class="op">;</span> <span class="co">// -1.9999</span>
+<span class="kw">var</span> out2 <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(xph<span class="op">,</span> y)<span class="op">;</span> <span class="co">// -5.9997</span>
+<span class="kw">var</span> x_derivative <span class="op">=</span> (out2 <span class="op">-</span> out) / h<span class="op">;</span> <span class="co">// 3.0</span>
+
+<span class="co">// &#23545; y &#30340;&#20559;&#23548;</span>
+<span class="kw">var</span> yph <span class="op">=</span> y <span class="op">+</span> h<span class="op">;</span> <span class="co">// 3.0001</span>
+<span class="kw">var</span> out3 <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> yph)<span class="op">;</span> <span class="co">// -6.0002</span>
+<span class="kw">var</span> y_derivative <span class="op">=</span> (out3 <span class="op">-</span> out) / h<span class="op">;</span> <span class="co">// -2.0</span>
+
+<span class="co">// &#25351;&#23450; stepsize&#65292;&#32473;&#36755;&#20837;&#28155;&#21152;&#19968;&#28857; tweak amount&#65292;</span>
+<span class="co">// &#24471;&#21040;&#26032;&#30340;&#36755;&#20986;&#65292;&#32780;&#19988;&#36755;&#20986;&#20540;&#30495;&#30340;&#26356;&#22823;&#19968;&#20123;&#65281;</span>
+<span class="kw">var</span> step_size <span class="op">=</span> <span class="fl">0.01</span><span class="op">;</span>
+<span class="kw">var</span> out <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// before: -6</span>
+x <span class="op">=</span> x <span class="op">+</span> step_size <span class="op">*</span> x_derivative<span class="op">;</span> <span class="co">// x becomes -1.97</span>
+y <span class="op">=</span> y <span class="op">+</span> step_size <span class="op">*</span> y_derivative<span class="op">;</span> <span class="co">// y becomes 2.98</span>
+<span class="kw">var</span> out_new <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// -5.87! exciting.</span></code></pre></div>
+<blockquote>
+<p>The derivative with respect to some input can be computed by tweaking that input by a small amount and observing the change on the output value.</p>
+</blockquote>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Strategy #3: Analytic Gradient <code class="fold">@</code></dt>
+<dd><p>&#20998;&#26512;&#23548;&#25968;&#12290;&#30456;&#27604;&#25968;&#20540;&#23548;&#25968;&#65292;&#36825;&#20010;&#38656;&#35201;&#19968;&#28857;&#25968;&#23398;&#30693;&#35782;&#12290;&#22909;&#22788;&#26159;&#21487;&#20197;&#24471;&#21040; exact &#23548;&#25968;&#65292;&#32780;&#19988;&#35745;&#31639;&#37327;&#23567;&#12290;</p>
+<blockquote>
+<p>The analytic derivative requires no tweaking of the inputs. It can be derived using mathematics (calculus).</p>
+</blockquote>
+<p>Javascript &#20195;&#30721;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+<span class="kw">var</span> out <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// before: -6</span>
+<span class="kw">var</span> x_gradient <span class="op">=</span> y<span class="op">;</span> <span class="co">// by our complex mathematical derivation above</span>
+<span class="kw">var</span> y_gradient <span class="op">=</span> x<span class="op">;</span>
+
+<span class="kw">var</span> step_size <span class="op">=</span> <span class="fl">0.01</span><span class="op">;</span>
+x <span class="op">+=</span> step_size <span class="op">*</span> x_gradient<span class="op">;</span> <span class="co">// -2.03</span>
+y <span class="op">+=</span> step_size <span class="op">*</span> y_gradient<span class="op">;</span> <span class="co">// 2.98</span>
+<span class="kw">var</span> out_new <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// -5.87. Higher output! Nice.</span></code></pre></div>
+</dd>
+</dl></li>
+</ul>
+<p>&#23567;&#32467;&#12290;Lets recap what we have learned: <code class="fold">@</code></p>
+<ul>
+<li>INPUT: We are given a circuit, some inputs and compute an output value.</li>
+<li>OUTPUT: We are then interested finding small changes to each input (independently) that would make the output higher.</li>
+<li>Strategy #1: One silly way is to randomly search for small pertubations of the inputs and keep track of what gives the highest increase in output.</li>
+<li>Strategy #2: We saw we can do much better by computing the gradient. Regardless of how complicated the circuit is, the numerical gradient is very simple (but relatively expensive) to compute. We compute it by probing the circuit&#8217;s output value as we tweak the inputs one at a time.</li>
+<li>Strategy #3: In the end, we saw that we can be even more clever and analytically derive a direct expression to get the analytic gradient. It is identical to the numerical gradient, it is fastest by far, and there is no need for any tweaking.</li>
+</ul>
+</dd>
+<dt>Recursive Case: Circuits with Multiple Gates <code class="fold">@</code></dt>
+<dd><p>f(x,y,z) = (x+y)*z&#65292;&#30452;&#25509;&#30475;&#20195;&#30721;&#21543;&#65292;&#30475;&#35299;&#37322;&#19981;&#22914;&#30475;&#20195;&#30721;&#12290;</p>
+<p>&#20998;&#19977;&#20010;&#36807;&#31243;&#65306;</p>
+<ul>
+<li><dl>
+<dt>forword&#65292;&#35745;&#31639;&#36755;&#20986;&#65306; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> forwardMultiplyGate <span class="op">=</span> <span class="kw">function</span>(a<span class="op">,</span> b) <span class="op">{</span>
+  <span class="cf">return</span> a <span class="op">*</span> b<span class="op">;</span>
+<span class="op">};</span>
+<span class="kw">var</span> forwardAddGate <span class="op">=</span> <span class="kw">function</span>(a<span class="op">,</span> b) <span class="op">{</span>
+  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span>
+<span class="op">};</span>
+<span class="kw">var</span> forwardCircuit <span class="op">=</span> <span class="kw">function</span>(x<span class="op">,</span>y<span class="op">,</span>z) <span class="op">{</span>
+  <span class="kw">var</span> q <span class="op">=</span> <span class="at">forwardAddGate</span>(x<span class="op">,</span> y)<span class="op">;</span>
+  <span class="kw">var</span> f <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(q<span class="op">,</span> z)<span class="op">;</span>
+  <span class="cf">return</span> f<span class="op">;</span>
+<span class="op">};</span>
+
+<span class="kw">var</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> z <span class="op">=</span> <span class="op">-</span><span class="dv">4</span><span class="op">;</span>
+<span class="kw">var</span> f <span class="op">=</span> <span class="at">forwardCircuit</span>(x<span class="op">,</span> y<span class="op">,</span> z)<span class="op">;</span> <span class="co">// output is -12</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>backward&#65292;&#21453;&#21521;&#20256;&#25773;&#65292;&#35745;&#31639;&#20559;&#23548;&#65288;&#20915;&#23450;&#20102;&#36755;&#20837;&#30340;&#26356;&#26032;&#65289;&#65306; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// initial conditions</span>
+<span class="kw">var</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">2</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> z <span class="op">=</span> <span class="op">-</span><span class="dv">4</span><span class="op">;</span>
+<span class="kw">var</span> q <span class="op">=</span> <span class="at">forwardAddGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// q is 3</span>
+<span class="kw">var</span> f <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(q<span class="op">,</span> z)<span class="op">;</span> <span class="co">// output is -12</span>
+
+<span class="co">// gradient of the MULTIPLY gate with respect to its inputs</span>
+<span class="co">// wrt is short for &quot;with respect to&quot;</span>
+<span class="kw">var</span> derivative_f_wrt_z <span class="op">=</span> q<span class="op">;</span> <span class="co">// 3</span>
+<span class="kw">var</span> derivative_f_wrt_q <span class="op">=</span> z<span class="op">;</span> <span class="co">// -4</span>
+
+<span class="co">// derivative of the ADD gate with respect to its inputs</span>
+<span class="kw">var</span> derivative_q_wrt_x <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>
+<span class="kw">var</span> derivative_q_wrt_y <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>
+
+<span class="co">// chain rule</span>
+<span class="kw">var</span> derivative_f_wrt_x <span class="op">=</span> derivative_q_wrt_x <span class="op">*</span> derivative_f_wrt_q<span class="op">;</span> <span class="co">// -4</span>
+<span class="kw">var</span> derivative_f_wrt_y <span class="op">=</span> derivative_q_wrt_y <span class="op">*</span> derivative_f_wrt_q<span class="op">;</span> <span class="co">// -4</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>forward&#65292;&#26681;&#25454;&#21453;&#21521;&#20256;&#25773;&#24471;&#21040;&#30340;&#20559;&#23548;&#65292;&#26356;&#26032;&#36755;&#20837;&#65292;&#20877;&#35745;&#31639;&#36755;&#20986;&#65306; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// final gradient, from above: [-4, -4, 3]</span>
+<span class="kw">var</span> gradient_f_wrt_xyz <span class="op">=</span> [derivative_f_wrt_x<span class="op">,</span> derivative_f_wrt_y<span class="op">,</span> derivative_f_wrt_z]
+
+<span class="co">// let the inputs respond to the force/tug:</span>
+<span class="kw">var</span> step_size <span class="op">=</span> <span class="fl">0.01</span><span class="op">;</span>
+x <span class="op">=</span> x <span class="op">+</span> step_size <span class="op">*</span> derivative_f_wrt_x<span class="op">;</span> <span class="co">// -2.04</span>
+y <span class="op">=</span> y <span class="op">+</span> step_size <span class="op">*</span> derivative_f_wrt_y<span class="op">;</span> <span class="co">// 4.96</span>
+z <span class="op">=</span> z <span class="op">+</span> step_size <span class="op">*</span> derivative_f_wrt_z<span class="op">;</span> <span class="co">// -3.97</span>
+
+<span class="co">// Our circuit now better give higher output:</span>
+<span class="kw">var</span> q <span class="op">=</span> <span class="at">forwardAddGate</span>(x<span class="op">,</span> y)<span class="op">;</span> <span class="co">// q becomes 2.92</span>
+<span class="kw">var</span> f <span class="op">=</span> <span class="at">forwardMultiplyGate</span>(q<span class="op">,</span> z)<span class="op">;</span> <span class="co">// output is -11.59, up from -12! Nice!</span></code></pre></div>
+<p>&#21457;&#29616;&#30830;&#23454;&#36755;&#20986;&#20540;&#30830;&#23454;&#21152;&#22823;&#20102;&#12290;</p>
+</dd>
+</dl></li>
+</ul>
+<p>&#29702;&#35299;&#21040;&#20102;&#36825;&#37324;&#65292;&#20320;&#23601;&#26126;&#30333;&#20102;&#21453;&#21521;&#20256;&#25773;&#21040;&#24213;&#26159;&#22312;&#24178;&#22043;&#12290;</p>
+<p>&#23567;&#32467;&#12290;Lets recap once again what we learned:</p>
+<ul>
+<li>In the previous chapter we saw that in the case of a single gate (or a single expression), we can derive the analytic gradient using simple calculus. We interpreted the gradient as a force, or a tug on the inputs that pulls them in a direction which would make this gate&#8217;s output higher.</li>
+<li>In case of multiple gates everything stays pretty much the same way: every gate is hanging out by itself completely unaware of the circuit it is embedded in. Some inputs come in and the gate computes its output and the derivate with respect to the inputs. The only difference now is that suddenly, something can pull on this gate from above. That&#8217; s the gradient of the final circuit output value with respect to the ouput this gate computed. It is the circuit asking the gate to output higher or lower numbers, and with some force. The gate simply takes this force and multiplies it to all the forces it computed for its inputs before (chain rule). This has the desired effect:</li>
+<li>If a gate experiences a strong positive pull from above, it will also pull harder on its own inputs, scaled by the force it is experiencing from above</li>
+<li>And if it experiences a negative tug, this means that circuit wants its value to decrease not increase, so it will flip the force of the pull on its inputs to make its own output value smaller.</li>
+</ul>
+<blockquote>
+<p>A nice picture to have in mind is that as we pull on the circuit&#8217;s output value at the end, this induces pulls downward through the entire circuit, all the way down to the inputs.</p>
+<p>&#23601;&#26159;&#35828;&#25105;&#20204;&#22312;&#36755;&#20986;&#31471;&#26045;&#21152;&#19968;&#20010;&#21147;&#65292;&#36825;&#20010;&#21147;&#33021;&#22815;&#36820;&#22238;&#21435;&#20316;&#29992;&#21040;&#30005;&#36335;&#30340;&#36755;&#20837;&#12290;</p>
+</blockquote>
+</dd>
+<dt>Patterns in the &#8220;backward&#8221; flow <code class="fold">@</code></dt>
+<dd><p>&#35828;&#30340;&#23601;&#26159; <code>+</code> &#21644; <code>*</code> &#21453;&#21521;&#20256;&#25773;&#30340;&#35268;&#24459;&#12290;&#65288;&#23545; <code>+</code> &#32780;&#35328;&#65292;&#26159;&#25226; sigma &#30452;&#25509;&#20998;&#25955;&#22238;&#21435;&#65307;&#23545; <code>*</code> &#32780;&#35328;&#65292;&#26159;&#20132;&#25442;&#36755;&#20837;&#20540;&#12290;&#65289;</p>
+</dd>
+<dt>Example: Single Neuron <code class="fold">@</code></dt>
+<dd><p>f(x,y,a,b,c) = &#963;(ax+by+c)&#12290;</p>
+<p>sigmoid &#20989;&#25968;&#24456;&#31526;&#21512;&#26174;&#31034;&#35268;&#24459;&#65292;&#26159;&#19968;&#20010; sigmoid &#24418;&#29366;&#65288;&#8220;S&#8221; &#24418;&#65289;&#12290;&#20294; &#8220;S&#8221; &#24418;&#30340;&#20989;&#25968;&#22810;&#20102;&#21435;&#65292;&#20026;&#20160;&#20040;&#35201;&#29992; sigmoid = 1/(1+e^(-x))&#65311;&#22240;&#20026;&#36825;&#20010;&#20989;&#25968;&#24456;&#26041;&#20415;&#35745;&#31639;&#23548;&#25968;&#12290;&#32780;&#19988;&#65292;&#22312;&#31070;&#32463;&#32593;&#32476;&#20013;&#65292;&#19981;&#20165;&#20165;&#26159; sigmoid &#20989;&#25968;&#30340;&#23548;&#25968;&#26159; sig&#8217;(x) = sig(x)(1-sig(x))&#65292;&#26356;&#26159; sig(x) &#22312; forward &#24050;&#32463;&#31639;&#36807;&#20102;&#65281;&#20063;&#23601;&#26159;&#35828; sigmoid &#20989;&#25968;&#27714;&#23548;&#25968;&#65292;&#35745;&#31639;&#20219;&#21153;&#30340;&#36127;&#25285;&#21644; x(1-x) &#19968;&#26679;&#8230;&#8230;&#26159;&#19981;&#26159;&#24456;&#36190;&#65311;&#65281;</p>
+<p>&#32447;&#36335;&#20013;&#27599;&#26465;&#32447;&#20854;&#23454;&#26377;&#20004;&#26679;&#25968;&#20540;&#20110;&#27492;&#30456;&#20851;&#65292;&#19968;&#20010;&#26159; forward &#26102;&#20256;&#36882;&#30340;&#36755;&#20837;&#20540;&#65292;&#19968;&#20010;&#26159; backward &#26102;&#21453;&#21521;&#20256;&#36882;&#30340; gradients&#12290;&#25105;&#20204;&#20808;&#21019;&#24314;&#19968;&#20010; Unit &#21333;&#20803;&#26469;&#23384;&#20648;&#30005;&#36335;&#20013;&#30340; wire &#30340; input value &#21644; weights&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// every Unit corresponds to a wire in the diagrams</span>
+<span class="kw">var</span> Unit <span class="op">=</span> <span class="kw">function</span>(value<span class="op">,</span> grad) <span class="op">{</span>
+  <span class="co">// value computed in the forward pass</span>
+  <span class="kw">this</span>.<span class="at">value</span> <span class="op">=</span> value<span class="op">;</span>
+  <span class="co">// the derivative of circuit output w.r.t this unit, computed in backward pass</span>
+  <span class="kw">this</span>.<span class="at">grad</span> <span class="op">=</span> grad<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>&#38500;&#20102; unit &#25105;&#20204;&#36824;&#35201;&#26377;&#19968;&#20010; <code>+</code>&#65292;&#19968;&#20010; <code>*</code> &#21644;&#19968;&#20010; <code>sig</code> (sigmoid)&#12290;</p>
+<ul>
+<li><dl>
+<dt>multiplyGate <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> multiplyGate <span class="op">=</span> <span class="kw">function</span>()<span class="op">{</span> <span class="op">};</span>
+<span class="va">multiplyGate</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">forward</span><span class="op">:</span> <span class="kw">function</span>(u0<span class="op">,</span> u1) <span class="op">{</span>
+    <span class="co">// store pointers to input Units u0 and u1 and output unit utop</span>
+    <span class="kw">this</span>.<span class="at">u0</span> <span class="op">=</span> u0<span class="op">;</span>
+    <span class="kw">this</span>.<span class="at">u1</span> <span class="op">=</span> u1<span class="op">;</span>
+    <span class="kw">this</span>.<span class="at">utop</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="va">u0</span>.<span class="at">value</span> <span class="op">*</span> <span class="va">u1</span>.<span class="at">value</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">utop</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">backward</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// take the gradient in output unit and chain it with the</span>
+    <span class="co">// local gradients, which we derived for multiply gate before</span>
+    <span class="co">// then write those gradients to those Units.</span>
+    <span class="kw">this</span>.<span class="va">u0</span>.<span class="at">grad</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="va">u1</span>.<span class="at">value</span> <span class="op">*</span> <span class="kw">this</span>.<span class="va">utop</span>.<span class="at">grad</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="va">u1</span>.<span class="at">grad</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="va">u0</span>.<span class="at">value</span> <span class="op">*</span> <span class="kw">this</span>.<span class="va">utop</span>.<span class="at">grad</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>addGate <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> addGate <span class="op">=</span> <span class="kw">function</span>()<span class="op">{</span> <span class="op">};</span>
+<span class="va">addGate</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">forward</span><span class="op">:</span> <span class="kw">function</span>(u0<span class="op">,</span> u1) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">u0</span> <span class="op">=</span> u0<span class="op">;</span>
+    <span class="kw">this</span>.<span class="at">u1</span> <span class="op">=</span> u1<span class="op">;</span> <span class="co">// store pointers to input units</span>
+    <span class="kw">this</span>.<span class="at">utop</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="va">u0</span>.<span class="at">value</span> <span class="op">+</span> <span class="va">u1</span>.<span class="at">value</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">utop</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">backward</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// add gate. derivative wrt both inputs is 1</span>
+    <span class="kw">this</span>.<span class="va">u0</span>.<span class="at">grad</span> <span class="op">+=</span> <span class="dv">1</span> <span class="op">*</span> <span class="kw">this</span>.<span class="va">utop</span>.<span class="at">grad</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="va">u1</span>.<span class="at">grad</span> <span class="op">+=</span> <span class="dv">1</span> <span class="op">*</span> <span class="kw">this</span>.<span class="va">utop</span>.<span class="at">grad</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>sigmoidGate <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> sigmoidGate <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// helper function</span>
+    <span class="kw">this</span>.<span class="at">sig</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="dv">1</span> / (<span class="dv">1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">exp</span>(<span class="op">-</span>x))<span class="op">;</span> <span class="op">};</span>
+<span class="op">};</span>
+<span class="va">sigmoidGate</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="op">{</span>
+    <span class="dt">forward</span><span class="op">:</span> <span class="kw">function</span>(u0) <span class="op">{</span>
+        <span class="kw">this</span>.<span class="at">u0</span> <span class="op">=</span> u0<span class="op">;</span>
+        <span class="kw">this</span>.<span class="at">utop</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="kw">this</span>.<span class="at">sig</span>(<span class="kw">this</span>.<span class="va">u0</span>.<span class="at">value</span>)<span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+        <span class="cf">return</span> <span class="kw">this</span>.<span class="at">utop</span><span class="op">;</span>
+    <span class="op">},</span>
+    <span class="dt">backward</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
+        <span class="kw">var</span> s <span class="op">=</span> <span class="kw">this</span>.<span class="at">sig</span>(<span class="kw">this</span>.<span class="va">u0</span>.<span class="at">value</span>)<span class="op">;</span>
+        <span class="kw">this</span>.<span class="va">u0</span>.<span class="at">grad</span> <span class="op">+=</span> (s <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> s)) <span class="op">*</span> <span class="kw">this</span>.<span class="va">utop</span>.<span class="at">grad</span><span class="op">;</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+</dd>
+</dl></li>
+</ul>
+<p>&#28982;&#21518;&#23601;&#21487;&#20197;&#25343;&#26469;&#31639;&#20102;&#65306;</p>
+<ul>
+<li><dl>
+<dt>forward <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// create input units</span>
+<span class="kw">var</span> a <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="fl">1.0</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+<span class="kw">var</span> b <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="fl">2.0</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+<span class="kw">var</span> c <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="op">-</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+<span class="kw">var</span> x <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="op">-</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+<span class="kw">var</span> y <span class="op">=</span> <span class="kw">new</span> <span class="at">Unit</span>(<span class="fl">3.0</span><span class="op">,</span> <span class="fl">0.0</span>)<span class="op">;</span>
+
+<span class="co">// create the gates</span>
+<span class="kw">var</span> mulg0 <span class="op">=</span> <span class="kw">new</span> <span class="at">multiplyGate</span>()<span class="op">;</span>
+<span class="kw">var</span> mulg1 <span class="op">=</span> <span class="kw">new</span> <span class="at">multiplyGate</span>()<span class="op">;</span>
+<span class="kw">var</span> addg0 <span class="op">=</span> <span class="kw">new</span> <span class="at">addGate</span>()<span class="op">;</span>
+<span class="kw">var</span> addg1 <span class="op">=</span> <span class="kw">new</span> <span class="at">addGate</span>()<span class="op">;</span>
+<span class="kw">var</span> sg0 <span class="op">=</span> <span class="kw">new</span> <span class="at">sigmoidGate</span>()<span class="op">;</span>
+
+<span class="co">// do the forward pass</span>
+<span class="kw">var</span> forwardNeuron <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+  ax <span class="op">=</span> <span class="va">mulg0</span>.<span class="at">forward</span>(a<span class="op">,</span> x)<span class="op">;</span> <span class="co">// a*x = -1</span>
+  by <span class="op">=</span> <span class="va">mulg1</span>.<span class="at">forward</span>(b<span class="op">,</span> y)<span class="op">;</span> <span class="co">// b*y = 6</span>
+  axpby <span class="op">=</span> <span class="va">addg0</span>.<span class="at">forward</span>(ax<span class="op">,</span> by)<span class="op">;</span> <span class="co">// a*x + b*y = 5</span>
+  axpbypc <span class="op">=</span> <span class="va">addg1</span>.<span class="at">forward</span>(axpby<span class="op">,</span> c)<span class="op">;</span> <span class="co">// a*x + b*y + c = 2</span>
+  s <span class="op">=</span> <span class="va">sg0</span>.<span class="at">forward</span>(axpbypc)<span class="op">;</span> <span class="co">// sig(a*x + b*y + c) = 0.8808</span>
+<span class="op">};</span>
+<span class="at">forwardNeuron</span>()<span class="op">;</span>
+
+<span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;circuit output: &#39;</span> <span class="op">+</span> <span class="va">s</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// prints 0.8808</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>backward <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">s</span>.<span class="at">grad</span> <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>
+<span class="va">sg0</span>.<span class="at">backward</span>()<span class="op">;</span> <span class="co">// writes gradient into axpbypc</span>
+<span class="va">addg1</span>.<span class="at">backward</span>()<span class="op">;</span> <span class="co">// writes gradients into axpby and c</span>
+<span class="va">addg0</span>.<span class="at">backward</span>()<span class="op">;</span> <span class="co">// writes gradients into ax and by</span>
+<span class="va">mulg1</span>.<span class="at">backward</span>()<span class="op">;</span> <span class="co">// writes gradients into b and y</span>
+<span class="va">mulg0</span>.<span class="at">backward</span>()<span class="op">;</span> <span class="co">// writes gradients into a and x</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>forward <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> step_size <span class="op">=</span> <span class="fl">0.01</span><span class="op">;</span>
+<span class="va">a</span>.<span class="at">value</span> <span class="op">+=</span> step_size <span class="op">*</span> <span class="va">a</span>.<span class="at">grad</span><span class="op">;</span> <span class="co">// a.grad is -0.105</span>
+<span class="va">b</span>.<span class="at">value</span> <span class="op">+=</span> step_size <span class="op">*</span> <span class="va">b</span>.<span class="at">grad</span><span class="op">;</span> <span class="co">// b.grad is 0.315</span>
+<span class="va">c</span>.<span class="at">value</span> <span class="op">+=</span> step_size <span class="op">*</span> <span class="va">c</span>.<span class="at">grad</span><span class="op">;</span> <span class="co">// c.grad is 0.105</span>
+<span class="va">x</span>.<span class="at">value</span> <span class="op">+=</span> step_size <span class="op">*</span> <span class="va">x</span>.<span class="at">grad</span><span class="op">;</span> <span class="co">// x.grad is 0.105</span>
+<span class="va">y</span>.<span class="at">value</span> <span class="op">+=</span> step_size <span class="op">*</span> <span class="va">y</span>.<span class="at">grad</span><span class="op">;</span> <span class="co">// y.grad is 0.210</span>
+
+<span class="at">forwardNeuron</span>()<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;circuit output after one backprop: &#39;</span> <span class="op">+</span> <span class="va">s</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// prints 0.8825</span></code></pre></div>
+<dl>
+<dt>&#25105;&#20204;&#36824;&#21487;&#20197;&#26816;&#39564;&#19968;&#19979; bp &#31639;&#20986;&#26469;&#30340; grad &#26159;&#21542;&#27491;&#30830;&#65292;</dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> forwardCircuitFast <span class="op">=</span> <span class="kw">function</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y) <span class="op">{</span>
+  <span class="cf">return</span> <span class="dv">1</span>/(<span class="dv">1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">exp</span>( <span class="op">-</span> (a<span class="op">*</span>x <span class="op">+</span> b<span class="op">*</span>y <span class="op">+</span> c)))<span class="op">;</span>
+<span class="op">};</span>
+<span class="kw">var</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> c <span class="op">=</span> <span class="op">-</span><span class="dv">3</span><span class="op">,</span> x <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+<span class="kw">var</span> h <span class="op">=</span> <span class="fl">0.0001</span><span class="op">;</span>
+<span class="kw">var</span> a_grad <span class="op">=</span> (<span class="at">forwardCircuitFast</span>(a<span class="op">+</span>h<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y) <span class="op">-</span> <span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y))/h<span class="op">;</span>
+<span class="kw">var</span> b_grad <span class="op">=</span> (<span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">+</span>h<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y) <span class="op">-</span> <span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y))/h<span class="op">;</span>
+<span class="kw">var</span> c_grad <span class="op">=</span> (<span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">+</span>h<span class="op">,</span>x<span class="op">,</span>y) <span class="op">-</span> <span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y))/h<span class="op">;</span>
+<span class="kw">var</span> x_grad <span class="op">=</span> (<span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">+</span>h<span class="op">,</span>y) <span class="op">-</span> <span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y))/h<span class="op">;</span>
+<span class="kw">var</span> y_grad <span class="op">=</span> (<span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y<span class="op">+</span>h) <span class="op">-</span> <span class="at">forwardCircuitFast</span>(a<span class="op">,</span>b<span class="op">,</span>c<span class="op">,</span>x<span class="op">,</span>y))/h<span class="op">;</span></code></pre></div>
+</dd>
+</dl>
+</dd>
+</dl></li>
+</ul>
+</dd>
+<dt>Becoming a Backprop Ninja <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#36825;&#31181;&#24773;&#20917;&#26159;&#31616;&#21333;&#30340;</span>
+<span class="kw">var</span> x <span class="op">=</span> a <span class="op">+</span> b <span class="op">+</span> c<span class="op">;</span>
+<span class="kw">var</span> da <span class="op">=</span> <span class="fl">1.0</span> <span class="op">*</span> dx<span class="op">;</span> <span class="kw">var</span> db <span class="op">=</span> <span class="fl">1.0</span> <span class="op">*</span> dx<span class="op">;</span> <span class="kw">var</span> dc <span class="op">=</span> <span class="fl">1.0</span> <span class="op">*</span> dx<span class="op">;</span>
+
+<span class="co">// &#36825;&#31181;&#24773;&#20917;&#21602;&#65311;</span>
+<span class="kw">var</span> x <span class="op">=</span> a <span class="op">*</span> a<span class="op">;</span>
+<span class="kw">var</span> da <span class="op">=</span> <span class="co">//???</span>
+
+<span class="co">// &#21487;&#20197;&#20570;&#22914;&#19979;&#32771;&#34385;</span>
+<span class="kw">var</span> da <span class="op">=</span> a <span class="op">*</span> dx<span class="op">;</span> <span class="co">// gradient into a from first branch</span>
+da <span class="op">+=</span> a <span class="op">*</span> dx<span class="op">;</span> <span class="co">// and add on the gradient from the second branch</span>
+
+<span class="co">// short form instead is:</span>
+<span class="kw">var</span> da <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> a <span class="op">*</span> dx<span class="op">;</span></code></pre></div>
+<p>&#36824;&#26377;&#26356;&#38590;&#30340;&#20363;&#23376;&#12290;</p>
+<p>&#36824;&#26377;&#65292;ReLU &#21602;&#65311;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> x <span class="op">=</span> <span class="va">Math</span>.<span class="at">max</span>(a<span class="op">,</span> <span class="dv">0</span>)
+<span class="co">// backprop through this gate will then be:</span>
+<span class="kw">var</span> da <span class="op">=</span> a <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fl">1.0</span> <span class="op">*</span> dx : <span class="fl">0.0</span><span class="op">;</span></code></pre></div>
+<blockquote>
+<p>&#8220;Maybe this is not immediately obvious, but this machinery is a powerful hammer for Machine Learning.&#8221;</p>
+</blockquote>
+</dd>
+</dl>
+</dd>
+</dl></li>
+<li>Chapter 2: Machine Learning</li>
+</ul>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

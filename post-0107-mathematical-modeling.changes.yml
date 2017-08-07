@@ -1,0 +1,17 @@
+---
+tzx-changes:
+  - hash: 5a7d1f7d62a5cd8a23e9aaa6609f69393870e372
+    datetime: 1480428507
+    insertions: 2
+    deletions: 3
+  - hash: e788b1c1af8a47c67781dfd5e983f22cbe68a28b
+    datetime: 1480348889
+    insertions: 0
+    deletions: 1
+  - hash: b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d
+    datetime: 1480083296
+    insertions: 12
+    deletions: 0
+
+tzx-filename: _posts/post-0107-mathematical-modeling.md
+...

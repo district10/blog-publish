@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-12-17" />
+  <title>Learning Perl</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Learning Perl</h1>
+<h3 class="date">2015-12-17</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#learning-perl">Learning Perl</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="learning-perl">Learning Perl</h1>
+<p>&#31508;&#35760;&#37096;&#20998;&#31227;&#21040;&#20102; <a href="http://tangzx.qiniudn.com/notes/lang/perl.html">Notes: lang/perl.html</a>&#12290;</p>
+<p>&#25105;&#20889;&#36807;&#19968;&#20123; Perl &#33050;&#26412;&#65292;&#29992;&#26469;&#22788;&#29702;&#26412;&#31449;&#30340; Markdown &#28304;&#30721;&#12290;&#20027;&#35201;&#23454;&#29616;&#20102;&#19977;&#20010;&#21151;&#33021;&#65306;</p>
+<ol style="list-style-type: decimal">
+<li><p>&#20174; git &#30340;&#21382;&#21490;&#20449;&#24687;&#37324;&#25552;&#21462;&#19968;&#31687; post &#28304;&#30721;&#30340;&#20462;&#25913;&#29366;&#20917;&#65292;&#24182;&#28155;&#21152;&#21040;&#39029;&#38754;&#12290;</p>
+<p>&#22914;&#26524;&#20320;&#30475;&#36807; html &#28304;&#30721;&#65292;&#24212;&#35813;&#21487;&#20197;&#30475;&#21040;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> tzxFilename <span class="op">=</span> <span class="st">&quot;_posts/post-0111-qt4-vs2015.md&quot;</span><span class="op">;</span>
+<span class="kw">var</span> tzxChanges <span class="op">=</span> [
+    <span class="op">{</span>
+        <span class="dt">hash</span><span class="op">:</span> <span class="st">&quot;c5d8b2116006abe088c7340ce63017b120e822d5&quot;</span><span class="op">,</span>
+        <span class="dt">datetime</span><span class="op">:</span> <span class="st">&quot;1469954954&quot;</span><span class="op">,</span>
+        <span class="dt">insertions</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span>
+        <span class="dt">deletions</span><span class="op">:</span> <span class="dv">2</span>
+    <span class="op">},</span>
+    ...
+]<span class="op">;</span></code></pre></div>
+<p>&#36825;&#37117;&#26159;&#20174;&#29256;&#26412;&#25511;&#21046;&#20449;&#24687;&#37324;&#25552;&#21462;&#20986;&#26469;&#30340;&#12290;</p>
+<p>&#21407;&#26469;&#25105;&#25552;&#20379;&#20135;&#30475;&#26576;&#19968;&#21382;&#21490;&#29256;&#26412;&#30340;&#28304;&#30721;&#26597;&#30475;&#21151;&#33021;&#12290;&#19981;&#36807;&#34987;&#25105;&#21435;&#25481;&#20102;&#12290;&#22240;&#20026;&#8230;&#8230;&#22909;&#20687;&#27809;&#20154;&#20250;&#30475;&#12290;&#25918;&#22312;&#20027;&#39029;&#19978;&#30340;&#25353;&#38062;&#22909;&#20667;&#12290;</p></li>
+<li><p>&#32473;&#39029;&#38754;&#28155;&#21152;&#25240;&#21472;&#21151;&#33021;&#12290;</p>
+<div class="tzx-drawer" shy="">
+<dl>
+<dt>&#12304;&#28857;&#25105;&#25171;&#24320;&#25240;&#21472;&#12305;</dt>
+<dd><p>blah blah blah&#8230;&#8230;</p>
+<p>&#36825;&#23601;&#26159;&#34987;&#25240;&#21472;&#25481;&#30340;&#20869;&#23481;&#12290;</p>
+<p>&#19981;&#36807;&#22312;&#21338;&#23458;&#36825;&#36793;&#29992;&#24471;&#23569;&#28857;&#12290;&#22312;&#31508;&#35760;&#37027;&#36793;&#29992;&#30340;&#26356;&#22810;&#12290;</p>
+<div class="tzx-drawer" shy="">
+<dl>
+<dt>&#12304;&#24403;&#28982;&#21487;&#20197;&#23884;&#22871;&#12305;</dt>
+<dd><p>&#28857;&#20987;&#20107;&#20214;&#30340; event propagation &#26366;&#25240;&#33150;&#20102;&#25105;&#25402;&#20037;&#12290;&#20197;&#21450;&#36873;&#20013;&#25991;&#23383;&#22797;&#21046;&#30340;&#26102;&#20505;&#65292;&#22914;&#26524;&#31105;&#29992;&#25240;&#21472;&#30418;&#30340;&#25171;&#24320;/&#20851;&#38381;&#30340;&#20999;&#25442;&#65292;&#20063;&#26159;&#25402;&#40635;&#28902;&#12290;</p>
+</dd>
+</dl>
+</div>
+</dd>
+</dl>
+</div></li>
+<li><p>&#32473; Markdown &#28155;&#21152; include &#20854;&#20182;&#25991;&#20214;&#30340;&#21151;&#33021;&#12290;</p>
+<p>&#36825;&#26679;&#24341;&#20837;&#19968;&#20010;&#24456;&#38271;&#30340;&#20195;&#30721;&#65292;&#25105;&#23601;&#19981;&#29992;&#20840;&#37096; copy &#36807;&#26469;&#20102;&#65281;&#32780;&#19988;&#20415;&#20110;&#31649;&#29702;&#12290;</p>
+<p>&#22522;&#20110;&#36825;&#20010;&#25105;&#35745;&#21010;&#20570;&#19968;&#20010; snippets &#26597;&#30475;&#24037;&#20855;&#65292;&#36825;&#26679;&#23601;&#33021;&#25226;&#33258;&#24049;&#30340;&#19968;&#20123;&#20195;&#30721;&#29255;&#27573;&#20445;&#23384;&#36215;&#26469;&#65292;&#26041;&#20415;&#22320;&#21508;&#31181; include &#21040;&#31508;&#35760;&#12290;&#26041;&#20415;&#22797;&#20064;&#21644;&#20877;&#35760;&#24518;&#12290;</p></li>
+</ol>
+<p>&#20960;&#20046;&#25152;&#26377;&#30340; perl &#33050;&#26412;&#37117;&#25918;&#22312;&#65306;<a href="https://github.com/district10/blog-utils">district10/blog-utils: Utils to process my blog posts.</a>&#12290;&#37027;&#37324;&#20063;&#26377;&#19968;&#28857;&#20171;&#32461;&#12290;</p>
+<p>&#22806;&#65292;&#36824;&#26377;&#20889;&#20102;&#19968;&#20010; pangu.pl&#65292;&#29992;&#26469;&#22788;&#29702;&#20013;&#33521;&#25991;&#20043;&#38388;&#30340;&#31354;&#26684;&#12290;&#26377;&#24456;&#22810;&#29256;&#26412;&#30340; pangu&#65292;&#21253;&#25324;</p>
+<ul>
+<li>pangu.go (Go)</li>
+<li>pangu.java (Java)</li>
+<li>pangu.js (JavaScript, both Node.js and Browser)</li>
+<li>pangu.objective-c (Objective-C)</li>
+<li>pangu.php (PHP)</li>
+<li>pangu.py (Python)</li>
+<li>pangu.rb (Ruby)</li>
+</ul>
+<p>&#20294;&#26159;&#27809;&#26377; perl&#65292;&#25152;&#20197;&#8230;&#8230;&#20854;&#23454;&#20195;&#30721;&#23601;&#19977;&#20004;&#34892;&#21704;&#21704;&#12290;&#35265; <a href="https://github.com/district10/pangu.pl">district10/pangu.pl: Paranoid text spacing in Perl</a>&#12290;&#36825;&#26159; vinta &#23545;&#36825;&#20010;&#39033;&#30446;&#30340;&#31616;&#35201;&#20171;&#32461;&#65306;</p>
+<blockquote>
+<p>&#22914;&#26524;&#20320;&#36319;&#25105;&#19968;&#27171;&#65292;&#27599;&#27425;&#30475;&#21040;&#32178;&#38913;&#19978;&#30340;&#20013;&#25991;&#23383;&#21644;&#33521;&#25991;&#12289;&#25976;&#23383;&#12289;&#31526;&#34399;&#25824;&#22312;&#19968;&#22602;&#65292;&#23601;&#26371;&#22352;&#31435;&#38627;&#23433;&#65292; &#24525;&#19981;&#20303;&#24819;&#22312;&#23427;&#20497;&#20043;&#38291;&#21152;&#20491;&#31354;&#26684;&#12290;&#36889;&#20491;&#22806;&#25499;&#65288;&#25903;&#25588; Chrome &#21644; Firefox&#65289;&#27491;&#26159;&#20320;&#22312;&#32178;&#36335;&#19990;&#30028; &#36208;&#36339;&#25152;&#38656;&#35201;&#30340;&#26481;&#35199;&#65292;&#23427;&#26371;&#33258;&#21205;&#26367;&#20320;&#22312;&#32178;&#38913;&#20013;&#25152;&#26377;&#30340;&#20013;&#25991;&#23383;&#21644;&#21322;&#24418;&#30340;&#33521;&#25991;&#12289;&#25976;&#23383;&#12289;&#31526;&#34399;&#20043;&#38291; &#25554;&#20837;&#31354;&#30333;&#12290;</p>
+<p>&#28450;&#23416;&#23478;&#31281;&#36889;&#20491;&#31354;&#30333;&#23383;&#20803;&#28858;&#12300;&#30436;&#21476;&#20043;&#30333;&#12301;&#65292;&#22240;&#28858;&#23427;&#21128;&#38283;&#20102;&#20840;&#24418;&#23383;&#21644;&#21322;&#24418;&#23383;&#20043;&#38291;&#30340;&#28151;&#27788;&#12290;&#21478;&#26377; &#30740;&#31350;&#39023;&#31034;&#65292;&#25171;&#23383;&#30340;&#26178;&#20505;&#19981;&#21916;&#27489;&#22312;&#20013;&#25991;&#21644;&#33521;&#25991;&#20043;&#38291;&#21152;&#31354;&#26684;&#30340;&#20154;&#65292;&#24863;&#24773;&#36335;&#37117;&#36208;&#24471;&#24456;&#36763;&#33510;&#65292;&#26377;&#19971; &#25104;&#30340;&#27604;&#20363;&#26371;&#22312; 34 &#27506;&#30340;&#26178;&#20505;&#36319;&#33258;&#24049;&#19981;&#24859;&#30340;&#20154;&#32080;&#23130;&#65292;&#32780;&#20854;&#39192;&#19977;&#25104;&#30340;&#20154;&#26368;&#24460;&#21482;&#33021;&#25226;&#36986;&#29986;&#30041;&#32102;&#33258; &#24049;&#30340;&#35987;&#12290;&#30050;&#31455;&#24859;&#24773;&#36319;&#26360;&#23531;&#37117;&#38656;&#35201;&#36969;&#26178;&#22320;&#30041;&#30333;&#12290;</p>
+<p>&#33287;&#22823;&#23478;&#20849;&#21193;&#20043;&#12290;</p>
+<p>| &#8211; vinta</p>
+</blockquote>
+<hr />
+<p>&#26368;&#21518;&#65292;&#25105;&#26368;&#29233;&#30340; include &#21151;&#33021;&#30340;&#20195;&#30721;&#65292;&#24182;&#19981;&#38271;&#65288;&#20889;&#24471;&#26102;&#20505;&#36824;&#26159;&#20986;&#20102;&#19981;&#23569; bug&#65292;&#21508;&#31181;&#22350;&#22391;&#65289;&#65292;&#36148;&#22312;&#36825;&#37324;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode perl"><code class="sourceCode perl"><span class="kw">#!/usr/bin/perl</span>
+
+<span class="fu">use</span> <span class="fl">5.010</span>;
+<span class="fu">use</span> <span class="kw">strict</span>;
+
+<span class="kw">sub </span><span class="fu">inList</span> {
+    <span class="kw">my</span> <span class="dt">$needle</span> = <span class="fu">shift</span>;
+    <span class="kw">my</span> <span class="dt">@haystack</span> = <span class="dt">@_</span>;
+    <span class="kw">foreach</span> <span class="kw">my</span> <span class="dt">$hay</span> (<span class="dt">@haystack</span>) {
+        <span class="kw">if</span> ( <span class="dt">$needle</span> <span class="kw">eq</span> <span class="dt">$hay</span> ) {
+            <span class="kw">return</span> <span class="dv">1</span>;
+        }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+<span class="kw">sub </span><span class="fu">unfold</span> {
+    <span class="kw">my</span>(<span class="dt">$PADDING</span>)  = <span class="fu">shift</span> <span class="dt">@_</span>;
+    <span class="kw">my</span>(<span class="dt">$PREFIX</span>)   = <span class="fu">shift</span> <span class="dt">@_</span>;
+    <span class="kw">my</span>(<span class="dt">$FILENAME</span>) = <span class="fu">shift</span> <span class="dt">@_</span>;
+
+    <span class="kw">if</span> (&amp;inList(<span class="dt">$FILENAME</span>, <span class="dt">@_</span>) == <span class="dv">1</span>) {
+        <span class="kw">return</span>;
+    }
+    <span class="fu">unshift</span>(<span class="dt">@_</span>, <span class="dt">$FILENAME</span>);
+
+    <span class="fu">open</span> <span class="kw">my</span> <span class="dt">$INPUT</span>, <span class="kw">&#39;</span><span class="st">&lt;</span><span class="kw">&#39;</span>, <span class="dt">$FILENAME</span>;
+    <span class="kw">while</span>(&lt;<span class="dt">$INPUT</span>&gt;) {
+        <span class="co">#   padding         prefix   filename</span>
+        <span class="kw">if</span> (<span class="kw">/</span><span class="ch">^(</span><span class="bn">\s</span><span class="ch">*)</span><span class="ot">\@include &lt;-</span><span class="ch">(</span><span class="ot">.</span><span class="ch">*)</span><span class="ot">=</span><span class="ch">(</span><span class="ot">.</span><span class="ch">*)</span><span class="ot">=</span><span class="kw">/</span>) {
+            &amp;unfold(
+                     <span class="dt">$PADDING</span> . <span class="dt">$1</span>,
+                     <span class="dt">$PREFIX</span> . <span class="dt">$2</span>,
+                     <span class="dt">$3</span>, <span class="dt">@_</span> );
+        } <span class="kw">else</span> {
+            <span class="fu">print</span> <span class="dt">$PADDING</span> . <span class="dt">$PREFIX</span> . <span class="dt">$_</span>;
+        }
+    }
+}
+
+&amp;unfold(<span class="kw">&quot;&quot;</span>, <span class="kw">&quot;&quot;</span>, <span class="dt">$ARGV</span>[<span class="dv">0</span>]);</code></pre></div>
+<p>&#25105;&#30340;&#20351;&#29992;&#20013;&#65292;&#36335;&#24452;&#20174; repo &#30340;&#26681;&#30446;&#24405;&#31639;&#36215;&#12290;&#20351;&#29992;&#26041;&#27861;&#26159;&#22312; Markdown &#37324;&#21152;&#19978;</p>
+<pre><code>@include &lt;-=path/to/file=</code></pre>
+<ul>
+<li>&#21487;&#20197;&#22810;&#27425; include&#65292;&#21482;&#35201;&#19981;&#20986;&#29616;&#29615;&#65288;&#21457;&#29616;&#24490;&#29615;&#24341;&#20837;&#65292;&#23601;&#19981; include &#21518;&#26469;&#30340;&#37027;&#20010;&#65289;</li>
+<li><code>@</code> &#31526;&#21495;&#21069;&#38754;&#30340;&#31354;&#26684;&#65292;&#20250; pad &#21040;&#27599;&#19968;&#34892;&#65288;&#36825;&#26679;&#25165;&#33021;&#36866;&#24403;&#22320;&#32553;&#36827;&#12290;&#65289;</li>
+<li><code>-=</code> &#20013;&#38388;&#21487;&#20197;&#25554;&#20837;&#19968;&#20123;&#23383;&#31526;</li>
+</ul>
+<p>&#20855;&#20307;&#30475;&#28304;&#30721;&#21543;&#12290;&#37117;&#26159;&#25105;&#33258;&#24049;&#29992;&#65292;&#20063;&#19981;&#24819;&#20889;&#22826;&#22810;&#30340;&#35828;&#26126;&#12290;</p>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#learning">learning</a></li>
+<li><a class="tzx-tag" href="tags.html/#perl">perl</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0078-learning-perl.md" title="3 insertions(+), 4 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0078-learning-perl.md" title="156 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0078-learning-perl.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 3,
+        deletions: 4
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 156,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

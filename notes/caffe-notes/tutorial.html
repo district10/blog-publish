@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body class="markdown-body">
+<a href="https://github.com/district10/notes">
+    <img
+        style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;"
+        src="../fork-me-on-github.png" alt="Fork me on GitHub"></a>
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<span id="help">&#25353;&#19979; "h" &#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;</span>
+<div id="main-body">
+<h2 id="caffe-caffe-tutorial"><a href="http://caffe.berkeleyvision.org/tutorial/">Caffe | Caffe Tutorial</a></h2>
+<ul>
+<li><dl>
+<dt>Philosophy <code class="fold">@</code></dt>
+<dd><p>In one sip, Caffe is brewed for</p>
+<ul>
+<li><strong>Expression</strong>: models and optimizations are defined as plaintext schemas instead of code.</li>
+<li><strong>Speed</strong>: for research and industry alike speed is crucial for state-of-the-art models and massive data.</li>
+<li><strong>Modularity</strong>: new tasks and settings require flexibility and extension.</li>
+<li><strong>Openness</strong>: scientific and applied progress call for common code, reference models, and reproducibility.</li>
+<li><strong>Community</strong>: academic research, startup prototypes, and industrial applications all share strength by joint discussion and development in a BSD-2 project.</li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Tour <code class="fold">@</code></dt>
+<dd><ul>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/net_layer_blob.html">Nets, Layers, and Blobs</a>: the anatomy of a Caffe model. <code class="fold">@</code></dt>
+<dd><p>&#22312; caffe &#30340;&#27169;&#22411;&#37324;&#65292;layer &#26159;&#19968;&#23618;&#23618;&#23450;&#20041;&#65292;&#20174;&#19979;&#24448;&#19978;&#26159; data &#23618;&#21040; loss &#23618;&#30340;&#36807;&#31243;&#12290;&#25968;&#25454;&#21644;&#20854;&#34893;&#29983;&#29289;&#65288;derivatives&#65289;&#22312;&#32593;&#32476;&#23618;&#20013;&#21069;&#21518;&#20256;&#25773;&#65292;&#36890;&#36807;&#30340;&#23601;&#26159; blob&#65292;&#23427;&#26082;&#26159; array&#65292;&#21448;&#26159; unified memory interface for the network&#65288;&#23601;&#20687; struct&#65289;&#12290;</p>
+<ul>
+<li>&#23618;&#65288;layer&#65289;&#26159;&#26469;&#33258;&#8220;&#27169;&#22411;&#8221;&#21644;&#8220;&#35745;&#31639;&#8221;&#12290;</li>
+<li>&#32593;&#65288;net&#65289;&#26469;&#33258; layer &#21644; layer &#30340;&#36830;&#25509;&#12290;</li>
+</ul>
+<p>blob &#20027;&#35201;&#30340;&#20219;&#21153;&#26159;&#21327;&#21161; layer &#21644; net &#37324;&#36827;&#34892;&#23384;&#20648;&#21644;&#27807;&#36890;&#65288;communicate&#65289;&#12290;</p>
+<p>blob &#39318;&#20808;&#26159;&#25968;&#25454;&#23384;&#20648;&#30340; wrapper&#65292;&#23631;&#34109;&#20102; CPU &#21644; GPU &#20043;&#38388;&#30340; gap&#65292;&#21487;&#20197;&#23450;&#20041;&#20026;&#65306; &#8220;<strong>blob is an N-dimensional array stored in a C-contiguous fashion.</strong>&#8221;&#12290;</p>
+<p>&#21487;&#20197;&#23384;&#20648;&#22270;&#29255;&#65292;&#27169;&#22411;&#21442;&#25968;&#65288;model parameters&#65289;&#65292;&#24050;&#32463; derivatives for optimization&#65288;&#20248;&#21270;&#36807;&#31243;&#20013;&#30340;&#20135;&#29983;&#30340;&#25968;&#25454;&#65311;&#65289;&#12290;</p>
+<p>&#26082;&#28982;&#26159; N-dim array&#65292;&#20854;&#35745;&#31639;&#26041;&#24335;&#20026;&#65306;For example, in a 4D blob, the value at index (n, k, h, w) is physically located at index <code>((n * K + k) * H + h) * W + w</code>&#12290;&#24182;&#27809;&#26377;&#20160;&#20040;&#29420;&#29305;&#30340;&#12290;&#26368;&#21069;&#30340;&#19968;&#20010;&#32500;&#24230;&#26159;&#26368;&#22823;&#30340;&#23610;&#24230;&#12290;</p>
+<p>&#19978;&#38754;&#30340; K&#65292;H&#65292;W &#26159; k&#65292;h&#65292;w &#30340;&#20010;&#25968;&#12290;&#30475;&#25104; RGB &#22270;&#29255;&#30340;&#35805;&#65292;&#23601;&#26159; w,h &#26159;&#23485;&#21644;&#39640;&#65292; k &#26159; channel &#25968;&#30446;&#20063;&#23601;&#26159; 3&#65292;n &#26159;&#25209;&#22788;&#29702;&#30340;&#20010;&#25968;&#65292;&#20063;&#23601;&#26159;&#19968;&#27425;&#22788;&#29702;&#22810;&#23569;&#24352;&#22270;&#29255;&#12290;&#22914;&#26524;&#20174;&#21491;&#21521;&#24038;&#30475;&#65292;w,h &#27491;&#22909;&#23545;&#39278; OpenCV &#22352;&#26631;&#37324;&#30340; x &#21644; y&#12290;&#19981;&#21516;&#30340;&#26159; OpenCV &#37324;&#65292;&#22270;&#29255;&#30340; rgb&#65288;&#39034;&#24207;&#26159; b&#65292;g&#65292;r&#65289;&#36890;&#24120;&#37117;&#25918;&#22312;&#19968;&#36215;&#65292;&#32780;&#19981;&#26159;&#19968;&#20010; channel &#19968;&#20010; channel &#20998;&#24320;&#12290;</p>
+<ul>
+<li>Number / N is the batch size of the data. Batch processing achieves better throughput for communication and device processing. For an ImageNet training batch of 256 images N = 256.</li>
+<li>Channel / K is the feature dimension e.g.&#160;for RGB images K = 3.</li>
+</ul>
+<p>&#19978;&#38754;&#26159;&#35828; Number&#65288;N&#65289;&#26159;&#25968;&#25454;&#25209;&#22788;&#29702;&#30340;&#23610;&#23544;&#12290;Channel&#65288;K&#65289;&#26159; feature &#30340;&#32500;&#24230;&#12290;</p>
+<p>caffe &#21407;&#26469;&#23601;&#26159;&#20570;&#22270;&#20687;&#30340;&#65292;&#25152;&#20197;&#19968;&#33324;&#37117;&#26159; 4D&#65292;&#20294;&#20063;&#21487;&#20197;&#26159;&#20854;&#20182;&#32500;&#24230;&#27604;&#22914; 2D&#12290;</p>
+<p>Parameter blob dimensions vary according to the type and configuration of the layer. For a convolution layer with 96 filters of 11 x 11 spatial dimension and 3 inputs the blob is 96 x 3 x 11 x 11.</p>
+<p>&#22914;&#19978;&#38754;&#65292;filter &#30340; 96 x 3 x 11 x 11 &#19968;&#23450;&#35201;&#29702;&#35299;&#12290;</p>
+<p>&#21478;&#22806;&#38656;&#35201;&#27880;&#24847;&#30340;&#26159; matlab &#37324;&#30340;&#32500;&#24230;&#19981;&#26159; <code>[n,k,h,w]</code> &#32780;&#26159; <code>[w,h,k,n]</code>&#12290;</p>
+<p>For an inner product / fully-connected layer with 1000 output channels and 1024 input channels the parameter blob is 1000 x 1024.</p>
+<p><code class="todo">&#19981;&#22826;&#29702;&#35299;&#20026;&#20160;&#20040;&#35201;&#36825;&#20040;&#23450;&#20041;&#8230;&#8230;</code></p>
+<p>blob &#37324;&#26377;&#20004;&#22823;&#37096;&#20998;&#65292;&#19968;&#20010;&#26159; data&#65292;&#19968;&#20010;&#26159; diff&#65292;&#21069;&#32773;&#26159;&#25105;&#20204;&#20256;&#36827;&#21435;&#30340;&#25968;&#25454;&#65292;&#21518;&#32773;&#26159;&#32593;&#32476;&#33258;&#24049;&#35757;&#32451;&#20986;&#26469;&#30340; gradient&#12290;&#36825;&#20123;&#25968;&#25454;&#21487;&#20197;&#22312; CPU &#20013;&#65292;&#20063;&#21487;&#20197;&#22312; GPU &#20013;&#65292;&#25968;&#25454;&#35775;&#38382;&#21487;&#20197;&#26159; const &#26041;&#24335;&#65292;&#20063;&#21487;&#20197;&#26159; mutable&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">const</span> Dtype* cpu_data() <span class="dt">const</span>;
+Dtype* mutable_cpu_data();</code></pre></div>
+<p>&#20877;&#22797;&#26434;&#19968;&#28857;&#65292;If you want to check out when a Blob will copy data, here is an illustrative example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Assuming that data are on the CPU initially, and we have a blob.</span>
+<span class="co">// const Dtype* foo;</span>
+<span class="co">// Dtype* bar;</span>
+<span class="co">// foo = blob.gpu_data(); // data copied cpu-&gt;gpu.</span>
+<span class="co">// foo = blob.cpu_data(); // no data copied since both have up-to-date contents.</span>
+<span class="co">// bar = blob.mutable_gpu_data(); // no data copied.</span>
+<span class="co">// // ... some operations ...</span>
+<span class="co">// bar = blob.mutable_gpu_data(); // no data copied when we are still on GPU.</span>
+<span class="co">// foo = blob.cpu_data(); // data copied gpu-&gt;cpu, since the gpu side has modified the data</span>
+<span class="co">// foo = blob.gpu_data(); // no data copied since both have up-to-date contents</span>
+<span class="co">// bar = blob.mutable_cpu_data(); // still no data copied.</span>
+<span class="co">// bar = blob.mutable_gpu_data(); // data copied cpu-&gt;gpu.</span>
+<span class="co">// bar = blob.mutable_cpu_data(); // data copied gpu-&gt;cpu.</span></code></pre></div>
+<p>The layer is the essence of a model and the fundamental unit of computation. Layers convolve filters, pool, take inner products, apply nonlinearities like rectified-linear and sigmoid and other elementwise transformations, normalize, load data, and compute losses like softmax and hinge. See the layer catalogue for all operations. Most of the types needed for state-of-the-art deep learning tasks are there.</p>
+<p>&#27599;&#20010; layer &#26377;&#19977;&#31181;&#37325;&#35201;&#30340;&#35745;&#31639;&#65306;setup&#65292;forward &#21644; backward&#12290;</p>
+<ul>
+<li>setup &#26159;&#21021;&#22987;&#21270;&#26102;&#20505;&#29992;&#30340;&#65292;&#21021;&#22987;&#21270; layer &#20197;&#21450; layer &#30340;&#36830;&#25509;&#12290;&#21482;&#20250;&#35843;&#29992;&#19968;&#27425;&#12290;</li>
+<li>forward&#65292;&#20174;&#19979;&#24448;&#19978;&#65307;</li>
+<li>backward&#65292;&#20174;&#19978;&#24448;&#19979;&#65307;</li>
+</ul>
+<p>&#20854;&#20013; forward/backward &#37117;&#26377; cpu &#21644; gpu &#30340;&#21508;&#33258;&#23454;&#29616;&#12290;&#65288;YangQing Jia &#30340; caffe2 &#37324;&#20934;&#22791;&#25226; forward/backward &#25972;&#21512;&#25104;&#20026;&#19968;&#20010; run&#12290;&#65289;</p>
+<p>Layers have two key responsibilities for the operation of the network as a whole: a forward pass that takes the inputs and produces the outputs, and a backward pass that takes the gradient with respect to the output, and computes the gradients with respect to the parameters and to the inputs, which are in turn back-propagated to earlier layers. These passes are simply the composition of each layer&#8217;s forward and backward.</p>
+<dl>
+<dt>&#32593;&#23601;&#26159;&#19968;&#20010; DAG&#65288;&#26377;&#21521;&#26080;&#29615;&#22270;&#65289; <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="er">name:</span> <span class="er">&quot;LogReg&quot;</span>
+<span class="er">layer</span> <span class="fu">{</span>
+  <span class="er">name</span><span class="fu">:</span> <span class="st">&quot;mnist&quot;</span>
+  <span class="er">type:</span> <span class="st">&quot;Data&quot;</span>
+  <span class="er">top:</span> <span class="st">&quot;data&quot;</span>
+  <span class="er">top:</span> <span class="st">&quot;label&quot;</span>
+  <span class="er">data_param</span> <span class="fu">{</span>
+    <span class="er">source</span><span class="fu">:</span> <span class="st">&quot;input_leveldb&quot;</span>
+    <span class="er">batch_size:</span> <span class="dv">64</span>
+  <span class="fu">}</span>
+<span class="fu">}</span>
+<span class="er">layer</span> <span class="fu">{</span>
+  <span class="er">name</span><span class="fu">:</span> <span class="st">&quot;ip&quot;</span>
+  <span class="er">type:</span> <span class="st">&quot;InnerProduct&quot;</span>
+  <span class="er">bottom:</span> <span class="st">&quot;data&quot;</span>
+  <span class="er">top:</span> <span class="st">&quot;ip&quot;</span>
+  <span class="er">inner_product_param</span> <span class="fu">{</span>
+    <span class="er">num_output</span><span class="fu">:</span> <span class="dv">2</span>
+  <span class="fu">}</span>
+<span class="fu">}</span>
+<span class="er">layer</span> <span class="fu">{</span>
+  <span class="er">name</span><span class="fu">:</span> <span class="st">&quot;loss&quot;</span>
+  <span class="er">type:</span> <span class="st">&quot;SoftmaxWithLoss&quot;</span>
+  <span class="er">bottom:</span> <span class="st">&quot;ip&quot;</span>
+  <span class="er">bottom:</span> <span class="st">&quot;label&quot;</span>
+  <span class="er">top:</span> <span class="st">&quot;loss&quot;</span>
+<span class="fu">}</span></code></pre></div>
+</dd>
+</dl>
+<p>&#39318;&#20808;&#35843;&#29992; <code class="sourceCode cpp">Net::Init()</code> &#26469;&#21021;&#22987;&#21270;&#65292;&#31435;&#38754;&#20250;&#20998;&#21035;&#35843;&#29992; layer &#30340; <code class="sourceCode cpp">layer.SetUp()</code> &#26469;&#21021;&#22987;&#21270; layer&#12290;&#25972;&#20010;&#32593;&#32476;&#30340;&#26500;&#36896;&#65288;construction&#65289;&#26159; device agnostic&#65288;&#23631;&#34109;&#20102; CPU/GPU &#30340;&#21306;&#21035;&#65289;&#12290;&#21487;&#20197;&#29992; <code class="sourceCode cpp">Caffe::mode()</code> &#26469;&#26597;&#35810;&#27169;&#24335;&#65292;&#29992; <code class="sourceCode cpp">Caffe::set_mode()</code> &#26469;&#35774;&#32622;&#12290;</p>
+<p>&#27169;&#22411;&#29992;&#25105;&#32431;&#25991;&#26412;&#23450;&#20041;&#22312; <code>.prototxt</code> &#25991;&#20214;&#65288;plaintext protocol buffer schema&#65289;&#37324;&#65292;&#35757;&#32451;&#21518;&#23384;&#25104;&#20108;&#36827;&#21046;&#25991;&#20214; <code>.caffemodel</code>&#65288;binaryproto&#65289;&#12290;</p>
+<p>The model format is defined by the protobuf schema in <a href="https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto">caffe.proto</a>. The source file is mostly self-explanatory so one is encouraged to check it out.</p>
+<p>Caffe &#29992;&#20102; google &#30340; google protocal buffer&#65292;&#22240;&#20026;&#23427;&#30340; txt &#21644; binary &#31561;&#20215;&#65292;&#20415;&#20110;&#38405;&#35835;&#65292;&#32780;&#19988;&#26377; C++ &#21644; python &#30340;&#25509;&#21475;&#12290;</p>
+<ul>
+<li><code>blob = {data, diff}</code></li>
+<li><code>params = [weights, biases]</code></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/forward_backward.html">Forward / Backward</a>: the essential computations of layered compositional models. <code class="fold">@</code></dt>
+<dd><p><img src="http://caffe.berkeleyvision.org/tutorial/fig/forward_backward.png" style="width:30.0%" /> <img src="http://caffe.berkeleyvision.org/tutorial/fig/forward.jpg" style="width:30.0%" /> <img src="http://caffe.berkeleyvision.org/tutorial/fig/backward.jpg" style="width:30.0%" /></p>
+<p>espresso, <code>[e&#712;spres&#601;&#650;]</code>, n.&#27987;&#21654;&#21857;&#65307;&#19968;&#26479;&#27987;&#21654;&#21857;</p>
+<p>&#20851;&#20110;&#21453;&#21521;&#20256;&#25773;&#65292;&#24378;&#28872;&#25512;&#33616;&#36825;&#31687;&#25991;&#31456;&#65306; <a href="backpropobation.html" class="featured heart" title="backpropobation.md">Principles of training multi-layer neural network using backpropagation</a></p>
+<p>These computations follow immediately from defining the model: Caffe plans and carries out the forward and backward passes for you.</p>
+<ul>
+<li>The <code>Net::Forward()</code> and <code>Net::Backward()</code> methods carry out the respective passes while <code>Layer::Forward()</code> and <code>Layer::Backward()</code> compute each step.</li>
+<li>Every layer type has <code>forward_{cpu,gpu}()</code> and <code>backward_{cpu,gpu}()</code> methods to compute its steps according to the mode of computation. A layer may only implement CPU or GPU mode due to constraints or convenience.</li>
+</ul>
+<p>solver &#21487;&#20197;&#20248;&#21270;&#27169;&#22411;&#65292;&#21548;&#36807; forward &#20135;&#29983; output &#21644; loss&#65292;&#36890;&#36807; backward &#29983;&#25104;&#27169;&#22411;&#30340; gradient&#65292;&#28982;&#21518;&#25226; gradient &#32771;&#34385;&#36827;&#27169;&#22411;&#36890;&#36807;&#35797;&#22270;&#20462;&#25913; weights &#26469;&#38477;&#20302; loss&#12290;</p>
+<p>Division of labor between the Solver, Net, and Layer keep Caffe modular and open to development.</p>
+<p>&#19978;&#38754;&#36825;&#21477;&#35805;&#26159;&#35828; solver &#21644; net &#21644; layer &#21508;&#21496;&#20854;&#32844;&#65292;&#20445;&#35777;&#20102; caffe &#30340;&#27169;&#22359;&#21270;&#65292;&#20351;&#24471;&#23427;&#20415;&#20110;&#22312;&#21407;&#26377;&#22522;&#30784;&#19978;&#20462;&#25913;&#21644;&#20877;&#24320;&#21457;&#12290;</p>
+<p>&#26356;&#22810;&#21442;&#35265;&#65306;<a href="http://caffe.berkeleyvision.org/tutorial/layers.html">Caffe | Layer Catalogue</a>&#12290;&#36825;&#37324;&#20171;&#32461;&#20102;&#21508;&#23618;&#30340;&#21442;&#25968;&#37197;&#32622;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/loss.html">Loss</a>: the task to be learned is defined by the loss. <code class="fold">@</code></dt>
+<dd><p>&#26426;&#22120;&#23398;&#20064;&#37324;&#23398;&#20064;&#23601;&#26159; loss &#39537;&#21160;&#30340;&#65292;loss &#20063;&#24120;&#34987;&#31216;&#20026; error&#65292;cost &#20197;&#21450; objective function&#65288;&#36825;&#20010;&#24456;&#29301;&#24378;&#20102;&#65292;&#36825;&#26159;&#24688;&#22909;&#20320;&#30340; objective &#26159;&#38477;&#20302; loss &#32780;&#24050;&#12290;&#65289;&#12290;</p>
+<p>A loss function specifies the goal of learning by mapping <strong>parameter settings</strong> (i.e., the current network weights) to a scalar value specifying the &#8220;badness&#8221; of these parameter settings. Hence, the goal of learning is to find a setting of the weights that minimizes the loss function.</p>
+<p>loss &#20989;&#25968;&#23545;&#24403;&#21069;&#32593;&#32476;&#30340;&#21442;&#25968;&#30340;&#22909;&#22351;&#35780;&#20215;&#65288;&#29992; badness &#26469;&#34913;&#37327;&#65289;&#26159;&#20248;&#21270;&#32593;&#32476;&#30340;&#22522;&#26412;&#20986;&#21457;&#12290;</p>
+<p>&#19968;&#20010;&#24120;&#29992;&#30340; loss &#20989;&#25968;&#23601;&#26159; SoftmaxWithLoss&#65292;&#26159;&#8220;&#19968;&#20010;&#23545;&#20854;&#20182;&#8221;&#65288;one-versus-all&#65289;&#65292;&#36825;&#26679;&#30340;&#19968;&#23618;&#21487;&#20197;&#29992;&#22914;&#19979;&#23450;&#20041;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="er">layer</span> <span class="fu">{</span>
+  <span class="er">name</span><span class="fu">:</span> <span class="st">&quot;loss&quot;</span>
+  <span class="er">type:</span> <span class="st">&quot;SoftmaxWithLoss&quot;</span>
+  <span class="er">bottom:</span> <span class="st">&quot;pred&quot;</span>
+  <span class="er">bottom:</span> <span class="st">&quot;label&quot;</span>
+  <span class="er">top:</span> <span class="st">&quot;loss&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>&#36825;&#20010; top &#26159;&#19968;&#20010;&#26631;&#37327;&#65288;scalar&#65289;&#65292;&#20063;&#23601;&#26159;&#27809;&#26377; shape &#30340;&#65288;&#26159;&#19981;&#26159;&#21487;&#20197;&#25226; shape &#30475;&#25104; <code>[]</code>&#65289;&#12290;</p>
+<p>&#36825;&#37324;&#26377;&#28857;&#20940;&#20081;&#12290;&#35828;&#26159;&#24102;&#26377; <code>Loss</code> &#21518;&#32512;&#30340; layer type &#30340;&#23618;&#20854;&#23454;&#37117;&#21487;&#20197;&#31639; loss&#65288;&#19981;&#21482;&#26159;&#26368;&#19978;&#38754;&#19968;&#23618;&#65289;&#65292;&#32780;&#19988;&#40664;&#35748;&#30340;&#26102;&#20505; layer &#30340;&#31532;&#19968;&#20010; top&#65292;&#30340; loss weight &#26159; 1&#65292;&#20854;&#20182;&#20026; 0&#12290;</p>
+<p>The final loss in Caffe, then, is computed by summing the total weighted loss over the network, as in the following pseudo-code:</p>
+<pre><code>loss := 0
+for layer in layers:
+  for top, loss_weight in layer.tops, layer.loss_weights:
+      loss += loss_weight * sum(top)</code></pre>
+<p><code class="todo">&#36825;&#37096;&#20998;&#19968;&#23450;&#35201;&#22909;&#22909;&#29702;&#35299;&#28165;&#26970;&#12290;</code></p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="caffe.berkeleyvision.org/tutorial/solver.html">Solver</a>: the solver coordinates model optimization. <code class="fold">@</code></dt>
+<dd><p>&#19968;&#20010;&#20363;&#23376;&#65306;</p>
+<pre><code>net: &quot;train_val.prototxt&quot;           # &#25351;&#23450;&#32593;&#32476;&#32467;&#26500;&#65292;&#36825;&#20010;&#25991;&#20214;&#26377;&#21508;&#31181; layer &#30340;&#35774;&#23450;&#65292;
+                                    # &#20197;&#21450; `name: &quot;net name&quot;`
+test_iter: 0
+test_interval: 1000000
+# lr for fine-tuning should be lower than when starting from scratch
+#debug_info: true
+base_lr: 0.000001
+lr_policy: &quot;step&quot;
+gamma: 0.1
+iter_size: 10
+# stepsize should also be lower, as we&#39;re closer to being done
+stepsize: 10000
+display: 20
+max_iter: 30001
+momentum: 0.9
+weight_decay: 0.0002
+snapshot: 1000
+snapshot_prefix: &quot;hed&quot;
+# uncomment the following to default to CPU mode solving
+# solver_mode: CPU</code></pre>
+<ul>
+<li>Stochastic Gradient Descent (type: <code>SGD</code>),</li>
+<li>AdaDelta (type: <code>AdaDelta</code>),</li>
+<li>Adaptive Gradient (type: <code>AdaGrad</code>),</li>
+<li>Adam (type: <code>Adam</code>),</li>
+<li>Nesterov&#8217;s Accelerated Gradient (type: <code>Nesterov</code>) and</li>
+<li>RMSprop (type: <code>RMSProp</code>)</li>
+</ul>
+<p>The solver</p>
+<ul>
+<li>scaffolds the optimization bookkeeping and creates the training network for learning and test network(s) for evaluation.</li>
+<li>iteratively optimizes by calling forward / backward and updating parameters</li>
+<li>(periodically) evaluates the test networks</li>
+<li>snapshots the model and solver state throughout the optimization</li>
+</ul>
+<p>solver &#36890;&#36807;&#19981;&#26029;&#35843;&#29992; forward/backward&#65292;&#35843;&#25972; parameters &#26469;&#38477;&#20302; loss&#12290;&#36824;&#21487;&#20197;&#21608;&#26399;&#24615; test networks&#65292;&#36824;&#21487;&#20197;&#19981;&#26029;&#29983;&#25104; model &#21644; solver state&#12290;&#27604;&#22914; HUD &#26469;&#36827;&#34892;&#36793;&#32536;&#25552;&#21462;&#30340;&#26102;&#20505;&#65292;&#23601;&#29983;&#25104;&#20102;&#24456;&#22810; <code>hud_iter_1000.caffemodel</code> &#21644; <code>hud_iter_1000.solverstate</code> &#25991;&#20214;&#12290;</p>
+<ul>
+<li>calls network forward to compute the output and loss</li>
+<li>calls network backward to compute the gradients</li>
+<li>incorporates the gradients into parameter updates <strong>according to the solver method</strong></li>
+<li>updates the solver state according to learning rate, history, and method</li>
+</ul>
+<p><code class="todo">&#28982;&#21518;&#19979;&#38754;&#35762;&#20102;&#19981;&#21516; solver &#20351;&#29992;&#30340;&#26041;&#27861;&#65288;&#19968;&#22534;&#25968;&#23398;&#20844;&#24335;&#65289;&#65292;&#20197;&#21518;&#20877;&#32454;&#30475;&#12290;</code></p>
+<p><code class="hide" title="d:/tzx/git/caffe-rc3/docs/tutorial/solver.md">@</code></p>
+<p>The solver methods address the general optimization problem of loss minimization. For dataset <span class="math inline">\(D\)</span>, the optimization objective is the average loss over all <span class="math inline">\(|D|\)</span> data instances throughout the dataset</p>
+<p><span class="math display">\[
+    L(W) = \frac{1}{|D|} \sum_i^{|D|} f_W\left(X^{(i)}\right) + \lambda r(W)
+\]</span></p>
+<p>where <span class="math inline">\(f_W\left(X^{(i)}\right)\)</span> is the loss on data instance <span class="math inline">\(X^{(i)}\)</span> and <span class="math inline">\(r(W)\)</span> is a regularization term with weight <span class="math inline">\(\lambda\)</span>. <span class="math inline">\(|D|\)</span> can be very large, so in practice, in each solver iteration we use a stochastic approximation of this objective, drawing a mini-batch of <span class="math inline">\(N &lt;&lt; |D|\)</span> instances:</p>
+<p><span class="math display">\[
+    L(W) \approx \frac{1}{N} \sum_i^N f_W\left(X^{(i)}\right) + \lambda r(W)
+\]</span></p>
+<p>The model computes <span class="math inline">\(f_W\)</span> in the forward pass and the gradient <span class="math inline">\(\nabla f_W\)</span> in the backward pass.</p>
+<p>The parameter update <span class="math inline">\(\Delta W\)</span> is formed by the solver from the error gradient <span class="math inline">\(\nabla f_W\)</span>, the regularization gradient <span class="math inline">\(\nabla r(W)\)</span>, and other particulars to each method.</p>
+<dl>
+<dt>Methods:</dt>
+<dd><ul>
+<li><dl>
+<dt>SGD <code class="fold">@</code></dt>
+<dd><p><strong>Stochastic gradient descent</strong> (<code>type: &quot;SGD&quot;</code>) updates the weights <span class="math inline">\(W\)</span> by a linear combination of the negative gradient <span class="math inline">\(\nabla L(W)\)</span> and the previous weight update <span class="math inline">\(V_t\)</span>. The <strong>learning rate</strong> <span class="math inline">\(\alpha\)</span> is the weight of the negative gradient. The <strong>momentum</strong> <span class="math inline">\(\mu\)</span> is the weight of the previous update.</p>
+<p>Formally, we have the following formulas to compute the update value $ V_{t+1} $ and the updated weights $ W_{t+1} $ at iteration $ t+1 $, given the previous weight update $ V_t $ and current weights $ W_t $:</p>
+<p><span class="math display">\[
+    V_{t+1} = \mu V_t - \alpha \nabla L(W_t)
+\]</span></p>
+<p><span class="math display">\[
+    W_{t+1} = W_t + V_{t+1}
+\]</span></p>
+<p>The learning &#8220;hyperparameters&#8221; (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\mu\)</span>) might require a bit of tuning for best results. If you&#8217;re not sure where to start, take a look at the &#8220;Rules of thumb&#8221; below, and for further information you might refer to Leon Bottou&#8217;s <a href="http://research.microsoft.com/pubs/192769/tricks-2012.pdf">Stochastic Gradient Descent Tricks</a>.</p>
+<p>&#23398;&#20064;&#29575;&#21487;&#20197;&#20808;&#35774;&#32622;&#20026; &#945; &#8776; 0.01&#65292;&#28982;&#21518;&#24930;&#24930;&#38477;&#20302;&#12290;<span class="math inline">\(\mu\)</span> &#21487;&#20197;&#35774;&#32622;&#20026; 0.9&#12290;</p>
+<p>By smoothing the weight updates across iterations, momentum tends to make deep learning with SGD both stabler and faster.</p>
+<pre><code>base_lr: 0.01     # &#21021;&#22987; lr
+
+lr_policy: &quot;step&quot; # &#38454;&#27573;&#19979;&#38477;&#12290;drop the learning rate in &quot;steps&quot;
+                  # by a factor of gamma every stepsize iterations
+
+gamma: 0.1        # &#27599;&#20010; step &#38477;&#20302;&#21040;&#21407;&#26469;&#30340; 0.1
+
+stepsize: 100000  # &#27599; 100, 000 &#38454;&#26799;&#19979;&#38477;&#19968;&#27425;
+
+max_iter: 350000  # train for 350K iterations total
+
+momentum: 0.9</code></pre>
+<p>Note that the momentum setting <span class="math inline">\(\mu\)</span> effectively multiplies the size of your updates by a factor of <span class="math inline">\(\frac{1}{1 - \mu}\)</span> after many iterations of training, so if you increase <span class="math inline">\(\mu\)</span>, it may be a good idea to <strong>decrease</strong> <span class="math inline">\(\alpha\)</span> accordingly (and vice versa).</p>
+<p>For example, with <span class="math inline">\(\mu = 0.9\)</span>, we have an effective update size multiplier of <span class="math inline">\(\frac{1}{1 - 0.9} = 10\)</span>. If we increased the momentum to <span class="math inline">\(\mu = 0.99\)</span>, we&#8217;ve increased our update size multiplier to 100, so we should drop <span class="math inline">\(\alpha\)</span> (<code>base_lr</code>) by a factor of 10.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>AdaDelta <code class="fold">@</code></dt>
+<dd><p>The <strong>AdaDelta</strong> (<code>type: &quot;AdaDelta&quot;</code>) method (M. Zeiler) is a &#8220;robust learning rate method&#8221;. It is a gradient-based optimization method (like SGD). The update formulas are</p>
+<p><span class="math display">\[
+    \begin{align}
+        (v_t)_i &amp;=
+            \frac{\operatorname{RMS}((v_{t-1})_i)}{\operatorname{RMS}\left(
+            \nabla L(W_t) \right)_{i}} \left( \nabla L(W_{t&#39;})
+            \right)_i \\
+        \operatorname{RMS}\left( \nabla L(W_t) \right)_{i} &amp;=
+            \sqrt{E[g^2] + \varepsilon} \\
+        E[g^2]_t &amp;=
+            \delta{E[g^2]_{t-1} } + (1-\delta)g_{t}^2
+    \end{align}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+    (W_{t+1})_i = (W_t)_i - \alpha (v_t)_i.
+\]</span></p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>AdaGrad <code class="fold">@</code></dt>
+<dd><p>The <strong>adaptive gradient</strong> (<code>type: &quot;AdaGrad&quot;</code>) method (Duchi et al.) is a gradient-based optimization method (like SGD) that attempts to &#8220;find needles in haystacks in the form of very predictive but rarely seen features,&#8221; in Duchi et al.&#8217;s words.</p>
+<p>Given the update information from all previous iterations <span class="math display">\[ \left( \nabla L(W) \right)_{t&#39;} \]</span> for <span class="math display">\[
+t&#39; \in \{1, 2, ..., t\} \]</span>, the update formulas proposed by are as follows, specified for each component <span class="math display">\[i\]</span> of the weights <span class="math display">\[W\]</span>:</p>
+<p><span class="math display">\[
+(W_{t+1})_i =
+(W_t)_i - \alpha
+\frac{\left( \nabla L(W_t) \right)_{i}}{
+    \sqrt{\sum_{t&#39;=1}^{t} \left( \nabla L(W_{t&#39;}) \right)_i^2}
+}
+\]</span></p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Adam <code class="fold">@</code></dt>
+<dd><p>like SGD.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>NAG <code class="fold">@</code></dt>
+<dd><p>Nesterov&#8217;s accelerated gradient</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>RMSprop</dt>
+<dd><p>like SGD.</p>
+</dd>
+</dl></li>
+</ul>
+</dd>
+<dt><code class="heart">Scaffolding</code> <code class="fold">@</code></dt>
+<dd><ul>
+<li><dl>
+<dt>The solver scaffolding prepares the optimization method and initializes the model to be learned in <code class="sourceCode cpp">Solver::Presolve()</code>. <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">&gt;&gt;&gt;</span> <span class="kw">caffe</span> train -solver examples/mnist/lenet_solver.prototxt
+<span class="kw">I0902</span> 13:35:56.474978 16020 caffe.cpp:90] Starting Optimization
+<span class="kw">I0902</span> 13:35:56.475190 16020 solver.cpp:32] Initializing solver from parameters:
+<span class="kw">test_iter</span>: 100
+<span class="kw">test_interval</span>: 500
+<span class="kw">base_lr</span>: 0.01
+<span class="kw">display</span>: 100
+<span class="kw">max_iter</span>: 10000
+<span class="kw">lr_policy</span>: <span class="st">&quot;inv&quot;</span>
+<span class="kw">gamma</span>: 0.0001
+<span class="kw">power</span>: 0.75
+<span class="kw">momentum</span>: 0.9
+<span class="kw">weight_decay</span>: 0.0005
+<span class="kw">snapshot</span>: 5000
+<span class="kw">snapshot_prefix</span>: <span class="st">&quot;examples/mnist/lenet&quot;</span>
+<span class="kw">solver_mode</span>: GPU
+<span class="kw">net</span>: <span class="st">&quot;examples/mnist/lenet_train_test.prototxt&quot;</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Net initialization <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">I0902</span> 13:35:56.655681 16020 solver.cpp:72] Creating training net from net file: examples/mnist/lenet_train_test.prototxt
+[<span class="kw">...</span>]
+<span class="kw">I0902</span> 13:35:56.656740 16020 net.cpp:56] Memory required for data: 0
+<span class="kw">I0902</span> 13:35:56.656791 16020 net.cpp:67] Creating Layer mnist
+<span class="kw">I0902</span> 13:35:56.656811 16020 net.cpp:356] mnist -<span class="kw">&gt;</span> data
+<span class="kw">I0902</span> 13:35:56.656846 16020 net.cpp:356] mnist -<span class="kw">&gt;</span> label
+<span class="kw">I0902</span> 13:35:56.656874 16020 net.cpp:96] Setting up mnist
+<span class="kw">I0902</span> 13:35:56.694052 16020 data_layer.cpp:135] Opening lmdb examples/mnist/mnist_train_lmdb
+<span class="kw">I0902</span> 13:35:56.701062 16020 data_layer.cpp:195] output data size: 64,1,28,28
+<span class="kw">I0902</span> 13:35:56.701146 16020 data_layer.cpp:236] Initializing prefetch
+<span class="kw">I0902</span> 13:35:56.701196 16020 data_layer.cpp:238] Prefetch initialized.
+<span class="kw">I0902</span> 13:35:56.701212 16020 net.cpp:103] Top shape: 64 1 28 28 (50176)
+<span class="kw">I0902</span> 13:35:56.701230 16020 net.cpp:103] Top shape: 64 1 1 1 (64)
+[<span class="kw">...</span>]
+<span class="kw">I0902</span> 13:35:56.703737 16020 net.cpp:67] Creating Layer ip1
+<span class="kw">I0902</span> 13:35:56.703753 16020 net.cpp:394] ip1 <span class="kw">&lt;</span>- pool2
+<span class="kw">I0902</span> 13:35:56.703778 16020 net.cpp:356] ip1 -<span class="kw">&gt;</span> ip1
+<span class="kw">I0902</span> 13:35:56.703797 16020 net.cpp:96] Setting up ip1
+<span class="kw">I0902</span> 13:35:56.728127 16020 net.cpp:103] Top shape: 64 500 1 1 (32000)
+<span class="kw">I0902</span> 13:35:56.728142 16020 net.cpp:113] Memory required for data: 5039360
+<span class="kw">I0902</span> 13:35:56.728175 16020 net.cpp:67] Creating Layer relu1
+<span class="kw">I0902</span> 13:35:56.728194 16020 net.cpp:394] relu1 <span class="kw">&lt;</span>- ip1
+<span class="kw">I0902</span> 13:35:56.728219 16020 net.cpp:345] relu1 -<span class="kw">&gt;</span> ip1 (in-place)
+<span class="kw">I0902</span> 13:35:56.728240 16020 net.cpp:96] Setting up relu1
+<span class="kw">I0902</span> 13:35:56.728256 16020 net.cpp:103] Top shape: 64 500 1 1 (32000)
+<span class="kw">I0902</span> 13:35:56.728270 16020 net.cpp:113] Memory required for data: 5167360
+<span class="kw">I0902</span> 13:35:56.728287 16020 net.cpp:67] Creating Layer ip2
+<span class="kw">I0902</span> 13:35:56.728304 16020 net.cpp:394] ip2 <span class="kw">&lt;</span>- ip1
+<span class="kw">I0902</span> 13:35:56.728333 16020 net.cpp:356] ip2 -<span class="kw">&gt;</span> ip2
+<span class="kw">I0902</span> 13:35:56.728356 16020 net.cpp:96] Setting up ip2
+<span class="kw">I0902</span> 13:35:56.728690 16020 net.cpp:103] Top shape: 64 10 1 1 (640)
+<span class="kw">I0902</span> 13:35:56.728705 16020 net.cpp:113] Memory required for data: 5169920
+<span class="kw">I0902</span> 13:35:56.728734 16020 net.cpp:67] Creating Layer loss
+<span class="kw">I0902</span> 13:35:56.728747 16020 net.cpp:394] loss <span class="kw">&lt;</span>- ip2
+<span class="kw">I0902</span> 13:35:56.728767 16020 net.cpp:394] loss <span class="kw">&lt;</span>- label
+<span class="kw">I0902</span> 13:35:56.728786 16020 net.cpp:356] loss -<span class="kw">&gt;</span> loss
+<span class="kw">I0902</span> 13:35:56.728811 16020 net.cpp:96] Setting up loss
+<span class="kw">I0902</span> 13:35:56.728837 16020 net.cpp:103] Top shape: 1 1 1 1 (1)
+<span class="kw">I0902</span> 13:35:56.728849 16020 net.cpp:109]     with loss weight 1
+<span class="kw">I0902</span> 13:35:56.728878 16020 net.cpp:113] Memory required for data: 5169924</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Loss <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">I0902</span> 13:35:56.728893 16020 net.cpp:170] loss needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728909 16020 net.cpp:170] ip2 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728924 16020 net.cpp:170] relu1 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728938 16020 net.cpp:170] ip1 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728953 16020 net.cpp:170] pool2 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728970 16020 net.cpp:170] conv2 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728984 16020 net.cpp:170] pool1 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.728998 16020 net.cpp:170] conv1 needs backward computation.
+<span class="kw">I0902</span> 13:35:56.729014 16020 net.cpp:172] mnist does not need backward computation.
+<span class="kw">I0902</span> 13:35:56.729027 16020 net.cpp:208] This network produces output loss
+<span class="kw">I0902</span> 13:35:56.729053 16020 net.cpp:467] Collecting Learning Rate and Weight Decay.
+<span class="kw">I0902</span> 13:35:56.729071 16020 net.cpp:219] Network initialization done.
+<span class="kw">I0902</span> 13:35:56.729085 16020 net.cpp:220] Memory required for data: 5169924
+<span class="kw">I0902</span> 13:35:56.729277 16020 solver.cpp:156] Creating test net (#0) <span class="kw">specified</span> by net file: examples/mnist/lenet_train_test.prototxt</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Completion <code class="fold">@</code></dt>
+<dd><pre><code>I0902 13:35:56.806970 16020 solver.cpp:46] Solver scaffolding done.
+I0902 13:35:56.806984 16020 solver.cpp:165] Solving LeNet</code></pre>
+</dd>
+</dl></li>
+</ul>
+</dd>
+<dt>Updating Parameters:</dt>
+<dd><p>&#26435;&#37325;&#30340;&#26356;&#26032;&#65288;weight update&#65289;&#26159; solver &#25552;&#20132;&#32473;&#30340; net&#65292;&#35843;&#29992;&#30340;&#20989;&#25968;&#26159; <code>Solver::ComputeUpdateValue()</code>&#12290;</p>
+<p>The <code>ComputeUpdateValue</code> method incorporates any weight decay <span class="math display">\[ r(W) \]</span> into the weight gradients (which currently just contain the error gradients) to get the final gradient with respect to each network weight. Then these gradients are scaled by the learning rate <span class="math display">\[ \alpha \]</span> and the update to subtract is stored in each parameter Blob&#8217;s <code>diff</code> field. Finally, the <code>Blob::Update</code> method is called on each parameter blob, which performs the final update (subtracting the Blob&#8217;s <code>diff</code> from its <code>data</code>).</p>
+</dd>
+<dt>Snapshotting and Resuming: <code class="fold">@</code></dt>
+<dd><p>The solver snapshots the <strong>weights</strong> and <strong>its own state</strong> during training in <code class="sourceCode cpp">Solver::Snapshot()</code> and <code class="sourceCode cpp">Solver::SnapshotSolverState()</code>. The weight snapshots export the learned model while the solver snapshots allow training to be resumed from a given point. Training is resumed by <code class="sourceCode cpp">Solver::Restore()</code> and <code class="sourceCode cpp">Solver::RestoreSolverState()</code>.</p>
+<p>Weights are saved without extension while solver states are saved with <code>.solverstate</code> extension. Both files will have an <code>_iter_N</code> suffix for the snapshot iteration number.</p>
+<p>Snapshotting is configured by:</p>
+<pre><code># The snapshot interval in iterations.
+snapshot: 5000
+# File path prefix for snapshotting model weights and solver state.
+# Note: this is relative to the invocation of the `caffe` utility, not the
+# solver definition file.
+snapshot_prefix: &quot;/path/to/model&quot;
+# Snapshot the diff along with the weights. This can help debugging training
+# but takes more storage.
+snapshot_diff: false
+# A final snapshot is saved at the end of training unless
+# this flag is set to false. The default is true.
+snapshot_after_train: true</code></pre>
+<p>in the solver definition prototxt.</p>
+</dd>
+</dl>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/layers.html">Layer Catalogue</a>: the layer is the fundamental unit of modeling and computation &#8211; Caffe&#8217;s catalogue includes layers for state-of-the-art models. <code class="fold">@</code></dt>
+<dd><p>&#36825;&#37324;&#35762;&#24471;&#24456;&#35814;&#32454;&#65292;&#20171;&#32461;&#20102;&#27599;&#20010;&#23618;&#26377;&#21738;&#20123; required &#21442;&#25968;&#65292;&#26377;&#21738;&#20123; optional &#21442;&#25968;&#12290;&#22836;&#25991;&#20214;&#65292;&#20197;&#21450; CPU/GPU &#23454;&#29616;&#30340;&#25991;&#20214;&#12290;</p>
+<dl>
+<dt><a href="https://github.com/district10/caffe-rc3/blob/master/src/caffe/proto/caffe.proto">caffe.proto</a> <code class="fold">@</code></dt>
+<dd><p>&#25152;&#26377;&#30340; layers &#37117;&#23450;&#20041;&#22312; <a href="https://github.com/district10/caffe-rc3/tree/master/src/caffe/layers">caffe:/src/caffe/layers</a>&#12290;</p>
+<p>my noteed source code: <a href="caffe-annotated.html" title="caffe-annotated.md">include/caffe-annotated.md</a></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># cd $CAFFE_ROOT</span>
+
+<span class="kw">&gt;&gt;&gt;</span> <span class="kw">ls</span> src/caffe/layers/*loss*.cpp
+<span class="kw">src/caffe/layers/contrastive_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/euclidean_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/hinge_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/infogain_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/multinomial_logistic_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/sigmoid_cross_entropy_loss_layer.cpp</span>
+<span class="kw">src/caffe/layers/softmax_loss_layer.cpp</span>
+
+<span class="kw">&gt;&gt;&gt;</span> <span class="kw">ls</span> src/caffe/layers/*loss*.cu
+<span class="kw">src/caffe/layers/contrastive_loss_layer.cu</span>
+<span class="kw">src/caffe/layers/euclidean_loss_layer.cu</span>
+<span class="kw">src/caffe/layers/sigmoid_cross_entropy_loss_layer.cu</span>
+<span class="kw">src/caffe/layers/softmax_loss_layer.cu</span></code></pre></div>
+</dd>
+</dl>
+<p><code class="hide" title="D:/tzx/git/caffe-rc3/docs/tutorial/layers.md">@</code></p>
+<dl>
+<dt>&#25152;&#26377;&#30340; layers <code class="fold">@</code></dt>
+<dd><ul>
+<li><dl>
+<dt>Vision Layers <code class="fold">@</code></dt>
+<dd><p>&#36755;&#20837;&#30340;&#26159;&#19977;&#32500;&#30340; <code>w*h*c</code> &#30340;&#22270;&#29255;&#65292;&#36755;&#20986;&#19968;&#20010;&#19968;&#32500;&#30340; <code>w*h*c</code> &#30340; big vector&#12290;</p>
+<p><strong>ignore the spatial structure of the input</strong></p>
+<ul>
+<li><dl>
+<dt>&#21367;&#31215;&#23618;, <code>Convolution</code> <code class="fold">@</code></dt>
+<dd><p>implemetaion</p>
+<ul>
+<li>/src/caffe/layers/convolution_layer.cpp</li>
+<li>/src/caffe/layers/convolution_layer.cpp</li>
+</ul>
+<p>sig: <code>[n * c_i * h_i * w_i]</code> -&gt; <code>[n * c_o * h_o * w_o]</code>,</p>
+<p>where <code>h_o = (h_i + 2 * pad_h - kernel_h) / stride_h + 1</code></p>
+<dl>
+<dt>&#19968;&#20010; prototxt &#20363;&#23376;&#65292;&#26469;&#33258; ./models/bvlc_reference_caffenet/train_val.prototxt <code class="fold">@</code></dt>
+<dd><pre><code>layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  # learning rate and decay multipliers for the filters
+  param { lr_mult: 1 decay_mult: 1 }
+  # learning rate and decay multipliers for the biases
+  param { lr_mult: 2 decay_mult: 0 }
+  convolution_param {
+    num_output: 96     # learn 96 filters
+    kernel_size: 11    # each filter is 11x11
+    stride: 4          # step 4 pixels between each filter application
+    weight_filler {
+      type: &quot;gaussian&quot; # initialize the filters from a Gaussian
+      std: 0.01        # distribution with stdev 0.01 (default mean: 0)
+    }
+    bias_filler {
+      type: &quot;constant&quot; # initialize the biases to zero (0)
+      value: 0
+    }
+  }
+}</code></pre>
+</dd>
+</dl>
+<ul>
+<li><strong><code>weight_filler</code></strong></li>
+<li><code>bias_term</code></li>
+<li><code>stride</code></li>
+<li><code>group</code></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#27744;&#21270;&#23618;, <code>Pooling</code> <code class="fold">@</code></dt>
+<dd><p>sig: <code>[n * c * h_i * w_i]</code> -&gt; <code>[n * c * h_o * w_o]</code></p>
+<pre><code>layer {
+  name: &quot;pool1&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;pool1&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3 # pool over a 3x3 region
+    stride: 2      # step two pixels (in the bottom blob) between pooling regions
+  }
+}</code></pre>
+<p>&#27744;&#21270;&#26041;&#27861;&#26377; MAX, AVE, or STOCHASTIC</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Local Response Normalization, <code>LRN</code> <code class="fold">@</code></dt>
+<dd><p>The local response normalization layer performs a kind of &#8220;lateral inhibition&#8221; <code>[.&#618;nh&#618;'b&#618;&#643;(&#601;)n]</code> n.&#25233;&#21046;&#65307;&#31105;&#27490;&#65307;&#25304;&#35880;&#65307;&#25304;&#26463;&#24863; by normalizing over local input regions. In <code>ACROSS_CHANNELS</code> mode, the local regions extend across nearby channels, but have no spatial extent (i.e., they have shape <code>local_size x 1 x 1</code>). In <code>WITHIN_CHANNEL</code> mode, the local regions extend spatially, but are in separate channels (i.e., they have shape <code>1 x local_size x local_size</code>). Each input value is divided by <span class="math inline">\((1+(&#945;/n)&#8721;_ix^2_i)^&#946;\)</span>, where n is the size of each local region, and the sum is taken over the region centered at that value (zero padding is added where necessary).</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>im2col <code class="fold">@</code></dt>
+<dd><p>Im2col is a helper for doing the image-to-column transformation that you most likely do not need to know about. This is used in Caffe&#8217;s original convolution to do matrix multiplication by laying out all patches into a matrix.</p>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Loss Layers <code class="fold">@</code></dt>
+<dd><ul>
+<li><p>Softmax, <code>SoftmaxWithLoss</code></p></li>
+<li><p>Sum-of-Squares / Euclidean, <code>EuclideanLoss</code></p></li>
+<li><p>Hinge / Margin, <code>HingeLoss</code></p></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Activation / Neuron Layers <code class="fold">@</code></dt>
+<dd><p>In general, activation / Neuron layers are element-wise operators, taking one bottom blob and producing one top blob of the same size. In the layers below, we will ignore the input and out sizes as they are identical: { input, output: n * c * h * w }.</p>
+<ul>
+<li><p>ReLU / Rectified-Linear and Leaky-ReLU, <code>ReLU</code></p>
+<p>max(0, x)</p></li>
+<li><p>Sigmoid, <code>Sigmoid</code></p>
+<p>sigmoid(x)</p></li>
+<li><p>TanH / Hyperbolic Tangent, <code>TanH</code></p></li>
+<li><p>Absolute Value, <code>AbsVal</code></p></li>
+<li><p>Power, <code>Power</code></p>
+<p><code>power(x, power=1, scale=1, shift=0) = (shift+scale*x)^power</code></p></li>
+<li><p>BNLL, <code>BNLL</code></p>
+<p>The BNLL (binomial normal log likelihood) layer computes the output as <code>log(1 + exp(x))</code> for each input element x.</p></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Data Layers <code class="fold">@</code></dt>
+<dd><p>Data enters Caffe through data layers: they lie at the bottom of nets. Data can come from efficient databases (LevelDB or LMDB), directly from memory, or, when efficiency is not critical, from files on disk in HDF5 or common image formats.</p>
+<ul>
+<li><p>Database, <code>Data</code></p></li>
+<li><p>In-Memory, <code>MemoryData</code></p></li>
+<li><p>HDF5 Input, <code>HDF5Data</code></p></li>
+<li><p>HDF5 Output, <code>HDF5Output</code></p></li>
+<li><p>Images, <code>ImageData</code></p>
+<p>source: name of a text file, with each line giving an image filename and label</p></li>
+<li><p>Dummy, <code>DummyData</code></p>
+<p><code>DummyData</code> is for development and debugging. See <code>DummyDataParam</code>.</p></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Common Layers <code class="fold">@</code></dt>
+<dd><ul>
+<li><dl>
+<dt>Inner Product, <code>InnerProduct</code> <code class="fold">@</code></dt>
+<dd><p>The InnerProduct layer (also usually referred to as the fully connected layer) treats the input as a simple vector and produces an output in the form of a single vector (with the blob&#8217;s height and width set to 1).</p>
+<p>sig: <code>[ n * c_i * h_i * w_i ]</code> -&gt; <code>[n * c_o * 1 * 1]</code></p>
+<pre><code>layer {
+  name: &quot;fc8&quot;
+  type: &quot;InnerProduct&quot;
+  # learning rate and decay multipliers for the weights
+  param { lr_mult: 1 decay_mult: 1 }
+  # learning rate and decay multipliers for the biases
+  param { lr_mult: 2 decay_mult: 0 }
+  inner_product_param {
+    num_output: 1000
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+  bottom: &quot;fc7&quot;
+  top: &quot;fc8&quot;
+}</code></pre>
+<p>&#31616;&#21333;&#30340;&#35828;&#65292;&#23545; ip &#23618;&#32780;&#35328;&#65292;&#25152;&#26377;&#30340; feature &#37117;&#30475;&#25104;&#19968;&#20018;&#25968;&#23383;&#65288;<code>c*h*w</code>&#65289;&#65292; ip &#23618;&#30340;&#20219;&#21153;&#26159;&#23398;&#20064; <code>c_o</code> &#20010;&#21516;&#26679;&#22823;&#23567;&#65288;<code>c*h*w</code>&#65289;&#30340;&#26435;&#37325;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Splitting, <code>Split</code> <code class="fold">@</code></dt>
+<dd><p>&#23601;&#26159; split &#21679;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Flattening, <code>Flatten</code> <code class="fold">@</code></dt>
+<dd><p>sig: <code>[n * c * h * w]</code> -&gt; <code>[n * (c*h*w)]</code></p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Reshape, <code>Reshape</code> <code class="fold">@</code></dt>
+<dd><p>As another example, specifying <code>reshape_param { shape { dim: 0 dim: -1 } }</code> makes the layer behave in exactly the same way as the Flatten layer.</p>
+<pre><code>layer {
+name: &quot;reshape&quot;
+type: &quot;Reshape&quot;
+bottom: &quot;input&quot;
+top: &quot;output&quot;
+reshape_param {
+  shape {
+    dim: 0  # copy the dimension from below
+    dim: 2
+    dim: 3
+    dim: -1 # infer it from the other dimensions
+  }
+}
+}</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Concatenation, <code>Concat</code> <code class="fold">@</code></dt>
+<dd><p>&#21487;&#20197;&#29992;&#26469;&#25226;&#22909;&#20960;&#20010; bottom &#30340;&#25968;&#25454;&#21512;&#36215;&#26469;&#12290;</p>
+<ul>
+<li><code>axis</code>, {0, 1}, 0 for n, 1 for c.</li>
+<li><code>[n_i * c_i * h * w]</code></li>
+<li>&#22914;&#26524; c &#37117;&#19968;&#26679;&#65292;&#32780;&#19988; axis = 0: &#23601;&#25226;&#25152;&#26377;&#37117;&#25968;&#25454;&#20018;&#32852;&#36215;&#26469;&#65292;&#36755;&#20986;&#20026;&#65306;<code>[(n_1 + n_2 + ... + n_K) * c_1 * h * w]</code></li>
+<li>&#22914;&#26524; n &#37117;&#19968;&#26679;&#65292;&#32780;&#19988; axis = 1&#65306;&#23601;&#25226;&#27599;&#32452;&#25968;&#25454;&#30340; c &#20010; feature &#20018;&#32852;&#36215;&#26469;&#65292;&#36755;&#20986;&#20026;&#65306; <code>[n_1 * (c_1 + c_2 + ... + c_K) * h * w]</code></li>
+</ul>
+<pre><code>layer {
+  name: &quot;concat&quot;
+  bottom: &quot;in1&quot;
+  bottom: &quot;in2&quot;
+  top: &quot;out&quot;
+  type: &quot;Concat&quot;
+  concat_param {
+    axis: 1 # &#25226; feature &#21512;&#36215;&#26469;&#65292;n &#19981;&#21464;&#12290;
+  }
+}</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Slicing <code class="fold">@</code></dt>
+<dd><pre><code>layer {
+  name: &quot;slicer_label&quot;
+  type: &quot;Slice&quot;
+  bottom: &quot;label&quot;
+  ## Example of label with a shape N x 3 x 1 x 1
+  top: &quot;label1&quot;
+  top: &quot;label2&quot;
+  top: &quot;label3&quot;
+  slice_param {
+    axis: 1
+    slice_point: 1
+    slice_point: 2
+  }
+}</code></pre>
+</dd>
+</dl></li>
+<li>Elementwise Operations</li>
+<li>ArgMax</li>
+<li>SoftMax</li>
+<li>Mean-Variance Normalization</li>
+</ul>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/interfaces.html">Interfaces</a>: command line, Python, and MATLAB Caffe. <code class="fold">@</code></dt>
+<dd><ul>
+<li><p>&#21629;&#20196;&#34892;&#65292;&#22312; <code>caffe/build/tools</code> &#25991;&#20214;&#22841;&#12290;</p>
+<p><code>caffe</code></p>
+<p><strong>Training</strong>: <code class="sourceCode bash"><span class="kw">caffe</span> train</code> learns models from scratch, resumes learning from saved snapshots, and fine-tunes models to new data and tasks:</p>
+<ul>
+<li>&#35774;&#32622; solver&#65306;<code>-solver solver.prototxt</code></li>
+<li>&#20174; snapshot &#32487;&#32493;&#35757;&#32451;&#65306;<code>-snapshot model_iter_1000.solverstate</code></li>
+<li>&#21021;&#22987;&#21270;&#65306;<code>-weights model.caffemodel</code></li>
+</ul>
+<p><strong>Testing</strong></p>
+<p><strong>Benchmarking</strong></p>
+<dl>
+<dt><strong>Diagnostics</strong></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">&gt;&gt;&gt;</span> <span class="kw">./build/tools/caffe</span> device_query -gpu 0
+<span class="kw">I0617</span> 17:51:26.008927 31605 caffe.cpp:112] Querying GPUs 0
+<span class="kw">I0617</span> 17:51:26.015770 31605 common.cpp:168] Device id:                     0
+<span class="kw">I0617</span> 17:51:26.015813 31605 common.cpp:169] Major revision number:         5
+<span class="kw">I0617</span> 17:51:26.015820 31605 common.cpp:170] Minor revision number:         2
+<span class="kw">I0617</span> 17:51:26.015825 31605 common.cpp:171] Name:                          GeForce GTX TITAN X
+<span class="kw">I0617</span> 17:51:26.015831 31605 common.cpp:172] Total global memory:           12884705280
+<span class="kw">I0617</span> 17:51:26.015837 31605 common.cpp:173] Total shared memory per block: 49152
+<span class="kw">I0617</span> 17:51:26.015843 31605 common.cpp:174] Total registers per block:     65536
+<span class="kw">I0617</span> 17:51:26.015848 31605 common.cpp:175] Warp size:                     32
+<span class="kw">I0617</span> 17:51:26.015853 31605 common.cpp:176] Maximum memory pitch:          2147483647
+<span class="kw">I0617</span> 17:51:26.015861 31605 common.cpp:177] Maximum threads per block:     1024
+<span class="kw">I0617</span> 17:51:26.015866 31605 common.cpp:178] Maximum dimension of block:    1024, 1024, 64
+<span class="kw">I0617</span> 17:51:26.015872 31605 common.cpp:181] Maximum dimension of grid:     2147483647, 65535, 65535
+<span class="kw">I0617</span> 17:51:26.015877 31605 common.cpp:184] Clock rate:                    1076000
+<span class="kw">I0617</span> 17:51:26.015882 31605 common.cpp:185] Total constant memory:         65536
+<span class="kw">I0617</span> 17:51:26.015893 31605 common.cpp:186] Texture alignment:             512
+<span class="kw">I0617</span> 17:51:26.015899 31605 common.cpp:187] Concurrent copy and execution: Yes
+<span class="kw">I0617</span> 17:51:26.015907 31605 common.cpp:189] Number of multiprocessors:     24
+<span class="kw">I0617</span> 17:51:26.015911 31605 common.cpp:190] Kernel execution timeout:      No
+
+<span class="kw">&gt;&gt;&gt;</span> <span class="kw">./build/tools/caffe</span> device_query -gpu 1
+<span class="kw">I0617</span> 16:58:12.442965 31520 caffe.cpp:112] Querying GPUs 1
+<span class="kw">I0617</span> 16:58:12.713518 31520 common.cpp:168] Device id:                     1
+<span class="kw">I0617</span> 16:58:12.713558 31520 common.cpp:169] Major revision number:         5
+<span class="kw">I0617</span> 16:58:12.713564 31520 common.cpp:170] Minor revision number:         2
+<span class="kw">I0617</span> 16:58:12.713570 31520 common.cpp:171] Name:                          GeForce GTX TITAN X
+<span class="kw">I0617</span> 16:58:12.713575 31520 common.cpp:172] Total global memory:           12884180992
+<span class="kw">I0617</span> 16:58:12.713582 31520 common.cpp:173] Total shared memory per block: 49152
+<span class="kw">I0617</span> 16:58:12.713587 31520 common.cpp:174] Total registers per block:     65536
+<span class="kw">I0617</span> 16:58:12.713593 31520 common.cpp:175] Warp size:                     32
+<span class="kw">I0617</span> 16:58:12.713598 31520 common.cpp:176] Maximum memory pitch:          2147483647
+<span class="kw">I0617</span> 16:58:12.713603 31520 common.cpp:177] Maximum threads per block:     1024
+<span class="kw">I0617</span> 16:58:12.713608 31520 common.cpp:178] Maximum dimension of block:    1024, 1024, 64
+<span class="kw">I0617</span> 16:58:12.713613 31520 common.cpp:181] Maximum dimension of grid:     2147483647, 65535, 65535
+<span class="kw">I0617</span> 16:58:12.713618 31520 common.cpp:184] Clock rate:                    1076000
+<span class="kw">I0617</span> 16:58:12.713623 31520 common.cpp:185] Total constant memory:         65536
+<span class="kw">I0617</span> 16:58:12.713627 31520 common.cpp:186] Texture alignment:             512
+<span class="kw">I0617</span> 16:58:12.713634 31520 common.cpp:187] Concurrent copy and execution: Yes
+<span class="kw">I0617</span> 16:58:12.713640 31520 common.cpp:189] Number of multiprocessors:     24
+<span class="kw">I0617</span> 16:58:12.713646 31520 common.cpp:190] Kernel execution timeout:      Yes</code></pre></div>
+</dd>
+<dt><strong>Parallelism</strong></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># train on GPUs 0 &amp; 1 (doubling the batch size)</span>
+<span class="kw">caffe</span> train -solver examples/mnist/lenet_solver.prototxt -gpu 0,1
+<span class="co"># train on all GPUs (multiplying batch size by number of devices)</span>
+<span class="kw">caffe</span> train -solver examples/mnist/lenet_solver.prototxt -gpu all</code></pre></div>
+</dd>
+</dl></li>
+<li><p>Python</p>
+<ul>
+<li>caffe.Net is the central interface for loading, configuring, and running models. caffe.Classifier and caffe.Detector provide convenience interfaces for common tasks.</li>
+<li>caffe.SGDSolver exposes the solving interface.</li>
+<li>caffe.io handles input / output with preprocessing and protocol buffers.</li>
+<li>caffe.draw visualizes network architectures.</li>
+<li>Caffe blobs are exposed as numpy ndarrays for ease-of-use and efficiency.</li>
+</ul></li>
+<li><p>Matlab</p>
+<p>caffe, single precision. matlab: <code>[w, h, c, n]</code> instead of <code>[n, c, h, w]</code></p>
+<p>TODO</p></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://caffe.berkeleyvision.org/tutorial/data.html">Data</a>: how to caffeinate data for model input. <code class="fold">@</code></dt>
+<dd><p>Data flows through Caffe as Blobs. Data layers load input and save output by converting to and from Blob to other formats. Common transformations like mean-subtraction and feature-scaling are done by data layer configuration. New input types are supported by developing a new data layer &#8211; the rest of the Net follows by the modularity of the Caffe layer catalogue.</p>
+<dl>
+<dt>load MNIST digits <code class="fold">@</code></dt>
+<dd><pre><code>layer {
+  name: &quot;mnist&quot;
+  # Data layer loads leveldb or lmdb storage DBs for high-throughput.
+  type: &quot;Data&quot;
+  # the 1st top is the data itself: the name is only convention
+  top: &quot;data&quot;
+  # the 2nd top is the ground truth: the name is only convention
+  top: &quot;label&quot;
+  # the Data layer configuration
+  data_param {
+    # path to the DB
+    source: &quot;examples/mnist/mnist_train_lmdb&quot;
+    # type of DB: LEVELDB or LMDB (LMDB supports concurrent reads)
+    backend: LMDB
+    # batch processing improves efficiency.
+    batch_size: 64
+  }
+  # common data transformations
+  transform_param {
+    # feature scaling coefficient: this maps the [0, 255] MNIST data to [0, 1]
+    scale: 0.00390625
+  }
+}</code></pre>
+</dd>
+</dl>
+<ul>
+<li><p>tops and bottoms</p></li>
+<li><p>data and label</p></li>
+<li><dl>
+<dt>Transformations</dt>
+<dd><div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="er">layer</span> <span class="fu">{</span>
+  <span class="er">name</span><span class="fu">:</span> <span class="st">&quot;data&quot;</span>
+  <span class="er">type:</span> <span class="st">&quot;Data&quot;</span>
+  <span class="ot">[</span><span class="er">...</span><span class="ot">]</span>
+  <span class="er">transform_param</span> <span class="fu">{</span>
+    <span class="er">scale</span><span class="fu">:</span> <span class="fl">0.1</span>
+    <span class="er">mean_file_size:</span> <span class="er">mean.binaryproto</span>
+    <span class="er">#</span> <span class="er">for</span> <span class="er">images</span> <span class="er">in</span> <span class="er">particular</span> <span class="er">horizontal</span> <span class="er">mirroring</span> <span class="er">and</span> <span class="er">random</span> <span class="er">cropping</span>
+    <span class="er">#</span> <span class="er">can</span> <span class="er">be</span> <span class="er">done</span> <span class="er">as</span> <span class="er">simple</span> <span class="er">data</span> <span class="er">augmentations.</span>
+    <span class="er">mirror:</span> <span class="dv">1</span>  <span class="er">#</span> <span class="dv">1</span> <span class="er">=</span> <span class="er">on</span><span class="fu">,</span> <span class="er">0</span> <span class="er">=</span> <span class="er">off</span>
+    <span class="er">#</span> <span class="er">crop</span> <span class="er">a</span> <span class="er">`crop_size`</span> <span class="er">x</span> <span class="er">`crop_size`</span> <span class="er">patch</span><span class="fu">:</span>
+    <span class="er">#</span> <span class="er">-</span> <span class="er">at</span> <span class="er">random</span> <span class="er">during</span> <span class="er">training</span>
+    <span class="er">#</span> <span class="er">-</span> <span class="er">from</span> <span class="er">the</span> <span class="er">center</span> <span class="er">during</span> <span class="er">testing</span>
+    <span class="er">crop_size:</span> <span class="dv">227</span>
+  <span class="fu">}</span>
+<span class="fu">}</span></code></pre></div>
+</dd>
+</dl></li>
+<li><p>Prefetching</p>
+<p>pre-fetching, for throughput data layers fetch the next batch of data and prepare it in the background while the Net computes the current batch.</p></li>
+<li><p>Multiple Inputs</p></li>
+</ul>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Deeper Learning <code class="foldable">@</code></dt>
+<dd><p>some tutorial on deeper learning.</p>
+</dd>
+</dl></li>
+</ul>
+<hr />
+<p>refs and see also</p>
+<ul>
+<li><a href="https://github.com/BVLC/caffe/blob/master/src/caffe/proto/caffe.proto" class="heart">caffe/caffe.proto at master &#183; BVLC/caffe</a></li>
+<li><a href="http://caffe.berkeleyvision.org/gathered/examples/feature_extraction.html">Caffe | Feature extraction with Caffe C++ code.</a></li>
+<li><a href="http://www.cnblogs.com/wm123/p/5462728.html">caffe &#23398;&#20064; (2)&#8212;&#8212;&#22522;&#26412;&#21407;&#29702; - dongbeidami - &#21338;&#23458;&#22253;</a></li>
+</ul>
+</div>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

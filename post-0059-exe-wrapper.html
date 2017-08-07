@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-08-11" />
+  <title>&#23553;&#35013;&#35828;&#26126;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#23553;&#35013;&#35828;&#26126;</h1>
+<h3 class="date">2015-08-11</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#23553;&#35013;&#35828;&#26126;">&#23553;&#35013;&#35828;&#26126;</a></li>
+        <li><a href="#&#26032;&#30340;&#39044;&#25805;&#20316;&#27969;&#31243;">&#26032;&#30340;&#39044;&#25805;&#20316;&#27969;&#31243;</a><ul>
+        <li><a href="#&#20855;&#20307;&#30340;&#25805;&#20316;&#25351;&#21335;&#22914;&#20309;&#20462;&#25913;&#31867;&#21644;-ui">&#20855;&#20307;&#30340;&#25805;&#20316;&#25351;&#21335;&#65288;&#22914;&#20309;&#20462;&#25913;&#31867;&#21644; UI&#65289;</a></li>
+        <li><a href="#&#20854;&#20182;">&#20854;&#20182;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#23553;&#35013;&#35828;&#26126;">&#23553;&#35013;&#35828;&#26126;</h1>
+<p>&#26412;&#25991;&#23545;&#24212;&#20195;&#30721;&#65306;</p>
+<blockquote>
+<p><a href="https://github.com/district10/CrossOS">district10/CrossOS: Cross OS Communication</a>&#65292;Qt4 &#31243;&#24207;&#65292;&#24050;&#32463;&#22312; Windows &#21644; Linux &#19978;&#27979;&#35797;&#36890;&#36807;&#12290;</p>
+</blockquote>
+<div style="background-color: violet; text-align:center;color:white;font-size:24px">
+UI &#8211; Wrapper(Class) &#8211; TCP/IP &#8211; Wrapper(Class)
+</div>
+<pre class="seq"><code>title: &#23553;&#35013;&#31034;&#24847;&#22270;&#65288;&#24573;&#30053;&#20102;&#30028;&#38754;&#21516;&#27493;&#37096;&#20998;&#65289;
+&#20027;UI-&gt;&#20027;Wrapper: &#25152;&#26377; UI &#25805;&#20316;\n&#30001; Wrapper &#25509;&#31649;
+note right of &#20027;Wrapper: &#26412;&#26426;&#25191;&#34892;&#65311;\n&#26159;
+&#20027;Wrapper-&gt;&#20027;Class: &#30452;&#25509;&#35843;&#29992;
+&#20027;Class-&gt;&#20027;Wrapper: &#25429;&#33719;&#32467;&#26524;
+&#20027;Wrapper-&gt;&#20027;UI: &#22312;&#30028;&#38754;&#19978;&#26377;&#25152;&#21453;&#26144;
+note right of &#20027;Wrapper: &#26412;&#26426;&#25191;&#34892;&#65311;\n&#21542;
+&#20027;Wrapper-&gt;&#20027;Socket: &#25226;&#35843;&#29992;&#20989;&#25968;&#21644;&#21442;&#25968;\n&#20256;&#36882;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;
+&#20027;Socket-&gt;&#20174;Socket: TCP &#36890;&#35759;\n&#31243;&#24207;&#36816;&#34892;&#26102;\n&#24050;&#32463;&#24314;&#31435;&#36830;&#25509;
+&#20174;Socket-&gt;&#20174;Wrapper: &#36824;&#21407;&#20989;&#25968;&#21644;&#21442;&#25968;&#65292;\n&#35843;&#29992; Wrapper
+&#20174;Wrapper-&gt;&#20174;Class: &#30452;&#25509;&#35843;&#29992;
+&#20174;Class-&gt;&#20174;Wrapper: &#25429;&#25417;&#32467;&#26524;
+note left of &#20174;Wrapper: &#24322;&#22320;&#21453;&#26144;&#65311;\n&#26159;\n&#65288;&#24207;&#21015;&#22270;&#37324;&#24573;&#30053;\n&#20102;&#26412;&#22320;&#21453;&#26144;&#65289;
+&#20174;Wrapper-&gt;&#20174;Socket: &#22238;&#20256;
+&#20174;Socket-&gt;&#20027;Socket:
+&#20027;Socket-&gt;&#20027;Wrapper: &#35299;&#26512;&#32473; Wrapper
+&#20027;Wrapper-&gt;&#20027;UI: &#22312;&#30028;&#38754;&#19978;&#26377;&#25152;&#21453;&#26144;</code></pre>
+<div class="sequence-diagram theme theme-white" data-anchor-id="fkxg">
+<svg height="940.109375" version="1.1" width="864" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;">
+<desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Rapha&#235;l 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="10" width="266" height="26" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="15" y="15" width="256" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="143" y="23" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#23553;&#35013;&#31034;&#24847;&#22270;&#65288;&#24573;&#30053;&#20102;&#30028;&#38754;&#21516;&#27493;&#37096;&#20998;&#65289;</tspan></text><rect x="10" y="46" width="52" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="56" width="32" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="36" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;UI</tspan></text><rect x="10" y="884.109375" width="52" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="20" y="894.109375" width="32" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="36" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;UI</tspan></text><path fill="none" stroke="#000000" d="M36,82L36,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="138" y="46" width="92" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="148" y="56" width="72" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="184" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Wrapper</tspan></text><rect x="138" y="884.109375" width="92" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="148" y="894.109375" width="72" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="184" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Wrapper</tspan></text><path fill="none" stroke="#000000" d="M184,82L184,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="276" y="46" width="76" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="286" y="56" width="56" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="314" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Class</tspan></text><rect x="276" y="884.109375" width="76" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="286" y="894.109375" width="56" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="314" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Class</tspan></text><path fill="none" stroke="#000000" d="M314,82L314,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="372" y="46" width="84" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="382" y="56" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="414" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Socket</tspan></text><rect x="372" y="884.109375" width="84" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="382" y="894.109375" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="414" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20027;Socket</tspan></text><path fill="none" stroke="#000000" d="M414,82L414,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="488" y="46" width="84" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="498" y="56" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="530" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Socket</tspan></text><rect x="488" y="884.109375" width="84" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="498" y="894.109375" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="530" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Socket</tspan></text><path fill="none" stroke="#000000" d="M530,82L530,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="646" y="46" width="92" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="656" y="56" width="72" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="692" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Wrapper</tspan></text><rect x="646" y="884.109375" width="92" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="656" y="894.109375" width="72" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="692" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Wrapper</tspan></text><path fill="none" stroke="#000000" d="M692,82L692,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="758" y="46" width="76" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="768" y="56" width="56" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="796" y="64" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Class</tspan></text><rect x="758" y="884.109375" width="76" height="36" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="768" y="894.109375" width="56" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="796" y="902.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#20174;Class</tspan></text><path fill="none" stroke="#000000" d="M796,82L796,884.109375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="50" y="89.390625" width="120" height="35.21875" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="110" y="107" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-3.6015625">&#25152;&#26377; UI &#25805;&#20316;</tspan><tspan dy="19.2" x="110" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#30001; Wrapper &#25509;&#31649;</tspan></text><path fill="none" stroke="#000000" d="M36,137.21875C36,137.21875,153.13820266723633,137.21875,178.99097005277872,137.21875" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="204" y="157.21875" width="90" height="45.21875" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="209" y="162.21875" width="80" height="35.21875" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="249" y="179.828125" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-3.6015625">&#26412;&#26426;&#25191;&#34892;&#65311;</tspan><tspan dy="19.2" x="249" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#26159;</tspan></text><rect x="217" y="219.4375" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="249" y="227.4375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#30452;&#25509;&#35843;&#29992;</tspan></text><path fill="none" stroke="#000000" d="M184,238.4375C184,238.4375,285.1484843492508,238.4375,309.0033270937274,238.4375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="217" y="255.4375" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="249" y="263.4375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#25429;&#33719;&#32467;&#26524;</tspan></text><path fill="none" stroke="#000000" d="M314,274.4375C314,274.4375,212.8515156507492,274.4375,188.99667290627258,274.4375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="46" y="291.4375" width="128" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="110" y="299.4375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#22312;&#30028;&#38754;&#19978;&#26377;&#25152;&#21453;&#26144;</tspan></text><path fill="none" stroke="#000000" d="M184,310.4375C184,310.4375,66.86179733276367,310.4375,41.00902994722128,310.4375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="204" y="330.4375" width="90" height="45.21875" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="209" y="335.4375" width="80" height="35.21875" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="249" y="353.046875" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-3.6015625">&#26412;&#26426;&#25191;&#34892;&#65311;</tspan><tspan dy="19.2" x="249" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#21542;</tspan></text><rect x="235" y="383.046875" width="128" height="35.21875" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="299" y="400.65625" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-3.6015625">&#25226;&#35843;&#29992;&#20989;&#25968;&#21644;&#21442;&#25968;</tspan><tspan dy="19.2" x="299" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#20256;&#36882;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;</tspan></text><path fill="none" stroke="#000000" d="M184,430.875C184,430.875,375.44945561885834,430.875,409.0091990598594,430.875" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="424" y="428.671875" width="96" height="54.40625" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="472" y="455.875" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-13.203125">TCP &#36890;&#35759;</tspan><tspan dy="19.2" x="472" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#31243;&#24207;&#36816;&#34892;&#26102;</tspan><tspan dy="19.2" x="472" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#24050;&#32463;&#24314;&#31435;&#36830;&#25509;</tspan></text><path fill="none" stroke="#000000" d="M414,505.28125C414,505.28125,502.7629463672638,505.28125,524.9970242414856,505.28125" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="547" y="512.671875" width="128" height="35.21875" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="611" y="530.28125" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-3.6015625">&#36824;&#21407;&#20989;&#25968;&#21644;&#21442;&#25968;&#65292;</tspan><tspan dy="19.2" x="611" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#35843;&#29992; Wrapper</tspan></text><path fill="none" stroke="#000000" d="M530,560.5C530,560.5,659.7009259462357,560.5,686.9963844827726,560.5" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="712" y="577.5" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="744" y="585.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#30452;&#25509;&#35843;&#29992;</tspan></text><path fill="none" stroke="#000000" d="M692,596.5C692,596.5,770.2535157203674,596.5,791.0013961091172,596.5" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="712" y="613.5" width="64" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="744" y="621.5" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#25429;&#25417;&#32467;&#26524;</tspan></text><path fill="none" stroke="#000000" d="M796,632.5C796,632.5,717.7464842796326,632.5,696.9986038908828,632.5" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="550" y="652.5" width="122" height="83.609375" r="0" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="555" y="657.5" width="112" height="73.609375" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="611" y="694.3046875" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="-22.796875">&#24322;&#22320;&#21453;&#26144;&#65311;</tspan><tspan dy="19.2" x="611" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#26159;</tspan><tspan dy="19.2" x="611" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#65288;&#24207;&#21015;&#22270;&#37324;&#24573;&#30053;</tspan><tspan dy="19.2" x="611" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">&#20102;&#26412;&#22320;&#21453;&#26144;&#65289;</tspan></text><rect x="595" y="753.109375" width="32" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="611" y="761.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#22238;&#20256;</tspan></text><path fill="none" stroke="#000000" d="M692,772.109375C692,772.109375,562.2990740537643,772.109375,535.0036155172274,772.109375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="0" y="0" width="0" height="0" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="472" y="797.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="797.109375"></tspan></text><path fill="none" stroke="#000000" d="M530,792.109375C530,792.109375,441.2370536327362,792.109375,419.00297575851437,792.109375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="243" y="809.109375" width="112" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="299" y="817.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#35299;&#26512;&#32473; Wrapper</tspan></text><path fill="none" stroke="#000000" d="M414,828.109375C414,828.109375,222.55054438114166,828.109375,188.99080094014062,828.109375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="46" y="845.109375" width="128" height="16" r="0" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="110" y="853.109375" text-anchor="middle" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-size: 16px; line-height: normal; font-family: 'Andale Mono', monospace;" font-size="16px" font-family="Andale Mono, monospace"><tspan style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" dy="6">&#22312;&#30028;&#38754;&#19978;&#26377;&#25152;&#21453;&#26144;</tspan></text><path fill="none" stroke="#000000" d="M184,864.109375C184,864.109375,66.86179733276367,864.109375,41.00902994722128,864.109375" stroke-width="2" marker-end="url(#raphael-marker-endblock55)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+</svg>
+</div>
+<ul>
+<li>&#20027;&#65306;Master&#65292;&#25805;&#20316;&#30340;&#30028;&#38754;&#65288;&#39640;&#24615;&#33021;&#24179;&#21488;&#65289;</li>
+<li>&#20174;&#65306;Slave&#65292;&#21478;&#19968;&#21488;&#30005;&#33041;&#65288;&#24037;&#25511;&#26426;&#65289;</li>
+</ul>
+<p>&#31243;&#24207;&#21482;&#26377;&#19968;&#20010;&#65292;&#36816;&#34892;&#22312;&#20004;&#20010;&#30005;&#33041;&#19978;&#65292;&#19968;&#20010;&#20026; Master&#65292;&#19968;&#20010;&#20026; Slave&#65292;TCP &#36830;&#25509;&#24314;&#31435;&#21518;&#12290;&#25805;&#20316; Master &#30340; UI&#65292;&#25191;&#34892;&#21487;&#33021;&#22312;</p>
+<ul>
+<li>&#26412;&#26426;&#65288;Master&#65289;&#65292;&#20063;&#21487;&#33021;&#22312;</li>
+<li>&#21478;&#19968;&#21488;&#30005;&#33041;&#65288;Slave&#65289;&#12290;</li>
+</ul>
+<p>&#23545; UI &#32780;&#35328;&#65292;&#26080;&#25152;&#35859;&#25191;&#34892;&#21457;&#29983;&#22312;&#21738;&#21488;&#30005;&#33041;&#65288;&#23454;&#29616;&#32454;&#33410;&#34987; Wrappers &#23631;&#34109;&#65289;&#12290;</p>
+<p>Wrapper &#20027;&#35201;&#20570;&#20102;&#20004;&#20214;&#20107;&#65306;</p>
+<ol>
+<li>&#21028;&#26029;&#25191;&#34892;&#24212;&#35813;&#22312;<strong>&#26412;&#26426;</strong>&#36824;&#26159;<strong>&#24322;&#22320;</strong>&#65292;&#24182;&#35843;&#29992;&#26412;&#22320;&#25110;&#24322;&#22320;&#30340;<strong>&#31867;&#25191;&#34892;&#23454;&#20307;</strong></li>
+<li>&#25509;&#21463; Class &#25110;&#32773; Socket &#20256;&#26469;&#30340;&#32467;&#26524;&#65292;&#24182; emit &#30456;&#24212;&#30340;&#20449;&#21495;&#65288;&#20108;&#20256;&#25163;&#65289;</li>
+</ol>
+<blockquote>
+<p>Wrapper &#21644; Class &#26377;&#20960;&#20046;&#30456;&#21516;&#30340;&#35843;&#29992;&#25509;&#21475;&#65292;&#25152;&#20197;&#21407;&#26469;&#22312;&#21333;&#30005;&#33041;&#19978;&#30340;&#31243;&#24207;&#21482;&#35201;&#31616;&#21333;&#20462;&#25913;&#21363;&#21487;&#12290;</p>
+</blockquote>
+<p>&#23545;&#31243;&#24207;&#30340;&#35201;&#27714;&#65306;</p>
+<ol>
+<li>&#35201;&#36991;&#20813;&#30452;&#25509;&#33719;&#21462; Class &#30340;&#36820;&#22238;&#20540;&#65288;&#36820;&#22238;&#20540;&#38590;&#20197;&#36328;&#30005;&#33041;&#65289;&#65292;&#32780;&#26159;&#37319;&#29992; emit &#20449;&#21495;&#30340;&#26041;&#24335;</li>
+<li>Class &#30340;&#20449;&#21495;&#30001; Wrapper &#23436;&#20840;&#25509;&#31649;&#65292;&#37325;&#26032;&#21457;&#23556;&#20449;&#21495;&#65288;&#20449;&#21495;&#21517;&#31216;&#20445;&#25345;&#19981;&#21464;&#65289;&#12290;</li>
+<li>UI &#30340;&#21464;&#21270;&#65292;&#37117;&#26159;&#36890;&#36807;&#25509;&#21463; Wrapper &#30340;&#20449;&#21495;&#12290;</li>
+</ol>
+<hr />
+<h1 id="&#26032;&#30340;&#39044;&#25805;&#20316;&#27969;&#31243;">&#26032;&#30340;&#39044;&#25805;&#20316;&#27969;&#31243;</h1>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/wrappers/master_slave.png" alt="&#20027;&#31243;&#24207;&#36816;&#34892;&#21518;&#65292;&#20808;&#35201;&#36873;&#25321;&#33258;&#24049;&#26159; Master&#65288;&#39640;&#24615;&#33021;&#24179;&#21488;&#65289;&#36824;&#26159; Slave&#65288;&#24037;&#25511;&#26426;&#65289;" />
+<p class="caption">&#20027;&#31243;&#24207;&#36816;&#34892;&#21518;&#65292;&#20808;&#35201;&#36873;&#25321;&#33258;&#24049;&#26159; Master&#65288;&#39640;&#24615;&#33021;&#24179;&#21488;&#65289;&#36824;&#26159; Slave&#65288;&#24037;&#25511;&#26426;&#65289;</p>
+</div>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/wrappers/server.png" alt="&#39640;&#24615;&#33021;&#24179;&#21488;&#35201;&#20808;&#25171;&#24320;&#65292;&#24182;&#25171;&#24320; TCP &#32593;&#32476;&#26381;&#21153;&#22120;&#65306;&#65288;&#28857;&#20987; Serve&#65289;" />
+<p class="caption">&#39640;&#24615;&#33021;&#24179;&#21488;&#35201;&#20808;&#25171;&#24320;&#65292;&#24182;&#25171;&#24320; TCP &#32593;&#32476;&#26381;&#21153;&#22120;&#65306;&#65288;&#28857;&#20987; <code>Serve</code>&#65289;</p>
+</div>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/wrappers/client.png" alt="&#20877;&#36816;&#34892;&#31243;&#24207;&#65292;&#19981;&#36807;&#36825;&#27425;&#36873;&#25321; Slave&#65292;&#28982;&#21518;&#23558;&#24037;&#25511;&#26426;&#36830;&#25509;&#21040;&#39640;&#24615;&#33021;&#24179;&#21488;&#65306;&#65288;&#28857;&#20987; Connect&#65289;" />
+<p class="caption">&#20877;&#36816;&#34892;&#31243;&#24207;&#65292;&#19981;&#36807;&#36825;&#27425;&#36873;&#25321; Slave&#65292;&#28982;&#21518;&#23558;&#24037;&#25511;&#26426;&#36830;&#25509;&#21040;&#39640;&#24615;&#33021;&#24179;&#21488;&#65306;&#65288;&#28857;&#20987; <code>Connect</code>&#65289;</p>
+</div>
+<p>&#29616;&#22312;&#20004;&#32773;&#36830;&#25509;&#19978;&#21518;&#65292;&#30028;&#38754;&#21457;&#29983;&#21464;&#21270;&#65288;&#19968;&#20123;&#25353;&#38062;&#21487;&#20197;&#20351;&#29992;&#65292;&#19968;&#20123;&#25353;&#38062;&#19981;&#20877;&#33021;&#20351;&#29992;&#65289;&#12290;&#29616;&#22312;&#28857;&#20987;&#19979;&#26041;&#22823;&#25353;&#38062;&#65292;&#21487;&#20197;&#21516;&#27493;&#20004;&#32773;&#30340;&#39068;&#33394;&#65288;&#22312;&#32418;&#21644;&#32511;&#30452;&#25509;&#20999;&#25442;&#65289;&#12290;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/wrappers/sync.png" alt="&#20851;&#38381;&#36825;&#20004;&#20010;&#30028;&#38754;&#20250;&#24377;&#20986;&#19968;&#20010; demo &#30028;&#38754;&#65292;&#23637;&#31034;&#30340;&#22914;&#20309;&#21516;&#27493;&#20004;&#32773;&#30340; UI &#20197;&#21450;&#36816;&#31639;&#22914;&#20309;&#20998;&#24067;&#22312;&#20004;&#21488;&#30005;&#33041;&#19978;" />
+<p class="caption">&#20851;&#38381;&#36825;&#20004;&#20010;&#30028;&#38754;&#20250;&#24377;&#20986;&#19968;&#20010; demo &#30028;&#38754;&#65292;&#23637;&#31034;&#30340;&#22914;&#20309;&#21516;&#27493;&#20004;&#32773;&#30340; UI &#20197;&#21450;&#36816;&#31639;&#22914;&#20309;&#20998;&#24067;&#22312;&#20004;&#21488;&#30005;&#33041;&#19978;</p>
+</div>
+<p>&#21487;&#20197;&#30475;&#21040;&#65292;</p>
+<ol>
+<li>&#8220;&#21152;&#27861;&#8221;&#36816;&#34892;&#22312;&#39640;&#24615;&#33021;&#24179;&#21488;&#19978;&#65292;</li>
+<li>&#8220;&#20056;&#27861;&#8221;&#36816;&#34892;&#22312;&#24037;&#25511;&#26426;&#19978;&#12290;</li>
+</ol>
+<p>&#21516;&#26102;&#65292;&#30028;&#38754;&#26159;&#21516;&#27493;&#30340;&#12290;&#19979;&#38754;&#20171;&#32461;&#22914;&#20309;&#23558;&#21407;&#26377;&#31867;&#25913;&#21892;&#65292;&#23454;&#29616;&#36328;&#20027;&#26426;&#36890;&#35759;&#12289;UI &#21516;&#27493;&#12290;</p>
+<h2 id="&#20855;&#20307;&#30340;&#25805;&#20316;&#25351;&#21335;&#22914;&#20309;&#20462;&#25913;&#31867;&#21644;-ui">&#20855;&#20307;&#30340;&#25805;&#20316;&#25351;&#21335;&#65288;&#22914;&#20309;&#20462;&#25913;&#31867;&#21644; UI&#65289;</h2>
+<p>&#20808;&#26126;&#30830;&#20960;&#20010;&#27010;&#24565;&#65292;</p>
+<dl>
+<dt>&#31867;&#65288;Class&#65289;</dt>
+<dd>&#23454;&#38469;&#30340;&#25191;&#34892;&#23454;&#20307;
+</dd>
+<dt>&#21253;&#35013;&#65288;Wrapper&#65289;</dt>
+<dd>&#23553;&#35013;&#20102;&#31867;&#65292;&#25552;&#20379;&#20960;&#20046;&#19968;&#33268;&#30340;&#25509;&#21475;&#65292;&#23631;&#34109;&#20102;&#36328;&#20027;&#26426;&#30340;&#19968;&#20123;&#25805;&#20316;&#12290;
+</dd>
+<dt>&#30028;&#38754;&#31867;&#65288;UI&#65289;</dt>
+<dd>&#30028;&#38754;&#19978;&#65292;&#35843;&#29992;&#30340;&#34429;&#28982;&#26159; Wrappers&#65292;&#20294;&#21644;&#35843;&#29992; Classes &#30340;&#26041;&#24335;&#19968;&#33268;&#12290;
+</dd>
+</dl>
+<p>&#36825;&#37324;&#30340;&#20462;&#25913;&#25351;&#21335;&#25351;&#23548;&#20102;&#22914;&#20309;&#22312; <code>Class &#21644; UI &#20043;&#38388;&#25554;&#20837;&#19968;&#20010;&#23553;&#35013;</code>&#65292;&#22312;&#19981;&#25913;&#21464;&#65288;&#20960;&#20046;&#65289;&#21407;&#26377;&#31867;&#30340;&#22522;&#30784;&#19978;&#23454;&#29616;&#36328;&#20027;&#26426;&#36890;&#20449;&#12290;</p>
+<p>&#27604;&#22914;&#20174; <code class="sourceCode cpp">ui-&gt;pushButton-&gt;setText( <span class="kw">class</span>-&gt;getString() )</code> &#25913;&#36215;&#12290;</p>
+<p>&#39318;&#20808;&#65292;&#22312; <code class="sourceCode cpp"><span class="ot">QString</span> Class::getString( args )</code> &#20013; emit &#19968;&#20010;&#20449;&#21495;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">emit</span> wrp_getString( returnValue ) <span class="co">// &#35201;&#25552;&#21069;&#23450;&#20041;&#65288;signals: void wrp_getString( QString text );&#65289;</span></code></pre></div>
+<p>&#28982;&#21518;&#21442;&#29031; Class &#23450;&#20041;&#19968;&#20010; Wrapper&#65292;&#25552;&#20379; <code>void Wrapper::getString( args )</code> &#20989;&#25968;&#65288;&#20960;&#20046;&#21644;&#21407;&#26377;&#31867; Class &#19968;&#27169;&#19968;&#26679;&#65289;&#65292;</p>
+<p>&#25226; Class &#30340;&#20449;&#21495;&#21644; Wrapper &#30340;&#27133;&#36830;&#25509;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="fu">connect</span>( <span class="kw">class</span>,   <span class="kw">SIGNAL</span>(wrp_getString(<span class="ot">QString</span>)),
+         wrapper, <span class="kw">SLOT</span>(onWrp_getString(<span class="ot">QString</span>)) );</code></pre></div>
+<p>Wrapper &#26500;&#36896;&#30340;&#26102;&#20505;&#20250;&#20256;&#20837; Class &#31867;&#23454;&#20307;&#25351;&#38024;&#65292;&#22914;&#26524; Class &#22312;&#26412;&#26426;&#36816;&#34892;&#65292;<code class="sourceCode cpp">Wrapper::getString( args )</code> &#20250;&#30452;&#25509;&#35843;&#29992; <code class="sourceCode cpp">Class::getString( args )</code>&#65292;&#22914;&#26524; Class &#22312;&#24322;&#22320;&#36816;&#34892;&#65292;&#32463;&#36807;&#21028;&#26029; <code class="sourceCode cpp">Wrapper::getString( args )</code> &#20250;&#25226; <code>&#20989;&#25968;&#21517; ID</code> &#21644;&#21442;&#25968; <code>args</code> &#20256;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;&#65292;&#30001;&#21478;&#19968;&#21488;&#30005;&#33041;&#30340;&#23545;&#24212;&#30340; Wrapper &#30340; Class &#23454;&#20307;&#25191;&#34892; <code class="sourceCode cpp">Class::getString( args )</code>&#12290;</p>
+<p>&#19981;&#31649;&#21738;&#20010;&#30005;&#33041;&#19978;&#25191;&#34892;&#20102; Class &#20989;&#25968;&#65292;&#20449;&#21495;&#37117;&#20250;&#34987;&#37027;&#20010;&#30005;&#33041;&#30340; Wrapper &#25429;&#33719;&#65292;&#28982;&#21518; emit &#19968;&#20010;&#21516;&#26679;&#30340;&#20449;&#21495;&#65292;&#24182;&#35753;&#21478;&#19968;&#21488;&#30005;&#33041; emit &#36825;&#20010;&#20449;&#21495;&#12290;&#21363; <code class="sourceCode cpp">Wrapper::getString( args )</code> &#30340;&#22823;&#33268;&#36923;&#36753;&#20026;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Class &#20989;&#25968;&#23545;&#24212;&#30340; Wrapper &#20989;&#25968;</span>
+<span class="dt">void</span> Wrapper::getString( args )
+{
+    <span class="kw">if</span> ( Class registered on THIS_COMPUTER )
+    {
+        <span class="co">// &#26412;&#26426;&#25191;&#34892;</span>
+        <span class="kw">this</span>-&gt;<span class="kw">class</span>-&gt;getString();
+    }
+    <span class="kw">else</span>
+    {
+        <span class="co">// &#24322;&#22320;&#25191;&#34892;&#65288;&#25226;&#20989;&#25968;&#21517;&#21644;&#21442;&#25968;&#20256;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;&#65289;</span>
+        send <span class="er">`</span>Class::getString<span class="st">&#39; + `args&#39;</span> to the other computer
+        tell THE_OTHER_COMPUTER to run: <span class="kw">class</span>-&gt;getString()
+    }
+}
+
+<span class="co">// &#20449;&#21495;&#25152;&#36830;&#25509;&#30340;&#27133;</span>
+<span class="dt">void</span> onWrp_getString( <span class="ot">QString</span> returnValue )
+{
+    <span class="co">// &#26412;&#26426;&#37322;&#25918;&#20449;&#21495;</span>
+    <span class="kw">emit</span> wrp_getString( returnValue );
+    <span class="co">// &#35753;&#24322;&#22320;&#30005;&#33041;&#37322;&#25918;&#20449;&#21495;</span>
+    tell THE_OTHER_COMPUTER to: <span class="kw">emit</span> Wrapper::wrp_getString( returnValue )
+}</code></pre></div>
+<p>&#29616;&#22312;&#65292;&#20004;&#21488;&#30005;&#33041;&#19978;&#65292;&#26377;<strong>&#19968;&#21488;</strong>&#30005;&#33041;&#25191;&#34892;&#20102;&#25805;&#20316;&#65288;&#21487;&#33021;&#26159;&#20320;&#36890;&#36807; UI &#20132;&#20114;&#30340;&#37027;&#19968;&#21488;&#65292;&#25110;&#32773;&#26159;&#21478;&#19968;&#21488;&#65289;&#65292;&#37322;&#25918;&#20102;<strong>&#20004;&#20010;</strong>&#21516;&#26679;&#30340;&#20449;&#21495;&#65292;&#21482;&#35201;&#25226;&#36825;&#20010;&#20449;&#21495;&#32465;&#23450;&#21040;&#21508;&#33258;&#30340; UI&#65292;&#30028;&#38754;&#23601;&#21516;&#27493;&#20102;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="fu">connect</span>( wrapper, <span class="kw">SIGNAL</span>(wrp_getString(<span class="ot">QString</span>)),
+         ui,      <span class="kw">SLOT</span>(onWrp_getString(<span class="ot">QString</span>)) );</code></pre></div>
+<p>&#26368;&#21518; UI &#24471;&#21040;&#36825;&#20010;&#20449;&#21495;&#65292;&#22312;&#30028;&#38754;&#19978;&#26377;&#25152;&#21453;&#26144;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> Ui::onWrp_getString( <span class="ot">QString</span> returnValue )
+{
+    ui-&gt;pushButton-&gt;setText( returnValue );
+}</code></pre></div>
+<p>&#29616;&#22312;&#65292;<span style="color:red">UI &#19981;&#20877;&#30452;&#25509;&#35843;&#29992; Class&#65292;&#32780;&#26159;&#35843;&#29992; Wrapper &#30340;&#20989;&#25968;&#65292;</span></p>
+<p>&#38656;&#25226;&#21407;&#26469;&#30340; <code class="sourceCode cpp">ui-&gt;pushButton-&gt;setText( <span class="kw">class</span>-&gt;getString() )</code> &#25442;&#25104; <code class="sourceCode cpp">wrapper-&gt;getString()</code>&#12290;</p>
+<p><strong>&#24635;&#32467;&#19968;&#19979;</strong>&#65292;&#21407;&#26469;&#30340;&#19968;&#21477;&#20043;&#38388;&#30340; <code class="sourceCode cpp">setText</code>&#65292;&#21464;&#25104;&#20102;&#38388;&#25509;&#30340;&#65306;</p>
+<ol>
+<li><strong>&#26576;&#19968;&#21488;</strong>&#30005;&#33041;&#30028;&#38754;&#30340;&#25805;&#20316;&#65292;&#23548;&#33268;<strong>&#26576;&#19968;&#21488;</strong>&#30005;&#33041;&#25191;&#34892; <code>Class</code> &#20989;&#25968;</li>
+<li><code class="sourceCode cpp">Class</code> emit &#20449;&#21495;&#32473; <code class="sourceCode cpp">Wrapper</code></li>
+<li><code class="sourceCode cpp">Wrapper</code> &#22312;&#20004;&#21488;&#30005;&#33041; emit &#20449;&#21495;&#32473; <code class="sourceCode cpp">UI</code></li>
+<li>&#20004;&#20010; <code class="sourceCode cpp">UI</code> &#24471;&#21040;&#20449;&#21495;&#65292;&#21516;&#27493;&#26356;&#26032;&#30028;&#38754;</li>
+</ol>
+<h2 id="&#20854;&#20182;">&#20854;&#20182;</h2>
+<p><strong>Bundle</strong></p>
+<p>&#25152;&#26377;&#30340; Wrappers &#21644; UI &#37117;&#22312;&#19968;&#20010;&#20840;&#23616;&#30340; Bundle &#20013;&#32465;&#23450;&#12290;&#65288;&#28304;&#30721;&#20301;&#20110; <code>Src/Wrappers/Wrappers.h</code>&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*</span>
+<span class="co"> * &#33719;&#24471;&#23454;&#20363;</span>
+<span class="co"> */</span>
+
+Bundle::getInstance(); <span class="co">// &#33719;&#24471;&#21807;&#19968;&#30340;&#12289;&#38745;&#24577;&#30340;&#19968;&#20010;&#23454;&#20363;&#65292;&#21253;&#21547;&#20102;&#25152;&#26377;&#30340;&#22823;&#30340;&#31867;&#23454;&#20363;&#65292;UIs&#65292;Wrappers&#65288;Classes&#65289;</span>
+
+<span class="co">/*</span>
+<span class="co"> * &#26412;&#26426;&#26159;&#39640;&#24615;&#33021;&#24179;&#21488;&#65288;Master&#65289;&#36824;&#26159;&#24037;&#25511;&#26426;&#65288;Slave&#65289;&#65311;</span>
+<span class="co"> */</span>
+
+<span class="co">// who am I?</span>
+Bundle::whoAmI(); <span class="co">// &#25105;&#26159;&#35841;&#65311;MASTER &#36824;&#26159; SLAVE&#65311;</span>
+
+<span class="co">// &#21487;&#20197;&#36827;&#34892;&#21028;&#26029;</span>
+<span class="kw">if</span> ( Bundle::whoAmI() == MASTER ) {
+    <span class="fu">qDebug</span>() &lt;&lt; <span class="st">&quot;&#25105;&#26159;&#39640;&#24615;&#33021;&#24179;&#21488;&#65288;Master&#65289;&quot;</span>;
+}
+
+<span class="co">/*</span>
+<span class="co"> * Bundle &#30340;&#19996;&#35199;&#26377;</span>
+<span class="co"> */</span>
+
+<span class="co">// &#20027;&#35201;&#27169;&#22359;&#30340;&#8220;&#23553;&#35013;&#8221;</span>
+Bundle::getInstance()-&gt;lms              <span class="co">// LMS Wrapper</span>
+Bundle::getInstance()-&gt;lmsAgent         <span class="co">// Wrapper &#29992;&#21040;&#30340;&#30028;&#38754;</span>
+Bundle::getInstance()-&gt;server           <span class="co">// &#32593;&#32476;&#36890;&#20449;&#25509;&#21475;</span>
+Bundle::getInstance()-&gt;client           <span class="co">// &#32593;&#32476;&#36890;&#20449;&#25509;&#21475;</span>
+...
+
+<span class="co">// &#20063;&#21487;&#20197;&#33719;&#24471;&#20027;&#35201;&#27169;&#22359;&#30340;&#8220;&#31867;&#23454;&#20307;&#8221;&#65288;&#19981;&#25512;&#33616;&#30452;&#25509;&#35843;&#29992;&#65289;</span>
+Bundle::getInstance()-&gt;lms-&gt;kernel      <span class="co">// LMSReader &#23454;&#20307;&#65292;&#21487;&#33021;&#20026; NULL&#65288;&#22914;&#26524;&#19981;&#22312;&#26412;&#26426;&#27880;&#20876;&#65289;</span>
+...
+
+<span class="co">/*</span>
+<span class="co"> * Bundle &#30340;&#19968;&#20123;&#20989;&#25968;</span>
+<span class="co"> */</span>
+
+<span class="co">// &#21521;&#21478;&#19968;&#21488;&#30005;&#33041;&#21457;&#25968;&#25454;</span>
+Bundle::getInstance()-&gt;send( <span class="dt">const</span> <span class="ot">QByteArray</span> &amp;msg );  <span class="co">// &#21457;&#36865;&#25968;&#25454;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;</span>
+
+<span class="co">// &#25968;&#25454;&#38656;&#35201;&#28385;&#36275;&#19968;&#23450;&#30340;&#26684;&#24335;&#65292;&#21487;&#36890;&#36807;&#19968;&#20010; Moderator&#65288;&#8220;&#32763;&#35793;&#8221;&#65289;&#38745;&#24577;&#31867;/&#20989;&#25968;&#36827;&#34892;&#36716;&#21270;&#65292;&#22914;&#65306;</span>
+<span class="co">// &#35201;&#22312;&#21478;&#19968;&#21488;&#30005;&#33041;&#19978;&#36816;&#34892; LMSReader::genNewPath( &quot;D://tmp/&quot; ); &#65288;LMS &#27880;&#20876;&#22312;&#37027;&#21488;&#30005;&#33041;&#19978;&#65289;</span>
+Bundle::getInstance()-&gt;send( Moderator::lms_genNewPath( <span class="st">&quot;D://tmp/&quot;</span> ) );</code></pre></div>
+<p><strong>&#31867;&#30340;&#27880;&#20876;</strong></p>
+<p>&#24456;&#31616;&#21333;&#65292;&#20462;&#25913; Moderator &#30340;&#19968;&#20010; HashMap &#21363;&#21487;&#65306;</p>
+<pre><code>// Master: &#39640;&#24615;&#33021;&#24179;&#21488;
+// Slave : &#24037;&#25511;&#26426;
+wss.insert(  BCD::TYPE_LMS,                             SLAVE  );
+wss.insert(  BCD::TYPE_MCU,                             SLAVE  );
+wss.insert(  BCD::TYPE_UR,                              SLAVE  );
+wss.insert(  BCD::TYPE_ARM,                             SLAVE  );
+wss.insert(  BCD::TYPE_SP20000C,                        MASTER );
+wss.insert(  BCD::TYPE_MULTIPLICATION_ON_SLAVE,         SLAVE  );
+wss.insert(  BCD::TYPE_ADDITION_ON_MASTER,              MASTER );</code></pre>
+<p><strong>How to Wrapping (live example)</strong></p>
+<p>UR0 &#23553;&#35013;&#20102; URController&#65292;&#28304;&#30721;&#20301;&#20110; <code>Src/Wrappers/UR0.h</code>&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> UR0 : <span class="kw">public</span> <span class="ot">QObject</span>
+{
+    <span class="kw">Q_OBJECT</span>
+
+<span class="kw">public</span>:
+    URController *kernel;  <span class="co">// kernel &#21464;&#37327;&#20026;&#23553;&#35013;&#30340;&#23545;&#35937;</span>
+
+<span class="kw">private</span>:
+    <span class="dt">bool</span> doItYourself;
+
+<span class="kw">public</span>:
+    UR0( URController *ur0 = NULL );</code></pre></div>
+<p>&#26500;&#36896;&#20989;&#25968;&#22522;&#26412;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">UR0::UR0( URController *ur0 <span class="co">/* = NULL */</span> )
+{
+    <span class="co">// &#31867;&#25191;&#34892;&#23454;&#20307;</span>
+    kernel = ur0;
+
+    <span class="co">// &#21028;&#26029;&#26159;&#21542;&#22312;&#26412;&#26426;&#25191;&#34892;</span>
+    doItYourself = Moderator::wss.value( BCD::TYPE_UR ) == Bundle::whoAmI();
+
+    <span class="co">/*</span>
+<span class="co">     * &#35828;&#26126;&#65306;</span>
+<span class="co">     *          Moderator::wss: &#35760;&#24405;&#20102;&#25152;&#26377;&#27169;&#22359;&#30340;&#27880;&#20876;&#20449;&#24687;&#65288;&#22312;&#39640;&#24615;&#33021;&#25191;&#34892;&#65292;&#36824;&#26159;&#22312;&#24037;&#25511;&#26426;&#65289;&#65292;</span>
+<span class="co">     *                          &#26032;&#21152;&#30340;&#27169;&#22359;&#20063;&#35201;&#21435;&#27880;&#20876;&#65292;&#28304;&#30721;&#22312; `Src/Utils/moderator.cpp&#39;</span>
+<span class="co">     *          Bundle::whoAmI(): &#26412;&#26426;&#26159;&#39640;&#24615;&#33021;&#36824;&#26159;&#24037;&#25511;&#26426;&#65311;</span>
+<span class="co">     */</span>
+
+    <span class="co">// &#22914;&#25346;&#22312;&#26412;&#26426;&#25191;&#34892;&#65292;&#20294;&#25191;&#34892;&#23454;&#20307;&#20026; NULL&#65292;&#35828;&#26126;&#27809;&#26377;&#27491;&#30830;&#21021;&#22987;&#21270;</span>
+    <span class="kw">if</span> ( doItYourself &amp;&amp; NULL == kernel ) {
+        Logger::log() &lt;&lt; <span class="st">&quot;Fatal Error&quot;</span>;
+        exit( EXIT_FAILURE );
+    }
+
+    <span class="co">// &#36830;&#25509;&#8220;&#23454;&#20307;&#8221;&#21407;&#26377;&#30340;&#20449;&#21495;&#21040;&#8220;&#23553;&#35013;&#8221;&#30340;&#27133;&#65292;&#37325;&#26032; emit &#20449;&#21495; &amp; &#20998;&#21457;&#21040;&#20004;&#21488;&#30005;&#33041;</span>
+    <span class="fu">connect</span> ( kernel, <span class="kw">SIGNAL</span>(wrp_getLocalAddress(<span class="ot">QString</span>)),
+              <span class="kw">this</span>,   <span class="kw">SLOT</span>(onWrp_getLocalAddress(<span class="ot">QString</span>)) );
+}</code></pre></div>
+<p>&#36825;&#20010; <code class="sourceCode cpp">wrp_getLocalAddress(<span class="ot">QString</span>)</code> &#20449;&#21495;&#26159;&#23545; <code class="sourceCode cpp"><span class="ot">QString</span> URControllor::getLocalAddress()</code> &#30340;&#23553;&#35013;&#65292;&#22312;&#20445;&#25345;&#21407;&#26377;&#31867;&#36820;&#22238;&#20540;&#30340;&#24773;&#20917;&#19979;&#65292;&#22312;&#20989;&#25968;&#20869;&#37096; emit &#20449;&#21495;&#65292;&#36825;&#37324;&#36830;&#25509;&#21518;&#34987; UR0 &#25429;&#25417;&#65292;&#37325;&#26032;&#21457;&#23556;&#20449;&#21495;&#65288;&#22312;&#20004;&#21488;&#30005;&#33041;&#65289;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> UR0::onWrp_getLocalAddress( <span class="ot">QString</span> addr )
+{
+    <span class="co">// &#22312;&#26412;&#26426; emit &#20449;&#21495;&#65288;&#26412;&#26426;&#30028;&#38754;&#21487;&#20197;&#25429;&#33719;&#65289;</span>
+    <span class="kw">emit</span> wrp_getLocalAddress( addr );
+    <span class="co">// &#22312;&#24322;&#22320; emit &#20449;&#21495;&#65288;&#24322;&#22320;&#30028;&#38754;&#21487;&#20197;&#25429;&#33719;&#65289;</span>
+    Bundle::send( Moderator::sig_ur_wrp_getLocalAddress( addr ) );
+}</code></pre></div>
+<p><code class="sourceCode cpp">Bundle::send</code> &#20250;&#25226;&#20989;&#25968;&#21644;&#21442;&#25968;&#20256;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;&#65292;&#20877;&#27425;&#21457;&#23556;&#20449;&#21495;&#12290;</p>
+<p>&#25152;&#26377;&#30340; Moderator &#30340;&#20989;&#25968;&#65288;&#22914;&#36825;&#37324;&#30340; <code class="sourceCode cpp">Moderator::sig_ur_wrp_getLocalAddress( <span class="ot">QString</span> )</code>&#65289;&#35201;&#29616;&#22312; Moderator &#37324;&#25351;&#23450;&#19968;&#20010;&#20989;&#25968; ID&#65288;&#29992;&#20110;&#21306;&#20998;&#19981;&#21516;&#20989;&#25968;&#65289;&#65292;ID &#21629;&#21517;&#35268;&#21017;&#20026;&#65306;<code>&#27169;&#22359;&#21517;__FUNCTION_NAME__TYPE1_TYPE2</code></p>
+<p>&#20030;&#20363;&#65306;</p>
+<pre class="plain"><code>// ur &#27169;&#22359;&#65292;genNewPath &#20989;&#25968;&#65292;QString &#31867;&#22411;&#21442;&#25968;
+UR__GEN_NEW_PATH__QSTRING
+
+// ur &#27169;&#22359;&#65292;genNewPath &#20989;&#25968;&#65292;&#26080;&#31867;&#22411;&#21442;&#25968;&#20063;&#35201;&#26174;&#24335;&#22320;&#34920;&#26126; VOID
+UR__GEN_NEW_PATH__VOID
+
+// &#20449;&#21495;&#30340;&#27169;&#22359;&#21517;&#20026; SIG_&#27169;&#22359;&#21517;__&#20989;_&#25968;_&#21517;__&#21442;_&#25968;_&#21517;&#65292;&#22914;
+SIG_UR__WRP_GET_LOCAL_ADDRESS__QSTRING
+
+// lms &#27169;&#22359;&#65292;setFrequencyAngleresolution &#20989;&#25968;&#65292;&#21442;&#25968;&#20026; int&#12289;double
+LMS__SET_FREQUENCY_ANGLERESOLUTION__INT_DOUBLE
+
+// &#19978;&#38754;&#30340;&#20989;&#25968; ID &#23545;&#24212;&#30340;&#20989;&#25968;&#20381;&#27425;&#20026;&#65306;
+//
+//     static QByteArray ur_genNewPath( const QString &amp;path );
+//     static QByteArray ur_genNewPath( )
+//     static QByteArray sigUR_wrp_getLocalAddress( const QString &amp;addr )
+//     static QByteArray lms_setFrequencyAngleresolution( const int i, const double &amp;d )</code></pre>
+<p>&#25351;&#23450;&#20102;&#20989;&#25968; ID &#21518;&#35201;&#25226;&#23545;&#24212;&#30340;&#20989;&#25968;&#21644;&#21442;&#25968;&#24207;&#21015;&#21270;&#20026;&#19968;&#20018;&#23383;&#33410;&#65292;&#38656;&#35201;&#23450;&#20041;&#19968;&#20010;&#38745;&#24577;&#20989;&#25968;&#65292;&#36820;&#22238;&#20540;&#20026; QByteArray&#65292;&#27604;&#22914;&#19978;&#38754;&#30340; <code class="sourceCode cpp">UR__GEN_NEW_PATH__QSTRING</code>&#65292;&#23545;&#24212;&#30340;&#20989;&#25968;&#20026;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// .h &#25991;&#20214;&#20013;&#30003;&#26126;</span>
+<span class="dt">static</span> <span class="ot">QByteArray</span> ur_genNewPath( <span class="dt">const</span> <span class="ot">QString</span> &amp;path );
+
+<span class="co">// .cpp &#25991;&#20214;&#20013;&#23454;&#29616;</span>
+<span class="ot">QByteArray</span> Moderator::ur_genNewPath( <span class="dt">const</span> <span class="ot">QString</span> &amp;path )
+{
+    TX_OUT &lt;&lt; (<span class="dt">int</span>)UR__GEN_NEW_PATH__QSTRING  <span class="co">// &#20256;&#20837;&#20989;&#25968; ID&#65292;&#24378;&#21046;&#36716;&#21270;&#20026; int &#22411;</span>
+           &lt;&lt; path;                           <span class="co">// &#20256;&#20837;&#35843;&#29992;&#30340;&#21442;&#25968;</span>
+    <span class="kw">return</span> tx;                                <span class="co">// &#36825;&#37324;&#30340;&#23439; TX_OUT &#21644; return tx &#19981;&#24517;&#28145;&#31350;</span>
+}</code></pre></div>
+<p>&#36825;&#26679;&#23601;&#33021;&#39034;&#21033;&#22320;&#29992; <code class="sourceCode cpp">Bundle::send( Moderator::ur_genNewPath( path ) )</code> &#25226;&#20449;&#24687;&#20256;&#36882;&#21040;&#21478;&#19968;&#21488;&#30005;&#33041;&#12290;</p>
+<p>&#19981;&#36807;&#65292;&#36824;&#24471;&#20889;&#35299;&#26512;&#37096;&#20998;&#12290;&#23545;&#25910;&#21040;&#30340;&#32593;&#32476;&#25968;&#25454;&#65292;&#35201;&#20998;&#26512;&#26159;<strong>&#35201;&#35843;&#29992;&#20160;&#20040;&#20989;&#25968;</strong>&#65292;&#36824;&#35201;&#36824;&#21407;<strong>&#21442;&#25968;</strong>&#65292;&#36825;&#37096;&#20998;&#22312; <code class="sourceCode cpp"><span class="dt">void</span> Moderator::dispatch( <span class="ot">QByteArray</span> &amp;msg )</code> &#20989;&#25968;&#20013;&#23450;&#20041;&#65292;&#27604;&#22914;&#19978;&#38754;&#30340; <code class="sourceCode cpp">Moderator::ur_genNewPath( <span class="dt">const</span> <span class="ot">QString</span> &amp;path )</code> &#22312; dispatch &#20989;&#25968;&#20013;&#23601;&#26159;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// &#24050;&#32463;&#25552;&#21462;&#20102;&#20989;&#25968; ID &#21040; flag</span>
+<span class="co">// &#22914;&#26524;&#20989;&#25968; ID &#20026; UR__GEN_NEW_PATH__QSTRING</span>
+<span class="kw">else</span> <span class="kw">if</span> ( UR__GEN_NEW_PATH__QSTRING == flag )
+{
+    <span class="co">// &#21442;&#25968;&#20026; QString&#65292;&#37027;&#23601;&#23450;&#20041;&#19968;&#20010; QString</span>
+    <span class="ot">QString</span> path;
+    <span class="co">// &#20174;&#32593;&#32476;&#20013;&#21462;&#20986; QString &#31867;&#22411;&#30340;&#36335;&#24452;</span>
+    in &gt;&gt; path;
+    <span class="co">// &#35753;&#26412;&#22320;&#30340;&#8220;&#31867;&#25191;&#34892;&#8221;&#23454;&#20307;&#21435;&#35843;&#29992;&#36825;&#20010;&#20989;&#25968;</span>
+    Bundle::getInstance()-&gt;ur-&gt;genNewPath( path );
+
+    <span class="co">/*</span>
+<span class="co">     * &#34917;&#20805;&#35828;&#26126;&#65306;</span>
+<span class="co">     *     &#36825;&#37324;&#20063;&#21487;&#30452;&#25509;&#35843;&#29992; `Bundle::getInstance()-&gt;ur-&gt;kernel-&gt;genNewPath( path )&#39;</span>
+<span class="co">     *     &#20294;&#24182;&#19981;&#25512;&#33616;&#36825;&#26679;&#20570;&#65288;Wrapper &#20026;&#21028;&#26029;&#35843;&#29992;&#26159;&#21542;&#21512;&#27861;&#65292;kernel &#19981;&#20250;&#65289;&#12290;</span>
+<span class="co">     */</span>
+}</code></pre></div>
+<p>&#28982;&#21518;&#65292;&#25226;&#27169;&#22359;&#21152;&#21040; Bundle &#37324;&#65292;&#27604;&#22914; UR&#65292;&#21017;&#21040; <code>Bundle</code> &#31867;&#20013;&#21152;&#20837;&#21464;&#37327;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// &#21152;&#20837;&#21464;&#37327;</span>
+<span class="kw">class</span> Bundle
+{
+    ...
+
+    UR0 *ur;
+
+    ...
+};
+
+<span class="co">// &#21021;&#22987;&#21270;&#65292;&#22312;</span>
+Bundle Bundle::initInstance( )
+{
+    Bundle bundle;
+    ...
+
+    bundle.ur = NULL;
+
+    ...
+
+    <span class="kw">return</span> bundle;
+}
+
+<span class="co">// &#22312; main.cpp &#20013;&#21021;&#22987;&#21270;&#65288;&#21442;&#32771; `Src/MasterSlave/main.cpp&#39;&#65289;</span>
+Bundle::getInstance()-&gt;ur = Bundle::whoAmI() == Moderator::wss.value( BCD::TYPE_UR )
+                          ? <span class="kw">new</span> UR0( <span class="kw">new</span> URController )
+                          : <span class="kw">new</span> UR0;</code></pre></div>
+<p>&#23553;&#35013;&#27969;&#31243;&#23436;&#27605;&#12290;&#24635;&#32467;&#65292;&#38656;&#35201;&#20570;&#30340;&#20107;&#24773;&#26377;&#65306;</p>
+<ol>
+<li>&#27880;&#20876; Class &#30340;&#25191;&#34892;&#65288;&#22312;&#39640;&#24615;&#33021;&#24179;&#21488;&#36824;&#26159;&#20844;&#20849;&#26426;&#65311;&#65289;</li>
+<li>&#23545; Class &#23553;&#35013;&#19968;&#20010; Wrapper&#65292;&#25226;&#21407;&#26469;&#24102;&#36820;&#22238;&#20540;&#30340;&#20989;&#25968;&#21464;&#25104; emit &#20449;&#21495;&#30340;&#26041;&#24335;</li>
+<li>&#25226; Wrapper &#25152;&#26377;&#30340;&#20989;&#25968;&#65292;&#37117;&#22312; Moderator &#20013; <code>&#23450;&#20041;&#20989;&#25968; ID</code>&#12289;<code>&#24207;&#21015;&#21270;&#20989;&#25968;</code>&#12289;<code>&#35299;&#26512;&#21644; dispatch</code></li>
+<li>&#25226; Wrapper &#22411;&#25351;&#38024;&#21152;&#21040; Bundle &#20013;&#65292;&#24182;&#20889;&#22909;&#21021;&#22987;&#21270;&#20989;&#25968;&#12290;</li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#doc">doc</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0059-exe-wrapper.md" title="418 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0059-exe-wrapper.md";
+var tzxChanges = [
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 418,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

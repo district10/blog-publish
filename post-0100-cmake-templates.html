@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2016-05-08" />
+  <title>CMake &#31616;&#20171;&#21644; CMake &#27169;&#26495;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">CMake &#31616;&#20171;&#21644; CMake &#27169;&#26495;</h1>
+<h3 class="date">2016-05-08</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#cmake-&#31616;&#20171;&#21644;-cmake-&#27169;&#26495;">CMake &#31616;&#20171;&#21644; CMake &#27169;&#26495;</a><ul>
+        <li><a href="#cmake-&#20351;&#29992;&#27969;&#31243;">CMake &#20351;&#29992;&#27969;&#31243;</a></li>
+        <li><a href="#cmake-&#22522;&#30784;">CMake &#22522;&#30784;</a><ul>
+        <li><a href="#&#31616;&#21333;&#30340;&#22235;&#34892;-cmakelists.txt">&#31616;&#21333;&#30340;&#22235;&#34892; CMakeLists.txt</a></li>
+        <li><a href="#&#29983;&#25104;&#38745;&#24577;&#21160;&#24577;&#24211;">&#29983;&#25104;&#38745;&#24577;&#12289;&#21160;&#24577;&#24211;</a></li>
+        <li><a href="#&#38142;&#25509;&#31995;&#32479;&#37197;&#32622;&#20102;&#30340;&#24211;">&#38142;&#25509;&#31995;&#32479;&#37197;&#32622;&#20102;&#30340;&#24211;</a></li>
+        </ul></li>
+        <li><a href="#&#26356;&#22810;&#30340;&#20102;&#35299;">&#26356;&#22810;&#30340;&#20102;&#35299;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="cmake-&#31616;&#20171;&#21644;-cmake-&#27169;&#26495;">CMake &#31616;&#20171;&#21644; CMake &#27169;&#26495;</h1>
+<p>&#22914;&#26524;&#20320;&#29992; Linux &#25805;&#20316;&#31995;&#32479;&#65292;&#20351;&#29992; cmake &#20250;&#31616;&#21333;&#24456;&#22810;&#65292;&#21487;&#20197;&#21442;&#32771;&#19968;&#20010;&#24456;&#22909;&#30340;&#25945;&#31243;&#65306;<a href="http://hahack.com/codes/cmake/">CMake &#20837;&#38376;&#23454;&#25112; | HaHack</a>&#12290;&#22914;&#26524;&#20320;&#29992; Linux &#25805;&#20316;&#31995;&#32479;&#65292;&#32780;&#19988;&#21482;&#26159;&#36816;&#34892;&#19968;&#20123;&#23567;&#31243;&#24207;&#65292;&#21487;&#20197;&#30475;&#30475;&#25105;&#30340;&#21478;&#19968;&#31687;&#21338;&#23458;&#65306;<a href="post-0035-pkg-config.html">&#20320;&#23601;&#32534;&#35793;&#19968;&#20010; cpp&#65292;&#29992; CMake &#36824;&#19981;&#22914;&#29992; pkg-config &#21602;</a>&#12290;</p>
+<p>&#20294;&#22914;&#26524;&#20320;&#29992; Windows&#65292;&#24456;&#22823;&#30340;&#21487;&#33021;&#20320;&#20250;&#20351;&#29992;&#22270;&#24418;&#30028;&#38754;&#30340; CMake&#65288;cmake-gui.exe&#65289;&#21644; Visual Studio&#12290;&#26412;&#25991;&#20808;&#31616;&#21333;&#20171;&#32461;&#20351;&#29992; CMake + Visual Studio &#30340;&#20351;&#29992;&#27969;&#31243;&#65292;&#28982;&#21518;&#20197;&#20960;&#20010;&#20363;&#23376;&#20171;&#32461; CMake &#30456;&#20851;&#30693;&#35782;&#12290;</p>
+<h2 id="cmake-&#20351;&#29992;&#27969;&#31243;">CMake &#20351;&#29992;&#27969;&#31243;</h2>
+<p>&#22914;&#26524;&#20320;&#36824;&#27809;&#23433;&#35013; cmake&#65292;&#19979;&#36733; <a href="https://cmake.org/files/v3.6/cmake-3.6.0-win64-x64.msi" class="uri">https://cmake.org/files/v3.6/cmake-3.6.0-win64-x64.msi</a>&#65288;15 MB&#65289;&#23433;&#35013;&#23427;&#12290;&#22914;&#26524;&#20320;&#36824;&#27809;&#35013; VS&#65292;&#25512;&#33616;&#20351;&#29992; <a href="https://www.visualstudio.com/products/visual-studio-community-vs">VS2015</a> &#31038;&#21306;&#29256;&#26412;&#65292;&#21040; <a href="https://www.microsoft.com/zh-CN/download/details.aspx?id=48146">&#36825;&#37324;</a> &#19979;&#36733;&#65292;&#36873;&#25321;&#37027;&#20010; 3.7 GB &#30340;&#12290;&#22240;&#20026;&#19968;&#27425;&#19979;&#36733;&#22909;&#65292;&#23433;&#35013;&#36215;&#26469;&#24456;&#30465;&#24515;&#12290;&#22914;&#26524;&#20320;&#24050;&#32463;&#26377;&#20102; VS2010 &#25110;&#32773; VS2013&#65292;&#20063;&#21487;&#20197;&#19981;&#23433;&#35013; VS2015&#12290;</p>
+<p>&#19979;&#36733;&#31532;&#19968;&#20221;&#28304;&#30721; <a href="http://whudoc.qiniudn.com/2016/cpp.zip">cpp.zip</a>&#65288;1.16 KB&#65289;&#12290;&#35299;&#21387;&#36827;&#20837;&#25991;&#20214;&#22841;&#65292;&#25171;&#24320; cmake-gui&#65292;&#25226;&#28304;&#30721;&#21644; cmake-gui &#30028;&#38754;&#23545;&#21322;&#25918;&#12290;&#22914;&#19979;&#22270;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/2016-07-12_10-25-15.png" />
+
+</div>
+<p>&#28982;&#21518;&#65292;</p>
+<ol style="list-style-type: decimal">
+<li>&#25226;&#28304;&#30721;&#26681;&#30446;&#24405;&#30340; CMakeLists.txt &#25302;&#21160;&#21040; cmake-gui &#30028;&#38754;&#19978;</li>
+<li>&#20462;&#25913;&#36755;&#20986;&#30446;&#24405;&#65288;&#25105;&#36890;&#24120;&#37117;&#26159;&#28155;&#21152; <code>/build</code>&#65289;</li>
+<li>&#28857;&#20987; configure&#65288;&#37197;&#32622;&#65289;&#65292;&#36873;&#25321;&#12304;Visual Studio 14 VS2015 Win64&#12305;&#65292;&#28857;&#20987;&#30830;&#23450;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li>&#28857;&#20987; generate&#65288;&#29983;&#25104;&#65289;</li>
+</ol>
+<p>&#26368;&#21518;&#65292;&#21040;&#36755;&#20986;&#30446;&#24405;&#65292;&#29992; VS2015 &#25171;&#24320; <code>CPP.sln</code> &#24037;&#31243;&#12290;&#22312; Solution Explorer &#20013;&#21491;&#38190;&#21333;&#20987; CPP&#65292;&#28982;&#21518;&#12304;Set as StartUp Project&#12305;&#65292;&#28982;&#21518; <kbd>Ctrl</kbd>+<kbd>F5</kbd> &#36816;&#34892;&#12290;</p>
+<p>&#30456;&#20449;&#20320;&#24050;&#32463;&#30475;&#21040;&#20102;&#31243;&#24207;&#36816;&#34892;&#32467;&#26524;&#65292;&#22823;&#27010;&#22914;&#19979;&#65306;</p>
+<pre><code>0^2 ---&gt;    0
+0^2 ---&gt;    0
+2^2 ---&gt;    4
+3^2 ---&gt;    9
+4^2 ---&gt;    16</code></pre>
+<p>&#20351;&#29992; CMake &#30340;&#22909;&#22788;&#26159;&#65292;&#23427;&#21487;&#20197;&#29983;&#25104; VS &#24037;&#31243;&#65292;&#20063;&#21487;&#20197;&#29983;&#25104; Linux &#31995;&#32479;&#19979;&#24120;&#29992;&#30340; Makefile &#24037;&#31243;&#65292;&#29978;&#33267;&#36824;&#21487;&#20197;&#29992; Qt creator &#25171;&#24320; CMakeLists.txt &#25991;&#20214;&#65292;&#28982;&#21518;&#29983;&#25104; qt &#24037;&#31243;&#12290; <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> &#36825;&#20221;&#20195;&#30721;&#65292;&#22312; Linux &#19978;&#20063;&#21487;&#20197;&#36805;&#36895;&#36305;&#36215;&#26469;&#65292;&#36825;&#26159;&#25105;&#34394;&#25311;&#26426;&#20013;&#36816;&#34892;&#30340;&#25130;&#22270;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/VirtualBox_2016-07-12_10-52-13.png" />
+
+</div>
+<h2 id="cmake-&#22522;&#30784;">CMake &#22522;&#30784;</h2>
+<h3 id="&#31616;&#21333;&#30340;&#22235;&#34892;-cmakelists.txt">&#31616;&#21333;&#30340;&#22235;&#34892; CMakeLists.txt</h3>
+<blockquote>
+<p>&#26412;&#23567;&#33410;&#28304;&#30721;&#65306;<a href="https://github.com/district10/cmake-templates/tree/master/cpp">cmake-templates/cpp at master &#183; district10/cmake-templates</a>&#12290;</p>
+</blockquote>
+<p>&#25105;&#20204;&#20174;&#26681;&#30446;&#24405;&#30340; CMakeLists.txt &#30475;&#36215;&#65292;&#23427;&#31616;&#27905;&#21040;&#21482;&#26377; 4 &#34892;&#65281;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="kw">project</span>( CPP )
+<span class="kw">cmake_minimum_required</span>( <span class="ot">VERSION</span> 2.6 )
+<span class="kw">file</span>( <span class="ot">GLOB</span> SRCS *.c *.cpp *.cc *.h *.hpp )
+<span class="kw">add_executable</span>( <span class="dv">${PROJECT_NAME}</span> <span class="dv">${SRCS}</span> )</code></pre></div>
+<p>&#25105;&#20204;&#19968;&#34892;&#19968;&#34892;&#30475;&#65292;</p>
+<ul>
+<li>&#31532;&#19968;&#34892;&#65292;&#35774;&#32622;&#20102;&#24037;&#31243;&#21517;&#31216;&#65292;&#21483;&#8220;CPP&#8221;&#65288;&#25152;&#20197;&#21518;&#26469;&#29983;&#25104;&#30340; VS &#24037;&#31243;&#21517;&#20026; <code>CPP.sln</code>&#65289;&#65307;</li>
+<li>&#31532;&#20108;&#34892;&#65292;&#35774;&#32622;&#20102; CMake &#26368;&#20302;&#29256;&#26412;&#21495;&#65292;&#36890;&#24120;&#22312;&#26681;&#30446;&#24405;&#30340; CMakeLists.txt &#28155;&#21152;&#36825;&#20010;&#25351;&#23450;&#65307;</li>
+<li>&#31532;&#19977;&#34892;&#65292;&#25226;&#24403;&#21069;&#25991;&#20214;&#22841;&#19979;&#30340;&#28304;&#30721;&#21015;&#34920;&#65288;&#25991;&#20214;&#21518;&#32512;&#21305;&#37197;&#30340;&#37027;&#20123;&#25991;&#20214;&#65289;&#23384;&#21040;&#21464;&#37327; SRCS &#20013;&#65307;</li>
+<li>&#31532;&#22235;&#34892;&#65292;&#25226;&#28304;&#30721;&#32534;&#35793;&#25104;&#19968;&#20010;&#20108;&#36827;&#21046;&#36825;&#37324;&#30340; <code>${PROJECT_NAME}</code> &#23601;&#26159; <code>CPP</code>&#65292;&#26159;&#22312;&#31532;&#19968;&#34892;&#35774;&#32622;&#30340;&#12290;</li>
+</ul>
+<p>&#36825;&#23601;&#26159;&#19968;&#20010;&#22522;&#26412;&#30340;&#29992; CMake &#32452;&#32455;&#30340; C++ &#31243;&#24207;&#12290;&#21482;&#35201;&#22235;&#34892;&#37197;&#32622;&#65292;&#21033;&#29992; CMake&#65292;&#25105;&#20204;&#23601;&#29983;&#25104;&#20102; Windows &#19979;&#30340; VS &#24037;&#31243;&#65292;&#36824;&#29983;&#25104;&#20102; Linux &#19979;&#30340; Makefile &#24037;&#31243;&#12290;&#21482;&#35201;&#22235;&#34892;&#65281;</p>
+<p>&#24403;&#28982;&#36824;&#21487;&#20197;&#29983;&#25104;&#22810;&#20010;&#20108;&#36827;&#21046;&#65292;&#22914;&#26524;&#20320;&#26377;&#22810;&#20221;&#28304;&#30721;&#65292;&#27604;&#22914;</p>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="kw">add_executable</span>( foo foo.cpp )
+<span class="kw">add_executable</span>( bar bar.cpp )</code></pre></div>
+<p>&#22914;&#26524;&#19978;&#38754;&#27809;&#38382;&#39064;&#65292;&#36824;&#26159;&#36825;&#20004;&#20010;&#20195;&#30721;&#65292;&#25105;&#20204;&#22312; CMakeLists.txt &#37324;&#21435;&#25481;&#19978;&#38754;&#20004;&#34892;&#65292;&#25913;&#25104; <code class="sourceCode cmake"><span class="kw">add_executable</span>( foobar foo.cpp bar.cpp )</code>&#65292;&#20250;&#19981;&#20250;&#26377;&#20160;&#20040;&#38382;&#39064;&#65311;</p>
+<h3 id="&#29983;&#25104;&#38745;&#24577;&#21160;&#24577;&#24211;">&#29983;&#25104;&#38745;&#24577;&#12289;&#21160;&#24577;&#24211;</h3>
+<blockquote>
+<p>&#26412;&#23567;&#33410;&#28304;&#30721;&#65306;<a href="https://github.com/district10/cmake-templates/tree/master/modules">cmake-templates/modules at master &#183; district10/cmake-templates</a>&#12290;</p>
+</blockquote>
+<p>&#36824;&#21487;&#20197;&#29992; CMake &#29983;&#25104;&#38142;&#25509;&#24211;&#65292;&#21487;&#20197;&#26159;&#38745;&#24577;&#24211;&#65288;<code>.lib</code>&#65289;&#65292;&#20063;&#21487;&#20197;&#26159;&#21160;&#24577;&#24211;&#65288;<code>.dll</code>&#65289;&#65292;&#35821;&#27861;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="kw">add_library</span>(    &#21160;&#24577;&#38142;&#25509;&#24211;&#21517;&#31216;      <span class="ot">SHARED</span>      &#28304;&#30721;&#21015;&#34920;    )
+<span class="kw">add_library</span>(    &#38745;&#24577;&#38142;&#25509;&#24211;&#21517;&#31216;      <span class="ot">STATIC</span>      &#28304;&#30721;&#21015;&#34920;    )</code></pre></div>
+<p>&#22914;&#26524;&#19981;&#25351;&#23450; SHARED &#25110;&#26159; STATIC&#65292;&#40664;&#35748;&#29983;&#25104;&#30340;&#26159; STATIC&#65292;&#36825;&#20010;&#20363;&#23376;&#37324;&#65292;src &#25991;&#20214;&#22841;&#19979;&#29983;&#25104;&#20102; 3 &#20010;&#38142;&#25509;&#24211;&#65292; LibCubic &#26159;&#8220;&#25351;&#23450;&#8221;&#29983;&#25104;&#30340;&#38745;&#24577;&#24211;&#65292; LibExtras &#26159;&#8220;&#25351;&#23450;&#8221;&#29983;&#25104;&#30340;&#21160;&#24577;&#24211;&#65292; LibSquare &#26159;&#8220;&#40664;&#35748;&#8221;&#29983;&#25104;&#30340;&#38745;&#24577;&#24211;&#12290;</p>
+<p>&#29983;&#25104;&#24211;&#25991;&#20214;&#23601;&#26159;&#20026;&#20102;&#35753;&#20154;&#29992;&#65292;&#25152;&#20197;&#25105;&#20204;&#35201;&#25226;&#23427;&#38142;&#25509;&#32473;&#26576;&#20010;&#20108;&#36827;&#21046;&#65292;&#35821;&#27861;&#22914;&#19979;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="kw">add_executable</span>(             &#20108;&#36827;&#21046;&#21517;    &#28304;&#30721;&#21015;&#34920;        )
+<span class="kw">target_link_libraries</span>(      &#20108;&#36827;&#21046;&#21517;    &#21160;&#38745;&#24577;&#24211;&#21517;      )</code></pre></div>
+<p>&#29983;&#25104;&#24211;&#30340;&#28304;&#30721;&#26377;&#20160;&#20040;&#26368;&#22522;&#26412;&#30340;&#35201;&#27714;&#21527;&#65311;&#22914;&#26524; <code class="sourceCode cmake"><span class="kw">add_executable</span>( baz baz.cpp b.cpp a.cpp z.cpp )</code> &#21487;&#20197;&#27491;&#30830;&#22320;&#29983;&#25104;&#20108;&#36827;&#21046;&#25991;&#20214; baz&#65288;windows &#19978;&#23601;&#26159; baz.exe&#65289;&#65292;&#37027;&#36825;&#34892; CMake &#37197;&#32622;&#21487;&#20197;&#20462;&#25913;&#20026; <code class="sourceCode cmake"><span class="kw">add_library</span>( baz baz.cpp b.cpp a.cpp z.cpp )</code> &#21527;&#65311;&#20026;&#20160;&#20040;&#12290;</p>
+<h3 id="&#38142;&#25509;&#31995;&#32479;&#37197;&#32622;&#20102;&#30340;&#24211;">&#38142;&#25509;&#31995;&#32479;&#37197;&#32622;&#20102;&#30340;&#24211;</h3>
+<blockquote>
+<p>&#26412;&#23567;&#33410;&#28304;&#30721;&#65306;<a href="https://github.com/district10/cmake-templates/tree/master/opencv3">cmake-templates/opencv3 at master &#183; district10/cmake-templates</a>&#12290;</p>
+</blockquote>
+<p>CMake &#30340;&#19968;&#20010;&#26041;&#20415;&#20043;&#22788;&#65292;&#20415;&#26159;&#28155;&#21152;&#31532;&#19977;&#26041;&#24211;&#12290;&#22312;&#25105;&#30340; CMake &#23433;&#35013;&#30446;&#24405;&#65288;<code>C:\Program Files\CMake\share\cmake-3.6\Modules</code>&#65289;&#19979;&#65292;&#26377;&#22810;&#36798; 145 &#20010; FindX.cmake &#25991;&#20214;&#65292;&#27604;&#22914; <code>FindQt4.cmake</code>&#12290;&#24403;&#20320;&#22312;&#33258;&#24049;&#28304;&#30721;&#20013;&#20351;&#29992; <code>find_package( Qt4 )</code> &#26102;&#65292;CMake &#23601;&#20250;&#23581;&#35797;&#21435;&#24341;&#20837; <code>FindQt4.cmake</code>&#65292;&#36825;&#20010;&#25991;&#20214;&#24341;&#20837;&#21518;&#65292;&#29305;&#23450;&#30340;&#21464;&#37327;&#37324;&#23601;&#23384;&#20648;&#20102;&#22836;&#25991;&#20214;&#22320;&#22336;&#65288;<code>include_directories</code>&#65289;&#12289;&#38142;&#25509;&#24211;&#22320;&#22336;&#65288;<code>link_directories</code>&#65289;&#12289;&#38142;&#25509;&#24211;&#30340;&#21517;&#31216;&#20197;&#21450;&#19968;&#20123;&#24320;&#20851;&#37197;&#32622;&#65288;options&#65289;&#12290;</p>
+<p>&#26412;&#33410;&#29992; OpenCV &#26469;&#35828;&#26126;&#22914;&#20309;&#38142;&#25509;&#20351;&#29992;&#31532;&#19977;&#26041;&#24211;&#65292;&#36825;&#37324;&#29992;&#30340;&#26159; opencv3&#12290; OpenCV3 &#23448;&#32593;&#25552;&#20379;&#30340;&#21482;&#26377; VS2013 (vc12) &#21644; VS2015 (vc14) &#30340; prebuild&#65292;&#22914;&#26524;&#20320;&#20351;&#29992; VS2012&#65292;&#20320;&#21482;&#33021;&#20351;&#29992; OpenCV2&#65288;&#25110;&#32773;&#20320;&#35201;&#33258;&#24049;&#32534;&#35793; OpenCV3&#65311;&#65289;&#12290; OpenCV &#30340;&#37197;&#32622;&#21487;&#20197;&#21442;&#32771;&#25105;&#20889;&#24471;&#25945;&#31243;&#65306; <a href="https://github.com/district10/cmake-templates/issues/4">HOWTO: OpenCV 2 &amp; OpenCV 3 &#183; Issue #4 &#183; district10/cmake-templates</a>&#12290;</p>
+<p>&#26412;&#33410;&#28304;&#30721;&#30340; CMakeLists.txt &#37324;&#65292;&#25105;&#27809;&#26377;&#20351;&#29992; <code>find_package( OpenCV REQUIRED )</code>&#65292;&#32780;&#26159;&#20351;&#29992;&#20102; <code>include( $ENV{OpenCV3_DIR}/OpenCVConfig.cmake )</code>&#65292;&#22240;&#20026;&#25105;&#35273;&#24471;&#36825;&#26159;&#19968;&#31181;&#26356;&#22909;&#30340;&#35299;&#20915;&#26041;&#26696;&#65292;&#22914;&#27492;&#19968;&#26469;&#65292;&#20320;&#21482;&#35201;&#35774;&#32622;&#29615;&#22659;&#21464;&#37327;&#65288;%OpenCV3_DIR%&#65289;&#65292;&#28155;&#21152;&#30456;&#24212;&#30446;&#24405;&#21040; %PATH%&#65292;&#20415;&#21487;&#20197;&#21516;&#26102;&#20351;&#29992; OpenCV2 &#21644; OpenCV3 &#65288;&#24403;&#28982;&#26159;&#22312;&#19981;&#21516;&#30340;&#39033;&#30446;&#20013;&#65289;&#12290;&#19978;&#38754;&#30340;&#28304;&#30721;&#38142;&#25509;&#20013;&#23545;&#27492;&#20063;&#26377;&#31616;&#35201;&#35828;&#26126;&#12290;</p>
+<p>&#30475;&#30475;&#25105;&#20204;&#30340; CMakeLists.txt&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cmake"><code class="sourceCode cmake"><span class="kw">project</span>( OPENCV3 )
+<span class="kw">cmake_minimum_required</span>( <span class="ot">VERSION</span> 2.8 )
+
+<span class="co"># find_package( OpenCV REQUIRED )                       # &#19981;&#20351;&#29992; find_package</span>
+<span class="kw">include</span>( <span class="fl">$ENV{OpenCV3_DIR}</span>/OpenCVConfig.cmake )         <span class="co"># &#30452;&#25509;&#24341;&#20837; cmake &#25991;&#20214;</span>
+
+<span class="kw">message</span>( <span class="ot">STATUS</span> <span class="st">&quot;OpenCV library status:&quot;</span> )              <span class="co"># &#36755;&#20986;&#19968;&#19979;&#24471;&#21040;&#30340;&#21464;&#37327;</span>
+<span class="kw">message</span>( <span class="ot">STATUS</span> <span class="st">&quot;    version: </span><span class="dv">${OpenCV_VERSION}</span><span class="st">&quot;</span> )
+<span class="kw">message</span>( <span class="ot">STATUS</span> <span class="st">&quot;    libraries: </span><span class="dv">${OpenCV_LIBS}</span><span class="st">&quot;</span> )
+<span class="kw">message</span>( <span class="ot">STATUS</span> <span class="st">&quot;    include path: </span><span class="dv">${OpenCV_INCLUDE_DIRS}</span><span class="st">&quot;</span> )
+
+<span class="kw">include_directories</span>( <span class="dv">${OpenCV_INCLUDE_DIRS}</span> )           <span class="co"># &#24341;&#20837; OpenCV &#22836;&#25991;&#20214;&#30446;&#24405;</span>
+
+<span class="kw">add_executable</span>( <span class="dv">${PROJECT_NAME}</span> example.cpp )
+<span class="kw">target_link_libraries</span>( <span class="dv">${PROJECT_NAME}</span> <span class="dv">${OpenCV_LIBS}</span> ) <span class="co"># exe &#38142;&#25509; OpenCV</span></code></pre></div>
+<p>&#22312;&#25105;&#30340;&#31995;&#32479;&#19979;&#65292;&#36755;&#20986;&#22914;&#19979;&#65288;&#25105;&#35843;&#25972;&#20102;&#25442;&#34892;&#65289;&#65306;</p>
+<pre><code>OpenCV ARCH: x64
+OpenCV RUNTIME: vc14
+OpenCV STATIC: ON
+Found OpenCV 3.1.0 in C:/OpenCV/opencv3/build/x64/vc14/lib
+You might need to add C:\OpenCV\opencv3\build\x64\vc14\bin to your PATH to be able to run your applications.
+OpenCV library status:
+    version: 3.1.0
+    libraries:  opencv_world;opencv_videostab;opencv_videoio;opencv_video;
+                opencv_superres;opencv_stitching;opencv_shape;opencv_photo;
+                opencv_objdetect;opencv_ml;opencv_imgproc;opencv_imgcodecs;
+                opencv_highgui;opencv_flann;opencv_features2d;opencv_core;opencv_calib3d
+    include path: C:/OpenCV/opencv3/build/include;C:/OpenCV/opencv3/build/include/opencv
+Configuring done</code></pre>
+<p>&#24456;&#23481;&#26131;&#22320;&#65292;&#31243;&#24207;&#20063;&#36816;&#34892;&#36215;&#26469;&#20102;&#12290;</p>
+<h2 id="&#26356;&#22810;&#30340;&#20102;&#35299;">&#26356;&#22810;&#30340;&#20102;&#35299;</h2>
+<p>&#21482;&#35201;&#25484;&#25569;&#19978;&#38754;&#37027;&#22522;&#26412;&#30340;&#20960;&#28857;&#65288;&#36890;&#20439;&#22320;&#35828;&#65292;&#23601;&#26159;&#29983;&#25104; exe&#12289;lib&#12289;dll&#65292;&#38142;&#25509; lib&#12289;dll&#65292;&#24341;&#20837;&#31532;&#19977;&#26041;&#24211;&#65289;&#65292;&#28982;&#21518;&#31215;&#25874;&#19968;&#20123;&#21035;&#20154;&#30340; CMakeLists.txt &#29255;&#27573;&#65292;CMake &#20415;&#19981;&#38590;&#20102;&#12290;</p>
+<p>&#22914;&#26524;&#20320;&#36824;&#35273;&#24471; CMake &#24456;&#40635;&#28902;&#65292;&#37027;&#19968;&#23450;&#26159;&#25105;&#21338;&#23458;&#20889;&#24471;&#19981;&#22909;&#12290;&#22914;&#26524;&#20320;&#35273;&#24471; CMake &#19981;&#22909;&#29992;&#65292;&#37027;&#19981;&#26159;&#25105;&#30340;&#38169;&#65292;&#37027;&#26159; CMake &#30340;&#23448;&#26041;&#25945;&#31243;&#22826;&#22403;&#22334;&#23548;&#33268;&#30340;&#65292;&#25105;&#21453;&#27491;&#20174;&#26469;&#27809;&#35265;&#36807;&#22914;&#27492;&#26214;&#28073;&#65292;&#19968;&#20010;&#20363;&#23376;&#37117;&#19981;&#32473;&#30340;&#25945;&#31243;&#12290;&#24403;&#26102;&#20889; <a href="https://github.com/district10/cmake-templates/blob/master/qt4-project/CMakeLists.txt" class="uri">https://github.com/district10/cmake-templates/blob/master/qt4-project/CMakeLists.txt</a> &#30340;&#26102;&#20505;&#65292;&#25105;&#21487;&#26159;&#28145;&#21463;&#20854;&#33510;&#12290;</p>
+<p>&#20889;&#36215;&#26469;&#34429;&#38590;&#65292;&#20294;&#29992;&#36215;&#26469;&#26041;&#20415;&#65292;&#25152;&#20197;&#8230;&#8230;&#25105;&#22823;&#36190; CMake&#12290;</p>
+<p>&#24819;&#23545; CMake &#26377;&#26356;&#22810;&#30340;&#20102;&#35299;&#65292;&#21487;&#20197;&#21442;&#32771;&#25105;&#30340; <a href="https://github.com/district10/cmake-templates">district10/cmake-templates: Some CMake Templates. Qt, Boost, OpenCV, C++11, etc.</a>&#65292;&#37324;&#38754;&#26377;&#31616;&#21333;&#30340; C &#24037;&#31243;&#65292;C++ &#24037;&#31243;&#65292;C++11 &#24037;&#31243;&#65292;Boost &#24211;&#30340;&#37197;&#32622;&#65292;OpenCV2&#12289;OpenCV3 &#30340;&#37197;&#32622;&#65292;Qt4&#12289;Qt5 &#30340;&#37197;&#32622;&#65292;&#31561;&#31561;&#12290;&#20195;&#30721;&#22312;&#22823;&#22810;&#22312; Windows + VS2010/VS2015 &#21644; Linux + GCC4.8 &#27979;&#35797;&#36890;&#36807;&#12290;</p>
+<p>&#25105;&#36824;&#20889;&#20102;&#19968;&#20123;&#24211;&#30340;&#37197;&#32622;&#65292;&#19981;&#21516;&#24179;&#21488;&#19981;&#21516; IDE&#12289;&#32534;&#35793;&#22120;&#19978;&#26377;&#20851; CMake &#20351;&#29992;&#30340;&#25945;&#31243;&#65306; <a href="https://github.com/district10/cmake-templates/issues">Issues &#183; district10/cmake-templates</a>&#12290;</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#8220;Win64&#8221;&#26159;&#25351;&#30340;&#26159;&#32534;&#35793; VS2015 x64 &#24037;&#31243;&#65292;&#27809;&#26377;&#8220;Win64&#8221;&#21017;&#20026; x86 &#24037;&#31243;&#65289;&#12290;<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p>&#21442;&#32771;&#25105;&#30340;&#25945;&#31243;&#65306;<a href="https://github.com/district10/cmake-templates/issues/5">HOWTO: Use Qt creator to Open CMakeLists.txt directly (will generate proper project files) &#183; Issue #5 &#183; district10/cmake-templates</a>&#65292;&#37324;&#38754;&#21253;&#21547;&#19968;&#20010; Linux &#19978;&#30340;&#20363;&#23376;&#65292;&#19968;&#20010; Windows &#19978;&#30340;&#20363;&#23376;&#12290;<a href="#fnref2">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#cmake">cmake</a></li>
+<li><a class="tzx-tag" href="tags.html/#templates">templates</a></li>
+<li><a class="tzx-tag" href="tags.html/#github">github</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0100-cmake-templates.md" title="4 insertions(+), 3 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0100-cmake-templates.md" title="203 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0100-cmake-templates.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 4,
+        deletions: 3
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 203,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2016-06-15" />
+  <title>Remote Jupyter</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Remote Jupyter</h1>
+<h3 class="date">2016-06-15</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#36828;&#31243;&#20351;&#29992;-jupyter-notebook-ipython-notebook">&#36828;&#31243;&#20351;&#29992; Jupyter Notebook &#65288;iPython Notebook&#65289;</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#36828;&#31243;&#20351;&#29992;-jupyter-notebook-ipython-notebook">&#36828;&#31243;&#20351;&#29992; Jupyter Notebook &#65288;iPython Notebook&#65289;</h1>
+<p>&#22312;&#28145;&#24230;&#23398;&#20064;&#26694;&#26550; caffe &#37324;&#65292;&#26377;&#20960;&#20010;&#24456;&#36190;&#30340;&#25945;&#31243;&#37117;&#26159;&#29992; ipython notebook &#20889;&#25104;&#30340;&#65292;&#22312;&#21629;&#20196;&#34892;&#20013;&#65292;cd &#21040; caffe &#26681;&#30446;&#24405;&#65292;&#36755;&#20837; <code class="sourceCode bash"><span class="kw">ipython</span> notebook</code> &#23601;&#21487;&#20197;&#22312;&#27983;&#35272;&#22120;&#20013;&#36816;&#34892;&#20351;&#29992;&#23427;&#20204;&#12290;</p>
+<p>&#20294;&#19981;&#24184;&#30340;&#26159;&#65292;&#20320;&#19981;&#33021;&#22312;&#26381;&#21153;&#22120;&#19978;&#25171;&#24320; ipython notebook&#65292;&#28982;&#21518;&#22238;&#21040;&#33258;&#24049;&#30340;&#31508;&#35760;&#26412;&#19978;&#36755;&#20837; ip &#31471;&#21475;&#36827;&#34892;&#30331;&#38470;&#65288;&#25105;&#20204;&#23454;&#39564;&#23460;&#37027;&#37197;&#26377;&#20004;&#20010; Nvidia &#26174;&#21345;&#65292;120 G &#20869;&#23384;&#30340;&#26381;&#21153;&#22120;&#20063;&#19981;&#33021;&#24635;&#33258;&#24049;&#21344;&#30528;&#38463;&#26159;&#19981;&#26159;&#8230;&#8230;&#65289;&#12290;&#22914;&#26524;&#30475;&#36807;&#23448;&#26041;&#30340;&#25991;&#26723;&#65292;&#20320;&#21457;&#29616;&#20854;&#23454;&#21487;&#20197;&#25226;&#26381;&#21153;&#20844;&#24320;&#32473;&#20854;&#20182;&#30005;&#33041;&#20351;&#29992;&#65292;&#19981;&#36807;&#24456;&#40635;&#28902;&#12290;</p>
+<p>&#36825;&#37324;&#26377;&#19968;&#20010;&#26356;&#31616;&#21333;&#30340;&#35299;&#20915;&#26041;&#26696;&#65292;&#12304;&#31471;&#21475;&#26144;&#23556;&#12305;&#12290;&#27493;&#39588;&#22914;&#19979;&#65306;</p>
+<ol>
+<li>&#22312;&#26381;&#21153;&#22120;&#19978;&#65292;<code class="sourceCode bash"><span class="kw">ipython</span> notebook --no-browser --port=8888</code> &#22312; 8888 &#31471;&#21475;&#25171;&#24320; notebook &#26381;&#21153;&#65307;</li>
+<li>&#29992; ssh &#36830;&#25509;&#21040;&#26381;&#21153;&#22120;&#65292;&#24182;&#25226;&#26381;&#21153;&#22120;&#30340;&#31471;&#21475;&#25509;&#36890;&#21040;&#19968;&#20010;&#20844;&#20849;&#30340;&#31471;&#21475;&#65306; <code class="sourceCode bash"><span class="kw">ssh</span> -NfL localhost:8000:localhost:8888 tzx@192.168.1.106</code> &#36825;&#37324;&#30340; <code>tzx@192.168.1.106</code> &#26159;&#36828;&#31243;&#26381;&#21153;&#22120;&#65288;&#30340; ip &#22320;&#22336;&#65289;&#21644;&#29992;&#25143;&#21517;&#65288;tzx&#65289;&#65292;&#26684;&#24335;&#20026; <code>&lt;&#29992;&#25143;&#21517;&gt;@&lt;&#20027;&#26426;&#22320;&#22336;&gt;</code>&#65307;</li>
+<li>&#28982;&#21518;&#23601;&#21487;&#20197;&#22312;&#26412;&#22320;&#25171;&#24320; <code>localhost:8000</code> &#23601;&#21487;&#20197;&#20351;&#29992;&#36828;&#31243;&#30340; notebook&#12290;</li>
+</ol>
+<dl>
+<dt>Why it works? -&gt; <code>man ssh</code></dt>
+<dd><pre><code>-N
+        Do not execute a remote command.
+        This is useful for just forwarding ports (protocol version 2 only).
+
+-f
+        Requests ssh to go to background just before command execution.
+        This is useful if ssh is going to ask for passwords or passphrases,
+        but the user wants it in the background.  This implies `-n`.
+        The recommended way to start X11 programs at a remote site is with
+        something like `ssh -f host xterm`.
+
+        If the ExitOnForwardFailure configuration option is set to &#8220;yes&#8221;,
+        then a client started with -f will wait for all remote port
+        forwards to be successfully established before placing itself in
+        the background.
+
+-L [bind_address:]port:host:hostport
+        Specifies that the given port on the local (client) host is to be
+        forwarded to the given host and port on the remote side.  This
+        works by allocating a socket to listen to port on the local side,
+        optionally bound to the specified bind_address.  Whenever a
+        connection is made to this port, the connection is forwarded over
+        the secure channel, and a connection is made to host port hostport
+        from the remote machine.  Port forwardings can also be specified in
+        the configuration file.  IPv6 addresses can be specified by
+        enclosing the address in square brackets.  Only the superuser can
+        forward privileged ports.  By default, the local port is bound in
+        accordance with the GatewayPorts setting.  However, an explicit
+        bind_address may be used to bind the connection to a specific
+        address.  The bind_address of &#8220;localhost&#8221; indicates that the
+        listening port be bound for local use only, while an empty address
+        or &#8216;*&#8217; indicates that the port should be available from all
+        interfaces.</code></pre>
+</dd>
+</dl>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh">Coderwall | Remote Access to IPython Notebooks via SSH</a></li>
+<li><a href="https://help.ubuntu.com/community/SSH/OpenSSH/PortForwarding">SSH/OpenSSH/PortForwarding - Community Help Wiki</a></li>
+</ul>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#ipython">ipython</a></li>
+<li><a class="tzx-tag" href="tags.html/#jupyter">jupyter</a></li>
+<li><a class="tzx-tag" href="tags.html/#hack">hack</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/5a7d1f7d62a5cd8a23e9aaa6609f69393870e372/_posts/post-0109-remote-jupyter.md" title="48 insertions(+), 15 deletions(-)">1480428507</option>
+<option value="https://raw.githubusercontent.com/district10/blog/b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d/_posts/post-0109-remote-jupyter.md" title="37 insertions(+), 0 deletions(-)">1480083296</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0109-remote-jupyter.md";
+var tzxChanges = [
+    {
+        hash: "5a7d1f7d62a5cd8a23e9aaa6609f69393870e372",
+        datetime: "1480428507",
+        insertions: 48,
+        deletions: 15
+    },
+    {
+        hash: "b08a696f534c650b0d7fccc3b0b1d7d0d68c6d3d",
+        datetime: "1480083296",
+        insertions: 37,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2017.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area">
+    <div><span id="showDisqus" title="&#27426;&#36814;&#20132;&#27969;">&#12300;Load Disqus | &#21152;&#36733;&#35780;&#35770;&#12301;</span></div>
+    <div id="disqus_thread"></div>
+</div>
+</body>
+</html>
