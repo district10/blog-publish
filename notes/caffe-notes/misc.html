@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="misc-tmp-notes">MISC (TMP NOTES)</h1>
+<dl>
+<dt>sucks <code class="fold">@</code></dt>
+<dd><ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/20377462?refer=hacker-and-painter">&#28145;&#24230;&#23398;&#20064;&#28304;&#30721;&#35299;&#35835;-ch0-talk is cheap - &#40657;&#23458;&#19982;&#30011;&#23478; - &#30693;&#20046;&#19987;&#26639;</a></p></li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/20435591">&#28145;&#24230;&#23398;&#20064;&#28304;&#30721;&#35299;&#35835;-ch2-Caffe is coming - &#40657;&#23458;&#19982;&#30011;&#23478; - &#30693;&#20046;&#19987;&#26639;</a></p>
+<p>proto txt,</p></li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/20456504?refer=hacker-and-painter">&#28145;&#24230;&#23398;&#20064;&#28304;&#30721;&#35299;&#35835;-ch3-&#37096;&#32626; Caffe &#32593;&#32476; - &#40657;&#23458;&#19982;&#30011;&#23478; - &#30693;&#20046;&#19987;&#26639;</a></p>
+<p>&#36890;&#36807;&#36825;&#20010;&#23454;&#38469;&#30340;&#20363;&#23376;&#65292;&#25105;&#20204;&#20877;&#21435;&#30475;proto.txt&#23601;&#23481;&#26131;&#22810;&#20102;&#65292;&#30693;&#36947;&#26681;&#33410;&#28857;&#26159;Net&#65292;&#25105;&#20204;&#23601;&#21487;&#20197;&#20174;&#28304;&#30721;&#20013;&#30475;&#21040;&#35843;&#29992;&#20851;&#31995;,&#20197;netparam&#20026;&#20363;&#65306;</p>
+<p>ReadNetParamsFromTextFileOrDie -&gt; ReadProtoFromTextFile -&gt; 5&#34892;&#21453;&#24207;&#21015;&#21270;&#20195;&#30721;&#12290;</p>
+<p>Solveparam&#26377;&#31867;&#20284;&#30340;&#23618;&#27425;&#32467;&#26500;&#65292;grep&#19968;&#19979;&#20195;&#30721;&#19981;&#38590;&#29702;&#28165;&#35843;&#29992;&#20851;&#31995;&#12290;</p></li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/20456649?refer=hacker-and-painter">&#28145;&#24230;&#23398;&#20064;&#28304;&#30721;&#35299;&#35835;-ch4-Caffe &#20013;&#30340;&#35774;&#35745;&#27169;&#24335; - &#40657;&#23458;&#19982;&#30011;&#23478; - &#30693;&#20046;&#19987;&#26639;</a></p>
+<p>&#25105;&#20204;&#21487;&#20197;&#25361;EUCLIDEAN LOSS Layer&#20026;&#20363;&#65292;&#30475;&#30475;caffe&#20013;&#21152;&#20837;&#19968;&#20010;&#33258;&#23450;&#20041;&#23618;&#65292;&#38656;&#35201;&#22810;&#23569;&#30340;&#24037;&#20316;&#37327;&#12290;</p>
+<p>caffe&#20351;&#29992;&#20102;&#24037;&#21378;&#27169;&#24335;&#65292;&#20195;&#30721;&#22312; layer_factory.hpp &#20013;&#65292;&#23439; REGISTER_LAYER_CLASS &#20026;&#27599;&#20010;type&#29983;&#25104;&#20102;create&#26041;&#27861;&#65292;&#24182;&#21644;type&#19968;&#36215;&#27880;&#20876;&#21040;&#20102; LayerRegistry&#20013;&#65292;&#20445;&#23384;&#22312;&#19968;&#20010;map&#37324;&#38754;&#12290;&#36825;&#26679;&#20197;&#21518;&#23601;&#21487;&#20197;&#36890;&#36807;Type&#65292;&#25105;&#20204;&#23601;&#33021;&#22815;&#21019;&#24314;&#24102;forward/backward&#23454;&#29616;&#30340;&#33410;&#28857;&#20102;&#12290;</p>
+<p>&#23545;&#20110;forward&#65292;&#23601;&#26159;&#22312;&#35745;&#31639;&#27431;&#24335;&#36317;&#31163;&#65292;&#20551;&#35774;&#32593;&#32476;&#36755;&#20986;&#21521;&#37327;&#20026; [x1, x2, &#8230; xn], label&#20026; [l1, l2, &#8230; ln]&#65292; &#21017;loss function &#20026;</p>
+<p>&#189; *[ (x1 &#8211; l1)<em>(x1-l1) + &#8230; (xn -ln)</em>(xn -ln)] / n</p>
+<p>&#25152;&#20197;&#20195;&#30721;&#23454;&#29616;&#26159;&#19968;&#20010;&#21521;&#37327;&#30340;&#20943;&#27861;&#65292;&#32039;&#36319;&#30528;&#19968;&#20010;&#28857;&#20056;&#65292;&#20197;CPU&#20026;&#20363;&#26159;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">caffe_sub(count, bottom[<span class="dv">0</span>]-&gt;cpu_data(), bottom[<span class="dv">1</span>]-&gt;cpu_data(), diff_.mutable_cpu_data());
+Dtype dot = caffe_cpu_dot(count, diff_.cpu_data(), diff_.cpu_data());
+Dtype loss = dot / bottom[<span class="dv">0</span>]-&gt;num() / Dtype(<span class="dv">2</span>);</code></pre></div></li>
+</ul>
+</dd>
+<dt><a href="https://www.zhihu.com/question/47467054">caffe&#24320;&#21457;&#36807;&#31243;&#20013;&#20351;&#29992;&#20102;&#21738;&#20123;&#24037;&#20855;&#65311; - &#36719;&#20214;&#24320;&#21457; - &#30693;&#20046;</a> <code class="fold">@</code></dt>
+<dd><p><strong>&#20316;&#32773;&#65306;&#36158;&#25196;&#28165;</strong></p>
+<p>&#36824;&#26159;&#25402;&#26631;&#20934;&#30340; linux &#24320;&#21457;&#27969;&#31243;&#65306;</p>
+<ul>
+<li>&#32534;&#36753;&#22120;&#65306;vim&#65288;&#22240;&#20026;&#35201;&#36828;&#31243;&#22312;&#26381;&#21153;&#22120;&#19978;&#32534;&#36753;&#65289;+ Sublime Text&#65288;&#26412;&#22320;&#32534;&#36753;&#65289;</li>
+<li>&#32534;&#35793;&#65306;gcc + nvcc + Makefile</li>
+<li>&#35843;&#35797;&#65306;gdb + cuda-gdb (cuda-gdb &#29992;&#24471;&#24456;&#23569;&#65289;&#65292;valgrind</li>
+<li>&#35843;&#35797; cuda &#20195;&#30721;&#36895;&#24230;&#65306;nvvp</li>
+<li>&#20195;&#30721;&#31649;&#29702;&#65306;git + github</li>
+</ul>
+<p>&#34917;&#20805;&#19968;&#20123;&#19981;&#26159;&#37027;&#20040;&#30456;&#20851;&#30340;&#65306;</p>
+<ul>
+<li>&#36828;&#31243; ssh &#33258;&#21160;&#37325;&#36830;&#65306;mosh</li>
+<li>&#21629;&#20196;&#34892;&#19979;&#22810;&#31383;&#21475;&#65306;tmux</li>
+<li>&#20598;&#23572;&#38656;&#35201;&#29992;&#21040;&#30340; vnc&#65306;TigerVNC server + Chicken (mac client)</li>
+<li>&#26412;&#22320;&#22810;&#31181;&#29615;&#22659;&#30340;&#38598;&#25104;&#27979;&#35797;&#65306;docker&#65288;&#24403;&#24180;&#27809;&#29992;&#21040;&#65292;&#21518;&#26469;&#24320;&#22987;&#29992;&#65289;</li>
+<li>&#26381;&#21153;&#22120;&#19978;&#30340;&#38598;&#25104;&#27979;&#35797;&#65306;Travis CI</li>
+</ul>
+<p>&#20027;&#35201;&#29992;&#21040;&#30340; dependency&#65306;</p>
+<ul>
+<li>glog&#65306;&#25171;&#21360;&#35843;&#35797;&#20449;&#24687;&#65292;&#36825;&#20010;&#23545;&#20110;&#35843;&#38169;&#24456;&#26377;&#29992;&#12290;</li>
+<li>gflags&#65306;&#21629;&#20196;&#34892;&#21442;&#25968;</li>
+<li>gtest&#65306;&#27979;&#35797;&#26694;&#26550;</li>
+<li>protobuf&#65306;&#25968;&#25454;&#30340;&#24207;&#21015;&#21270;</li>
+<li>boost&#65306;&#19968;&#20123;&#31867;&#20284; C++11 &#30340; feature&#65292;&#22240;&#20026;&#26089;&#26399; cuda &#19981;&#25903;&#25345; c++11</li>
+<li>opencv&#65306;&#22270;&#20687;&#22788;&#29702;&#20989;&#25968;</li>
+<li>leveldb&#65292;lmdb&#65306;&#31616;&#21333;&#30340;&#26412;&#22320;&#25968;&#25454;&#24211;&#12290;</li>
+<li>cuda&#65306;&#36825;&#20010;&#23601;&#19981;&#29992;&#35828;&#20102;</li>
+<li>atlas/mkl/eigen&#65306;&#32447;&#24615;&#20195;&#25968;&#35745;&#31639;&#24211;</li>
+</ul>
+<p>downloads</p>
+<ul>
+<li><a href="https://github.com/mobile-shell/mosh/issues">Issues &#183; mobile-shell/mosh</a></li>
+<li><a href="http://mobaxterm.mobatek.net/download-home-edition.html" class="heart featured">MobaXterm Xserver with SSH, telnet, RDP, VNC and X11 - Home Edition</a></li>
+</ul>
+</dd>
+<dt><a href="https://www.zhihu.com/question/47385572">CVPR 2016 &#26377;&#20160;&#20040;&#20540;&#24471;&#20851;&#27880;&#30340;&#20142;&#28857;&#65311; - &#28145;&#24230;&#23398;&#20064;&#65288;Deep Learning&#65289; - &#30693;&#20046;</a></dt>
+<dd><p>nothing special.</p>
+</dd>
+<dt><a href="https://www.zhihu.com/question/44864396">&#23545;&#20154;&#24037;&#26234;&#33021;&#26377;&#30528;&#19968;&#23450;&#24999;&#25004;&#30340;&#35745;&#31639;&#26426;&#19987;&#19994;&#23398;&#29983;&#21487;&#20197;&#38405;&#35835;&#20160;&#20040;&#26448;&#26009;&#25110;&#20070;&#31821;&#30495;&#27491;&#24320;&#22987;&#20837;&#38376;&#20154;&#24037;&#26234;&#33021;&#30340;&#24605;&#36335;&#21644;&#30740;&#31350;&#65311; - &#35745;&#31639;&#26426;&#31185;&#23398; - &#30693;&#20046;</a></dt>
+<dd><p>too good! too much!</p>
+</dd>
+</dl>
+<p><a href="https://github.com/fzliu/style-transfer">fzliu/style-transfer: An implementation of &#8220;A Neural Algorithm of Artistic Style&#8221; by L. Gatys, A. Ecker, and M. Bethge. http://arxiv.org/abs/1508.06576.</a></p>
+<p><a href="http://open.163.com/movie/2015/3/Q/R/MAKN9A24M_MAKN9QAQR.html">&#26446;&#39134;&#39134;&#65306;&#22914;&#20309;&#25945;&#35745;&#31639;&#26426;&#29702;&#35299;&#22270;&#29255;_&#26446;&#39134;&#39134;&#65306;&#22914;&#20309;&#25945;&#35745;&#31639;&#26426;&#29702;&#35299;&#22270;&#29255;_&#32593;&#26131;&#20844;&#24320;&#35838;</a></p>
+<p>&#31616;&#30701;&#22320;&#22238;&#31572;&#26159;: &#36825;&#26159;&#22240;&#20026;&#24494;&#36719;&#21313;&#24180;&#22914;&#19968;&#26085;&#22320;&#28903;&#38065;&#20859;&#20102;&#19968;&#20010;&#21483;&#24494;&#36719;&#30740;&#31350;&#38498;&#30340;&#26426;&#26500;&#65292;&#37324;&#38754;&#19968;&#24110;&#31185;&#23398;&#23478;&#19981;&#29992;&#20570;&#20135;&#21697;&#27809;&#20107;&#24178;&#22825;&#22825;&#29730;&#30952;&#24590;&#20040;&#25226;&#31185;&#24187;&#21464;&#25104;&#29616;&#23454;&#12290;&#32456;&#20110;&#30896;&#19978;&#20010;&#33021;&#25918;&#21040;&#20135;&#21697;&#37324;&#20102;&#65292;&#20135;&#21697;&#30340;&#30828;&#23454;&#21147;&#31435;&#39532;&#25226;&#27809;&#26377;&#31185;&#30740;&#31215;&#32047;&#30340;&#33529;&#26524;&#21644;&#35895;&#27468;&#29993;&#20102;&#19968;&#22823;&#25130;&#65288;&#24403;&#28982;&#24066;&#22330;&#34920;&#29616;&#21478;&#35770;&#65289;&#12290;</p>
+<p>&#38500;&#20102;&#25105;&#35828;&#30340;&#20004;&#31181;&#24456;&#21385;&#23475;&#30340;&#23398;&#32773;&#20043;&#22806;&#65292;&#36824;&#26377;&#20004;&#31181; vision &#30340;&#30740;&#31350;&#32773;&#12290;&#31532;&#19968;&#31181;&#26159;&#8220;&#24615;&#33021;&#25346;&#24069;&#8221;&#65306;&#20170;&#22825;&#25972;&#20010; HOG+SIFT&#65292;&#26126;&#22825;&#25442;&#20010; boosting &#30340;&#30446;&#26631;&#20989;&#25968;&#65292;&#21518;&#22825;&#20877;&#26469;&#20010;&#23616;&#37096;&#29305;&#24449; + &#25972;&#20307;&#29305;&#24449;&#65307;&#21035;&#20154;&#21457;&#29616;&#20102; deep learning &#31649;&#29992;&#20102;&#33258;&#24049;&#39532;&#19978;&#20063;&#25671;&#36523;&#21464;&#25104;&#20102; deep learning &#30340;&#30742;&#23478;&#65292;&#36319;&#22312;&#21035;&#20154;&#21518;&#38754;&#29992;&#29616;&#26377;&#30340;&#25216;&#26415;&#25226;&#24615;&#33021;&#20174; 81% &#20570;&#21040; 82% &#23601;&#24320;&#22987;&#22312;&#31038;&#20132;&#32593;&#32476;&#19978;&#21561;&#22040;&#33258;&#24049;&#23454;&#29616;&#20102;&#37324;&#31243;&#30865;&#65292;&#36229;&#36234;&#20102;&#35895;&#27468; MIT&#12290;&#36825;&#19981;&#26159;&#20570;&#30740;&#31350;&#65292;&#36825;&#26159;&#23665;&#23528;&#12290;&#31532;&#20108;&#31181;&#26159;&#8220;&#25968;&#23398;&#25346;&#24069;&#8221;&#12290;&#36935;&#21040;&#36825;&#31181;&#32769;&#26495;&#26356;&#35201;&#36225;&#26089;&#36864;&#23398;&#25110;&#32773;&#36716;&#34892;&#65292;&#21542;&#21017;&#23398;&#26415;&#30028;&#24037;&#19994;&#30028;&#30340;&#24037;&#20316;&#37117;&#19981;&#22909;&#25214;&#12290;&#22823;&#23478;&#23545;&#21495;&#20837;&#24231;&#65292;&#30475;&#30475;&#33258;&#24049;&#21644;&#33258;&#24049;&#30340;&#23548;&#24072;&#26159;&#21738;&#19968;&#31181; :)</p>
+<p><code>getSelection().toString()</code>, or <code>&quot;*p</code></p>
+<p>&#27492;&#22806;&#26377;&#20154;&#25552;&#21040;&#20102; Feifei &#23545;&#23398;&#29983;&#30340;&#24577;&#24230;&#12290;&#26377;&#20010;&#25925;&#20107;&#65292;&#21040; Feifei &#30340;&#20027;&#39029;&#19978;&#26597;&#23398;&#29983;&#21435;&#21521;&#65292;&#22312;&#19968;&#32676;&#30789;&#35895; scientist&#65292;professor &#20013;&#38388;&#26377;&#19968;&#20010;&#31354;&#30333;&#30340;&#65292;&#36825;&#20010;&#20154;&#21435;&#20102;&#34903;&#19978;&#65292;&#25910;&#20837;&#26159;&#20854;&#20182;&#20154;&#30340;&#21644;&#12290;</p>
+<p>&#20351;&#29992;&#21516;&#26679;&#27169;&#24335;&#36816;&#33829;&#30340; lab&#65288;&#38738;&#30544;&#22269;&#20869;&#20248;&#31168;&#26412;&#31185;&#27605;&#19994;&#29983;&#65292;&#35201;&#27714;&#21160;&#25163;&#33021;&#21147;&#24378;&#65292;&#20570;&#22823;&#37327;&#23454;&#39564;&#65289;&#30340;&#21326;&#20154; CV &#22823;&#29275;&#36824;&#26377; UCLA &#30340;&#26417;&#26494;&#32431;&#12289;NUS &#30340;&#39068;&#27700;&#22478;&#31561;&#12290;</p>
+<ul>
+<li><a href="https://github.com/BVLC/caffe/issues/1537">What does &#8220;xavier&#8221; mean? &#183; Issue #1537 &#183; BVLC/caffe</a></li>
+<li><a href="http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization">andy&#8217;s blog &#8212; An Explanation of Xavier Initialization</a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">print</span>(<span class="st">&quot;Accuracy: {:.3f}&quot;</span>.<span class="bu">format</span>(accuracy))<span class="op">;</span></code></pre></div>
+<hr />
+<dl>
+<dt>include/solver.prototxt <code class="fold">@</code></dt>
+<dd><pre><code>net: &quot;models/finetune_flickr_style/train_val.prototxt&quot;
+test_iter: 100
+test_interval: 1000
+# lr for fine-tuning should be lower than when starting from scratch
+base_lr: 0.001
+lr_policy: &quot;step&quot;
+gamma: 0.1
+# stepsize should also be lower, as we&#39;re closer to being done
+stepsize: 20000
+display: 20
+max_iter: 100000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 10000
+snapshot_prefix: &quot;models/finetune_flickr_style/finetune_flickr_style&quot;
+# uncomment the following to default to CPU mode solving
+# solver_mode: CPU</code></pre>
+</dd>
+<dt>models/finetune_flickr_style/train_val.prototxt <code class="fold">@</code></dt>
+<dd><pre><code>name: &quot;FlickrStyleCaffeNet&quot;
+layer {
+  name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+  image_data_param {
+    source: &quot;data/flickr_style/train.txt&quot;
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+layer {
+  name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+  image_data_param {
+    source: &quot;data/flickr_style/test.txt&quot;
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu1&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;conv1&quot;
+}
+layer {
+  name: &quot;pool1&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;pool1&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm1&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool1&quot;
+  top: &quot;norm1&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv2&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm1&quot;
+  top: &quot;conv2&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 2
+    kernel_size: 5
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu2&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;conv2&quot;
+}
+layer {
+  name: &quot;pool2&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;pool2&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm2&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool2&quot;
+  top: &quot;norm2&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv3&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm2&quot;
+  top: &quot;conv3&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu3&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv3&quot;
+}
+layer {
+  name: &quot;conv4&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv4&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu4&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv4&quot;
+}
+layer {
+  name: &quot;conv5&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv5&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu5&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;conv5&quot;
+}
+layer {
+  name: &quot;pool5&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;pool5&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;fc6&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;pool5&quot;
+  top: &quot;fc6&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu6&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+}
+layer {
+  name: &quot;drop6&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc7&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc7&quot;
+  # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu7&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+}
+layer {
+  name: &quot;drop7&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc8_flickr&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc8_flickr&quot;
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 20
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;accuracy&quot;
+  type: &quot;Accuracy&quot;
+  bottom: &quot;fc8_flickr&quot;
+  bottom: &quot;label&quot;
+  top: &quot;accuracy&quot;
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: &quot;loss&quot;
+  type: &quot;SoftmaxWithLoss&quot;
+  bottom: &quot;fc8_flickr&quot;
+  bottom: &quot;label&quot;
+  top: &quot;loss&quot;
+}</code></pre>
+</dd>
+<dt><a href="https://github.com/rbgirshick">rbgirshick (Ross Girshick)</a> <code class="fold">@</code></dt>
+<dd><p>rbg</p>
+<ul>
+<li><dl>
+<dt><a href="https://github.com/rbgirshick/fast-rcnn">rbgirshick/fast-rcnn: Fast R-CNN</a> <code class="fold">@</code></dt>
+<dd><p>790 stars.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/rbgirshick/DeepPyramid">rbgirshick/DeepPyramid: Deep feature pyramids for various computer vision algorithms (DPMs, pyramid R-CNN, etc.)</a> <code class="fold">@</code></dt>
+<dd><p>79 stars.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/rbgirshick/voc-dpm">rbgirshick/voc-dpm: Object detection system using deformable part models (DPMs) and latent SVM (voc-release5). You may want to use the latest tarball on my website. The github code may include code changes that have not been tested as thoroughly and will not necessarily reproduce the results on the website.</a> <code class="fold">@</code></dt>
+<dd><p>282 stars.</p>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl>
+<hr />
+<p><a href="http://www.stat.ucla.edu/%7Esczhu/">Song-Chun Zhu&#8217;s homepage</a></p>
+<p>&#32467;&#26463;&#35821;&#65306; &#36873;&#25321;&#19987;&#19994;&#26041;&#21521;&#21644;&#21338;&#22763;&#23548;&#24072;&#26159;&#25913;&#21464;&#20320;&#20154;&#29983;&#36712;&#36857;&#30340;&#25225;&#25321;&#65292; &#32477;&#38750;&#28216;&#25103;&#65292;&#26395;&#20320;&#24910;&#37325;&#32771;&#34385;&#65292; &#35851;&#23450;&#32780;&#21160;&#65292; &#38194;&#32780;&#19981;&#33293;&#12290; &#20320;&#26368;&#22909;&#35748;&#30495;&#27983;&#35272;&#26412;&#23454;&#39564;&#23460;&#30340;&#27963;&#21160;&#12289;demo&#12289;&#31185;&#30740;&#39033;&#30446;&#65292;&#22810;&#35835;&#20960;&#31687;&#35770;&#25991;&#65292; &#38382;&#20320;&#33258;&#24049;&#26159;&#21542;&#24895;&#24847;&#38271;&#26399;&#25237;&#36523;&#36825;&#20010;&#26041;&#21521;&#12290;&#8220;&#36947;&#19981;&#21516;&#65292;&#19981;&#30456;&#20026;&#35851;&#8221;&#65292;&#22914;&#26524;&#20320;&#19981;&#30830;&#23450;&#12289;&#36824;&#27809;&#24819;&#22909;&#65292; &#26368;&#22909;&#19981;&#35201;&#25253;&#65292; &#26356;&#19981;&#35201;&#35854;&#25253;&#12290;</p>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

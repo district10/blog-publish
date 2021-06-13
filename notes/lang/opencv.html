@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+<!--<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="opencv">OpenCV</h1>
+<pre><code>     |   cols
+   --o---x------&gt;
+     |
+rows |
+     |
+     V  y</code></pre>
+<dl>
+<dt>Basics <code class="fold">@</code></dt>
+<dd><ul>
+<li><p>CvArr -&gt; CvMat -&gt; IplImage</p></li>
+<li><dl>
+<dt>header files <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;string&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;cstdio&gt;</span>
+<span class="ot">#include &lt;cctype&gt;</span>
+<span class="ot">#include &lt;ctime&gt;</span>
+
+<span class="ot">#include &lt;opencv2/core.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/highgui.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/imgcodecs.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/imgproc.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/ml.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/objdetect.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/opencv.hpp&gt;</span>
+<span class="ot">#include &lt;opencv2/video/tracking.hpp&gt;</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>imread, imshow <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::Mat imgSrc = cv::imread( IMAGE_INPUT_SRC <span class="co">/*, cv::IMREAD_COLOR*/</span> ); <span class="co">//  1</span>
+<span class="co">//                                               cv::IMREAD_GRAYSCALE  //  0</span>
+<span class="co">//                                               cv::IMREAD_UNCHANGED  // -1</span>
+<span class="co">//      //! Imread flags</span>
+<span class="co">//      enum ImreadModes {</span>
+<span class="co">//             IMREAD_UNCHANGED            = -1,</span>
+<span class="co">//             IMREAD_GRAYSCALE            = 0,</span>
+<span class="co">//             IMREAD_COLOR                = 1,</span>
+<span class="co">//             IMREAD_ANYDEPTH             = 2,</span>
+<span class="co">//             IMREAD_ANYCOLOR             = 4,</span>
+<span class="co">//             IMREAD_LOAD_GDAL            = 8,</span>
+<span class="co">//             IMREAD_REDUCED_GRAYSCALE_2  = 16,</span>
+<span class="co">//             IMREAD_REDUCED_COLOR_2      = 17,</span>
+<span class="co">//             IMREAD_REDUCED_GRAYSCALE_4  = 32,</span>
+<span class="co">//             IMREAD_REDUCED_COLOR_4      = 33,</span>
+<span class="co">//             IMREAD_REDUCED_GRAYSCALE_8  = 64,</span>
+<span class="co">//             IMREAD_REDUCED_COLOR_8      = 65</span>
+<span class="co">//           };</span>
+
+cv::imshow( <span class="st">&quot;src&quot;</span>, imgSrc );
+imgSrc.release();</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>cvtColor <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::cvtColor( src, dst, cv::COLOR_BGR2GRAY );</code></pre></div>
+<p>RGB &lt;-&gt; GRAY ( <code>COLOR_BGR2GRAY</code>, <code>COLOR_RGB2GRAY</code>, <code>COLOR_GRAY2BGR</code>, <code>COLOR_GRAY2RGB</code> )</p>
+<ul>
+<li><span class="math inline">\(\text{RGB[A] to Gray:} \quad Y \leftarrow 0.299 \cdot R + 0.587 \cdot G + 0.114 \cdot B\)</span></li>
+<li><span class="math inline">\(\text{Gray to RGB[A]:} \quad R \leftarrow Y, G \leftarrow Y, B \leftarrow Y, A \leftarrow \max (\text{ChannelRange})\)</span></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>ROI: region of interest <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cvSetImageROI( img, cvRect(x,y,w,h) );
+cvSetImageCOI( img, <span class="dv">0</span> );
+
+<span class="co">// both by reference</span>
+cv::Mat roi = img( cv::Rect(x,y,w,h) );
+cv::Mat roi = img( cv::Range(y,y+dy), cv::Range(x,x+dx) );</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>cvMahalonobis <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">CvSize cvMahalonobis( <span class="co">// z-score</span>
+    <span class="dt">const</span> CvArr* vec1,
+    <span class="dt">const</span> CvArr* vec2,
+    CvArr*       mat
+);</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>min, minS, mul, dot&#8230; <code class="fold">@</code></dt>
+<dd><p>cvNorm, cvMul, cvNot,</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> cvMin( CvArr *src1, CvArr *src2, CvArr *dst);
+<span class="dt">void</span> cvMinS( CvArr *src, <span class="dt">double</span> value, CvArr *dst);
+
+<span class="co">// dst[i] = src1[i] - src2[i]</span>
+<span class="dt">void</span> cvSub( <span class="dt">const</span> CvArr *src1, <span class="dt">const</span> CvArr *src2, CvArr *dst, <span class="dt">const</span> CvArr *mask = NULL );
+<span class="co">// dst[i] = src1[i] - value</span>
+<span class="dt">void</span> cvSubS( <span class="dt">const</span> CvArr *src1, <span class="dt">double</span> value, CvArr *dst, <span class="dt">const</span> CvArr *mask = NULL );
+<span class="co">// dst[i] = value - src1[i]</span>
+<span class="dt">void</span> cvSubRS( <span class="dt">const</span> CvArr *src1, <span class="dt">double</span> value, CvArr *dst, <span class="dt">const</span> CvArr *mask = NULL );
+
+<span class="co">// A = U * W * Trans(T)</span>
+<span class="dt">void</span> cvSVD(
+    CvArr *A,
+    CvArr *W,
+    CvArr *U = NULL,
+    CvArr *V = NULL,
+    <span class="dt">int</span> flags = <span class="dv">0</span>
+);</code></pre></div>
+</dd>
+</dl></li>
+<li><p>XML &amp; YAML</p></li>
+<li><p>cvSmooth, border -&gt; virtual pixel</p></li>
+<li><p>Morphism?</p></li>
+<li><p>Erode (-)</p></li>
+<li><p>Dialate (+)</p></li>
+<li><p>Gradient(src) = dilate(src) - erode(src)</p></li>
+<li><p>BlackHat(src) = close(src) - src</p></li>
+<li><p>cvCreateStructuringElementEx ? Ex for what?</p></li>
+<li><p>flood fill</p></li>
+<li><p>cvPyrUp, cvPyrDown</p></li>
+<li><p>cvAdaptiveThreshold</p></li>
+<li><p>Sobel (<span class="math inline">\(\partial ^2 / \partial x \partial y\)</span>)</p></li>
+<li><p>laplace</p></li>
+<li><p>canny</p></li>
+<li><p>hog</p></li>
+<li><p>cvRemap</p></li>
+<li><p>affine, prespective</p></li>
+<li><p>CartToPolar, PolarToCart, LogPolar,</p></li>
+<li><p>DFT, DCT,</p></li>
+<li><p>cvIntegral, integral image</p></li>
+<li><p>cvDistTransform</p></li>
+<li><p>compare hist,</p></li>
+<li><p>EMD: Earth Mover&#8217;s Distance</p></li>
+<li><p>back projection,</p></li>
+<li><p>cvMatchTemplate,</p></li>
+<li><p>cvMemStorageAlloc</p></li>
+<li><p>cvSeq,</p></li>
+<li><p>cvFindContours,</p></li>
+<li><p>freeman chaincode,</p></li>
+<li><p>cvAppproxPoly, DP: douglas -Peucker</p></li>
+<li><p>cvFindDominantPoints (IPAN)</p></li>
+<li><p>cvRect, cvBox2D,</p></li>
+<li><p>cvContoursMoments,</p></li>
+<li><p>Hu moments: cvGetHuMoments</p></li>
+<li><p>cvGetNormalizedCentralMoment,</p></li>
+<li><p>CvTermCriteria</p></li>
+<li><p>convex hull</p></li>
+<li><p>convex defects</p></li>
+<li><p>freeman chaincodes (FCCs)</p></li>
+<li><p>pairwise geometrical histogram (PGH): cvCalcPGH</p></li>
+<li><p>chain code histogram (CCH)</p></li>
+<li><p>cvInitLineIterator</p></li>
+<li><p>watershed algorithm,</p></li>
+<li><p>inpainting</p></li>
+<li><p>cvPyrSegmentation</p></li>
+<li><p>mean-shift,</p></li>
+<li><p>delaunay, voronoi tesselation,</p></li>
+<li><p>Lucas-Kanade,</p></li>
+<li><p>cvCalcOpticalFlowPyrLK()</p></li>
+<li><p>Horn-Schunk, dense/sparse optical flow</p></li>
+<li><p>corner,</p></li>
+<li><p>subpixel,</p></li>
+<li><p>SIFT (scale-invariant feature transform)</p></li>
+<li><p>block matching,</p></li>
+<li><p>mean-shift, camshift (continuously adaptive mean-sift)</p></li>
+<li><p>motion template,</p></li>
+<li><p>silhouette</p></li>
+<li><p>estimator, kalman</p></li>
+<li><p>dynamical motion, control motion, random motion,</p></li>
+<li><p>projection transform,</p></li>
+<li><p>camera intrinsics matrix</p></li>
+<li><p>q = MQ</p></li>
+<li><dl>
+<dt><code>cvConvertPointsHomogenious()</code> <code class="fold">@</code></dt>
+<dd><p>&#24452;&#21521;:</p>
+<ul>
+<li><span class="math inline">\(x_{corrected} = x ( 1 + k_1r^2 + k_2r^24 + k_3r^6 )\)</span></li>
+<li><span class="math inline">\(y_{corrected} = y ( 1 + k_1r^2 + k_2r^24 + k_3r^6 )\)</span></li>
+</ul>
+<p>&#20999;&#21521;:</p>
+<ul>
+<li><span class="math inline">\(x_corrected = x + [ 2 p_1 y + p_2 ( r^2 + 2 x^2 )]\)</span></li>
+<li><span class="math inline">\(y_corrected = y + [ p_1 ( r^2 + 2 y^2 ) + 2 y_2 x ]\)</span></li>
+</ul>
+<p>k1, k2, p1, p2, k3 (fish-eye camera)</p>
+<p>(R, t)</p>
+<ul>
+<li>cvFindChessboardCorners()</li>
+<li>cvFindCornersSubPix()</li>
+</ul>
+<p>homograph</p>
+<p><code>Q = [ X Y Z I ]^{Trans}</code></p>
+<pre><code>W = [ R t ] = [ rotation tranlation ]
+q\hat{~} = s * M * W * Q\hat{~},
+M = [
+f_x   0   c_x
+ 0   f_y  c_y
+ 0    0    1
+]</code></pre>
+<p>instrinsic matrix , distortion-coeffs</p>
+<p>rodrigues,</p>
+<p>POSIT: pose orthography and scaling with iteration</p>
+<p>stero imaging,</p>
+<p>epipole,</p>
+<ul>
+<li>&#26412;&#24449;&#30697;&#38453;,</li>
+<li>&#22522;&#30784;&#30697;&#38453;</li>
+</ul>
+</dd>
+</dl></li>
+<li><p>no free lunch theorem,</p></li>
+<li><p>train set size,</p></li>
+<li><p>cross-validation,</p></li>
+<li><p>bootstrapping,</p></li>
+<li><p>ROC</p></li>
+<li><p>mahalanobis distance,</p></li>
+<li><p>adaboost,</p></li>
+<li><p>MLP</p></li>
+<li><p>feature maps</p></li>
+<li><p>subsampling</p></li>
+<li><p>Convolutional Neural Networks (LeCun et al. 1989)</p></li>
+<li><p>Image Lab</p></li>
+<li><p><code>32 -&gt; 28? -&gt; kernel[3x3]</code></p></li>
+<li><dl>
+<dt>codes <code class="fold">@</code></dt>
+<dd><p>&#36825;&#20123;&#20195;&#30721;&#38656;&#35201;&#32454;&#30475;&#12290;</p>
+<ul>
+<li><a href="https://github.com/4ker/opencv-haar-classifier-training">4ker/opencv-haar-classifier-training: Learn how to train your own OpenCV Haar classifier</a></li>
+<li><a href="https://github.com/4ker/opencv-code">4ker/opencv-code: C++ and Python code extracted from the tutorials at http://opencv-code.com</a></li>
+<li><a href="https://github.com/4ker/code">4ker/code: Code for the book &#8220;Mastering OpenCV with Practical Computer Vision Projects&#8221; by Packt Publishing 2012.</a></li>
+</ul>
+<p>libfacerec is a library for face recognition in OpenCV. It has been merged into OpenCV 2.4 (contrib module) and both implementations are synchronized. So if you are in (a recent) OpenCV 2.4: There is no need to compile libfacerec yourself, you have everything to get started. Note: Make sure to work on a recent OpenCV revision, if you want to be compatible with the very latest libfacerec version.</p>
+<ul>
+<li><a href="http://www.bytefish.de/blog/opencv_visual_studio_and_libfacerec/">OpenCV, Microsoft Visual Studio and libfacerec</a></li>
+<li><a href="https://github.com/4ker/facerec">4ker/facerec: Implements face recognition algorithms for MATLAB/GNU Octave and Python.</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><p>SURF &#29305;&#24449;&#28857;&#26816;&#27979;</p></li>
+<li><p>SURF &#29305;&#24449;&#25552;&#21462;</p></li>
+<li><p>&#20351;&#29992; FLANN &#36827;&#34892;&#29305;&#24449;&#28857;&#21305;&#37197;</p></li>
+<li><p>FLANN &#32467;&#21512; SURF &#36827;&#34892;&#20851;&#38190;&#28857;&#30340;&#25551;&#36848;&#21644;&#21305;&#37197;</p></li>
+<li><p>SIFT &#37197;&#21512;&#26292;&#21147;&#21305;&#37197;&#36827;&#34892;&#20851;&#38190;&#28857;&#25551;&#36848;&#21644;&#25552;&#21462;</p></li>
+<li><p>&#23547;&#25214;&#24050;&#30693;&#29289;&#20307;</p></li>
+<li><p>&#21033;&#29992; ORB &#31639;&#27861;&#36827;&#34892;&#20851;&#38190;&#28857;&#30340;&#25551;&#36848;&#19982;&#21305;&#37197;</p></li>
+<li><dl>
+<dt>edge <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::Mat element = cv::getStructuringElement( cv::MORPH_RECT, cv::Size(<span class="dv">15</span>, <span class="dv">15</span>) );
+cv::dilate(         imgSrc, imgDilate, element );
+cv::erode(          imgSrc, imgEroded, element );
+cv::blur(           imgSrc, imgBlurred, cv::Size(<span class="dv">7</span>, <span class="dv">7</span>) );
+cv::Canny(          imgSrc, imgEdge, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">3</span> );
+cv::boxFilter(      imgSrc, imgBox, <span class="dv">-1</span>, cv::Size(<span class="dv">5</span>, <span class="dv">5</span>) );
+cv::medianBlur(     imgSrc, imgMedian, <span class="dv">7</span> );
+<span class="co">//                     src      dst  sigmaColor sigmaSpace borderType</span>
+cv::bilateralFilter( imgSrc, imgBilateral, <span class="dv">25</span>, <span class="dv">25</span>*<span class="dv">2</span>, <span class="dv">25</span>/<span class="dv">2</span> );
+
+cv::morphologyEx( imgSrc, imgMorphDilate,    cv::MORPH_DILATE,    element );
+cv::morphologyEx( imgSrc, imgMorphErode,     cv::MORPH_ERODE,     element );
+cv::morphologyEx( imgSrc, imgMorphOpen,      cv::MORPH_OPEN,      element );
+cv::morphologyEx( imgSrc, imgMorphClose,     cv::MORPH_CLOSE,     element );
+cv::morphologyEx( imgSrc, imgMorphGradient,  cv::MORPH_GRADIENT,  element );
+cv::morphologyEx( imgSrc, imgMorphTophat,    cv::MORPH_TOPHAT,    element );
+cv::morphologyEx( imgSrc, imgMorphBlackhat,  cv::MORPH_BLACKHAT,  element );</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>resize <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::resize( imgSrc, imgResize,
+            cv::Size(imgSrc.rows/<span class="dv">2</span>,imgSrc.cols/<span class="dv">2</span>),
+            <span class="fl">0.0</span>, <span class="fl">0.0</span>,
+            cv::INTER_AREA );               <span class="co">// interpolation method</span>
+cv::pyrUp( imgSrc, imgPyrUp,
+           cv::Size(imgSrc.rows*<span class="dv">2</span>,imgSrc.cols*<span class="dv">2</span>) );
+           <span class="co">// cv::BORDER_REPLICATE );       // border type, assert failed!</span>
+cv::pyrDown( imgSrc, imgPyrDown,
+           cv::Size(imgSrc.rows/<span class="dv">2</span>,imgSrc.cols/<span class="dv">2</span>) );</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>threshold <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::threshold( imgGray, imgThreshold, <span class="dv">128</span>, <span class="dv">255</span>, cv::THRESH_BINARY );
+<span class="co">//      enum ThresholdTypes {</span>
+<span class="co">//          THRESH_BINARY     = 0,</span>
+<span class="co">//          THRESH_BINARY_INV = 1,</span>
+<span class="co">//          THRESH_TRUNC      = 2,</span>
+<span class="co">//          THRESH_TOZERO     = 3,</span>
+<span class="co">//          THRESH_TOZERO_INV = 4,</span>
+<span class="co">//          THRESH_MASK       = 7,</span>
+<span class="co">//          THRESH_OTSU       = 8,</span>
+<span class="co">//          THRESH_TRIANGLE   = 16</span>
+<span class="co">//      };</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>floodFill <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::floodFill( imgFloodFill,                <span class="co">// input&amp;output</span>
+               cv::Point(<span class="dv">345</span>,<span class="dv">234</span>),          <span class="co">// seed point</span>
+               cv::Scalar(<span class="dv">155</span>, <span class="dv">255</span>,<span class="dv">55</span>),     <span class="co">// new value</span>
+               &amp;ccomp,                      <span class="co">//</span>
+               cv::Scalar(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>),      <span class="co">// lo diff</span>
+               cv::Scalar(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>) );    <span class="co">// up diff</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>sobel, laplace, scharr, etc <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::Sobel( imgGray, imgSobelX, <span class="co">// src -&gt; dst</span>
+           CV_16S,             <span class="co">// ddepth</span>
+           <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>,            <span class="co">// dx, dy, ksize</span>
+           <span class="dv">1</span>, <span class="dv">1</span>,               <span class="co">// scale, delta</span>
+           cv::BORDER_DEFAULT );
+cv::Sobel( imgGray, imgSobelY, <span class="co">// src -&gt; dst</span>
+           CV_16S,             <span class="co">// ddepth</span>
+           <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>,            <span class="co">// dx, dy, ksize</span>
+           <span class="dv">1</span>, <span class="dv">1</span>,               <span class="co">// scale, delta</span>
+           cv::BORDER_DEFAULT );
+cv::convertScaleAbs( imgSobelX, imgSobelAbsX );
+cv::convertScaleAbs( imgSobelY, imgSobelAbsY );
+cv::addWeighted( imgSobelAbsX, <span class="fl">0.5</span>, imgSobelAbsY, <span class="fl">0.5</span>, <span class="dv">0</span>, imgSobel );</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::Rect rectangle;
+cv::cvtColor( imgSrc, imgSrc, cv::COLOR_BGR2GRAY );
+cv::Laplacian( imgSrc, imgLaplace, CV_16S, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>, cv::BORDER_DEFAULT );
+cv::convertScaleAbs( imgLaplace, imgLaplace );
+
+<span class="co">// scharr</span>
+cv::Scharr( imgSrc, imgGradX, CV_16S, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, cv::BORDER_DEFAULT );
+cv::Scharr( imgSrc, imgGradY, CV_16S, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, cv::BORDER_DEFAULT );
+cv::convertScaleAbs( imgGradX, imgGradX );
+cv::convertScaleAbs( imgGradY, imgGradY );
+cv::addWeighted( imgGradX, <span class="fl">0.5</span>, imgGradY, <span class="fl">0.5</span>, <span class="dv">0</span>, imgScharr );</code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>hough line <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// hough line</span>
+std::vector&lt;cv::Vec2f&gt; lines;
+cv::Canny( imgIceKing, imgCanny, <span class="dv">50</span>, <span class="dv">200</span>, <span class="dv">3</span> );
+cv::HoughLines( imgCanny, lines, <span class="dv">1</span>, CV_PI/<span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">0</span>, <span class="dv">0</span> );
+
+cv::cvtColor( imgIceKing, imgGaussBlur, cv::COLOR_BGR2GRAY );
+<span class="co">//  src, dst, ksize, sigmaX, sigmaY, borderType = BORDER_DEFAULT</span>
+cv::GaussianBlur( imgGaussBlur, imgGaussBlur, cv::Size(<span class="dv">9</span>, <span class="dv">9</span>), <span class="dv">2</span>, <span class="dv">2</span> );
+std::vector&lt;cv::Vec3f&gt; circles; <span class="co">// [0]-&gt;cx, [1]-&gt;cy, [2]-&gt;radius</span>
+cv::HoughCircles( imgGaussBlur, circles,
+                  cv::HOUGH_GRADIENT, <span class="fl">1.5</span>, <span class="dv">10</span>, <span class="dv">200</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span> );
+
+cv::remap( imgSrc, imgRemap1, imgMap1X, imgMap1Y,
+           cv::INTER_LINEAR, cv::BORDER_CONSTANT, cv::Scalar(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) );
+
+cv::Mat rotMat( <span class="dv">2</span>, <span class="dv">3</span>, CV_32FC1 );
+rotMat = cv::getRotationMatrix2D( center, angle, scale );
+
+cv::Mat matWarp( <span class="dv">2</span>, <span class="dv">3</span>, CV_32FC1 );
+srcTriangle[<span class="dv">0</span>] = cv::Point2f( <span class="dv">0</span>,<span class="dv">0</span> );
+srcTriangle[<span class="dv">1</span>] = cv::Point2f( <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.cols - <span class="dv">1</span>), <span class="dv">0</span> );
+srcTriangle[<span class="dv">2</span>] = cv::Point2f( <span class="dv">0</span>, <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.rows - <span class="dv">1</span> ));
+dstTriangle[<span class="dv">0</span>] = cv::Point2f( <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.cols*<span class="fl">0.0</span>), <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.rows*<span class="fl">0.33</span>));
+dstTriangle[<span class="dv">1</span>] = cv::Point2f( <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.cols*<span class="fl">0.65</span>), <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.rows*<span class="fl">0.35</span>));
+dstTriangle[<span class="dv">2</span>] = cv::Point2f( <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.cols*<span class="fl">0.15</span>), <span class="kw">static_cast</span>&lt;<span class="dt">float</span>&gt;(imgSrc.rows*<span class="fl">0.6</span>));
+matWarp = cv::getAffineTransform( srcTriangle, dstTriangle );
+
+cv::Mat imgDstWarp = cv::Mat::zeros( imgSrc.rows, imgSrc.cols, imgSrc.type() );
+cv::warpAffine( imgSrc, imgDstWarp, matWarp, imgDstWarp.size() );
+
+cv::equalizeHist( imgGray, imgDst );
+
+std::vector&lt;std::vector&lt;cv::Point&gt; &gt; contours;
+std::vector&lt;cv::Vec4i&gt; hierarchy;
+cv::findContours( imgMask, contours, hierarchy,
+                  cv::RETR_CCOMP, cv::CHAIN_APPROX_SIMPLE );
+
+cv::RNG rng(<span class="dv">12345</span>);
+cv::RNG &amp;rng = cv::theRNG();
+rng.uniform(image.cols/<span class="dv">4</span>, image.cols*<span class="dv">3</span>/<span class="dv">4</span>);
+
+std::vector&lt;<span class="dt">int</span>&gt; hull;
+cv::Mat matPoints(points); <span class="co">// cols: 1</span>
+cv::convexHull( matPoints, hull, <span class="kw">true</span>);
+
+cv::createTrackbar( <span class="st">&quot;threshold&quot;</span>, WINDOW_NAME1, &amp;g_nThresh, g_maxThresh, on_ThreshChange );
+on_ThreshChange( <span class="dv">0</span>, <span class="dv">0</span> ); <span class="co">// init</span>
+
+cv::VideoCapture capture( VIDEO_INPUT_SRC );
+<span class="kw">while</span>( <span class="dv">1</span> ) {
+    cv::Mat frame;
+    capture &gt;&gt; frame;
+    cv::imshow( <span class="st">&quot;frame from file stream&quot;</span>, frame );
+    cv::waitKey( <span class="dv">30</span> );
+}
+
+cv::TermCriteria termcrit(cv::TermCriteria::MAX_ITER|cv::TermCriteria::EPS, <span class="dv">20</span>, <span class="fl">0.03</span>);
+<span class="co">// opencv2:                         CV_TERMCRIT_ITER,      CV_TERMCRIT_EPS</span>
+
+cv::goodFeaturesToTrack(gray, points[<span class="dv">1</span>], MAX_COUNT, <span class="fl">0.01</span>, <span class="dv">10</span>, cv::Mat(), <span class="dv">3</span>, <span class="dv">0</span>, <span class="fl">0.04</span>);
+cv::cornerSubPix(gray, points[<span class="dv">1</span>], subPixWinSize, cv::Size(<span class="dv">-1</span>,<span class="dv">-1</span>), termcrit);
+
+cv::calcOpticalFlowPyrLK( prevGray, gray, points[<span class="dv">0</span>], points[<span class="dv">1</span>],
+                          status, err, winSize, <span class="dv">3</span>, termcrit, <span class="dv">0</span>, <span class="fl">0.001</span>);
+
+<span class="co">// set up SVM parameters</span>
+cv::Ptr&lt;cv::ml::SVM&gt; svm = cv::ml::SVM::create();
+svm-&gt;setType(cv::ml::SVM::C_SVC);   <span class="co">// c-support vector classification</span>
+svm-&gt;setKernel(cv::ml::SVM::LINEAR);
+svm-&gt;setGamma(<span class="dv">3</span>);
+svm-&gt;setTermCriteria( cv::TermCriteria(cv::TermCriteria::MAX_ITER, <span class="dv">100</span>, <span class="fl">1e-6</span>) );
+<span class="co">//           samples              layout        response</span>
+svm-&gt;train( trainingDataMat, cv::ml::ROW_SAMPLE, labelsMat );
+cv::Vec3b green(<span class="dv">0</span>,<span class="dv">255</span>,<span class="dv">0</span>), blue (<span class="dv">255</span>,<span class="dv">0</span>,<span class="dv">0</span>);
+<span class="co">// show the decision regions given by the SVM</span>
+<span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; image.rows; ++i) {
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; image.cols; ++j) {
+        cv::Mat sampleMat = (cv::Mat_&lt;<span class="dt">float</span>&gt;(<span class="dv">1</span>, <span class="dv">2</span>) &lt;&lt; j, i);
+        <span class="dt">float</span> response = svm-&gt;predict(sampleMat); <span class="co">// position as feature</span>
+        <span class="kw">if</span> ( response &gt; <span class="dv">0</span> ) {
+            image.at&lt;cv::Vec3b&gt;(i, j) = green;
+        } <span class="kw">else</span> {
+            image.at&lt;cv::Vec3b&gt;(i, j) = blue;
+        }
+    }
+    <span class="co">// Show the training data</span>
+    cv::Mat sv = svm-&gt;getSupportVectors();
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; sv.rows; ++i) {
+        <span class="dt">const</span> <span class="dt">float</span>* v = sv.ptr&lt;<span class="dt">float</span>&gt;(i);
+        cv::circle(image, cv::Point((<span class="dt">int</span>)v[<span class="dv">0</span>], (<span class="dt">int</span>)v[<span class="dv">1</span>]), <span class="dv">6</span>, cv::Scalar(<span class="dv">128</span>, <span class="dv">128</span>, <span class="dv">128</span>), thickness, lineType);
+    }
+    cv::imshow(<span class="st">&quot;SVM Simple Example&quot;</span>, image);
+    cv::waitKey(<span class="dv">0</span>);
+}
+<span class="co">// imgROI = imgDota( cv::Rect(x,y,imgDotaLogo.cols,imgDotaLogo.rows) ); // VS not able to rename this</span>
+<span class="co">//                        (row_begin, row_end), (col_begin, col_end)</span>
+imgROI = imgDota( cv::Range(y,y+imgDotaLogo.rows), cv::Range(x,x+imgDotaLogo.cols) );
+cv::setMouseCallback( WINDOW_NAME, on_MouseHandle, (<span class="dt">void</span>*)&amp;srcImage );
+
+cv::Mat imgGray = cv::imread(IMAGE_INPUT_SRC, cv::IMREAD_GRAYSCALE);
+<span class="dt">int</span> m = cv::getOptimalDFTSize( imgGray.rows );
+<span class="dt">int</span> n = cv::getOptimalDFTSize( imgGray.cols );
+cv::Mat padded;
+<span class="co">//              src dst top bottom left right borderType, scalar</span>
+cv::copyMakeBorder( imgGray, padded,
+                    <span class="dv">0</span>, m - imgGray.rows, <span class="dv">0</span>, n - imgGray.cols,
+                    cv::BORDER_CONSTANT, cv::Scalar::all(<span class="dv">0</span>) );
+cv::Mat planes[] = {
+    cv::Mat_&lt;<span class="dt">float</span>&gt;(padded),
+    cv::Mat::zeros(padded.size(), CV_32F)
+} ;
+cv::Mat complexI;
+cv::merge(planes, <span class="dv">2</span>, complexI);
+<span class="co">// log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))</span>
+cv::dft(complexI, complexI);
+<span class="co">// planes[0] = Re(DFT(I), planes[1] = Im(DFT(I))</span>
+cv::split(complexI, planes);
+<span class="co">//              src1       src2     magnitude</span>
+cv::magnitude(planes[<span class="dv">0</span>], planes[<span class="dv">1</span>], planes[<span class="dv">0</span>]);
+cv::Mat magnitudeImage = planes[<span class="dv">0</span>];
+magnitudeImage += cv::Scalar::all(<span class="dv">1</span>);
+<span class="co">//          src             dst</span>
+cv::log(magnitudeImage, magnitudeImage);
+<span class="co">// clipping</span>
+magnitudeImage = magnitudeImage(
+    cv::Rect(<span class="dv">0</span>, <span class="dv">0</span>, magnitudeImage.cols &amp; <span class="dv">-2</span>, magnitudeImage.rows &amp; <span class="dv">-2</span>)
+);
+<span class="co">// -2: 11111111111111111110</span>
+<span class="co">// recentering</span>
+<span class="dt">int</span> cx = magnitudeImage.cols/<span class="dv">2</span>;
+<span class="dt">int</span> cy = magnitudeImage.rows/<span class="dv">2</span>;
+cv::Mat q0(magnitudeImage, cv::Rect(<span class="dv">0</span>, <span class="dv">0</span>, cx, cy));   <span class="co">// top left</span>
+cv::Mat q1(magnitudeImage, cv::Rect(cx, <span class="dv">0</span>, cx, cy));  <span class="co">// top right</span>
+cv::Mat q2(magnitudeImage, cv::Rect(<span class="dv">0</span>, cy, cx, cy));  <span class="co">// bottom left</span>
+cv::Mat q3(magnitudeImage, cv::Rect(cx, cy, cx, cy)); <span class="co">// bottom right</span>
+<span class="co">// cv::Mat tmp; q0.copyTo(tmp); q3.copyTo(q0); tmp.copyTo(q3);</span>
+cv::swap(q0, q3);
+cv::swap(q1, q2);
+cv::normalize(magnitudeImage, magnitudeImage, <span class="dv">0</span>, <span class="dv">1</span>, cv::NORM_MINMAX );
+
+cv::FileStorage fs( DATA_DIR <span class="st">&quot;/test.yaml&quot;</span>, cv::FileStorage::WRITE );
+fs &lt;&lt; <span class="st">&quot;frameCount&quot;</span> &lt;&lt; <span class="dv">5</span>;
+cv::Mat cameraMatrix = (cv::Mat_&lt;<span class="dt">double</span>&gt;(<span class="dv">3</span>,<span class="dv">3</span>) &lt;&lt; <span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">320</span>, <span class="dv">0</span>, <span class="dv">1000</span>, <span class="dv">240</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>);
+fs &lt;&lt; <span class="st">&quot;cameraMatrix&quot;</span> &lt;&lt; cameraMatrix &lt;&lt; <span class="st">&quot;distCoeffs&quot;</span> &lt;&lt; distCoeffs;
+fs &lt;&lt; <span class="st">&quot;features&quot;</span> &lt;&lt; <span class="st">&quot;[&quot;</span>;
+<span class="kw">for</span>( <span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">3</span>; i++ ) {
+    <span class="dt">int</span> x = rand() % <span class="dv">640</span>;
+    <span class="dt">int</span> y = rand() % <span class="dv">480</span>;
+    <span class="dt">uchar</span> lbp = rand() % <span class="dv">256</span>; <span class="co">// local binary pattern?</span>
+    fs &lt;&lt; <span class="st">&quot;{:&quot;</span> &lt;&lt; <span class="st">&quot;x&quot;</span> &lt;&lt; x &lt;&lt; <span class="st">&quot;y&quot;</span> &lt;&lt; y &lt;&lt; <span class="st">&quot;lbp&quot;</span> &lt;&lt; <span class="st">&quot;[:&quot;</span>;
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; <span class="dv">8</span>; j++) {
+        fs &lt;&lt; ((lbp &gt;&gt; j) &amp; <span class="dv">1</span>);
+    }
+    fs &lt;&lt; <span class="st">&quot;]&quot;</span> &lt;&lt; <span class="st">&quot;}&quot;</span>;
+}
+fs &lt;&lt; <span class="st">&quot;]&quot;</span>;
+fs.release();
+<span class="co">//          %YAML:1.0</span>
+<span class="co">//          frameCount: 5</span>
+<span class="co">//          calibrationDate: &quot;Wed May 18 00:37:57 2016\n&quot;</span>
+<span class="co">//          cameraMatrix: !!opencv-matrix</span>
+<span class="co">//             rows: 3</span>
+<span class="co">//             cols: 3</span>
+<span class="co">//             dt: d</span>
+<span class="co">//             data: [ 1000., 0., 320., 0., 1000., 240., 0., 0., 1. ]</span>
+<span class="co">//          distCoeffs: !!opencv-matrix</span>
+<span class="co">//             rows: 5</span>
+<span class="co">//             cols: 1</span>
+<span class="co">//             dt: d</span>
+<span class="co">//             data: [ 1.0000000000000001e-01, 1.0000000000000000e-02,</span>
+<span class="co">//                 -1.0000000000000000e-03, 0., 0. ]</span>
+<span class="co">//          features:</span>
+<span class="co">//             - { x:41, y:227, lbp:[ 0, 1, 1, 1, 1, 1, 0, 1 ] }</span>
+<span class="co">//             - { x:260, y:449, lbp:[ 0, 0, 1, 1, 0, 1, 1, 0 ] }</span>
+<span class="co">//             - { x:598, y:78, lbp:[ 0, 1, 0, 0, 1, 0, 1, 0 ] }</span>
+
+cv::FileStorage fs2( DATA_DIR <span class="st">&quot;/test.yaml&quot;</span>, cv::FileStorage::READ );
+<span class="co">// method 1: node retreve</span>
+<span class="dt">int</span> frameCount = (<span class="dt">int</span>)fs2[<span class="st">&quot;frameCount&quot;</span>];
+<span class="co">// method 2: stream out</span>
+std::string date;
+fs2[<span class="st">&quot;calibrationDate&quot;</span>] &gt;&gt; date;
+cv::Mat cameraMatrix2, distCoeffs2;
+fs2[<span class="st">&quot;cameraMatrix&quot;</span>] &gt;&gt; cameraMatrix2;
+fs2[<span class="st">&quot;distCoeffs&quot;</span>] &gt;&gt; distCoeffs2;
+cv::FileNode features = fs2[<span class="st">&quot;features&quot;</span>];
+
+cv::FileNodeIterator it = features.begin(), it_end = features.end();
+<span class="kw">for</span>( ; it != it_end; ++it, idx++ ) {
+    std::cout &lt;&lt; <span class="st">&quot;x=&quot;</span> &lt;&lt; (<span class="dt">int</span>)(*it)[<span class="st">&quot;x&quot;</span>] &lt;&lt; <span class="st">&quot;, y=&quot;</span> &lt;&lt; (<span class="dt">int</span>)(*it)[<span class="st">&quot;y&quot;</span>] &lt;&lt; <span class="st">&quot;, lbp: (&quot;</span>;
+    (*it)[<span class="st">&quot;lbp&quot;</span>] &gt;&gt; lbpval;
+    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; (<span class="dt">int</span>)lbpval.size(); i++) {
+        std::cout &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; (<span class="dt">int</span>)lbpval[i];
+    }
+}
+fs2.release();
+
+cv::minEnclosingCircle(cv::Mat(points), center, radius);
+cv::circle(image, center, cvRound(radius), cv::Scalar(rng.uniform(<span class="dv">0</span>, <span class="dv">255</span>), rng.uniform(<span class="dv">0</span>, <span class="dv">255</span>), rng.uniform(<span class="dv">0</span>, <span class="dv">255</span>)), <span class="dv">2</span>, cv::LINE_AA);
+
+cv::inpaint(srcImage1, inpaintMask, inpaintedImage, <span class="dv">3</span>, cv::INPAINT_TELEA);
+
+cv::cvtColor(srcImage, hsvImage, cv::COLOR_BGR2HSV);
+<span class="dt">int</span> hueBinNum = <span class="dv">30</span>;
+<span class="dt">int</span> saturationBinNum = <span class="dv">32</span>;
+<span class="dt">int</span> histSize[] = { hueBinNum, saturationBinNum };
+<span class="dt">float</span> hueRanges[] = { <span class="dv">0</span>, <span class="dv">180</span> };
+<span class="dt">float</span> saturationRanges[] = { <span class="dv">0</span>, <span class="dv">256</span> };
+<span class="dt">const</span> <span class="dt">float</span>* ranges[] = { hueRanges, saturationRanges };
+cv::MatND dstHist;
+<span class="dt">int</span> channels[] = {<span class="dv">0</span>, <span class="dv">1</span>};
+cv::calcHist( &amp;hsvImage, <span class="co">//  arr</span>
+              <span class="dv">1</span>,         <span class="co">// #arr</span>
+              channels, cv::Mat(),
+              dstHist, <span class="dv">2</span>, histSize,
+              ranges, <span class="kw">true</span>, <span class="kw">false</span> );
+<span class="dt">double</span> maxValue=<span class="dv">0</span>;
+cv::minMaxLoc( dstHist, <span class="dv">0</span>, &amp;maxValue, <span class="dv">0</span>, <span class="dv">0</span>);
+<span class="dt">int</span> scale = <span class="dv">10</span>;
+cv::Mat histImg = cv::Mat::zeros(saturationBinNum*scale, hueBinNum*<span class="dv">10</span>, CV_8UC3);
+
+cv::normalize( testHist2, testHist2, <span class="dv">0</span>, <span class="dv">1</span>, cv::NORM_MINMAX, <span class="dv">-1</span>, cv::Mat() );
+<span class="co">//  CV_COMP_CORREL Correlation</span>
+<span class="co">//  CV_COMP_CHISQR Chi-Square</span>
+<span class="co">//  CV_COMP_CHISQR_ALT Alternative Chi-Square</span>
+<span class="co">//  CV_COMP_INTERSECT Intersection</span>
+<span class="co">//</span>
+cv::cornerHarris(srcImage, cornerStrength, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">0.01</span>);
+cv::Mat harrisCorner; <span class="co">// 8 bits or 16 bits float</span>
+<span class="co">//              src         dst          threshold maxval   binary: {0, maval}</span>
+cv::threshold( cornerStrength, harrisCorner, <span class="fl">0.00001</span>, <span class="dv">255</span>, cv::THRESH_BINARY );
+
+cv::calcOpticalFlowPyrLK(gray_prev, gray, points[<span class="dv">0</span>], points[<span class="dv">1</span>], status, err);
+
+std::swap(gray_prev, gray);
+
+cv::imshow(window_name, output);
+cv::ellipse( img,
+    cv::Point( WINDOW_WIDTH/<span class="dv">2</span>, WINDOW_WIDTH/<span class="dv">2</span> ),
+    cv::Size( WINDOW_WIDTH/<span class="dv">4</span>, WINDOW_WIDTH/<span class="dv">16</span> ),
+    angle, <span class="dv">0</span>, <span class="dv">360</span>,
+    cv::Scalar( <span class="dv">255</span>, <span class="dv">129</span>, <span class="dv">0</span> ),
+    thickness, lineType );
+cv::fillPoly( img, ppt, npt, <span class="dv">1</span>, cv::Scalar( <span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span> ), lineType );
+cv::line( img, start, end, cv::Scalar( <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span> ), thickness, lineType );
+
+<span class="dt">int</span> row = imgDst.rows;
+<span class="dt">int</span> widthStep = imgDst.cols*imgDst.channels();
+<span class="kw">for</span>( <span class="dt">int</span> i = <span class="dv">0</span>;i &lt; row;i++ ) {
+    <span class="co">// uchar, opencv2/core/hal/interface.h</span>
+    <span class="co">// mat.ptr&lt;type&gt;(i), return ith row header</span>
+    <span class="dt">uchar</span> *data = imgDst.ptr&lt;<span class="dt">uchar</span>&gt;(i);
+    <span class="kw">for</span>(<span class="dt">int</span> j = <span class="dv">0</span>;j &lt; widthStep;j++) {
+        <span class="co">// descretize!</span>
+        data[j] = data[j]/div*div + div/<span class="dv">2</span>;
+    }
+}
+
+cv::Mat_&lt;cv::Vec3b&gt;::iterator it = imgDst.begin&lt;cv::Vec3b&gt;();
+cv::Mat_&lt;cv::Vec3b&gt;::iterator itend = imgDst.end&lt;cv::Vec3b&gt;();
+<span class="kw">for</span>( ;it != itend;++it ) {
+    (*it)[<span class="dv">0</span>] = (*it)[<span class="dv">0</span>]/div*div + div/<span class="dv">2</span>;
+    (*it)[<span class="dv">1</span>] = (*it)[<span class="dv">1</span>]/div*div + div/<span class="dv">2</span>;
+    (*it)[<span class="dv">2</span>] = (*it)[<span class="dv">2</span>]/div*div + div/<span class="dv">2</span>;
+}
+
+<span class="dt">int</span> r = imgDst.rows;
+<span class="dt">int</span> c = imgDst.cols;
+<span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>;i &lt; r;i++) {
+    <span class="kw">for</span>(<span class="dt">int</span> j = <span class="dv">0</span>;j &lt; c;j++) {
+        imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">0</span>] = imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">0</span>]/div*div + div/<span class="dv">2</span>;
+        imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">1</span>] = imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">1</span>]/div*div + div/<span class="dv">2</span>;
+        imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">2</span>] = imgDst.at&lt;cv::Vec3b&gt;(i,j)[<span class="dv">2</span>]/div*div + div/<span class="dv">2</span>;
+    }
+}
+
+<span class="dt">int</span> r = imgDst.rows;
+<span class="dt">int</span> n = imgDst.cols*imgDst.channels();
+<span class="dt">int</span> step = imgDst.step;
+<span class="dt">uchar</span> *data = imgDst.data;
+<span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; r; i++) {
+    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">0</span>; j &lt; n; j++) {
+        *(data + j) = *(data+j) - *(data+j)%div + div/<span class="dv">2</span>;
+    }
+    data += step;
+}
+cv::saturate_cast&lt;<span class="dt">uchar</span>&gt;( (g_nContrastValue*<span class="fl">0.01</span>)*(g_srcImage.at&lt;cv::Vec3b&gt;(y, x)[c]) + g_nBrightValue );
+cv::drawContours( drawing, g_vContours, i, color, <span class="dv">2</span>, <span class="dv">8</span>,
+                  g_vHierarchy, <span class="dv">0</span>, cv::Point() );
+cv::normalize( hist, hist, <span class="dv">0</span>, <span class="dv">255</span>, cv::NORM_MINMAX, <span class="dv">-1</span>, cv::Mat() );
+cv::calcBackProject( &amp;g_hueImage, <span class="dv">1</span>, <span class="dv">0</span>, hist, backproj, &amp;ranges, <span class="dv">1</span>, <span class="kw">true</span> );
+cv::matchTemplate( g_srcImage, g_templateImage, g_resultImage, g_nMatchMethod );
+cv::normalize( g_resultImage, g_resultImage, <span class="dv">0</span>, <span class="dv">1</span>, cv::NORM_MINMAX, <span class="dv">-1</span>, cv::Mat() );
+cv::minMaxLoc( g_resultImage,
+               &amp;minValue, &amp;maxValue,
+               &amp;minLocation, &amp;maxLocation, cv::Mat() );
+cv::cornerHarris( g_grayImage, dstImage, <span class="dv">2</span>, <span class="dv">3</span>, <span class="fl">0.04</span>, cv::BORDER_DEFAULT );
+cv::normalize( dstImage, normImage, <span class="dv">0</span>, <span class="dv">255</span>, cv::NORM_MINMAX, CV_32FC1, cv::Mat() );
+cv::convertScaleAbs( normImage, scaledImage );
+
+cv::goodFeaturesToTrack( g_grayImage, corners,
+                         g_maxCornerNumber, qualityLevel, minDistance,
+                         cv::Mat(), blockSize, <span class="kw">false</span>, k );</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cv::CommandLineParser parser(argc, argv, <span class="st">&quot;{help h||}&quot;</span>);
+<span class="kw">if</span> (!parser.has(<span class="st">&quot;help&quot;</span>)) {
+    help();
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+string input_image = parser.get&lt;string&gt;(<span class="st">&quot;@input&quot;</span>);
+<span class="kw">if</span> (input_image.empty()) {
+    parser.printMessage();
+    parser.printErrors();
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+vector&lt;vector&lt;Point&gt; &gt; contours0;
+cv::findContours( img, contours0, hierarchy, cv::RETR_TREE, cv:CHAIN_APPROX_SIMPLE);
+contours.resize(contours0.size());
+<span class="kw">for</span>( size_t k = <span class="dv">0</span>; k &lt; contours0.size(); k++ ) {
+    approxPolyDP(Mat(contours0[k]), contours[k], <span class="dv">3</span>, <span class="kw">true</span>);
+}
+
+<span class="co">// print</span>
+cout &lt;&lt; <span class="st">&quot;r (default) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; r &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;r (matlab) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; format(r, Formatter::FMT_MATLAB) &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;r (python) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; format(r, Formatter::FMT_PYTHON) &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;r (numpy) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; format(r, Formatter::FMT_NUMPY) &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;r (csv) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; format(r, Formatter::FMT_CSV) &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+cout &lt;&lt; <span class="st">&quot;r (c) = </span><span class="ch">\n</span><span class="st">&quot;</span> &lt;&lt; format(r, Formatter::FMT_C) &lt;&lt; <span class="st">&quot;;&quot;</span> &lt;&lt; endl &lt;&lt; endl;
+
+<span class="kw">if</span> (event == EVENT_LBUTTONDOWN &amp;&amp; !drag) {
+    <span class="co">// blah blah...</span>
+}
+
+polylines( img1, pts3, &amp;numpts,<span class="dv">1</span>, <span class="dv">1</span>, Scalar(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">8</span>, <span class="dv">0</span>);
+fillPoly(res1, pts4,&amp;numpts, <span class="dv">1</span>, Scalar(<span class="dv">255</span>, <span class="dv">255</span>, <span class="dv">255</span>), <span class="dv">8</span>, <span class="dv">0</span>);
+bitwise_and(img0, img0, <span class="kw">final</span>,res1);
+
+<span class="dt">static</span> Scalar randomColor(RNG&amp; rng)
+{
+    <span class="dt">int</span> icolor = (<span class="dt">unsigned</span>)rng;
+    <span class="kw">return</span> Scalar(icolor&amp;<span class="dv">255</span>, (icolor&gt;&gt;<span class="dv">8</span>)&amp;<span class="dv">255</span>, (icolor&gt;&gt;<span class="dv">16</span>)&amp;<span class="dv">255</span>);
+}
+
+<span class="co">// Run the edge detector on grayscale</span>
+blur(gray, edge, Size(<span class="dv">3</span>,<span class="dv">3</span>));
+Canny(edge, edge, edgeThresh, edgeThresh*<span class="dv">3</span>, <span class="dv">3</span>);
+cedge = Scalar::all(<span class="dv">0</span>);
+image.copyTo(cedge, edge); <span class="co">// output, mask</span>
+imshow(<span class="st">&quot;Edge map&quot;</span>, cedge);
+
+<span class="co">//      //! type of line</span>
+<span class="co">//      enum LineTypes {</span>
+<span class="co">//          FILLED  = -1,</span>
+<span class="co">//          LINE_4  = 4, //!&lt; 4-connected line</span>
+<span class="co">//          LINE_8  = 8, //!&lt; 8-connected line</span>
+<span class="co">//          LINE_AA = 16 //!&lt; antialiased line</span>
+<span class="co">//      };</span>
+
+Point pt[<span class="dv">2</span>][<span class="dv">3</span>];
+pt[<span class="dv">0</span>][<span class="dv">0</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">0</span>][<span class="dv">0</span>].y = rng.uniform(y1, y2);
+pt[<span class="dv">0</span>][<span class="dv">1</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">0</span>][<span class="dv">1</span>].y = rng.uniform(y1, y2);
+pt[<span class="dv">0</span>][<span class="dv">2</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">0</span>][<span class="dv">2</span>].y = rng.uniform(y1, y2);
+pt[<span class="dv">1</span>][<span class="dv">0</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">1</span>][<span class="dv">0</span>].y = rng.uniform(y1, y2);
+pt[<span class="dv">1</span>][<span class="dv">1</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">1</span>][<span class="dv">1</span>].y = rng.uniform(y1, y2);
+pt[<span class="dv">1</span>][<span class="dv">2</span>].x = rng.uniform(x1, x2);
+pt[<span class="dv">1</span>][<span class="dv">2</span>].y = rng.uniform(y1, y2);
+<span class="dt">const</span> Point* ppt[<span class="dv">2</span>] = {pt[<span class="dv">0</span>], pt[<span class="dv">1</span>]};
+<span class="dt">int</span> npt[] = {<span class="dv">3</span>, <span class="dv">3</span>};
+
+polylines(image, ppt, npt, <span class="dv">2</span>, <span class="kw">true</span>, randomColor(rng), rng.uniform(<span class="dv">1</span>,<span class="dv">10</span>), lineType);
+<span class="co">// fillPoly(image, ppt, npt, 2, randomColor(rng), lineType);</span>
+
+<span class="co">//      CV_EXPORTS_W void putText( InputOutputArray img, const String&amp; text, Point org,</span>
+<span class="co">//                                 int fontFace, double fontScale, Scalar color,</span>
+<span class="co">//                                 int thickness = 1, int lineType = LINE_8,</span>
+<span class="co">//                                 bool bottomLeftOrigin = false );</span>
+
+Size textsize = cv::getTextSize(<span class="st">&quot;OpenCV forever!&quot;</span>, cv::FONT_HERSHEY_COMPLEX, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">0</span>);
+cv::Point org((width - textsize.width)/<span class="dv">2</span>, (height - textsize.height)/<span class="dv">2</span>);
+
+Mat image2;
+<span class="kw">for</span>( i = <span class="dv">0</span>; i &lt; <span class="dv">255</span>; i += <span class="dv">2</span> ) {
+    image2 = image - Scalar::all(i);
+    putText(image2, <span class="st">&quot;OpenCV forever!&quot;</span>, org, FONT_HERSHEY_COMPLEX, <span class="dv">3</span>,
+            Scalar(i, i, <span class="dv">255</span>), <span class="dv">5</span>, lineType);
+
+    imshow(wndname, image2);
+    <span class="kw">if</span>(waitKey(DELAY) &gt;= <span class="dv">0</span>)
+        <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+
+<span class="ot">#ifdef _EiC</span>
+main(<span class="dv">1</span>,<span class="st">&quot;drawing.c&quot;</span>);
+<span class="ot">#endif</span>
+
+image=(image&amp;cv::Scalar(mask,mask,mask))+cv::Scalar(div/<span class="dv">2</span>,div/<span class="dv">2</span>,div/<span class="dv">2</span>);
+
+    CvScalar avgChannels = cvAvg(img);
+    <span class="dt">double</span> avgB=avgChannels.val[<span class="dv">0</span>];
+    <span class="dt">double</span> avgG=avgChannels.val[<span class="dv">1</span>];
+    <span class="dt">double</span> avgR=avgChannels.val[<span class="dv">2</span>];</code></pre></div>
+</dd>
+</dl></li>
+</ul>
+</dd>
+<dt>Blogs <code class="fold">@</code></dt>
+<dd><dl>
+<dt><a href="http://blog.csdn.net/xiaowei_cqu/article/details/7616044">&#12304;OpenCV&#12305;&#22270;&#20687;&#20960;&#20309;&#21464;&#25442;&#65306;&#26059;&#36716;&#65292;&#32553;&#25918;&#65292;&#26012;&#20999; - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> <code class="fold">@</code></dt>
+<dd><p>&#21035;&#20154;&#24635;&#32467;&#20986;&#26469;&#30340;&#19996;&#35199;&#33021;&#24110;&#21161;&#25105;&#20204;&#22312;&#19968;&#24320;&#22987;&#36805;&#36895;&#20837;&#38376;&#65292;&#20294;&#35201;&#23398;&#28145;&#65292;&#23398;&#31934;&#65292;&#32456;&#24402;&#36824;&#26159;&#35201;&#33258;&#24049;&#21435;&#21162;&#21147;&#25366;&#30340;&#12290;</p>
+<p>&#36825;&#31687;&#26159;&#20197;&#21069;&#20889;&#30340;&#65292;&#20854;&#23454;&#36824;&#26159;&#24314;&#35758;&#22823;&#23478;&#29992; C++ &#25509;&#21475;&#30340; OpenCV&#65292;&#20869;&#23384;&#38382;&#39064;&#24456;&#23569;&#20102;~</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> cvWarpAffine(
+    <span class="dt">const</span> CvArr* src,<span class="co">//&#36755;&#20837;&#22270;&#20687;</span>
+    CvArr* dst, <span class="co">//&#36755;&#20986;&#22270;&#20687;</span>
+    <span class="dt">const</span> CvMat* map_matrix,   <span class="co">//2*3&#30340;&#21464;&#25442;&#30697;&#38453;</span>
+    <span class="dt">int</span> flags=CV_INTER_LINEAR+CV_WARP_FILL_OUTLIERS,   <span class="co">//&#25554;&#20540;&#26041;&#27861;&#30340;&#32452;&#21512;</span>
+    CvScalar fillval=cvScalarAll(<span class="dv">0</span>)   <span class="co">//&#29992;&#26469;&#22635;&#20805;&#36793;&#30028;&#22806;&#30340;&#20540;</span>
+);
+
+<span class="dt">void</span> cvGetQuadrangleSubPix(
+       <span class="dt">const</span> CvArr* src,  <span class="co">//&#36755;&#20837;&#22270;&#20687;</span>
+       CvArr* dst,   <span class="co">// &#25552;&#21462;&#30340;&#22235;&#36793;&#24418;</span>
+       <span class="dt">const</span> CvMat* map_matrix <span class="co">//2*3&#30340;&#21464;&#25442;&#30697;&#38453;</span>
+);</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//&#36870;&#26102;&#38024;&#26059;&#36716;&#22270;&#20687;degree&#35282;&#24230;&#65288;&#21407;&#23610;&#23544;&#65289;</span>
+<span class="dt">void</span> rotateImage(IplImage* img, IplImage *img_rotate,<span class="dt">int</span> degree)
+{
+    <span class="co">//&#26059;&#36716;&#20013;&#24515;&#20026;&#22270;&#20687;&#20013;&#24515;</span>
+    CvPoint2D32f center;
+    center.x=<span class="dt">float</span> (img-&gt;width/<span class="fl">2.0+0.5</span>);
+    center.y=<span class="dt">float</span> (img-&gt;height/<span class="fl">2.0+0.5</span>);
+    <span class="co">//&#35745;&#31639;&#20108;&#32500;&#26059;&#36716;&#30340;&#20223;&#23556;&#21464;&#25442;&#30697;&#38453;</span>
+    <span class="dt">float</span> m[<span class="dv">6</span>];
+    CvMat M = cvMat( <span class="dv">2</span>, <span class="dv">3</span>, CV_32F, m );
+    cv2DRotationMatrix( center, degree,<span class="dv">1</span>, &amp;M);
+    <span class="co">//&#21464;&#25442;&#22270;&#20687;&#65292;&#24182;&#29992;&#40657;&#33394;&#22635;&#20805;&#20854;&#20313;&#20540;</span>
+    cvWarpAffine(img,img_rotate, &amp;M,CV_INTER_LINEAR+CV_WARP_FILL_OUTLIERS,cvScalarAll(<span class="dv">0</span>) );
+}</code></pre></div>
+</dd>
+<dt><a href="http://blog.csdn.net/xiaowei_cqu/article/details/8067881">&#12304;OpenCV&#12305;SIFT&#21407;&#29702;&#19982;&#28304;&#30721;&#20998;&#26512;&#65306;DoG&#23610;&#24230;&#31354;&#38388;&#26500;&#36896; - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> <code class="fold">@</code></dt>
+<dd><div class="figure">
+<img src="http://img.my.csdn.net/uploads/201210/13/1350133046_8371.png" />
+
+</div>
+<p>DoG&#65288;Difference of Gaussian&#65289;</p>
+<p>&#39640;&#26031;&#25289;&#26222;&#25289;&#26031; LoG &#37329;&#23383;&#22612;&#32467;&#21512;&#23610;&#24230;&#31354;&#38388;&#34920;&#36798;&#21644;&#37329;&#23383;&#22612;&#22810;&#20998;&#36776;&#29575;&#34920;&#36798;&#65292;&#23601;&#26159;&#22312;&#20351;&#29992;&#23610;&#24230;&#31354;&#38388;&#26102;&#20351;&#29992;&#37329;&#23383;&#22612;&#34920;&#31034;&#65292;&#20063;&#23601;&#26159;&#35745;&#31639;&#26426;&#35270;&#35273;&#20013;&#26368;&#26377;&#21517;&#30340;&#25289;&#26222;&#25289;&#26031;&#37329;&#23376;&#22612;&#65288;&#12298;The Laplacian pyramid as a compact image code&#12299;&#65289;&#12290;&#39640;&#26031;&#25289;&#26222;&#25289;&#26031; LoG&#65288;Laplace of Guassian&#65289;&#31639;&#23376;&#23601;&#26159;&#23545;&#39640;&#26031;&#20989;&#25968;&#36827;&#34892;&#25289;&#26222;&#25289;&#26031;&#21464;&#25442;&#65306;</p>
+<p>&#26680;&#24515;&#24605;&#24819;&#36824;&#26159;&#39640;&#26031;&#65292;&#36825;&#20010;&#19981;&#22810;&#21465;&#36848;&#12290;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://blog.csdn.net/xiaowei_cqu/article/details/19839019">&#12304;OpenCV&#12305;&#35775;&#38382;Mat&#20013;&#27599;&#20010;&#20687;&#32032;&#30340;&#20540;&#65288;&#26032;&#65289; - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/xiaowei_cqu/article/details/26471527">&#12304;&#22270;&#20687;&#22788;&#29702;&#12305;&#36879;&#35270;&#21464;&#25442; Perspective Transformation - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a></li>
+<li><a href="http://blog.csdn.net/xiaowei_cqu/article/details/26478135">&#12304;OpenCV&#12305;&#36879;&#35270;&#21464;&#25442; Perspective Transformation&#65288;&#32493;&#65289; - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> &#38500;&#20102; getPerspectiveTransform() &#20989;&#25968;&#65292;OpenCV &#36824;&#25552;&#20379;&#20102; findHomography() &#30340;&#20989;&#25968;&#65292;&#19981;&#26159;&#29992;&#28857;&#26469;&#25214;&#65292;&#32780;&#26159;&#30452;&#25509;&#29992;&#36879;&#35270;&#24179;&#38754;&#26469;&#25214;&#21464;&#25442;&#20844;&#24335;&#12290;&#36825;&#20010;&#20989;&#25968;&#22312;&#29305;&#24449;&#21305;&#37197;&#30340;&#32463;&#20856;&#20363;&#23376;&#20013;&#26377;&#29992;&#21040;&#65292;&#20063;&#38750;&#24120;&#30452;&#35266;.</li>
+</ul>
+</dd>
+<dt><a href="http://blog.csdn.net/xiaowei_cqu/article/details/7522368">&#12304;&#25968;&#25454;&#38477;&#32500;&#12305;&#25968;&#25454;&#38477;&#32500;&#26041;&#27861;&#20998;&#31867; - &#23567;&#39759;&#30340;&#20462;&#34892;&#36335; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> <code class="fold">@</code></dt>
+<dd><p>&#22240;&#20026;&#24456;&#22810;&#24182;&#27809;&#26377;&#20180;&#32454;&#20102;&#35299;&#65292;&#22312;&#27492;&#27425;&#21482;&#23545;&#20843;&#31181;&#26041;&#27861;&#20570;&#20998;&#31867;&#65306;&#20027;&#25104;&#20998;&#20998;&#26512;&#65288;Principal Component Analysis,PCA)&#12289;&#32447;&#24615;&#21028;&#21035;&#20998;&#26512;&#65288;Linear Discriminant Analysis,LDA&#65289;&#12289;&#31561;&#36317;&#26144;&#23556;&#65288;Isomap&#65289;&#12289;&#23616;&#37096;&#32447;&#24615;&#23884;&#20837;&#65288;Locally Linear Embedding,LLE&#65289;&#12289;Laplacian &#29305;&#24449;&#26144;&#23556;&#65288;Laplacian Eigenmaps&#65289;&#12289;&#23616;&#37096;&#20445;&#30041;&#25237;&#24433;&#65288;Local Preserving Projection,LPP&#65289;&#12289;&#23616;&#37096;&#20999;&#31354;&#38388;&#25490;&#21015;&#65288;Local Tangent Space Alignment,LTSA&#65289;&#12289;&#26368;&#22823;&#26041;&#24046;&#23637;&#24320;&#65288; Maximum Variance Unfolding, MVU&#65289;</p>
+</dd>
+</dl>
+</dd>
+<dt>MISC <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">cvtColor(mat,rgb,CV_BGR2RGB);
+<span class="ot">QApplication::</span>keyboardModifiers()==<span class="ot">Qt::</span>ShiftModifier
+<span class="ot">QApplication::</span>keyboardModifiers()==<span class="ot">Qt::</span>ControlModifier
+
+<span class="kw">enum</span> <span class="ot">Qt::</span>KeyboardModifier
+flags <span class="ot">Qt::</span>KeyboardModifiers
+This <span class="kw">enum</span> describes the modifier keys.
+Constant    Value   Description
+<span class="ot">Qt::</span>NoModifier  <span class="bn">0x00000000</span>  No modifier key is pressed.
+<span class="ot">Qt::</span>ShiftModifier   <span class="bn">0x02000000</span>  A Shift key on the keyboard is pressed.
+<span class="ot">Qt::</span>ControlModifier <span class="bn">0x04000000</span>  A Ctrl key on the keyboard is pressed.
+<span class="ot">Qt::</span>AltModifier <span class="bn">0x08000000</span>  An Alt key on the keyboard is pressed.
+<span class="ot">Qt::</span>MetaModifier    <span class="bn">0x10000000</span>  A Meta key on the keyboard is pressed.
+<span class="ot">Qt::</span>KeypadModifier  <span class="bn">0x20000000</span>  A keypad button is pressed.
+<span class="ot">Qt::</span>GroupSwitchModifier <span class="bn">0x40000000</span>  X11 only. A Mode_switch key on the keyboard is pressed.
+event-&gt;button()==<span class="ot">Qt::</span>MiddleButton</code></pre></div>
+</dd>
+</dl>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

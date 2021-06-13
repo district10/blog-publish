@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-12-13" />
+  <title>&#33180;&#25308;&#22823;&#31070;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#33180;&#25308;&#22823;&#31070;</h1>
+<h3 class="date">2015-12-13</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#33180;&#25308;&#22823;&#31070;">&#33180;&#25308;&#22823;&#31070;</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#33180;&#25308;&#22823;&#31070;">&#33180;&#25308;&#22823;&#31070;</h1>
+<p>&#29992; Pandoc &#30340;&#26102;&#20505;&#24863;&#21040;&#20854;&#19968;&#20010;&#22320;&#26041;&#19981;&#29245;&#65292;&#20110;&#26159;&#21435; Pandoc &#30340; GitHub &#19978;&#25552;&#20102;&#19968;&#20010; Issue&#65306; <a href="https://github.com/jgm/pandoc/issues/2586">Text Layout Requirements When Encountered East Asian Languages &#183; Issue #2586 &#183; jgm/pandoc</a></p>
+<div class="tzx-frame">
+<p><small></p>
+<blockquote>
+<p>&#26356;&#22909;&#22320;&#28151;&#25490;&#19996;&#20122;&#25991;&#23383;&#21644;&#35199;&#25991; | Text Layout Requirements When Encountered East Asian Languages</p>
+</blockquote>
+<p>Pandoc &#30830;&#23454;&#26377;&#36825;&#20040;&#19968;&#20010;&#25193;&#23637;&#65306; | Pandoc does have a relevant extension:</p>
+<dl>
+<dt><code>ignore_line_breaks</code></dt>
+<dd><p>Causes newlines within a paragraph to be ignored, rather than being treated as spaces or as hard line breaks. This option is intended for use with East Asian languages where spaces are not used between words, but text is divided into lines for readability.</p>
+</dd>
+</dl>
+<p><code>&#20013;</code>&#65306;&#20294;&#36825;&#20010;&#25193;&#23637;&#23454;&#38469;&#19981;&#21487;&#29992;&#65292;&#22240;&#20026;&#24403;&#25105;&#29992;&#19996;&#20122;&#25991;&#23383;&#30340;&#26102;&#20505;&#25105;&#24635;&#20063;&#20250;&#29992;&#21040;&#33521;&#25991;&#12290;&#36825;&#26679;&#19968;&#26469;&#65292;&#22914;&#26524;&#19981;&#21152;&#36825;&#20010;&#25193;&#23637;&#65292;&#21512;&#24182;&#34892;&#30340;&#26102;&#20505;&#19996;&#20122;&#25991;&#23383;&#65288;&#27604;&#22914;&#20013;&#25991;&#65289;&#20250;&#22810;&#20986;&#24456;&#22810;&#31354;&#26684;&#65292;&#19981;&#32654;&#35266;&#65307;&#22914;&#26524;&#21152;&#20837;&#36825;&#20010;&#25193;&#23637;&#65292;&#21512;&#24182;&#34892;&#30340;&#26102;&#20505;&#35199;&#25991;&#65288;&#22914;&#33521;&#25991;&#65289;&#20250;&#28151;&#20316;&#19968;&#22242;&#65292;&#19981;&#20165;&#19981;&#32654;&#35266;&#65292;&#20869;&#23481;&#37117;&#21464;&#20102;&#12290;</p>
+<p><code>En</code>: But this extension cannot work as expected, for we also use some English when writing in East Asian languages. In that case, if we not turn on this extension, Asian character lines will be joined together with extra spaces, pretty ugly; But if turning on this extension, Western character lines will join into a mess (e.g.&#160;several pairs of words turned into one).</p>
+<p>For example, there is a demo file <code>demo.md</code> with content:</p>
+<pre class="plain"><code>## Case 1: only East Asian Characters
+
+&#25105;&#33021;&#21534;&#19979;&#29627;&#29827;&#65292;
+&#32780;&#19981;&#20260;&#36523;&#20307;&#12290;&#25105;&#33021;&#21534;&#19979;&#29627;&#29827;
+&#32780;&#19981;&#20260;&#36523;&#20307;&#12290;
+
+## Case 2: Only Western Characters
+
+The quick brown fox,
+jumps over the lazy dog. The quick brown fox
+jumps over the lazy dog.
+
+## Case 3: Blended
+
+&#25105;&#33021;&#21534;&#19979;&#29627;&#29827;&#32780;&#19981;&#20260;&#36523;&#20307;&#65292;
+the quick brown fox jumps over the lazy dog.
+
+The quick brown fox jumps over the lazy dog,
+&#25105;&#33021;&#21534;&#19979;&#29627;&#29827;&#32780;&#19981;&#20260;&#36523;&#20307;&#12290;
+
+&#20013;&#25991;&#21644;
+English &#28151;&#21512;&#25490;&#29256;&#12290;
+
+English blended with
+&#20013;&#25991;.</code></pre>
+<p>Using <code>pandoc</code> to convert it to html:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pandoc</span> -f markdown -s -S demo.md -o demo-ext-off.html
+<span class="kw">pandoc</span> -f markdown+ignore_line_breaks -s -S demo.md -o demo-ext-on.html</code></pre></div>
+<p>Without extension: (red marks point out pitfalls, I highlighted spaces in browser simply with Control+F)</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/github/a.png" />
+
+</div>
+<p>With extension:</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/github/b.png" />
+
+</div>
+<p>I think <code>Pandoc</code> should be more intelligent so as to only insert space</p>
+<ol style="list-style-type: decimal">
+<li>between two western chars, e.g. <code>apple\n</code> + <code>pie</code> &#8594; <code>apple pie</code>,</li>
+<li>between asian char and western char, e.g. <code>&#35910;&#29923;\n</code> + <code>FM</code> &#8594; <code>&#35910;&#29923; FM</code></li>
+</ol>
+<p>and no extra spaces in others cases.</p>
+<hr />
+<p>Or make it more simply:</p>
+<p>Always add a space when join lines <strong>except</strong> when the previous line ends with an East Asia Character and this line starts with another.</p>
+<hr />
+<p>Pandoc &#20316;&#32773; <a href="https://github.com/jgm">jgm (John MacFarlane)</a> &#30340;&#22238;&#22797;&#65306;</p>
+<blockquote>
+<p>One approach would be to implement this option using an AST filter (internal to pandoc), instead of in the Markdown parser. The AST contains Space elements for spaces and soft line breaks (though it doesn&#8217;t currently distinguish between the two&#8212;that may change soon). The filter could look for and remove Space elements when they occur between two Chinese characters. Note that (unlike the current approach) this would also affect line-internal spaces &#8211; they would be collapsed too. Let me know if that&#8217;s not desirable.</p>
+<p>Are spaces every used between two Chinese characters, or would it be safe for pandoc to avoid this by default?</p>
+</blockquote>
+<p>&#25105;&#65306;</p>
+<blockquote>
+<p>Better not &#8220;affect line-internal spaces&#8221;.</p>
+<p>Spaces are not ever used between two Chinese characters.</p>
+<p>Of course there would be someone in some cases to use &#8220;&#27880; &#24847; &#65281; &#65281;&#8221; (A T T E N T I O N ! ! !), but that&#8217;s not normal. And I recommend they use fullwidth space (<em>i.e.</em> &#8220;&#12288;&#8221;) instead of typical space (<em>i.e.</em> &quot; &#8220;): <code>&#27880; &#24847; &#65281; &#65281;</code> &#8594; <code>&#27880;&#12288;&#24847;&#12288;&#65281;&#12288;&#65281;</code>.</p>
+<p>So it would be safe for pandoc to avoid this by default.</p>
+<p>For your information, adding a space between Chinese character and western character is not adopted by everyone, its more like a common rule for those who care typesetting. (see <a href="https://github.com/sparanoid/chinese-copywriting-guidelines/blob/master/README.en.md#place-one-space-before--after-english-words" class="uri">https://github.com/sparanoid/chinese-copywriting-guidelines/blob/master/README.en.md#place-one-space-before--after-english-words</a>).</p>
+<p>But this: <code>fox\n</code> + <code>jumps</code> &#8594; <code>foxjumps</code> is bad, should be agreed by everyone.</p>
+</blockquote>
+<p>&#39069;&#8230;&#8230;&#25105;&#23601;&#22238;&#21435;&#30561;&#20102;&#20010;&#35273;&#65292;jgm &#23601;&#25226;&#36825;&#20010;&#38382;&#39064;&#24324;&#22909;&#20102;&#8230;&#8230;&#65306; <a href="https://github.com/jgm/pandoc/commit/44120ea7165546152af88fd442c52ab0f201052e#diff-c47c7c7383225ab55ff591cb59c41e6bR3227">Implemented <code>east_asian_line_breaks</code> extension. &#183; jgm/pandoc@44120ea</a></p>
+</small>
+</div>
+<p>&#22823;&#31070;&#30340; commit message &#37324;&#20889;&#36947;&#65306;</p>
+<blockquote>
+<p><strong>Implemented <code>east_asian_line_breaks</code> extension.</strong></p>
+<p>Text.Pandoc.Options: Added <code>Ext_east_asian_line_breaks</code> constructor to <code>Extension</code> (API change).</p>
+<p>This extension is like <code>ignore_line_breaks</code>, but smarter &#8211; it only ignores line breaks between two East Asian wide characters. This makes it better suited for writing with a mix of East Asian and non-East Asian scripts.</p>
+<p>Closes <a href="https://github.com/jgm/pandoc/issues/2586">#2586</a>.</p>
+</blockquote>
+<p>&#22823;&#31070;&#20462;&#25913;&#21518;&#30340;&#20195;&#30721;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">parseMarkdown ::</span> <span class="dt">MarkdownParser</span> <span class="dt">Pandoc</span>
+parseMarkdown <span class="fu">=</span> <span class="kw">do</span>
+  <span class="co">-- markdown allows raw HTML</span>
+  updateState <span class="fu">$</span> \state <span class="ot">-&gt;</span> state { stateOptions <span class="fu">=</span>
+                <span class="kw">let</span> oldOpts <span class="fu">=</span> stateOptions state <span class="kw">in</span>
+                    oldOpts{ readerParseRaw <span class="fu">=</span> <span class="dt">True</span> } }
+  optional titleBlock
+  blocks <span class="ot">&lt;-</span> parseBlocks
+  st <span class="ot">&lt;-</span> getState
+  <span class="kw">let</span> meta <span class="fu">=</span> runF (stateMeta&#39; st) st
+  <span class="kw">let</span> <span class="dt">Pandoc</span> _ bs <span class="fu">=</span> B.doc <span class="fu">$</span> runF blocks st
+  eastAsianLineBreaks <span class="ot">&lt;-</span> option <span class="dt">False</span> <span class="fu">$</span>
+                    <span class="dt">True</span> <span class="fu">&lt;$</span> guardEnabled <span class="dt">Ext_east_asian_line_breaks</span>
+  return <span class="fu">$</span> (<span class="kw">if</span> eastAsianLineBreaks
+               <span class="kw">then</span> bottomUp softBreakFilter
+               <span class="kw">else</span> id) <span class="fu">$</span> <span class="dt">Pandoc</span> meta bs
+
+<span class="ot">softBreakFilter ::</span> [<span class="dt">Inline</span>] <span class="ot">-&gt;</span> [<span class="dt">Inline</span>]
+softBreakFilter (x<span class="fu">:</span><span class="dt">SoftBreak</span><span class="fu">:</span>y<span class="fu">:</span>zs) <span class="fu">=</span>
+  <span class="kw">case</span> (stringify x, stringify y) <span class="kw">of</span>
+        (xs<span class="fu">@</span>(_<span class="fu">:</span>_), (c<span class="fu">:</span>_))
+          <span class="fu">|</span> charWidth (last xs) <span class="fu">==</span> <span class="dv">2</span> <span class="fu">&amp;&amp;</span> charWidth c <span class="fu">==</span> <span class="dv">2</span> <span class="ot">-&gt;</span> x<span class="fu">:</span>y<span class="fu">:</span>zs
+        _ <span class="ot">-&gt;</span> x<span class="fu">:</span><span class="dt">SoftBreak</span><span class="fu">:</span>y<span class="fu">:</span>zs
+softBreakFilter xs <span class="fu">=</span> xs</code></pre></div>
+<p>&#25105;&#29616;&#22312;&#26159;&#20116;&#20307;&#25237;&#22320;&#65281;</p>
+<p>P.S. Emacs Org-mode &#23548;&#20986; HTML &#30340;&#26102;&#20505;&#20063;&#26377;&#36825;&#20010;&#38382;&#39064;&#65292;Coldnew &#32473;&#20986;&#20102;&#20462;&#27491;&#20195;&#30721;&#65306;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<div style="font-size:80%">
+<div class="sourceCode"><pre class="sourceCode lisp"><code class="sourceCode commonlisp">(defadvice org-html-paragraph (before org-html-paragraph-advice
+                                      (paragraph contents info) activate)
+  <span class="st">&quot;Join consecutive Chinese lines into a single long line without</span>
+<span class="st">unwanted space when exporting org-mode to html.&quot;</span>
+  (<span class="kw">let*</span> ((origin-contents (ad-get-arg <span class="dv">1</span>))
+         (fix-regexp <span class="st">&quot;[[:multibyte:]]&quot;</span>)
+         (fixed-contents
+          (replace-regexp-in-string
+           (concat
+            <span class="st">&quot;</span>\\<span class="st">(&quot;</span> fix-regexp <span class="st">&quot;</span>\\<span class="st">) *</span>\n<span class="st"> *</span>\\<span class="st">(&quot;</span> fix-regexp <span class="st">&quot;</span>\\<span class="st">)&quot;</span>) <span class="st">&quot;</span>\\<span class="st">1</span>\\<span class="st">2&quot;</span> origin-contents)))
+
+    (ad-set-arg <span class="dv">1</span> fixed-contents)))</code></pre></div>
+</div>
+<p>&#35265;&#65306;<a href="http://coldnew.github.io/blog/2013/12-17_03349/">&#21435;&#38500; org-mode &#36664;&#20986; HTML &#26178;&#29986;&#29983;&#22810;&#39192;&#30340;&#31354;&#26684; | coldnew&#8217;s blog</a>&#12290;</p>
+<div class="tzx-hide">
+<p>&#25105;&#35201;&#22909;&#22909;&#23398;&#20064;&#31185;&#23398;&#25991;&#21270;&#30693;&#35782;&#65292;&#20687; jgm &#19968;&#26679;&#31934;&#36890;&#25968;&#23398;&#21644;&#35745;&#31639;&#26426;&#12290;</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Coldnew &#36824;&#26159; pangu-spacing &#30340;&#20316;&#32773;&#12290;</p>
+<p>&#22823;&#36190;&#25105;&#22788;&#22899;&#24231;&#12290;</p>
+<p><img src="http://whudoc.qiniudn.com/pangu-spacing.gif" title="fig:" alt="pangu-spacing &#25928;&#26524;" /><a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#hacker">hacker</a></li>
+<li><a class="tzx-tag" href="tags.html/#pandoc">pandoc</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0076-real-hacker.md" title="213 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0076-real-hacker.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 213,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

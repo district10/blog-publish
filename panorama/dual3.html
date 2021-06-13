@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>全景过渡 3</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.contextMenu.css" type="text/css"/>
+    <style>
+        body {
+            margin: 0px;
+            overflow: hidden;
+            z-index: -1000;
+        }
+        /* cursors: [JavaScript - Mouse Cursor Styles](http://www.javascripter.net/faq/stylesc.htm) */
+        body.move, body.move *                   { cursor: move !important; }
+        body.crosshair, body.crosshair *        { cursor: crosshair !important; }
+        body.pointer, body.pointer *             { cursor: pointer !important; }
+        body.all-scroll, body.all-scroll *      { cursor: all-scroll !important; }
+
+        .pic {
+            position: absolute;
+            bottom: 0px;
+            margin: 2px;
+            padding: 2px;
+            border: 1px solid white;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .pic1 { left:  0px; }
+        .pic2 { right: 0px; }
+
+        #context-menu {
+            // visibility: hidden;
+            background-color: white;
+            border: 1px solid grey;
+            width: 200px;
+            height: 300px;
+        }
+        .labels > span > ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: block;
+            float: none;
+        }
+        .labels > span > ul > li {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #CCC;
+            overflow: hidden;
+            text-indent: -2000px;
+        }
+        .labels > span > ul > li.selected,
+        .labels > span > ul > li:hover { border: 1px solid #000; }
+        .labels > span > ul > li + li { margin-left: 5px; }
+        .labels > span > ul > li.label1 { background: red; }
+        .labels > span > ul > li.label2 { background: green; }
+        .labels > span > ul > li.label3 { background: blue; }
+        .labels > span > ul > li.label4 { background: yellow; }
+
+        .log {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            margin: 2px;
+            padding: 2px;
+            border: 1px solid white;
+            color: white;
+            font-size: 8px;
+            max-width: 50%;
+            max-height: 60%;
+            min-width: 200px;
+            background-color: rgba(0,0,0,0.4);
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        #cursor-log {
+            margin: 0;
+            padding: 10px;
+            border: none;
+            min-width: 0px;
+            min-height: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container"></div>
+<div class="log" id="cursor-log"><pre><code id="cursor-log-code"></code></pre></div>
+<div class="pic pic1"><a href="texture1.jpg" target="_blank"><img id="pic1" src="texture1.jpg" style="width:200px;height:100px;" alt="左" /></a></div>
+<div class="pic pic2"><a href="texture2.jpg" target="_blank"><img id="pic2" src="texture2.jpg" style="width:200px;height:100px;" alt="右" /></a></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/three.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/CanvasRenderer.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/Projector.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/DeviceOrientationControls.js"></script>
+<script src="js/dat.gui.min.js"></script>
+<script src="js/jquery.ui.position.js"></script>
+<script src="js/jquery.contextMenu.js"></script>
+<script src="js/CubemapToEquirectangular.js"></script>
+<script src="js/tween.min.js"></script>
+
+<script>
+    "use strict";
+
+    var Config = function() {
+        var _this = this;
+        this.debug = true;
+
+        this.shits = [];
+        this.showShits = function() { config.shits.forEach(function(g){g.visible = true;}); };
+        this.hideShits = function() { config.shits.forEach(function(g){g.visible = false;}); };
+
+        this.clock = new THREE.Clock();
+
+        this.saveAsImage = function() {
+            setTimeout(function(){
+                var src = renderer.domElement.toDataURL("image/png"); // .replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+                window.open(src, '_blank');
+                window.focus();
+            }, 3000);
+        };
+
+        this.featurePointScale = 1.0;
+        this.point = new THREE.SphereGeometry( 1, 64, 32);
+
+        this.points = [];
+        this.pointsXYZ = [];
+        for (var i = 0; i < 8; ++i) {
+            this.pointsXYZ.push(new THREE.Vector3());
+        }
+        this.POIs = {};
+        this.rawPOIs = [];
+        this.setPOI = function(json) {
+            var ret = {};
+            json.forEach(function(poi){
+                ret[poi.name] = poi;
+            });
+            config.points.forEach(function(poi){
+                setPOI(poi, ret[poi.name]);
+            });
+        }
+        this.loadPOI = Util.fileInputReadAsText(function(text){
+            var pois = JSON.parse(text);
+            setPOI(pois);
+        });
+
+        this.savePOI = function () {
+            var ret = [];
+            config.points.forEach(function(poi){
+                ret.push({
+                    name: poi.name,
+                    lon: poi.lon,
+                    lat: poi.lat,
+                    position: poi.position
+                });
+            });
+            var url = 'data:text/json;charset=utf8,' + encodeURIComponent(JSON.stringify(ret));
+            window.open(url, '_blank');
+            window.focus();
+        };
+
+        // this.lonSpeed = 0.1; TODO, 带有加速度的 delta
+
+        this.material1 = new THREE.MeshBasicMaterial(); this.material1.transparent = true;
+        this.material2 = new THREE.MeshBasicMaterial(); this.material2.transparent = true;
+        this.material0 = new THREE.MeshBasicMaterial(); this.material0.transparent = true;
+
+        this.sphere = new THREE.SphereGeometry( 100, 64, 32 ); this.sphere.scale( -1, 1, 1 );
+        this.mesh1 = new THREE.Mesh( this.sphere, this.material1 );
+        this.mesh2 = new THREE.Mesh( this.sphere, this.material2 );
+
+        this.group2Distance = 200;
+        this.group2OffsetNorth = 90;
+        this.sphereScale = 1;
+        this.sphereScale0 = this.sphereScale;
+
+        this.showPic = false;
+
+        this.toggleCamHelperVisibility = function() {
+            var helpers;
+            return function() {
+                if (helpers === undefined && config.cam0Helper !== undefined) {
+                    helpers = [
+                        config.cam0Helper,
+                        config.cam1Helper,
+                        config.cam2Helper,
+                        config.camXHelper
+                    ];
+                }
+                Util.toogleVisibility(helpers);
+            }
+        }();
+        this.toggleAxisHelperVisibility = function() {
+            var helpers;
+            return function() {
+                if (helpers === undefined && config.globalAxis !== undefined) {
+                    helpers = [
+                        config.globalAxis,
+                        config.group1Axis,
+                        config.group2Axis
+                    ];
+                }
+                Util.toogleVisibility(helpers);
+            }
+        }();
+
+        this.raycastUV = false;
+
+        this.fov = 60; // 全局 fov：cam 0/1/2
+        this.fovMin = 10;
+        this.fovMax = 100;
+        this.near = 10;
+        this.nearMin = 0;
+        this.nearMax = 100;
+        this.far = 10000;
+        this.farMin = 100;
+        this.farMax = 10000;
+
+        this.alpha = 1.0;
+        this.deltaMove = 8;
+
+        // axis helper
+        this.globalAxis = new THREE.AxisHelper(1000);
+        this.group1Axis = new THREE.AxisHelper(1000);
+        this.group2Axis = new THREE.AxisHelper(1000);
+        this.cam0Axis   = new THREE.AxisHelper(1000);
+
+        // cameras
+        this.camera1 = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 10, 2000);
+        this.camera2 = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 10, 2000);
+        this.camera0 = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 10, 200000); this.camera0.position.set(-400, 0, 0);
+        this.cameraX = new THREE.PerspectiveCamera(this.fov, window.innerWidth / window.innerHeight, 10, 2000);
+
+        this.camera0.name = "CAM 0";
+        this.camera1.name = "CAM 1";
+        this.camera2.name = "CAM 2";
+        this.cameraX.name = "CAM X";
+
+        this.camera1.isCamP = true; // panoramic camera
+        this.camera2.isCamP = true;
+        this.camera0.isCam0 = true; // orbit controlled cam
+        this.cameraX.isCamX = true;
+        this.cameraX.isCamP = true;
+
+        this.camera1.lon = this.camera2.lon = this.cameraX.lon = 0;
+        this.camera1.lat = this.camera2.lat = this.cameraX.lat = 0;
+
+        this.cameraIndex = 1; // init to cam 1
+
+        this.cam1Helper = new THREE.CameraHelper( this.camera1 );
+        this.cam2Helper = new THREE.CameraHelper( this.camera2 );
+        this.camXHelper = new THREE.CameraHelper( this.cameraX );
+        this.cam0Helper = new THREE.CameraHelper( this.camera0 );
+
+        // groups
+        this.group1 = new THREE.Group();
+        this.group2 = new THREE.Group();
+
+        // screenshot panorama
+        this.savePanorama = function() {
+            // shit
+            config.cam0Controls.enabled = false;
+            var equiManaged = new CubemapToEquirectangular( renderer, true );
+            equiManaged.setSize( 2048, 1024 );
+            equiManaged.update( camera, scene );
+            config.cam0Controls.enabled = true;
+        };
+        this.needUpdateScreenshot = false;
+
+        // able to edit offset to north?
+        this.canEditOffsetToNorth = false;
+        this.offsetToNorth1 = 0;
+        this.offsetToNorth2 = 0;
+
+        this.freeze = false;
+
+        this.dual = function() {
+            $(".close-button").click();
+            // _this.freeze = true;
+            _this.alpha0 = _this.alpha;
+        };
+
+        this.light = new THREE.AmbientLight(0xffffff); // can be turned off
+        this.gridXZ = new THREE.GridHelper(10000, 100, 0x888888, 0x888888);
+        this.gridXZ.visible = false;
+    };
+    var config = new Config();
+    if (!config.showPic) { $(".pic").hide(); }
+
+    var gui = new dat.GUI(); gui.closed = true;
+
+    config.ws = config.hs = 20; // 10;
+    config.arcs = [];
+    config.doit = function() {
+        // ceiling
+        config.arc12 = lerpArc("P1", "P2", config.ws);
+        config.arc23 = lerpArc("P2", "P3", config.hs);
+        config.arc34 = lerpArc("P3", "P4", config.ws);
+        config.arc41 = lerpArc("P4", "P1", config.hs);
+        // floor
+        config.arc56 = lerpArc("P5", "P6", config.ws);
+        config.arc67 = lerpArc("P6", "P7", config.hs);
+        config.arc78 = lerpArc("P7", "P8", config.ws);
+        config.arc85 = lerpArc("P8", "P5", config.hs);
+        // verticles
+        config.arc15 = lerpArc("P1", "P5", config.hs);
+        config.arc26 = lerpArc("P2", "P6", config.hs);
+        config.arc37 = lerpArc("P3", "P7", config.hs);
+        config.arc48 = lerpArc("P4", "P8", config.hs);
+        config.arcs = [
+            config.arc12, config.arc23, config.arc34, config.arc41,
+            config.arc56, config.arc67, config.arc78, config.arc85,
+            config.arc15, config.arc26, config.arc37, config.arc48
+        ];
+
+        config.face1 = lerpFace(
+            config.POIs["P1"].position,
+            config.POIs["P2"].position,
+            config.POIs["P3"].position,
+            config.POIs["P4"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(1,0,0)
+        );
+        config.face2 = lerpFace(
+            config.POIs["P5"].position,
+            config.POIs["P6"].position,
+            config.POIs["P7"].position,
+            config.POIs["P8"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(1,0,0)
+        );
+        config.face3 = lerpFace(
+            config.POIs["P2"].position,
+            config.POIs["P3"].position,
+            config.POIs["P7"].position,
+            config.POIs["P6"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(0,1,0)
+
+        );
+        config.face4 = lerpFace(
+            config.POIs["P1"].position,
+            config.POIs["P4"].position,
+            config.POIs["P8"].position,
+            config.POIs["P5"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(0,1,0)
+        );
+        config.face5 = lerpFace(
+            config.POIs["P4"].position,
+            config.POIs["P3"].position,
+            config.POIs["P7"].position,
+            config.POIs["P8"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(0,0,1)
+        );
+        config.face6 = lerpFace(
+            config.POIs["P2"].position,
+            config.POIs["P1"].position,
+            config.POIs["P5"].position,
+            config.POIs["P6"].position,
+            config.ws,
+            config.hs,
+            new THREE.Color(0,0,1)
+        );
+        scene.add(config.face1);
+        scene.add(config.face2);
+        scene.add(config.face3);
+        scene.add(config.face4);
+        scene.add(config.face5);
+        scene.add(config.face6);
+    };
+    gui.add(config, 'doit').name("内插上表面");
+
+    [1,2,3,4,5,6].forEach(function(index){
+        config["applyFace"+index] = function() {
+            var idx = index;
+            return function() {
+                applyFace(idx);
+            };
+        }();
+    });
+    config["applyFace"] = function() {
+        [1,2,3,4,5,6].forEach(function(idx){
+            applyFace(idx);
+        });
+    };
+    var applyFaces = gui.addFolder("添加页面");
+    applyFaces.add(config, 'applyFace').name("Face ALL");
+    applyFaces.add(config, 'applyFace1').name("Face 1");
+    applyFaces.add(config, 'applyFace2').name("Face 2");
+    applyFaces.add(config, 'applyFace3').name("Face 3");
+    applyFaces.add(config, 'applyFace4').name("Face 4");
+    applyFaces.add(config, 'applyFace5').name("Face 5");
+    applyFaces.add(config, 'applyFace6').name("Face 6");
+    // gui.add(config, 'loadPOI').name("加载 POI 点");
+    // gui.add(config, 'savePOI').name("保存 POI 点");
+    // gui.add(config, 'raycastUV').listen().name("Raycast UV");
+
+    function updateGroup2Position() {
+        var theta = THREE.Math.degToRad(config.group2OffsetNorth);
+        var radius = config.group2Distance;
+        var x =  Math.sin(theta) * radius;
+        var z = -Math.cos(theta) * radius;
+        config.group2.position.set(x,0,z);
+    }
+
+    var setScale = function(geometry, initScale) {
+        var scale0 = 1;
+        var geometry = geometry;
+        var ret =  function(scale) {
+            var s = scale / scale0;
+            geometry.scale(s,s,s);
+            scale0 = scale;
+        };
+        if (geometry) {
+            if (initScale) { ret(initScale); }
+            return ret;
+        } else {
+            return function(){};
+        }
+    };
+
+    sphere = config.sphere;
+
+    var geometryFolder = gui.addFolder('全景位置'); // geometryFolder.closed = false;
+    geometryFolder.add(config, 'group2Distance').min(0).max(1000).step(1).onChange(updateGroup2Position).name("距离")
+    geometryFolder.add(config, 'group2OffsetNorth').min(0).max(360).step(1).onChange(updateGroup2Position).name("角度");
+    geometryFolder.add(config, 'sphereScale').min(0.5).max(10).step(0.1).onChange(setScale(sphere)).name("大小");
+    var offsetFolder = geometryFolder.addFolder('偏移量');
+    var onShowOffset = function (show) {
+        if (show) {
+            config.offsetController1 = offsetFolder.add(config, 'offsetToNorth1').name("图 1 偏移量").min(0).max(360).step(0.1).listen().onChange(updateOffsetToNorth(config.group1));
+            config.offsetController2 = offsetFolder.add(config, 'offsetToNorth2').name("图 2 偏移量").min(0).max(360).step(0.1).listen().onChange(updateOffsetToNorth(config.group2));
+        } else {
+            if (config.offsetController1) { offsetFolder.remove(config.offsetController1); }
+            if (config.offsetController2) { offsetFolder.remove(config.offsetController2); }
+        }
+    };
+    offsetFolder.add(config, 'canEditOffsetToNorth').onChange(onShowOffset).name("修改偏移量");
+
+
+    // gui.add(config, 'fov').min(10).max(100).step(1).listen().name("视场角").onChange(updateCameraFov);
+    gui.add(config, 'savePanorama').name("把场景存成全景图");
+    gui.add(config, 'saveAsImage').name("把场景存成图切片");
+    // gui.add(config, 'deltaMove').min(1).max(10).step(1).listen().name("移动速度");
+
+    var flags = gui.addFolder("变量的设定");
+    flags.add(config, 'showPic').name("显示原图").onFinishChange(function (show){ if (show) { $(".pic").show(); } else { $(".pic").hide(); } });
+    flags.add(config.light, 'visible').listen().name("显示灯光");
+    flags.add(config.gridXZ, 'visible').listen().name("显示地平线");
+    flags.add(config.mesh1, 'visible').listen().name("显示 Mesh 1");
+    // config.mesh2.visible = false;
+    flags.add(config.mesh2, 'visible').listen().name("显示 Mesh 2");
+    config.toggleFaces = true;
+    flags.add(config, 'toggleFaces').listen().name("显示/隐藏 Faces").onChange(function(vis){
+        Util.range(1,6+1).forEach(function(index){
+            var face = config["face"+index];
+            if (face) { face.visible = vis; }
+        });
+        Util.range(1,8+1).forEach(function(index){
+            var arrow = config["arr"+index];
+            if (arrow) { arrow.visible = vis; }
+        });
+        config.rawPOIs.forEach(function(mesh){
+            if (mesh /* && mesh.isPOI */) {
+                mesh.visible = vis;
+            }
+        });
+    });
+    flags.add(config, 'toggleCamHelperVisibility').listen().name("显示/隐藏相机");
+    flags.add(config.cam0Helper, 'visible').listen().name("显示 CAM 0");
+    flags.add(config.cam1Helper, 'visible').listen().name("显示 CAM 1");
+    flags.add(config.cam2Helper, 'visible').listen().name("显示 CAM 2");
+    flags.add(config.camXHelper, 'visible').listen().name("显示 CAM X");
+    flags.add(config, 'toggleAxisHelperVisibility').listen().name("显示/隐藏坐标系");
+    flags.add(config.globalAxis, 'visible').listen().name("显示全局   坐标系");
+    flags.add(config.group1Axis, 'visible').listen().name("显示全景 1 坐标系");
+    flags.add(config.group2Axis, 'visible').listen().name("显示全景 2 坐标系");
+
+    function updateOffsetToNorth(group) {
+        var _group = group;
+        return function (offset) {
+            var p = _group.position.clone();
+            _group.matrix.identity();
+            _group.applyMatrix(
+                new THREE.Matrix4().makeTranslation(p.x,p.y,p.z).multiply(
+                    new THREE.Matrix4().makeRotationY(THREE.Math.degToRad(offset))
+                )
+            );
+        }
+    }
+
+    var addPOI_ = function(type) {
+        var point = config.point;
+        var mat = new THREE.MeshBasicMaterial( { color: 0x0000ff, side: THREE.DoubleSide } );
+        if (type === undefined) {
+            return function(lon, lat, radius, color, name) {
+                var ret = new THREE.Mesh( point, mat.clone() );
+                ret.isPOI = true;
+                ret.material.color.copy(color);
+                ret.lon = lon;
+                ret.lat = lat;
+                var v = Util.lonlat2xyz(ret.lon, ret.lat, radius);
+                ret.position.set(v.x,v.y,v.z);
+                ret.name = name !== undefined ? name : ret.uuid;
+                config.points.push(ret);
+                config.POIs[ret.name] = ret;
+                config.rawPOIs.push(ret);
+                scene.add(ret);
+                return ret;
+            };
+        } else {
+            return function(lon, lat, radius, color, position) {
+                var ret = new THREE.Mesh( point, mat.clone() );
+                ret.isPOI = true;
+                ret.material.color.copy(color);
+                ret.lon = lon || 0;
+                ret.lat = lat || 0;
+                ret.position.copy(position);
+                config.rawPOIs.push(ret);
+                return ret;
+            };
+        }
+    };
+    var addPOI = addPOI_();
+    var addPOIRaw = addPOI_(1);
+
+    var cams = [config.camera0, config.camera1, config.camera2, config.cameraX];
+    function switchToCam(index) {
+        var index = index || config.cameraIndex+1;
+        config.cameraIndex = index%cams.length;
+        camera = cams[config.cameraIndex];
+        if (config.cam0Controls !== undefined) {
+            config.cam0Controls.enabled = camera.isCam0 || false;
+        }
+        console.log("active camera: "+camera.name);
+    }
+    var camFolder = gui.addFolder('相机设定');
+    camFolder.add(config, 'cameraIndex', {
+        "CAM 1": 1,
+        "CAM 2": 2,
+        "CAM X": 3,
+        "CAM 0": 0
+    } ).listen().onChange(switchToCam).name("当前相机");
+    camFolder.add(config, 'fov').min(config.fovMin).max(config.fovMax).step(1).listen().onChange(function(fov){
+        // config.camera0.fov =
+        config.camera1.fov = config.camera2.fov = config.cameraX.fov = fov;
+    }).name("全局 fov");
+    camFolder.add(config, 'near').min(config.nearMin).max(config.nearMax).step(1).listen().onChange(function(near){
+        if (config.near > config.far) {
+            config.near = config.far;
+        }
+        config.camera1.near = config.camera2.near = config.cameraX.near = config.near;
+    }).name("全局 near");
+    camFolder.add(config, 'far').min(config.farMin).max(config.farMax).step(1).listen().onChange(function(near){
+        if (config.far < config.near) {
+            config.far = config.near;
+        }
+        config.camera1.far = config.camera2.far = config.cameraX.far = config.far;
+    }).name("全局 far");
+
+    var cam1Folder = camFolder.addFolder('CAM 1'); // cam1Folder.closed = false;
+    var cam2Folder = camFolder.addFolder('CAM 2'); // cam2Folder.closed = false;
+    var camXFolder = camFolder.addFolder('CAM X'); // camXFolder.closed = false;
+
+    cam1Folder.add(config.camera1, "fov").min(config.fovMin).max(config.fovMax).step(1).listen().onChange(function(){ });
+    cam2Folder.add(config.camera2, "fov").min(config.fovMin).max(config.fovMax).step(1).listen().onChange(function(){ });
+    camXFolder.add(config.cameraX, "fov").min(config.fovMin).max(config.fovMax).step(1).listen().onChange(function(){ });
+
+    cam1Folder.add(config.camera1, "near").min(config.nearMin).max(config.nearMax).step(1).listen().onChange(function(){
+        if (config.camera1.near > config.camera1.far) {
+            config.camera1.near = config.camera1.far;
+        }
+    });
+    cam2Folder.add(config.camera2, "near").min(config.nearMin).max(config.nearMax).step(1).listen().onChange(function(){
+        if (config.camera2.near > config.camera2.far) {
+            config.camera2.near = config.camera2.far;
+        }
+    });
+    camXFolder.add(config.cameraX, "near").min(config.nearMin).max(config.nearMax).step(1).listen().onChange(function(){
+        if (config.cameraX.near > config.cameraX.far) {
+            config.cameraX.near = config.cameraX.far;
+        }
+    });
+
+    cam1Folder.add(config.camera1, "far").min(config.farMin).max(config.farMax).step(1).listen().onChange(function(){
+        if (config.camera1.far < config.camera1.near) {
+            config.camera1.far = config.camera1.near;
+        }
+    });
+    cam2Folder.add(config.camera2, "far").min(config.farMin).max(config.farMax).step(1).listen().onChange(function(){
+        if (config.camera2.far < config.camera2.near) {
+            config.camera2.far = config.camera2.near;
+        }
+    });
+    camXFolder.add(config.cameraX, "far").min(config.farMin).max(config.farMax).step(1).listen().onChange(function(){
+        if (config.cameraX.far < config.cameraX.near) {
+            config.cameraX.far = config.cameraX.near;
+        }
+    });
+
+    var onAlphaChange = function (value, value2) {
+        var value2 = value2 || 1-value;
+        config.material1.opacity = value;
+        config.material2.opacity = value2;
+    };
+    gui.add(config, 'alpha').min(0.0).max(1.0).step(0.01).listen().onChange(onAlphaChange).name("颜色混合比例");
+    gui.add(config.material1, 'opacity').min(0.0).max(1.0).step(0.01).listen().name("全景 1 不透明度");
+    gui.add(config.material2, 'opacity').min(0.0).max(1.0).step(0.01).listen().name("全景 2 不透明度");
+
+    gui.add(config, 'featurePointScale').min(0.5).max(10).step(0.1).onChange(setScale(config.point, config.featurePointScale)).name("特征点大小");
+
+    function setCursorStyle(style) {
+        $("body").removeClass();
+        if (style) {
+            $("body").addClass(style);
+        }
+    }
+
+    var $info = config.$info = (config.$info || $("#cursor-log-code"));
+    var $iBox = config.$iBox = (config.$iBox || config.$info.parent().parent());
+
+    var container, camera, scene, renderer, sphere, controls;
+    var raycaster = new THREE.Raycaster();
+
+    var isUserInteracting = false;
+    var onPointerDownPointerX = 0, onPointerDownPointerY = 0, onPointerDownLon = 0, onPointerDownLat = 0;
+
+    var getMeshUv = function (mesh, direction) {
+        var origin = raycaster.ray.origin.copy(mesh.position);
+        raycaster.ray.direction.copy(direction).sub(origin).normalize();
+        var hit = raycaster.intersectObjects([mesh], true);
+        if ( hit.length > 0 && hit[0].uv) {
+            return (config.uv = hit[0].uv);
+        } else {
+            return null;
+        }
+    };
+
+    var getIntersects = function ( point, objects, recursive ) {
+        var mouse = new THREE.Vector2( ( point.x * 2 ) - 1, - ( point.y * 2 ) + 1  );
+        raycaster.setFromCamera( mouse, camera );
+        return raycaster.intersectObjects( objects, recursive);
+    };
+
+    var isDesktop = !navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|BB10|mobi|tablet|opera mini|nexus 7)/i);
+
+    window.addEventListener('load', function() {
+
+        // scene
+        scene = new THREE.Scene();
+        scene.add(config.light);
+        scene.add(config.gridXZ);
+
+        config.arr1 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr1.visible = true;
+        config.arr2 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr2.visible = true;
+        config.arr3 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr3.visible = true;
+        config.arr4 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr4.visible = true;
+        config.arr5 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr5.visible = true;
+        config.arr6 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr6.visible = true;
+        config.arr7 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr7.visible = true;
+        config.arr8 = new THREE.ArrowHelper( new THREE.Vector3(1,0,0), new THREE.Vector3(0,0,0), 100, 0xffffff ); config.arr8.visible = true;
+        scene
+            .add(config.arr1)
+            .add(config.arr2)
+            .add(config.arr3)
+            .add(config.arr4)
+            .add(config.arr5)
+            .add(config.arr6)
+            .add(config.arr7)
+            .add(config.arr8);
+        // scene.add(config.arr2);
+        // scene.add(config.arr3);
+        // config.arr1.visible = config.arr2.visible = config.arr3.visible = false;
+
+        config.addPlane = function() {
+            var geometry = new THREE.PlaneGeometry(100, 100, config.ws+1, config.hs+1);
+            var material = config.material0;
+            var mesh = new THREE.Mesh(geometry, material);
+            mesh.hit = [];
+            return mesh;
+        };
+        // mesh.position.set(0,100,0);
+        // mesh.rotation.x = Math.PI/2;
+        config.plane1 = config.addPlane();
+        config.plane2 = config.addPlane();
+        config.plane3 = config.addPlane();
+        config.plane4 = config.addPlane();
+        config.plane5 = config.addPlane();
+        config.plane6 = config.addPlane();
+        // scene.add(mesh);
+        config.plane = config.plane1;
+        scene
+            .add(config.plane1)
+            .add(config.plane2)
+            .add(config.plane3)
+            .add(config.plane4)
+            .add(config.plane5)
+            .add(config.plane6);
+
+        config.addSphere = function () {
+            return new THREE.Mesh(
+                new THREE.SphereGeometry( 50, 64, 32 ),
+                new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true})
+            );
+        };
+
+        // cameras
+        scene.add(config.camera1).add(config.cam1Helper );
+        scene.add(config.camera2).add(config.cam2Helper );
+        scene.add(config.cameraX).add(config.camXHelper );
+        scene.add(config.camera0).add(config.cam0Helper );
+
+        // renderer
+        container = document.getElementById( 'container' );
+        if(Detector.webgl){
+            renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                preserveDrawingBuffer: true,
+                alpha: true
+            });
+        } else {
+            renderer = new THREE.CanvasRenderer();
+        }
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.domElement.style.position = 'absolute';
+        renderer.domElement.style.top = 0;
+        container.appendChild(renderer.domElement);
+
+        // controls
+        config.cam0Controls = new THREE.OrbitControls( config.camera0, renderer.domElement );
+        switchToCam(config.cameraIndex);
+        controls = new THREE.DeviceOrientationControls( camera );
+        if (isDesktop) { controls.enabled = false; }
+
+        // meshes
+
+        config.texture1 = new THREE.TextureLoader().load("texture1.jpg");
+        config.texture2 = new THREE.TextureLoader().load("texture2.jpg");
+        config.texture1.wrapS = config.texture2.wrapS = THREE.RepeatWrapping;
+        config.texture1.wrapT = config.texture2.wrapT = THREE.RepeatWrapping;
+
+        config.material1.map = config.texture1; config.material1.side = THREE.DoubleSide;
+        config.material2.map = config.texture2; config.material2.side = THREE.DoubleSide;
+        config.material0.map = config.texture1; config.material0.side = THREE.DoubleSide;
+
+        scene.add(config.globalAxis);
+        scene.add(config.cam0Axis);
+
+        // groups
+        scene.add( config.group1.add(config.group1Axis).add(config.mesh1) );
+        scene.add( config.group2.add(config.group2Axis).add(config.mesh2) );
+
+        updateGroup2Position();
+
+        // init
+        onAlphaChange(config.alpha);
+        config.toggleCamHelperVisibility();
+        config.toggleAxisHelperVisibility();
+
+        // shit
+        addPOI( 0, 10, 100, new THREE.Color(1.0, 0.0, 0.0), "P1");
+        addPOI(10, 10, 100, new THREE.Color(0.0, 1.0, 0.0), "P2");
+        addPOI(20, 10, 100, new THREE.Color(0.0, 0.0, 1.0), "P3");
+        addPOI(30, 10, 100, new THREE.Color(1.1, 1.0, 1.0), "P4");
+
+        addPOI( 0,-10, 100, new THREE.Color(0.0, 1.0, 1.0), "P5");
+        addPOI(10,-10, 100, new THREE.Color(1.0, 0.0, 1.0), "P6");
+        addPOI(20,-10, 100, new THREE.Color(1.0, 1.0, 0.0), "P7");
+        addPOI(30,-10, 100, new THREE.Color(1.0, 0.5, 0.0), "P8");
+
+        // if (window.location.host === "" || window.location.host === "")
+        config.setPOI(POIInfo);
+
+        animate();
+
+        window.addEventListener('keydown', onKeyDown, false );
+        window.addEventListener('resize', function() {
+            var aspect = window.innerWidth / window.innerHeight;
+            [ config.camera1, config.camera2, config.cameraX, config.camera0 ].forEach(function(cam){
+                cam.aspect = aspect;
+                cam.updateProjectionMatrix();
+            });
+            renderer.setSize( window.innerWidth, window.innerHeight );
+        }, false);
+        document.addEventListener( 'mousedown', function(event) {
+            if (event.target !== renderer.domElement) { return; }
+            if (event.button === 2) { return; } // right click
+            if (config.freeze) { return; }
+            //
+            if (camera.isCam0) {
+                // stash
+                config.gridXZ.visible0 = config.gridXZ.visible;
+                config.gridXZ.visible = true;
+                config.material1.opacity0 = config.material1.opacity;
+                config.material2.opacity0 = config.material2.opacity;
+                config.material1.opacity  = config.material2.opacity = 0.5;
+                // config.material1.opacity  = config.material2.opacity = 0.0;
+                return;
+            } else if (camera.isCamP) {
+                if (config.raycastUV) {
+                    var array = [event.clientX / window.innerWidth, event.clientY / window.innerHeight];
+                    var intersects = getIntersects( new THREE.Vector2().fromArray(array), config.points.concat(config.arcs), true);
+                    // var intersects = getIntersects( new THREE.Vector2().fromArray(array), config.points, true);
+                    if (intersects.length > 0) {
+                        var point = intersects[0].object;
+                        if (point && point.isPOI) {
+                            config.pickle = point;
+                            setCursorStyle("pointer");
+                        }
+                    } else {
+                        console.log("no match");
+                    }
+                } else {
+                    setCursorStyle("all-scroll");
+                    isUserInteracting = true;
+                    onPointerDownPointerX = event.clientX;
+                    onPointerDownPointerY = event.clientY;
+                    onPointerDownLon = camera.lon;
+                    onPointerDownLat = camera.lat;
+                }
+            }
+        }, false );
+        document.addEventListener( 'mousemove', function(event) {
+            if (config.freeze) { return; }
+            if (camera.isCam0) { return; }
+            if (camera.isCamP) {
+                if ( isUserInteracting === true ) {
+                    camera.lon = ( onPointerDownPointerX - event.clientX ) * 0.1 + onPointerDownLon;
+                    camera.lat = ( event.clientY - onPointerDownPointerY ) * 0.1 + onPointerDownLat;
+                } else if (config.raycastUV) {
+                    var array = [event.clientX / window.innerWidth, event.clientY / window.innerHeight];
+                    if (Math.abs(array[0]-0.5) > 0.45 || Math.abs(array[1]-0.5)>0.45) {
+                        // $iBox.fadeOut(); return;
+                    }
+                    var mesh = camera === config.camera1 ? [config.mesh1] : [config.mesh2];
+                    var objects = config.pickle ? mesh : config.points.concat(config.arcs).concat(mesh);
+                    var intersects = getIntersects( new THREE.Vector2().fromArray(array), objects, true );
+                    if ( intersects.length > 0 && intersects[0].uv) {
+                        var o = intersects[0];
+                        var uv = o.uv;
+                        var lonlat = Util.uv2lonlat(uv.x, uv.y);
+                        var pLon = lonlat.lon.toFixed(4);
+                        var pLat = lonlat.lat.toFixed(4);
+                        if (o.object && o.object.isPOI) {
+                            setCursorStyle("pointer");
+                            var obj = o.object;
+                            var text = (obj.name || obj.uuid) + "\n" + obj.lon + ", " + obj.lat;
+                            $info[0].innerHTML = text;
+                            config.hoveredPOI = o.object;
+                        } else {
+                            config.hoveredPOI = null;
+                            setCursorStyle();
+                            $info[0].innerHTML = ""+
+                                pLon + ", "+ pLat+ "\n"+
+                                uv.x.toFixed(5) + ", "+
+                                uv.y.toFixed(5) + "\n";
+                        }
+                        // update dragged object
+                        if (config.pickle) {
+                            config.pickle.position.copy(o.point);
+                            config.pickle.lon = lonlat.lon;
+                            config.pickle.lat = lonlat.lat;
+                            $iBox.fadeOut();
+                        } else {
+                            var left = event.clientX - $info.width()/2;
+                            var bottom = window.innerHeight - event.clientY + 40;
+                            $iBox.css({ "left": left, "right": "", "top": "", "bottom": bottom }).fadeIn();
+                        }
+                    }
+                } else {
+                    $iBox.fadeOut();
+                }
+            }
+        }, false );
+        container.addEventListener( 'mouseup', function(event) {
+            if (config.freeze) { return; }
+            if (camera.isCam0) {
+                // resume
+                config.gridXZ.visible = config.gridXZ.visible0;
+                config.material1.opacity = config.material1.opacity0;
+                config.material2.opacity = config.material2.opacity0;
+            } else if (camera.isCamP) {
+                isUserInteracting = false;
+                setCursorStyle();
+            }
+            config.pickle = null;
+        }, false );
+        container.addEventListener( 'wheel', function(event) {
+            if (config.freeze) { return; }
+            var fov = camera.fov + event.deltaY * 0.05;
+            camera.fov = THREE.Math.clamp(Math.round(fov), config.fovMin, config.fovMax);
+        }, false );
+    }, false);
+
+    var animate = function(time) {
+        // setTimeout( function() { requestAnimationFrame( animate ); }, 1000 / 30 );
+        requestAnimationFrame( animate );
+        TWEEN.update();
+
+        // live update 8 corner points
+        for (var i = 0; i < 8; ++i) {
+            var poi = config.points[i];
+            if (poi.position0 === undefined || !poi.position0.equals(poi.position)) {
+                poi.position0 = poi.position.clone();
+                var position = poi.position.clone();
+                var line = new THREE.Line3(new THREE.Vector3(0,0,0), position.setLength(1000000000000));
+                var plane = new THREE.Plane(new THREE.Vector3(0,1,0), i < 4 ? -200 : 200);
+                var point = plane.intersectLine(line);
+                var arrow = config["arr"+(i+1)];
+                if (config.debug === true) {
+                    arrow.visible = false;
+                }
+                if (point) {
+                    point.valid = true;
+                    var length = point.length();
+                    arrow.setDirection(point.normalize());
+                    arrow.setLength(length);
+                    // arrow.visible = true;
+                    config.pointsXYZ[i] = point;
+                } else {
+                    // arrow.visible = false;
+                }
+            } else {
+                // no need for updating
+            }
+        }
+        var triangles = 1;
+        var geometry = new THREE.BufferGeometry();
+        var positions = new Float32Array( triangles * 3 * 3 );
+        var normals = new Float32Array( triangles * 3 * 3 );
+        for ( var i = 0; i < positions.length; i += 9 ) {
+            positions[ i ]     = config.pointsXYZ[0].x;
+            positions[ i + 1 ] = config.pointsXYZ[0].y;
+            positions[ i + 2 ] = config.pointsXYZ[0].z;
+            positions[ i + 3 ] = config.pointsXYZ[1].x;
+            positions[ i + 4 ] = config.pointsXYZ[1].y;
+            positions[ i + 5 ] = config.pointsXYZ[1].z;
+            positions[ i + 6 ] = config.pointsXYZ[2].x;
+            positions[ i + 7 ] = config.pointsXYZ[2].y;
+            positions[ i + 8 ] = config.pointsXYZ[2].z;
+        }
+        geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+
+        config.cam0Axis.visible = camera.isCam0 || false;
+        config.cam0Axis.position.copy(config.cam0Controls.target);
+
+        if (camera.isCam0) {
+            config.cam0Controls.update(config.clock.getDelta());
+        } else if (!isDesktop) {
+            controls.update();
+            // TODO, calculate lon, lat
+        } else if (camera.lon !== undefined && camera.lat !== undefined) {
+            while (camera.lon > 360) { camera.lon -= 360; }
+            while (camera.lon <   0) { camera.lon += 360; }
+            camera.lat = Math.max(-85, Math.min(85, camera.lat));
+            // var v = Util.lonlat2xyz(camera.lon, camera.lat, 500);
+            camera.lookAt( new THREE.Vector3().setFromSpherical({
+                phi: THREE.Math.degToRad(90 - camera.lat),
+                theta: THREE.Math.degToRad(-camera.lon),
+                radius: 500
+            }).add( camera.position ) );
+        }
+
+        config.camera1.position.copy(config.group1.position);
+        config.camera2.position.copy(config.group2.position);
+
+        if (!config.freeze) { }
+
+        // cams
+        config.camera0.updateProjectionMatrix(); config.cam0Helper.update();
+        config.camera1.updateProjectionMatrix(); config.cam1Helper.update();
+        config.camera2.updateProjectionMatrix(); config.cam2Helper.update();
+        config.cameraX.updateProjectionMatrix(); config.camXHelper.update();
+
+        if (config.debug === true) {
+            config.mesh2.visible = false;
+        }
+        renderer.render( scene, camera );
+    };
+
+    function onKeyDown(event) {
+        var code = event.keyCode;
+        if (16 <= code && code <= 18) { // shift, control, alt
+            return;
+        }
+        switch (code) {
+
+            case 48: ; break; // 0
+            case 49: config.mesh1.visible = !config.mesh1.visible; break; // 1
+            case 50: ; break; // 2
+            case 51: ; break; // 3
+
+            case 52: config.cam0Controls.target.x -= config.deltaMove; break; // 4
+            case 53: config.cam0Controls.target.x += config.deltaMove; break; // 5
+            case 54: config.cam0Controls.target.z += config.deltaMove; break; // 6
+            case 55: config.cam0Controls.target.z -= config.deltaMove; break; // 7
+
+            case 56: config.deltaMove = Math.max(1,  config.deltaMove-1); break; // 8
+            case 57: config.deltaMove = Math.min(10, config.deltaMove+1); break; // 9
+
+            case 69: // e
+                break;
+            case 70: // f
+                break;
+            case 38: // up
+                if (camera !== config.camera0) {
+                    config.alpha += 0.01;
+                    if (config.alpha > 1.0) {
+                        config.alpha = 1.0;
+                    }
+                    onAlphaChange(config.alpha);
+                }
+                break;
+            case 40: // down
+                if (camera !== config.camera0) {
+                    config.alpha -= 0.01;
+                    if (config.alpha < 0.0) {
+                        config.alpha = 0.0;
+                    }
+                    onAlphaChange(config.alpha);
+                }
+                break;
+            case 37: // left
+                if (camera.lon !== undefined) {
+                    camera.lon -= 0.25;
+                }
+                break;
+            case 39: // right
+                if (camera.lon !== undefined) {
+                    camera.lon += 0.25;
+                }
+                break;
+
+            case 32: // space
+                if (camera.isCam0) {
+                    config.cam0Controls.target.setScalar(0);
+                } else if (camera.isCamP){
+                    config.raycastUV = !config.raycastUV;
+                }
+                break;
+            case 13: // enter
+                switchToCam();
+                break;
+            default:
+                console.log("keyCode: "+event.keyCode);
+        }
+    }
+
+    // gui.remember(config);
+
+    /*
+    $.contextMenu.types.label = function(item, opt, root) {
+        $('<span>Label<ul>'
+            + '<li class="label1" title="label 1">label 1</li>'
+            + '<li class="label2" title="label 2">label 2</li>'
+            + '<li class="label3" title="label 3">label 3</li>'
+            + '<li class="label4" title="label 4">label 4</li></ul></span>')
+            .appendTo(this)
+            .on('click', 'li', function() {
+                // do some funky stuff
+                console.log('Clicked on ' + $(this).text());
+                // hide the menu
+                // root.$menu.trigger('contextmenu:hide');
+            });
+        this.addClass('labels').on('contextmenu:focus', function(e) {
+            // setup some awesome stuff
+        }).on('contextmenu:blur', function(e) {
+            // tear down whatever you did
+        }).on('keydown', function(e) {
+            // some funky key handling, maybe?
+        });
+    };
+
+    $.contextMenu({
+        selector: 'body',
+        build: function($triggerElement, event) {
+            // if (config.hoveredPOI) { }
+            return {};
+            return {
+                selectableSubMenu: true,
+                callback: function (key, opt) {
+                    console.log("Clicked on " + key + " on element " + opt.$trigger.attr("id"));
+                    console.log("Clicked on " + $triggerElement + " on element " + event);
+                },
+                // animation: "{duration: 250, show: 'fadeIn', hide: 'fadeOut'}",
+                // autoHide: true, // buggy on chrome
+                // className: 'contextmenu-custom contextmenu-custom',
+                events: {
+                    show: function (options) {
+                        // ...
+                    },
+                    hide: function (options) {
+                        // ...
+                    }
+                },
+                items: {
+                    copy: {
+                        name: "Copy close",
+                        icon: "edit",
+                        // accesskey: "cool word" // c
+                        // accesskey: "cool word" // w
+                        callback: function (key, opt) {
+                            console.log("copy close");
+                            return true; // close
+                        }
+                    },
+                    copy2: {
+                        name: "Copy open",
+                        icon: "edit",
+                        callback: function (key, opt) {
+                            console.log("copy not close");
+                            return false;
+                        }
+                    },
+                    copy3: {
+                        name: "Copy default callback",
+                        icon: "edit"
+                    },
+                    sep1: "---------",
+                    saveAsImage: {
+                        name: "Save",
+                        icon: "cut",
+                        callback: function (key, opt) {
+                            var $a = $("<a></a>");
+                            $a[0].download = 'image.png';
+                            $a[0].href = renderer.domElement.toDataURL();
+                            $a.click();
+                        }
+                    },
+                    label: {
+                        type: 'label',
+                        customName: 'label',
+                        callback: function (key, opt) {
+                            return false; // open
+                        }
+                    },
+                    sep2: "---------",
+                    cut: {
+                        name: "如果是 cam0 则 disabled",
+                        icon: "cut",
+                        disabled: function () {
+                            return camera.isCam0 || false;
+                        }
+                    },
+                    fold1: {
+                        "name": "Sub group",
+                        "items": {
+                            "fold1-key1": {"name": "Foo bar"},
+                            "fold2": {
+                                "name": "Sub group 2",
+                                "items": {
+                                    "fold2-key1": {"name": "alpha"},
+                                    "fold2-key2": {"name": "bravo"},
+                                    "fold2-key3": {"name": "charlie"}
+                                }
+                            },
+                            "fold1-key3": {"name": "delta"}
+                        }
+                    }
+                }
+            };
+        }
+    });
+    */
+
+    var toggleContext = function() {
+        var show = true;
+        return function(_show){
+            if (_show === undefined) {
+                show = !show;
+                _show = show;
+            }
+            $("body").contextMenu(_show);
+        };
+    }();
+
+    function setPOI(poi, json) {
+        if (
+            poi  !== undefined && poi.isPOI &&
+            json !== undefined && poi.name === json.name
+        ) {
+            poi.lon = json.lon;
+            poi.lat = json.lat;
+            if (json.position !== undefined) {
+                poi.position.set(
+                    json.position.x,
+                    json.position.y,
+                    json.position.z
+                ); // .setLength(100);
+            }
+        }
+    }
+
+    function finishTexture(plane) {
+        var ws = plane.geometry.parameters.widthSegments;
+        var hs = plane.geometry.parameters.heightSegments;
+        // first/last row
+        [0, hs].forEach(function(row){
+            for (var col = 0; col <= ws; ++col) {
+                var index = row*(ws+1)+col;
+                var offset = row === 0? (ws+1) : -(ws+1);
+                plane.hit.push([row, col]);
+                plane.geometry.vertices[index].copy(
+                    plane.geometry.vertices[index+offset]
+                );
+            }
+        });
+        // both sides
+        for (var row = 1; row < hs; ++row) {
+            plane.geometry.vertices[row*(ws+1)   ].copy( plane.geometry.vertices[row*(ws+1)   +1] );
+            plane.geometry.vertices[row*(ws+1)+ws].copy( plane.geometry.vertices[row*(ws+1)+ws-1] );
+            plane.hit.push([row, 0]);
+            plane.hit.push([row, ws]);
+        }
+    };
+
+    function tweetTexture(plane, i, j, position) {
+        var ws = config.ws; // plane.geometry.parameters.widthSegments - 1;
+        var hs = config.hs; // plane.geometry.parameters.heightSegments - 1;
+
+        if (i < 0 || i > hs-1 || j < 0 || j > ws-1) {
+            console.log("margin!: "+i+", "+j);
+            return;
+        }
+        var index = (i+1)*(ws+2)+(j+1);
+        plane.hit.push([i+1,j+1]);
+        plane.geometry.vertices[index].copy(position);
+
+        var m = ((i+1)-1)*2 * (ws+1) + (j+1)*2 - 1;
+        var n = m + (ws+1)*2 +1;
+
+        var uv;
+        if (uv = getMeshUv(config.mesh1, position)) {
+        } else {
+            uv = position2uv(position);
+            console.log("not hit uv!");
+        }
+
+        plane.geometry.faceVertexUvs[0][m  ][1].copy(uv); // b
+        plane.geometry.faceVertexUvs[0][m+1][1].copy(uv); // b
+        plane.geometry.faceVertexUvs[0][m+2][0].copy(uv); // a
+
+        plane.geometry.faceVertexUvs[0][n  ][0].copy(uv); // a
+        plane.geometry.faceVertexUvs[0][n-1][2].copy(uv); // c
+        plane.geometry.faceVertexUvs[0][n-2][2].copy(uv); // c
+    }
+
+    var POIInfo = JSON.parse('[{"name":"P1","lon":10.812908045927097,"lat":19.192325176667385,"position":{"x":92.7590916763561,"y":32.88331044990007,"z":17.73242242991227}},{"name":"P2","lon":299.4946131307555,"lat":6.8376689495179255,"position":{"x":48.88864104690188,"y":11.91461449576205,"z":-86.41725949140343}},{"name":"P3","lon":227.46642582905815,"lat":5.0778243227066415,"position":{"x":-67.3346521564821,"y":8.862422294327834,"z":-73.39960551694104}},{"name":"P4","lon":160.71395796833897,"lat":15.537959975978337,"position":{"x":-90.93853973172696,"y":26.81844839228228,"z":31.795484227978164}},{"name":"P5","lon":13.776138603170633,"lat":-24.598557208408927,"position":{"x":88.31151106719577,"y":-41.66581992093747,"z":21.564704109831094}},{"name":"P6","lon":303.21809325383305,"lat":-21.733643282970903,"position":{"x":50.86397348537039,"y":-37.044024698721415,"z":-77.72127402069562}},{"name":"P7","lon":225.70372851246128,"lat":-20.864413972410635,"position":{"x":-65.2620300673202,"y":-35.63330000837629,"z":-66.86654890156399}},{"name":"P8","lon":157.58744710392284,"lat":-23.86257790351809,"position":{"x":-84.54143916275964,"y":-40.45547899595596,"z":34.872615094041585}},{"name":"P0","lon":0,"lat":0,"position":{"x":100,"y":6.123233995736766e-15,"z":0}}]');
+
+    var lerp = function (from, to, alpha, out) {
+        var angle = from.angleTo(to);
+        var axis = new THREE.Vector3().crossVectors(from, to).normalize();
+        out.copy(from).applyAxisAngle(axis, angle*alpha);
+    };
+    var lerpArc = function(from, to, seg) {
+        var P1 = config.POIs[from];
+        var P2 = config.POIs[to];
+        var group = new THREE.Group();
+        var ct = P2.material.color;
+        var angle = P1.position.angleTo(P2.position);
+        var axis = new THREE.Vector3().crossVectors(P1.position, P2.position).normalize();
+        for (var i = 1; i < seg-1; ++i) {
+            var a = i/(seg-1);
+            var v = P1.position.clone();
+            v.applyAxisAngle(axis, angle*a);
+            var lonlat = Util.xyz2lonlat(v.x, v.y, v.z);
+            var lon = lonlat.lon;
+            if (lon < 0) { lon += 360; }
+            var lat = lonlat.lat;
+            var radius = v.length();
+            var c = P1.material.color.clone();
+            var poi = addPOIRaw(lon, lat, radius, c.lerp(ct, a), v);
+            group.add(poi);
+        }
+        config.faces = config.faces || {};
+        config.faces[from+"-"+to] = group;
+        scene.add(group);
+        config.shits.push(group);
+        return group.children;
+    };
+    // ws, hs 指的是有多少个节点
+    var lerpFace = function (v1, v2, v3, v4, ws, hs, color) {
+        var group = new THREE.Group();
+        var vs = [];
+        for (var i = 0; i < hs; ++i) {
+            var row = [];
+            for (var j = 0; j < ws; ++j) {
+                row.push(new THREE.Vector3());
+            }
+            vs.push(row);
+        }
+        vs[0 ][0 ].copy(v2);
+        vs[0 ][ws-1].copy(v1);
+        vs[hs-1][0 ].copy(v3);
+        vs[hs-1][ws-1].copy(v4);
+        // lerp first row, last row
+        [0, hs-1].forEach(function(r){
+            for (var j = 1; j < ws; ++j) {
+                var from = vs[r][0];
+                var to   = vs[r][ws-1];
+                var alpha = j/(ws-1);
+                lerp(from, to, alpha, vs[r][j]);
+            }
+        });
+        // cols
+        for (var j = 0; j < ws; ++j) {
+            for (var i = 1; i < hs-1; ++i) {
+                var from = vs[0][j];
+                var to = vs[hs-1][j];
+                var alpha = i/(hs-1);
+                lerp(from, to, alpha, vs[i][j]);
+                // addPOIRaw
+            }
+        }
+        for (var i = 0; i < ws; ++i) {
+            for (var j = 0; j < hs; ++j) {
+                vs[i][j].multiplyScalar(1.1);
+                var poi = addPOIRaw(0, 0, 0, color, vs[i][j]);
+                poi.i = i;
+                poi.j = i;
+                group.add(poi);
+            }
+        }
+        config.shits.push(group);
+        // scene.add(group);
+        // return vs;
+        group.ws = ws;
+        group.hs = hs;
+        return group;
+    };
+
+    var position2uv = function(p) {
+        var theta = Math.atan( p.z / p.x );
+        var phi = Math.acos( p.y / p.length() );
+        var lon = THREE.Math.radToDeg(theta);
+        var lat = 90 - THREE.Math.radToDeg(phi);
+        return new THREE.Vector2(lon/360, lat/180+0.5);
+    };
+
+    var applyFace = function() {
+        var done = [];
+        return function(id) {
+            if (id === undefined) { return; }
+            if (id in done) {
+                console.log("Won't process "+id+" again.");
+                return;
+            } else {
+                done.push(id);
+            }
+            var face = config["face"+id];
+            if (face === undefined) { return; }
+            if (face.updateMe === undefined) {
+                face.updateMe = true;
+            }
+            if (face.updateMe) {
+                face.updateMe = false;
+                var v1, v2, v3, v4;
+                switch (id) {
+                    case 1:
+                        v1 = config.POIs["P1"].position;
+                        v2 = config.POIs["P2"].position;
+                        v3 = config.POIs["P3"].position;
+                        v4 = config.POIs["P4"].position;
+                        break;
+                    case 2:
+                        v1 = config.POIs["P8"].position;
+                        v2 = config.POIs["P5"].position;
+                        v3 = config.POIs["P6"].position;
+                        v4 = config.POIs["P7"].position;
+                        break;
+                    case 3:
+                        v1 = config.POIs["P3"].position;
+                        v2 = config.POIs["P2"].position;
+                        v3 = config.POIs["P6"].position;
+                        v4 = config.POIs["P7"].position;
+                        break;
+                    case 4:
+                        v1 = config.POIs["P4"].position;
+                        v2 = config.POIs["P8"].position;
+                        v3 = config.POIs["P5"].position;
+                        v4 = config.POIs["P1"].position;
+                        break;
+                    case 5:
+                        v1 = config.POIs["P4"].position;
+                        v2 = config.POIs["P3"].position;
+                        v3 = config.POIs["P7"].position;
+                        v4 = config.POIs["P8"].position;
+                        break;
+                    case 6:
+                        v1 = config.POIs["P1"].position;
+                        v2 = config.POIs["P5"].position;
+                        v3 = config.POIs["P6"].position;
+                        v4 = config.POIs["P2"].position;
+                        break;
+                    default:
+                        console.log("shit!!!!!");
+                        return;
+                }
+                var vc = v1.clone().add(v2).add(v3).add(v4).divideScalar(4);
+                vc.multiplyScalar(5);
+                var normal = normalOfFour(v1,v2,v3,v4);
+                var plane = new THREE.Plane(normal, -vc.dot(normal));
+                var group = new THREE.Group();
+                for (var i = 0; i < face.ws; ++i) {
+                    for (var j = 0; j < face.hs; ++j) {
+                        var index = i*face.ws+j;
+                        var poi = face.children[index];
+                        var line = new THREE.Line3(new THREE.Vector3(0,0,0), poi.position.clone().setLength(1000000000000));
+                        var point = plane.intersectLine(line);
+                        if (point) {
+                            tweetTexture(config["plane"+id], i,j, point);
+                            // var poi = addPOIRaw(0, 0, 0, new THREE.Color(1,1,1), point.multiplyScalar(2));
+                            // group.add(poi);
+                        } else {
+                            console.log("FUCK");
+                        }
+                    }
+                }
+                finishTexture(config["plane"+id]);
+            }
+            scene.add(group);
+            config["faceMe"+id] = group;
+            config["plane"+id].geometry.verticesNeedUpdate = true;
+            config["plane"+id].geometry.uvsNeedUpdate = true;
+        }
+    }();
+
+    var normalOfThree = function(v1, v2, v3) {
+        var v21 = v1.clone().sub(v2);
+        var v23 = v3.clone().sub(v2);
+        var n123 = v23.cross(v21);
+        return n123.normalize();
+    };
+
+    var normalOfFour = function (v1, v2, v3, v4) {
+        var n123 = normalOfThree(v1, v2, v3);
+        var n134 = normalOfThree(v1, v3, v4);
+        return n123.add(n134).normalize();
+    };
+
+</script>
+
+</body>
+</html>

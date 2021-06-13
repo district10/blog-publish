@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="http---the-definitive-guide">HTTP - The Definitive Guide</h1>
+<h2 id="part-i.-http-the-webs-foundation">Part I. HTTP: The Web&#8217;s Foundation</h2>
+<h3 id="chapter-01.-overview-of-http">Chapter 01. Overview of HTTP</h3>
+Keywords: * MIME, URIs, URLs, URNs * Transactions: * GET * PUT * DELETE * POST * HEAD * Status code * Request/Response Messages: * Start line * Header * Content-type header * Content-length header * Body(optional, <an empty line(CRLF)> +
+<body>
+<p>) * Connections: * TCP/IP * Connections, IP address, and Port Numbers * Protocol Versions: * 0.9 * 1.0 * 1.0+ * 1.1 * 2.0(HTTP-NG) * Architechtural Components of the Web * Proxies * Caches(Web cache, or caching proxy) * Gateways * Tunnels * Agents(Web browsers, etc)</p>
+<h3 id="chapter-02.-urls-and-resources">Chapter 02. URLs and resources</h3>
+<p>Scheme(how), Host(where), Path(what)</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">[<span class="kw">&lt;scheme&gt;</span>://][<span class="kw">&lt;user&gt;</span>[:<span class="kw">&lt;password&gt;</span>]@]<span class="kw">&lt;host&gt;</span>[:<span class="kw">&lt;port&gt;</span>][/<span class="kw">&lt;path&gt;</span>][;<span class="kw">&lt;params&gt;</span>][?<span class="kw">&lt;query&gt;</span>][#<span class="kw">&lt;frag&gt;</span>]</code></pre></div>
+<ul>
+<li>Params(Parameters), name/value pairs.</li>
+<li>Base URLs: <code>&lt;BASE&gt;</code> HTML tag. Converting relative to absolute URLs</li>
+<li>Expandomatic URLs
+<ul>
+<li>Hostname expansion(<code>www.</code> <code>.com</code>, etc)</li>
+<li>History expansion</li>
+</ul></li>
+<li>Shady Characters</li>
+</ul>
+<h3 id="chapter-03.-http-messages">Chapter 03. HTTP Messages</h3>
+<p>Points: * Transactional direction: inbound, outbound * Messages flow: upstream, downstream * Messages syntax * Request message ```xml <method> <request-URL> <version> <headers></p>
+<pre><code>    &lt;entity-body&gt;
+    ```
+* Response message
+    ```xml
+    &lt;version&gt; &lt;status-code&gt; &lt;reason-phrase&gt;
+    &lt;headers&gt;
+
+    &lt;entity-body&gt;
+    ```
+* ?
+    * version 2.22 &gt; 2.3
+    * Header continuation lines
+    * Method: GET, PUT, POST, TRACE, OPTIONS, DELETE
+    * UA(User Agent): UA-OS, UA-CPU, etc.
+    * Headers
+        * General headers: Date: Tue, 3 Oct 1974 02:16:00 GMT
+        * Request headers: Accept: */*
+        * Accept headers
+        * Conditional request headers
+        * Request security headers
+        * Proxy request headers
+    * Response headers: Server: Tiki-Hut/1.0
+    * Entity headers: Content-Type: text/html; charset=iso-latin-1
+    * Content headers
+    * Entity caching headers
+    * Extension headers:</code></pre>
+<p>See also * http://www.w3.org/Protocols/</p>
+<h3 id="chapter-04.-connection-management">Chapter 04. Connection Management</h3>
+<p>TCP Reliable Data Pipes</p>
+<p>TCP Streams Are Segmented and Shipped by IP Packets</p>
+<p>Keeping TCP Connections Straight</p>
+<p>A TCP connection * <code>&lt;source-IP-address, source-port, destination-IP-address, destination-port&gt;</code> * Programming with TCP Sockets * s = socket(<parameters>): Creates a new, unnamed, unattached socket. * bind(s, <local IP:port>): Assigns a local port number and interface to the socket.</p>
+<p>TCP Performance Considerations * HTTP Transaction Delays * Performance Focus Areas * Delayed Acknowledgments * TCP Slow Start * Nagle&#8217;s Algorithm and TCP_NODELAY * TIME_WAIT Accumulation and Port Exhaustion * Serial Transaction Delays</p>
+<p>Parallel Connections * Parallel Connections May Make Pages Load Faster * Parallel Connections Are Not Always Faster * Parallel Connections May &#8220;Feel&#8221; Faster</p>
+<p>Persistent Connections</p>
+<p>Persistent Versus Parallel Connections</p>
+<p>HTTP/1.0+ Keep-Alive Connections * Keep-Alive Operation * Keep-Alive and Dumb Proxies * The Connection header and blind relays * Proxies and hop-by-hop headers</p>
+<p>The Proxy-Connection Hack</p>
+<p>HTTP/1.1 Persistent Connections Pipelined Connections</p>
+<p>The Mysteries of Connection Close * &#8220;At Will&#8221; Disconnection * Content-Length and Truncation * Connection Close Tolerance, Retries, and Idempotency * Graceful Connection Close</p>
+<p>See also * http://www.w3.org/Protocols/HTTP/Performance/ * http://www.acm.org/sigcomm/ccr/archive/2001/jan01/ccr-200101-mogul.pdf</p>
+<h2 id="part-ii.-http-architechture">Part II. HTTP Architechture</h2>
+<h3 id="chapter-05.-web-servers">Chapter 05. Web Servers</h3>
+<p>Web Server Implementations: HTTP, TCP</p>
+<p>General-Purpose Software Web Servers</p>
+<p>Web Server Appliances</p>
+<p>Embedded Web Servers</p>
+<p>What Real Web Servers Do * Step 1: Accepting Client Connections * Handling New Connections * Client Hostname Identification (reverse DNS) * Determining the Client User Through ident * Step 2: Receiving Request Messages * Internal Representations of Messages * Connection Input/Output Processing Architectures * Step 3: Processing Requests * Step 4: Mapping and Accessing Resources * Docroots (document root) * Virtually hosted docroots <code>xml                 &lt;VirtualHost www.marys-antiques.com&gt;                 ServerName www.marys-antiques.com                 DocumentRoot /docs/mary                 TransferLog /logs/mary.access_log                 ErrorLog /logs/mary.error_log                 &lt;/VirtualHost&gt;</code> * User home directory docroots (<code>GET /~Bob/index.html</code> ==&gt; /home/Bob/index.html) * Directory Listings * Dynamic Content Resource Mapping <code>ScriptAlias /cgi-bin/ /usr/local/etc/httpd/cgi-programs/             AddHandler cgi-script .cgi</code> * Server-Side Includes (SSI) * Access Controls * Step 5: Building Responses * Response Entities * MIME Typing * mime.types * Magic typing * Explicit typing (igonre file extension or content (maybe magic number)) * Type negotiation * Redirection * Permanently/temporarily moved resources * URL augmentation * Load balancing * Step 6: Sending Responses * Step 7: Logging</p>
+<h3 id="chapter-06.-proxies">Chapter 06. Proxies</h3>
+<p>Web Intermediaries</p>
+<p>Private and Shared Proxies</p>
+<p>Proxies (middlemen) Versus Gateways (protocol converter)</p>
+<p>Why Use Proxies? * Child filter * Document access controller * Security firewall * Web cache * Surrogate * Content router * Transcoder (<code>*.gif</code> ==&gt; <code>*.jpeg</code>, etc) * Anonymizer</p>
+<p>Where Do Proxies Go?</p>
+<p>Proxy Server Deployment * Egress proxy (adult content) * Access (ingress) proxy (ISP access proxy: download speed) * Surrogates * Network exchange proxy</p>
+<p>Proxy Hierarchies * inbound * outbound * parent * Proxy hierarchy content routing</p>
+<p>How Proxies Get Traffic * Modify the client (Proxy Plugin) * Modify the network (intercepting proxy, like GFW) * Modify the DNS namespace * Modify the web server</p>
+<p>Client Proxy Settings * Manual configuration * Browner preconfiguartion * Proxy auto-configuration: Proxy auto-configuration (PAC) + suffix: &#8220;.pac&#8221; + MIME type: &#8220;application/x-ns-proxy-autoconfig&#8221; * Client Proxy Configuartion: Web Proxy Autodiscovery Protocol (WPAD) + Dynamic Host Discovery Protocol (DHCP) + Service Location Protocol (SLP) + DNS well-known hostnames + DNS SRV records + DNS service URIs in TXT records</p>
+<ul>
+<li>Tricky Things About Proxy Requests
+<ul>
+<li>Proxy URIs Differ from Server URIs</li>
+<li>Server request, explicit proxy request, surrogate(reverse proxy) request, intersecpting proxy request</li>
+</ul></li>
+<li><p>The Same Problem with Virtual Hosting (index.html ==&gt; bob/index.html? or tom/index.html?)</p></li>
+<li>Intercepting Proxies Get Partial URIs</li>
+<li>Proxies Can Handle Both Proxy and Server Requests</li>
+<li>In-Flight URI Modification
+<ul>
+<li>URI Client Auto-Expansion and Hostname Resolution</li>
+<li>URI Resolution Without a Proxy</li>
+<li>URI Resolution with an Explicit Proxy</li>
+<li>URI Resolution with an Intercepting Proxy Tracing Messages</li>
+<li>The Via Header
+<ul>
+<li>Via syntax</li>
+<li>Via request and response paths</li>
+<li>Via and gateways</li>
+<li>The Server and Via headers</li>
+<li>Privacy and security implications of Via</li>
+</ul></li>
+<li>The TRACE Method
+<ul>
+<li>Max-Forwards</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Proxy Authentication</p>
+<p>Proxy Interoperation</p>
+<p>Handling Unsupported Headers and Methods</p>
+<ul>
+<li>OPTIONS: Discovering Optional Feature Support The Allow Header</li>
+</ul>
+<h3 id="chapter-07.-caching">Chapter 07. Caching</h3>
+<p>Redundant Data Transfers Bandwidth Bottlenecks Flash Crowds Distance Delays Hits and Misses (hits, misses, revalidations(freshness check)) * cache hit * cache miss * revalidate hit (slow hit) * revalidate miss</p>
+<p>Revalidate request with If-Modified-Since + ==&gt; Revalidate hit: 304(not modified) response (&#8220;still fresh&#8221;) + ==&gt; Revalidate miss: normal HTTP 200 OK response + full content,</p>
+<p>Hit Rate/Ratio (fraction of requests) Byte Hit Rate</p>
+<p>Distinguishing Hits and Misses</p>
+<p>Cache Topologies + private caches (Firefox: <code>about:cache</code>) + shared public caches (public proxy caches)</p>
+<p>Proxy Cache Hierarchies Cache Meshes, Content Routing, and Peering(sibling caches)</p>
+<p>Cache Processing Steps * Step 1: Receiving * Step 2: Parsing * Step 3: Lookup * Step 4: Freshness Check * Step 4: Freshness Check * Step 5: Response Creation * Step 6: Sending * Step 7: Logging</p>
+<p>Cache Processing Flowchart</p>
+<p>Keeping Copies Fresh * document expiration + Cache-Control: max-age=<max-age(in seconds)> + Expires: <date> * server revalidation * Revalidation with Conditional Methods (conditional request) + If-Modified-Since: <date> + If-None-Match: <tags> ETags(entity tags)</p>
+<p>Weak and Strong Validators When to Use Entity Tags and Last-Modified Dates</p>
+<p>Controlling Cachability * No-Cache and No-Store Response Headers * Cache-Control: no-store * Cache-Control: no-cache # (may be cached locally) * Pragma: no-cache * Max-Age Response Headers * Cache-Control: max-age=3600 * Cache-Control: s-maxage=3600 # shared(public) cache * Expires Response Headers * Expires: <date> * Must-Revalidate Response Headers * Cache-Control: must-revalidate * Heuristic Expiration * LM-Factor algorithm * Client Freshness Constraints * Max-Age Response Headers * Client Freshness Constraints</p>
+<p>Setting Cache Controls * Controlling HTTP Headers with Apache + mod_headers (the mod_headers module) <code>xml         &lt;Files *.html&gt;         Header set Cache-control no-cache         &lt;/Files&gt;</code> + mod_expires * ExpiresDefault M86400 * ExpiresByType text/html &#8220;modification plus 2 days 6 hours 12 minutes&#8221; * mod_cern_meta * Controlling HTML Caching Through HTTP-EQUIV</p>
+<p>Detailed Algorithms * Age and Freshness Lifetime * Age Computation * Apparent age is based on the Date header * Hop-by-hop age calculations * Compensating for network delays * Freshness Lifetime Computation &#8230;</p>
+<p>Caches and Advertising * The Advertiser&#8217;s Dilemma * The Publisher&#8217;s Response (cache-busting)</p>
+<p>Log Migration</p>
+<h3 id="chapter-08.-integration-points-gateways-tunnels-and-relays">Chapter 08. Integration Points: Gateways, Tunnels, and Relays</h3>
+<p>Client-Side and Server-Side Gateways <client-protocol>/<server-protocol></p>
+<p>Protocol Gateways * HTTP/<em>: Server-Side Web Gateways </em> HTTP/HTTPS: Server-Side Security Gateways * HTTPS/HTTP: Client-Side Security Accelerator Gateways</p>
+<p>Resource Gateways * Common Gateway Interface(CGI) * Server Extension APIs</p>
+<p>Application Interfaces and Web Services</p>
+<p>Tunnels * Establishing HTTP Tunnels with CONNECT (a raw byte relay) + CONNECT requests CONNECT home.netscape.com:443 HTTP/1.0 User-agent: Mozilla/4.0 + CONNECT responses * Data Tunneling, Timing, and Connection Management + SSL Tunneling + SSL Tunneling Versus HTTP/HTTPS Gateways * Tunnel Authentication * Tunnel Security Considerations</p>
+<p>Relays</p>
+<h3 id="chapter-09.-web-robots">Chapter 09. Web Robots</h3>
+<p>Crawlers and Crawling</p>
+<p>Where to Start: The &#8220;Root Set&#8221; * stranded&#8212;isolated,</p>
+<p>Extracting Links and Normalizing Relative Links * Loops and Dups</p>
+<p>Trails of Breadcrumbs * Trees and hash tables * Lossy presence bit maps * Checkpoints * Partitioning</p>
+<p>Aliases and Robot Cycles * Canonicalizing URLs * Filesystem Link Cycles * Dynamic Virtual Web Spaces</p>
+<p>Avoiding Loops and Dups * Canonicalizing URLs * Breadth-first crawling * Throttling * Limit URL size * URL/site blacklist * Pattern detection (<code>/subdir/subdir/subdir...</code>) * Content fingerprinting * Human monitoring</p>
+<p>Robotic HTTP * Identifying Request Headers * Virtual Hosting * Conditional Requests * Response Handling + status codes + entities * User-Agent Targeting</p>
+<p>Misbehaving Robots * Runaway robots * Stale URLs * Long, wrong URLs * Nosy robots * Dynamic gateway access</p>
+<p>Excluding Robots * Robots Exclusion Standard (robots.txt) * Web Sites and robots.txt Files + retrive <code>robots.txt</code> and check response codes + robots.txt File Format</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">User-Agent: <span class="kw">&lt;robot-name&gt;</span> # case-insensitive substring of the robot&#8217;s name</code></pre></div>
+<ul>
+<li>Disallow/Allow prefix matching</li>
+<li>Other robots.txt Wisdom</li>
+</ul>
+<p>Caching and Expiration of robots.txt</p>
+<p>Robot Exclusion Perl Code</p>
+<p>HTML Robot-Control META Tags NOINDEX, NOFOLLOW, INDEX, FOLLOW, NOARCHIVE, ALL, NONE</p>
+<p>Robot Etiquette(&#31036;&#20202;) * http://www.robotstxt.org/wc/guidelines.html</p>
+<h3 id="chapter-10.-http-ng">Chapter 10. HTTP-NG</h3>
+<p>HTTP&#8217;s Growing Pains <a href="http://www.w3.org/Protocols/HTTP-NG/">HTTP-NG</a> Activity = HTTP: The Next Generation (HTTP-NG)</p>
+<p>Modularize and Enhance * Layer {1..3} * Distributed Objects * Layer 1: <a href="http://www.w3.org/Protocols/MUX/WD-mux-980722.html">Messaging (WebMUX)</a> * Layer 2: Remote Invocation (<a href="http://www.w3.org/Protocols/HTTP-NG/1998/08/draft-janssen-httpng-wire-00.txt">Binary Wire Protocol</a>) * Layer 3: Web Application</p>
+<h2 id="part-iii.-identification-authorization-and-security">PART III. Identification, Authorization, and Security</h2>
+<h3 id="chapter-11.-client-identification-and-cookies">Chapter 11. Client Identification and Cookies</h3>
+<p>The Personal Touch</p>
+<ol style="list-style-type: decimal">
+<li>HTTP Headers</li>
+<li>Client IP Address</li>
+<li>User Login (Pretty soon, Fred will give up on the Internet and go back to watching Oprah&#8230;)</li>
+<li>Fat URLs</li>
+</ol>
+<ul>
+<li>Ugly URLs</li>
+<li>Can&#8217;t share URLs</li>
+<li>Breaks caching</li>
+<li>Extral server load</li>
+<li>Excape hatches (may lost your shopping cart)</li>
+<li>Not persistent across sessions</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Cookies</li>
+</ol>
+<ul>
+<li>Types of Cookies: session and persistent</li>
+<li>How Cookies Work</li>
+<li>Cookie Jar: Client-Side State</li>
+<li>domain</li>
+<li>allh</li>
+<li>path</li>
+<li>secure</li>
+<li>expiration</li>
+<li>name</li>
+<li>value</li>
+<li>Different Cookies for Different Sites (<code>Set-Cookie: key=val</code>, Cookie: key=value`)</li>
+<li>Cookie Domain attribute: <code>domain=&lt;SITE&gt;</code>, <SITE> e.g. &#8220;www.jianshu.com&#8221;</li>
+<li>Cookie Path attribute: <code>path=/autos/</code></li>
+<li>Cookie Ingredients</li>
+<li>Version 0 (Netscape) Cookies</li>
+<li>Version 1 (RFC 2965) Cookies</li>
+<li>Cookies and Session Tracking</li>
+<li>Cookies and Caching</li>
+<li>Mark documents uncacheable if they are</li>
+<li>Be cautious about caching Set-Cookie headers</li>
+<li>Be cautious about requests with Cookie headers</li>
+<li>Cookies, Security, and Privacy</li>
+</ul>
+<h3 id="chapter-12.-basic-authentication">Chapter 12. Basic Authentication</h3>
+<ul>
+<li>Authentication</li>
+<li>Authentication Protocols and Headers</li>
+<li>Security Realms</li>
+<li>Basic Authentication</li>
+<li>Challenge/Response</li>
+<li>Challenge(server2client): <code>WWW-Authenticate: Basic realm=&lt;quoted-realm&gt;</code></li>
+<li>Response(client2server): <code>Authorization: Basic &lt;base64-username-and-password&gt;</code></li>
+<li>Base-64 Username/Password Encoding: BASE64ENC(<username>:<passwd>)</li>
+<li>Proxy Authentication</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Web Server</th>
+<th align="center">Proxy Server</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Unauthorized status code: 401</td>
+<td align="center">Unauthorized status code: 407</td>
+</tr>
+<tr class="even">
+<td align="center">WWW-Authenticate</td>
+<td align="center">Proxy-Authenticate</td>
+</tr>
+<tr class="odd">
+<td align="center">Authorization</td>
+<td align="center">Proxy-Authorization</td>
+</tr>
+<tr class="even">
+<td align="center">Authentication-Info</td>
+<td align="center">Proxy-Authentication-Info</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The Security Flaws of Basic Authentication</li>
+</ul>
+<h3 id="chapter-13.-digest-authentication">Chapter 13. Digest Authentication</h3>
+<p>The Improvements of Digest Authentication * Transport Layer Security (TLS) * Secure HTTP (HTTPS)</p>
+<p>Using Digests to Keep Passwords Secret</p>
+<p>One-Way Digests * aliases of <code>Digest functions</code>= <code>cryptographic checksums</code>, <code>one-way hash functions</code>, or <code>fingerprint functions</code></p>
+<ul>
+<li>MD5</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Input</th>
+<th align="center">MD5 digest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">&#8220;Hi&#8221;</td>
+<td align="center">C1A5298F939E87E8F962A5EDFC206918</td>
+</tr>
+<tr class="even">
+<td align="center">&#8220;bri:Ow!&#8221;</td>
+<td align="center">BEAAA0E34EBDB072F8627C038AB211F8</td>
+</tr>
+<tr class="odd">
+<td align="center">&#8220;3.1415926535897&#8221;</td>
+<td align="center">475B977E19ECEE70835BC6DF46F4F6DE</td>
+</tr>
+</tbody>
+</table>
+<p>Using Nonces to Prevent Replays * a special token called a <code>nonce</code></p>
+<p>The Digest Authentication Handshake * chanllenge, nonce, algorithms&#8230;</p>
+<h2 id="digest-calculations">Digest Calculations</h2>
+<p>Digest Algorithm Input Data</p>
+<p>Digests are computed from three components: * A pair of functions consisting of a one-way hash function H(d) and digest KD(s,d), where s stands for secret and d stands for data * A chunk of data containing security information, including the secret password, called A1 * A chunk of data containing nonsecret attributes of the request message, called A2 The two pieces of data, A1 and A2, are processed by H and KD to yield a digest.</p>
+<p>H(<data>) = MD5(<data>) KD(<secret>,<data>) = H(concatenate(<secret>:<data>)) qop: quality of protection <request-method>: HTTP request method <uri-directive-value>: the request URI from the request line nc: nonce count</p>
+<p>The Security-Related Data (A1) | Algorithm | A1 | | :&#8212;: | :&#8212;: | | MD5 | A1 = <user>:<realm>:<password> | | MD5-sess | A1 = MD5(<user>:<realm>:<password>):<nonce>:<cnonce> |</p>
+<p>The Message-Related Data (A2) | qop | A2 | | undefined | <request-method>:<uri-directive-value> | | auth | <request-method>:<uri-directive-value> | | auth-int | <request-method>:<uri-directive-value>:H(<request-entity-body>) |</p>
+<p>Overall Digest Algorithm * Old and new digest algorithms | qop | Digest algorithm | Notes | | :&#8212;: | :&#8212;: | :&#8212;: | | undefined | KD(H(A1), <nonce>:H(A2)) | Deprecated | | auth or auth-int | KD(H(A1), <nonce>:<nc>:<cnonce>:<qop>:H(A2)) | Preferred | * Unfolded digest algorithm cheat sheet | qop | Algorithm | Unfolded algorithm | | :&#8212;: | :&#8212;: | :&#8212;: | | undefined | <undefined>, MD5, MD5-sess | MD5(MD5(A1):<nonce>:MD5(A2)) | | auth | <undefined>, MD5, MD5-sess | MD5(MD5(A1):<nonce>:<nc>:<cnonce>:<qop>:MD5(A2)) | | auth-int | <undefined>, MD5, MD5-sess | MD5(MD5(A1):<nonce>:<nc>:<cnonce>:<qop>:MD5(A2)) |</p>
+<p>Digest Authentication Session</p>
+<p>Preemptive Authorization * Next nonce pregeneration * Limited nonce reuse * Synchronized nonce generation</p>
+<p>Nonce Selection * Suggested by RFC 2617, nonce = BASE64(time-stamp H(time-stamp &#8220;:&#8221; ETag &#8220;:&#8221; private-key)) * ETag: the HTTP ETag header associated with the requested entity</p>
+<p>Symmetric Authentication * Definitions for A2 by algorithm (request digests) | qop | A2 | | :&#8212;: | :&#8212;: | | undefined | <request-method>:<uri-directive-value> | | auth | <request-method>:<uri-directive-value> | | auth-int | <request-method>:<uri-directive-value>:H(<request-entity-body>) | * Definitions for A2 by algorithm (response digests) | qop | A2 | | :&#8212;: | :&#8212;: | | undefined | :<uri-directive-value> | | auth | :<uri-directive-value> | | auth-int | :<uri-directive-value>:H(<response-entity-body>) |</p>
+<p>Quality of Protection Enhancements * Use of qop is optional, but only for backward compatibility with the older RFC 2069 specification.</p>
+<p>Message Integrity Protection</p>
+<p>Digest Authentication Headers</p>
+<p>Practical Considerations * Multiple Challenges * Error Handling * Protection Spaces * Rewriting URIs * Caches</p>
+<p>Security Considerations * Header Tampering * Replay Attacks * Multiple Authentication Mechanisms * Dictionary Attacks * Hostile Proxies and Man-in-the-Middle Attacks * Chosen Plaintext Attacks * Storing Passwords</p>
+<h3 id="chapter-14.-secure-http">Chapter 14. Secure HTTP</h3>
+<p>Making HTTP Safe HTTPS Digital Cryptography: The Art and Science of Secret Coding Cipher</p>
+<p>Symmetric-Key Cryptography * (e=k), encoding = decoding * P = D(C, d) * DES, Triple-DES, RC2, and RC4 * Key Length and Enumeration Attacks v</p>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-05-04" />
+  <meta name="keywords" content="gis, spatial gis, spatial analysis, arcgis" />
+  <title>&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;</h1>
+<h3 class="date">2014-05-04</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;">&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;</a><ul>
+        <li><a href="#&#23454;&#20064;&#30446;&#30340;">&#23454;&#20064;&#30446;&#30340;</a></li>
+        <li><a href="#&#23454;&#20064;&#36807;&#31243;">&#23454;&#20064;&#36807;&#31243;</a><ul>
+        <li><a href="#&#36807;&#31243;&#32508;&#36848;">&#36807;&#31243;&#32508;&#36848;</a></li>
+        <li><a href="#&#19968;&#28857;&#35828;&#26126;">&#19968;&#28857;&#35828;&#26126;</a></li>
+        <li><a href="#&#26629;&#26684;&#37096;&#20998;&#19968;&#20010;&#23436;&#25972;&#30340;&#20363;&#23376;-demo">&#26629;&#26684;&#37096;&#20998;&#65288;&#19968;&#20010;&#23436;&#25972;&#30340;&#20363;&#23376;, DEMO&#65289;</a></li>
+        </ul></li>
+        <li><a href="#&#20854;&#20182;">&#20854;&#20182;</a></li>
+        <li><a href="#&#23454;&#20064;&#24863;&#24735;">&#23454;&#20064;&#24863;&#24735;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;">&#31354;&#38388;&#20998;&#26512;&#23454;&#20064;&#25253;&#21578;</h1>
+<h2 id="&#23454;&#20064;&#30446;&#30340;">&#23454;&#20064;&#30446;&#30340;</h2>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/aa_arcgis_logo.png" alt="ArcGIS" />
+<p class="caption">ArcGIS</p>
+</div>
+<ul>
+<li>&#26412;&#27425;&#23454;&#20064;&#30340;&#29992; <a href="http://en.wikipedia.org/wiki/ArcGIS" title="&#20854;&#23454; ArcGIS &#19981;&#20540;&#37027;&#20040;&#22810;">ArcGIS</a> &#23436;&#25104;&#31354;&#38388;&#20998;&#26512;&#30340;&#19968;&#20123;&#25805;&#20316;&#65292;</li>
+<li>&#21152;&#28145;&#23545;&#31354;&#38388;&#20998;&#26512;&#29702;&#35770;&#30340;&#29702;&#35299;&#21644;&#35748;&#35782;&#65292;</li>
+<li>&#29087;&#24713; GIS &#39046;&#22495;&#26368;&#36890;&#29992;&#26368;&#24378;&#22823;&#30340;&#36719;&#20214; ArcGIS &#30340;&#20351;&#29992;&#12290;</li>
+</ul>
+<h2 id="&#23454;&#20064;&#36807;&#31243;">&#23454;&#20064;&#36807;&#31243;</h2>
+<h3 id="&#36807;&#31243;&#32508;&#36848;">&#36807;&#31243;&#32508;&#36848;</h3>
+<ol style="list-style-type: decimal">
+<li>&#23454;&#20064;&#25353;&#29031;&#23454;&#20064;&#25351;&#23548;&#20070;&#36827;&#34892;&#65292;&#20998;&#20026;&#26629;&#26684;&#12289;&#30690;&#37327;&#12289;&#19977;&#32500;&#31561;&#20960;&#22823;&#29256;&#22359;&#65307;</li>
+<li>&#25353;&#29031;&#23454;&#20064;&#25351;&#23548;&#20070;&#35201;&#27714;&#65292;&#22238;&#31572;&#30456;&#24212;&#38382;&#39064;&#65292;&#24182;&#25552;&#20132;&#20960;&#20221;&#22320;&#22270;&#65307;</li>
+<li>&#26368;&#21518;&#25353;&#35201;&#27714;&#25776;&#20889;&#23454;&#20064;&#25253;&#21578;&#12290;</li>
+</ol>
+<h3 id="&#19968;&#28857;&#35828;&#26126;">&#19968;&#28857;&#35828;&#26126;</h3>
+<p>&#22240;&#20026;&#26576;&#31181;&#31070;&#30340;&#21495;&#21484;&#65292;&#25105;&#35201;&#29992; Python &#20570;&#36825;&#27425;&#23454;&#20064;&#12290;&#35843;&#29992; ArcGIS &#30340; ArcPy &#20043;&#21069;&#30340;&#20934;&#22791;&#24037;&#20316;</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ab_extract.png" alt="&#35299;&#21387;&#25968;&#25454;" />
+<p class="caption">&#35299;&#21387;&#25968;&#25454;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ac_load_mxd.png" alt="&#25171;&#24320;&#22320;&#22270;" />
+<p class="caption">&#25171;&#24320;&#22320;&#22270;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ad_python_shell.png" alt="&#25171;&#24320; Python Shell" />
+<p class="caption">&#25171;&#24320; Python Shell</p>
+</div>
+<p>&#28982;&#21518;&#23601;&#26159;&#25226;&#30456;&#24212;&#20195;&#30721;&#31896;&#36148;&#21040; Python Shell &#20013;&#25191;&#34892;&#65288;&#22238;&#36710;&#21363;&#21487;&#65289;</p>
+<p>&#20195;&#30721;&#25918;&#22312;&#21508; <code>DEMO</code> &#25991;&#20214;&#22841;&#30340; <code>x-py</code> &#25991;&#20214;&#22841;&#20869;&#65292;&#26377;&#20123;&#25105;&#35797;&#39564;&#30340; Python &#33050;&#26412;&#25918;&#22312; <code>more-scripts</code> &#25991;&#20214;&#22841;</p>
+<h3 id="&#26629;&#26684;&#37096;&#20998;&#19968;&#20010;&#23436;&#25972;&#30340;&#20363;&#23376;-demo">&#26629;&#26684;&#37096;&#20998;&#65288;&#19968;&#20010;&#23436;&#25972;&#30340;&#20363;&#23376;, DEMO&#65289;</h3>
+<ol style="list-style-type: decimal">
+<li>&#35774;&#32622;&#24037;&#20316;&#36335;&#24452;&#65292;&#21152;&#20837;&#24517;&#35201;&#30340; Python Module</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">path_base <span class="op">=</span> <span class="st">&#39;X://DEMO/&#39;</span><span class="op">;</span>
+path_gdb <span class="op">=</span> path_base <span class="op">+</span> <span class="st">&#39;demo.gdb/&#39;</span><span class="op">;</span>
+path_data <span class="op">=</span> path_base <span class="op">+</span> <span class="st">&#39;Spatial/&#39;</span><span class="op">;</span>
+<span class="co"># import modules</span>
+<span class="im">import</span> sys, os, arcpy<span class="op">;</span>
+<span class="im">import</span> arcpy.mapping <span class="im">as</span> mapping<span class="op">;</span>
+<span class="im">from</span> arcpy.sa <span class="im">import</span> <span class="op">*</span>
+<span class="im">from</span> arcpy.mapping <span class="im">import</span> <span class="op">*</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>&#35774;&#32622;&#24037;&#20316;&#21306;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># set workspace</span>
+arcpy.env.workspace <span class="op">=</span> path_gdb<span class="op">;</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>&#25351;&#23450;&#25968;&#25454;&#26469;&#28304;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># source data</span>
+path_elevation <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;elevation&#39;</span>
+path_landuse <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;landuse&#39;</span>
+path_school_site <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;School_site.shp&#39;</span>
+path_destination <span class="op">=</span> path_data <span class="op">+</span>  <span class="st">&#39;Stowe.gdb/destination&#39;</span>
+path_rec_sites <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;Stowe.gdb/rec_sites&#39;</span>
+path_roads <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;Stowe.gdb/roads&#39;</span>
+path_schools <span class="op">=</span> path_data <span class="op">+</span> <span class="st">&#39;Stowe.gdb/schools&#39;</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>&#33719;&#21462;&#24403;&#21069;&#22320;&#22270;&#30340;&#31532;&#19968;&#20010; dataFrame&#65292;&#20197;&#28155;&#21152;&#25968;&#25454;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># get document</span>
+mxd <span class="op">=</span> mapping.MapDocument(<span class="st">&quot;CURRENT&quot;</span>)<span class="op">;</span>
+df <span class="op">=</span> mapping.ListDataFrames(mxd)[<span class="dv">0</span>]<span class="op">;</span> <span class="co"># Get First Data frame, a.k.a. &quot;Layers&quot; (empty by far)</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>&#28155;&#21152;&#25968;&#25454;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Add Layers</span>
+layer <span class="op">=</span> mapping.Layer(path_elevation)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_landuse)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_school_site)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_destination)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_rec_sites)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_roads)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+layer <span class="op">=</span> mapping.Layer(path_schools)<span class="op">;</span>
+mapping.AddLayer(df, layer, <span class="st">&quot;AUTO_ARRANGE&quot;</span>)
+<span class="co"># Adding Layers Done, Fantastic~</span></code></pre></div>
+<ol start="6" style="list-style-type: decimal">
+<li>&#35774;&#32622;&#25968;&#25454;&#30340;&#36335;&#24452;&#20026;&#30456;&#23545;&#36335;&#24452;&#20415;&#20110;&#20998;&#20139;&#25335;&#36125;&#21518;&#20351;&#29992;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># set relative path</span>
+mxd.relativePaths <span class="op">=</span> <span class="va">True</span><span class="op">;</span></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>&#35774;&#32622;&#22788;&#29702;&#30340;&#36793;&#30028;&#65288;&#21253;&#22260;&#30418;&#65311;&#65289;&#65292;&#36825;&#26679;&#22788;&#29702;&#23601;&#26159;&#23545;&#20840;&#22270;&#65292;&#32780;&#19981;&#26159;&#23616;&#37096;&#65292;&#20415;&#20110;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">for</span> df <span class="op">in</span> mapping.ListDataFrames(mxd):
+    <span class="cf">if</span> (df.name <span class="op">==</span> <span class="st">&#39;Layers&#39;</span>): <span class="co"># that&#39;s for sure</span>
+        layers <span class="op">=</span> mapping.ListLayers(mxd, <span class="st">&#39;elevation&#39;</span>, df)<span class="op">;</span>
+        <span class="co"># set extent to whole map, that&#39;s what we want</span>
+        arcpy.env.extent <span class="op">=</span> layers[<span class="dv">0</span>].getExtent()<span class="op">;</span></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>&#30830;&#23450;&#19979;&#65292;&#20320;&#30340;&#31354;&#38388;&#20998;&#26512;&#32452;&#20214;&#26377;&#27809;&#26377;&#25171;&#19978;&#21246;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">arcpy.CheckOutExtension(<span class="st">&quot;Spatial&quot;</span>)<span class="op">;</span></code></pre></div>
+<p>&#22914;&#26524;&#20320;&#27809;&#25171;&#24320;&#30340;&#35805;&#65292;&#22823;&#27010;&#20250;&#30475;&#21040;&#20010;&#36825;&#20010;</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/zz_shit.png" alt="spatial extension error" />
+<p class="caption">spatial extension error</p>
+</div>
+<ol start="9" style="list-style-type: decimal">
+<li>&#24320;&#22987;&#22788;&#29702;</li>
+</ol>
+<p>&#26681;&#25454;&#22320;&#24418;&#29983;&#25104;&#38452;&#24433;&#12289;&#22369;&#24230;&#26629;&#26684;&#22270;&#65292;&#26681;&#25454;&#27431;&#24335;&#36317;&#31163;&#29983;&#25104; DisTanceRec &#21644; DistanceSch &#22270;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Execute HillShade</span>
+outHillShade <span class="op">=</span> arcpy.sa.Hillshade(<span class="st">&quot;elevation&quot;</span>, <span class="dv">180</span>, <span class="dv">75</span>, <span class="st">&quot;SHADOWS&quot;</span>, <span class="dv">1</span>)<span class="op">;</span> <span class="co"># done</span>
+outHillShade.save(path_gdb <span class="op">+</span> <span class="st">&#39;HillShade&#39;</span>)<span class="op">;</span>
+<span class="co"># fine</span>
+Slope <span class="op">=</span> arcpy.sa.Slope(<span class="st">&quot;elevation&quot;</span>, <span class="st">&quot;DEGREE&quot;</span>)<span class="op">;</span>
+Slope.save(path_gdb <span class="op">+</span> <span class="st">&#39;Slope&#39;</span>)<span class="op">;</span>
+<span class="co"># Distance to Rec Site</span>
+DistanceRec <span class="op">=</span> arcpy.sa.EucDistance(<span class="st">&quot;rec_sites&quot;</span>, cell_size <span class="op">=</span> <span class="dv">30</span>)<span class="op">;</span>
+DistanceRec.save(path_gdb <span class="op">+</span> <span class="st">&#39;DistanceRec&#39;</span>)<span class="op">;</span>
+<span class="co"># Distance to School</span>
+DistanceSch <span class="op">=</span> arcpy.sa.EucDistance(<span class="st">&quot;schools&quot;</span>, cell_size <span class="op">=</span> <span class="dv">30</span>)<span class="op">;</span>
+DistanceSch.save(path_gdb <span class="op">+</span> <span class="st">&#39;DistanceSch&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>&#38477;&#20302;&#36317;&#31163;&#30340;&#20998;&#31867;&#65292;&#37325;&#20998;&#31867;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># this is it, Reclassify</span>
+ReclassSlope <span class="op">=</span> arcpy.sa.Reclassify(<span class="st">&quot;Slope&quot;</span>, <span class="st">&quot;Value&quot;</span>,
+                        RemapRange([[<span class="dv">0</span>,<span class="dv">8</span>,<span class="dv">1</span>],[<span class="dv">8</span>,<span class="dv">15</span>,<span class="dv">2</span>],[<span class="dv">15</span>,<span class="dv">23</span>,<span class="dv">3</span>],[<span class="dv">23</span>,<span class="dv">31</span>,<span class="dv">4</span>],[<span class="dv">31</span>,<span class="dv">39</span>,<span class="dv">5</span>],
+                                    [<span class="dv">39</span>,<span class="dv">46</span>,<span class="dv">6</span>],[<span class="dv">46</span>,<span class="dv">54</span>,<span class="dv">7</span>],[<span class="dv">54</span>,<span class="dv">62</span>,<span class="dv">8</span>],[<span class="dv">62</span>,<span class="dv">69</span>,<span class="dv">9</span>],[<span class="dv">69</span>,<span class="dv">78</span>,<span class="dv">10</span>]]), <span class="st">&quot;NODATA&quot;</span>)<span class="op">;</span> <span class="co"># this is what we want~</span>
+ReclassSlope.save(path_gdb <span class="op">+</span> <span class="st">&#39;ReclassSlope&#39;</span>)<span class="op">;</span>
+ReclassRec <span class="op">=</span> arcpy.sa.Reclassify(<span class="st">&quot;DistanceRec&quot;</span>, <span class="st">&quot;Value&quot;</span>,
+                        RemapRange([[<span class="dv">0</span>,<span class="dv">1349</span>,<span class="dv">1</span>],[<span class="dv">1349</span>,<span class="dv">2698</span>,<span class="dv">2</span>],[<span class="dv">2698</span>,<span class="dv">4046</span>,<span class="dv">3</span>],[<span class="dv">4046</span>,<span class="dv">5395</span>,<span class="dv">4</span>],[<span class="dv">5395</span>,<span class="dv">6744</span>,<span class="dv">5</span>],
+                                    [<span class="dv">6744</span>,<span class="dv">8093</span>,<span class="dv">6</span>],[<span class="dv">8093</span>,<span class="dv">9441</span>,<span class="dv">7</span>],[<span class="dv">12139</span>,<span class="dv">13488</span>,<span class="dv">8</span>],[<span class="dv">10790</span>,<span class="dv">12139</span>,<span class="dv">9</span>],[<span class="dv">12139</span>,<span class="dv">13488</span>,<span class="dv">10</span>]]), <span class="st">&quot;NODATA&quot;</span>)<span class="op">;</span>
+ReclassRec.save(path_gdb <span class="op">+</span> <span class="st">&#39;ReclassRec&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>&#25163;&#24037;&#22826;&#32047;&#65292;&#29992;&#19968;&#20010;&#20989;&#25968;&#29983;&#25104;&#37325;&#20998;&#31867;&#30340; RemapRange &#30697;&#38453;&#65292;&#20877;&#37325;&#20998;&#31867;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># seem we need a function to help us out</span>
+<span class="kw">def</span> partition (beg, end, num):
+    pace <span class="op">=</span> ( end <span class="op">-</span> beg ) <span class="op">/</span> num <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+    <span class="cf">return</span> [[beg<span class="op">+</span>pace<span class="op">*</span>i, beg<span class="op">+</span>pace<span class="op">*</span>i<span class="op">+</span>pace] <span class="cf">for</span> i <span class="op">in</span> <span class="bu">xrange</span>(num)]
+<span class="bu">range</span> <span class="op">=</span> partition (<span class="dv">0</span>, <span class="dv">16928</span>, <span class="dv">10</span>)<span class="op">;</span>
+ReclassSch <span class="op">=</span> arcpy.sa.Reclassify(<span class="st">&quot;DistanceSch&quot;</span>, <span class="st">&quot;Value&quot;</span>,
+                        RemapRange(<span class="bu">range</span>), <span class="st">&quot;NODATA&quot;</span>)<span class="op">;</span>
+ReclassSch.save(path_gdb <span class="op">+</span> <span class="st">&#39;ReclassSch&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>&#25353;&#29031;&#23454;&#20064;&#25351;&#23548;&#20070;&#30340;&#35201;&#27714;&#65292;&#36755;&#20986;</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="cf">with</span> arcpy.da.SearchCursor(<span class="st">&quot;landuse&quot;</span>, (<span class="st">&quot;LANDUSE&quot;</span>)) <span class="im">as</span> cursor:
+    <span class="cf">for</span> row <span class="op">in</span> <span class="bu">sorted</span>(cursor):
+        <span class="bu">print</span> row[<span class="dv">0</span>]</code></pre></div>
+<ol start="10" style="list-style-type: decimal">
+<li>&#22788;&#29702;&#32467;&#26524;&#25130;&#22270;</li>
+</ol>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/af_paste_and_execute2.png" alt="&#31896;&#36148;&#24182;&#36816;&#34892;" />
+<p class="caption">&#31896;&#36148;&#24182;&#36816;&#34892;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ag_processing_msg.png" alt="&#36816;&#34892;&#26694;&#30340;&#36755;&#20986;&#20449;&#24687;" />
+<p class="caption">&#36816;&#34892;&#26694;&#30340;&#36755;&#20986;&#20449;&#24687;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ah_processing_msg2.png" alt="&#26700;&#38754;&#21491;&#19979;&#35282;&#30340;&#36755;&#20986;&#20449;&#24687;" />
+<p class="caption">&#26700;&#38754;&#21491;&#19979;&#35282;&#30340;&#36755;&#20986;&#20449;&#24687;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/ai_processing_done.png" alt="&#20195;&#30721;&#36755;&#20986;&#32467;&#26524;" />
+<p class="caption">&#20195;&#30721;&#36755;&#20986;&#32467;&#26524;</p>
+</div>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/aj_processing_result.png" alt="&#26368;&#32456;&#36755;&#20986;&#32467;&#26524;" />
+<p class="caption">&#26368;&#32456;&#36755;&#20986;&#32467;&#26524;</p>
+</div>
+<h4 id="&#30690;&#37327;&#37096;&#20998;">&#30690;&#37327;&#37096;&#20998;</h4>
+<p><strong>DEMO2, test1</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>&#25171;&#24320; mxd &#31354;&#22320;&#22270;&#25991;&#20214;&#65292;&#29992;&#30456;&#24212;&#33050;&#26412;&#21152;&#36733;&#25968;&#25454;</p></li>
+<li><p>&#36890;&#36807;&#23646;&#24615;&#36873;&#23450;&#25968;&#25454;&#65292;&#29992; Arcpy &#20013;&#30340; <code>SelectLayerByAttribute_management</code>&#12290;</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">arcpy.SelectLayerByAttribute_management(<span class="st">&quot;Streets&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>, <span class="st">&#39;&quot;STR&quot; = </span><span class="ch">\&#39;</span><span class="st">I40</span><span class="ch">\&#39;</span><span class="st">&#39;</span>)<span class="op">;</span></code></pre></div>
+<dl>
+<dt>&#27880;&#65306;</dt>
+<dd><blockquote>
+<p>ArcPy &#37324;&#21516;&#19968;&#20010;&#20989;&#25968;&#26377;&#20004;&#31181;&#35843;&#29992;&#26041;&#27861;&#65292;&#19968;&#31181;&#26159;&#36825;&#37324;&#30340;&#26041;&#24335;&#65306;&#21151;&#33021;&#65288;SelectLayerByAttribute&#65289;+ &#20998;&#31867;&#65288;management&#65289;&#65307;&#21478;&#19968;&#31181;&#26159;&#25353;&#29031; ArcToolBox &#30340;&#32467;&#26500;&#20998;&#23618;&#27425;&#65292;&#22914; <code>arcpy.sa.Slope()</code>&#65292;&#20854;&#20013; sa &#25351; Spatial Analysis&#65292;&#26159;&#30456;&#24212; ArcToolBox &#30340;&#21035;&#21517;&#65288;alias&#65289;&#65292;&#21487;&#20197;&#36890;&#36807;&#21491;&#38190;&#30456;&#24212; ToolBox &#26597;&#30475;&#12290;&#21518;&#19968;&#31181;&#30340;&#23618;&#27425;&#24615;&#21644;&#26465;&#29702;&#24615;&#26356;&#28165;&#26224;&#65292;&#20294;&#21069;&#19968;&#31181;&#65292;&#26356;&#30452;&#25509;&#24471;&#38754;&#21521;&#21151;&#33021;&#65292;&#21363;&#20320;&#24819;&#24178;&#20160;&#20040;&#12290;&#26681;&#25454;&#20855;&#20307;&#24773;&#20917;&#65292;&#36873;&#25321;&#36866;&#21512;&#30340;&#26041;&#24335;&#12290;</p>
+</blockquote>
+</dd>
+</dl>
+<ol start="3" style="list-style-type: decimal">
+<li>&#36873;&#23450;&#25968;&#25454;&#65292;&#32479;&#35745;&#25968;&#37327;&#65292;&#25353;&#29031;&#25351;&#23548;&#20070;&#35201;&#27714;&#22238;&#31572;&#38382;&#39064;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">arcpy.SelectLayerByLocation_management(<span class="st">&quot;Stations&quot;</span>, <span class="st">&quot;WITHIN_A_DISTANCE&quot;</span>, <span class="st">&quot;Streets&quot;</span>, <span class="st">&quot;1000 Feet&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>)<span class="op">;</span>
+count <span class="op">=</span> arcpy.GetCount_management(<span class="st">&quot;Stations&quot;</span>)<span class="op">;</span>
+<span class="co"># Ques: How many sites, and their name?</span>
+<span class="co"># Ans:</span>
+<span class="bu">print</span> <span class="st">&#39;There are &#39;</span> <span class="op">+</span> <span class="bu">str</span>(count) <span class="op">+</span> <span class="st">&#39; Stations are ... within 140 feets from 140 road&#39;</span><span class="op">;</span> <span class="co"># ===&gt; 2, ...</span>
+<span class="cf">with</span> arcpy.da.SearchCursor(<span class="st">&quot;Stations&quot;</span>, (<span class="st">&quot;NAME&quot;</span>)) <span class="im">as</span> cursor:
+    <span class="cf">for</span> row <span class="op">in</span> <span class="bu">sorted</span>(cursor):
+        <span class="bu">print</span> row[<span class="dv">0</span>] <span class="co"># have a better looking than `print row&#39;</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>&#19968;&#20123;&#21035;&#30340;&#22788;&#29702;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">arcpy.SelectLayerByLocation_management(<span class="st">&quot;Business&quot;</span>, <span class="st">&quot;WITHIN_A_DISTANCE&quot;</span>, <span class="st">&quot;Stations&quot;</span>, <span class="st">&quot;1320 Feet&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>)<span class="op">;</span>
+count <span class="op">=</span> arcpy.GetCount_management( <span class="st">&quot;Business&quot;</span>)<span class="op">;</span> <span class="co"># ==&gt; 19</span>
+<span class="bu">print</span> <span class="st">&quot;&#26377; &quot;</span> <span class="op">+</span> <span class="bu">str</span>(count) <span class="op">+</span> <span class="st">&quot; &#20010;&#21830;&#19994;&#31449;&#28857;&#20301;&#20110;&#24050;&#36873;&#20013;&#30340;&#21152;&#27833;&#31449; 1320 &#33521;&#23610;&#20197;&#20869;&quot;</span>
+arcpy.SelectLayerByAttribute_management(<span class="st">&quot;Zoning&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>, <span class="st">&#39;&quot;DESCRIPTIO&quot; = </span><span class="ch">\&#39;</span><span class="st">DRAIN</span><span class="ch">\&#39;</span><span class="st">&#39;</span>)<span class="op">;</span>
+arcpy.SelectLayerByLocation_management(<span class="st">&quot;Zoning&quot;</span>, <span class="st">&quot;BOUNDARY_TOUCHES&quot;</span>, <span class="st">&quot;Zoning&quot;</span>)<span class="op">;</span> <span class="co"># ==&gt; 37</span>
+juris<span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="op">in</span> arcpy.da.SearchCursor(<span class="st">&quot;Zoning&quot;</span>, (<span class="st">&quot;JURISDICTI&quot;</span>))]<span class="op">;</span>
+JURIS<span class="op">=</span><span class="bu">set</span>(juris)<span class="op">;</span>
+<span class="co"># &gt;&gt;&gt; print JURIS</span>
+<span class="co"># set([u&#39;COUNTY&#39;, u&#39;CITY&#39;])</span>
+acres<span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="op">in</span> arcpy.da.SearchCursor(<span class="st">&quot;Zoning&quot;</span>, (<span class="st">&quot;ACRES&quot;</span>))]<span class="op">;</span>
+key<span class="op">-</span>val<span class="op">=</span> [(row[<span class="dv">0</span>], row[<span class="dv">1</span>]) <span class="cf">for</span> row <span class="op">in</span> arcpy.da.SearchCursor(<span class="st">&quot;Zoning&quot;</span>, (<span class="st">&quot;JURISDICTI&quot;</span>, <span class="st">&quot;ACRES&quot;</span>))]
+<span class="co"># how to use dict?</span></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
+<li>&#36755;&#20986;</li>
+</ol>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/bb_printout.png" />
+
+</div>
+<p><strong>DOME2, other tests</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>&#20854;&#20182;&#30340;&#20960;&#20010;&#22788;&#29702;&#37117;&#22823;&#21516;&#23567;&#24322;&#65292;&#36825;&#37324;&#21482;&#30475;&#20851;&#38190;&#30340;&#20960;&#20010;&#20195;&#30721;</p></li>
+<li><p>&#26681;&#25454;&#23646;&#24615;&#65288;&#38750;&#31354;&#38388;&#30340;&#65289;&#21644;&#20301;&#32622;&#65288;&#31354;&#38388;&#30340;&#65289;&#26469;&#36873;&#25321; Feature&#65288;&#34920;&#20013;&#30340;&#34892;&#65292;&#25968;&#25454;&#39033;&#65289;</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">arcpy.SelectLayerByAttribute_management(<span class="st">&quot;Centract&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>, <span class="st">&#39;&quot;POP_90&quot; &lt; 5786.054054&#39;</span>)<span class="op">;</span>
+<span class="co"># arcpy.SelectLayerByLocation_management(&quot;Centract&quot;, &quot;COMPLETELY_CONTAINS&quot;, &quot;MidSchol&quot;);</span>
+arcpy.SelectLayerByLocation_management(<span class="st">&quot;Centract&quot;</span>, <span class="st">&quot;COMPLETELY_CONTAINS&quot;</span>, <span class="st">&quot;MidSchol&quot;</span>, selection_type<span class="op">=</span><span class="st">&quot;SUBSET_SELECTION&quot;</span>)<span class="op">;</span>
+arcpy.SelectLayerByAttribute_management(<span class="st">&quot;Counties&quot;</span>, <span class="st">&quot;NEW_SELECTION&quot;</span>, <span class="st">&#39;&quot;Name&quot; = </span><span class="ch">\&#39;</span><span class="st">Cobb County</span><span class="ch">\&#39;</span><span class="st">&#39;</span>)<span class="op">;</span>
+arcpy.SelectLayerByLocation_management(<span class="st">&quot;Centract&quot;</span>, <span class="st">&quot;COMPLETELY_WITHIN&quot;</span>, <span class="st">&quot;Counties&quot;</span>, selection_type<span class="op">=</span><span class="st">&quot;SUBSET_SELECTION&quot;</span>)<span class="op">;</span>
+count <span class="op">=</span> arcpy.GetCount_management( <span class="st">&quot;Centract&quot;</span>)<span class="op">;</span>
+<span class="bu">print</span> count
+percap<span class="op">=</span> [row[<span class="dv">0</span>] <span class="cf">for</span> row <span class="op">in</span> arcpy.da.SearchCursor(<span class="st">&quot;Centract&quot;</span>, (<span class="st">&quot;PER_CAPINC&quot;</span>))]<span class="op">;</span>
+<span class="bu">print</span> percap <span class="co"># ===&gt; [19867.69921875, 12793.2998046875, 17364.80078125]</span></code></pre></div>
+<p>&#36755;&#20986;&#25928;&#26524;</p>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/bd_done.png" />
+
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>&#32531;&#20914;&#21306;&#25805;&#20316;&#65292;&#26368;&#21518;&#23548;&#20986;&#21040; shp &#25991;&#20214;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># arcpy.analysis.Buffer(&quot;vernal_pools&quot;, &quot;vernal_pools_Buffer.shp&quot;, &quot;2000 Feets&quot;, &quot;FULL&quot;, &quot;ROUND&quot;, &quot;ALL&quot;);</span>
+<span class="co"># Not Feets, it&#39;s Feet</span>
+arcpy.analysis.Buffer(<span class="st">&quot;vernal_pools&quot;</span>, <span class="st">&quot;vernal_pools_Buffer.shp&quot;</span>, <span class="st">&quot;2000 Feet&quot;</span>, <span class="st">&quot;FULL&quot;</span>, <span class="st">&quot;ROUND&quot;</span>, <span class="st">&quot;ALL&quot;</span>)<span class="op">;</span>
+arcpy.SelectLayerByLocation_management(<span class="st">&quot;parcels&quot;</span>, <span class="st">&quot;INTERSECT&quot;</span>, <span class="st">&quot;vernal_pools_Buffer&quot;</span>)<span class="op">;</span>
+arcpy.MakeFeatureLayer_management(<span class="st">&quot;parcels&quot;</span>, <span class="st">&quot;parcels_out&quot;</span>) <span class="co"># &#38752;&#65292;&#30452;&#25509;&#23548;&#20986;&#65292;&#23601;&#26159;&#23548;&#20986; selected features&#65292;&#26597;&#20102;&#25105;&#21322;&#22825;</span></code></pre></div>
+<blockquote>
+<p>&#38656;&#35201;&#27880;&#24847;&#30340;&#26159; <code>2000 Feet</code> &#19981;&#33021;&#20889;&#25104; <code>2000 Feets</code>&#12290;&#26377;&#26102;&#20505; ArcGIS &#20250;&#26080;&#25925;&#21345;&#27515;&#65292;&#19981;&#30693;&#36947;&#20160;&#20040;&#24773;&#20917; <img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/bf_error_occurred.png" alt="arcgis-died" /></p>
+</blockquote>
+<ol start="4" style="list-style-type: decimal">
+<li>&#32531;&#20914;&#21306;&#25805;&#20316;&#65292;&#24182;&#21512;&#24182;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="co"># Processing</span>
+arcpy.analysis.Buffer(<span class="st">&quot;Roads&quot;</span>, <span class="st">&quot;Roads_BUFFER&quot;</span>, <span class="st">&quot;500 Meter&quot;</span>, <span class="st">&quot;FULL&quot;</span>, <span class="st">&quot;ROUND&quot;</span>, <span class="st">&quot;ALL&quot;</span>)<span class="op">;</span>
+arcpy.analysis.Buffer(<span class="st">&quot;Water&quot;</span>, <span class="st">&quot;Water_BUFFER&quot;</span>, <span class="st">&quot;500 Meter&quot;</span>, <span class="st">&quot;FULL&quot;</span>, <span class="st">&quot;ROUND&quot;</span>, <span class="st">&quot;ALL&quot;</span>)<span class="op">;</span>
+arcpy.analysis.Union((<span class="st">&quot;Water_BUFFER&quot;</span>, <span class="st">&quot;Roads_BUFFER&quot;</span>), <span class="st">&quot;water_road&quot;</span>, <span class="st">&quot;ALL&quot;</span>, gaps<span class="op">=</span><span class="st">&quot;GAPS&quot;</span>)</code></pre></div>
+<h2 id="&#20854;&#20182;">&#20854;&#20182;</h2>
+<ol style="list-style-type: decimal">
+<li>&#20854;&#20182;&#30340;&#37096;&#20998;&#29992; ArcPy &#27809;&#27861;&#25630;&#23450;&#65292;&#39318;&#20808;&#23601;&#26159;&#26080;&#27861;&#25171;&#24320;&#32593;&#32476;&#20998;&#26512;&#30340; &#8220;Streets_ND&#8221; &#25968;&#25454;&#65292;&#20174;&#25105;&#26597;&#21040;&#30340;&#36164;&#26009;&#34920;&#26126; ArcPy &#20570;&#19981;&#20102;&#12290;</li>
+<li>&#21487;&#33021;&#26159;&#25105;&#30340; ArcGIS &#26435;&#38480;&#19981;&#22815;&#30340;&#38382;&#39064;&#65292;&#25105;&#27809;&#27861;&#26032;&#24314; ToolBox&#12290;</li>
+<li>&#25163;&#24037;&#20570;&#20102;&#19968;&#28857;&#20854;&#20182;&#30340;&#20869;&#23481;&#65292;&#23454;&#22312;&#22826;&#28866;&#65292;&#19981;&#25954;&#22810;&#21457;</li>
+</ol>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/fb_holly_shit.png" />
+
+</div>
+<h2 id="&#23454;&#20064;&#24863;&#24735;">&#23454;&#20064;&#24863;&#24735;</h2>
+<ol style="list-style-type: decimal">
+<li>&#36890;&#36807;&#23454;&#20064;&#65292;&#24041;&#22266;&#20102; ArcGIS &#30340;&#20351;&#29992;&#65292;&#24041;&#22266;&#20102; Python &#32534;&#31243;&#65307;</li>
+<li>&#38203;&#28860;&#20102;&#26597;&#36164;&#26009;&#65292;&#26597;&#25991;&#26723;&#30340;&#33021;&#21147;&#65292;&#33521;&#25991;&#25628;&#32034;&#25237;&#25918;&#20851;&#38190;&#23383;&#30340;&#27700;&#24179;&#20063;&#22823;&#22823;&#25552;&#39640;&#20102;&#65307;</li>
+<li>&#29087;&#24713;&#20102; Windows &#19979; <a href="http://notepad-plus-plus.org/" title="Win &#19978;&#26368;&#22909;&#29992;&#30340;&#20043;&#19968;&#65292;&#22914;&#26524;&#27809;&#26377;Vim &#21644; Emacs&#30340;&#35805;">notepad++</a> &#30340;&#20351;&#29992;&#65292; Linux &#19979; <a href="http://jianshu.io/p/87eefaf092c5" title="&#20174;&#23567;&#20859;&#25104; SEO &#30340;&#22909;&#20064;&#24815;~">Bash</a> &#33050;&#26412;&#22788;&#29702;&#25991;&#26723;&#30340;&#23567;&#25216;&#24039;&#65307;</li>
+<li><a href="http://www.douban.com/group/topic/5212341/?start=213" title="&#38752;&#65292;ArcGIS &#36825;&#20040;&#26080;&#32842;&#65292;&#25105;&#20116;&#19968;&#37117;&#34987;&#20320;&#27585;&#20102;&#65292;&#20320;&#24403;&#25105;&#20667;&#21834;">&#36825;&#26159;&#19968;&#20010;&#24555;&#20048;&#32780;&#20805;&#23454;&#30340;&#20116;&#19968;&#22269;&#38469;&#21171;&#21160;&#33410;&#65307;</a></li>
+<li>&#36824;&#26159; Linux &#22909;&#29992;&#65292;&#20889;&#25253;&#21578;&#22810;&#26041;&#20415;&#22810;&#20102;&#65292;see:
+<ul>
+<li><a href="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/linux_1.png">&#25776;&#20889;</a></li>
+<li><a href="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/linux_2.png">&#32534;&#35793;</a></li>
+<li><a href="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/linux_3.png">&#26597;&#30475;</a></li>
+<li>&#36824;&#21487;&#20197;&#38543;&#24847;&#23548;&#20986;&#20998;&#20139;, e.g.&#160;&#26412;&#31449;</li>
+<li><a href="http://gnat-tang-shared-image.qiniudn.com/ScreenShots/vim.png">Vim is Fantastic&#65281;</a></li>
+</ul></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#gis">gis</a></li>
+<li><a class="tzx-tag" href="tags.html/#spatial gis">spatial gis</a></li>
+<li><a class="tzx-tag" href="tags.html/#spatial analysis">spatial analysis</a></li>
+<li><a class="tzx-tag" href="tags.html/#arcgis">arcgis</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0018-spatial-analysis.md" title="363 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0018-spatial-analysis.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 363,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

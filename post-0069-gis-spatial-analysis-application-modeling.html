@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-11-23" />
+  <title>GIS Spatial Analysis and Application Modeling | GIS &#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">GIS Spatial Analysis and Application Modeling | GIS &#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;</h1>
+<h3 class="date">2015-11-23</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#gis-&#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;">GIS &#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;</a><ul>
+        <li><a href="#&#31354;&#38388;&#20998;&#26512;&#25805;&#20316;">&#31354;&#38388;&#20998;&#26512;&#25805;&#20316;</a></li>
+        <li><a href="#&#31354;&#38388;&#25968;&#25454;&#32479;&#35745;&#20998;&#26512;">&#31354;&#38388;&#25968;&#25454;&#32479;&#35745;&#20998;&#26512;</a><ul>
+        <li><a href="#&#19968;&#33324;&#32479;&#35745;&#20998;&#26512;">&#19968;&#33324;&#32479;&#35745;&#20998;&#26512;</a></li>
+        <li><a href="#&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;">&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;</a></li>
+        <li><a href="#&#31354;&#38388;&#28857;&#27169;&#24335;&#20998;&#26512;">&#31354;&#38388;&#28857;&#27169;&#24335;&#20998;&#26512;</a></li>
+        <li><a href="#&#26684;&#32593;&#25110;&#38754;&#29366;&#25968;&#25454;&#31354;&#38388;&#32479;&#35745;&#20998;&#26512;">&#26684;&#32593;&#25110;&#38754;&#29366;&#25968;&#25454;&#31354;&#38388;&#32479;&#35745;&#20998;&#26512;</a></li>
+        <li><a href="#&#22320;&#32479;&#35745;&#20998;&#26512;">&#22320;&#32479;&#35745;&#20998;&#26512;</a></li>
+        <li><a href="#arcgis&#22320;&#32479;&#35745;&#20998;&#26512;">ArcGIS&#22320;&#32479;&#35745;&#20998;&#26512;</a></li>
+        </ul></li>
+        <li><a href="#&#31354;&#38388;&#20998;&#26512;&#24212;&#29992;&#24314;&#27169;">&#31354;&#38388;&#20998;&#26512;&#24212;&#29992;&#24314;&#27169;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="gis-&#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;">GIS &#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;</h1>
+<h2 id="&#31354;&#38388;&#20998;&#26512;&#25805;&#20316;">&#31354;&#38388;&#20998;&#26512;&#25805;&#20316;</h2>
+<p>&#31354;&#38388;&#20998;&#26512;&#25805;&#20316;&#21253;&#25324;&#19977;&#20010;&#26041;&#38754;&#65306;</p>
+<ol>
+<li>&#30690;&#37327;&#25968;&#25454;&#31354;&#38388;&#20998;&#26512;</li>
+<li>&#26629;&#26684;&#25968;&#25454;&#31354;&#38388;&#20998;&#26512;</li>
+<li>&#19977;&#32500;&#25968;&#25454;&#31354;&#38388;&#20998;&#26512;</li>
+</ol>
+<p>&#21487;&#21442;&#32771; <a href="post-0050-gis-overall.html#&#31354;&#38388;&#20998;&#26512;">GIS &#29702;&#35770;&#19982;&#25216;&#26415; &#8211; &#20316;&#19994; 2&#65306;GIS &#30740;&#31350;&#32508;&#36848; #&#31354;&#38388;&#20998;&#26512;</a>&#65292;&#36825;&#37324;&#19981;&#36184;&#36848;&#12290;</p>
+<h2 id="&#31354;&#38388;&#25968;&#25454;&#32479;&#35745;&#20998;&#26512;">&#31354;&#38388;&#25968;&#25454;&#32479;&#35745;&#20998;&#26512;</h2>
+<h3 id="&#19968;&#33324;&#32479;&#35745;&#20998;&#26512;">&#19968;&#33324;&#32479;&#35745;&#20998;&#26512;</h3>
+<dl>
+<dt>GIS &#23646;&#24615;&#25968;&#25454;&#30340;&#19968;&#33324;&#32479;&#35745;&#20998;&#26512;</dt>
+<dd><p>&#25351;&#23545; GIS &#22320;&#29702;&#31354;&#38388;&#25968;&#25454;&#24211;&#20013;&#30340;&#23646;&#24615;&#25968;&#25454;&#36827;&#34892;&#24120;&#35268;&#32479;&#35745;&#20998;&#26512;&#12290;</p>
+<ol>
+<li>&#20808;&#23545;&#25968;&#25454;&#36827;&#34892;&#12304;&#25551;&#36848;&#24615;&#32479;&#35745;&#20998;&#26512;&#12305;&#65292;&#20197;&#21457;&#29616;&#20854;&#20869;&#22312;&#35268;&#24459;</li>
+<li>&#20877;&#36873;&#25321;&#36827;&#19968;&#27493;&#20998;&#26512;&#30340;&#26041;&#27861;</li>
+</ol>
+<dl>
+<dt>&#25551;&#36848;&#24615;&#32479;&#35745;&#20998;&#26512;</dt>
+<dd>&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;&#30340;&#31532;&#19968;&#27493;&#65292;&#36890;&#36807;&#25551;&#36848;&#24615;&#20998;&#26512;&#65292;&#25552;&#21462;&#26377;&#20215;&#20540;&#30340;&#31354;&#38388;&#20449;&#24687;&#65292;&#20415;&#20110;&#21518;&#32493;&#30340;&#31354;&#38388;&#20998;&#26512;&#21644;&#22788;&#29702;&#12290;
+</dd>
+</dl>
+<p>&#30456;&#20851;&#27010;&#24565;</p>
+<ol>
+<li>&#39057;&#25968;</li>
+<li>&#39057;&#29575;</li>
+<li>&#39057;&#29575;&#20998;&#24067;&#22270;</li>
+<li>&#39057;&#29575;&#30452;&#26041;&#22270;</li>
+</ol>
+<p>&#25968;&#25454;&#38598;&#20013;&#36235;&#21183;&#20998;&#26512;</p>
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Comparison_mean_median_mode.svg/300px-Comparison_mean_median_mode.svg.png" alt="&#25968;&#25454;&#30340;&#38598;&#20013;&#36235;&#21183;" />
+<p class="caption">&#25968;&#25454;&#30340;&#38598;&#20013;&#36235;&#21183;</p>
+</div>
+<ol>
+<li>&#24179;&#22343;&#20540;
+<ul>
+<li>&#31639;&#25968;&#65306;<span class="math inline">\(\frac{1}{n}\sum_{i=1}^{n} a_i.\)</span></li>
+<li>&#21152;&#26435;&#65306;<span class="math inline">\(\int_{-\infty}^{\infty} xf(x)\,dx\)</span></li>
+<li>&#35843;&#21644;&#24179;&#22343;&#25968;</li>
+<li>&#21152;&#26435;&#35843;&#21644;&#24179;&#22343;&#25968;</li>
+<li>&#20960;&#20309;&#24179;&#22343;&#25968;</li>
+</ul></li>
+<li>&#20013;&#20301;&#25968;
+<ul>
+<li>the median satisfies: <span class="math inline">\(\operatorname{P}(X\leq m) = \operatorname{P}(X\geq m)=\int_{-\infty}^m f(x)\, dx=\frac{1}{2}.\)</span></li>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Visualisation_mode_median_mean.svg/100px-Visualisation_mode_median_mean.svg.png" /></li>
+</ul></li>
+<li>&#20247;&#25968;</li>
+</ol>
+<p>&#25968;&#25454;&#30340;&#31163;&#25955;&#31243;&#24230;&#20998;&#26512;</p>
+<ol>
+<li>&#26041;&#24046;
+<ul>
+<li>mean square error: <span class="math display">\[\operatorname{MSE}(\overline{X})=\operatorname{E}((\overline{X}-\mu)^2)=\left(\frac{\sigma}{\sqrt{n}}\right)^2= \frac{\sigma^2}{n}\]</span> where <span class="math inline">\(\sigma^2\)</span> is the population variance.</li>
+</ul></li>
+<li>&#26631;&#20934;&#24046;</li>
+<li>&#26497;&#24046;</li>
+<li>&#31163;&#24046;</li>
+<li>&#24179;&#22343;&#31163;&#24046;
+<ul>
+<li>mean absolute deviation: <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n |x_i-m(X)|.\)</span></li>
+</ul></li>
+<li>&#31163;&#24046;&#24179;&#26041;&#21644;</li>
+<li>&#21464;&#24046;&#31995;&#25968;</li>
+</ol>
+<p>&#25968;&#25454;&#30340;&#20998;&#24067;</p>
+<ol>
+<li>&#20559;&#24230;&#65288;skewness&#65289;
+<ul>
+<li>skewness is a measure of the asymmetry of the probability distribution of a real-valued random variable about its mean. The skewness value can be positive or negative, or even undefined.</li>
+<li>The skewness is also sometimes denoted <span class="math inline">\(\operatorname{Skew}[X]\)</span>. The formula expressing skewness in terms of the non-central moment <span class="math inline">\(\operatorname E[X^3]\)</span> can be expressed by expanding the previous formula, <span class="math display">\[
+  \begin{align}
+    \gamma_1
+     &amp;= \operatorname{E}\left[\left(\frac{X-\mu}{\sigma}\right)^3 \right] \\
+     &amp; = \frac{\operatorname{E}[X^3] - 3\mu\operatorname E[X^2] + 3\mu^2\operatorname E[X] - \mu^3}{\sigma^3}\\
+     &amp;= \frac{\operatorname{E}[X^3] - 3\mu(\operatorname E[X^2] -\mu\operatorname E[X]) - \mu^3}{\sigma^3}\\
+     &amp;= \frac{\operatorname{E}[X^3] - 3\mu\sigma^2 - \mu^3}{\sigma^3}.
+  \end{align}\]</span></li>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/446px-Negative_and_positive_skew_diagrams_%28English%29.svg.png" /></li>
+</ul></li>
+<li>&#23792;&#24230;&#65288;Peakness/Kurtosis <code>[k&#605;'tos&#618;s]</code>&#65289;&#65306;<span class="math inline">\(\beta=\frac{V_4}{\sigma^4}=\frac{\frac{\sum(X_\bar{X})^4f}{\sum f}}{\sigma^4}\)</span></li>
+</ol>
+<p>&#22270;&#24418;&#34920;&#36798;&#25968;&#25454;</p>
+<ol>
+<li>&#26609;&#29366;&#22270;</li>
+<li>&#25159;&#24418;&#22270;</li>
+<li>&#30452;&#26041;&#22270;</li>
+<li>&#25240;&#32447;&#22270;</li>
+<li>&#25955;&#28857;&#22270;</li>
+</ol>
+</dd>
+</dl>
+<h3 id="&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;">&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;</h3>
+<p>&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512; (Exploratory Spatial Data Analysis, ESDA)</p>
+<div class="tzx-fright">
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/John_Tukey.jpg/220px-John_Tukey.jpg" alt="John Tukey" />
+<p class="caption">John Tukey</p>
+</div>
+</div>
+<p>&#32479;&#35745;&#23398;&#26159;&#25968;&#25454;&#20998;&#26512;&#30340;&#20027;&#35201;&#24037;&#20855;&#65292;&#22823;&#37327;&#30340;&#32479;&#35745;&#20998;&#26512;&#26041;&#27861;&#20197;&#25968;&#25454;&#24635;&#20307;&#28385;&#36275;&#27491;&#24577;&#20551;&#35774;&#20026;&#20381;&#25454;&#65292;&#24182;&#22312;&#27492;&#22522;&#30784;&#19978;&#24314;&#31435;&#27169;&#22411;&#21644;&#25512;&#28436;&#12290;&#28982;&#32780;&#65292;&#23454;&#36341;&#20013;&#22823;&#37327;&#30340;&#25968;&#25454;&#19981;&#33021;&#28385;&#36275;&#27491;&#24577;&#20551;&#35774;&#65292;&#24182;&#19988;&#22522;&#20110;&#22343;&#20540;&#12289;&#26041;&#24046;&#31561;&#30340;&#27169;&#22411;&#22312;&#23454;&#38469;&#25968;&#25454;&#20998;&#26512;&#20013;&#32570;&#20047;&#31283;&#20581;&#24615;&#65292;&#20110;&#26159;&#23548;&#33268;&#24456;&#22810;&#32479;&#35745;&#20998;&#26512;&#26041;&#27861;&#19981;&#33021;&#28385;&#36275;&#28023;&#37327;&#25968;&#25454;&#20998;&#26512;&#30340;&#35201;&#27714;&#12290;19 &#19990;&#32426; 60 &#24180;&#20195;&#30340; <a href="https://en.wikipedia.org/wiki/John_Tukey">Tukey</a> &#38754;&#21521;&#25968;&#25454;&#20998;&#26512;&#30340;&#20027;&#39064;&#65292;&#25552;&#20986;&#20102;&#25506;&#32034;&#24615;&#25968;&#25454;&#20998;&#26512;&#65288;exploratory data analysis, EDA&#65289;&#30340;&#26032;&#24605;&#36335;&#12290;</p>
+<p>&#25506;&#32034;&#24615;&#25968;&#25454;&#20998;&#26512;(EDA)&#30340;&#29305;&#28857;&#65306;&#23545;&#25968;&#25454;&#26469;&#28304;&#30340;&#24635;&#20307;&#19981;&#20316;&#20551;&#35774;&#65292;&#24182;&#19988;&#20551;&#35774;&#26816;&#39564;&#20063;&#32463;&#24120;&#34987;&#25490;&#38500;&#22312;&#22806;&#12290;&#36825;&#19968;&#25216;&#26415;&#20351;&#29992;&#32479;&#35745;&#22270;&#34920;&#12289;&#22270;&#24418;&#21644;&#32479;&#35745;&#27010;&#25324;&#26041;&#27861;&#23545;&#25968;&#25454;&#30340;&#29305;&#24449;&#36827;&#34892;&#20998;&#26512;&#21644;&#25551;&#36848;&#12290; EDA &#25216;&#26415;&#30340;&#26680;&#24515;&#65306;</p>
+<blockquote>
+<p>&#8220;&#35753;&#25968;&#25454;&#35828;&#35805;&#8221;</p>
+</blockquote>
+<p>&#22312;&#25506;&#32034;&#30340;&#22522;&#30784;&#19978;&#20877;&#23545;&#25968;&#25454;&#36827;&#34892;&#26356;&#20026;&#22797;&#26434;&#30340;&#24314;&#27169;&#20998;&#26512;&#12290;</p>
+<ol>
+<li><dl>
+<dt>&#35745;&#31639; EDA &#26041;&#27861;</dt>
+<dd><p>&#21253;&#25324;&#20174;&#31616;&#21333;&#30340;&#32479;&#35745;&#35745;&#31639;&#21040;&#39640;&#32423;&#30340;&#29992;&#20110;&#25506;&#32034;&#20998;&#26512;&#22810;&#21464;&#37327;&#25968;&#25454;&#38598;&#20013;&#27169;&#24335;&#30340;&#22810;&#20803;&#32479;&#35745;&#20998;&#26512;&#26041;&#27861;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#22270;&#24418; EDA &#26041;&#27861;</dt>
+<dd><p>&#21487;&#35270;&#21270;&#30340;&#25506;&#32034;&#25968;&#25454;&#20998;&#26512;&#12290;</p>
+<p>&#24120;&#29992;&#30340;&#22270;&#24418;&#26041;&#27861;&#26377;</p>
+<ul>
+<li><p>&#30452;&#26041;&#22270;(histogram)</p>
+<ul>
+<li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Cumulative_vs_normal_histogram.svg/350px-Cumulative_vs_normal_histogram.svg.png" title="fig:" alt="ordinary histogram &amp; cummulative histogram" /></li>
+</ul></li>
+<li><p>&#33550;&#21494;&#22270;(stem leaf)</p>
+<pre class="plain"><code> 4 | 4 6 7 9
+ 5 |
+ 6 | 3 4 6 8 8
+ 7 | 2 2 5 6
+ 8 | 1 4 8
+ 9 |
+10 | 6
+key: 6|3=63
+leaf unit: 1.0
+stem unit: 10.0</code></pre></li>
+<li><p>&#31665;&#32447;&#22270;(box plot)</p>
+<ul>
+<li><p>The &#8220;interquartile range&#8221;, abbreviated &#8220;IQR&#8221;, is just the width of the box in the box-and-whisker plot. That is, IQR = Q3 &#8211; Q1. The IQR can be used as a measure of how spread-out the values are. Statistics assumes that your values are clustered around some central value. The IQR tells how spread out the &#8220;middle&#8221; values are; it can also be used to tell when some of the other values are &#8220;too far&#8221; from the central value. These &#8220;too far away&#8221; points are called &#8220;outliers&#8221;, because they &#8220;lie outside&#8221; the range in which we expect them.</p></li>
+<li><div class="figure">
+<img src="http://www.purplemath.com/modules/stats/boxwhisk08.gif" />
+
+</div></li>
+<li><p>(Why one and a half times the width of the box? Why does that particular value demark the difference between &#8220;acceptable&#8221; and &#8220;unacceptable&#8221; values? Because, when <a href="https://en.wikipedia.org/wiki/John_Tukey">John Tukey</a> was inventing the box-and-whisker plot in 1977 to display these values, he picked 1.5&#215;IQR as the demarkation line for outliers. This has worked well, so we&#8217;ve continued using that value ever since.)</p></li>
+<li><div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Boxplot_vs_PDF.svg/220px-Boxplot_vs_PDF.svg.png" />
+
+</div></li>
+<li><p>Adjusted box plots are intended for skew distributions. They rely on the medcouple&#65288;&#65311;&#65311;&#65289; statistic of skewness. For a medcouple value of MC, the lengths of the upper and lower whiskers are respectively defined to be <span class="math display">\[1.5 \times IQR \times e^{3 MC}, ~\qquad~ 1.5 \times IQR \times e^{-4 MC} \text{if} MC \geq 0\]</span> and <span class="math display">\[1.5 \times IQR \times e^{4 MC}, ~\quad~ 1.5 \times IQR \times e^{-3 MC} \text{if} MC \leq 0.\]</span> Observe that for symmetrical distributions, the medcouple will be zero, and this reduces to Tukey&#8217;s boxplot with equal whisker lengths of <span class="math inline">\(1.5 \times IQR\)</span> for both whiskers.</p></li>
+</ul></li>
+<li><p>&#25955;&#28857;&#22270;(scatter plot)</p>
+<ul>
+<li><div class="figure">
+<img src="http://www.itl.nist.gov/div898/handbook/eda/section3/gif/spmatr2.gif" />
+
+</div></li>
+<li><p>Given a set of variables X<sub>1</sub>, X<sub>2</sub>, &#8230; , X<sub>k</sub>, the scatter plot matrix contains all the pairwise scatter plots of the variables on a single page in a matrix format. That is, if there are k variables, the scatter plot matrix will have k rows and k columns and the ith row and <sub>j</sub>th column of this matrix is a plot of X<sub>i</sub> versus X<sub>j</sub>.</p></li>
+<li><p>Matlab &#30340; <code>plotmatrix</code> &#20989;&#25968;</p>
+<ul>
+<li><code class="sourceCode python">plotmatrix(X,Y)</code> creates a matrix of subaxes containing scatter plots of the columns of X against the columns of Y. If X is p-by-n and Y is p-by-m, then plotmatrix produces an n-by-m matrix of subaxes.</li>
+<li><img src="http://cn.mathworks.com/help/releases/R2015b/examples/graphics/CreateScatterPlotMatrixwithTwoMatrixInputsExample_01.png" title="fig:" /></li>
+</ul></li>
+</ul></li>
+<li><p>&#24179;&#34892;&#22352;&#26631;&#22270;(parallel coordinate plot)</p></li>
+</ul>
+</dd>
+</dl></li>
+</ol>
+<p>&#25506;&#32034;&#24615;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;(ESDA)&#65306;&#25506;&#32034;&#24615;&#25968;&#25454;&#20998;&#26512;(EDA)&#22312;&#31354;&#38388;&#25968;&#25454;&#20998;&#26512;(SDA: Spatial Data Analysis)&#39046;&#22495;&#30340;&#25512;&#24191;&#12290;&#23558;&#25968;&#25454;&#30340;&#32479;&#35745;&#20998;&#26512;&#21644;&#22320;&#22270;&#23450;&#20301;&#32039;&#23494;&#32467;&#21512;&#22312;&#19968;&#36215;&#12290;</p>
+<p>ESDA = EDA + SDA</p>
+<p>ESDA&#65306;</p>
+<ol style="list-style-type: decimal">
+<li><p>&#27010;&#25324;&#31354;&#38388;&#25968;&#25454;&#30340;&#24615;&#36136;;</p></li>
+<li><p>&#25506;&#32034;&#31354;&#38388;&#25968;&#25454;&#20013;&#30340;&#27169;&#24335;;</p></li>
+<li><p>&#20135;&#29983;&#21644;&#22320;&#29702;&#25968;&#25454;&#30456;&#20851;&#30340;&#20551;&#35774;;</p></li>
+<li><p>&#22312;&#22320;&#22270;&#19978;&#35782;&#21035;&#24322;&#24120;&#25968;&#25454;&#30340;&#20998;&#24067;&#20301;&#32622;;</p></li>
+<li><p>&#21457;&#29616;&#26159;&#21542;&#23384;&#22312;&#28909;&#28857;&#21306;&#22495;(hotspots)&#12290;</p>
+<p>&#22320;&#22270;&#33021;&#22815;&#23450;&#20301;&#26696;&#20363;&#21450;&#20854;&#31354;&#38388;&#20851;&#31995;&#65292;&#24182;&#33021;&#22312;&#20998;&#26512;&#12289;&#26816;&#39564;&#21644;&#34920;&#31034;&#27169;&#22411;&#30340;&#32467;&#26524;&#20013;&#21457;&#25381;&#37325;&#35201;&#20316;&#29992;&#12290;</p></li>
+</ol>
+<p>read more</p>
+<ol>
+<li><a href="http://book.douban.com/subject/1551897/">&#25506;&#32034;&#24615;&#25968;&#25454;&#20998;&#26512; (&#35910;&#29923;)</a></li>
+</ol>
+<h3 id="&#31354;&#38388;&#28857;&#27169;&#24335;&#20998;&#26512;">&#31354;&#38388;&#28857;&#27169;&#24335;&#20998;&#26512;</h3>
+<h3 id="&#26684;&#32593;&#25110;&#38754;&#29366;&#25968;&#25454;&#31354;&#38388;&#32479;&#35745;&#20998;&#26512;">&#26684;&#32593;&#25110;&#38754;&#29366;&#25968;&#25454;&#31354;&#38388;&#32479;&#35745;&#20998;&#26512;</h3>
+<h3 id="&#22320;&#32479;&#35745;&#20998;&#26512;">&#22320;&#32479;&#35745;&#20998;&#26512;</h3>
+<h3 id="arcgis&#22320;&#32479;&#35745;&#20998;&#26512;">ArcGIS&#22320;&#32479;&#35745;&#20998;&#26512;</h3>
+<h2 id="&#31354;&#38388;&#20998;&#26512;&#24212;&#29992;&#24314;&#27169;">&#31354;&#38388;&#20998;&#26512;&#24212;&#29992;&#24314;&#27169;</h2>
+<hr />
+<p>refs and see also</p>
+<ol>
+<li>GIS &#29702;&#35770;&#19982;&#25216;&#26415;&#65292;&#31532;&#19971;&#31456; GIS &#31354;&#38388;&#20998;&#26512;&#19982;&#24212;&#29992;&#24314;&#27169;&#65292;Slides&#65292;&#31206;&#26118;&#65292;&#27494;&#27721;&#22823;&#23398;</li>
+<li><a href="https://en.wikipedia.org/wiki/Mean_squared_error">Mean squared error - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mean">Mean - Wikipedia, the free encyclopedia</a></li>
+<li><a href="http://wiki.mbalib.com/wiki/%E5%B3%B0%E5%BA%A6">&#23792;&#24230; - MBA&#26234;&#24211;&#30334;&#31185;</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Average_absolute_deviation">Average absolute deviation - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stem-and-leaf_display">Stem-and-leaf display - Wikipedia, the free encyclopedia</a></li>
+<li><a href="http://www.purplemath.com/modules/boxwhisk3.htm">Box-and-Whisker Plots: Interquartile Ranges and Outliers</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Box_plot">Box plot - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mode_(statistics)">Mode (statistics) - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Mean_squared_error">Mean squared error - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Medcouple">Medcouple - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Robust_statistics">Robust statistics - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Skewness">Skewness - Wikipedia, the free encyclopedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Histogram">Histogram - Wikipedia, the free encyclopedia</a></li>
+<li><a href="http://www.itl.nist.gov/div898/handbook/eda/section3/scatplma.htm">1.3.3.26.11. Scatter Plot Matrix</a></li>
+<li><a href="http://cn.mathworks.com/help/stats/gplotmatrix.html">Matrix of scatter plots by group - MATLAB gplotmatrix - MathWorks &#20013;&#22269;</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#gis">gis</a></li>
+<li><a class="tzx-tag" href="tags.html/#spatial analysis">spatial analysis</a></li>
+<li><a class="tzx-tag" href="tags.html/#homework">homework</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/58d3d3880db6ca3930e48156b2a0339ab4f5351a/&#8230;69-gis-spatial-analysis-application-modeling.md" title="1 insertions(+), 1 deletions(-)">1578505724</option>
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/&#8230;69-gis-spatial-analysis-application-modeling.md" title="251 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "&#8230;69-gis-spatial-analysis-application-modeling.md";
+var tzxChanges = [
+    {
+        hash: "58d3d3880db6ca3930e48156b2a0339ab4f5351a",
+        datetime: "1578505724",
+        insertions: 1,
+        deletions: 1
+    },
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 251,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

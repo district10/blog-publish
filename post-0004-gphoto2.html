@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-02-19" />
+  <meta name="keywords" content="gphoto2, linux" />
+  <title>&#30456;&#26426;&#25511;&#21046;&#36719;&#20214; gPhoto2 &#30340;&#31616;&#35201;&#20171;&#32461;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">&#30456;&#26426;&#25511;&#21046;&#36719;&#20214; gPhoto2 &#30340;&#31616;&#35201;&#20171;&#32461;</h1>
+<h3 class="date">2015-02-19</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#&#30456;&#26426;&#25511;&#21046;&#36719;&#20214;-gphoto2-&#30340;&#31616;&#35201;&#20171;&#32461;clearify">&#30456;&#26426;&#25511;&#21046;&#36719;&#20214; gPhoto2 &#30340;&#31616;&#35201;&#20171;&#32461;</a><ul>
+        <li><a href="#bash-&#25351;&#21335;">Bash &#25351;&#21335;</a><ul>
+        <li><a href="#tab-&#34917;&#20840;">Tab &#34917;&#20840;</a></li>
+        <li><a href="#&#21629;&#20196;-&#21442;&#25968;">&#21629;&#20196; + &#21442;&#25968;</a></li>
+        <li><a href="#man-&#25991;&#26723;">man &#25991;&#26723;</a></li>
+        <li><a href="#&#21487;&#20197;&#25226;&#21629;&#20196;&#20889;&#25104;&#33050;&#26412;&#19979;&#27425;&#30452;&#25509;&#20351;&#29992;">&#21487;&#20197;&#25226;&#21629;&#20196;&#20889;&#25104;&#33050;&#26412;&#19979;&#27425;&#30452;&#25509;&#20351;&#29992;</a></li>
+        </ul></li>
+        <li><a href="#&#23433;&#35013;-gphoto2">&#23433;&#35013; gPhoto2</a><ul>
+        <li><a href="#&#20960;&#20010;&#33050;&#26412;">&#20960;&#20010;&#33050;&#26412;</a></li>
+        </ul></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="&#30456;&#26426;&#25511;&#21046;&#36719;&#20214;-gphoto2-&#30340;&#31616;&#35201;&#20171;&#32461;clearify">&#30456;&#26426;&#25511;&#21046;&#36719;&#20214; gPhoto2 &#30340;&#31616;&#35201;&#20171;&#32461;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h1>
+<p>&#30456;&#26426;&#30340;&#25293;&#25668;&#65292;&#21487;&#20197;&#36890;&#36807;&#30456;&#26426;&#33258;&#24102;&#30340;&#39537;&#21160;&#31243;&#24207;&#21644;&#24212;&#29992;&#36719;&#20214;&#12290;&#20063;&#21487;&#20197;&#36890;&#36807; gPhoto2&#65292;&#23427;&#30340; <a href="http://www.gphoto.org/">&#23448;&#32593;</a> &#19978;&#36825;&#20040;&#20171;&#32461;&#21040;&#65306;</p>
+<blockquote>
+<p>gPhoto2 is a free, redistributable, ready to use set of digital camera software applications for Unix-like systems, written by a whole team of dedicated volunteers around the world. It supports more than 2100 cameras&#8230;</p>
+</blockquote>
+<p>&#25105;&#20204;&#29992; gPhoto2 &#26469;&#25511;&#21046; Nikon &#30456;&#26426;&#21644;&#19968;&#20010;&#24037;&#19994;&#40060;&#30524;&#38236;&#22836;&#65292;&#23454;&#29616;&#23450;&#26102;&#35302;&#21457;&#30340;&#25293;&#25668;&#65292;&#29992;&#20110;&#23460;&#20869;&#20840;&#26223;&#22270;&#30340;&#37319;&#38598;&#12290;&#26412;&#25991;&#20808;&#20171;&#32461; Linux &#19979; Bash &#22522;&#30784;&#30693;&#35782;&#65292;&#20877;&#20171;&#32461; gPhoto2 &#30340;&#23433;&#35013;&#21644;&#20351;&#29992;&#65292;&#20197;&#21450;&#30456;&#26426;&#30340;&#37197;&#32622;&#26041;&#27861;&#12290;</p>
+<h2 id="bash-&#25351;&#21335;">Bash &#25351;&#21335;</h2>
+<p>Linux &#19979;&#21629;&#20196;&#34892;&#29615;&#22659;&#20026;&#19968;&#31181; shell&#65292;&#36890;&#24120;&#40664;&#35748;&#20026; Bash&#65288;borne-again shell&#65289;&#12290;</p>
+<h3 id="tab-&#34917;&#20840;">Tab &#34917;&#20840;</h3>
+<p>&#21629;&#20196;&#19981;&#38656;&#35201;&#20840;&#37096;&#25163;&#25970;&#65292;&#25353; <code>Tab</code> &#38190;&#21629;&#20196;&#21487;&#33258;&#21160;&#34917;&#20840;&#12290;&#22914;&#65306;<kbd>ec&lt;TAB&gt;</kbd>&#65288;&#36825;&#37324;&#30340; <kbd>&lt;TAB&gt;</kbd> &#25351;&#30340;&#26159;&#38190;&#30424;&#19978;&#30340; <code>Tab</code> &#38190;&#65289;&#65292; Bash &#20250;&#33258;&#21160;&#34917;&#20840;&#20026; <code class="sourceCode bash"><span class="kw">echo</span></code>&#65292;&#25509;&#30528;&#25970;&#31354;&#26684;&#65292;&#20877; <code>hello Bash</code>&#65292;&#21363;&#25972;&#20010;&#35821;&#21477;&#26159; <code class="sourceCode bash"><span class="kw">echo</span> hello Bash</code>&#65292;&#36755;&#20986;&#20026; <code class="plain">hello Bash</code>&#12290;</p>
+<h3 id="&#21629;&#20196;-&#21442;&#25968;">&#21629;&#20196; + &#21442;&#25968;</h3>
+<p><code class="sourceCode bash"><span class="kw">echo</span></code> &#26159;&#21629;&#20196;&#65292;<code class="sourceCode bash"><span class="kw">hello</span> Bash</code> &#26159;&#21442;&#25968;&#12290;&#32467;&#26524;&#23601;&#26159;&#25171;&#21360; <code class="plain">hello Bash</code> &#21040;&#26631;&#20934;&#36755;&#20986;&#27969;&#65288;&#21363;&#21629;&#20196;&#34892;&#65289;&#12290;</p>
+<h3 id="man-&#25991;&#26723;">man &#25991;&#26723;</h3>
+<p>&#20960;&#20046;&#25152;&#26377;&#21629;&#20196;&#37117;&#26377;&#35814;&#32454;&#30340;&#20351;&#29992;&#25991;&#26723;&#65292;&#25152;&#20197;&#19981;&#24517;&#32972;&#22826;&#22810;&#25351;&#20196;&#12290;&#19981;&#30693;&#36947; <code>gphoto2</code> &#24590;&#20040;&#29992;&#65292;&#23601; <code class="sourceCode bash"><span class="kw">man</span> gphoto2</code>&#65292;&#25110;&#32773;&#35797;&#35797; <code class="sourceCode bash"><span class="kw">gphoto2</span> --help</code>&#65292;&#25110;&#32773;&#30452;&#25509; <code>gphoto2</code>&#65292;&#20351;&#29992;&#26041;&#27861;&#20250;&#25171;&#21360;&#22312;&#23631;&#24149;&#19978;&#65288;Linux &#29992;&#36215;&#26469;&#20854;&#23454;&#24456;&#23481;&#26131;&#65289;&#65306;</p>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/misc/gphoto2.png" alt="gphoto2 help" />
+<p class="caption">gphoto2 help</p>
+</div>
+<h3 id="&#21487;&#20197;&#25226;&#21629;&#20196;&#20889;&#25104;&#33050;&#26412;&#19979;&#27425;&#30452;&#25509;&#20351;&#29992;">&#21487;&#20197;&#25226;&#21629;&#20196;&#20889;&#25104;&#33050;&#26412;&#19979;&#27425;&#30452;&#25509;&#20351;&#29992;</h3>
+<p>&#25293;&#19968;&#24352;&#29031;&#29255;&#65292;&#29992; <code class="sourceCode bash"><span class="kw">gphoto2</span> --capture-image</code> &#21363;&#21487;&#65292;&#20889;&#21040;&#19968;&#20010;&#25991;&#20214;&#37324;&#27604;&#22914; <code>run.sh</code>&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#/bin/bash</span>
+
+<span class="co"># &#36825;&#26159;&#21333;&#34892;&#27880;&#37322;&#65292;&#19979;&#38754;&#26159;&#21629;&#20196;</span>
+<span class="kw">gphoto2</span> \
+--capture-image
+<span class="kw">:</span> <span class="st">&#39;</span>
+<span class="st">&#36825;&#26159;&#22810;&#34892;&#27880;&#37322;&#65292;&#19978;&#38754;&#20882;&#21495;&#21069;&#30340;&#20004;&#34892;&#26159;&#21629;&#20196;&#12290;&#21453;&#26012;&#26464;&#29992;&#26469;&#32493;&#34892;&#65292;&#19978;&#38754;&#30340;&#21629;&#20196;&#31561;&#20215;&#20110;</span>
+<span class="st">    gphoto2 --capture-image</span>
+<span class="st">&#20004;&#31181;&#34920;&#36798;&#19968;&#27169;&#19968;&#26679;&#12290;</span>
+<span class="st">&#22810;&#34892;&#27880;&#37322;&#32467;&#26463;&#12290;</span>
+<span class="st">&#39;</span></code></pre></div>
+<p>&#20445;&#23384;&#22909; <code>run.sh</code>&#65292;&#28155;&#21152;&#25191;&#34892;&#26435;&#38480;&#65288;&#19981;&#28982;&#25991;&#26412;&#23601;&#26159;&#25991;&#26412;&#65292;&#19981;&#33021;&#36816;&#34892;&#65289;&#65306;<code class="sourceCode bash"><span class="kw">chmod</span> +x ./run.sh</code>&#65292;&#26368;&#21518;&#36816;&#34892;&#65306;<code class="sourceCode bash"><span class="kw">./run.sh</span></code>&#65292;&#21363;&#21487;&#25293;&#19968;&#24352;&#29031;&#29255;&#12290;</p>
+<p>&#20851;&#20110; Linux &#21644; Bash &#33050;&#26412;&#65292;&#21487;&#20197;&#21442;&#32771;&#25105;&#30340;&#21478;&#19968;&#31687; post&#65306; <a href="post-0024-linux-shell-scripting-cookbook.html">Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</a>&#65292;&#25110;&#32773; <a href="http://linux.vbird.org/">&#40165;&#21733;&#30340; Linux &#31169;&#25151;&#33756;</a>&#12290;</p>
+<h2 id="&#23433;&#35013;-gphoto2">&#23433;&#35013; gPhoto2</h2>
+<p>&#25105;&#20027;&#35201;&#21442;&#32771;&#20102;&#36825;&#31687;&#25991;&#31456;&#65306;<a href="http://www.yannock.be/computer/compiling-gphoto2-on-the-raspberry-pi">Compiling gphoto2 on the Raspberry Pi &#8211; One life and a few more things</a>&#65292;&#22823;&#33268;&#30340;&#27969;&#31243;&#26159;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># &#23433;&#35013;&#20381;&#36182;</span>
+<span class="kw">sudo</span> apt-get install \
+    subversion dh-autoreconf \
+    libglib2.0-dev \
+    libusb-dev libusb-1.0-0-dev \
+    libexif-dev libpopt-dev libfuse-dev \
+    mono-devel monodoc-base libmono-2.0.1 mono-gmcs \
+    python-pyrex
+
+<span class="co"># &#19979;&#36733;&#23433;&#35013; libgphoto2</span>
+<span class="kw">wget</span> http://sourceforge.net/projects/gphoto/files/libgphoto/2.5.2/libgphoto2-2.5.2.tar.gz
+<span class="kw">tar</span> xvf libgphoto2*.tar.gz
+<span class="kw">cd</span> libgphoto2*
+<span class="kw">./configure</span>
+<span class="kw">make</span> -j4
+<span class="kw">sudo</span> make install
+
+<span class="co"># &#19979;&#36733;&#23433;&#35013; gphoto2</span>
+<span class="kw">wget</span> http://sourceforge.net/projects/gphoto/files/gphoto/2.5.2/gphoto2-2.5.2.tar.gz
+<span class="kw">tar</span> xvf gphoto2*.tar.gz
+<span class="kw">cd</span> gphoto2*
+<span class="kw">./configure</span>
+<span class="kw">make</span> -j4
+<span class="kw">sudo</span> make install</code></pre></div>
+<h3 id="&#20960;&#20010;&#33050;&#26412;">&#20960;&#20010;&#33050;&#26412;</h3>
+<p>&#25293;&#29031;&#65306;&#65288;&#20445;&#30041;&#19968;&#20123;&#27880;&#37322;&#25481;&#30340;&#21629;&#20196;&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#/bin/bash</span>
+
+<span class="kw">gphoto2</span> \
+--capture-image \
+--capture-image \
+--capture-image \
+
+: <span class="st">&#39;</span>
+<span class="st">&#26356;&#25913;&#19968;&#20123;&#35774;&#32622;&#65292;&#25913;&#19968;&#27425;&#23601;&#22909;&#65292;&#29992;&#20102;&#23601;&#27880;&#37322;&#25481;</span>
+
+<span class="st">gphoto2 \</span>
+<span class="st">    --set-config /main/capturesettings/nikonflashmode=3 \</span>
+<span class="st">    --set-config /main/capturesettings/shootingspeed=3 \</span>
+<span class="st">    --set-config /main/capturesettings/flashmode=1 \</span>
+<span class="st">    --set-config /main/capturesettings/shutterspeed=15 \</span>
+<span class="st">    --set-config /main/capturesettings/shutterspeed2=17 \</span>
+<span class="st">    --set-config /main/capturesettings/exposuredelaymode=0 \</span>
+<span class="st">    --set-config /main/capturesettings/burstnumber=1 \</span>
+<span class="st">    --set-config /main/other/500c=1 \</span>
+<span class="st">    --set-config /main/other/500d=15 \</span>
+<span class="st">    --set-config /main/other/500f=0 \</span>
+<span class="st">    --set-config /main/other/5018=0 \</span>
+<span class="st">    --set-config /main/other/d068=3 \</span>
+<span class="st">    --set-config /main/other/d06a=3 \</span>
+<span class="st">    --set-config /main/other/d1b1=36 \</span>
+<span class="st">&#39;</span>
+
+<span class="kw">:</span> <span class="st">&#39;</span>
+<span class="st"># &#36825;&#26159;&#21407;&#26469;&#30340;&#35774;&#32622;&#65292;&#24674;&#22797;&#30340;&#26102;&#20505;&#29992;</span>
+
+<span class="st">    --set-config /main/capturesettings/nikonflashmode=0 \</span>
+<span class="st">    --set-config /main/capturesettings/shootingspeed=3 \</span>
+<span class="st">    --set-config /main/capturesettings/flashmode=1 \</span>
+<span class="st">    --set-config /main/capturesettings/shutterspeed=15 \</span>
+<span class="st">    --set-config /main/capturesettings/shutterspeed2=17 \</span>
+<span class="st">    --set-config /main/capturesettings/exposuredelaymode=0 \</span>
+<span class="st">    --set-config /main/capturesettings/burstnumber=1 \</span>
+<span class="st">    --set-config /main/other/500c=1 \</span>
+<span class="st">    --set-config /main/other/500d=15 \</span>
+<span class="st">    --set-config /main/other/500f=0 \</span>
+<span class="st">    --set-config /main/other/5018=0 \</span>
+<span class="st">    --set-config /main/other/d068=3 \</span>
+<span class="st">    --set-config /main/other/d06a=3 \</span>
+<span class="st">    --set-config /main/other/d1b1=36 \</span>
+<span class="st">    &#39;</span></code></pre></div>
+<p>&#27880;&#24847; <code class="sourceCode bash"><span class="kw">--capture-preview</span></code> &#21644; <code class="sourceCode bash"><span class="kw">--capture-image</span></code> &#30340;&#21306;&#21035;&#65292;&#21487;&#25442;&#30528;&#35797;&#35797;&#30475;&#12290;</p>
+<p>&#33719;&#21462; Thumbnail&#65288;&#25226;&#30456;&#26426;&#37324;&#30340;&#29031;&#29255;&#32553;&#30053;&#22270;&#20256;&#22238;&#30005;&#33041;&#65289;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">gphoto2</span> --get-all-thumbnails</code></pre></div>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/misc/thumb1.jpg" alt="&#32553;&#30053;&#22270;&#8211;&#36965;&#24863;&#27004;&#20869;&#37096;&#65306;thumb_DSC_2221.jpg" />
+<p class="caption">&#32553;&#30053;&#22270;&#8211;&#36965;&#24863;&#27004;&#20869;&#37096;&#65306;thumb_DSC_2221.jpg</p>
+</div>
+<p>&#33258;&#21160;&#20998;&#31867;&#23384;&#21040;&#25991;&#20214;&#22841;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#/bin/bash</span>
+
+<span class="co"># BASENAME=$(date +%s_%F_%H:%M:%S_%N)</span>
+
+<span class="ot">BASEDIR=</span><span class="st">&quot;/tmp/&quot;</span>
+<span class="ot">EXTENTION=</span><span class="st">&quot;jpg&quot;</span>
+
+<span class="fu">repeat()</span> <span class="kw">{</span> <span class="kw">while</span> <span class="kw">true;</span> <span class="kw">do</span> <span class="ot">$@</span>; <span class="kw">done</span>;<span class="kw">}</span>;
+<span class="fu">capture()</span> <span class="kw">{</span>
+    <span class="ot">FOLDER=</span><span class="st">&quot;</span><span class="ot">${BASEDIR}</span><span class="st">./</span><span class="ot">$(</span><span class="kw">date</span> +%F/%H/%M<span class="ot">)</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="kw">\</span>
+    <span class="ot">IMG=</span><span class="st">&quot;</span><span class="ot">$(</span><span class="kw">date</span> +%s_%F_%H:%M:%S_%N<span class="ot">)</span><span class="st">.</span><span class="ot">${EXTENTION}</span><span class="st">&quot;</span>
+    <span class="kw">mkdir</span> -p <span class="ot">$FOLDER</span>
+    <span class="kw">echo</span> @___folder: [<span class="ot">$FOLDER</span>]
+    <span class="kw">echo</span> @____image: [<span class="ot">$IMG</span>]
+    <span class="co"># &#29031;&#30456;&#21629;&#21517;&#24182;&#20998;&#31867;&#20445;&#23384;</span>
+    <span class="kw">gphoto2</span> --capture-image --filename <span class="ot">$IMG</span> <span class="kw">&amp;&amp;</span> <span class="kw">mv</span> <span class="ot">$IMG</span> <span class="ot">$FOLDER</span>
+    <span class="co"># echo  &#39;hello(`date +%s`)&#39; &gt; $IMG &amp;&amp; mv $IMG $FOLDER</span>
+    <span class="co"># read -t 1 || return</span>
+    <span class="co"># echo sleep 3 seconds &amp;&amp; sleep 3 &amp;&amp; echo sleep done</span>
+<span class="kw">}</span>;
+
+<span class="kw">repeat</span> capture <span class="co"># &#25345;&#32493;&#25293;&#29031;</span></code></pre></div>
+<p>&#21487;&#20197;&#36890;&#36807; gphoto2 &#33719;&#21462;&#30456;&#26426;&#30340;&#24403;&#21069;&#35774;&#32622;&#65306;<code class="sourceCode bash"><span class="kw">gphoto2</span> --summary</code>&#65292;&#36825;&#37324;&#26159;&#37096;&#20998;&#36755;&#20986;&#65306;</p>
+<pre><code>Camera summary:
+Manufacturer: Nikon Corporation
+Model: D7100
+  Version: V1.01
+  Serial Number: 61778820000000000000000000000000
+Vendor Extension ID: 0xa (1.0)
+Vendor Extension Description: microsoft.com: 1.0
+
+Capture Formats: JPEG Undefined Type
+Display Formats: Undefined Type, Association/Directory, Script, DPOF, Apple Quicktime, JPEG
+
+Device Capabilities:
+    File Download, File Deletion, File Upload
+    Generic Image Capture, No Open Capture, Nikon Capture 1, Nikon Capture 2, Nikon Capture 3</code></pre>
+<p>&#20840;&#37096;&#36755;&#20986;&#65306;<a href="http://gnat.qiniudn.com/tmp/gphoto2/summary.txt">summary.txt</a>&#12290;</p>
+<p>&#36824;&#21487;&#20197;&#36755;&#20986;&#30456;&#26426;&#30340;&#25152;&#26377;&#30340;&#21442;&#25968;&#20505;&#36873;&#39033;&#65292;&#22823;&#27010;&#38271;&#36825;&#26679;&#65288;<a href="http://gnat.qiniudn.com/tmp/gphoto2/list-all-config.txt"><code class="sourceCode bash"><span class="kw">list-all-config</span></code></a>( &lt;= &#28857;&#25105;&#26597;&#30475;&#20840;&#37096;&#20869;&#23481;)&#65289;&#65306;</p>
+<pre><code>/main/actions/autofocusdrive
+Label: Drive Nikon DSLR Autofocus
+Type: TOGGLE
+Current: 0
+/main/actions/manualfocusdrive
+Label: Drive Nikon DSLR Manual focus
+Type: RANGE
+Current: 0
+Bottom: -32767
+Top: 32767
+Step: 1
+/main/actions/changeafarea
+Label: Set Nikon Autofocus area
+Type: TEXT
+Current: 0x0
+/main/actions/controlmode
+Label: Set Nikon Control Mode
+Type: TEXT
+Current: 0
+/main/settings/capturetarget
+Label: Capture Target
+Type: RADIO
+Current: Internal RAM
+Choice: 0 Internal RAM
+Choice: 1 Memory card</code></pre>
+<p>&#21033;&#29992;&#36825;&#20123;&#21487;&#20197;&#35774;&#32622;&#30456;&#26426;&#65292;&#27604;&#22914;&#19978;&#38754;&#30340; <code>/main/settings/capturetarget</code> &#30340;&#31867;&#22411;&#26159; RADIO &#65288;&#23601;&#26159; Qt/MFC &#37324;&#30340; Radio button&#65292;HTML &#37324;&#30340; Radio input&#65292;&#19968;&#26679;&#19968;&#26679;&#30340;&#65289;&#65292;&#20108;&#36873;&#19968;&#12290;</p>
+<p>&#37027;&#20040;&#65292;&#35774;&#32622;&#29031;&#29255;&#20445;&#23384;&#22312; RAM &#19978;&#23601;&#21487;&#20197;&#65306;</p>
+<p><code class="sourceCode bash"><span class="kw">gphoto2</span> --set-config /main/settings/capturetarget=0</code>&#12290;</p>
+<p>&#20854;&#20182;&#21442;&#25968;&#20063;&#26159;&#36825;&#26679;&#35774;&#32622;&#12290;</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#25110;&#35768;&#35828;&#8220;&#36719;&#20214;&#8221;&#26377;&#28857;&#24618;&#65292;&#22240;&#20026; gphoto2 &#20854;&#23454;&#26159;&#19968;&#20010; Linux &#21629;&#20196;&#34892;&#24037;&#20855;&#65292;&#22312;&#24456;&#22810;&#20154;&#30524;&#20013;&#36719;&#20214;&#37117;&#26159;&#26377;&#30028;&#38754;&#30340;&#12290;</p>
+<p>&#20294;&#23427;&#65292;&#30830;&#23454;&#26159;&#19968;&#20010;&#36719;&#20214;&#8230;&#8230;&#21704;&#21704;&#12290;<a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#gphoto2">gphoto2</a></li>
+<li><a class="tzx-tag" href="tags.html/#linux">linux</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0004-gphoto2.md" title="263 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0004-gphoto2.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 263,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning JavaScript</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="learning-javascript">Learning JavaScript</h1>
+<p><a href="http://es6.ruanyifeng.com/#undefined">ECMAScript 6&#20837;&#38376;</a></p>
+<p>&#12298;ECMAScript 6&#20837;&#38376;&#12299;&#26159;&#19968;&#26412;&#24320;&#28304;&#30340;JavaScript&#35821;&#35328;&#25945;&#31243;&#65292;&#20840;&#38754;&#20171;&#32461;ECMAScript 6&#26032;&#24341;&#20837;&#30340;&#35821;&#27861;&#29305;&#24615;&#12290;</p>
+<h2 id="ecmascript-6&#31616;&#20171;">ECMAScript 6&#31616;&#20171;</h2>
+<h3 id="ecmascript&#21644;javascript&#30340;&#20851;&#31995;">ECMAScript&#21644;JavaScript&#30340;&#20851;&#31995;</h3>
+<h3 id="ecmascript&#30340;&#21382;&#21490;">ECMAScript&#30340;&#21382;&#21490;</h3>
+<h3 id="&#37096;&#32626;&#36827;&#24230;">&#37096;&#32626;&#36827;&#24230;</h3>
+<p>nvm -&gt; node -&gt; cnpm</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">node</span> --v8-options <span class="kw">|</span> <span class="kw">grep</span> harmony
+
+  <span class="kw">--harmony_typeof</span>
+  <span class="kw">--harmony_scoping</span>
+  <span class="kw">--harmony_modules</span>
+  <span class="kw">--harmony_symbols</span>
+  <span class="kw">--harmony_proxies</span>
+  <span class="kw">--harmony_collections</span>
+  <span class="kw">--harmony_observation</span>
+  <span class="kw">--harmony_generators</span>
+  <span class="kw">--harmony_iteration</span>
+  <span class="kw">--harmony_numeric_literals</span>
+  <span class="kw">--harmony_strings</span>
+  <span class="kw">--harmony_arrays</span>
+  <span class="kw">--harmony_maths</span>
+  <span class="kw">--harmony</span></code></pre></div>
+<h3 id="babel&#36716;&#30721;&#22120;">Babel&#36716;&#30721;&#22120;</h3>
+<p>Babel&#26159;&#19968;&#20010;&#24191;&#27867;&#20351;&#29992;&#30340;ES6&#36716;&#30721;&#22120;&#65292;&#21487;&#20197;&#23558;ES6&#20195;&#30721;&#36716;&#20026;ES5&#20195;&#30721;&#65292;&#20174;&#32780;&#22312;&#29616;&#26377;&#29615;&#22659;&#25191;&#34892;&#12290;&#36825;&#24847;&#21619;&#30528;&#65292;&#20320;&#21487;&#20197;&#29992;ES6&#30340;&#26041;&#24335;&#32534;&#20889;&#31243;&#24207;&#65292;&#21448;&#19981;&#29992;&#25285;&#24515;&#29616;&#26377;&#29615;&#22659;&#26159;&#21542;&#25903;&#25345;&#12290;&#19979;&#38754;&#26159;&#19968;&#20010;&#20363;&#23376;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#36716;&#30721;&#21069;</span>
+<span class="va">input</span>.<span class="at">map</span>(item <span class="op">=&gt;</span> item <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span>
+
+<span class="co">// &#36716;&#30721;&#21518;</span>
+<span class="va">input</span>.<span class="at">map</span>(<span class="kw">function</span> (item) <span class="op">{</span>
+  <span class="cf">return</span> item <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p><code>.babelrc</code></p>
+<p>preset, &#39044;&#35843;&#35013;&#32622;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ES2015&#36716;&#30721;&#35268;&#21017;</span>
+$ <span class="kw">npm</span> install --save-dev babel-preset-es2015
+
+<span class="co"># react&#36716;&#30721;&#35268;&#21017;</span>
+$ <span class="kw">npm</span> install --save-dev babel-preset-react
+
+<span class="co"># ES7&#19981;&#21516;&#38454;&#27573;&#35821;&#27861;&#25552;&#26696;&#30340;&#36716;&#30721;&#35268;&#21017;&#65288;&#20849;&#26377;4&#20010;&#38454;&#27573;&#65289;&#65292;&#36873;&#35013;&#19968;&#20010;</span>
+$ <span class="kw">npm</span> install --save-dev babel-preset-stage-0
+$ <span class="kw">npm</span> install --save-dev babel-preset-stage-1
+$ <span class="kw">npm</span> install --save-dev babel-preset-stage-2
+$ <span class="kw">npm</span> install --save-dev babel-preset-stage-3</code></pre></div>
+<p>presets&#23383;&#27573;&#35774;&#23450;&#36716;&#30721;&#35268;&#21017;&#65292;&#23448;&#26041;&#25552;&#20379;&#20197;&#19979;&#30340;&#35268;&#21017;&#38598;&#65292;&#20320;&#21487;&#20197;&#26681;&#25454;&#38656;&#35201;&#23433;&#35013;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;presets&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+        <span class="st">&quot;es2015&quot;</span><span class="ot">,</span>
+        <span class="st">&quot;react&quot;</span><span class="ot">,</span>
+        <span class="st">&quot;stage-2&quot;</span>
+    <span class="ot">]</span><span class="fu">,</span>
+    <span class="dt">&quot;plugins&quot;</span><span class="fu">:</span> <span class="ot">[]</span>
+<span class="fu">}</span></code></pre></div>
+<p>Babel&#25552;&#20379;babel-cli&#24037;&#20855;&#65292;&#29992;&#20110;&#21629;&#20196;&#34892;&#36716;&#30721;&#12290;</p>
+<p>babel-cli&#24037;&#20855;&#33258;&#24102;&#19968;&#20010;babel-node&#21629;&#20196;&#65292;&#25552;&#20379;&#19968;&#20010;&#25903;&#25345;ES6&#30340;REPL&#29615;&#22659;&#12290;&#23427;&#25903;&#25345;Node&#30340;REPL&#29615;&#22659;&#30340;&#25152;&#26377;&#21151;&#33021;&#65292;&#32780;&#19988;&#21487;&#20197;&#30452;&#25509;&#36816;&#34892;ES6&#20195;&#30721;&#12290;</p>
+<p>&#23427;&#19981;&#29992;&#21333;&#29420;&#23433;&#35013;&#65292;&#32780;&#26159;&#38543;babel-cli&#19968;&#36215;&#23433;&#35013;&#12290;&#28982;&#21518;&#65292;&#25191;&#34892;babel-node&#23601;&#36827;&#20837;REPL&#29615;&#22659;&#12290;</p>
+<p>babel-register&#27169;&#22359;&#25913;&#20889;require&#21629;&#20196;&#65292;&#20026;&#23427;&#21152;&#19978;&#19968;&#20010;&#38057;&#23376;&#12290;&#27492;&#21518;&#65292;&#27599;&#24403;&#20351;&#29992;require&#21152;&#36733;.js&#12289;.jsx&#12289;.es&#21644;.es6&#21518;&#32512;&#21517;&#30340;&#25991;&#20214;&#65292;&#23601;&#20250;&#20808;&#29992;Babel&#36827;&#34892;&#36716;&#30721;&#12290;</p>
+<p>Babel&#20063;&#21487;&#20197;&#29992;&#20110;&#27983;&#35272;&#22120;&#29615;&#22659;&#12290;&#20294;&#26159;&#65292;&#20174;Babel 6.0&#24320;&#22987;&#65292;&#19981;&#20877;&#30452;&#25509;&#25552;&#20379;&#27983;&#35272;&#22120;&#29256;&#26412;&#65292;&#32780;&#26159;&#35201;&#29992;&#26500;&#24314;&#24037;&#20855;&#26500;&#24314;&#20986;&#26469;&#12290;&#22914;&#26524;&#20320;&#27809;&#26377;&#25110;&#19981;&#24819;&#20351;&#29992;&#26500;&#24314;&#24037;&#20855;&#65292;&#21487;&#20197;&#36890;&#36807;&#23433;&#35013;5.x&#29256;&#26412;&#30340;babel-core&#27169;&#22359;&#33719;&#21462;&#12290;</p>
+<p><a href="https://babeljs.io/repl/">Babel &#183; The compiler for writing next generation JavaScript</a></p>
+<h3 id="traceur&#36716;&#30721;&#22120;">Traceur&#36716;&#30721;&#22120;</h3>
+<h3 id="ecmascript-7">ECMAScript 7</h3>
+<h2 id="let&#21644;const&#21629;&#20196;">let&#21644;const&#21629;&#20196;</h2>
+<h3 id="let&#21629;&#20196;">let&#21629;&#20196;</h3>
+<p>&#20316;&#29992;&#22495;&#65292; block level</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> []<span class="op">;</span>
+<span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+  a[i] <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">}</span>
+a[<span class="dv">6</span>]()<span class="op">;</span> <span class="co">// 6</span>
+<span class="co">// var &#30340;&#35805;&#21487;&#26159; 9&#65281;</span></code></pre></div>
+<p>let&#19981;&#20687;var&#37027;&#26679;&#20250;&#21457;&#29983;&#8220;&#21464;&#37327;&#25552;&#21319;&#8221;&#29616;&#35937;&#12290;&#25152;&#20197;&#65292;&#21464;&#37327;&#19968;&#23450;&#35201;&#22312;&#22768;&#26126;&#21518;&#20351;&#29992;&#65292;&#21542;&#21017;&#25253;&#38169;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// &#36755;&#20986;undefined</span>
+<span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// &#25253;&#38169;ReferenceError</span>
+
+<span class="kw">var</span> foo <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+<span class="kw">let</span> bar <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></code></pre></div>
+<p>&#19978;&#38754;&#20195;&#30721;&#20013;&#65292;&#21464;&#37327;foo&#29992;var&#21629;&#20196;&#22768;&#26126;&#65292;&#20250;&#21457;&#29983;&#21464;&#37327;&#25552;&#21319;&#65292;&#21363;&#33050;&#26412;&#24320;&#22987;&#36816;&#34892;&#26102;&#65292;&#21464;&#37327;foo &#24050;&#32463;&#23384;&#22312;&#20102;&#65292;&#20294;&#26159;&#27809;&#26377;&#20540;&#65292;&#25152;&#20197;&#20250;&#36755;&#20986;undefined&#12290;&#21464;&#37327;bar&#29992;let&#21629;&#20196;&#22768;&#26126;&#65292;&#19981;&#20250;&#21457;&#29983;&#21464;&#37327;&#25552;&#21319;&#12290;&#36825;&#34920;&#31034;&#22312;&#22768;&#26126;&#23427;&#20043;&#21069;&#65292;&#21464;&#37327;bar&#26159;&#19981;&#23384;&#22312;&#30340;&#65292;&#36825;&#26102;&#22914;&#26524;&#29992;&#21040;&#23427;&#65292;&#23601;&#20250;&#25243;&#20986;&#19968;&#20010;&#38169;&#35823;&#12290;</p>
+<p>ES6&#26126;&#30830;&#35268;&#23450;&#65292;&#22914;&#26524;&#21306;&#22359;&#20013;&#23384;&#22312;let&#21644;const&#21629;&#20196;&#65292;&#36825;&#20010;&#21306;&#22359;&#23545;&#36825;&#20123;&#21629;&#20196;&#22768;&#26126;&#30340;&#21464;&#37327;&#65292;&#20174;&#19968;&#24320;&#22987;&#23601;&#24418;&#25104;&#20102;&#23553;&#38381;&#20316;&#29992;&#22495;&#12290;&#20961;&#26159;&#22312;&#22768;&#26126;&#20043;&#21069;&#23601;&#20351;&#29992;&#36825;&#20123;&#21464;&#37327;&#65292;&#23601;&#20250;&#25253;&#38169;&#12290;</p>
+<p>&#8220;&#26242;&#26102;&#24615;&#27515;&#21306;&#8221;&#65288;temporal dead zone&#65292;&#31616;&#31216;TDZ&#65289;&#12290;</p>
+<p>&#24635;&#20043;&#65292;&#26242;&#26102;&#24615;&#27515;&#21306;&#30340;&#26412;&#36136;&#23601;&#26159;&#65292;&#21482;&#35201;&#19968;&#36827;&#20837;&#24403;&#21069;&#20316;&#29992;&#22495;&#65292;&#25152;&#35201;&#20351;&#29992;&#30340;&#21464;&#37327;&#23601;&#24050;&#32463;&#23384;&#22312;&#20102;&#65292;&#20294;&#26159;&#19981;&#21487;&#33719;&#21462;&#65292;&#21482;&#26377;&#31561;&#21040;&#22768;&#26126;&#21464;&#37327;&#30340;&#37027;&#19968;&#34892;&#20195;&#30721;&#20986;&#29616;&#65292;&#25165;&#21487;&#20197;&#33719;&#21462;&#21644;&#20351;&#29992;&#35813;&#21464;&#37327;&#12290;</p>
+<p>&#19981;&#20801;&#35768;&#37325;&#22797;&#22768;&#26126;</p>
+<h3 id="&#22359;&#32423;&#20316;&#29992;&#22495;">&#22359;&#32423;&#20316;&#29992;&#22495;</h3>
+<p>&#20026;&#20160;&#20040;&#38656;&#35201;&#22359;&#32423;&#20316;&#29992;&#22495;&#65311;</p>
+<ul>
+<li>&#31532;&#19968;&#31181;&#22330;&#26223;&#65292;&#20869;&#23618;&#21464;&#37327;&#21487;&#33021;&#20250;&#35206;&#30422;&#22806;&#23618;&#21464;&#37327;&#12290;</li>
+<li>&#31532;&#20108;&#31181;&#22330;&#26223;&#65292;&#29992;&#26469;&#35745;&#25968;&#30340;&#24490;&#29615;&#21464;&#37327;&#27844;&#38706;&#20026;&#20840;&#23616;&#21464;&#37327;&#12290;&#65288;for var i&#65289;</li>
+</ul>
+<p>&#22359;&#32423;&#20316;&#29992;&#22495;&#30340;&#20986;&#29616;&#65292;&#23454;&#38469;&#19978;&#20351;&#24471;&#33719;&#24471;&#24191;&#27867;&#24212;&#29992;&#30340;&#31435;&#21363;&#25191;&#34892;&#21311;&#21517;&#20989;&#25968;&#65288;IIFE&#65289;&#19981;&#20877;&#24517;&#35201;&#20102;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// IIFE&#20889;&#27861;</span>
+(<span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">var</span> tmp <span class="op">=</span> ...<span class="op">;</span>
+  ...
+<span class="op">}</span>())<span class="op">;</span>
+
+<span class="co">// &#22359;&#32423;&#20316;&#29992;&#22495;&#20889;&#27861;</span>
+<span class="op">{</span>
+  <span class="kw">let</span> tmp <span class="op">=</span> ...<span class="op">;</span>
+  ...
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I am outside!&#39;</span>)<span class="op">;</span> <span class="op">}</span>
+(<span class="kw">function</span> () <span class="op">{</span>
+  <span class="cf">if</span>(<span class="kw">false</span>) <span class="op">{</span>
+    <span class="co">// &#37325;&#22797;&#22768;&#26126;&#19968;&#27425;&#20989;&#25968;f</span>
+    <span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I am inside!&#39;</span>)<span class="op">;</span> <span class="op">}</span>
+  <span class="op">}</span>
+
+  <span class="at">f</span>()<span class="op">;</span>
+<span class="op">}</span>())<span class="op">;</span></code></pre></div>
+<h3 id="const&#21629;&#20196;">const&#21629;&#20196;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&#39;use strict&#39;</span><span class="op">;</span>
+
+<span class="kw">const</span> PI <span class="op">=</span> <span class="fl">3.1415</span><span class="op">;</span></code></pre></div>
+<p>const&#30340;&#20316;&#29992;&#22495;&#19982;let&#21629;&#20196;&#30456;&#21516;&#65306;&#21482;&#22312;&#22768;&#26126;&#25152;&#22312;&#30340;&#22359;&#32423;&#20316;&#29992;&#22495;&#20869;&#26377;&#25928;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> foo <span class="op">=</span> <span class="op">{};</span>
+<span class="va">foo</span>.<span class="at">prop</span> <span class="op">=</span> <span class="dv">123</span><span class="op">;</span>
+
+<span class="va">foo</span>.<span class="at">prop</span>
+<span class="co">// 123</span>
+
+foo <span class="op">=</span> <span class="op">{}</span> <span class="co">// TypeError: &quot;foo&quot; is read-only</span>
+
+<span class="kw">const</span> a <span class="op">=</span> []<span class="op">;</span>
+<span class="va">a</span>.<span class="at">push</span>(<span class="st">&quot;Hello&quot;</span>)<span class="op">;</span> <span class="co">// &#21487;&#25191;&#34892;</span>
+<span class="va">a</span>.<span class="at">length</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>    <span class="co">// &#21487;&#25191;&#34892;</span>
+a <span class="op">=</span> [<span class="st">&quot;Dave&quot;</span>]<span class="op">;</span>    <span class="co">// &#25253;&#38169;</span></code></pre></div>
+<p>&#22914;&#26524;&#30495;&#30340;&#24819;&#23558;&#23545;&#35937;&#20923;&#32467;&#65292;&#24212;&#35813;&#20351;&#29992;Object.freeze&#26041;&#27861;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> foo <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{}</span>)<span class="op">;</span>
+
+<span class="co">// &#24120;&#35268;&#27169;&#24335;&#26102;&#65292;&#19979;&#38754;&#19968;&#34892;&#19981;&#36215;&#20316;&#29992;&#65307;</span>
+<span class="co">// &#20005;&#26684;&#27169;&#24335;&#26102;&#65292;&#35813;&#34892;&#20250;&#25253;&#38169;</span>
+<span class="va">foo</span>.<span class="at">prop</span> <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></code></pre></div>
+<p>&#38500;&#20102;&#23558;&#23545;&#35937;&#26412;&#36523;&#20923;&#32467;&#65292;&#23545;&#35937;&#30340;&#23646;&#24615;&#20063;&#24212;&#35813;&#20923;&#32467;&#12290;&#19979;&#38754;&#26159;&#19968;&#20010;&#23558;&#23545;&#35937;&#24443;&#24213;&#20923;&#32467;&#30340;&#20989;&#25968;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> constantize <span class="op">=</span> (obj) <span class="op">=&gt;</span> <span class="op">{</span>
+  <span class="va">Object</span>.<span class="at">freeze</span>(obj)<span class="op">;</span>
+  <span class="va">Object</span>.<span class="at">keys</span>(obj).<span class="at">forEach</span>( (key<span class="op">,</span> value) <span class="op">=&gt;</span> <span class="op">{</span>
+    <span class="cf">if</span> ( <span class="kw">typeof</span> obj[key] <span class="op">===</span> <span class="st">&#39;object&#39;</span> ) <span class="op">{</span>
+      <span class="at">constantize</span>( obj[key] )<span class="op">;</span>
+    <span class="op">}</span>
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<h3 id="&#36328;&#27169;&#22359;&#24120;&#37327;">&#36328;&#27169;&#22359;&#24120;&#37327;</h3>
+<p>&#19978;&#38754;&#35828;&#36807;&#65292;const&#22768;&#26126;&#30340;&#24120;&#37327;&#21482;&#22312;&#24403;&#21069;&#20195;&#30721;&#22359;&#26377;&#25928;&#12290;&#22914;&#26524;&#24819;&#35774;&#32622;&#36328;&#27169;&#22359;&#30340;&#24120;&#37327;&#65292;&#21487;&#20197;&#37319;&#29992;&#19979;&#38754;&#30340;&#20889;&#27861;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// constants.js &#27169;&#22359;</span>
+<span class="im">export</span> <span class="kw">const</span> A <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="im">export</span> <span class="kw">const</span> B <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+<span class="im">export</span> <span class="kw">const</span> C <span class="op">=</span> <span class="dv">4</span><span class="op">;</span>
+
+<span class="co">// test1.js &#27169;&#22359;</span>
+<span class="im">import</span> <span class="op">*</span> <span class="im">as</span> constants <span class="im">from</span> <span class="st">&#39;./constants&#39;</span><span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="va">constants</span>.<span class="at">A</span>)<span class="op">;</span> <span class="co">// 1</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="va">constants</span>.<span class="at">B</span>)<span class="op">;</span> <span class="co">// 3</span>
+
+<span class="co">// test2.js &#27169;&#22359;</span>
+<span class="im">import</span> <span class="op">{</span>A<span class="op">,</span> B<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./constants&#39;</span><span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(A)<span class="op">;</span> <span class="co">// 1</span>
+<span class="va">console</span>.<span class="at">log</span>(B)<span class="op">;</span> <span class="co">// 3</span></code></pre></div>
+<h3 id="&#20840;&#23616;&#23545;&#35937;&#30340;&#23646;&#24615;">&#20840;&#23616;&#23545;&#35937;&#30340;&#23646;&#24615;</h3>
+<p>&#20840;&#23616;&#23545;&#35937;&#26159;&#26368;&#39030;&#23618;&#30340;&#23545;&#35937;&#65292;&#22312;&#27983;&#35272;&#22120;&#29615;&#22659;&#25351;&#30340;&#26159;window&#23545;&#35937;&#65292;&#22312;Node.js&#25351;&#30340;&#26159;global&#23545;&#35937;&#12290;ES5&#20043;&#20013;&#65292;&#20840;&#23616;&#23545;&#35937;&#30340;&#23646;&#24615;&#19982;&#20840;&#23616;&#21464;&#37327;&#26159;&#31561;&#20215;&#30340;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">window</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+a <span class="co">// 1</span>
+
+a <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+<span class="va">window</span>.<span class="at">a</span> <span class="co">// 2</span></code></pre></div>
+<p>&#19968;&#26041;&#38754;&#35268;&#23450;&#65292;var&#21629;&#20196;&#21644;function&#21629;&#20196;&#22768;&#26126;&#30340;&#20840;&#23616;&#21464;&#37327;&#65292;&#20381;&#26087;&#26159;&#20840;&#23616;&#23545;&#35937;&#30340;&#23646;&#24615;&#65307;&#21478;&#19968;&#26041;&#38754;&#35268;&#23450;&#65292;let&#21629;&#20196;&#12289;const&#21629;&#20196;&#12289;class&#21629;&#20196;&#22768;&#26126;&#30340;&#20840;&#23616;&#21464;&#37327;&#65292;&#19981;&#23646;&#20110;&#20840;&#23616;&#23545;&#35937;&#30340;&#23646;&#24615;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="co">// &#22914;&#26524;&#22312;Node&#30340;REPL&#29615;&#22659;&#65292;&#21487;&#20197;&#20889;&#25104;global.a</span>
+<span class="co">// &#25110;&#32773;&#37319;&#29992;&#36890;&#29992;&#26041;&#27861;&#65292;&#20889;&#25104;this.a</span>
+<span class="va">window</span>.<span class="at">a</span> <span class="co">// 1</span>
+
+<span class="kw">let</span> b <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="va">window</span>.<span class="at">b</span> <span class="co">// undefined</span></code></pre></div>
+<h2 id="&#21464;&#37327;&#30340;&#35299;&#26500;&#36171;&#20540;">&#21464;&#37327;&#30340;&#35299;&#26500;&#36171;&#20540;</h2>
+<h3 id="&#25968;&#32452;&#30340;&#35299;&#26500;&#36171;&#20540;">&#25968;&#32452;&#30340;&#35299;&#26500;&#36171;&#20540;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> [a<span class="op">,</span> b<span class="op">,</span> c] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span>
+<span class="kw">let</span> [foo<span class="op">,</span> [[bar]<span class="op">,</span> baz]] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> [[<span class="dv">2</span>]<span class="op">,</span> <span class="dv">3</span>]]<span class="op">;</span>
+<span class="kw">let</span> [foo<span class="op">,</span> [[bar]<span class="op">,</span> baz]] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> [[<span class="dv">2</span>]<span class="op">,</span> <span class="dv">3</span>]]<span class="op">;</span>
+foo <span class="co">// 1</span>
+bar <span class="co">// 2</span>
+baz <span class="co">// 3</span>
+
+<span class="kw">let</span> [ <span class="op">,</span> <span class="op">,</span> third] <span class="op">=</span> [<span class="st">&quot;foo&quot;</span><span class="op">,</span> <span class="st">&quot;bar&quot;</span><span class="op">,</span> <span class="st">&quot;baz&quot;</span>]<span class="op">;</span>
+third <span class="co">// &quot;baz&quot;</span>
+
+<span class="kw">let</span> [x<span class="op">,</span> <span class="op">,</span> y] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span>
+x <span class="co">// 1</span>
+y <span class="co">// 3</span>
+
+<span class="kw">let</span> [head<span class="op">,</span> ...<span class="at">tail</span>] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span>
+head <span class="co">// 1</span>
+tail <span class="co">// [2, 3, 4]</span>
+
+<span class="kw">let</span> [x<span class="op">,</span> y<span class="op">,</span> ...<span class="at">z</span>] <span class="op">=</span> [<span class="st">&#39;a&#39;</span>]<span class="op">;</span>
+x <span class="co">// &quot;a&quot;</span>
+y <span class="co">// undefined</span>
+z <span class="co">// []</span>
+
+<span class="co">// &#25253;&#38169;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="kw">false</span><span class="op">;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="kw">NaN</span><span class="op">;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+<span class="kw">let</span> [foo] <span class="op">=</span> <span class="op">{};</span></code></pre></div>
+<p>&#35299;&#26500;&#36171;&#20540;&#19981;&#20165;&#36866;&#29992;&#20110;var&#21629;&#20196;&#65292;&#20063;&#36866;&#29992;&#20110;let&#21644;const&#21629;&#20196;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">let</span> [x<span class="op">,</span> y<span class="op">,</span> z] <span class="op">=</span> <span class="kw">new</span> <span class="at">Set</span>([<span class="st">&quot;a&quot;</span><span class="op">,</span> <span class="st">&quot;b&quot;</span><span class="op">,</span> <span class="st">&quot;c&quot;</span>])</code></pre></div>
+<p>&#20107;&#23454;&#19978;&#65292;&#21482;&#35201;&#26576;&#31181;&#25968;&#25454;&#32467;&#26500;&#20855;&#26377;Iterator&#25509;&#21475;&#65292;&#37117;&#21487;&#20197;&#37319;&#29992;&#25968;&#32452;&#24418;&#24335;&#30340;&#35299;&#26500;&#36171;&#20540;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span><span class="op">*</span> <span class="at">fibs</span>() <span class="op">{</span>
+  <span class="kw">var</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+  <span class="kw">var</span> b <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="cf">while</span> (<span class="kw">true</span>) <span class="op">{</span>
+    <span class="kw">yield</span> a<span class="op">;</span>
+    [a<span class="op">,</span> b] <span class="op">=</span> [b<span class="op">,</span> a <span class="op">+</span> b]<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> [first<span class="op">,</span> second<span class="op">,</span> third<span class="op">,</span> fourth<span class="op">,</span> fifth<span class="op">,</span> sixth] <span class="op">=</span> <span class="at">fibs</span>()<span class="op">;</span>
+sixth <span class="co">// 5</span></code></pre></div>
+<p>&#19978;&#38754;&#20195;&#30721;&#20013;&#65292;fibs&#26159;&#19968;&#20010;Generator&#20989;&#25968;&#65292;&#21407;&#29983;&#20855;&#26377;Iterator&#25509;&#21475;&#12290;&#35299;&#26500;&#36171;&#20540;&#20250;&#20381;&#27425;&#20174;&#36825;&#20010;&#25509;&#21475;&#33719;&#21462;&#20540;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">[x<span class="op">,</span> y <span class="op">=</span> <span class="st">&#39;b&#39;</span>] <span class="op">=</span> [<span class="st">&#39;a&#39;</span>] <span class="co">// x=&#39;a&#39;, y=&#39;b&#39;</span>
+[x<span class="op">,</span> y <span class="op">=</span> <span class="st">&#39;b&#39;</span>] <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="kw">undefined</span>] <span class="co">// x=&#39;a&#39;, y=&#39;b&#39;</span>
+
+<span class="kw">let</span> [x <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> y <span class="op">=</span> x] <span class="op">=</span> []<span class="op">;</span>     <span class="co">// x=1; y=1</span>
+<span class="kw">let</span> [x <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> y <span class="op">=</span> x] <span class="op">=</span> [<span class="dv">2</span>]<span class="op">;</span>    <span class="co">// x=2; y=2</span>
+<span class="kw">let</span> [x <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> y <span class="op">=</span> x] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span> <span class="co">// x=1; y=2</span>
+<span class="kw">let</span> [x <span class="op">=</span> y<span class="op">,</span> y <span class="op">=</span> <span class="dv">1</span>] <span class="op">=</span> []<span class="op">;</span>     <span class="co">// ReferenceError</span></code></pre></div>
+<h3 id="&#23545;&#35937;&#30340;&#35299;&#26500;&#36171;&#20540;">&#23545;&#35937;&#30340;&#35299;&#26500;&#36171;&#20540;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> <span class="op">{</span> foo<span class="op">,</span> bar <span class="op">}</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="st">&quot;aaa&quot;</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="st">&quot;bbb&quot;</span> <span class="op">};</span>
+foo <span class="co">// &quot;aaa&quot;</span>
+bar <span class="co">// &quot;bbb&quot;</span>
+
+<span class="kw">var</span> <span class="op">{</span> baz <span class="op">}</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="st">&quot;aaa&quot;</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="st">&quot;bbb&quot;</span> <span class="op">};</span>
+baz <span class="co">// undefined</span>
+
+<span class="kw">let</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">first</span><span class="op">:</span> <span class="st">&#39;hello&#39;</span><span class="op">,</span> <span class="dt">last</span><span class="op">:</span> <span class="st">&#39;world&#39;</span> <span class="op">};</span>
+<span class="kw">let</span> <span class="op">{</span> <span class="dt">first</span><span class="op">:</span> f<span class="op">,</span> <span class="dt">last</span><span class="op">:</span> l <span class="op">}</span> <span class="op">=</span> obj<span class="op">;</span>
+f <span class="co">// &#39;hello&#39;</span>
+l <span class="co">// &#39;world&#39;</span>
+
+<span class="kw">let</span> foo<span class="op">;</span>
+<span class="kw">let</span> <span class="op">{</span>foo<span class="op">}</span> <span class="op">=</span> <span class="op">{</span><span class="dt">foo</span><span class="op">:</span> <span class="dv">1</span><span class="op">};</span> <span class="co">// SyntaxError: Duplicate declaration &quot;foo&quot;</span>
+
+<span class="kw">let</span> baz<span class="op">;</span>
+<span class="kw">let</span> <span class="op">{</span><span class="dt">bar</span><span class="op">:</span> baz<span class="op">}</span> <span class="op">=</span> <span class="op">{</span><span class="dt">bar</span><span class="op">:</span> <span class="dv">1</span><span class="op">};</span> <span class="co">// SyntaxError: Duplicate declaration &quot;baz&quot;</span>
+(<span class="op">{</span>foo<span class="op">}</span> <span class="op">=</span> <span class="op">{</span><span class="dt">foo</span><span class="op">:</span> <span class="dv">1</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// &#25104;&#21151;</span>
+
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">p</span><span class="op">:</span> [
+    <span class="st">&quot;Hello&quot;</span><span class="op">,</span>
+    <span class="op">{</span> <span class="dt">y</span><span class="op">:</span> <span class="st">&quot;World&quot;</span> <span class="op">}</span>
+  ]
+<span class="op">};</span>
+
+<span class="kw">var</span> <span class="op">{</span> <span class="dt">p</span><span class="op">:</span> [x<span class="op">,</span> <span class="op">{</span> y <span class="op">}</span>] <span class="op">}</span> <span class="op">=</span> obj<span class="op">;</span>
+x <span class="co">// &quot;Hello&quot;</span>
+y <span class="co">// &quot;World&quot;</span>
+
+
+<span class="kw">let</span> obj <span class="op">=</span> <span class="op">{};</span>
+<span class="kw">let</span> arr <span class="op">=</span> []<span class="op">;</span>
+
+(<span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="va">obj</span>.<span class="at">prop</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> arr[<span class="dv">0</span>] <span class="op">}</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="dv">123</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)<span class="op">;</span>
+
+obj <span class="co">// {prop:123}</span>
+arr <span class="co">// [true]</span>
+
+<span class="kw">let</span> <span class="op">{</span> log<span class="op">,</span> sin<span class="op">,</span> cos <span class="op">}</span> <span class="op">=</span> Math<span class="op">;</span></code></pre></div>
+<h3 id="&#23383;&#31526;&#20018;&#30340;&#35299;&#26500;&#36171;&#20540;">&#23383;&#31526;&#20018;&#30340;&#35299;&#26500;&#36171;&#20540;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> [a<span class="op">,</span> b<span class="op">,</span> c<span class="op">,</span> d<span class="op">,</span> e] <span class="op">=</span> <span class="st">&#39;hello&#39;</span><span class="op">;</span>
+<span class="kw">let</span> <span class="op">{</span><span class="dt">length </span><span class="op">:</span> len<span class="op">}</span> <span class="op">=</span> <span class="st">&#39;hello&#39;</span><span class="op">;</span></code></pre></div>
+<h3 id="&#25968;&#20540;&#21644;&#24067;&#23572;&#20540;&#30340;&#35299;&#26500;&#36171;&#20540;">&#25968;&#20540;&#21644;&#24067;&#23572;&#20540;&#30340;&#35299;&#26500;&#36171;&#20540;</h3>
+<p>```javascript let {toString: s} = 123; s === Number.prototype.toString // true</p>
+<p>let {toString: s} = true; s === Boolean.prototype.toString // true ```javascript</p>
+<h3 id="&#20989;&#25968;&#21442;&#25968;&#30340;&#35299;&#26500;&#36171;&#20540;">&#20989;&#25968;&#21442;&#25968;&#30340;&#35299;&#26500;&#36171;&#20540;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">add</span>([x<span class="op">,</span> y])<span class="op">{</span>
+  <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">add</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]) <span class="co">// 3</span>
+
+[[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]].<span class="at">map</span>(([a<span class="op">,</span> b]) <span class="op">=&gt;</span> a <span class="op">+</span> b)
+<span class="co">// [ 3, 7 ]</span>
+
+<span class="kw">function</span> <span class="at">move</span>(<span class="op">{</span>x <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">}</span> <span class="op">=</span> <span class="op">{}</span>) <span class="op">{</span>
+  <span class="cf">return</span> [x<span class="op">,</span> y]<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">move</span>(<span class="op">{</span><span class="dt">x</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">8</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// [3, 8]</span>
+<span class="at">move</span>(<span class="op">{</span><span class="dt">x</span><span class="op">:</span> <span class="dv">3</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// [3, 0]</span>
+<span class="at">move</span>(<span class="op">{}</span>)<span class="op">;</span> <span class="co">// [0, 0]</span>
+<span class="at">move</span>()<span class="op">;</span> <span class="co">// [0, 0]</span></code></pre></div>
+<h3 id="&#22278;&#25324;&#21495;&#38382;&#39064;">&#22278;&#25324;&#21495;&#38382;&#39064;</h3>
+<p>&#35299;&#26500;&#36171;&#20540;&#34429;&#28982;&#24456;&#26041;&#20415;&#65292;&#20294;&#26159;&#35299;&#26512;&#36215;&#26469;&#24182;&#19981;&#23481;&#26131;&#12290;&#23545;&#20110;&#32534;&#35793;&#22120;&#26469;&#35828;&#65292;&#19968;&#20010;&#24335;&#23376;&#21040;&#24213;&#26159;&#27169;&#24335;&#65292;&#36824;&#26159;&#34920;&#36798;&#24335;&#65292;&#27809;&#26377;&#21150;&#27861;&#20174;&#19968;&#24320;&#22987;&#23601;&#30693;&#36947;&#65292;&#24517;&#39035;&#35299;&#26512;&#21040;&#65288;&#25110;&#35299;&#26512;&#19981;&#21040;&#65289;&#31561;&#21495;&#25165;&#33021;&#30693;&#36947;&#12290;</p>
+<p>&#30001;&#27492;&#24102;&#26469;&#30340;&#38382;&#39064;&#26159;&#65292;&#22914;&#26524;&#27169;&#24335;&#20013;&#20986;&#29616;&#22278;&#25324;&#21495;&#24590;&#20040;&#22788;&#29702;&#12290;ES6&#30340;&#35268;&#21017;&#26159;&#65292;&#21482;&#35201;&#26377;&#21487;&#33021;&#23548;&#33268;&#35299;&#26500;&#30340;&#27495;&#20041;&#65292;&#23601;&#19981;&#24471;&#20351;&#29992;&#22278;&#25324;&#21495;&#12290;</p>
+<p>&#20294;&#26159;&#65292;&#36825;&#26465;&#35268;&#21017;&#23454;&#38469;&#19978;&#19981;&#37027;&#20040;&#23481;&#26131;&#36776;&#21035;&#65292;&#22788;&#29702;&#36215;&#26469;&#30456;&#24403;&#40635;&#28902;&#12290;&#22240;&#27492;&#65292;&#24314;&#35758;&#21482;&#35201;&#26377;&#21487;&#33021;&#65292;&#23601;&#19981;&#35201;&#22312;&#27169;&#24335;&#20013;&#25918;&#32622;&#22278;&#25324;&#21495;&#12290;</p>
+<p>&#21487;&#20197;&#20351;&#29992;&#22278;&#25324;&#21495;&#30340;&#24773;&#20917;&#21482;&#26377;&#19968;&#31181;&#65306;&#36171;&#20540;&#35821;&#21477;&#30340;&#38750;&#27169;&#24335;&#37096;&#20998;&#65292;&#21487;&#20197;&#20351;&#29992;&#22278;&#25324;&#21495;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">[(b)] <span class="op">=</span> [<span class="dv">3</span>]<span class="op">;</span> <span class="co">// &#27491;&#30830;</span>
+(<span class="op">{</span> <span class="dt">p</span><span class="op">:</span> (d) <span class="op">}</span> <span class="op">=</span> <span class="op">{}</span>)<span class="op">;</span> <span class="co">// &#27491;&#30830;</span>
+[(<span class="va">parseInt</span>.<span class="at">prop</span>)] <span class="op">=</span> [<span class="dv">3</span>]<span class="op">;</span> <span class="co">// &#27491;&#30830;</span></code></pre></div>
+<h3 id="&#29992;&#36884;">&#29992;&#36884;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">[x<span class="op">,</span> y] <span class="op">=</span> [y<span class="op">,</span> x]<span class="op">;</span>
+
+<span class="kw">var</span> jsonData <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">id</span><span class="op">:</span> <span class="dv">42</span><span class="op">,</span>
+  <span class="dt">status</span><span class="op">:</span> <span class="st">&quot;OK&quot;</span><span class="op">,</span>
+  <span class="dt">data</span><span class="op">:</span> [<span class="dv">867</span><span class="op">,</span> <span class="dv">5309</span>]
+<span class="op">}</span>
+
+<span class="kw">let</span> <span class="op">{</span> id<span class="op">,</span> status<span class="op">,</span> <span class="dt">data</span><span class="op">:</span> number <span class="op">}</span> <span class="op">=</span> jsonData<span class="op">;</span>
+<span class="co">// let { id, status, data } = jsonData;</span>
+
+<span class="va">console</span>.<span class="at">log</span>(id<span class="op">,</span> status<span class="op">,</span> number)
+<span class="co">// console.log(id, status, data)</span>
+<span class="co">// 42, &quot;OK&quot;, [867, 5309]</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#20989;&#25968;&#21442;&#25968;&#30340;&#40664;&#35748;&#20540;</span>
+<span class="va">jQuery</span>.<span class="at">ajax</span> <span class="op">=</span> <span class="kw">function</span> (url<span class="op">,</span> <span class="op">{</span>
+  async <span class="op">=</span> <span class="kw">true</span><span class="op">,</span>
+  beforeSend <span class="op">=</span> <span class="kw">function</span> () <span class="op">{},</span>
+  cache <span class="op">=</span> <span class="kw">true</span><span class="op">,</span>
+  complete <span class="op">=</span> <span class="kw">function</span> () <span class="op">{},</span>
+  crossDomain <span class="op">=</span> <span class="kw">false</span><span class="op">,</span>
+  global <span class="op">=</span> <span class="kw">true</span><span class="op">,</span>
+  <span class="co">// ... more config</span>
+<span class="op">}</span>) <span class="op">{</span>
+  <span class="co">// ... do stuff</span>
+<span class="op">};</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> map <span class="op">=</span> <span class="kw">new</span> <span class="at">Map</span>()<span class="op">;</span>
+<span class="va">map</span>.<span class="at">set</span>(<span class="st">&#39;first&#39;</span><span class="op">,</span> <span class="st">&#39;hello&#39;</span>)<span class="op">;</span>
+<span class="va">map</span>.<span class="at">set</span>(<span class="st">&#39;second&#39;</span><span class="op">,</span> <span class="st">&#39;world&#39;</span>)<span class="op">;</span>
+
+<span class="cf">for</span> (<span class="kw">let</span> [key<span class="op">,</span> value] of map) <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(key <span class="op">+</span> <span class="st">&quot; is &quot;</span> <span class="op">+</span> value)<span class="op">;</span>
+<span class="op">}</span>
+<span class="co">// first is hello</span>
+<span class="co">// second is world</span>
+
+<span class="co">// &#33719;&#21462;&#38190;&#21517;</span>
+<span class="cf">for</span> (<span class="kw">let</span> [key] of map) <span class="op">{</span>
+  <span class="co">// ...</span>
+<span class="op">}</span>
+
+<span class="co">// &#33719;&#21462;&#38190;&#20540;</span>
+<span class="cf">for</span> (<span class="kw">let</span> [<span class="op">,</span>value] of map) <span class="op">{</span>
+  <span class="co">// ...</span>
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// &#36755;&#20837;&#27169;&#22359;&#30340;&#25351;&#23450;&#26041;&#27861;</span>
+<span class="kw">const</span> <span class="op">{</span> SourceMapConsumer<span class="op">,</span> SourceNode <span class="op">}</span> <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;source-map&quot;</span>)<span class="op">;</span></code></pre></div>
+<h2 id="&#23383;&#31526;&#20018;&#30340;&#25193;&#23637;">&#23383;&#31526;&#20018;&#30340;&#25193;&#23637;</h2>
+<p>ES6&#21152;&#24378;&#20102;&#23545;Unicode&#30340;&#25903;&#25345;&#65292;&#24182;&#19988;&#25193;&#23637;&#20102;&#23383;&#31526;&#20018;&#23545;&#35937;&#12290;</p>
+<h3 id="&#23383;&#31526;&#30340;unicode&#34920;&#31034;&#27861;">&#23383;&#31526;&#30340;Unicode&#34920;&#31034;&#27861;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&quot;\u0061&quot;</span> <span class="co">// \uxxxx</span>
+<span class="co">// &quot;a&quot;</span>
+<span class="st">&quot;\uD842\uDFB7&quot;</span>
+<span class="co">// &quot;&#134071;&quot;</span>
+
+<span class="st">&quot;\u{20BB7}&quot;</span>
+<span class="co">// &quot;&#134071;&quot;</span>
+
+<span class="st">&quot;\u{41}\u{42}\u{43}&quot;</span>
+<span class="co">// &quot;ABC&quot;</span>
+
+<span class="st">&quot;\u{20BB7}&quot;</span>
+<span class="co">// &quot;&#134071;&quot;</span>
+
+<span class="st">&quot;\u{41}\u{42}\u{43}&quot;</span>
+<span class="co">// &quot;ABC&quot;</span>
+
+<span class="kw">let</span> hello <span class="op">=</span> <span class="dv">123</span><span class="op">;</span>
+hell\u<span class="op">{</span>6F<span class="op">}</span> <span class="co">// 123</span>
+
+<span class="st">&#39;\u{1F680}&#39;</span> <span class="op">===</span> <span class="st">&#39;\uD83D\uDE80&#39;</span>
+<span class="co">// true</span></code></pre></div>
+<p>&#19978;&#38754;&#20195;&#30721;&#20013;&#65292;&#26368;&#21518;&#19968;&#20010;&#20363;&#23376;&#34920;&#26126;&#65292;&#22823;&#25324;&#21495;&#34920;&#31034;&#27861;&#19982;&#22235;&#23383;&#33410;&#30340;UTF-16&#32534;&#30721;&#26159;&#31561;&#20215;&#30340;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&#39;\z&#39;</span> <span class="op">===</span> <span class="st">&#39;z&#39;</span>  <span class="co">// true</span>
+<span class="st">&#39;\172&#39;</span> <span class="op">===</span> <span class="st">&#39;z&#39;</span> <span class="co">// true</span>
+<span class="st">&#39;</span><span class="sc">\x7A</span><span class="st">&#39;</span> <span class="op">===</span> <span class="st">&#39;z&#39;</span> <span class="co">// true</span>
+<span class="st">&#39;\u007A&#39;</span> <span class="op">===</span> <span class="st">&#39;z&#39;</span> <span class="co">// true</span>
+<span class="st">&#39;\u{7A}&#39;</span> <span class="op">===</span> <span class="st">&#39;z&#39;</span> <span class="co">// true</span></code></pre></div>
+<h3 id="codepointat"><code>codePointAt()</code></h3>
+<p>JavaScript&#20869;&#37096;&#65292;&#23383;&#31526;&#20197;UTF-16&#30340;&#26684;&#24335;&#20648;&#23384;&#65292;&#27599;&#20010;&#23383;&#31526;&#22266;&#23450;&#20026;2&#20010;&#23383;&#33410;&#12290;&#23545;&#20110;&#37027;&#20123;&#38656;&#35201;4&#20010;&#23383;&#33410;&#20648;&#23384;&#30340;&#23383;&#31526;&#65288;Unicode&#30721;&#28857;&#22823;&#20110;0xFFFF&#30340;&#23383;&#31526;&#65289;&#65292;JavaScript&#20250;&#35748;&#20026;&#23427;&#20204;&#26159;&#20004;&#20010;&#23383;&#31526;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">String</span>.<span class="at">fromCodePoint</span>()
+
+<span class="va">String</span>.<span class="at">fromCodePoint</span>(<span class="bn">0x20BB7</span>)
+<span class="co">// &quot;&#134071;&quot;</span>
+<span class="va">String</span>.<span class="at">fromCodePoint</span>(<span class="bn">0x78</span><span class="op">,</span> <span class="bn">0x1f680</span><span class="op">,</span> <span class="bn">0x79</span>) <span class="op">===</span> <span class="st">&#39;x\uD83D\uDE80y&#39;</span>
+<span class="co">// true</span></code></pre></div>
+<h3 id="&#23383;&#31526;&#20018;&#30340;&#36941;&#21382;&#22120;&#25509;&#21475;">&#23383;&#31526;&#20018;&#30340;&#36941;&#21382;&#22120;&#25509;&#21475;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="cf">for</span> (<span class="kw">let</span> i of text) <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span>
+<span class="op">}</span>
+<span class="co">// &quot;&#134071;&quot;</span>
+
+<span class="co">// charAt()  -&gt; at()</span>
+<span class="st">&#39;abc&#39;</span>.<span class="at">at</span>(<span class="dv">0</span>) <span class="co">// &quot;a&quot;</span>
+<span class="st">&#39;&#134071;&#39;</span>.<span class="at">at</span>(<span class="dv">0</span>) <span class="co">// &quot;&#134071;&quot;</span></code></pre></div>
+<h3 id="normalize"><code>normalize()</code></h3>
+<p>ES6&#25552;&#20379;&#23383;&#31526;&#20018;&#23454;&#20363;&#30340;normalize()&#26041;&#27861;&#65292;&#29992;&#26469;&#23558;&#23383;&#31526;&#30340;&#19981;&#21516;&#34920;&#31034;&#26041;&#27861;&#32479;&#19968;&#20026;&#21516;&#26679;&#30340;&#24418;&#24335;&#65292;&#36825;&#31216;&#20026;Unicode&#27491;&#35268;&#21270;&#12290;</p>
+<p>normalize&#26041;&#27861;&#21487;&#20197;&#25509;&#21463;&#22235;&#20010;&#21442;&#25968;&#12290;</p>
+<ul>
+<li>NFC&#65292;&#40664;&#35748;&#21442;&#25968;&#65292;&#34920;&#31034;&#8220;&#26631;&#20934;&#31561;&#20215;&#21512;&#25104;&#8221;&#65288;Normalization Form Canonical Composition&#65289;&#65292;&#36820;&#22238;&#22810;&#20010;&#31616;&#21333;&#23383;&#31526;&#30340;&#21512;&#25104;&#23383;&#31526;&#12290;&#25152;&#35859;&#8220;&#26631;&#20934;&#31561;&#20215;&#8221;&#25351;&#30340;&#26159;&#35270;&#35273;&#21644;&#35821;&#20041;&#19978;&#30340;&#31561;&#20215;&#12290;</li>
+<li>NFD&#65292;&#34920;&#31034;&#8220;&#26631;&#20934;&#31561;&#20215;&#20998;&#35299;&#8221;&#65288;Normalization Form Canonical Decomposition&#65289;&#65292;&#21363;&#22312;&#26631;&#20934;&#31561;&#20215;&#30340;&#21069;&#25552;&#19979;&#65292;&#36820;&#22238;&#21512;&#25104;&#23383;&#31526;&#20998;&#35299;&#30340;&#22810;&#20010;&#31616;&#21333;&#23383;&#31526;&#12290;</li>
+<li>NFKC&#65292;&#34920;&#31034;&#8220;&#20860;&#23481;&#31561;&#20215;&#21512;&#25104;&#8221;&#65288;Normalization Form Compatibility Composition&#65289;&#65292;&#36820;&#22238;&#21512;&#25104;&#23383;&#31526;&#12290;&#25152;&#35859;&#8220;&#20860;&#23481;&#31561;&#20215;&#8221;&#25351;&#30340;&#26159;&#35821;&#20041;&#19978;&#23384;&#22312;&#31561;&#20215;&#65292;&#20294;&#35270;&#35273;&#19978;&#19981;&#31561;&#20215;&#65292;&#27604;&#22914;&#8220;&#22221;&#8221;&#21644;&#8220;&#21916;&#21916;&#8221;&#12290;&#65288;&#36825;&#21482;&#26159;&#29992;&#26469;&#20030;&#20363;&#65292;normalize&#26041;&#27861;&#19981;&#33021;&#35782;&#21035;&#20013;&#25991;&#12290;&#65289;</li>
+<li>NFKD&#65292;&#34920;&#31034;&#8220;&#20860;&#23481;&#31561;&#20215;&#20998;&#35299;&#8221;&#65288;Normalization Form Compatibility Decomposition&#65289;&#65292;&#21363;&#22312;&#20860;&#23481;&#31561;&#20215;&#30340;&#21069;&#25552;&#19979;&#65292;&#36820;&#22238;&#21512;&#25104;&#23383;&#31526;&#20998;&#35299;&#30340;&#22810;&#20010;&#31616;&#21333;&#23383;&#31526;&#12290;</li>
+</ul>
+<h3 id="includes-startswith-endswith"><code>includes()</code>, <code>startsWith()</code>, <code>endsWith()</code></h3>
+<ul>
+<li>includes()&#65306;&#36820;&#22238;&#24067;&#23572;&#20540;&#65292;&#34920;&#31034;&#26159;&#21542;&#25214;&#21040;&#20102;&#21442;&#25968;&#23383;&#31526;&#20018;&#12290;</li>
+<li>startsWith()&#65306;&#36820;&#22238;&#24067;&#23572;&#20540;&#65292;&#34920;&#31034;&#21442;&#25968;&#23383;&#31526;&#20018;&#26159;&#21542;&#22312;&#28304;&#23383;&#31526;&#20018;&#30340;&#22836;&#37096;&#12290;</li>
+<li>endsWith()&#65306;&#36820;&#22238;&#24067;&#23572;&#20540;&#65292;&#34920;&#31034;&#21442;&#25968;&#23383;&#31526;&#20018;&#26159;&#21542;&#22312;&#28304;&#23383;&#31526;&#20018;&#30340;&#23614;&#37096;&#12290;</li>
+</ul>
+<p>&#36825;&#19977;&#20010;&#26041;&#27861;&#37117;&#25903;&#25345;&#31532;&#20108;&#20010;&#21442;&#25968;&#65292;&#34920;&#31034;&#24320;&#22987;&#25628;&#32034;&#30340;&#20301;&#32622;&#12290;</p>
+<h3 id="repeat"><code>repeat()</code></h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&#39;x&#39;</span>.<span class="at">repeat</span>(<span class="dv">3</span>) <span class="co">// &quot;xxx&quot;</span>
+<span class="st">&#39;hello&#39;</span>.<span class="at">repeat</span>(<span class="dv">2</span>) <span class="co">// &quot;hellohello&quot;</span>
+<span class="st">&#39;na&#39;</span>.<span class="at">repeat</span>(<span class="dv">0</span>) <span class="co">// &quot;&quot;</span></code></pre></div>
+<p>&#21442;&#25968;&#22914;&#26524;&#26159;&#23567;&#25968;&#65292;&#20250;&#34987;&#21462;&#25972;&#12290;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&#39;na&#39;</span>.<span class="at">repeat</span>(<span class="fl">2.9</span>) <span class="co">// &quot;nana&quot;</span>
+<span class="st">&#39;na&#39;</span>.<span class="at">repeat</span>(<span class="kw">NaN</span>) <span class="co">// &quot;&quot;</span>
+<span class="st">&#39;na&#39;</span>.<span class="at">repeat</span>(<span class="st">&#39;na&#39;</span>) <span class="co">// &quot;&quot;</span>
+<span class="st">&#39;na&#39;</span>.<span class="at">repeat</span>(<span class="st">&#39;3&#39;</span>) <span class="co">// &quot;nanana&quot;</span></code></pre></div>
+<h3 id="padstartpadend"><code>padStart()</code>&#65292;<code>padEnd()</code></h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&#39;x&#39;</span>.<span class="at">padStart</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">&#39;ab&#39;</span>) <span class="co">// &#39;ababx&#39;</span>
+<span class="st">&#39;x&#39;</span>.<span class="at">padStart</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">&#39;ab&#39;</span>) <span class="co">// &#39;abax&#39;</span>
+
+<span class="st">&#39;x&#39;</span>.<span class="at">padEnd</span>(<span class="dv">5</span><span class="op">,</span> <span class="st">&#39;ab&#39;</span>) <span class="co">// &#39;xabab&#39;</span>
+<span class="st">&#39;x&#39;</span>.<span class="at">padEnd</span>(<span class="dv">4</span><span class="op">,</span> <span class="st">&#39;ab&#39;</span>) <span class="co">// &#39;xaba&#39;</span></code></pre></div>
+<h3 id="&#27169;&#26495;&#23383;&#31526;&#20018;">&#27169;&#26495;&#23383;&#31526;&#20018;</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="at">$</span>(<span class="st">&quot;#result&quot;</span>).<span class="at">append</span>(
+  <span class="st">&quot;There are &lt;b&gt;&quot;</span> <span class="op">+</span> <span class="va">basket</span>.<span class="at">count</span> <span class="op">+</span> <span class="st">&quot;&lt;/b&gt; &quot;</span> <span class="op">+</span>
+  <span class="st">&quot;items in your basket, &quot;</span> <span class="op">+</span>
+  <span class="st">&quot;&lt;em&gt;&quot;</span> <span class="op">+</span> <span class="va">basket</span>.<span class="at">onSale</span> <span class="op">+</span>
+  <span class="st">&quot;&lt;/em&gt; are on sale!&quot;</span>
+)<span class="op">;</span>
+
+<span class="at">$</span>(<span class="st">&quot;#result&quot;</span>).<span class="at">append</span>(<span class="vs">`</span>
+<span class="vs">  There are &lt;b&gt;</span><span class="sc">${</span><span class="va">basket</span>.<span class="at">count</span><span class="sc">}</span><span class="vs">&lt;/b&gt; items</span>
+<span class="vs">   in your basket, &lt;em&gt;</span><span class="sc">${</span><span class="va">basket</span>.<span class="at">onSale</span><span class="sc">}</span><span class="vs">&lt;/em&gt;</span>
+<span class="vs">  are on sale!</span>
+<span class="vs">`</span>)<span class="op">;</span></code></pre></div>
+<p>&#23454;&#20363;&#65306;&#27169;&#26495;&#32534;&#35793;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="kw">var</span> y <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+
+<span class="vs">`</span><span class="sc">${</span>x<span class="sc">}</span><span class="vs"> + </span><span class="sc">${</span>y<span class="sc">}</span><span class="vs"> = </span><span class="sc">${</span>x <span class="op">+</span> y<span class="sc">}</span><span class="vs">`</span>
+<span class="co">// &quot;1 + 2 = 3&quot;</span>
+
+<span class="vs">`</span><span class="sc">${</span>x<span class="sc">}</span><span class="vs"> + </span><span class="sc">${</span>y <span class="op">*</span> <span class="dv">2</span><span class="sc">}</span><span class="vs"> = </span><span class="sc">${</span>x <span class="op">+</span> y <span class="op">*</span> <span class="dv">2</span><span class="sc">}</span><span class="vs">`</span>
+<span class="co">// &quot;1 + 4 = 5&quot;</span>
+
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span><span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">2</span><span class="op">};</span>
+<span class="vs">`</span><span class="sc">${</span><span class="va">obj</span>.<span class="at">x</span> <span class="op">+</span> <span class="va">obj</span>.<span class="at">y</span><span class="sc">}</span><span class="vs">`</span>
+<span class="co">// 3</span>
+
+<span class="kw">function</span> <span class="at">fn</span>() <span class="op">{</span>
+  <span class="cf">return</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="vs">`foo </span><span class="sc">${</span><span class="at">fn</span>()<span class="sc">}</span><span class="vs"> bar`</span>
+<span class="co">// foo Hello World bar</span></code></pre></div>
+<p>&#26631;&#31614;&#27169;&#26495;</p>
+<p><code>String.raw()</code></p>
+<h2 id="&#27491;&#21017;&#30340;&#25193;&#23637;">&#27491;&#21017;&#30340;&#25193;&#23637;</h2>
+<h3 id="regexp&#26500;&#36896;&#20989;&#25968;">RegExp&#26500;&#36896;&#20989;&#25968;</h3>
+<pre><code>var regex = new RegExp(&#39;xyz&#39;, &#39;i&#39;);
+var regex = new RegExp(/xyz/i);
+// &#31561;&#20215;&#20110;
+var regex = /xyz/i;
+
+new RegExp(/abc/ig, &#39;i&#39;).flags
+// &quot;i&quot;</code></pre>
+<h3 id="&#23383;&#31526;&#20018;&#30340;&#27491;&#21017;&#26041;&#27861;">&#23383;&#31526;&#20018;&#30340;&#27491;&#21017;&#26041;&#27861;</h3>
+<h3 id="u&#20462;&#39280;&#31526;">u&#20462;&#39280;&#31526;</h3>
+<h3 id="y&#20462;&#39280;&#31526;">y&#20462;&#39280;&#31526;</h3>
+<h3 id="sticky&#23646;&#24615;">sticky&#23646;&#24615;</h3>
+<h3 id="flags&#23646;&#24615;">flags&#23646;&#24615;</h3>
+<h3 id="regexp.escape">RegExp.escape()</h3>
+<h3 id="&#21518;&#34892;&#26029;&#35328;">&#21518;&#34892;&#26029;&#35328;</h3>
+<h2 id="&#25968;&#20540;&#30340;&#25193;&#23637;">&#25968;&#20540;&#30340;&#25193;&#23637;</h2>
+<h3 id="&#20108;&#36827;&#21046;&#21644;&#20843;&#36827;&#21046;&#34920;&#31034;&#27861;">&#20108;&#36827;&#21046;&#21644;&#20843;&#36827;&#21046;&#34920;&#31034;&#27861;</h3>
+<h3 id="number.isfinite-number.isnan">Number.isFinite(), Number.isNaN()</h3>
+<h3 id="number.parseint-number.parsefloat">Number.parseInt(), Number.parseFloat()</h3>
+<h3 id="number.isinteger">Number.isInteger()</h3>
+<h3 id="number.epsilon">Number.EPSILON</h3>
+<h3 id="&#23433;&#20840;&#25972;&#25968;&#21644;number.issafeinteger">&#23433;&#20840;&#25972;&#25968;&#21644;Number.isSafeInteger()</h3>
+<h3 id="math&#23545;&#35937;&#30340;&#25193;&#23637;">Math&#23545;&#35937;&#30340;&#25193;&#23637;</h3>
+<h3 id="&#25351;&#25968;&#36816;&#31639;&#31526;">&#25351;&#25968;&#36816;&#31639;&#31526;</h3>
+<h2 id="&#25968;&#32452;&#30340;&#25193;&#23637;">&#25968;&#32452;&#30340;&#25193;&#23637;</h2>
+<h3 id="array.from">Array.from()</h3>
+<h3 id="array.of">Array.of()</h3>
+<h3 id="&#25968;&#32452;&#23454;&#20363;&#30340;copywithin">&#25968;&#32452;&#23454;&#20363;&#30340;copyWithin()</h3>
+<h3 id="&#25968;&#32452;&#23454;&#20363;&#30340;find&#21644;findindex">&#25968;&#32452;&#23454;&#20363;&#30340;find()&#21644;findIndex()</h3>
+<h3 id="&#25968;&#32452;&#23454;&#20363;&#30340;fill">&#25968;&#32452;&#23454;&#20363;&#30340;fill()</h3>
+<h3 id="&#25968;&#32452;&#23454;&#20363;&#30340;entrieskeys&#21644;values">&#25968;&#32452;&#23454;&#20363;&#30340;entries()&#65292;keys()&#21644;values()</h3>
+<h3 id="&#25968;&#32452;&#23454;&#20363;&#30340;includes">&#25968;&#32452;&#23454;&#20363;&#30340;includes()</h3>
+<h3 id="&#25968;&#32452;&#30340;&#31354;&#20301;">&#25968;&#32452;&#30340;&#31354;&#20301;</h3>
+<h3 id="&#25968;&#32452;&#25512;&#23548;">&#25968;&#32452;&#25512;&#23548;</h3>
+<h2 id="&#20989;&#25968;&#30340;&#25193;&#23637;">&#20989;&#25968;&#30340;&#25193;&#23637;</h2>
+<h3 id="&#20989;&#25968;&#21442;&#25968;&#30340;&#40664;&#35748;&#20540;">&#20989;&#25968;&#21442;&#25968;&#30340;&#40664;&#35748;&#20540;</h3>
+<h3 id="rest&#21442;&#25968;">rest&#21442;&#25968;</h3>
+<h3 id="&#25193;&#23637;&#36816;&#31639;&#31526;">&#25193;&#23637;&#36816;&#31639;&#31526;</h3>
+<h3 id="name&#23646;&#24615;">name&#23646;&#24615;</h3>
+<h3 id="&#31661;&#22836;&#20989;&#25968;">&#31661;&#22836;&#20989;&#25968;</h3>
+<h3 id="&#20989;&#25968;&#32465;&#23450;">&#20989;&#25968;&#32465;&#23450;</h3>
+<h3 id="&#23614;&#35843;&#29992;&#20248;&#21270;">&#23614;&#35843;&#29992;&#20248;&#21270;</h3>
+<h3 id="&#20989;&#25968;&#21442;&#25968;&#30340;&#23614;&#36887;&#21495;">&#20989;&#25968;&#21442;&#25968;&#30340;&#23614;&#36887;&#21495;</h3>
+<h2 id="&#23545;&#35937;&#30340;&#25193;&#23637;">&#23545;&#35937;&#30340;&#25193;&#23637;</h2>
+<h3 id="&#23646;&#24615;&#30340;&#31616;&#27905;&#34920;&#31034;&#27861;">&#23646;&#24615;&#30340;&#31616;&#27905;&#34920;&#31034;&#27861;</h3>
+<h3 id="&#23646;&#24615;&#21517;&#34920;&#36798;&#24335;">&#23646;&#24615;&#21517;&#34920;&#36798;&#24335;</h3>
+<h3 id="&#26041;&#27861;&#30340;name&#23646;&#24615;">&#26041;&#27861;&#30340;name&#23646;&#24615;</h3>
+<h3 id="object.is">Object.is()</h3>
+<h3 id="object.assign">Object.assign()</h3>
+<h3 id="&#23646;&#24615;&#30340;&#21487;&#26522;&#20030;&#24615;">&#23646;&#24615;&#30340;&#21487;&#26522;&#20030;&#24615;</h3>
+<h3 id="&#23646;&#24615;&#30340;&#36941;&#21382;">&#23646;&#24615;&#30340;&#36941;&#21382;</h3>
+<h3 id="proto__&#23646;&#24615;object.setprototypeofobject.getprototypeof-object.valuesobject.entries-&#23545;&#35937;&#30340;&#25193;&#23637;&#36816;&#31639;&#31526;-object.getownpropertydescriptors">__proto__&#23646;&#24615;&#65292;Object.setPrototypeOf()&#65292;Object.getPrototypeOf() Object.values()&#65292;Object.entries() &#23545;&#35937;&#30340;&#25193;&#23637;&#36816;&#31639;&#31526; Object.getOwnPropertyDescriptors()</h3>
+<h2 id="symbol">Symbol</h2>
+<h3 id="&#27010;&#36848;">&#27010;&#36848;</h3>
+<h3 id="&#20316;&#20026;&#23646;&#24615;&#21517;&#30340;symbol">&#20316;&#20026;&#23646;&#24615;&#21517;&#30340;Symbol</h3>
+<h3 id="&#23454;&#20363;&#28040;&#38500;&#39764;&#26415;&#23383;&#31526;&#20018;">&#23454;&#20363;&#65306;&#28040;&#38500;&#39764;&#26415;&#23383;&#31526;&#20018;</h3>
+<h3 id="&#23646;&#24615;&#21517;&#30340;&#36941;&#21382;">&#23646;&#24615;&#21517;&#30340;&#36941;&#21382;</h3>
+<h3 id="symbol.forsymbol.keyfor">Symbol.for()&#65292;Symbol.keyFor()</h3>
+<h3 id="&#20869;&#32622;&#30340;symbol&#20540;">&#20869;&#32622;&#30340;Symbol&#20540;</h3>
+<h2 id="proxy&#21644;reflect">Proxy&#21644;Reflect</h2>
+<h3 id="proxy&#27010;&#36848;">Proxy&#27010;&#36848;</h3>
+<h3 id="proxy&#23454;&#20363;&#30340;&#26041;&#27861;">Proxy&#23454;&#20363;&#30340;&#26041;&#27861;</h3>
+<h3 id="proxy.revocable">Proxy.revocable()</h3>
+<h3 id="reflect&#27010;&#36848;">Reflect&#27010;&#36848;</h3>
+<h3 id="reflect&#23545;&#35937;&#30340;&#26041;&#27861;">Reflect&#23545;&#35937;&#30340;&#26041;&#27861;</h3>
+<h2 id="&#20108;&#36827;&#21046;&#25968;&#32452;">&#20108;&#36827;&#21046;&#25968;&#32452;</h2>
+<h3 id="arraybuffer&#23545;&#35937;">ArrayBuffer&#23545;&#35937;</h3>
+<h3 id="typedarray&#35270;&#22270;">TypedArray&#35270;&#22270;</h3>
+<h3 id="&#22797;&#21512;&#35270;&#22270;">&#22797;&#21512;&#35270;&#22270;</h3>
+<h3 id="dataview&#35270;&#22270;">DataView&#35270;&#22270;</h3>
+<h3 id="&#20108;&#36827;&#21046;&#25968;&#32452;&#30340;&#24212;&#29992;">&#20108;&#36827;&#21046;&#25968;&#32452;&#30340;&#24212;&#29992;</h3>
+<h2 id="set&#21644;map&#25968;&#25454;&#32467;&#26500;">Set&#21644;Map&#25968;&#25454;&#32467;&#26500;</h2>
+<h3 id="set">Set</h3>
+<h3 id="weakset">WeakSet</h3>
+<h3 id="map">Map</h3>
+<h3 id="weakmap">WeakMap</h3>
+<h2 id="iterator&#21644;forof&#24490;&#29615;">Iterator&#21644;for&#8230;of&#24490;&#29615;</h2>
+<h3 id="iterator&#36941;&#21382;&#22120;&#30340;&#27010;&#24565;">Iterator&#65288;&#36941;&#21382;&#22120;&#65289;&#30340;&#27010;&#24565;</h3>
+<h3 id="&#25968;&#25454;&#32467;&#26500;&#30340;&#40664;&#35748;iterator&#25509;&#21475;">&#25968;&#25454;&#32467;&#26500;&#30340;&#40664;&#35748;Iterator&#25509;&#21475;</h3>
+<h3 id="&#35843;&#29992;iterator&#25509;&#21475;&#30340;&#22330;&#21512;">&#35843;&#29992;Iterator&#25509;&#21475;&#30340;&#22330;&#21512;</h3>
+<h3 id="&#23383;&#31526;&#20018;&#30340;iterator&#25509;&#21475;">&#23383;&#31526;&#20018;&#30340;Iterator&#25509;&#21475;</h3>
+<h3 id="iterator&#25509;&#21475;&#19982;generator&#20989;&#25968;">Iterator&#25509;&#21475;&#19982;Generator&#20989;&#25968;</h3>
+<h3 id="&#36941;&#21382;&#22120;&#23545;&#35937;&#30340;returnthrow">&#36941;&#21382;&#22120;&#23545;&#35937;&#30340;return()&#65292;throw()</h3>
+<h3 id="forof&#24490;&#29615;">for&#8230;of&#24490;&#29615;</h3>
+<h2 id="generator-&#20989;&#25968;">Generator &#20989;&#25968;</h2>
+<h3 id="&#31616;&#20171;">&#31616;&#20171;</h3>
+<h3 id="next&#26041;&#27861;&#30340;&#21442;&#25968;">next&#26041;&#27861;&#30340;&#21442;&#25968;</h3>
+<h3 id="forof&#24490;&#29615;-1">for&#8230;of&#24490;&#29615;</h3>
+<h3 id="generator.prototype.throw">Generator.prototype.throw()</h3>
+<h3 id="generator.prototype.return">Generator.prototype.return()</h3>
+<h3 id="yield&#35821;&#21477;-&#20316;&#20026;&#23545;&#35937;&#23646;&#24615;&#30340;generator&#20989;&#25968;-generator&#20989;&#25968;&#30340;this-generator&#20989;&#25968;&#25512;&#23548;-&#21547;&#20041;-&#24212;&#29992;">yield*&#35821;&#21477; ### &#20316;&#20026;&#23545;&#35937;&#23646;&#24615;&#30340;Generator&#20989;&#25968; ### Generator&#20989;&#25968;&#30340;this ### Generator&#20989;&#25968;&#25512;&#23548; ### &#21547;&#20041; ### &#24212;&#29992;</h3>
+<h2 id="promise&#23545;&#35937;">Promise&#23545;&#35937;</h2>
+<h3 id="promise&#30340;&#21547;&#20041;">Promise&#30340;&#21547;&#20041;</h3>
+<h3 id="&#22522;&#26412;&#29992;&#27861;">&#22522;&#26412;&#29992;&#27861;</h3>
+<h3 id="promise.prototype.then">Promise.prototype.then()</h3>
+<h3 id="promise.prototype.catch">Promise.prototype.catch()</h3>
+<h3 id="promise.all">Promise.all()</h3>
+<h3 id="promise.race">Promise.race()</h3>
+<h3 id="promise.resolve">Promise.resolve()</h3>
+<h3 id="promise.reject">Promise.reject()</h3>
+<h3 id="&#20004;&#20010;&#26377;&#29992;&#30340;&#38468;&#21152;&#26041;&#27861;">&#20004;&#20010;&#26377;&#29992;&#30340;&#38468;&#21152;&#26041;&#27861;</h3>
+<h3 id="&#24212;&#29992;">&#24212;&#29992;</h3>
+<h3 id="async&#20989;&#25968;">async&#20989;&#25968;</h3>
+<h2 id="&#24322;&#27493;&#25805;&#20316;&#21644;async&#20989;&#25968;">&#24322;&#27493;&#25805;&#20316;&#21644;Async&#20989;&#25968;</h2>
+<h3 id="&#22522;&#26412;&#27010;&#24565;">&#22522;&#26412;&#27010;&#24565;</h3>
+<h3 id="generator&#20989;&#25968;">Generator&#20989;&#25968;</h3>
+<h3 id="thunk&#20989;&#25968;">Thunk&#20989;&#25968;</h3>
+<h3 id="co&#27169;&#22359;">co&#27169;&#22359;</h3>
+<h3 id="async&#20989;&#25968;-1">async&#20989;&#25968;</h3>
+<h3 id="class">Class</h3>
+<h3 id="class&#22522;&#26412;&#35821;&#27861;">Class&#22522;&#26412;&#35821;&#27861;</h3>
+<h3 id="class&#30340;&#32487;&#25215;">Class&#30340;&#32487;&#25215;</h3>
+<h3 id="&#21407;&#29983;&#26500;&#36896;&#20989;&#25968;&#30340;&#32487;&#25215;">&#21407;&#29983;&#26500;&#36896;&#20989;&#25968;&#30340;&#32487;&#25215;</h3>
+<h3 id="class&#30340;&#21462;&#20540;&#20989;&#25968;getter&#21644;&#23384;&#20540;&#20989;&#25968;setter">Class&#30340;&#21462;&#20540;&#20989;&#25968;&#65288;getter&#65289;&#21644;&#23384;&#20540;&#20989;&#25968;&#65288;setter&#65289;</h3>
+<h3 id="class&#30340;generator&#26041;&#27861;">Class&#30340;Generator&#26041;&#27861;</h3>
+<h3 id="class&#30340;&#38745;&#24577;&#26041;&#27861;">Class&#30340;&#38745;&#24577;&#26041;&#27861;</h3>
+<h3 id="class&#30340;&#38745;&#24577;&#23646;&#24615;&#21644;&#23454;&#20363;&#23646;&#24615;">Class&#30340;&#38745;&#24577;&#23646;&#24615;&#21644;&#23454;&#20363;&#23646;&#24615;</h3>
+<h3 id="new.target&#23646;&#24615;">new.target&#23646;&#24615;</h3>
+<h3 id="mixin&#27169;&#24335;&#30340;&#23454;&#29616;">Mixin&#27169;&#24335;&#30340;&#23454;&#29616;</h3>
+<h2 id="&#20462;&#39280;&#22120;">&#20462;&#39280;&#22120;</h2>
+<h3 id="&#31867;&#30340;&#20462;&#39280;">&#31867;&#30340;&#20462;&#39280;</h3>
+<h3 id="&#26041;&#27861;&#30340;&#20462;&#39280;">&#26041;&#27861;&#30340;&#20462;&#39280;</h3>
+<h3 id="&#20026;&#20160;&#20040;&#20462;&#39280;&#22120;&#19981;&#33021;&#29992;&#20110;&#20989;&#25968;">&#20026;&#20160;&#20040;&#20462;&#39280;&#22120;&#19981;&#33021;&#29992;&#20110;&#20989;&#25968;&#65311;</h3>
+<h3 id="core-decorators.js">core-decorators.js</h3>
+<h3 id="&#20351;&#29992;&#20462;&#39280;&#22120;&#23454;&#29616;&#33258;&#21160;&#21457;&#24067;&#20107;&#20214;">&#20351;&#29992;&#20462;&#39280;&#22120;&#23454;&#29616;&#33258;&#21160;&#21457;&#24067;&#20107;&#20214;</h3>
+<h3 id="mixin">Mixin</h3>
+<h3 id="trait">Trait</h3>
+<h3 id="babel&#36716;&#30721;&#22120;&#30340;&#25903;&#25345;">Babel&#36716;&#30721;&#22120;&#30340;&#25903;&#25345;</h3>
+<h2 id="module">Module</h2>
+<h3 id="&#20005;&#26684;&#27169;&#24335;">&#20005;&#26684;&#27169;&#24335;</h3>
+<h3 id="export&#21629;&#20196;">export&#21629;&#20196;</h3>
+<h3 id="import&#21629;&#20196;">import&#21629;&#20196;</h3>
+<h3 id="&#27169;&#22359;&#30340;&#25972;&#20307;&#21152;&#36733;">&#27169;&#22359;&#30340;&#25972;&#20307;&#21152;&#36733;</h3>
+<h3 id="export-default&#21629;&#20196;">export default&#21629;&#20196;</h3>
+<h3 id="&#27169;&#22359;&#30340;&#32487;&#25215;">&#27169;&#22359;&#30340;&#32487;&#25215;</h3>
+<h3 id="es6&#27169;&#22359;&#21152;&#36733;&#30340;&#23454;&#36136;">ES6&#27169;&#22359;&#21152;&#36733;&#30340;&#23454;&#36136;</h3>
+<h3 id="&#24490;&#29615;&#21152;&#36733;">&#24490;&#29615;&#21152;&#36733;</h3>
+<h3 id="es6&#27169;&#22359;&#30340;&#36716;&#30721;">ES6&#27169;&#22359;&#30340;&#36716;&#30721;</h3>
+<h2 id="&#32534;&#31243;&#39118;&#26684;">&#32534;&#31243;&#39118;&#26684;</h2>
+<h3 id="&#22359;&#32423;&#20316;&#29992;&#22495;-1">&#22359;&#32423;&#20316;&#29992;&#22495;</h3>
+<h3 id="&#23383;&#31526;&#20018;">&#23383;&#31526;&#20018;</h3>
+<h3 id="&#35299;&#26500;&#36171;&#20540;">&#35299;&#26500;&#36171;&#20540;</h3>
+<h3 id="&#23545;&#35937;">&#23545;&#35937;</h3>
+<h3 id="&#25968;&#32452;">&#25968;&#32452;</h3>
+<h3 id="&#20989;&#25968;">&#20989;&#25968;</h3>
+<h3 id="map&#32467;&#26500;">Map&#32467;&#26500;</h3>
+<h3 id="class-1">Class</h3>
+<h3 id="&#27169;&#22359;">&#27169;&#22359;</h3>
+<h3 id="eslint&#30340;&#20351;&#29992;">ESLint&#30340;&#20351;&#29992;</h3>
+<h2 id="&#35835;&#25026;-ecmascript-&#35268;&#26684;">&#35835;&#25026; ECMAScript &#35268;&#26684;</h2>
+<h3 id="&#27010;&#36848;-1">&#27010;&#36848;</h3>
+<h3 id="&#30456;&#31561;&#36816;&#31639;&#31526;">&#30456;&#31561;&#36816;&#31639;&#31526;</h3>
+<h3 id="&#25968;&#32452;&#30340;&#31354;&#20301;-1">&#25968;&#32452;&#30340;&#31354;&#20301;</h3>
+<h3 id="&#25968;&#32452;&#30340;map&#26041;&#27861;">&#25968;&#32452;&#30340;map&#26041;&#27861;</h3>
+<h2 id="&#21442;&#32771;&#38142;&#25509;">&#21442;&#32771;&#38142;&#25509;</h2>
+<h3 id="&#23448;&#26041;&#25991;&#20214;">&#23448;&#26041;&#25991;&#20214;</h3>
+<h3 id="&#32508;&#21512;&#20171;&#32461;">&#32508;&#21512;&#20171;&#32461;</h3>
+<h3 id="let&#21644;const">let&#21644;const</h3>
+<h3 id="&#35299;&#26500;&#36171;&#20540;-1">&#35299;&#26500;&#36171;&#20540;</h3>
+<h3 id="&#23383;&#31526;&#20018;-1">&#23383;&#31526;&#20018;</h3>
+<h3 id="&#27491;&#21017;">&#27491;&#21017;</h3>
+<h3 id="&#25968;&#20540;">&#25968;&#20540;</h3>
+<h3 id="&#25968;&#32452;-1">&#25968;&#32452;</h3>
+<h3 id="&#20989;&#25968;-1">&#20989;&#25968;</h3>
+<h3 id="&#23545;&#35937;-1">&#23545;&#35937;</h3>
+<h3 id="proxy&#21644;reflect-1">Proxy&#21644;Reflect</h3>
+<h3 id="symbol-1">Symbol</h3>
+<h3 id="&#20108;&#36827;&#21046;&#25968;&#32452;-1">&#20108;&#36827;&#21046;&#25968;&#32452;</h3>
+<h3 id="set&#21644;map">Set&#21644;Map</h3>
+<h3 id="iterator">Iterator</h3>
+<h3 id="generator">Generator</h3>
+<h3 id="promise&#23545;&#35937;-1">Promise&#23545;&#35937;</h3>
+<h3 id="&#24322;&#27493;&#25805;&#20316;&#21644;async&#20989;&#25968;-1">&#24322;&#27493;&#25805;&#20316;&#21644;Async&#20989;&#25968;</h3>
+<h3 id="class-2">Class</h3>
+<h3 id="decorator">Decorator</h3>
+<h3 id="module-1">Module</h3>
+<h3 id="&#24037;&#20855;">&#24037;&#20855;</h3>
+<hr />
+<h1 id="trevor-burnham-&#30340;&#20070;">Trevor burnham &#30340;&#20070;</h1>
+<h2 id="eloquent-javascript">Eloquent JavaScript</h2>
+<p>it&#8217;s open source and can be read online, see</p>
+<ul>
+<li><a href="https://github.com/marijnh/Eloquent-JavaScript">marijnh/Eloquent-JavaScript: The second edition of Eloquent JavaScript</a></li>
+<li><a href="http://eloquentjavascript.net/">Eloquent JavaScript</a></li>
+<li><a href="http://eloquentjavascript.net/code/">Eloquent JavaScript :: Code Sandbox</a></li>
+</ul>
+<p>Eloquent JavaScript A Modern Introduction to Programming</p>
+<h3 id="introduction">Introduction</h3>
+<p><a href="http://eloquentjavascript.net/00_intro.html">Introduction :: Eloquent JavaScript</a></p>
+<p>I do not enlighten those who are not eager to learn, nor arouse those who are not anxious to give an explanation themselves. If I have presented one corner of the square and they cannot come back to me with the other three, I should not go over the points again.</p>
+<p>&#8211; Confucius</p>
+<p>Overview of this book</p>
+<h3 id="part-1-language">Part 1: Language</h3>
+<h4 id="values-types-and-operators">Values, Types, and Operators</h4>
+<p><a href="http://eloquentjavascript.net/01_values.html">Values, Types, and Operators :: Eloquent JavaScript</a></p>
+<dl>
+<dt>Undefined values</dt>
+<dd><p>There are two special values, written null and undefined, that are used to denote the absence of a meaningful value. They are themselves values, but they carry no information.</p>
+</dd>
+</dl>
+<p>Many operations in the language that don&#8217;t produce a meaningful value (you&#8217;ll see some later) yield undefined simply because they have to yield some value.</p>
+<p>The difference in meaning between undefined and null is an accident of JavaScript&#8217;s design, and it doesn&#8217;t matter most of the time. In the cases where you actually have to concern yourself with these values, I recommend treating them as interchangeable (more on that in a moment).</p>
+<p>Automatic type conversion</p>
+<pre><code>```javascript</code></pre>
+<p>console.log(8 * null) // &#8594; 0 console.log(&#8220;5&#8221; - 1) // &#8594; 4 console.log(&#8220;5&#8221; + 1) // &#8594; 51 console.log(&#8220;five&#8221; * 2) // &#8594; NaN console.log(false == 0) // &#8594; true</p>
+<pre><code>console.log(null == undefined);
+// &#8594; true
+console.log(null == 0);
+// &#8594; false
+```
+
+Because of this, expressions like 0 == false and &quot;&quot; == false are also true. For cases like this, where you do not want any automatic type conversions to happen, there are two extra operators: === and !==. The first tests whether a value is precisely equal to the other, and the second tests whether it is not precisely equal. So &quot;&quot; === false is false as expected.
+
+I recommend using the three-character comparison operators defensively to prevent unexpected type conversions from tripping you up. But when you&#8217;re certain the types on both sides will be the same, there is no problem with using the shorter operators.
+
+Short-circuiting of logical operators</code></pre>
+<h4 id="program-structure">Program Structure</h4>
+<pre><code>[Program Structure :: Eloquent JavaScript](http://eloquentjavascript.net/02_program_structure.html)
+
+```javascript
+confirm(&quot;Shall we, then?&quot;);
+prompt(&quot;Tell me everything you know.&quot;, &quot;...&quot;);
+
+var theNumber = Number(prompt(&quot;Pick a number&quot;, &quot;&quot;));
+alert(&quot;Your number is the square root of &quot; +
+        theNumber * theNumber);
+```
+
+```javascript
+for (var number = 0; number &lt;= 12; number = number + 2) {
+    if (...) { break; }
+    console.log(number);
+}</code></pre>
+<p>// &#8594; 0 // &#8594; 2 // &#8230; etcetera ```</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// C &#35821;&#35328;&#37324;&#26159;&#19981;&#33021;&#36825;&#20040;&#29992;&#30340;&#12290;</span>
+<span class="cf">switch</span> (<span class="at">prompt</span>(<span class="st">&quot;What is the weather like?&quot;</span>)) <span class="op">{</span>
+    <span class="cf">case</span> <span class="st">&quot;rainy&quot;</span><span class="op">:</span>
+        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Remember to bring an umbrella.&quot;</span>)<span class="op">;</span>
+        <span class="cf">break</span><span class="op">;</span>
+    <span class="cf">case</span> <span class="st">&quot;sunny&quot;</span><span class="op">:</span>
+        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Dress lightly.&quot;</span>)<span class="op">;</span>
+    <span class="cf">case</span> <span class="st">&quot;cloudy&quot;</span><span class="op">:</span>
+        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Go outside.&quot;</span>)<span class="op">;</span>
+        <span class="cf">break</span><span class="op">;</span>
+    <span class="dt">default</span><span class="op">:</span>
+        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Unknown weather type!&quot;</span>)<span class="op">;</span>
+        <span class="cf">break</span><span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<pre><code>var str = &#39;&#39;;
+for (var i = 0; i &lt; 8; i++) {
+    for (var j = 0; j &lt; 8; j++) {
+        if ((i+j)%2!=0) { str += &#39;#&#39;; }
+        else { str += &#39; &#39;; }
+        if ( j == 7 ) { str += &#39;\n&#39;; }
+    }
+}
+console.log(str);</code></pre>
+<h4 id="functions">Functions</h4>
+<p>People think that computer science is the art of geniuses but the actual reality is the opposite, just many people doing things that build on each other, like a wall of mini stones.</p>
+<p>&#8211; Donald Knuth</p>
+<pre><code>var landscape = function() {
+    var result = &quot;&quot;;
+    var flat = function(size) {
+        for (var count = 0; count &lt; size; count++)
+            result += &quot;_&quot;;
+    };
+    var mountain = function(size) {
+        result += &quot;/&quot;;
+        for (var count = 0; count &lt; size; count++)
+            result += &quot;&#39;&quot;;
+        result += &quot;\\&quot;;
+    };
+
+    flat(3);
+    mountain(4);
+    flat(6);
+    mountain(1);
+    flat(1);
+    return result;
+};
+
+console.log(landscape());
+// &#8594; ___/&#39;&#39;&#39;&#39;\______/&#39;\_</code></pre>
+<p>closure</p>
+<pre><code>function wrapValue(n) {
+    var localVariable = n;
+    return function() { return localVariable; };
+}
+
+var wrap1 = wrapValue(1);
+var wrap2 = wrapValue(2);
+console.log(wrap1());
+// &#8594; 1
+console.log(wrap2());
+// &#8594; 2</code></pre>
+<pre><code>```</code></pre>
+<p>function isEven(num) { if ( num &lt; 0 ) { return isEven(1-num); } if ( num === 0 ) { return true; } if ( num === 1 ) { return false; } return isEven( num - 2 ); }</p>
+<p>console.log(isEven(50)); // &#8594; true console.log(isEven(75)); // &#8594; false console.log(isEven(-1));</p>
+<pre><code>
+    ```
+function countChar(s, c)
+{
+    var hits = 0;
+    for ( var i = 0; i &lt; s.length; ++i ) {
+        if ( s.charAt(i) === c ) {
+            ++hits;
+        }
+    }
+    return hits;
+}
+
+function countBs(s) {
+    return countChar(s, &#39;B&#39;);
+}
+
+console.log(countBs(&quot;BBC&quot;));
+// &#8594; 2
+console.log(countChar(&quot;kakkerlak&quot;, &quot;k&quot;));
+// &#8594; 4</code></pre>
+<pre><code>null.length;
+// &#8594; TypeError: Cannot read property &#39;length&#39; of null
+
+var doh = &quot;Doh&quot;;
+console.log(typeof doh.toUpperCase);
+// &#8594; function
+console.log(doh.toUpperCase());
+// &#8594; DOH</code></pre>
+<pre><code>```</code></pre>
+<p>arr.push(elem[, elem]) obj.node // undefined ```</p>
+<pre><code>```
+var anObject = {left: 1, right: 2};</code></pre>
+<p>console.log(anObject.left); // &#8594; 1 delete anObject.left; console.log(anObject.left); // &#8594; undefined console.log(&#8220;left&#8221; in anObject); // &#8594; false console.log(&#8220;right&#8221; in anObject); // &#8594; true</p>
+<pre><code>
+you typically write array.length because that is easier to write than array[&quot;length&quot;].
+
+Mutability
+</code></pre>
+<p>var object1 = {value: 10}; var object2 = object1; var object3 = {value: 10};</p>
+<p>console.log(object1 == object2); // &#8594; true console.log(object1 == object3); // &#8594; false</p>
+<p>object1.value = 15; console.log(object2.value); // &#8594; 15 console.log(object3.value); // &#8594; 10</p>
+<pre><code>
+The lycanthrope&#8217;s (`[&#39;la&#618;k(&#601;)n,&#952;r&#601;&#650;p]`, &#21464;&#29436;&#29378;&#24739;&#32773;) log
+
+&#20013;&#25991;:&#29436;&#20154;;&#33521;&#35821;:werewolf;&#26085;&#35821;:&#29436;&#30007;;&#27861;&#35821;:lycanthrope;&#38889;&#35821;:&#45713;&#45824;&#51064;&#44036;;
+
+coefficient
+</code></pre>
+<p>function phi(table) { return (table[3] * table[0] - table[2] * table[1]) / Math.sqrt((table[2] + table[3]) <em> (table[0] + table[1]) </em> (table[1] + table[3]) * (table[0] + table[2])); }</p>
+<p>console.log(phi([76, 9, 4, 1])); // &#8594; 0.068599434</p>
+<pre><code>
+objects as maps
+</code></pre>
+<p>var map = {}; function storePhi(event, phi) { map[event] = phi; }</p>
+<pre><code></code></pre>
+<p>console.log([1, 2, 3, 2, 1].indexOf(2)); // &#8594; 1 console.log([1, 2, 3, 2, 1].lastIndexOf(2)); // &#8594; 3</p>
+<p>console.log([0, 1, 2, 3, 4].slice(2, 4)); // &#8594; [2, 3] console.log([0, 1, 2, 3, 4].slice(2)); // &#8594; [2, 3, 4]</p>
+<p>function remove(array, index) { return array.slice(0, index) .concat(array.slice(index + 1)); } console.log(remove([&#8220;a&#8221;, &#8220;b&#8221;, &#8220;c&#8221;, &#8220;d&#8221;, &#8220;e&#8221;], 2)); // &#8594; [&#8220;a&#8221;, &#8220;b&#8221;, &#8220;d&#8221;, &#8220;e&#8221;]</p>
+<p>console.log(&#8220;e oee&#8221;.indexOf(&#8220;ee&#8221;)); // 3</p>
+<pre><code>
+The trim method removes whitespace (spaces, newlines, tabs, and similar characters) from the start and end of a string.
+</code></pre>
+<p>console.log(&quot; okay &#8220;.trim()); // &#8594; okay</p>
+<pre><code>
+The arguments object
+
+    ```
+function packArgs()
+{
+    return arguments;
+}
+console.log(packArgs({nice:&quot;good&quot;}, &quot;shit&quot;, 23));
+// {0: {nice: &quot;good&quot;}, 1: &quot;shit&quot;, 2: 23}</code></pre>
+<p>The Math object</p>
+<p>As we&#8217;ve seen, Math is a grab-bag of number-related utility functions, such as Math.max Math.min Math.sqrt Math.random Math.floor Math.ceil Math.round</p>
+<p>The global object</p>
+<pre><code>```</code></pre>
+<p>for (var name in object) ```</p>
+<pre><code>```
+// Your code here.</code></pre>
+<p>function range(a,b,d) { if (!d) { d = 1; } var arr = []; var cur = a; while( (d&gt;0&amp;&amp;cur&lt;=b) || (d&lt;0&amp;&amp;cur&gt;=b) ) { arr.push(cur); cur += d; } return arr; } function sum(arr) { var result = 0; for ( var i = 0; i &lt; arr.length; ++i ) { result += arr[i]; } return result; }</p>
+<p>console.log(range(1, 10)); // &#8594; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] console.log(range(5, 2, -1)); // &#8594; [5, 4, 3, 2] console.log(sum(range(1, 10))); // &#8594; 55</p>
+<pre><code>
+#### Data Structures: Objects and Arrays
+</code></pre>
+<p>// Your code here. function reverseArray(arr) { var result = []; for ( var i = arr.length-1; i &gt;= 0; &#8211;i ) { result.push( arr[i] ); } return result; }</p>
+<p>function reverseArrayInPlace(arr) { for ( var i = 0, j = arr.length-1; i &lt; j; ++i, &#8211;j ) { var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp; } }</p>
+<p>console.log(reverseArray([&#8220;A&#8221;, &#8220;B&#8221;, &#8220;C&#8221;])); // &#8594; [&#8220;C&#8221;, &#8220;B&#8221;, &#8220;A&#8221;]; var arrayValue = [1, 2, 3, 4, 5]; reverseArrayInPlace(arrayValue); console.log(arrayValue); // &#8594; [5, 4, 3, 2, 1]</p>
+<pre><code></code></pre>
+<p>// Your code here. function arrayToList(arr) { if (!arr.length) { return null; } var value = arr[0]; var rest = arrayToList(arr.splice(1)); return {value: value, rest: rest}; } function listToArray(list) { var arr = []; arr.push(list.value); while( list.rest != null ) { arr.push(list.rest.value); list = list.rest; } return arr; } function prepend(elem, arr) { return {value: elem, rest: arr}; }</p>
+<p>function nth(list, index) { return listToArray(list)[index]; }</p>
+<p>console.log(arrayToList([10, 20])); // &#8594; {value: 10, rest: {value: 20, rest: null}} console.log(listToArray(arrayToList([10, 20, 30]))); // &#8594; [10, 20, 30] console.log(prepend(10, prepend(20, null))); // &#8594; {value: 10, rest: {value: 20, rest: null}} console.log(nth(arrayToList([10, 20, 30]), 1)); // &#8594; 20</p>
+<pre><code></code></pre>
+<p>// Your code here. function deepEqual(a, b) { if (typeof a === typeof {}) { return false; } }</p>
+<p>var obj = {here: {is: &#8220;an&#8221;}, object: 2}; console.log(deepEqual(obj, obj)); // &#8594; true console.log(deepEqual(obj, {here: 1, object: 2})); // &#8594; false console.log(deepEqual(obj, {here: {is: &#8220;an&#8221;}, object: 2})); // &#8594; true</p>
+<pre><code>
+#### Higher-order Functions
+</code></pre>
+<p>function greaterThan(n) { return function(m) { return m &gt; n; }; } var greaterThan10 = greaterThan(10); console.log(greaterThan10(11)); // &#8594; true</p>
+<pre><code></code></pre>
+<p>function transparentWrapping(f) { return function() { return f.apply(null, arguments); }; }</p>
+<pre><code>
+This format is called JSON (pronounced &#8220;Jason&#8221;), which stands for JavaScript Object Notation. It is widely used as a data storage and communication format on the Web.
+
+var string = JSON.stringify({name: &quot;X&quot;, born: 1980});
+console.log(string);
+// &#8594; {&quot;name&quot;:&quot;X&quot;,&quot;born&quot;:1980}
+console.log(JSON.parse(string).born);
+// &#8594; 1980
+
+
+filter(arr, function (elem){
+        return true/false;
+        });
+
+arr.filter = f(elem)
+
+    Transforming with map
+
+    Summarizing with reduce
+
+    bind and apply.
+
+    [1,3,5].reduce(function(a,b){return a*b;})
+    // 15
+
+    Mother-child age difference
+
+#### The Secret Life of Objects
+
+    The problem with object-oriented languages is they&#8217;ve got all this implicit environment that they carry around with them. You wanted a banana but what you got was a gorilla holding the banana and the entire jungle.
+
+    -- Joe Armstrong, interviewed in Coders at Work
+
+    Usually a method needs to do something with the object it was called on. When a function is called as a method&#8212;looked up as a property and immediately called, as in object.method()&#8212;the special variable this in its body will point to the object that it was called on
+
+    There is a method similar to apply, called call. It also calls the function it is a method of but takes its arguments normally, rather than as an array. Like apply and bind, call can be passed a specific this value.
+
+    speak.apply(fatRabbit, [&quot;Burp!&quot;]);
+    // &#8594; The fat rabbit says &#39;Burp!&#39;
+    speak.call({type: &quot;old&quot;}, &quot;Oh my.&quot;);
+    // &#8594; The old rabbit says &#39;Oh my.&#39;
+
+    Watch closely.
+
+    var empty = {};
+console.log(empty.toString);
+// &#8594; function toString(){&#8230;}
+console.log(empty.toString());
+// &#8594; [object Object]
+
+I just pulled a property out of an empty object. Magic!
+
+Well, not really. I have simply been withholding information about the way JavaScript objects work. In addition to their set of properties, almost all objects also have a prototype. A prototype is another object that is used as a fallback source of properties. When an object gets a request for a property that it does not have, its prototype will be searched for the property, then the prototype&#8217;s prototype, and so on.
+
+So who is the prototype of that empty object? It is the great ancestral prototype, the entity behind almost all objects, Object.prototype.
+
+console.log(Object.getPrototypeOf({}) ==
+        Object.prototype);
+// &#8594; true
+console.log(Object.getPrototypeOf(Object.prototype));
+// &#8594; null
+
+console.log(Object.getPrototypeOf(isNaN) ==
+        Function.prototype);
+// &#8594; true
+console.log(Object.getPrototypeOf([]) ==
+        Array.prototype);
+// &#8594; true
+
+var protoRabbit = {
+speak: function(line) {
+           console.log(&quot;The &quot; + this.type + &quot; rabbit says &#39;&quot; +
+                   line + &quot;&#39;&quot;);
+       }
+};
+var killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = &quot;killer&quot;;
+killerRabbit.speak(&quot;SKREEEE!&quot;);
+// &#8594; The killer rabbit says &#39;SKREEEE!&#39;
+
+constructor
+
+Constructors (in fact, all functions) automatically get a property named prototype, which by default holds a plain, empty object that derives from Object.prototype. Every instance created with this constructor will have this object as its prototype. So to add a speak method to rabbits created with the Rabbit constructor, we can simply do this:
+
+Rabbit.prototype.speak = function(line) {
+    console.log(&quot;The &quot; + this.type + &quot; rabbit says &#39;&quot; +
+            line + &quot;&#39;&quot;);
+};
+blackRabbit.speak(&quot;Doom...&quot;);
+// &#8594; The black rabbit says &#39;Doom...&#39;
+
+It is important to note the distinction between the way a prototype is associated with a constructor (through its prototype property) and the way objects have a prototype (which can be retrieved with Object.getPrototypeOf). The actual prototype of a constructor is Function.prototype since constructors are functions. Its prototype property will be the prototype of instances created through it but is not its own prototype.
+
+When you add a property to an object, whether it is present in the prototype or not, the property is added to the object itself, which will henceforth have it as its own property. If there is a property by the same name in the prototype, this property will no longer affect the object. The prototype itself is not changed.
+
+![](http://eloquentjavascript.net/img/rabbits.svg)
+
+console.log(Array.prototype.toString ==
+        Object.prototype.toString);
+// &#8594; false
+console.log([1, 2].toString());
+// &#8594; 1,2
+
+
+That function doesn&#8217;t know about arrays, so it simply puts the word &#8220;object&#8221; and the name of the type between square brackets.
+
+console.log(Object.prototype.toString.call([1, 2]));
+// &#8594; [object Array]
+
+for (var name in map)
+
+    Prototype interference
+
+    Oddly, toString did not show up in the for/in loop, but the in operator did return true for it. This is because JavaScript distinguishes between enumerable and nonenumerable properties.
+
+    All properties that we create by simply assigning to them are enumerable. The standard properties in Object.prototype are all nonenumerable, which is why they do not show up in such a for/in loop.
+
+    Object.defineProperty(Object.prototype, &quot;hiddenNonsense&quot;,
+            {enumerable: false, value: &quot;hi&quot;});
+
+console.log(map.hasOwnProperty(&quot;toString&quot;));
+// &#8594; false
+
+Prototype-less objects
+
+var map = Object.create(null); // objet without a prototype
+map[&quot;pizza&quot;] = 0.069;
+console.log(&quot;toString&quot; in map);
+// &#8594; false
+console.log(&quot;pizza&quot; in map);
+// &#8594; true
+
+Polymorphism
+
+Laying out a table
+
+Getters and setters
+
+var pile = {
+elements: [&quot;eggshell&quot;, &quot;orange peel&quot;, &quot;worm&quot;],
+          get height() {
+              return this.elements.length;
+          },
+          set height(value) {
+              console.log(&quot;Ignoring attempt to set height to&quot;, value);
+          }
+};
+
+console.log(pile.height);
+// &#8594; 3
+pile.height = 100;
+// &#8594; Ignoring attempt to set height to 100
+
+#### Project: Electronic Life
+#### Bugs and Error Handling
+#### Regular Expressions
+#### Modules
+
+### Part 2: Browser
+
+#### JavaScript and the Browser
+#### The Document Object Model
+#### Handling Events
+#### Project: A Platform Game
+#### Drawing on Canvas
+#### HTTP
+#### Forms and Form Fields
+#### Project: A Paint Program
+
+### Part 3: Node
+
+#### Node.js
+#### Project: Skill-Sharing Website
+
+---
+
+# JavaScript: The Good Parts
+
+## Good Parts
+
+JavaScript&#8217;s functions are first class objects with (mostly) lexical scoping. JavaScript
+is the first lambda language to go mainstream. Deep down, JavaScript has more in
+common with Lisp and Scheme than with Java. It is Lisp in C&#8217;s clothing. This makes
+JavaScript a remarkably powerful language.
+
+document.writeln(&#39;Hello, world!&#39;);
+
+Function.prototype.method = function (name, func) {
+    this.prototype[name] = func;
+    return this;
+};
+
+## Grammar
+
+railroal diagrams
+
+## Objects
+</code></pre>
+<p>var obj = {}; var obj = { k : &#8220;v&#8221;, &#8230; }</p>
+<p>obj.k obj[&#8220;k&#8221;] ```</p>
+<p>The || operator can be used to fill in default values: var middle = stooge[&#8220;middle-name&#8221;] || &#8220;(none)&#8221;; var status = flight.status || &#8220;unknown&#8221;;</p>
+<p>Objects are passed around by reference. They are never copied:</p>
+<p>Every object is linked to a prototype object from which it can inherit properties. All objects created from object literals are linked to Object.prototype , an object that comes standard with JavaScript.</p>
+<p>if (typeof Object.create !== &#8216;function&#8217;) { Object.create = function (o) { var F = function () {}; F.prototype = o; return new F(); }; } var another_stooge = Object.create(stooge);</p>
+<p>Reflection</p>
+<p>typeof flight.toString // &#8216;function&#8217; typeof flight.constructor // &#8216;function&#8217;</p>
+<p>Deletion</p>
+<p>The delete operator can be used to remove a property from an object. It will remove a property from the object if it has one. It will not touch any of the objects in the proto- type linkage. Removing a property from an object may allow a property from the prototype link- age to shine</p>
+<p>another_stooge.nickname; // local delete another_stooge.nickname; another_stooge.nickname; // prototype</p>
+<p>Global Abatement (&#20943;&#36731;)</p>
+<pre><code>&#36991;&#20813;&#36807;&#22810;&#30340; global &#21464;&#37327;&#65292;&#21487;&#20197;&#20840;&#37096;&#25918;&#21040;&#19968;&#20010; obj &#37324;&#38754;&#12290;</code></pre>
+<h2 id="functions-1">Functions</h2>
+<pre><code>Function Objects
+
+Functions in JavaScript are objects. Objects are collections of name/value pairs hav-
+ing a hidden link to a prototype object. Objects produced from object literals are
+linked to Object.prototype . Function objects are linked to Function.prototype
+(which is itself linked to Object.prototype ). Every function is also created with two
+additional hidden properties: the function&#8217;s context and the code that implements
+the function&#8217;s behavior.
+
+Function Literal
+
+// Create a variable called add and store a function
+// in it that adds two numbers.
+var add = function (a, b) {
+    return a + b;
+};</code></pre>
+<p>Function Literal&#65292; 4 parts = &#8220;function&#8221; + [function name] + &#8216;(&#8217; [params] &#8216;)&#8217; + { set of statements };</p>
+<p>Invocation</p>
+<p>The Method Invocation Pattern</p>
+<p>When a function is stored as a property of an object, we call it a method.</p>
+<p>obj.method, obj[&#8216;method&#8217;]</p>
+<pre><code>A method can use this to access the object so that it can retrieve values from the
+object or modify the object. The binding of this to the object happens at invocation
+time. This very late binding makes functions that use this highly reusable. Methods
+that get their object context from this are called public methods.
+
+The Function Invocation Pattern
+
+A consequence of this error is that a method cannot
+employ an inner function to help it do its work because the inner function does not
+share the method&#8217;s access to the object as its this is bound to the wrong value.
+
+myObject.double = function () {
+    var that = this; // Workaround.
+    var helper = function () {
+        that.value = add(that.value, that.value);
+    };
+    helper(); // Invoke helper as a function.
+};</code></pre>
+<p>The Constructor Invocation Pattern</p>
+<p>JavaScript is a prototypal inheritance language. That means that objects can inherit properties directly from other objects. The language is class-free.</p>
+<p>// Create a constructor function called Quo. // It makes an object with a status property. var Quo = function (string) { this.status = string; }; // Give all instances of Quo a public method</p>
+<p>// called get_status. Quo.prototype.get_status = function () { return this.status; }; // Make an instance of Quo. var myQuo = new Quo(&#8220;confused&#8221;); document.writeln(myQuo.get_status()); // confused</p>
+<p>Functions that are intended to be used with the new prefix are called constructors. By convention, they are kept in variables with a capitalized name. If a constructor is called without the new prefix, very bad things can happen without a compile-time or runtime warning, so the capitalization convention is really important.</p>
+<p>The Apply Invocation Pattern</p>
+<p>Because JavaScript is a functional object-oriented language, functions can have methods.</p>
+<p>The apply method takes two parame- ters. The first is the value that should be bound to this . The second is an array of parameters.</p>
+<p>Arguments</p>
+<p>Because of a design error, arguments is not really an array. It is an array-like object. arguments has a length property, but it lacks all of the array methods. We will see a consequence of that design error at the end of this chapter.</p>
+<p>Return</p>
+<p>If the function was invoked with the new prefix and the return value is not an object, then this (the new object) is returned instead.</p>
+<p>Exceptions</p>
+<p>var add = function (a, b) { if (typeof a !== &#8216;number&#8217; || typeof b !== &#8216;number&#8217;) { throw { name: &#8216;TypeError&#8217;, message: &#8216;add needs numbers&#8217; }; } return a + b; }</p>
+<p>var try_it = function () { try { add(&#8220;seven&#8221;); } catch (e) { document.writeln(e.name + &#8216;:&#8217; + e.message); } }</p>
+<p>The throw statement interrupts execution of the function. It should be given an exception object containing a name property that identifies the type of the exception, and a descriptive message property. You can also add other properties.</p>
+<pre><code>      Augmenting Types
+
+
+      For example, by augmenting Function.prototype , we can make a method available to
+      all functions:
+
+      Function.prototype.method = function (name, func) {
+          this.prototype[name] = func;
+          return this;
+      };</code></pre>
+<p>Number.method(&#8216;integer&#8217;, function () { return Math<a href="this">this &lt; 0 ? &#8216;ceiling&#8217; : &#8216;floor&#8217;</a>; });</p>
+<p>document.writeln((-10 / 3).integer()); // -3</p>
+<p>JavaScript lacks a method that removes spaces from the ends of a string. That is an easy oversight to fix:</p>
+<p>String.method(&#8216;trim&#8217;, function () { return this.replace(/^+|+$/g, &#8216;&#8217;); }); document.writeln(&#8217;&#8220;&#8216;+ &quot; neat &#8220;.trim() + &#8217;&#8221;&#8217;);</p>
+<p>Recursion</p>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-04-07" />
+  <meta name="keywords" content="reading" />
+  <title>AWK &#25991;&#23383;&#22788;&#29702;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">AWK &#25991;&#23383;&#22788;&#29702;</h1>
+<h3 class="date">2014-04-07</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#awk-&#25991;&#23383;&#22788;&#29702;">AWK &#25991;&#23383;&#22788;&#29702;</a><ul>
+        <li><a href="#&#20837;&#38376;awk-&#31616;&#26126;&#25945;&#31243;">&#20837;&#38376;&#65306;AWK &#31616;&#26126;&#25945;&#31243;</a></li>
+        <li><a href="#the-awk-programming-language">The AWK Programming Language</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="awk-&#25991;&#23383;&#22788;&#29702;">AWK &#25991;&#23383;&#22788;&#29702;</h1>
+<blockquote>
+<p>Notice:</p>
+<blockquote>
+<p>&#24863;&#35273; <em>The AWK Programming Language</em> &#35762;&#24471;&#26356;&#28165;&#26224;&#65292;&#34429;&#28982;&#26159;&#36827;&#38454;&#65292;&#20294;&#35753;&#25105;&#20877;&#26469;&#19968;&#36941;&#65292;&#25105;&#23601;&#19981;&#30475;&#38472;&#30355;&#30340;&#31616;&#26126;&#25945;&#31243;&#20102;&#12290;&#26412;&#20070;&#19981;&#24871; 9.5 &#30340;&#35780;&#20998;&#65292;&#20837;&#38376;&#23601;&#30475;&#30475;&#21407;&#20070; <a href="post-0046-awk.html">&#31532;&#19968;&#31456;&#65288;&#25105;&#30340;&#31508;&#35760;&#65289;</a>&#65292;&#36827;&#38454;&#23601;&#32487;&#32493;&#30475;&#21518;&#20960;&#31456;&#12290;&#65289;</p>
+</blockquote>
+</blockquote>
+<h2 id="&#20837;&#38376;awk-&#31616;&#26126;&#25945;&#31243;">&#20837;&#38376;&#65306;AWK &#31616;&#26126;&#25945;&#31243;</h2>
+<dl>
+<dt>Data: <code>netstat.txt</code></dt>
+<dd><pre class="tzx-plain"><code>Proto Recv-Q Send-Q Local-Address          Foreign-Address             State
+tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN
+tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN
+tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN
+tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT
+tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2
+tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED
+tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED
+tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2
+tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED
+tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT
+tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED
+tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1
+tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED
+tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT
+tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK
+tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED
+tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2
+tcp        0      0 :::22                  :::*                        LISTEN</code></pre>
+</dd>
+</dl>
+<p>Some Code Examples:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># retrive spefic fields</span>
+<span class="kw">awk</span> <span class="st">&#39;{print $1, $4}&#39;</span> netstat.txt
+
+<span class="co"># format fields</span>
+<span class="kw">awk</span> <span class="st">&#39;{printf &quot;%-8s %-8s %-8s %-18s %-22s %-15s\n&quot;,$1,$2,$3,$4,$5,$6}&#39;</span> netstat.txt
+
+<span class="co"># apply filter</span>
+<span class="kw">awk</span> <span class="st">&#39;$3==0 &amp;&amp; $6==&quot;LISTEN&quot; &#39;</span> netstat.txt
+<span class="kw">awk</span> <span class="st">&#39; $3&gt;0 {print $0}&#39;</span> netstat.txt
+<span class="kw">awk</span> <span class="st">&#39;$3==0 &amp;&amp; $6==&quot;LISTEN&quot; || NR==1 &#39;</span> netstat.txt <span class="co"># plus first row</span></code></pre></div>
+<p>built-in variables</p>
+<table>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>&#35828;&#26126;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$0</code></td>
+<td>&#24403;&#21069;&#35760;&#24405;&#65288;&#36825;&#20010;&#21464;&#37327;&#20013;&#23384;&#25918;&#30528;&#25972;&#20010;&#34892;&#30340;&#20869;&#23481;&#65289;</td>
+</tr>
+<tr class="even">
+<td><code>$1~$n</code></td>
+<td>&#24403;&#21069;&#35760;&#24405;&#30340;&#31532;n&#20010;&#23383;&#27573;&#65292;&#23383;&#27573;&#38388;&#30001;FS&#20998;&#38548;</td>
+</tr>
+<tr class="odd">
+<td><code>FS</code></td>
+<td>Field Separator. &#36755;&#20837;&#23383;&#27573;&#20998;&#38548;&#31526; &#40664;&#35748;&#26159;&#31354;&#26684;&#25110;Tab</td>
+</tr>
+<tr class="even">
+<td><code>NF</code></td>
+<td>Number of Fields. &#24403;&#21069;&#35760;&#24405;&#20013;&#30340;&#23383;&#27573;&#20010;&#25968;&#65292;&#23601;&#26159;&#26377;&#22810;&#23569;&#21015;</td>
+</tr>
+<tr class="odd">
+<td><code>NR</code></td>
+<td>Number of Lines Read so far. &#24050;&#32463;&#35835;&#20986;&#30340;&#35760;&#24405;&#25968;&#65292;&#23601;&#26159;&#34892;&#21495;&#65292;&#20174;1&#24320;&#22987;&#65292;&#22914;&#26524;&#26377;&#22810;&#20010;&#25991;&#20214;&#35805;&#65292;&#36825;&#20010;&#20540;&#20063;&#26159;&#19981;&#26029;&#32047;&#21152;&#20013;&#12290;</td>
+</tr>
+<tr class="even">
+<td><code>FNR</code></td>
+<td>&#24403;&#21069;&#35760;&#24405;&#25968;&#65292;&#19982;NR&#19981;&#21516;&#30340;&#26159;&#65292;&#36825;&#20010;&#20540;&#20250;&#26159;&#21508;&#20010;&#25991;&#20214;&#33258;&#24049;&#30340;&#34892;&#21495;</td>
+</tr>
+<tr class="odd">
+<td><code>RS</code></td>
+<td>Record Separator. &#36755;&#20837;&#30340;&#35760;&#24405;&#20998;&#38548;&#31526;&#65292; &#40664;&#35748;&#20026;&#25442;&#34892;&#31526;</td>
+</tr>
+<tr class="even">
+<td><code>OFS</code></td>
+<td>Output FS. &#36755;&#20986;&#23383;&#27573;&#20998;&#38548;&#31526;&#65292; &#40664;&#35748;&#20063;&#26159;&#31354;&#26684;</td>
+</tr>
+<tr class="odd">
+<td><code>ORS</code></td>
+<td>Output RS. &#36755;&#20986;&#30340;&#35760;&#24405;&#20998;&#38548;&#31526;&#65292;&#40664;&#35748;&#20026;&#25442;&#34892;&#31526;</td>
+</tr>
+<tr class="even">
+<td><code>FILENAME</code></td>
+<td>&#24403;&#21069;&#36755;&#20837;&#25991;&#20214;&#30340;&#21517;&#23383;</td>
+</tr>
+</tbody>
+</table>
+<p>more examples</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">awk</span>  <span class="st">&#39;BEGIN{FS=&quot;:&quot;} {print $1,$3,$6}&#39;</span> /etc/passwd
+<span class="kw">awk</span>  -F: <span class="st">&#39;{print $1,$3,$6}&#39;</span> /etc/passwd
+
+<span class="co"># multi FS</span>
+<span class="kw">awk</span> -F <span class="st">&#39;[;:]&#39;</span>
+<span class="kw">awk</span> -F: <span class="st">&#39;{print $1,$3,$6}&#39;</span> OFS=<span class="st">&quot;\t&quot;</span> /etc/passwd
+
+<span class="co"># regexpr</span>
+<span class="kw">awk</span> <span class="st">&#39;$6 ~ /WAIT|TIME/ || NR==1 {print NR,$4,$5,$6}&#39;</span> OFS=<span class="st">&quot;\t&quot;</span> netstat.txt <span class="co"># match WAIT or TIME</span>
+
+<span class="co"># awk &#25286;&#20998;&#25991;&#20214;&#24456;&#31616;&#21333;&#65292;&#20351;&#29992;&#37325;&#23450;&#21521;&#23601;&#22909;&#20102;</span>
+<span class="kw">awk</span> <span class="st">&#39;NR!=1{print &gt; $6}&#39;</span> netstat.txt
+
+<span class="co"># bonus</span>
+<span class="kw">awk</span> <span class="st">&#39;NR!=1{if($6 ~ /TIME|ESTABLISHED/) print &gt; &quot;1.txt&quot;;</span>
+<span class="st">else if($6 ~ /LISTEN/) print &gt; &quot;2.txt&quot;;</span>
+<span class="st">else print &gt; &quot;3.txt&quot; }&#39;</span> netstat.txt
+<span class="kw">for</span> <span class="kw">i</span> in <span class="dt">{1,2,3}</span>.txt<span class="kw">;</span> <span class="kw">do</span> <span class="kw">echo</span> <span class="ot">$i</span><span class="kw">;</span> <span class="kw">cat</span> <span class="ot">$i</span><span class="kw">;</span> <span class="kw">done</span>
+
+<span class="co"># sum file size</span>
+$ <span class="kw">ls</span> -l  *.cpp *.c *.h <span class="kw">|</span> <span class="kw">awk</span> <span class="st">&#39;{sum+=$5} END {print sum}&#39;</span>
+
+<span class="kw">awk</span> <span class="st">&#39;NR!=1{a[$6]++;} END {for (i in a) print i &quot;, &quot; a[i];}&#39;</span> netstat.txt
+<span class="kw">awk</span> -f ./call.awk score.txt</code></pre></div>
+<p>a complicated example</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">file</span> cal.awk
+<span class="co">#!/bin/awk -f</span>
+<span class="co">#&#36816;&#34892;&#21069;</span>
+<span class="kw">BEGIN</span> {
+    <span class="kw">math</span> = 0, english = 0, computer = 0
+    <span class="kw">printf</span> <span class="st">&quot;NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n&quot;</span>
+    <span class="kw">printf</span> <span class="st">&quot;---------------------------------------------\n&quot;</span>
+}
+<span class="co">#&#36816;&#34892;&#20013;</span>
+<span class="kw">{</span>
+    <span class="ot">math+=$3</span>, <span class="ot">english+=$4</span>, <span class="ot">computer+=$5</span>
+    <span class="kw">printf</span> <span class="st">&quot;%-6s %-6s %4d %8d %8d %8d\n&quot;</span>, <span class="ot">$1</span>, <span class="ot">$2</span>, <span class="ot">$3</span>,<span class="ot">$4</span>,<span class="ot">$5</span>, <span class="ot">$3</span>+<span class="ot">$4</span>+<span class="ot">$5</span>
+<span class="kw">}</span>
+<span class="co">#&#36816;&#34892;&#21518;</span>
+<span class="kw">END</span> {
+    <span class="kw">printf</span> <span class="st">&quot;---------------------------------------------\n&quot;</span>
+    <span class="kw">printf</span> <span class="st">&quot;  TOTAL:%10d %8d %8d \n&quot;</span>, math, english, computer
+    <span class="kw">printf</span> <span class="st">&quot;AVERAGE:%10.2f %8.2f %8.2f\n&quot;</span>, math/NR, english/NR, computer/NR
+}
+$ <span class="kw">score.txt</span>
+<span class="kw">Marry</span>  2143     78       84       77      239
+<span class="kw">Jack</span>   2321     66       78       45      189
+<span class="kw">Tom</span>    2122     48       77       71      196
+<span class="kw">Mike</span>   2537     87       97       95      279</code></pre></div>
+<p>&#21644;&#29615;&#22659;&#21464;&#37327;&#20132;&#20114;&#65306;&#65288;&#20351;&#29992; <code>-v</code> &#21442;&#25968;&#21644; <code>ENVIRON</code>&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">x=</span>5 <span class="kw">&amp;&amp;</span> <span class="kw">y</span> = 10 <span class="kw">&amp;&amp;</span> <span class="kw">export</span> <span class="ot">y</span>
+<span class="kw">awk</span> -v val=<span class="ot">$x</span> <span class="st">&#39;{print $1, $2, $3, $4+val, $5+ENVIRON[&quot;y&quot;]}&#39;</span> OFS=<span class="st">&quot;\t&quot;</span> score.txt</code></pre></div>
+<p>more tricks</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># &#25171;&#21360;99&#20056;&#27861;&#34920;</span>
+<span class="kw">seq</span> 9 <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;H;g&#39;</span> <span class="kw">|</span> <span class="kw">awk</span> -v RS=<span class="st">&#39;&#39;</span> <span class="st">&#39;{for(i=1;i&lt;=NF;i++)printf(&quot;%dx%d=%d%s&quot;, i, NR, i*NR, i==NR?&quot;\n&quot;:&quot;\t&quot;)}&#39;</span></code></pre></div>
+<ul>
+<li><a href="http://www.gnu.org/software/gawk/manual/gawk.html"><strong>more: The GNU Awk User&#8217;s Guide</strong></a></li>
+</ul>
+<h2 id="the-awk-programming-language">The AWK Programming Language</h2>
+<p><a href="http://book.douban.com/subject/1876898/">The AWK Programming Language</a></p>
+<p>&#20889;&#20102;&#28857;&#35835;&#20070;&#31508;&#35760;&#65292;<a href="post-0046-awk.html">&#25139;&#36825;&#37324;</a></p>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://coolshell.cn/articles/9070.html">AWK &#31616;&#26126;&#25945;&#31243;</a></li>
+<li><a href="http://book.douban.com/subject/1876898/">The AWK Programming Language</a> <code>9.5 !!!</code></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#awk">awk</a></li>
+<li><a class="tzx-tag" href="tags.html/#reading">reading</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0012-awk.md" title="171 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0012-awk.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 171,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

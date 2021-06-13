@@ -1,0 +1,13 @@
+---
+tzx-changes:
+  - hash: f8d4a1d796993958bc5e4510840454aba6b43031
+    datetime: 1509463654
+    insertions: 3
+    deletions: 2
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 337
+    deletions: 0
+
+tzx-filename: _posts/post-0044-git-github-notes.md
+...

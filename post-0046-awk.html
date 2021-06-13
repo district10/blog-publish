@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-05-07" />
+  <title>The AWK Programming Language | AWK &#32534;&#31243;&#35821;&#35328;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">The AWK Programming Language | AWK &#32534;&#31243;&#35821;&#35328;</h1>
+<h3 class="date">2014-05-07</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#the-awk-programming-language-awk-&#32534;&#31243;&#35821;&#35328;">The AWK Programming Language | AWK &#32534;&#31243;&#35821;&#35328;</a><ul>
+        <li><a href="#an-awk-tutorial">An Awk Tutorial</a><ul>
+        <li><a href="#get-started">Get Started</a></li>
+        <li><a href="#simple-output">Simple Output</a></li>
+        <li><a href="#fancier-output">Fancier Output</a></li>
+        <li><a href="#selection">Selection</a></li>
+        <li><a href="#computing-with-awk">Computing with AWK</a></li>
+        <li><a href="#control-flow-statements">Control-flow statements</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#a-handful-of-useful-one-liners">A Handful Of Useful &#8220;One-Liners&#8221;</a></li>
+        <li><a href="#whats-next">WHAT&#8217;S NEXT</a></li>
+        </ul></li>
+        <li><a href="#the-awk-language">THE AWK LANGUAGE</a></li>
+        <li><a href="#data-processing">DATA PROCESSING</a></li>
+        <li><a href="#reports-and-databases">reports and databases</a></li>
+        <li><a href="#processing-words">processing words</a></li>
+        <li><a href="#little-languages">little languages</a></li>
+        <li><a href="#experiments-with-algorithms">experiments with algorithms</a></li>
+        <li><a href="#epilog">epilog</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="the-awk-programming-language-awk-&#32534;&#31243;&#35821;&#35328;">The AWK Programming Language | AWK &#32534;&#31243;&#35821;&#35328;</h1>
+<p>&#34429;&#28982;&#20840;&#20070;&#27809;&#26377;&#30475;&#23436;&#65288;&#20316;&#32773;&#20063;&#35828;&#30475;&#31532;&#19968;&#31456;&#23601;&#22815;&#20102;&#65289;&#65292;&#20294;&#36824;&#26159;&#35201;&#24213;&#27668;&#24456;&#36275;&#22320;&#35828;&#36825;&#26412;&#20070;&#30495;&#30340;&#24456;&#22909;&#12290;&#20316;&#32773;&#20449;&#25163;&#25288;&#26469;&#21508;&#31181;&#22909;&#30340;&#20363;&#23376;&#12290;</p>
+<h2 id="an-awk-tutorial">An Awk Tutorial</h2>
+<h3 id="get-started">Get Started</h3>
+<p>Hello World Example: <code class="sourceCode bash"><span class="kw">awk</span> <span class="st">&#39;$3 &gt; 0 {print $1, $2 * $3}&#39;</span> data.txt</code></p>
+<p>The Structure Of AWK Program</p>
+<ul>
+<li><code class="sourceCode bash"><span class="kw">awk</span> <span class="st">&#39; program &#39;</span> infiles</code></li>
+<li><code class="sourceCode bash"><span class="kw">awk</span> <span class="st">&#39; program &#39;</span> <span class="co"># get input from command line</span></code></li>
+<li><code class="sourceCode bash"><span class="kw">awk</span> -f progfile <span class="kw">&lt;</span>optional list of input files<span class="kw">&gt;</span></code></li>
+<li>Format: <code>pattern { action }</code></li>
+</ul>
+<h3 id="simple-output">Simple Output</h3>
+<dl>
+<dt>What AWK Can?</dt>
+<dd><p>Printing Fields, Selecting Input, And Transforming Data</p>
+<ul>
+<li>Printing Every Line
+<ul>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span> <span class="kw">}</span></code></li>
+</ul></li>
+<li>Printing Certain Fields
+<ul>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$1</span> <span class="kw">}</span></code></li>
+</ul></li>
+<li>Computing and Printing
+<ul>
+<li><code>{ print $2, $3 * $4 }</code></li>
+</ul></li>
+<li><code>NF</code>, the Number of Fields
+<ul>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> NF, <span class="dt">$1</span>, <span class="dt">$NF</span> <span class="kw">}</span></code>: print number of fields and first and last fields of each input line</li>
+</ul></li>
+<li><code>NR</code>, the Number of Lines Read so far
+<ul>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> NR, <span class="dt">$1</span> <span class="kw">}</span></code></li>
+</ul></li>
+<li>Putting Text in the output
+<ul>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="st">&quot;Total cost of the lunch is &quot;</span>, <span class="dt">$1</span>, <span class="dt">$2</span> * <span class="dt">$3</span> <span class="kw">}</span></code></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h3 id="fancier-output">Fancier Output</h3>
+<dl>
+<dt><code class="sourceCode bash"><span class="kw">printf</span> (<span class="st">&quot;format&quot;</span>,  value1, value2, ...)</code></dt>
+<dd><ul>
+<li><code>%s</code>, <code>%f</code>, <code>%.2f</code> for formats</li>
+<li><code>\n</code> for newline</li>
+<li><code>%-s</code>, left justfied</li>
+</ul>
+</dd>
+<dt>Sorting</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">awk</span> <span class="st">&#39;{ printf(&quot;%6.2f %s\n&quot;, $2 * $3, $0) }&#39;</span> emp.data <span class="kw">|</span> <span class="kw">sort</span></code></p>
+</dd>
+</dl>
+<h3 id="selection">Selection</h3>
+<ul>
+<li>Selection By Comparison: <code class="sourceCode awk"><span class="dt">$2</span> &gt; <span class="dv">8</span></code></li>
+<li>Selection By Computation: <code class="sourceCode awk"><span class="dt">$2</span> * <span class="dt">$3</span>  &gt; <span class="dv">40</span></code></li>
+<li>Selection By Text Content: <code class="sourceCode awk"><span class="dt">$2</span> == <span class="st">&quot;Susan&quot;</span></code></li>
+<li>Combination of Patterns
+<ul>
+<li><code class="sourceCode awk"><span class="dt">$2</span> &gt;= <span class="dv">20</span> || <span class="dt">$3</span> &lt;= <span class="dv">50</span></code></li>
+<li><code class="sourceCode awk">!(<span class="dt">$2</span> &lt; <span class="dv">20</span> &amp;&amp; <span class="dt">$3</span> &gt; <span class="dv">50</span>)</code></li>
+</ul></li>
+<li><p>Data Validation</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">NF I= <span class="dv">3</span>    <span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span>, <span class="st">&quot;number of fields is not equal to 3&quot;</span> <span class="kw">}</span>
+<span class="dt">$2</span> &lt; <span class="fl">3.35</span>  <span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span>, <span class="st">&quot;rate is below minimum wage&quot;</span> <span class="kw">}</span>
+<span class="dt">$2</span> &gt; <span class="dv">10</span>    <span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span>, <span class="st">&quot;rate exceeds $10 per hour&quot;</span> <span class="kw">}</span>
+<span class="dt">$3</span> &lt; <span class="dv">0</span>     <span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span>, <span class="st">&quot;negative hours worked&quot;</span> <span class="kw">}</span>
+<span class="dt">$3</span> &gt; <span class="dv">60</span>    <span class="kw">{</span> <span class="kw">print</span> <span class="dt">$0</span>, <span class="st">&quot;too many hours worked&quot;</span> <span class="kw">}</span></code></pre></div></li>
+<li>BEGIN and END
+<ul>
+<li><code class="sourceCode awk"><span class="kw">BEGIN</span> <span class="kw">{</span> something you want to <span class="kw">do</span> at begin <span class="kw">}</span> <span class="kw">{</span> process <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">print</span> <span class="st">&quot;&quot;</span></code>: print empty line</li>
+<li><code class="sourceCode awk"><span class="kw">print</span></code>: print input line</li>
+</ul></li>
+</ul>
+<h3 id="computing-with-awk">Computing with AWK</h3>
+<dl>
+<dt>Counting</dt>
+<dd><div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="kw">{</span> counter = counter + <span class="dv">1</span> <span class="kw">}</span>
+<span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> (<span class="st">&quot;there are %d lines.\n&quot;</span>, counter) <span class="kw">}</span></code></pre></div>
+</dd>
+</dl>
+<p>Computing Sums and Average</p>
+<p>Handing Text</p>
+<dl>
+<dt>String Concatenation</dt>
+<dd><div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">    <span class="kw">{</span> names = names <span class="dt">$1</span> <span class="st">&quot; &quot;</span> <span class="kw">}</span>
+<span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> names <span class="kw">}</span></code></pre></div>
+</dd>
+<dt>Printing the Last Input Line</dt>
+<dd><div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">    <span class="kw">{</span> last = <span class="dt">$0</span> <span class="kw">}</span>
+<span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> last <span class="kw">}</span></code></pre></div>
+</dd>
+<dt>Built-in Functions</dt>
+<dd><p><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$1</span>, <span class="fu">length</span>(<span class="dt">$1</span>) <span class="kw">}</span></code></p>
+</dd>
+<dt>Counting Lines, Words</dt>
+<dd><div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">        <span class="kw">{</span> nc = nc + <span class="fu">length</span>(<span class="dt">$0</span>) + <span class="dv">1</span>
+          nw = nw + NF <span class="kw">}</span>
+    <span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> NR <span class="st">&quot;lines&quot;</span>, nw, <span class="st">&quot;words&quot;</span>, nc, <span class="st">&quot;chars&quot;</span> <span class="kw">}</span></code></pre></div>
+</dd>
+</dl>
+<h3 id="control-flow-statements">Control-flow statements</h3>
+<ul>
+<li>If-Else Statement</li>
+<li>While Statement</li>
+<li>For Statement</li>
+</ul>
+<h3 id="arrays">Arrays</h3>
+<dl>
+<dt>Print Input In Reverse Order By Line</dt>
+<dd><div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="kw">{</span> line[NR] = <span class="dt">$0</span> <span class="kw">}</span>
+<span class="kw">END</span> <span class="kw">{</span> i = NR
+      <span class="kw">while</span> (i &gt; <span class="dv">0</span>) <span class="kw">{</span>
+      <span class="kw">print</span> line[i]
+      i = i - <span class="dv">1</span>
+      <span class="kw">}</span>
+<span class="kw">}</span></code></pre></div>
+</dd>
+</dl>
+<h3 id="a-handful-of-useful-one-liners">A Handful Of Useful &#8220;One-Liners&#8221;</h3>
+<ul>
+<li><code class="sourceCode awk"><span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> NR <span class="kw">}</span></code>: print Line Num</li>
+<li><code class="sourceCode awk">NR == <span class="dv">10</span> <span class="kw">{</span> <span class="kw">print</span> <span class="kw">}</span></code>: print specific line</li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$NF</span> <span class="kw">}</span></code>: print last field</li>
+<li><code class="sourceCode awk"><span class="kw">{</span> field = <span class="dt">$NF</span> <span class="kw">}</span> <span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> field <span class="kw">}</span></code>: last field of last line</li>
+<li><code class="sourceCode awk"><span class="kw">{</span> nf = nf + NF <span class="kw">}</span> <span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> <span class="st">&quot;there are &quot;</span>, nf, <span class="st">&quot; fields in this file&quot;</span> <span class="kw">}</span></code></li>
+<li><p>Lines that contain &#8220;apple&#8221;</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="ot">/</span><span class="st">apple</span><span class="ot">/</span> <span class="kw">{</span> lines = lines + <span class="dv">1</span> <span class="kw">}</span>
+    <span class="kw">END</span> <span class="kw">{</span> <span class="kw">print</span> lines <span class="kw">}</span></code></pre></div></li>
+<li><p>largest field and the line contains it</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="dt">$1</span> &gt; max <span class="kw">{</span> max = <span class="dt">$1</span>; maxline = <span class="dt">$0</span> <span class="kw">}</span>
+<span class="kw">END</span>      <span class="kw">{</span> <span class="kw">print</span> max, maxline <span class="kw">}</span></code></pre></div></li>
+<li><code class="sourceCode awk">NF &gt; <span class="dv">0</span></code>: more than one field</li>
+<li><code class="sourceCode awk"><span class="fu">length</span>(<span class="dt">$0</span>) &gt; <span class="dv">80</span></code>: lines that longer than 80 characters</li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> NF, <span class="dt">$0</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$2</span>, <span class="dt">$1</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> tmp = <span class="dt">$1</span>; <span class="dt">$1</span> = <span class="dt">$2</span>; <span class="dt">$2</span> = tmp; <span class="kw">print</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="dt">$1</span> = NR; <span class="kw">print</span> <span class="kw">}</span></code>: print Line Num, then the line</li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="dt">$2</span> = <span class="st">&quot;&quot;</span>; <span class="kw">print</span> <span class="kw">}</span></code>: erase the second field</li>
+<li><p>Reverse fields</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">for</span> (i = <span class="dv">1</span>; i &lt;= NF; i = i + <span class="dv">1</span>) <span class="kw">printf</span> (<span class="st">&quot;%s&quot;</span>, <span class="dt">$i</span>)
+  <span class="kw">printf</span>(&#39;\n&#39;)
+<span class="kw">}</span></code></pre></div></li>
+</ul>
+<h3 id="whats-next">WHAT&#8217;S NEXT</h3>
+<ul>
+<li>keep reading</li>
+<li>keep writing scripts</li>
+<li>&#20837;&#38376;&#21040;&#36825;&#23601;&#22815;&#20102;&#12290;&#36825;&#26159;&#26412;&#20070;&#30340;&#31532;&#19968;&#31456;&#12290;&#21518;&#38754;&#20855;&#20307;&#20171;&#32461;&#20102; awk &#21508;&#20010;&#32454;&#37096;&#12290;&#21487;&#20197;&#30623;&#19968;&#30524;&#65292;&#26377;&#20010;&#27010;&#24565;&#65292;&#29992;&#30340;&#26102;&#20505;&#20877;&#26597;&#12290;</li>
+</ul>
+<h2 id="the-awk-language">THE AWK LANGUAGE</h2>
+<p>Data</p>
+<pre class="plain"><code>USSR    8649  275   Asia
+Canada  3852  25    North America
+China   3705  1032  Asia
+USA 3615  237   North America
+Brazil  3286  134   South America
+India   1267  746   Asia
+Mexico  762   78    North America
+France  211   55    Europe
+Japan   144   120   Asia
+Germany 96    61    Europe
+England 94    56    Europe</code></pre>
+<p>program format: one line or multi lines breaks with &#8220;&quot;</p>
+<ul>
+<li>patterns
+<ul>
+<li><code>{ statements }</code>{awk}</li>
+<li><code class="sourceCode awk"><span class="kw">BEGIN</span> <span class="kw">{</span> statements <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">END</span> <span class="kw">{</span> statements <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk">expression <span class="kw">{</span> statements <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="ot">/</span><span class="st"> regular expression </span><span class="ot">/</span> <span class="kw">{</span> statements <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk">pattern1, pattern2 <span class="kw">{</span> statements <span class="kw">}</span></code></li>
+</ul></li>
+<li>Actions
+<ul>
+<li><code class="sourceCode awk"><span class="kw">print</span></code>, <code class="sourceCode awk"><span class="kw">printf</span>()</code></li>
+<li><code class="sourceCode awk"><span class="kw">if</span></code>, <code class="sourceCode awk"><span class="kw">if</span> <span class="kw">else</span></code>, <code class="sourceCode awk"><span class="kw">for</span></code>, <code class="sourceCode awk"><span class="kw">do</span> <span class="kw">while</span></code>, <code class="sourceCode awk"><span class="kw">break</span></code>, <code class="sourceCode awk"><span class="kw">continue</span></code>, <code class="sourceCode awk"><span class="kw">next</span></code>, <code class="sourceCode awk"><span class="kw">exit</span></code></li>
+</ul></li>
+<li>variables
+<ul>
+<li>built-in variables: <code class="sourceCode awk"><span class="dt">$0</span></code>, <code class="sourceCode awk"><span class="dt">$1</span></code>, &#8230;, <code class="sourceCode awk"><span class="dt">$NF</span></code></li>
+<li>field variables: <code class="sourceCode awk">FS</code>, <code class="sourceCode awk">OFS</code> (output field separator), <code class="sourceCode awk">ORS</code> (output record separator)</li>
+</ul></li>
+<li><p>string as regular expression</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk"><span class="kw">BEGIN</span> <span class="kw">{</span> FS = <span class="st">&quot;\t&quot;</span><span class="kw">}</span>
+      <span class="kw">{</span> pop[<span class="dt">$3</span>] += <span class="dt">$4</span> <span class="kw">}</span>
+<span class="kw">END</span>   <span class="kw">{</span> <span class="kw">for</span> (name <span class="kw">in</span> pop)
+            <span class="kw">print</span> name, pop[name]<span class="kw">}</span></code></pre></div></li>
+<li><code class="sourceCode awk"><span class="fu">split</span>(<span class="st">&quot;/123/23/55&quot;</span>, str, <span class="st">&quot;/&quot;</span>)</code>: <code>arr[&quot;1&quot;], arr[&quot;2&quot;], arr[&quot;3&quot;]</code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> <span class="dt">$1</span>, <span class="dt">$3</span> &gt; (<span class="dt">$3</span> &gt; <span class="dv">40</span>? <span class="st">&quot;file-a.txt&quot;</span>, <span class="st">&quot;file-b.txt&quot;</span>) <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">{</span> <span class="kw">print</span> &gt; <span class="dt">$1</span> <span class="kw">}</span></code></li>
+<li></li>
+<li><code class="sourceCode awk"><span class="kw">BEGIN</span> <span class="kw">{</span> FS = <span class="st">&quot;[{\n\t}]:;&quot;</span> <span class="kw">}</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">BEGIN</span> <span class="kw">{</span> FS = <span class="st">&quot;[ ]&quot;</span> <span class="kw">}</span></code>: a single blank</li>
+<li><code class="sourceCode bash"><span class="kw">awk</span> -F<span class="st">&#39;;:[\t]\n&#39;</span> <span class="st">&#39;{ print }&#39;</span> file-in.txt</code></li>
+<li><code class="sourceCode awk">RS</code> (record separator)</li>
+<li>The getline function
+<ul>
+<li><code class="sourceCode awk"><span class="kw">getline</span> &lt;<span class="st">&quot;file&quot;</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">getline</span> x &lt;<span class="st">&quot;file&quot;</span></code></li>
+<li><code class="sourceCode awk"><span class="kw">while</span> (<span class="kw">getline</span> &lt;<span class="st">&quot;file&quot;</span>)</code>: dangerous</li>
+<li><code class="sourceCode awk"><span class="kw">while</span> (<span class="kw">getline</span> &lt;<span class="st">&quot;file&quot;</span> &gt; <span class="dv">0</span>)</code>: safe</li>
+</ul></li>
+<li>ARGV: <code class="sourceCode awk">ARGC</code>, <code class="sourceCode awk">ARGV</code></li>
+<li><p>Making A Shell Command From An Awk Program</p></li>
+</ul>
+<h2 id="data-processing">DATA PROCESSING</h2>
+<p>histgram:</p>
+<div class="sourceCode"><pre class="sourceCode awk"><code class="sourceCode awk">    <span class="kw">{</span> data[<span class="fu">int</span>(<span class="dt">$1</span>/<span class="dv">10</span>)]++ <span class="kw">}</span>
+<span class="kw">END</span> <span class="kw">{</span> <span class="kw">for</span> (i=<span class="dv">0</span>; i&lt;<span class="dv">10</span>; i++)
+          <span class="kw">printf</span>(<span class="st">&quot;%s&quot;</span>, rep(data[i], <span class="st">&quot;*&quot;</span>))
+<span class="kw">}</span>
+
+<span class="kw">function</span> rep(n, s, t)
+<span class="kw">{</span>
+    <span class="kw">while</span> (n-- &gt; <span class="dv">0</span>)
+       <span class="kw">{</span>
+    t = t s
+       <span class="kw">}</span>
+    <span class="kw">return</span> t
+<span class="kw">}</span></code></pre></div>
+<p>convert mmddyy to yymmdd: <code class="sourceCode awk"><span class="kw">{</span> <span class="dt">$1</span> = <span class="fu">substr</span>(<span class="dt">$1</span>,<span class="dv">5</span>,<span class="dv">2</span>) <span class="fu">substr</span>(<span class="dt">$1</span>,<span class="dv">1</span>,<span class="dv">2</span>) <span class="fu">substr</span>(<span class="dt">$1</span>,<span class="dv">3</span>,<span class="dv">2</span>) <span class="kw">print</span> <span class="dt">$1</span> <span class="kw">}</span></code></p>
+<h2 id="reports-and-databases">reports and databases</h2>
+<h2 id="processing-words">processing words</h2>
+<h2 id="little-languages">little languages</h2>
+<h2 id="experiments-with-algorithms">experiments with algorithms</h2>
+<h2 id="epilog">epilog</h2>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://book.douban.com/subject/1876898/">The AWK Programming Language (&#35910;&#29923;)</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#awk">awk</a></li>
+<li><a class="tzx-tag" href="tags.html/#reading">reading</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0046-awk.md" title="288 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0046-awk.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 288,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+tzx-changes:
+  - hash: 1acc512bba50db67f2c4ef4dee18324c44e717bc
+    datetime: 1509615133
+    insertions: 1
+    deletions: 1
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 14
+    deletions: 0
+
+tzx-filename: _pages/3d.md
+...

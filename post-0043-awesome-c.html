@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-01-00" />
+  <title>Function Pointer Stack in C</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Function Pointer Stack in C</h1>
+<h3 class="date">2015-01-00</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#function-pointer-stack-in-c">Function Pointer Stack in C</a><ul>
+        <li><a href="#&#36755;&#20986;">&#36755;&#20986;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="function-pointer-stack-in-c">Function Pointer Stack in C</h1>
+<p>&#27880;&#65306;&#36825;&#20123;&#35821;&#27861;&#19981;&#23646;&#20110;&#35268;&#33539;&#30340;&#20869;&#23481;&#65292;&#21482;&#26377;&#29992; GCC &#25165;&#33021;&#32534;&#35793;&#12290;<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> &#24403;&#28982;&#20320;&#21487;&#20197;&#22312;&#35013;&#20010; Windows &#30340; GCC&#65306;<a href="http://nuwen.net/mingw.html">MinGW Distro - nuwen.net</a>&#12290;</p>
+<p>&#36825;&#37324;&#23601;&#19981;&#35828;&#24590;&#20040;&#32534;&#35793;&#36816;&#34892;&#20102;&#65292;&#21487;&#20197;&#21442;&#32771;&#65306;<a href="post-0008-argc-argv-in-c.html#%E7%BC%96%E8%AF%91%E5%90%8E%E8%B0%83%E7%94%A8">C &#35821;&#35328;&#30340; argc&#12289;argv &#24178;&#22043;&#30340;&#65311;#&#32534;&#35793;&#21518;&#35843;&#29992;</a>&#12290;</p>
+<p>&#36825;&#31687;&#25991;&#31456;&#20197;&#19968;&#28857;&#20195;&#30721;&#23637;&#31034;&#20102; C &#35821;&#35328;&#30340;&#20989;&#25968;&#25351;&#38024;&#12289;&#21487;&#21464;&#25968;&#30446;&#30340;&#21442;&#25968;&#65288;&#20320;&#29992;&#36807; <code>printf</code> &#20989;&#25968;&#20040;&#65311;&#23601;&#26159;&#36825;&#26679;&#30340;&#20989;&#25968;&#12290;&#65289;&#12290;&#36825;&#26159;&#22312;&#30740;&#31350;&#29983;&#22797;&#35797;&#30340;&#26102;&#20505;&#20889;&#65288;&#29609;&#65289;&#32473;&#33258;&#24049;&#30475; demo &#31243;&#24207;&#12290;</p>
+<p>&#28304;&#30721;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include&lt;stdio.h&gt;</span>
+<span class="ot">#include&lt;stdlib.h&gt;</span>
+<span class="ot">#include&lt;stdarg.h&gt;</span>
+
+<span class="dt">void</span> add( <span class="dt">int</span> *data, <span class="dt">int</span> n )
+{
+    *data += n;
+    printf ( <span class="st">&quot;%20sdata: %4d (Added 5)</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, *data );
+}
+
+<span class="dt">void</span> add3( <span class="dt">int</span> *data )
+{
+    *data += <span class="dv">3</span>;
+    printf( <span class="st">&quot;%20sdata: %4d (Added 3)</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, *data );
+}
+
+<span class="dt">void</span> add5( <span class="dt">int</span> *data )
+{
+    *data += <span class="dv">5</span>;
+    printf( <span class="st">&quot;%20sdata: %4d (Added 5)</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, *data );
+}
+
+<span class="dt">void</span> addn( <span class="dt">int</span> *data, <span class="dt">int</span> n )
+{
+    *data += n;
+    printf( <span class="st">&quot;%20sdata: %4d (Added %d)</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, *data, n );
+}
+
+<span class="dt">void</span> doit( <span class="dt">int</span> *data, <span class="dt">void</span> (*func)() )
+{
+    (*func)(data);
+}
+
+<span class="dt">void</span> doit2( <span class="dt">int</span> *data, <span class="dt">int</span> n, <span class="dt">void</span> (*func)() )
+{
+    (*func)(data, n);
+}
+
+<span class="co">/*</span>
+<span class="co">void doit3 (int *data, void (*func)()[], int n)</span>
+<span class="co">{</span>
+<span class="co">    int i;</span>
+<span class="co">    for (i = 0; i &lt; n; ++i) {</span>
+<span class="co">        (*func+i)(data);</span>
+<span class="co">    }</span>
+<span class="co">    return;</span>
+<span class="co">}</span>
+<span class="co">*/</span>
+
+<span class="co">/*</span>
+<span class="co">void doit4 (void (*func)(...))</span>
+<span class="co">{</span>
+<span class="co">    (*func)(__VA__ARGS__);</span>
+<span class="co">    return;</span>
+<span class="co">}</span>
+<span class="co">*/</span>
+
+<span class="dt">void</span> todos( <span class="dt">int</span> *data, ... )
+{
+    va_list ap;
+    va_start (ap, data);
+
+    <span class="dt">void</span> (*f)() = va_arg (ap, <span class="dt">void</span> (*)());
+    <span class="kw">do</span> {
+        (*f)(data);
+    } <span class="kw">while</span> (NULL != (f = va_arg(ap, <span class="dt">void</span> (*)())));
+    va_end (ap);
+}
+
+<span class="dt">int</span> main( <span class="dt">void</span> )
+{
+    <span class="dt">int</span> i; <span class="co">/* iter */</span>
+
+    <span class="dt">int</span> d = <span class="dv">23</span>;
+    printf( <span class="st">&quot;d = %2d</span><span class="ch">\n</span><span class="st">&quot;</span>, d );
+
+    puts( <span class="st">&quot;--simple doit&quot;</span> );
+    doit( &amp;d, add3 );
+    doit( &amp;d, add5 );
+    doit2( &amp;d, <span class="dv">24</span>, addn );
+
+    puts( <span class="st">&quot;--function pointer doit&quot;</span> );
+    <span class="dt">void</span> (*f)() = add3;
+    doit( &amp;d, f );
+    f = &amp;add5;
+    doit( &amp;d, f );
+
+    puts( <span class="st">&quot;--function pointer stack doit, simple stack&quot;</span> );
+    <span class="dt">void</span> (*fs[])() = {
+        add3,
+        add5,     <span class="co">/* works */</span>
+        &amp;add5,    <span class="co">/* works too */</span>
+        add3
+    };
+    <span class="kw">for</span>( i = <span class="dv">0</span>; i &lt; <span class="dv">4</span>; ++i ) {
+        doit (&amp;d, fs[i]);
+    }
+
+    puts( <span class="st">&quot;--function pointer stack doit, complicated stack&quot;</span> );
+    <span class="dt">void</span> (*fs2[<span class="dv">3</span>])() = {
+        add5,
+        addn,
+        add
+    };
+    doit( &amp;d, fs2[<span class="dv">0</span>] );                  <span class="co">/* first func */</span>
+    doit2( &amp;d, <span class="dv">8</span>, *(fs2<span class="dv">+1</span>) );            <span class="co">/* apply second func */</span>
+<span class="co">//     doit4 (fs2[2](&amp;d, 23));          /* third func */</span>
+
+    puts( <span class="st">&quot;--vargs, va_list&quot;</span> );
+    todos( &amp;d, add3, add5, add3, NULL );  <span class="co">/* just like pipeline on UNIX */</span>
+
+    printf( <span class="st">&quot;d = %2d</span><span class="ch">\n</span><span class="st">&quot;</span>, d );
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="&#36755;&#20986;">&#36755;&#20986;</h2>
+<pre class="plain"><code>d = 23
+--simple doit
+                    data:   26 (Added 3)
+                    data:   31 (Added 5)
+                    data:   55 (Added 24)
+--function pointer doit
+                    data:   58 (Added 3)
+                    data:   63 (Added 5)
+--function pointer stack doit, simple stack
+                    data:   66 (Added 3)
+                    data:   71 (Added 5)
+                    data:   76 (Added 5)
+                    data:   79 (Added 3)
+--function pointer stack doit, complicated stack
+                    data:   84 (Added 5)
+                    data:   92 (Added 8)
+--vargs, va_list
+                    data:   95 (Added 3)
+                    data:  100 (Added 5)
+                    data:  103 (Added 3)
+d = 103</code></pre>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#19981;&#36807; Windows &#19978;&#20063;&#26377;&#36825;&#20010;&#22836;&#25991;&#20214;&#21644;&#37027;&#20123;&#20989;&#25968;&#65292;&#22312; <code>C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\vadefs.h</code> &#37324;&#12290;<a href="#fnref1">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#c">c</a></li>
+<li><a class="tzx-tag" href="tags.html/#pointer">pointer</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0043-awesome-c.md" title="166 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0043-awesome-c.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 166,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+---
+tzx-changes:
+  - hash: bc1ba3937f7c497414ee0347b5fd2b1daacfb64d
+    datetime: 1578507352
+    insertions: 1
+    deletions: 1
+  - hash: 58d3d3880db6ca3930e48156b2a0339ab4f5351a
+    datetime: 1578505724
+    insertions: 1
+    deletions: 1
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 12
+    deletions: 0
+
+tzx-filename: _posts/post-0095-c-cpp.md
+...

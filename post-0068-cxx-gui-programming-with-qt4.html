@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-11-23" />
+  <title>C++ GUI Programming with Qt4 | C++ GUI Qt4 &#32534;&#31243;&#65288;&#31532;&#20108;&#29256;&#65289;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">C++ GUI Programming with Qt4 | C++ GUI Qt4 &#32534;&#31243;&#65288;&#31532;&#20108;&#29256;&#65289;</h1>
+<h3 class="date">2015-11-23</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#c-gui-qt4-&#32534;&#31243;">C++ GUI Qt4 &#32534;&#31243;</a></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="c-gui-qt4-&#32534;&#31243;">C++ GUI Qt4 &#32534;&#31243;</h1>
+<p>&#31508;&#35760;&#37096;&#20998;&#31227;&#21040;&#20102; <a href="notes/lang/qt.html">Notes: lang/qt.html</a>&#12290;</p>
+<p>&#36825;&#20010;&#27809;&#21861;&#22909;&#35828;&#30340;&#65292;&#22240;&#20026;&#21482;&#35201;&#20889;&#30028;&#38754;&#65292;&#25105;&#37117;&#29992; Qt&#65292;&#22312; Windows &#19978;&#20889;&#22909;&#20102;&#20877;&#21040; Ubuntu &#27979;&#35797;&#19968;&#36941;&#65292;&#36890;&#24120;&#37117;&#19981;&#20250;&#26377;&#38382;&#39064;&#12290;</p>
+<p>&#38500;&#20102; QProcess &#22312; Windows &#19978;&#19981;&#22826;&#33021;&#29992;&#65292;&#20854;&#20182;&#37117;&#36824; Okay&#65288;&#25105;&#24576;&#30097;&#26159;&#31243;&#24207;&#36816;&#34892;&#30340;&#26102;&#20505;&#27809;&#26377;&#25343;&#21040;&#21512;&#36866;&#30340;&#29615;&#22659;&#21464;&#37327;&#65289;&#12290;&#19981;&#36807;&#25105;&#19968;&#33324;&#27809;&#26377;&#35843;&#20854;&#20182; executable&#12290;&#36825;&#37324;&#23601;&#19981;&#27714;&#29978;&#35299;&#20102;&#12290;</p>
+<p>&#19981;&#36807;&#65292;&#25105;&#35745;&#21010;&#20889;&#19968;&#20010; pdf &#36716; png &#30340;&#30028;&#38754;&#31243;&#24207;&#65292;&#20027;&#35201;&#29992;&#26469;&#20570;&#31508;&#35760;&#12290;&#23454;&#29616;&#65306;</p>
+<ul>
+<li>&#25171;&#24320; pdf&#65292;&#29983;&#25104;&#22270;&#29255;&#24182;&#21152;&#36733;</li>
+<li>&#21487;&#20197;&#22312;&#22270;&#23618;&#19978;&#31508;&#35760;&#65292;&#28982;&#21518;&#20445;&#23384;&#25104;&#19968;&#20010;&#25991;&#26412;</li>
+<li>&#19979;&#27425;&#36824;&#33021;&#25171;&#24320;&#26174;&#31034;</li>
+</ul>
+<p>&#26368;&#22909;&#20877;&#25552;&#20379;&#19968;&#20010;&#22312;&#32447;&#30340;&#26597;&#30475;&#22120;&#65292;&#21152;&#36733;&#33258;&#24049; pdf &#22270;&#29255;&#21644;&#31508;&#35760;&#22270;&#23618;&#12290;&#29992;&#26469;&#20570; presentation &#20063;&#26159;&#25402;&#22909;&#30340;&#12290;</p>
+<p>P.S. PDF &#36716;&#22270;&#29255;&#25105;&#25214;&#20102;&#24456;&#22810;&#36164;&#26009;&#12290;&#22823;&#23478;&#19968;&#33324;&#29992; xpdf&#65292;&#25110;&#32773; poppler&#12290;&#20294;&#25105;&#24863;&#35273;&#36825;&#19996;&#35199;&#19981;&#22909;&#37197;&#32622;&#12290;&#20110;&#26159;&#25214;&#21040;&#20102; binary&#65306;<a href="https://github.com/district10/blog/issues/10">&#29992; xpdf &#22788;&#29702; PDF &#183; Issue #10 &#183; district10/blog</a>&#12290;</p>
+<p>&#25928;&#26524;&#21313;&#20998;&#22909;&#65281;dpi &#21644;&#28784;&#24230;&#32423;&#21487;&#20197;&#35843;&#65292;&#25152;&#20197;&#29983;&#25104;&#30340;&#22270;&#29255;&#21487;&#20197;&#24456;&#23567;&#12290;&#25105;&#35797;&#20102;&#19979;&#22823;&#27010; 200 KB &#19968;&#39029;&#30340;&#26679;&#23376;&#12290;</p>
+<p>&#29992; binary &#30340;&#35805;&#8230;&#8230;&#20320;&#21487;&#20197;&#35753;&#29992;&#25143;&#33258;&#24049;&#21435;&#19979;&#36733;&#65292;&#20063;&#19981;&#29992;&#25285;&#24515;&#21327;&#35758;&#30340;&#38382;&#39064;&#20102;&#12290;</p>
+<p>P.P.S. &#30475;&#21040;&#26377;&#20010;&#20154;&#20570;&#20102;&#19968;&#20010;&#25130;&#22270;&#36719;&#20214;&#65292;&#21500;&#21040;&#27809;&#26379;&#21451;&#65306;<a href="http://www.v2ex.com/t/295433">Snipaste - &#24320;&#21457;&#20102;&#19977;&#24180;&#30340;&#25130;&#22270;&#24037;&#20855;&#65292;&#20294;&#19981;&#21482;&#26159;&#25130;&#22270; - V2EX</a>&#12290;</p>
+<div class="figure">
+<img src="http://ww2.sinaimg.cn/large/840a8430jw1f68mbo23png20qv0higz2.jpg" />
+
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#qt">qt</a></li>
+<li><a class="tzx-tag" href="tags.html/#gui">gui</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/58d3d3880db6ca3930e48156b2a0339ab4f5351a/_posts/post-0068-cxx-gui-programming-with-qt4.md" title="1 insertions(+), 1 deletions(-)">1578505724</option>
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0068-cxx-gui-programming-with-qt4.md" title="39 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0068-cxx-gui-programming-with-qt4.md";
+var tzxChanges = [
+    {
+        hash: "58d3d3880db6ca3930e48156b2a0339ab4f5351a",
+        datetime: "1578505724",
+        insertions: 1,
+        deletions: 1
+    },
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 39,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

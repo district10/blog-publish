@@ -1,0 +1,1185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-02-02" />
+  <meta name="keywords" content="linux, bash, shell" />
+  <title>Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</h1>
+<h3 class="date">2014-02-02</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#linux-shell-&#33050;&#26412;&#33756;&#35889;-linux-shell-scripting-cookbook">Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</a><ul>
+        <li><a href="#chap-1-shell-something-out">Chap 1: Shell Something Out</a></li>
+        <li><a href="#chap-2-have-a-good-command">Chap 2: Have a Good Command</a></li>
+        <li><a href="#chap-3-file-in-file-out">Chap 3: File in, File out</a></li>
+        <li><a href="#chap-4-texting-and-driving">Chap 4: Texting and Driving</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="linux-shell-&#33050;&#26412;&#33756;&#35889;-linux-shell-scripting-cookbook">Linux Shell &#33050;&#26412;&#33756;&#35889; | Linux Shell Scripting Cookbook</h1>
+<blockquote>
+<p>Notice: &#37027;&#26102;&#25105;&#31532;&#19968;&#27425;&#29992; Markdown&#12290;&#65288;The Old Golden Days&#65289;</p>
+</blockquote>
+<h2 id="chap-1-shell-something-out">Chap 1: Shell Something Out</h2>
+<dl>
+<dt>Bash (<code>B</code>ourne <code>A</code>gain <code>Sh</code>ell)</dt>
+<dd><ul>
+<li>&#25552;&#31034;&#31526;&#65306; <code>#</code>(root) and <code>$</code>(non root);</li>
+<li><code class="sourceCode bash"><span class="co">#!/bin/bash</span></code> (Shebang),</li>
+<li><code class="sourceCode bash"><span class="kw">bash</span> script.sh</code>,</li>
+<li><code class="sourceCode bash"><span class="kw">chmod</span> +x script.sh <span class="kw">&amp;&amp;</span> <span class="kw">./script.sh</span></code></li>
+<li><code class="sourceCode bash">;</code> is like a newline in bash</li>
+<li><p>Comment Example</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+
+<span class="kw">echo</span> Hello
+
+<span class="co"># one line comment</span>
+
+<span class="kw">:</span> <span class="st">&#39;</span>
+<span class="st">multi line</span>
+<span class="st">comments</span>
+<span class="st">&#20854;&#23454;&#36825;&#26159;&#19968;&#26465;&#21629;&#20196;&#65292;comments &#24403;&#25104;&#21442;&#25968;&#20256;&#20837;&#20882;&#21495;&#65288;&#36825;&#20010; cmd&#65289;&#65292;</span>
+<span class="st">&#28982;&#21518;&#19981;&#22788;&#29702;&#65292;&#20110;&#26159; comment &#25481;&#20102;</span>
+<span class="st">you can not see these lines</span>
+<span class="st">&#39;</span>
+
+<span class="kw">echo</span> Comments Are Something You Can Not See</code></pre></div></li>
+<li><p>Printing in the terminal (<code class="sourceCode bash"><span class="kw">echo</span></code> &amp; <code class="sourceCode bash"><span class="kw">printf</span></code>)</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">text=</span><span class="st">&quot;apple&quot;</span>
+<span class="kw">echo</span> <span class="st">&quot;some </span><span class="ot">$text</span><span class="st">&quot;</span>
+<span class="kw">echo</span> <span class="st">&#39;some $text&#39;</span>
+<span class="co"># More options: &quot;-n&quot; no newline; &quot;-e&quot; convert &quot;\t\n&quot; etc</span>
+
+<span class="kw">printf</span> <span class="st">&quot;%-10s %4.2f\n&quot;</span> price 4.24 <span class="co"># &#39;-&#39; -&gt; left align</span></code></pre></div></li>
+<li><p>Colored output</p>
+<pre class="plain"><code>Text: reset  =  0, black = 30, red     = 31, green = 32,
+      yellow = 33, blue  = 34, magenta = 35, cyan  = 36, and white = 37
+Back: reset  =  0, black = 40, red     = 41, green = 42,
+      yellow = 43, blue  = 44, magenta = 45, cyan  = 46, and white = 47</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> -e <span class="st">&quot;\e[1;42m \e[1;31m Green Background, red Text \e[0m&quot;</span></code></pre></div></li>
+<li><p>Variables and Environment Variables</p>
+<ul>
+<li><p><code class="sourceCode bash"><span class="ot">$environ</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">PID=</span><span class="kw">`pidof</span> geany<span class="kw">`</span>
+<span class="kw">cat</span> /proc/<span class="ot">$PID</span>/environ <span class="kw">|</span> <span class="kw">tr</span> <span class="st">&#39;\0&#39;</span> <span class="st">&#39;\n&#39;</span>
+<span class="kw">echo</span> <span class="ot">$PATH</span> <span class="kw">|</span> <span class="kw">tr</span> <span class="st">&#39;:&#39;</span> <span class="st">&#39;\n&#39;</span></code></pre></div></li>
+<li><code class="sourceCode bash">\<span class="kw">0</span></code>: null character
+<ul>
+<li>to get <code>$PID</code>: <code class="sourceCode bash"><span class="kw">pgrep</span> geany</code> or <code class="sourceCode bash"><span class="kw">pidof</span> geany</code></li>
+<li>length = <code class="sourceCode bash"><span class="ot">${#var}</span></code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">if [</span> <span class="ot">$UID</span> <span class="ot">-ne</span> 0<span class="kw"> ]</span>;
+<span class="kw">then</span>  <span class="kw">echo</span> <span class="st">&quot;you are not root&quot;</span><span class="kw">;</span>
+<span class="kw">else</span>  <span class="kw">echo</span> <span class="st">&quot;you are root&quot;</span><span class="kw">;</span>
+<span class="kw">fi</span></code></pre></div></li>
+</ul></li>
+<li><p>Modify the Bash Prompt String</p>
+<ul>
+<li><code class="sourceCode bash"><span class="kw">cat</span> ~/.bashrc <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&quot;PS1&quot;</span></code></li>
+<li><code>\u</code> ==&gt; expands to username</li>
+<li><code>\w</code> ==&gt; expands to the current working directory</li>
+<li><code>\h</code> ==&gt; expands hostname</li>
+</ul></li>
+<li><p>Math with the shell: <code class="sourceCode bash"><span class="kw">let</span></code>, <code class="sourceCode bash"><span class="kw">expr</span></code>, <code class="sourceCode bash">$[]</code>, <code class="sourceCode bash"><span class="ot">$(())</span></code>, <code class="sourceCode bash"><span class="kw">bc</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># let</span>
+<span class="ot">a=</span>4 <span class="kw">&amp;&amp;</span> <span class="ot">b=</span>6
+<span class="kw">let</span> sum=a+b      <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">$sum</span>
+
+<span class="co"># $[], $(())</span>
+<span class="ot">sum=</span>$[  <span class="kw">a</span> + b  ] <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">$sum</span>
+<span class="ot">sum=</span>$[  <span class="kw">a</span> + 10 ] <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">$sum</span>
+<span class="ot">sum=$((</span> a + b <span class="ot">))</span> <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">$sum</span>
+
+<span class="ot">sum=</span><span class="kw">`expr</span> 24 + 40<span class="kw">`</span>
+<span class="ot">sum=</span><span class="kw">`expr</span> 42 + <span class="ot">$a</span><span class="kw">`</span>
+
+<span class="kw">echo</span> <span class="st">&quot;420 * 04 / 42&quot;</span> <span class="kw">|</span> <span class="kw">bc</span>
+<span class="kw">echo</span> <span class="st">&quot;scale=2;  3/8&quot;</span> <span class="kw">|</span> <span class="kw">bc</span></code></pre></div></li>
+<li><p>File descriptors and Redirection</p>
+<table>
+<thead>
+<tr class="header">
+<th>fid</th>
+<th>fd name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>stdin</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>stdout</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>stderr</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># &quot;&gt;&quot; redirection, &quot;&gt;&gt;&quot; redirection and append (stdout)</span>
+<span class="co"># &quot;2&gt;&quot;, &quot;2&gt;&gt;&quot;                                  (stderr)</span>
+<span class="co"># &quot;&amp;&gt;&quot;, &quot;2&gt;&amp;1&quot;                        (stdout &amp; stderr)</span></code></pre></div>
+<dl>
+<dt>Trash Can(Black Hole)</dt>
+<dd><code>/dev/null</code>
+</dd>
+<dt>pipe</dt>
+<dd><code class="sourceCode bash"><span class="kw">cat</span> file.txt <span class="kw">|</span> <span class="kw">tee</span> out.txt <span class="kw">|</span> <span class="kw">cat</span> -n</code>
+</dd>
+<dt>read as stdin (heredoc)</dt>
+<dd><code class="sourceCode bash"><span class="kw">cat</span> &lt;&lt;DONE &gt; output.txt</code>
+</dd>
+<dt>customize file descriptor</dt>
+<dd><code class="sourceCode bash"><span class="kw">exec</span></code> (read mode, write with truncate mode, write with append mode)
+</dd>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">exec</span> <span class="kw">4&gt;&gt;</span>log.txt <span class="co"># 4 is our customized fd now</span>
+<span class="kw">echo</span> <span class="st">&quot;hello&quot;</span> <span class="kw">&gt;&amp;4</span>
+<span class="kw">echo</span> <span class="st">&quot;world&quot;</span> <span class="kw">&gt;&amp;4</span>
+<span class="kw">cat</span> log.txt <span class="co"># &quot;cat&lt;log.txt&quot; or&quot;cat &lt; log.txt&quot;, both fine</span></code></pre></div>
+</dd>
+</dl></li>
+<li><p>Arrays and Associative Arrays</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">array_var=(</span>10 20 30 40 50<span class="ot">)</span>; <span class="ot">index=</span>3
+<span class="kw">echo</span> <span class="ot">$array_var</span>
+<span class="kw">echo</span> <span class="ot">${array_var[0]}</span>
+<span class="kw">echo</span> <span class="ot">${array_var[*]}</span>
+<span class="kw">echo</span> <span class="ot">${array_var[@]}</span>
+<span class="kw">echo</span> <span class="ot">${array_var[$index]}</span>
+<span class="kw">echo</span> <span class="ot">${#array_var[*]}</span>
+<span class="kw">echo</span> <span class="ot">${#array_var[@]}</span>
+
+<span class="kw">declare</span> -A <span class="ot">ass_array</span>
+<span class="ot">ass_array=([gnat]=</span>124 <span class="ot">[tang]=</span><span class="st">&quot;name&quot;</span><span class="ot">)</span> <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">${ass_array[tang]}</span> <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="ot">${ass_array[*]}</span>
+<span class="kw">echo</span> <span class="ot">${!ass_array[*]}</span></code></pre></div></li>
+<li><p>Visiting Alias: <code class="sourceCode bash"><span class="kw">alias</span> install=<span class="st">&quot;sudo apt-get install&quot;</span></code></p></li>
+<li><p>Grabbing info about the terminal</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># tput</span>
+<span class="co"># :   initialize a terminal or query terminfo database</span>
+<span class="kw">tput</span> cols/lines/longname
+<span class="kw">tput</span> cup 100 100 <span class="co"># set cursor position</span>
+<span class="kw">tput</span> setb/setf NUM     <span class="co"># set background/font color, NUM: 0~7 (I think its better than &quot;/e[1;32&quot;)</span>
+<span class="kw">tput</span> setb 2 setf 7 <span class="kw">&amp;&amp;</span> <span class="kw">echo</span> <span class="st">&quot;green background &amp;&amp; white text&quot;</span>  <span class="co"># you should &quot;setb&quot; first then &quot;setf&quot;</span>
+<span class="kw">tput</span> bold, tput smul, tput rmul  <span class="co"># bold, set underline, remove underline</span>
+<span class="kw">tput</span> ed <span class="co"># I dont understand this...</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+<span class="co">#Filename: sleep.sh</span>
+<span class="kw">echo</span> -n Count:
+<span class="kw">tput</span> sc
+<span class="ot">count=</span>0;
+<span class="kw">while</span> <span class="kw">true;</span>
+<span class="kw">do</span>
+         <span class="kw">if [</span> <span class="ot">$count</span> <span class="ot">-lt</span> 40<span class="kw"> ]</span>;
+         <span class="kw">then</span>
+            <span class="kw">let</span> count++<span class="kw">;</span>
+            <span class="kw">sleep</span> 1<span class="kw">;</span>
+            <span class="kw">tput</span> rc
+            <span class="kw">tput</span> ed
+            <span class="kw">echo</span> -n <span class="ot">$count</span><span class="kw">;</span>
+         <span class="kw">else</span> <span class="kw">exit</span> 0<span class="kw">;</span>
+         <span class="kw">fi</span>
+<span class="kw">done</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># stty</span>
+<span class="co"># :   change and print terminal line settings</span>
+<span class="kw">stty</span> -echo <span class="co"># Fantastic way to joke others</span>
+<span class="kw">stty</span> echo  <span class="co"># resume</span></code></pre></div></li>
+<li><p>Getting and Setting dates and delays</p>
+<ul>
+<li><p>In Unix-like System: <em>1970-01-01 00:00:00 UTC</em>, is called <code>Epoch</code> or <code>Unix Time</code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">date</span>
+<span class="kw">date</span> +%s
+<span class="kw">date</span> --date <span class="st">&quot;Sun Feb  2 18:48:51 CST 2014&quot;</span> +%s <span class="co"># specify date/time</span>
+<span class="kw">date</span> <span class="st">&quot;+%d %B %Y&quot;</span> <span class="co"># customize output format</span>
+<span class="kw">date</span> -s <span class="st">&quot;2 Feb  2014 18:48:51&quot;</span> <span class="co"># set data/time, i prefer NOT try it</span>
+
+<span class="co"># Count time</span>
+<span class="ot">start=$(</span><span class="kw">date</span> +%s<span class="ot">)</span>
+<span class="ot">end=$(</span><span class="kw">date</span> +%s<span class="ot">)</span>
+<span class="ot">diff=$((</span>end - start<span class="ot">))</span>
+<span class="kw">echo</span> <span class="st">&quot;passed </span><span class="ot">$diff</span><span class="st"> seconds&quot;</span></code></pre></div></li>
+<li><p>see Formats<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p></li>
+</ul></li>
+<li><p>Debugging the Script</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">bash</span> -x script.sh <span class="co"># specify when running script</span>
+<span class="co"># or the so-called &quot;Shebang hack&quot;</span>
+<span class="st">&quot;#!/bin/bash -xv&quot;</span> <span class="co"># &quot;-xv&quot; ==&gt; enable debugging</span></code></pre></div></li>
+<li><p>Functions and Arguments</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">fname()</span> <span class="kw">{</span> <span class="kw">\</span>
+    <span class="kw">echo</span> -n Arg1: <span class="ot">$1</span> <span class="st">&quot; &quot;</span><span class="kw">;</span> <span class="kw">\</span>
+    <span class="kw">echo</span> Arg2: <span class="ot">$2</span><span class="kw">;</span> <span class="kw">echo</span> Args: <span class="ot">$@</span><span class="kw">;</span> <span class="kw">\</span>
+    <span class="kw">return</span> 0<span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">}</span> <span class="kw">&amp;&amp;</span> <span class="kw">fname</span> how are you
+<span class="co"># $@ v.s. $*, we prefer the former</span>
+<span class="co"># $*(expands as &quot;$1c$2c$3&quot;, where c is the first character of IFS)</span></code></pre></div>
+<ul>
+<li><p>The Recusive Funcs:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">F()</span> <span class="kw">{</span> <span class="kw">echo</span> <span class="ot">$1</span><span class="kw">;</span> <span class="kw">sleep</span> 1<span class="kw">;</span> <span class="kw">F</span> hello<span class="kw">;}</span> <span class="kw">&amp;&amp;</span> <span class="kw">F</span> hello</code></pre></div></li>
+<li><p>Fork Bomb&#65288;&#19981;&#35201;&#22312;&#33258;&#24049;&#30005;&#33041;&#19978;&#35797;&#65281;&#65281;&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Do not Try it Yourself !!!</span>
+<span class="fu">:()</span><span class="kw">{</span> <span class="kw">:|:&amp;</span> <span class="kw">}</span>;<span class="kw">:</span>
+<span class="co"># &quot;:&quot; is the function name, no params. in &quot;{}&quot;, the first &quot;:&quot; calls</span>
+<span class="co"># itself, and &quot;:&amp;&quot; fork the process. by &quot;;&quot; the function is defined,</span>
+<span class="co"># and the final &quot;:&quot; runs the function. You can check wikipedia for</span>
+<span class="co"># more information</span></code></pre></div>
+<blockquote>
+<p>We can write a recursive function, which is basically a function that <strong>calls itself</strong>, it <strong>infinitely spawns processes</strong> and ends up in a <strong>denial-of-service</strong> attack.</p>
+</blockquote></li>
+<li><p>Exporting Functions: <code class="sourceCode bash"><span class="kw">export</span> -f <span class="ot">fname</span></code></p></li>
+<li><p>Reading the return status of last command: <code class="sourceCode bash"><span class="kw">cmd;</span> <span class="kw">echo</span> <span class="ot">$?</span> <span class="co"># retrieve exit status</span></code></p></li>
+<li><p>Passing arguments to commands</p></li>
+<li><p>Reading the output of a sequence of commands in a variable</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Filters: cmd1 | cmd2 | cmd3 e.g.</span>
+<span class="kw">ls</span> <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&quot;os&quot;</span> <span class="kw">|</span> <span class="kw">cat</span> -n <span class="kw">&gt;</span> output.txt
+<span class="co"># Subshell Method: e.g.</span>
+<span class="ot">cmd_output=$(</span><span class="kw">ls</span> <span class="kw">|</span> <span class="kw">cat</span> -n<span class="ot">)</span>
+<span class="co"># Back tick/ Back quotes:  e.g.</span>
+<span class="ot">cmd_output=</span><span class="kw">`ls</span> <span class="kw">|</span> <span class="kw">cat</span> -n<span class="kw">`</span> <span class="co"># I like it a lot</span></code></pre></div></li>
+<li><p>More Subshell:</p>
+<ul>
+<li>Spawning a separate process with subshell: e.g.: <code class="sourceCode bash"><span class="kw">pwd;</span> <span class="kw">(cd</span> /usr<span class="kw">;</span> <span class="kw">ls)</span>; <span class="kw">pwd</span></code></li>
+<li>Subshell quoting to preserve spacing and the newline character: <code class="sourceCode bash"><span class="ot">out=$(</span><span class="kw">cat</span> file.txt<span class="ot">)</span></code></li>
+</ul></li>
+</ul></li>
+<li><p>Read</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># read -n num_of_chars variable</span>
+<span class="kw">read</span> -n 4 <span class="ot">year</span>
+<span class="co"># nonecho mode for reading password</span>
+<span class="kw">read</span> -s <span class="ot">password</span>
+<span class="kw">read</span> -p <span class="st">&quot;enter your username: &quot;</span> <span class="ot">username</span> <span class="co"># read with a message/prompt</span>
+<span class="kw">read</span> -t <span class="ot">seconds</span> <span class="ot">var</span> <span class="co"># read with a timeout</span>
+<span class="co"># read with a specified delim char</span>
+<span class="kw">read</span> -d <span class="st">&#39;,&#39;</span> <span class="ot">var</span></code></pre></div></li>
+<li><p>Repeat func</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">repeat()</span> <span class="kw">{</span> <span class="kw">while</span> <span class="kw">true;</span> <span class="kw">do</span> <span class="ot">$@</span> <span class="kw">&amp;&amp;</span> <span class="kw">return;</span> <span class="kw">done</span>;<span class="kw">}</span>; <span class="co"># define it</span>
+<span class="co"># repeat doing what you want to do, till it&#39;s done. e.g.</span>
+<span class="kw">repeat</span> read forever
+<span class="co"># revised edition</span>
+<span class="fu">repeat()</span> <span class="kw">{</span> <span class="kw">while</span> <span class="kw">:;</span> <span class="kw">do</span> <span class="ot">$@</span> <span class="kw">&amp;&amp;</span> <span class="kw">return;</span> <span class="kw">done</span>;<span class="kw">}</span>; <span class="kw">&amp;&amp;</span> <span class="kw">\</span>
+<span class="kw">repeat</span> read forever
+<span class="fu">repeat()</span> <span class="kw">{</span> <span class="kw">while</span> <span class="kw">:;</span> <span class="kw">do</span> <span class="ot">$@</span> <span class="kw">&amp;&amp;</span> <span class="kw">return;</span> <span class="kw">sleep</span> 30<span class="kw">;</span> <span class="kw">done</span>;<span class="kw">}</span>; <span class="kw">&amp;&amp;</span> <span class="kw">\</span>
+<span class="kw">repeat</span> read forever
+<span class="co"># why i need it? see below,</span>
+<span class="kw">repeat</span> wget -c www.sourceforge.com/somefile.tar.gz</code></pre></div></li>
+<li><p>File Separators and Iterators</p>
+<ul>
+<li><p><a href="http://en.wikipedia.org/wiki/Internal_field_separator">IFS - Internal Field Iterator</a></p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Comma_Separated_Values">CSV - Comma Separated Values</a></p></li>
+<li><p>example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">data=</span><span class="st">&quot;how,are,you&quot;</span>
+<span class="ot">oldIFS=$IFS</span>
+<span class="ot">IFS=</span>,
+<span class="kw">for</span> <span class="kw">item</span> in <span class="ot">$data</span>
+<span class="kw">do</span> <span class="kw">echo</span> item: <span class="ot">$item</span>
+<span class="kw">done</span>
+<span class="ot">IFS=$oldIFS</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> <span class="dt">{a..z}</span><span class="kw">;</span> <span class="kw">echo</span> <span class="dt">{1..420}</span><span class="kw">;</span>
+<span class="kw">for((</span>i=0; i&lt;24; i++<span class="kw">)){</span> <span class="kw">echo</span> <span class="ot">$i</span><span class="kw">;}</span>
+<span class="co"># while condition; do something; done;</span>
+<span class="co"># until condition; do somthing; done;</span></code></pre></div></li>
+</ul></li>
+<li><p>Comparisons and tests</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># if condition;</span>
+<span class="co"># then do_something;</span>
+<span class="co"># else if condition;</span>
+<span class="co"># then do_something;</span>
+<span class="co"># else do_something;</span>
+<span class="co"># fi;</span>
+
+<span class="co"># or</span>
+<span class="co"># [ condition ] &amp;&amp; something</span>
+<span class="co"># [ condition ] || something</span></code></pre></div></li>
+<li><p>Conditions</p>
+<ul>
+<li><p><code class="sourceCode bash"><span class="kw">-gt</span>, -lt, -ge, -le</code>: greater/less than/equal</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-a</span>, -o</code>: and/or</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-f</span>, -d</code>: file/dir</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-x</span>, -e</code>: executable/exists</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-c</span>, -b</code>: char/block devices</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-w</span>, -r</code>: writeable/readable</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">-L</span></code>: symlink</p></li>
+<li><p>Example:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">if [</span> <span class="ot">-e</span> /bin/bash<span class="kw"> ]</span>; <span class="kw">then</span> <span class="kw">echo</span> exists<span class="kw">;</span> <span class="kw">else</span> <span class="kw">echo</span> not exists<span class="kw">;</span> <span class="kw">fi</span>
+<span class="kw">if [</span> <span class="ot">-e</span> <span class="st">&quot;/bin/bash&quot;</span><span class="kw"> ]</span>; <span class="kw">then</span> <span class="kw">echo</span> exists<span class="kw">;</span> <span class="kw">else</span> <span class="kw">echo</span> not exists<span class="kw">;</span> <span class="kw">fi</span></code></pre></div></li>
+</ul></li>
+<li><p>String comparason</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">[[</span> <span class="ot">$str1</span> <span class="ot">==</span> <span class="ot">$str2</span> ]], [[ <span class="ot">$str1</span> <span class="ot">=</span> <span class="ot">$str2</span><span class="kw"> ]]</span> <span class="co"># same thing</span>
+<span class="kw">[[</span> <span class="ot">$str1</span> <span class="ot">!=</span> <span class="ot">$str2</span><span class="kw"> ]]</span>
+<span class="kw">[[</span> <span class="ot">$str1</span> <span class="ot">&lt;</span> <span class="ot">$str2</span><span class="kw"> ]]</span>;<span class="kw"> [[</span> <span class="ot">$str1</span> &gt;<span class="ot">$str2</span><span class="kw"> ]]</span>
+<span class="kw">[[</span> <span class="ot">-z</span> <span class="ot">$str</span><span class="kw"> ]]</span>;<span class="kw"> [[</span> <span class="ot">-n</span> <span class="ot">$str</span><span class="kw"> ]]</span> <span class="co"># empty/non-empty</span></code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<h2 id="chap-2-have-a-good-command">Chap 2: Have a Good Command</h2>
+<dl>
+<dt>Concatenating with Cat</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># cat somefile.list or `someoutput | cat`</span>
+<span class="kw">cat</span> a.txt b.txt
+<span class="kw">echo</span> <span class="st">&quot;hello&quot;</span> <span class="kw">|</span> <span class="kw">cat</span>
+<span class="co"># Getting rid of blank lines</span>
+<span class="kw">cat</span> -s file.txt
+<span class="co"># more options:</span>
+<span class="co">#     -T(Display Tab as ^T);</span>
+<span class="co">#     -n(line numbers);</span>
+<span class="co">#     -b(line numbers, exculding blank lines)</span></code></pre></div>
+</dd>
+<dt>Recording and Playing back of terminal session</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># start recording</span>
+<span class="kw">script</span> -t <span class="kw">2&gt;</span> timing.log -a output.session
+<span class="co"># do whatever you want here</span>
+<span class="kw">pwd;</span> <span class="kw">echo</span> <span class="st">&quot;hello, scripting recording&quot;</span><span class="kw">;</span> <span class="kw">dir</span> -al<span class="kw">;</span>
+<span class="co"># exit recording</span>
+<span class="kw">exit</span>
+<span class="co"># yesterday once more!</span>
+<span class="kw">scriptreplay</span> timing.log output.session</code></pre></div>
+</dd>
+<dt>Finding files and file listing</dt>
+<dd><ul>
+<li><p>find</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">path=</span><span class="st">&quot;/bin&quot;</span> <span class="co"># specify a path</span>
+<span class="kw">find</span> <span class="ot">$path</span> <span class="co"># equals to &quot;find $path -print&quot;</span>
+<span class="kw">find</span> <span class="ot">$path</span> -print0 <span class="co"># delimed by &#39;\0&#39;</span></code></pre></div></li>
+<li><p>more found(fun)</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">find</span> <span class="ot">$path</span> -name <span class="st">&quot;*.txt&quot;</span> <span class="co"># or we can use &quot;-iname&quot;(ignore case)</span>
+<span class="kw">find</span> <span class="ot">$path</span> <span class="dt">\(</span> -name <span class="st">&quot;*.txt&quot;</span> -o -name <span class="st">&quot;*.pdf&quot;</span> <span class="dt">\)</span> <span class="co"># and</span>
+<span class="kw">find</span> <span class="ot">$path</span> -path <span class="st">&quot;*/gnat/*&quot;</span>
+<span class="kw">find</span> <span class="ot">$path</span> -regex <span class="st">&quot;.*\(\.py\|\.sh\)&quot;</span>
+<span class="co"># or ignore case when applying regexpr, &quot;-iregex&quot;</span>
+<span class="co"># do not try hard to memorize it, check it when you use them</span>
+<span class="kw">find</span> <span class="ot">$path</span> ! -name <span class="st">&quot;*.txt&quot;</span> <span class="co"># excluding</span></code></pre></div></li>
+</ul>
+</dd>
+<dt>Playing with Xargs</dt>
+<dd><ul>
+<li><p>Converting multi lines of input to a single-line output</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> files.txt <span class="kw">|</span> <span class="kw">xargs</span></code></pre></div></li>
+<li><p>Converting single-line of input to multi lines of output</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cat</span> file.txt <span class="kw">|</span> <span class="kw">xargs</span> -n 3 <span class="co"># default delim: $IFS</span></code></pre></div></li>
+<li><p>more xargs:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># -d $X option, specify delim, now $X is the delim</span>
+
+<span class="co"># each time pass 2 args to &quot;process_args.sh&quot;</span>
+<span class="kw">cat</span> args.txt <span class="kw">|</span> <span class="kw">xargs</span> -n 2 ./process_args.sh
+
+<span class="co"># precise replacement</span>
+<span class="kw">cat</span> args.txt <span class="kw">|</span> <span class="kw">xargs</span> -I <span class="dt">{}</span> ./process_args.sh -p <span class="dt">{}</span> -l
+
+<span class="co"># bad</span>
+<span class="kw">find</span> <span class="ot">$some_filters</span> -print   <span class="kw">|</span> <span class="kw">xargs</span>     rm -f
+<span class="co"># better, for -0 specify the delim is &#39;\0&#39;</span>
+<span class="kw">find</span> <span class="ot">$some_filters</span> -print0  <span class="kw">|</span> <span class="kw">xargs</span> -0 rm -f
+
+<span class="co"># LOC (Lines of Code)</span>
+<span class="kw">find</span> <span class="ot">$path</span> -type f -name <span class="st">&quot;*.c&quot;</span> -print0 <span class="kw">|</span> <span class="kw">xargs</span> -0 wc -l
+<span class="kw">cat</span> files.txt <span class="kw">|</span> <span class="kw">(</span> <span class="kw">while</span> <span class="kw">read</span> <span class="ot">arg</span>; <span class="kw">do</span> <span class="kw">cat</span> <span class="ot">$arg</span><span class="kw">;</span> <span class="kw">done</span> <span class="kw">)</span>
+<span class="co"># like &quot;cat files.txt | xargs -I {} cat {}&quot;</span></code></pre></div></li>
+</ul>
+</dd>
+<dt>Translating with tr</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">tr</span> [option] set1 set2</code></p>
+<p>mapping from set1 to set2 (with specified options), notice the len(set1) &amp;&amp; len(set2) issue</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> <span class="st">&quot;WHO IS THIS&quot;</span> <span class="kw">|</span> <span class="kw">tr</span> <span class="st">&#39;A-Z&#39;</span> <span class="st">&#39;a-z&#39;</span> <span class="co"># other valid sets: &#39;a-fg-z&#39;, &#39;a-n0-9&#39;, &#39;aA&#39;...</span>
+
+<span class="kw">tr</span> <span class="st">&#39;0-9&#39;</span> <span class="st">&#39;987654321&#39;</span> <span class="co"># encription</span>
+<span class="kw">tr</span> <span class="st">&#39;987654321&#39;</span> <span class="st">&#39;0-9&#39;</span> <span class="co"># decryption</span>
+
+<span class="co"># the famous ROT13 Encryption.</span>
+<span class="co"># symmetric, use it the second time to decrypt</span>
+<span class="kw">tr</span> <span class="st">&#39;a-zA-Z&#39;</span> <span class="st">&#39;n-za-mN-ZA-M&#39;</span>
+
+<span class="co"># Deleting chars</span>
+<span class="kw">tr</span> -d <span class="st">&#39;[set1]&#39;</span>
+
+<span class="co"># more options:</span>
+<span class="co">#      Complementing character set: -c</span>
+<span class="co">#      Squeezing Characters with tr: tr -s &#39; &#39;</span>
+<span class="co"># Character Classes, e.g. &#39;[:alnum:]&#39;:</span>
+<span class="co">#      1. alnum, alpha, digit</span>
+<span class="co">#      2. cntrl: control (nonprinting) chars</span>
+<span class="co">#      3. graph (graphic), print (printable)</span>
+<span class="co">#      4. lower, upper, space (whitespace chars)</span>
+<span class="co">#      5. punct, xdigit (hexadecimal chars)</span></code></pre></div>
+</dd>
+<dt>Just for fun from dvorak4tzx</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">for</span> <span class="kw">x</span> in <span class="dt">{30..37}</span><span class="kw">;</span>
+<span class="kw">do</span>
+    <span class="kw">for</span> <span class="kw">y</span> in <span class="dt">{40..47}</span><span class="kw">;</span>
+    <span class="kw">do</span>
+        <span class="kw">echo</span> -e -n <span class="st">&quot;\e[1;</span><span class="ot">${x}</span><span class="st">m \e[1;</span><span class="ot">${y}</span><span class="st">m bash &quot;</span><span class="kw">;</span>
+    <span class="kw">done</span>;
+    <span class="kw">echo</span> -e <span class="st">&quot;\e[1;30m&quot;</span><span class="kw">;</span>
+<span class="kw">done</span></code></pre></div>
+<div class="figure">
+<img src="http://gnat.qiniudn.com/tmp/bash.png" alt="colorful bash" />
+<p class="caption">colorful bash</p>
+</div>
+</dd>
+<dt>Checksum and Verification</dt>
+<dd><ul>
+<li><p>md5sum</p>
+<ul>
+<li><code class="sourceCode bash"><span class="kw">md5sum</span> filename</code> ==&gt; 32-Character Hexadecimal String</li>
+<li><code class="sourceCode bash"><span class="kw">md5sum</span> -c filename.md5sum</code> ==&gt; Ok/Filed # dont have to specify filename, it is in filename.md5sum</li>
+</ul></li>
+<li><p><code class="sourceCode bash"><span class="kw">sha1sum</span></code>, like <code class="sourceCode bash"><span class="kw">md5sum</span></code>, but with 40-character Hex code</p></li>
+<li><p>Checksum for Directories</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># -r(recursive), -l(use relative path)</span>
+<span class="kw">md5deep</span> / sha1deep -rl dir</code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<p>Crptographic tools and Hashes</p>
+<dl>
+<dt>Sorting Unique and Duplicates</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># or `sort files &gt; output.txt`</span>
+<span class="kw">sort</span> files -o output.txt
+
+<span class="co"># more options:</span>
+<span class="co">#    -n: numeric sort, -M: sort Months, -r: Reverse</span>
+<span class="co">#    -m: merge two sorted file: `sort -m sorted1.txt sorted2.txt`</span>
+<span class="co">#    -k NUM: sort by colomun NUM(1..INF)</span>
+<span class="kw">sort</span> file1.txt file2.txt <span class="kw">|</span> <span class="kw">unique</span>
+<span class="co"># `unique` options:</span>
+<span class="co">#   -u(dups will not print out),</span>
+<span class="co">#   -c(count),</span>
+<span class="co">#   -d(only dups),</span>
+<span class="co">#   -s, -w(#pass, #compare)</span></code></pre></div>
+</dd>
+<dt>Temporary file naming and random numbers</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">filename=</span><span class="kw">`mktemp`</span>
+<span class="ot">dirname=</span><span class="kw">`mktemp</span> -d<span class="kw">`</span>
+
+<span class="co"># generate a name but not create it now</span>
+<span class="kw">mktemp</span> -u
+
+<span class="co"># with file name prefixed with &quot;test&quot; and</span>
+<span class="co"># suffixed with randomly generated 3 chars</span>
+<span class="kw">mktemp</span> test.XXX</code></pre></div>
+</dd>
+<dt>Spliting files and data</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># split [args] [prefix], e.g.</span>
+<span class="co"># -d: numeric suffix, -a 4: 4 suffix)</span>
+<span class="kw">split</span> -b 10k data.file -d -a 4
+
+<span class="co"># ==&gt; part01, part02, ...</span>
+<span class="kw">split</span> -b 10k data.file -d -a 2 part
+
+<span class="co"># split to several text files each with 10 lines of text</span>
+<span class="kw">split</span> -l 10 Python.txt
+
+<span class="co"># csplit - split a file into sections determined by context lines, e.g.</span>
+<span class="kw">csplit</span> server.log /SERVER/ -n 2 -s <span class="dt">{*}</span> -f server -b <span class="st">&quot;%2d.log&quot;</span>
+
+<span class="co"># Slicing filenames based on extension</span>
+<span class="ot">file=</span><span class="st">&quot;sample.jpg&quot;</span>; <span class="ot">name=${file%</span>.*<span class="ot">}</span>; <span class="kw">echo</span> <span class="ot">$name</span>
+<span class="co"># ==&gt; &quot;sample&quot; (% is nongreedy, %% is greedy)</span>
+
+<span class="ot">file=</span><span class="st">&quot;sample.jpg&quot;</span>; <span class="ot">name=${file#</span>*.<span class="ot">}</span>; <span class="kw">echo</span> <span class="ot">$name</span>
+<span class="co"># ==&gt; &quot;jpg&quot; (from left, ##: greedy)</span></code></pre></div>
+</dd>
+<dt>Renaming and Moving files in Bulk</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mv</span> <span class="ot">$before</span> <span class="ot">$after</span>
+
+<span class="co"># rename all jpg files to JPG files</span>
+<span class="kw">rename</span> *.jpg *.JPG
+
+<span class="co"># &lt;space&gt; to &quot;_&quot;</span>
+<span class="kw">rename</span> <span class="st">&#39;s/ /_/g&#39;</span>
+
+<span class="co"># Upper to Lower:</span>
+<span class="kw">rename</span> <span class="st">&#39;y/A-Z/a-z/&#39;</span> *
+<span class="co"># Lower to Upper:</span>
+<span class="kw">rename</span> <span class="st">&#39;y/a-z/A-Z/&#39;</span> *</code></pre></div>
+</dd>
+<dt>Spell Checking and dictionary manipulation</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ls</span> /usr/share/dict</code></pre></div>
+</dd>
+<dt>dvorak4tzx found something</dt>
+<dd><ul>
+<li>In a word-processing app like geany, the line num is not the real one</li>
+<li>Because of the <strong>offset-by-1</strong>, for an empty file has 1 line but actually there is nothing</li>
+</ul>
+</dd>
+</dl>
+<p>Automating interactive Input</p>
+<p>Making commands quicker by running parallel processes</p>
+<h2 id="chap-3-file-in-file-out">Chap 3: File in, File out</h2>
+<dl>
+<dt>Generating files of any size</dt>
+<dd><ul>
+<li><code class="sourceCode bash"><span class="kw">dd</span> if=/dev/zero of=./junk.data count=50 bs=1M</code></li>
+<li><code>M</code> can alse be <code>c</code>, <code>w</code>, <code>b</code>, <code>k</code>, <code>M</code>, <code>G</code></li>
+</ul>
+</dd>
+<dt>The Intersection and set difference (A-B) on text files</dt>
+<dd><ul>
+<li><p><code class="sourceCode bash"><span class="kw">comm</span></code>: compare two sorted files line by line</p></li>
+<li><p><code class="sourceCode bash"><span class="kw">sort</span></code>: sort lines of text files</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># in place sort</span>
+
+<span class="co"># sort A.txt and output to A.txt</span>
+<span class="kw">sort</span> A.txt -o A.txt
+
+<span class="co"># 1st col: from A, 2nd col: from B, 3rd col: A and B</span>
+<span class="kw">comm</span> A.txt B.txt
+
+<span class="co"># no 1st, 2nd col</span>
+<span class="kw">comm</span> A.txt B.txt -1 -2
+
+<span class="co"># no 3rd col</span>
+<span class="kw">comm</span> A.txt B.txt -3
+
+<span class="co"># produce a unified output, `^` is the start of the line marker</span>
+<span class="kw">comm</span> A.txt B.txt -3 <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;s/^\t//&#39;</span>
+
+<span class="co"># Set difference for A.txt:</span>
+<span class="kw">comm</span> A.txt B.txt -2 -3
+
+<span class="co"># Set difference for B.txt:</span>
+<span class="kw">comm</span> A.txt B.txt -1 -3</code></pre></div></li>
+</ul>
+</dd>
+<dt>Finding and deleting duplicate files</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># create some duplicated files</span>
+<span class="kw">echo</span> <span class="st">&quot;hello&quot;</span> <span class="kw">&gt;</span> test <span class="kw">;</span>
+<span class="kw">cp</span> test test_copy1 <span class="kw">;</span>
+<span class="kw">cp</span> test test_copy2<span class="kw">;</span>
+<span class="kw">echo</span> <span class="st">&quot;next&quot;</span> <span class="kw">&gt;</span> other<span class="kw">;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+<span class="co"># Filename: remove_duplicates.sh</span>
+<span class="co"># Description: Find and remove duplicate files and</span>
+<span class="co">#              keep one sample of each file.</span>
+<span class="kw">ls</span> -lS --time-style=long-iso <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">awk</span> <span class="st">&#39;BEGIN {</span>
+<span class="st">    getline; getline;</span>
+<span class="st">    name1=$8; size=$5</span>
+<span class="st">    }</span>
+<span class="st">    {</span>
+<span class="st">        name2=$8;</span>
+<span class="st">        if (size==$5) {</span>
+<span class="st">            &quot;md5sum &quot;name1 | getline; csum1=$1;</span>
+<span class="st">            &quot;md5sum &quot;name2 | getline; csum2=$1;</span>
+<span class="st">            if ( csum1==csum2 ) {</span>
+<span class="st">                print name1; print name2</span>
+<span class="st">            }</span>
+<span class="st">        };</span>
+<span class="st">        size=$5; name1=name2;</span>
+<span class="st">    }&#39;</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">sort</span> -u <span class="kw">&gt;</span> duplicate_files
+
+<span class="kw">cat</span> duplicate_files <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">xargs</span> -I <span class="dt">{}</span> md5sum <span class="dt">{}</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">sort</span> <span class="kw">|</span> <span class="kw">uniq</span> -w 32 <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">awk</span> <span class="st">&#39;{ print &quot;^&quot;$2&quot;$&quot; }&#39;</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">sort</span> -u <span class="kw">&gt;</span> duplicate_sample
+
+<span class="kw">echo</span> Removing..
+<span class="kw">comm</span> duplicate_files duplicate_sample -2 -3 <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">tee</span> /dev/stderr <span class="kw">|</span> <span class="kw">xargs</span> rm
+
+<span class="kw">echo</span> Removed duplicates files successfully.</code></pre></div>
+</dd>
+<dt>Working with file permissions, ownership, and sticky bit</dt>
+<dd><p>File permissions and ownership are one of the <strong>distinguishing features</strong> of the Unix/Linux filesystems such as <strong>extfs</strong> (extended FS).</p>
+<dl>
+<dt>formats:</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># permission set</span>
+<span class="kw">-r</span>, -w, -x
+<span class="co"># special permissions</span>
+<span class="co"># file, x -&gt; S, Permission S (S)</span>
+<span class="kw">user</span>:  setuid
+<span class="co"># The setuid permission enables an executable file to be executed</span>
+<span class="co"># effectively as its owner, even when the executable is run by another</span>
+<span class="co"># user.</span>
+
+<span class="kw">group</span>: setgid
+<span class="co"># This enables the item to run an executable file with an effective</span>
+<span class="co"># group as the owner group.</span>
+
+<span class="kw">others</span>:  NULL
+<span class="co"># Others have the same read, write, and execute permissions as the user</span>
+<span class="co"># and group. But it does not have permission S (such as setuid or</span>
+<span class="co"># setgid).</span>
+
+<span class="co"># directories, Sticky Bit (t, T)</span>
+<span class="co"># only the user who created the directory can delete the files in the</span>
+<span class="co"># directory, even if the group and others have write permissions.</span>
+
+<span class="co"># ------rwt , ------rwT</span>
+<span class="kw">cd</span> /tmp<span class="kw">;</span> <span class="kw">dir</span> -al <span class="co"># to have a look</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode bash"><span class="kw">chmod</span></code>, <code class="sourceCode bash"><span class="kw">chown</span></code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># chmod</span>
+<span class="kw">chmod</span> u=rwx g=rw o=r filename
+<span class="kw">chmod</span> 764 filename
+<span class="kw">chmod</span> a+x filename
+<span class="kw">chmod</span> a-x filename
+<span class="co"># Setting sticky bit</span>
+<span class="kw">chmod</span> a+t directory_name
+<span class="co"># Applying permissions recursively to files</span>
+<span class="kw">chmod</span> 777 . -R
+<span class="co"># chown: `chown user.group filename`, e.g.</span>
+<span class="kw">chown</span> slynux.slynux test.sh
+<span class="co"># set setuid S</span>
+<span class="kw">chmod</span> +s executable_file</code></pre></div>
+</dd>
+</dl>
+<p><code class="sourceCode bash"><span class="kw">setuid</span></code> is restricted such that setuid would not work for scripts, but only for Linux <strong>ELF</strong> binaries</p>
+</dd>
+<dt>Making files Immutable</dt>
+<dd><p>Check mounted partion: <code class="sourceCode bash"><span class="kw">cat</span> /etc/mtab</code></p>
+<pre class="plain"><code>rootfs / rootfs rw 0 0
+sysfs /sys sysfs rw,nosuid,nodev,noexec,relatime 0 0
+/dev/sda2 /media/Share fuseblk rw,nosuid,nodev,relatime,user_id=0,group_id=0,allow_other,blksize=4096 0 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># /etc/resolv.conf, stores a list of DNS servers, by default is set to your</span>
+<span class="co"># ISP&#39;s DNS Server</span>
+<span class="kw">chattr</span> +i file <span class="co"># make immutable</span>
+<span class="kw">chattr</span> -i file <span class="co"># make not immutable</span></code></pre></div>
+</dd>
+<dt><code class="sourceCode bash"><span class="kw">touch</span></code></dt>
+<dd><p><code class="sourceCode bash"><span class="kw">touch</span> -d <span class="st">&quot;Fri Jun 25 20:50:14 IST 1999&quot;</span> filename</code>, specify timestamp</p>
+<p>other options: <code>-a</code> modifies only the access time, <code>-m</code> for modification time</p>
+</dd>
+<dt>Finding symbolic links and their target</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">ln</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ln</span> -s target symbolic_link_name <span class="co"># create symbolic link</span>
+<span class="kw">ls</span> -l symbolic_link_name <span class="co"># print out symlink</span>
+<span class="kw">ls</span> -l <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&quot;^l&quot;</span> <span class="co"># print out all symbolic links</span>
+<span class="kw">find</span> . -type l -print <span class="co"># use `find`, can also print out subdir files</span>
+<span class="kw">readlink</span> symbolic_link_name</code></pre></div>
+</dd>
+<dt>Enumeration file types statics</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">file</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">file</span> /etc/passwd <span class="co"># ==&gt; /etc/passwd: ASCII text</span>
+<span class="kw">file</span> -b /etc/passwd <span class="co"># excluding file name, ==&gt; ASCII text</span></code></pre></div>
+<p>make it a script to automate</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+
+<span class="kw">if [</span> <span class="ot">$#</span> <span class="ot">-ne</span> 1<span class="kw"> ]</span>;
+<span class="kw">then</span>
+    <span class="kw">echo</span> <span class="st">&quot;Usage is </span><span class="ot">$0</span><span class="st"> basepath&quot;</span><span class="kw">;</span>
+    <span class="kw">exit</span>
+<span class="kw">fi</span>
+<span class="ot">path=$1</span>
+<span class="kw">declare</span> -A <span class="ot">statarray</span>;
+<span class="kw">while</span> <span class="kw">read</span> <span class="ot">line</span>;
+<span class="kw">do</span>
+    <span class="ot">ftype=</span><span class="kw">`file</span> -b <span class="st">&quot;</span><span class="ot">$line</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="kw">cut</span> -d, -f1<span class="kw">`</span>
+    <span class="kw">let</span> statarray[<span class="st">&quot;</span><span class="ot">$ftype</span><span class="st">&quot;</span>]++<span class="kw">;</span>
+<span class="kw">done</span> <span class="kw">&lt;</span> <span class="kw">&lt;(find</span> <span class="ot">$path</span> -type f -print<span class="kw">)</span> <span class="co"># notice the &lt;space&gt; between &quot;&lt;&quot;, WHY?</span>
+<span class="kw">echo</span> ============ File types and counts =============
+<span class="kw">for</span> <span class="kw">ftype</span> in <span class="st">&quot;</span><span class="ot">${!statarray[@]}</span><span class="st">&quot;</span><span class="kw">;</span>
+<span class="kw">do</span>
+    <span class="kw">echo</span> <span class="ot">$ftype</span> : <span class="ot">${statarray[</span><span class="st">&quot;</span><span class="ot">$ftype</span><span class="st">&quot;</span><span class="ot">]}</span>
+<span class="kw">done</span></code></pre></div>
+<p>run <code class="sourceCode bash"><span class="kw">bash</span> filestat.sh <span class="kw">`pwd`</span></code>, and on my computer I get:</p>
+<pre class="plain"><code>============ File types and counts =============
+assembler source : 2
+PDF document : 1
+HTML document : 1
+Emacs v18 byte-compiled Lisp data : 1
+GIF image data : 1
+PNG image data : 1
+Bourne-Again shell script : 1
+ASCII text : 1</code></pre>
+<p>On WHY?</p>
+<p><code class="sourceCode bash"><span class="kw">&lt;(find</span> <span class="ot">$path</span> -type f -print<span class="kw">)</span></code> is equivalent to a filename, the first <code class="sourceCode bash"><span class="kw">&lt;</span></code> is for input redirection and the second <code class="sourceCode bash"><span class="kw">&lt;</span></code> is for converting the subprocess output to a filename. In Bash 3.x and higher we have a new operator <code class="sourceCode bash"><span class="kw">&lt;&lt;&lt;</span></code> that lets us use a string output as an input file. So we can do this:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">done</span> <span class="kw">&lt;&lt;&lt;</span> <span class="st">&quot;</span><span class="kw">`find</span> <span class="ot">$path</span> -type f -print<span class="kw">`</span><span class="st">&quot;</span></code></pre></div>
+</dd>
+<dt>Using loopback files</dt>
+<dd><ul>
+<li><p>Creat a block file, format and mount it</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># create a block file</span>
+<span class="kw">dd</span> if=/dev/zero of=loopbackfile.img bs=1M count=20
+
+<span class="co"># format it to an ext4 filesystem</span>
+<span class="kw">mkfs.ext4</span> loopbackfile.img
+
+<span class="co"># check what is it</span>
+<span class="kw">file</span> loopbackfile.img
+
+<span class="co"># mount it</span>
+<span class="kw">mkdir</span> /mnt/loopback
+<span class="kw">mount</span> -o loop loopbackfile.img /mnt/loopback
+
+<span class="co"># or mount it this way:</span>
+<span class="co"># `losetup /dev/loop1 loopbackfile.img; mount /dev/loop1 /mnt/loopback`</span>
+
+<span class="co"># umount it, syntax: mount &lt;mount_point&gt;</span>
+<span class="kw">umount</span> /mnt/loopback
+
+<span class="co"># or unmount it this way: `umount /dev/loop1`</span></code></pre></div></li>
+</ul>
+</dd>
+<dt>Creating partions inside it</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">losetup</span> /dev/loop1 loopbackfile.img
+<span class="kw">fdisk</span> /dev/loop1
+<span class="kw">losetup</span> -o 32256 /dev/loop2 loopbackfile.img
+
+<span class="co"># Here,</span>
+<span class="co">#    /dev/loop2 will represent the first partition,</span>
+<span class="co">#    -o is the offset flag, 32256 bytes are for a DOS partition scheme.</span>
+<span class="co">#    The first partition starts after an offset of 32256 bytes from the</span>
+<span class="co">#    start of the hard disk.</span></code></pre></div>
+</dd>
+<dt>Quicker way to mount loopback disk images with partitions</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># this part have not tested myself</span>
+<span class="kw">kpartx</span> -v -a diskimage.img
+
+<span class="co"># output:</span>
+<span class="co"># &quot;add map loop0p1 (252:0): 0 114688 linear /dev/loop0 8192&quot;</span>
+<span class="co"># &quot;add map loop0p2 (252:1): 0 15628288 linear /dev/loop0 122880&quot;</span>
+
+<span class="co"># This creates mappings from the partitions in the disk image to devices in</span>
+<span class="co"># /dev/mapper which you can then mount.</span>
+<span class="kw">mount</span> /dev/mapper/loop0p1 /mnt/disk1 <span class="co"># mount it</span>
+
+<span class="co"># do something and then unmount it</span>
+<span class="kw">unmount</span> /mnt/disk1
+
+<span class="co"># remove the mappings by</span>
+<span class="kw">kpartx</span> -d diskimage.img</code></pre></div>
+<ul>
+<li><p>Mounting ISO files as loopback, generating an ISO</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mkdir</span> /mnt/iso
+<span class="kw">mount</span> -o loop linux.iso /mnt/iso
+
+<span class="co"># Flush changing immediately with sync</span>
+<span class="kw">sync</span>
+
+<span class="co"># Creating ISO files and hybrid ISO</span>
+<span class="kw">cat</span> /dev/cdrom <span class="kw">&gt;</span> image.iso <span class="co"># simply cat</span>
+<span class="kw">dd</span> if=/dev/cdrom of=image.iso <span class="co"># better choice</span>
+<span class="kw">mkisofs</span> -V <span class="st">&quot;Label&quot;</span> -o image.iso source_dir/
+
+<span class="co"># `mkisofs` util has been replaced by `genisoimage` util, see</span>
+<span class="co">#    genisoimage -V &quot;books&quot; -o books.iso pdfs/ # and it works</span></code></pre></div></li>
+<li><p>Hybrid ISO that boots off a flash drive or hard disk</p>
+<ul>
+<li><dl>
+<dt>What is Hybrid ISO?</dt>
+<dd>Usually, bootable ISO files cannot be transferred or written to a USB storage device and booted the OS from the USB key. But, special type of ISO files called hybrid ISOs can be flashed and they are capable of booting from such devices.
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># generate a hybrid iso</span>
+<span class="kw">isohybrid</span> image.iso
+
+<span class="co"># write the iso file to usb device # this &quot;cat image.iso &gt;&gt; /dev/usb0&quot;</span>
+<span class="co"># works too, but I do not recommand</span>
+<span class="kw">dd</span> if=image.iso of=/dev/usb0</code></pre></div></li>
+</ul></li>
+<li><p>More about ISO</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Burning an ISO from the command line</span>
+<span class="kw">cdrecord</span> -v dev=/dev/cdrom image.iso
+<span class="kw">eject</span> <span class="co"># works! and my cdrom driver ejected</span></code></pre></div></li>
+</ul>
+</dd>
+<dt>Finding the difference between files, patching</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">diff</span></code>, <code class="sourceCode bash"><span class="kw">patch</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">diff</span> version1.txt version2.txt
+<span class="kw">diff</span> -u version1.txt version2.txt
+<span class="kw">diff</span> -u version1.txt version2.txt <span class="kw">&gt;</span> version.patch
+
+<span class="co"># version1.txt is no difference with version2.txt now</span>
+<span class="kw">patch</span> -p1 version1.txt <span class="kw">&lt;</span> version.patch</code></pre></div>
+</dd>
+<dt>Using head and tail for printing the last or first 10 lines</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">head</span> file <span class="co"># print out 10 lines</span>
+<span class="kw">cat</span> text <span class="kw">|</span> <span class="kw">head</span> <span class="co"># read from stdin</span>
+<span class="kw">head</span> -n 4 file <span class="co"># 4 lines</span>
+<span class="kw">head</span> -n -4 flie <span class="co"># print all lines except the last 4 lines</span>
+<span class="kw">seq</span> 11 <span class="kw">|</span> <span class="kw">head</span> -n -4
+
+<span class="co"># tail is  like head, except</span>
+<span class="kw">tail</span> -n +4 file <span class="co"># syntax: tail -n +M, print all except first (M-1) lines</span>
+
+<span class="co"># -f --follow option</span>
+<span class="kw">tail</span> -f /var/log/message
+
+<span class="co"># this can read  last lines of log file, but can&#39;t keep tracking on</span>
+<span class="kw">dmesg</span> <span class="kw">|</span> <span class="kw">tail</span> -f
+
+<span class="co"># Suppose we are reading a growing file, and a process Foo is appending</span>
+<span class="co"># data to the file, the -f tail should be executed until the process Foo</span>
+<span class="co"># dies.</span>
+<span class="kw">tail</span> -f file --pid <span class="ot">$(</span><span class="kw">pidof</span> geany<span class="ot">)</span> <span class="co"># $(pidof geany) or $(pgrep geany)</span></code></pre></div>
+</dd>
+<dt>Several ways to list dirs</dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ls</span> -d */
+<span class="kw">ls</span> -F <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&quot;/$&quot;</span>
+<span class="kw">ls</span> -l <span class="kw">|</span> <span class="kw">grep</span> <span class="st">&quot;^d&quot;</span>
+<span class="kw">print</span> . -type d -maxdepth 1 -print
+<span class="co"># I prefer `dir`, instead of `ls`, though there is one more typing</span></code></pre></div>
+<p>Fast command-line navigation</p>
+</dd>
+<dd><p><code class="sourceCode bash"><span class="kw">pushd</span></code> and <code class="sourceCode bash"><span class="kw">popd</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">pushd</span> /var/www
+<span class="kw">pushd</span> /usr/src
+<span class="kw">pushd</span> +3 <span class="co"># 0, 1, 2, 3</span>
+<span class="kw">dirs</span> <span class="kw">|</span> <span class="kw">tr</span> <span class="st">&#39; &#39;</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="kw">cat</span> -n <span class="co"># I prefer this</span>
+<span class="kw">popd</span>
+<span class="co"># more useful tricks</span>
+<span class="kw">cd</span> - <span class="co"># switching to last path</span>
+<span class="kw">cd</span> <span class="co"># switching to home dir</span></code></pre></div>
+</dd>
+<dt>Counting the number of lines, words, and characters in a file</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">wc</span></code>: print newline, word, and byte counts for each file</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">wc</span> -l file <span class="co"># count lines</span>
+<span class="kw">wc</span> -w file <span class="co"># count words</span>
+<span class="kw">wc</span> -c file <span class="co"># count characters</span>
+<span class="kw">echo</span> -n 1234 <span class="kw">|</span> <span class="kw">wc</span> -c <span class="co"># 4</span>
+<span class="kw">echo</span>    1234 <span class="kw">|</span> <span class="kw">wc</span> -c <span class="co"># 5, &quot;1234\n&quot;</span>
+<span class="kw">wc</span> file <span class="co"># lines, words, chars</span>
+<span class="kw">wc</span> file -L <span class="co"># the lenth of the longest line (metric: char)</span></code></pre></div>
+</dd>
+<dt>Printing the directory tree</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">tree</span></code></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># tree path -P PATTERN, e.g.</span>
+<span class="kw">tree</span> -P <span class="st">&quot;*.txt&quot;</span>
+<span class="kw">tree</span> /root/Desktop -P <span class="st">&quot;*.txt&quot;</span> -h <span class="co"># -h: print filesize in human way</span>
+<span class="kw">tree</span> PATH -H http://localhost -o output.html <span class="co"># output to a html file</span>
+<span class="kw">tree</span> -H <span class="kw">`pwd`</span> -o refs.html <span class="co"># create reference html pages</span></code></pre></div>
+</dd>
+</dl>
+<h2 id="chap-4-texting-and-driving">Chap 4: Texting and Driving</h2>
+<dl>
+<dt>Using regular expressions</dt>
+<dd><ul>
+<li><p>notation &amp; meaning</p>
+<table>
+<colgroup>
+<col width="21%" />
+<col width="78%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">notation</th>
+<th align="left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>^</code></td>
+<td align="left">the start of the line marker</td>
+</tr>
+<tr class="even">
+<td align="left"><code>$</code></td>
+<td align="left">the end of the line marker</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>.</code></td>
+<td align="left">matches any one character</td>
+</tr>
+<tr class="even">
+<td align="left"><code>?</code></td>
+<td align="left">This means that the preceding item must match one or zero times</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>+</code></td>
+<td align="left">This means that the preceding item must match one or more times</td>
+</tr>
+<tr class="even">
+<td align="left"><code>*</code></td>
+<td align="left">This means that the preceding item must match zero or more times</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[ ]</code></td>
+<td align="left">matches any one of the characters enclosed in <code>[chars]</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>[^]</code></td>
+<td align="left">except those that are enclosed in <code>[^chars]</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[a-z]</code></td>
+<td align="left">This matches any character within the range specified in <code>[]</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>( )</code></td>
+<td align="left">This treats the terms enclosed as one entity, e.g. <code>(how)?</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>{n}</code></td>
+<td align="left">This means that the preceding item must match n times.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>{n, }</code></td>
+<td align="left">at least n times</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>{n,m}</code></td>
+<td align="left">n to m times</td>
+</tr>
+<tr class="even">
+<td align="left"><code>|</code></td>
+<td align="left">This specifies the alternation&#8212;one of the items on either of side of <code>|</code> should match</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>\</code></td>
+<td align="left">escape char</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><a href="http://www.regexper.com">visualize regular expr</a></p></li>
+<li><p>examples</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># ip address:</span>
+[<span class="kw">0-9</span>]<span class="dt">{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}</span>
+<span class="co"># {1, 3} for 1 to 3 digits</span>
+
+[[:<span class="kw">digit</span>:]]<span class="dt">{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}</span></code></pre></div></li>
+<li><p><code class="sourceCode bash"><span class="kw">grep</span></code>: print lines matching a pattern</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># grep pattern filename(s)</span>
+<span class="kw">grep</span> -E <span class="st">&quot;[a-z]+&quot;</span> file <span class="co"># or</span>
+<span class="kw">egrep</span> <span class="st">&quot;[a-z]+&quot;</span> file
+
+<span class="co"># format output</span>
+<span class="kw">echo</span> this is a line. <span class="kw">|</span> <span class="kw">egrep</span> -o <span class="st">&quot;[a-z]+\.&quot;</span> <span class="co"># or</span>
+<span class="kw">echo</span> this is a line. <span class="kw">|</span> <span class="kw">grep</span> -oE <span class="st">&quot;[a-z]+\.&quot;</span>
+
+<span class="co"># -v: excluding, -c: count matching lines, -n: with line number</span>
+<span class="co"># -i: ignore case, -e: multiple patterns, e.g.</span>
+<span class="kw">grep</span> -e <span class="st">&quot;text&quot;</span> -e <span class="st">&quot;the&quot;</span> . -R -n
+
+<span class="co"># regpack.txt contains regexprs</span>
+<span class="kw">cat</span> file.txt <span class="kw">|</span> <span class="kw">grep</span> -f regpack.txt
+<span class="kw">echo</span> -e <span class="st">&quot;1 2 3 4\nhello\n5 6789&quot;</span> <span class="kw">|</span> <span class="kw">egrep</span> -o <span class="st">&quot;[0-9]&quot;</span>
+<span class="co"># ==&gt; 9 lines of [1..9]</span>
+
+<span class="kw">grep</span> <span class="st">&quot;text&quot;</span> . -R -n <span class="co"># recursively search many files</span>
+
+<span class="co"># --include *.{c,cpp}: grep c cpp files</span>
+<span class="co"># --exclude-dir: exclude dirs</span>
+<span class="co"># --exclude-from FILE</span></code></pre></div></li>
+<li><p><code class="sourceCode bash"><span class="kw">cut</span></code>: cut a file column-wise</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Syntax: cut -f FIELD_LIST filename</span>
+<span class="kw">echo</span> -e \
+    <span class="st">&quot;No Name Mark Percent\n1 Sarath 45 90\n2 Alex 49 98\n3 Anu 45 99&quot;</span> \
+<span class="kw">&gt;</span> student_data.txt
+
+<span class="kw">cut</span> -f1 student_data.txt
+<span class="kw">cut</span> -f1, 2 student_data.txt
+<span class="kw">cut</span> -f2,3 -d<span class="st">&#39;;&#39;</span> student_data.txt
+<span class="kw">echo</span> -e \
+    <span class="st">&quot;abcdefghijklmnopqrstuvwxyz\nabcdefghijklmnopqrstuvwxyz\n\</span>
+<span class="st">    abcdefghijklmnopqrstuvwxyz\nabcdefghijklmnopqrstuvwxy&quot;</span> \
+<span class="kw">&gt;</span> rangefields.txt
+
+<span class="kw">cut</span> -c1-5 range_fields.txt <span class="co"># --characters</span>
+<span class="kw">cut</span> range_fields.txt -c1-3,6-9 --output-delimiter <span class="st">&quot;,&quot;</span></code></pre></div></li>
+<li><p><code class="sourceCode bash"><span class="kw">sed</span></code>: stream editor for filtering and transforming text</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Syntax: sed &#39;s/pattern/replace_string/&#39; file</span>
+<span class="co"># -i: in place</span>
+<span class="kw">sed</span> <span class="st">&#39;s/this/THIS/&#39;</span> file <span class="co"># replace the first occurrence</span>
+<span class="kw">sed</span> <span class="st">&#39;s/this/THIS/g&#39;</span> file <span class="co"># for every occurence</span>
+<span class="kw">sed</span> <span class="st">&#39;s/this/THIS/20g&#39;</span> file <span class="co"># form 20 occurence onwards, 1-based index</span>
+<span class="kw">echo</span> thisthisthisthis <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;s/this/THIS/2g&#39;</span> <span class="co"># ==&gt; thisTHISTHISTHIS</span>
+<span class="co"># we can use other delims</span>
+<span class="kw">sed</span> <span class="st">&#39;s:text:replace:g&#39;</span> <span class="co"># escape delim: &quot;\:&quot;</span>
+<span class="kw">sed</span> <span class="st">&#39;s|text|replace|g&#39;</span> <span class="co"># escape delim: &quot;\|&quot;</span>
+<span class="co"># remove blank lines</span>
+<span class="kw">sed</span> <span class="st">&#39;/^$/d&#39;</span> file
+<span class="co"># Matched string notation (&amp;)</span>
+<span class="kw">echo</span> not matched <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;s/\w\+/[&amp;]/g&#39;</span>
+<span class="co"># Substring match notation (\1)</span>
+<span class="kw">echo</span> this is digit 7 in a number <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;s:digit \([0-9]\):\1:&#39;</span>
+<span class="co"># Combination of multiple expressions</span>
+<span class="kw">sed</span> <span class="st">&#39;expression1&#39;</span> <span class="kw">|</span> <span class="kw">sed</span> <span class="st">&#39;expression2&#39;</span> <span class="co"># method 1</span>
+<span class="kw">sed</span> <span class="st">&#39;expression1; expression2&#39;</span> <span class="co"># method 2</span>
+<span class="kw">sed</span> -e <span class="st">&#39;expression1&#39;</span> -e <span class="st">&#39;expression2&#39;</span> <span class="co"># method 3</span></code></pre></div></li>
+<li><p><code class="sourceCode bash"><span class="kw">awk</span></code>: pattern scanning and processing language. (Better See my other post: <a href="post-0012-awk.html">awk-tutorial</a>)</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Syntax:</span>
+<span class="co"># awk &#39;BEGIN{ print &quot;start&quot; } pattern { commands } END{ print &quot;end&quot; }</span>
+<span class="kw">echo</span> -e <span class="st">&quot;line1\nline2&quot;</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">awk</span> \
+<span class="st">&#39;BEGIN{ print &quot;START&quot; } { print } END{ print &quot;END&quot; } &#39;</span>
+
+<span class="co"># &quot;v1 v2 v3&quot;</span>
+<span class="kw">echo</span> <span class="kw">|</span> <span class="kw">awk</span> \
+<span class="st">&#39;{ var1=&quot;v1&quot;; var2=&quot;v2&quot;; var3=&quot;v3&quot;; print var1,var2,var3 ; }&#39;</span>
+
+<span class="co"># &quot;v1v2v3&quot;</span>
+<span class="kw">echo</span> <span class="kw">|</span> <span class="kw">awk</span> \
+<span class="st">&#39;{ var1=&quot;v1&quot;; var2=&quot;v2&quot;; var3=&quot;v3&quot;; print var1 var2 var3 ; }&#39;</span>
+
+<span class="co"># &quot;v1-v2-v3&quot;</span>
+<span class="kw">echo</span> <span class="kw">|</span> <span class="kw">awk</span> \
+<span class="st">&#39;{ var1=&quot;v1&quot;; var2=&quot;v2&quot;; var3=&quot;v3&quot;; print var1 &quot;-&quot; var2 &quot;-&quot; var3 ; }&#39;</span>
+
+<span class="co"># print options: &quot;NR&quot;: record number(line num), &quot;NF&quot;: num of</span>
+<span class="co"># fields(delimed by &lt;space&gt;)</span>
+<span class="kw">echo</span> -e <span class="st">&quot;line1 f2 f3\nline2 f4 f5\nline3 f6 f7&quot;</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">awk</span> \
+<span class="st">&#39;{print &quot;Line no:&quot;NR&quot;,No of fields:&quot;NF, &quot;$0=&quot;$0, &quot;$1=&quot;$1,&quot;$2=&quot;$2,&quot;$3=&quot;$3 }&#39;</span>
+
+<span class="kw">awk</span> <span class="st">&#39;{ print $3,$2 }&#39;</span> file</code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<hr />
+<p>refs and see also</p>
+<ul>
+<li><a href="http://book.douban.com/subject/24669816/">Linux Shell Scripting Cookbook</a></li>
+</ul>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>date fomats</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"><code class="sourceCode bash"><span class="kw">date</span></code></th>
+<th align="center">format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Weekday</td>
+<td align="center"><code>%a</code>(Sun) or <code>%A</code>(Sunday)</td>
+</tr>
+<tr class="even">
+<td align="center">Month</td>
+<td align="center"><code>%b</code>(Feb) or <code>%B</code>(February)</td>
+</tr>
+<tr class="odd">
+<td align="center">Day</td>
+<td align="center"><code>%d</code>(02)</td>
+</tr>
+<tr class="even">
+<td align="center">Date in Format(mm/dd/yy)</td>
+<td align="center"><code>%D</code>(02/02/14)</td>
+</tr>
+<tr class="odd">
+<td align="center">Year</td>
+<td align="center"><code>%y</code>(14) or <code>%Y</code>(2014)</td>
+</tr>
+<tr class="even">
+<td align="center">Hour</td>
+<td align="center"><code>%I</code>(06) <code>%H</code>(18)</td>
+</tr>
+<tr class="odd">
+<td align="center">Minute</td>
+<td align="center"><code>%M</code></td>
+</tr>
+<tr class="even">
+<td align="center">Second</td>
+<td align="center"><code>%S</code></td>
+</tr>
+<tr class="odd">
+<td align="center">Nano Second</td>
+<td align="center"><code>%N</code></td>
+</tr>
+<tr class="even">
+<td align="center">Epoch Unix Time in seconds</td>
+<td align="center"><code>%s</code></td>
+</tr>
+</tbody>
+</table>
+<a href="#fnref1">&#8617;</a></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#linux">linux</a></li>
+<li><a class="tzx-tag" href="tags.html/#bash">bash</a></li>
+<li><a class="tzx-tag" href="tags.html/#shell">shell</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0024-linux-shell-scripting-cookbook.md" title="1233 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0024-linux-shell-scripting-cookbook.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 1233,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

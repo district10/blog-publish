@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-02-12" />
+  <meta name="keywords" content="html" />
+  <title>Learning HTML</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Learning HTML</h1>
+<h3 class="date">2014-02-12</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#learning-html">Learning HTML</a><ul>
+        <li><a href="#html-introduction">HTML Introduction</a></li>
+        <li><a href="#html-basic">HTML Basic</a><ul>
+        <li><a href="#html-head">HTML <code class="sourceCode html"><span class="kw">&lt;head&gt;</span></code></a></li>
+        <li><a href="#html-styles---css">HTML Styles - CSS</a></li>
+        <li><a href="#html-images">HTML Images</a></li>
+        <li><a href="#html-table">HTML Table</a></li>
+        <li><a href="#html-list">HTML List</a></li>
+        <li><a href="#html-blocks">HTML Blocks</a></li>
+        <li><a href="#html-layouts">HTML Layouts</a></li>
+        <li><a href="#html-forms-and-input">HTML Forms and Input</a></li>
+        <li><a href="#html-iframes">HTML Iframes</a></li>
+        </ul></li>
+        <li><a href="#html-colors-color-names">HTML Colors, Color Names</a></li>
+        <li><a href="#html-scripts-javascript">HTML Scripts: JavaScript</a></li>
+        <li><a href="#html-entities">HTML Entities</a></li>
+        <li><a href="#html-symbols">HTML Symbols</a></li>
+        <li><a href="#html-encoding-character-sets">HTML Encoding (Character Sets)</a></li>
+        <li><a href="#html-uniform-resource-locators">HTML Uniform Resource Locators</a></li>
+        <li><a href="#html---xhtml">HTML - XHTML</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="learning-html">Learning HTML</h1>
+<h2 id="html-introduction">HTML Introduction</h2>
+<dl>
+<dt>What is HTML?</dt>
+<dd><ul>
+<li>HTML stands for <strong>Hyper Text Markup Language</strong></li>
+<li><strong>Markup language</strong>, A markup language is a set of markup tags</li>
+<li>Tags: describe document content</li>
+<li>HTML documents contain <strong>HTML tags</strong> and <strong>plain text</strong></li>
+<li>HTML documents also called <strong>web pages</strong></li>
+</ul>
+</dd>
+<dt>HTML Tags</dt>
+<dd><ul>
+<li><code class="sourceCode html"><span class="kw">&lt;tagname&gt;</span>content<span class="kw">&lt;/tagname&gt;</span></code></li>
+<li>opening/closing tags, or start/end tags</li>
+</ul>
+</dd>
+<dt>HTML Elements</dt>
+<dd><p><code>HTML element</code> = <code>HTML tags</code> + <code>contents within</code></p>
+</dd>
+</dl>
+<p>HTML Page Structure: <code>nested</code></p>
+<p>HTML Versions</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="center">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">HTML</td>
+<td align="center">1991</td>
+</tr>
+<tr class="even">
+<td align="left">HTML+</td>
+<td align="center">1993</td>
+</tr>
+<tr class="odd">
+<td align="left">HTML 2.0</td>
+<td align="center">1995</td>
+</tr>
+<tr class="even">
+<td align="left">HTML 3.2</td>
+<td align="center">1997</td>
+</tr>
+<tr class="odd">
+<td align="left">HTML 4.01</td>
+<td align="center">1999</td>
+</tr>
+<tr class="even">
+<td align="left">XHTML</td>
+<td align="center">2000</td>
+</tr>
+<tr class="odd">
+<td align="left">HTML5</td>
+<td align="center">2012</td>
+</tr>
+</tbody>
+</table>
+<dl>
+<dt><code class="sourceCode html"><span class="er">&lt;</span>!DOCTYPE&gt;</code> Declaration</dt>
+<dd><ul>
+<li><strong>helps the browser to display a web page correctly.</strong></li>
+<li><strong>Common Declarations</strong></li>
+<li>HTML5: <code>&lt;!DOCTYPE html&gt;</code></li>
+<li><p>HTML 4.01</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/html4/loose.dtd&quot;<span class="dt">&gt;</span></code></pre></div></li>
+<li><p>XHTML 1.0</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="dt">&lt;!DOCTYPE </span>html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot;
+&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;<span class="dt">&gt;</span></code></pre></div></li>
+<li><p>for more, see <a href="http://www.w3schools.com/tags/tag_doctype.asp"><strong>DOCTYPE Reference</strong></a></p></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html-basic">HTML Basic</h2>
+<dl>
+<dt>HTML Headings</dt>
+<dd><p><code class="sourceCode html"><span class="kw">&lt;h1&gt;</span></code> to <code class="sourceCode html"><span class="kw">&lt;h6&gt;</span></code></p>
+</dd>
+<dt>HTML Paragraphs</dt>
+<dd><p><code class="sourceCode html"><span class="kw">&lt;p&gt;</span></code> and <code class="sourceCode html"><span class="kw">&lt;/p&gt;</span></code></p>
+</dd>
+<dt>HTML Links (anchor)</dt>
+<dd><p><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;http://www.w3schools.com&quot;</span><span class="kw">&gt;</span>This is a link<span class="kw">&lt;/a&gt;</span></code></p>
+</dd>
+<dt>HTML Images</dt>
+<dd><p><code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;w3schools.jpg&quot;</span><span class="ot"> alt=</span><span class="st">&quot;W3Schools.com&quot;</span><span class="ot"> width=</span><span class="st">&quot;104&quot;</span><span class="ot"> height=</span><span class="st">&quot;142&quot;</span><span class="kw">&gt;</span></code></p>
+</dd>
+<dt>HTML Elements</dt>
+<dd><ul>
+<li><code>HTML Element</code> = <code>start tag</code> + <code>Element content</code> + <code>end tag</code></li>
+<li>Syntax
+<ul>
+<li>start / opening tag, and end /closing tag</li>
+<li>Most <strong>HTML elements</strong> can have <strong>attributes</strong></li>
+<li>some may have <strong>empty content</strong></li>
+<li>can be <strong>nested</strong></li>
+</ul></li>
+<li><strong>Notice</strong>
+<ul>
+<li>Don&#8217;t Forget the End Tag</li>
+<li>Empty HTML Elements: <code class="sourceCode html"><span class="kw">&lt;br&gt;</span></code> (line break) is an empty element <strong>without a closing tag</strong></li>
+</ul></li>
+<li>HTML Tip: Use <strong>Lowercase</strong> Tags, though it&#8217;s ** not case sensitive**</li>
+</ul>
+</dd>
+<dt>HTML Attributes</dt>
+<dd><ul>
+<li><strong>specified in the start tag</strong></li>
+<li>come in <strong><code>name/value</code> pairs</strong></li>
+<li>notice: Always <code>Quote</code> Attribute Values, <code>Double style quotes</code>: most common, <code>single style quotes</code>: also allowed.</li>
+<li><a href="http://www.w3schools.com/tags/default.asp">HTML Tag Reference</a></li>
+<li><code class="sourceCode html"><span class="kw">&lt;hr&gt;</span></code>: horizontal line</li>
+<li><code class="sourceCode html"><span class="co">&lt;!-- This is a comment --&gt;</span></code> : HTML Comments, will not be rendered,</li>
+<li><code class="sourceCode html"><span class="co">&lt;!--...--&gt;</span></code> &#8592; <code>Ann Lau</code> style</li>
+</ul>
+</dd>
+<dt>Text Formatting</dt>
+<dd><ul>
+<li>Text Formatting Tags
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;b&gt;</span></code>: <strong>bold</strong>, or similarly <code class="sourceCode html"><span class="kw">&lt;strong&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;i&gt;</span></code>: <em>italic</em>, or similarly <code class="sourceCode html"><span class="kw">&lt;em&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;sub&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;sup&gt;</span></code>: <sub>subscripted</sub> / <sup><sup>superscripted</sup></sup></li>
+<li><code class="sourceCode html"><span class="kw">&lt;ins&gt;</span></code>: <ins>inserted text</ins></li>
+<li><code class="sourceCode html"><span class="kw">&lt;mark&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;del&gt;</span></code></li>
+</ul></li>
+<li>Computer Output Tags
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;code&gt;</span></code>: Defines computer code text</li>
+<li><code class="sourceCode html"><span class="kw">&lt;kbd&gt;</span></code>: keyboard</li>
+<li><code class="sourceCode html"><span class="kw">&lt;samp&gt;</span></code>: sample computer code</li>
+<li><code class="sourceCode html"><span class="kw">&lt;var&gt;</span></code>: variable</li>
+<li><code class="sourceCode html"><span class="kw">&lt;pre&gt;</span></code>: <strong>preformatted text</strong> &#9829;</li>
+</ul></li>
+<li>Citations, Quotations, and Definition Tags
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;abbr&gt;</span></code>: abbreviation or acronym</li>
+<li><code class="sourceCode html"><span class="kw">&lt;address&gt;</span></code>: contact information for the author/owner of a document</li>
+<li><code class="sourceCode html"><span class="kw">&lt;bdo&gt;</span></code>: HTML bidirectional override element. <bdo dir="rtl">(text direction)</bdo></li>
+<li><code class="sourceCode html"><span class="kw">&lt;blockquote&gt;</span></code> : a section that is quoted from another source</li>
+<li><code class="sourceCode html"><span class="kw">&lt;q&gt;</span></code>: inline (short) quotation</li>
+<li><code class="sourceCode html"><span class="kw">&lt;cite&gt;</span></code>: defines the title of a work</li>
+<li><code class="sourceCode html"><span class="kw">&lt;dfn&gt;</span></code>: defines a definition term</li>
+</ul></li>
+</ul>
+</dd>
+<dt>HTML Links</dt>
+<dd><ul>
+<li><strong><code class="sourceCode html">#href</code> &#8594; id</strong></li>
+<li><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> id=</span><span class="st">&quot;tips&quot;</span><span class="kw">&gt;</span>Useful Tips Section<span class="kw">&lt;/a&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#tips&quot;</span><span class="kw">&gt;</span>Visit the Useful Tips Section<span class="kw">&lt;/a&gt;</span></code></li>
+</ul>
+</dd>
+<dt>Target Attribute</dt>
+<dd><ul>
+<li>specifies where to open the linked document, in a new tab or window</li>
+<li><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;http://www.w3schools.com/&quot;</span><span class="ot"> target=</span><span class="st">&quot;_blank&quot;</span><span class="kw">&gt;</span>Visit W3Schools!<span class="kw">&lt;/a&gt;</span></code></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-head">HTML <code class="sourceCode html"><span class="kw">&lt;head&gt;</span></code></h3>
+<dl>
+<dt>Head Section</dt>
+<dd><p>defines information about the document</p>
+<p>The following tags can be added to the head section: <code class="sourceCode html"><span class="kw">&lt;title&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;style&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;meta&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;link&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;script&gt;</span></code>, <code class="sourceCode html"><span class="kw">&lt;noscript&gt;</span></code>, and <code class="sourceCode html"><span class="kw">&lt;base&gt;</span></code>.</p>
+<ul>
+<li><p><code class="sourceCode html"><span class="kw">&lt;base&gt;</span></code>: specifies the base URL/target for all relative URLs in a page</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;base</span><span class="ot"> href=</span><span class="st">&quot;http://www.w3schools.com/images/&quot;</span><span class="ot"> target=</span><span class="st">&quot;_blank&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/head&gt;</span></code></pre></div></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;link&gt;</span></code>: defines the relationship between a document and an external resource most used to link to style sheets</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="ot"> href=</span><span class="st">&quot;mystyle.css&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/head&gt;</span></code></pre></div></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;style&gt;</span></code>: define style information, specify how HTML elements render</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;style</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="kw">&gt;</span>
+        body <span class="kw">{background-color:</span><span class="dt">yellow</span><span class="kw">;}</span>
+        p <span class="kw">{color:</span><span class="dt">blue</span><span class="kw">;}</span>
+    <span class="kw">&lt;/style&gt;</span>
+<span class="kw">&lt;/head&gt;</span></code></pre></div></li>
+<li><code class="sourceCode html"><span class="kw">&lt;meta&gt;</span></code>: not be displayed on the page, but will be <strong>machine parsable</strong>
+<ul>
+<li>define keywords for search engines: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;keywords&quot;</span><span class="ot"> content=</span><span class="st">&quot;HTML, CSS, XML, XHTML, JavaScript&quot;</span><span class="kw">&gt;</span></code></li>
+<li>define a description of your web page: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> content=</span><span class="st">&quot;Free Web tutorials on HTML and CSS&quot;</span><span class="kw">&gt;</span></code></li>
+<li>define the author of a page: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;author&quot;</span><span class="ot"> content=</span><span class="st">&quot;Hege Refsnes&quot;</span><span class="kw">&gt;</span></code></li>
+<li>refresh document every 30 seconds: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;refresh&quot;</span><span class="ot"> content=</span><span class="st">&quot;30&quot;</span><span class="kw">&gt;</span></code></li>
+</ul></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;script&gt;</span></code>: define a <strong>client-side</strong> script, such as a JavaScript</p></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-styles---css">HTML Styles - CSS</h3>
+<dl>
+<dt>CSS</dt>
+<dd><p>Cascading Style Sheets</p>
+<ul>
+<li>CSS can be added to HTML in the following ways:
+<ul>
+<li>Inline - using the <strong>style attribute</strong> in HTML elements</li>
+<li>Internal - using the <code class="sourceCode html"><span class="kw">&lt;style&gt;</span></code> element in the <code class="sourceCode html"><span class="kw">&lt;head&gt;</span></code> section</li>
+<li>External - using an <strong>external CSS file</strong></li>
+</ul></li>
+<li>The preferred way to add CSS to HTML, is to put CSS syntax <strong>in separate CSS files</strong></li>
+<li>Inline Styles
+<ul>
+<li><code class="sourceCode html"><span class="kw">&lt;p</span><span class="ot"> style=</span><span class="st">&quot;color:blue;margin-left:20px;&quot;</span><span class="kw">&gt;</span>This is a paragraph.<span class="kw">&lt;/p&gt;</span></code></li>
+<li>Background Color: <code class="sourceCode html">style=&quot;background-color:red;&quot;</code></li>
+<li>Font, Color and Size: <code class="sourceCode html">style=&quot;font-family:arial;color:red;font-size:20px;&quot;</code></li>
+<li>Text Alignment: <code class="sourceCode html">style=&quot;text-align:center;&quot;</code></li>
+</ul></li>
+<li>Internal Style Sheet
+<ul>
+<li><p>used if <strong>one single document has a unique style</strong> defined in the <code class="sourceCode html"><span class="kw">&lt;head&gt;</span></code> section, by using the <code class="sourceCode html"><span class="kw">&lt;style&gt;</span></code> tag</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;style&gt;</span>
+        body <span class="kw">{background-color:</span><span class="dt">yellow</span><span class="kw">;}</span>
+        p <span class="kw">{color:</span><span class="dt">blue</span><span class="kw">;}</span>
+    <span class="kw">&lt;/style&gt;</span>
+<span class="kw">&lt;/head&gt;</span></code></pre></div></li>
+</ul></li>
+<li>External Style Sheet
+<ul>
+<li>ideal when the style is <strong>applied to many pages</strong></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;link&gt;</span></code> tag goes inside the <code class="sourceCode html"><span class="kw">&lt;head&gt;</span></code> section (&#26679;&#24335;&#19982;&#39029;&#38754;&#26159;&#36830;&#25509;&#20851;&#31995;)</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="ot"> href=</span><span class="st">&quot;mystyle.css&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/head&gt;</span></code></pre></div></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-images">HTML Images</h3>
+<p><code class="sourceCode html"><span class="kw">&lt;img&gt;</span></code> tag is <strong>empty</strong> (contains attributes only, and no closing tag)</p>
+<p>Syntax: <code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;url&quot;</span><span class="ot"> alt=</span><span class="st">&quot;some_text&quot;</span><span class="kw">&gt;</span></code></p>
+<p>Example: <code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;smiley.gif&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Smiley face&quot;</span><span class="ot"> width=</span><span class="st">&quot;42&quot;</span><span class="ot"> height=</span><span class="st">&quot;42&quot;</span><span class="kw">&gt;</span></code></p>
+<p>More Options</p>
+<ul>
+<li><code class="sourceCode html">style=&quot;float:left&quot;</code>: float to the left, <strong>not supported in HTML5</strong></li>
+<li><p>mouse area:</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;planets.gif&quot;</span><span class="ot"> width=</span><span class="st">&quot;145&quot;</span><span class="ot"> height=</span><span class="st">&quot;126&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Planets&quot;</span><span class="ot"> usemap=</span><span class="st">&quot;#planetmap&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;map</span><span class="ot"> name=</span><span class="st">&quot;planetmap&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;area</span><span class="ot"> shape=</span><span class="st">&quot;rect&quot;</span><span class="ot">   coords=</span><span class="st">&quot;0,0,82,126&quot;</span><span class="ot"> alt=</span><span class="st">&quot;Sun&quot;</span><span class="ot"> href=</span><span class="st">&quot;sun.htm&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;area</span><span class="ot"> shape=</span><span class="st">&quot;circle&quot;</span><span class="ot"> coords=</span><span class="st">&quot;90,58,3&quot;</span><span class="ot">    alt=</span><span class="st">&quot;Mercury&quot;</span><span class="ot"> href=</span><span class="st">&quot;mercur.htm&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;area</span><span class="ot"> shape=</span><span class="st">&quot;circle&quot;</span><span class="ot"> coords=</span><span class="st">&quot;124,58,8&quot;</span><span class="ot">   alt=</span><span class="st">&quot;Venus&quot;</span><span class="ot"> href=</span><span class="st">&quot;venus.htm&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/map&gt;</span></code></pre></div></li>
+</ul>
+<h3 id="html-table">HTML Table</h3>
+<dl>
+<dt>Elements</dt>
+<dd><ul>
+<li><code class="sourceCode html"><span class="kw">&lt;table&gt;</span></code></li>
+<li><code class="sourceCode html"><span class="kw">&lt;tr&gt;</span></code>: table row</li>
+<li><code class="sourceCode html"><span class="kw">&lt;td&gt;</span></code>: table data</li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;th&gt;</span></code>: table heading</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;table</span><span class="ot"> style=</span><span class="st">&quot;width:300px&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;tr&gt;</span>
+     <span class="kw">&lt;td&gt;</span>Jill<span class="kw">&lt;/td&gt;</span>
+     <span class="kw">&lt;td&gt;</span>Smith<span class="kw">&lt;/td&gt;</span>
+     <span class="kw">&lt;td&gt;</span>50<span class="kw">&lt;/td&gt;</span>
+<span class="kw">&lt;/tr&gt;</span>
+<span class="kw">&lt;tr&gt;</span>
+     <span class="kw">&lt;td&gt;</span>Eve<span class="kw">&lt;/td&gt;</span>
+     <span class="kw">&lt;td&gt;</span>Jackson<span class="kw">&lt;/td&gt;</span>
+     <span class="kw">&lt;td&gt;</span>94<span class="kw">&lt;/td&gt;</span>
+<span class="kw">&lt;/tr&gt;</span>
+<span class="kw">&lt;/table&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;style&gt;</span>
+    table, th, td <span class="kw">{</span>
+        <span class="kw">border:</span><span class="dt">1px</span> <span class="dt">solid</span> <span class="dt">black</span><span class="kw">;</span>
+    <span class="kw">}</span>
+<span class="kw">&lt;/style&gt;</span></code></pre></div></li>
+<li>Options
+<ul>
+<li>Border Attribute: <code class="sourceCode html"><span class="kw">&lt;table</span><span class="ot"> border=</span><span class="st">&quot;1&quot;</span><span class="ot"> style=</span><span class="st">&quot;width:300px&quot;</span><span class="kw">&gt;</span></code></li>
+<li><p>Text Alignment</p>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">th <span class="kw">{</span>
+    <span class="kw">text-align:</span><span class="dt">left</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div></li>
+<li><p>Caption : <code class="sourceCode html"><span class="kw">&lt;caption&gt;</span></code></p></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-list">HTML List</h3>
+<dl>
+<dt>Elements</dt>
+<dd><ul>
+<li><code class="sourceCode html"><span class="kw">&lt;ol&gt;</span></code>: ordered list</li>
+<li><code class="sourceCode html"><span class="kw">&lt;ul&gt;</span></code>: <strong>unordered</strong> list</li>
+<li><code class="sourceCode html"><span class="kw">&lt;dl&gt;</span></code>: description list</li>
+<li><code class="sourceCode html"><span class="kw">&lt;li&gt;</span></code>: list item</li>
+<li><code class="sourceCode html"><span class="kw">&lt;dt&gt;</span></code>: <strong>description term</strong> (term/name in a description list)</li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;dd&gt;</span></code>: <strong>description description</strong></p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;ul&gt;</span>
+    <span class="kw">&lt;li&gt;</span>Coffee<span class="kw">&lt;/li&gt;</span>
+    <span class="kw">&lt;li&gt;</span>Milk<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span>
+
+<span class="kw">&lt;ol&gt;</span>
+    <span class="kw">&lt;li&gt;</span>Coffee<span class="kw">&lt;/li&gt;</span>
+    <span class="kw">&lt;li&gt;</span>Milk<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ol&gt;</span>
+
+<span class="kw">&lt;dl&gt;</span>
+    <span class="kw">&lt;dt&gt;</span>Coffee<span class="kw">&lt;/dt&gt;&lt;dd&gt;</span>- black hot drink<span class="kw">&lt;/dd&gt;</span>
+    <span class="kw">&lt;dt&gt;</span>Milk<span class="kw">&lt;/dt&gt;&lt;dd&gt;</span>- white cold drink<span class="kw">&lt;/dd&gt;</span>
+<span class="kw">&lt;/dl&gt;</span></code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-blocks">HTML Blocks</h3>
+<dl>
+<dt><code>HTML Elements</code></dt>
+<dd><ul>
+<li><code>block level elements</code> or <code>inline elements</code></li>
+<li>block level elements
+<ul>
+<li>start and end with a new line when displayed</li>
+<li><code class="sourceCode html"><span class="kw">&lt;h1&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;p&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;ul&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;table&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;div&gt;</span></code></li>
+</ul></li>
+<li>inline elments
+<ul>
+<li>displayed without starting a new line</li>
+<li><code class="sourceCode html"><span class="kw">&lt;b&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;td&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;a&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;img&gt;</span></code> <code class="sourceCode html"><span class="kw">&lt;span&gt;</span></code></li>
+</ul></li>
+<li><code class="sourceCode html"><span class="kw">&lt;div&gt;</span></code>: defines a section in a document (block-level)</li>
+<li><code class="sourceCode html"><span class="kw">&lt;span&gt;</span></code>: defines a section in a document (inline)</li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-layouts">HTML Layouts</h3>
+<dl>
+<dt>Using <code class="sourceCode html"><span class="kw">&lt;div&gt;</span></code> elements (a shortening of division)</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;container&quot;</span><span class="ot"> style=</span><span class="st">&quot;width:500px&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;header&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFA500;&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;h1</span><span class="ot"> style=</span><span class="st">&quot;margin-bottom:0;&quot;</span><span class="kw">&gt;</span>Main Title of Web Page<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;menu&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFD700;height:200px;width:100px;float:left;&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;b&gt;</span>Menu<span class="kw">&lt;/b&gt;&lt;br&gt;</span>
+        HTML<span class="kw">&lt;br&gt;</span>
+        CSS<span class="kw">&lt;br&gt;</span>
+        JavaScript
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;content&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#EEEEEE;height:200px;width:400px;float:left;&quot;</span><span class="kw">&gt;</span>
+        Content goes here
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;footer&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFA500;clear:both;text-align:center;&quot;</span><span class="kw">&gt;</span>
+        Copyright ? W3Schools.com
+    <span class="kw">&lt;/div&gt;</span>
+    <span class="kw">&lt;p&gt;&lt;/p&gt;</span>
+<span class="kw">&lt;/div&gt;</span></code></pre></div>
+</dd>
+</dl>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/blog-Screenshot%20from%202014-02-11%2022:20:36.png" alt="div" />
+<p class="caption">div</p>
+</div>
+<dl>
+<dt>Using <code class="sourceCode html"><span class="kw">&lt;table&gt;</span></code> elements</dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;table</span><span class="ot"> width=</span><span class="st">&quot;500&quot;</span><span class="ot"> border=</span><span class="st">&quot;0&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+        <span class="kw">&lt;td</span><span class="ot"> colspan=</span><span class="st">&quot;2&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFA500;&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;h1&gt;</span>Main Title of Web Page<span class="kw">&lt;/h1&gt;</span>
+        <span class="kw">&lt;/td&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+        <span class="kw">&lt;td</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFD700;width:100px;&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;b&gt;</span>Menu<span class="kw">&lt;/b&gt;&lt;br&gt;</span>HTML<span class="kw">&lt;br&gt;</span>CSS<span class="kw">&lt;br&gt;</span>JavaScript
+        <span class="kw">&lt;/td&gt;</span>
+        <span class="kw">&lt;td</span><span class="ot"> style=</span><span class="st">&quot;background-color:#EEEEEE;height:200px;width:400px;&quot;</span><span class="kw">&gt;</span>
+            Content goes here
+        <span class="kw">&lt;/td&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+        <span class="kw">&lt;td</span><span class="ot"> colspan=</span><span class="st">&quot;2&quot;</span><span class="ot"> style=</span><span class="st">&quot;background-color:#FFA500;text-align:center;&quot;</span><span class="kw">&gt;</span>
+            Copyright ? W3Schools.com
+        <span class="kw">&lt;/td&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+<span class="kw">&lt;/table&gt;</span></code></pre></div>
+</dd>
+</dl>
+<h3 id="html-forms-and-input">HTML Forms and Input</h3>
+<dl>
+<dt><code class="sourceCode html"><span class="kw">&lt;form&gt;</span></code></dt>
+<dd><ul>
+<li>HTML forms are used to <strong>pass data to a server</strong></li>
+<li><p><code class="sourceCode html"><span class="kw">&lt;input&gt;</span></code>: most important form element</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;firstname&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;password&quot;</span><span class="ot"> name=</span><span class="st">&quot;pwd&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;radio&quot;</span><span class="ot"> name=</span><span class="st">&quot;sex&quot;</span><span class="ot"> value=</span><span class="st">&quot;male&quot;</span><span class="kw">&gt;</span>Male<span class="kw">&lt;br&gt;</span>
+<span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;vehicle&quot;</span><span class="ot"> value=</span><span class="st">&quot;Bike&quot;</span><span class="kw">&gt;</span>I have a bike<span class="kw">&lt;br&gt;</span>
+<span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> value=</span><span class="st">&quot;Hello world!&quot;</span><span class="kw">&gt;</span></code></pre></div></li>
+<li>special input form element: <strong>submit button</strong>
+<ul>
+<li>A submit button is used to send form data to a server.</li>
+<li>The data is sent to the page specified in the form&#8217;s action attribute.</li>
+<li>The file defined in the action attribute usually does something with the received input</li>
+<li>example:
+<form name="input" action="html_form_action.asp" method="get">
+Username: <input type="text" name="user"> <input type="submit" value="Submit">
+</form>
+<!-- ![submit button](http://gnat-tang-shared-image.qiniudn.com/blog-Screenshot%20from%202014-02-11%2023:11:04.png) -->
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;form</span><span class="ot"> name=</span><span class="st">&quot;input&quot;</span><span class="ot"> action=</span><span class="st">&quot;html_form_action.asp&quot;</span><span class="ot"> method=</span><span class="st">&quot;get&quot;</span><span class="kw">&gt;</span>
+    Username: <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;submit&quot;</span><span class="ot"> value=</span><span class="st">&quot;Submit&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div></li>
+</ul></li>
+<li>special input form element: <strong>drop-down list</strong>:
+<form action>
+<select name="cars"> <option value="volvo">Volvo</option> <option value="saab">Saab</option> <option value="fiat" selected>Fiat</option> <option value="audi">Audi</option> </select>
+</form>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;select</span><span class="ot"> name=</span><span class="st">&quot;cars&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;volvo&quot;</span><span class="kw">&gt;</span>Volvo<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;saab&quot;</span><span class="kw">&gt;</span>Saab<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;fiat&quot;</span><span class="ot"> selected</span><span class="kw">&gt;</span>Fiat<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;audi&quot;</span><span class="kw">&gt;</span>Audi<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;/select&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div></li>
+<li>special input form element: <strong>textarea</strong>:
+<textarea rows="10" cols="30">
+The cat was playing in the garden.
+</textarea>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;textarea</span><span class="ot"> rows=</span><span class="st">&quot;10&quot;</span><span class="ot"> cols=</span><span class="st">&quot;30&quot;</span><span class="kw">&gt;</span>
+    The cat was playing in the garden.
+<span class="kw">&lt;/textarea&gt;</span></code></pre></div></li>
+</ul>
+</dd>
+</dl>
+<h3 id="html-iframes">HTML Iframes</h3>
+<p>An iframe is used to <strong>display a web page within a web page</strong>, <code>i</code> stands for inline</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;iframe</span><span class="ot"> src=</span><span class="st">&quot;http://bl.ocks.org/mbostock/raw/4060366/&quot;</span><span class="ot"> width=</span><span class="st">&quot;1000&quot;</span><span class="ot"> height=</span><span class="st">&quot;560&quot;</span><span class="kw">&gt;&lt;/iframe&gt;</span></code></pre></div>
+<iframe src="http://bl.ocks.org/mbostock/raw/4060366/" width="1000" height="560">
+</iframe>
+<h2 id="html-colors-color-names">HTML Colors, Color Names</h2>
+<dl>
+<dt>CSS colors</dt>
+<dd><ul>
+<li>using hexadecimal notation
+<ul>
+<li>Hex values are <strong>written as 3 double digit numbers</strong></li>
+<li>starting with a <code>#</code> sign</li>
+</ul></li>
+<li>140 color names: 17 standard colors plus 123 more
+<ul>
+<li><p>17 standard colors <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: black;"> black </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: gray;"> gray </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: white;"> white </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: red;"> red </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: green;"> green </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: blue;"> blue </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: orange;"> orange </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: yellow;"> yellow </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: purple;"> purple </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: maroon;"> maroon </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: navy;"> navy </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: olive;"> olive </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: silver;"> silver </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: lime;"> lime </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: teal;"> teal </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: fuchsia;"> fuchsia </span> <span style="padding: 1px 1px 1px 1px; border: 1px solid silver; color: aqua;"> aqua </span></p></li>
+<li><p><a href="http://www.w3schools.com/html/html_colorvalues.asp">List: Color Values</a></p></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html-scripts-javascript">HTML Scripts: JavaScript</h2>
+<dl>
+<dt><code class="sourceCode html"><span class="kw">&lt;script&gt;</span></code> tag</dt>
+<dd><p>define a client-side script, such as a JavaScript, e.g. <code class="sourceCode html"><span class="kw">&lt;script&gt;</span> <span class="va">document</span>.<span class="at">write</span>(<span class="st">&quot;Hello World!&quot;</span>) <span class="op">&lt;</span><span class="ss">/script&gt;</span></code></p>
+</dd>
+<dt><code class="sourceCode html"><span class="kw">&lt;noscript&gt;</span></code></dt>
+<dd><p>provide an alternate content, <code class="sourceCode html"><span class="kw">&lt;script&gt;</span>...<span class="op">&lt;</span><span class="ss">/script&gt;&lt;noscript&gt;Sorry, Your Browser Doesn&#39;t Support It&lt;/noscript</span><span class="op">&gt;</span></code></p>
+</dd>
+</dl>
+<p>A Taste of JavaScript</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">document</span>.<span class="at">write</span>(<span class="st">&quot;&lt;p&gt;This is a paragraph&lt;/p&gt;&quot;</span>)<span class="op">;</span>
+<span class="op">&lt;</span>button type<span class="op">=</span><span class="st">&quot;button&quot;</span> onclick<span class="op">=</span><span class="st">&quot;myFunction()&quot;</span><span class="op">&gt;</span>Click Me<span class="op">!&lt;</span><span class="ss">/button&gt;</span>
+<span class="ss">document.getElementById</span><span class="sc">(</span><span class="ss">&quot;demo&quot;</span><span class="sc">)</span><span class="ss">.style.color=&quot;#ff0000&quot;;</span></code></pre></div>
+<h2 id="html-entities">HTML Entities</h2>
+<p>Be replaced with <strong>character entities</strong></p>
+<ul>
+<li><strong>Reserved characters</strong> (must be replaced)</li>
+<li><strong>Characters, not present on your keyboard</strong> (can be replaced)</li>
+</ul>
+<p><code class="sourceCode html"><span class="dv">&amp;entity_name;</span></code> or <code class="sourceCode html"><span class="er">&amp;</span>#entity_number;</code> e.g.</p>
+<ul>
+<li><code class="sourceCode html"><span class="dv">&amp;amp;</span></code> or <code class="sourceCode html"><span class="er">&amp;</span></code>, ampersand</li>
+<li><code class="sourceCode html"><span class="dv">&amp;lt;</span></code> or <code class="sourceCode html"><span class="er">&lt;</span></code>, less than</li>
+<li><code class="sourceCode html"><span class="dv">&amp;nbsp;</span></code>, non breaking space</li>
+<li>acute, grave, diacritical marks
+<ul>
+<li><code class="sourceCode html">a<span class="dv">&amp;#768;</span></code>, a&#768;</li>
+<li><code class="sourceCode html">a<span class="dv">&amp;#769;</span></code>, a&#769;</li>
+<li><code class="sourceCode html">a<span class="dv">&amp;#770;</span></code>, a&#770;</li>
+<li><code class="sourceCode html">a<span class="dv">&amp;#771;</span></code>, a&#771;</li>
+</ul></li>
+<li><code>&amp;#2610; &amp;#2611;</code>, &#2610; &#2611;</li>
+</ul>
+<h2 id="html-symbols">HTML Symbols</h2>
+<dl>
+<dt>HTML symbols</dt>
+<dd><p>like <strong>mathematical operators</strong>, <strong>arrows</strong>, <strong>technical symbols</strong> and <strong>shapes</strong>, are not present on a normal keyboard.</p>
+<ul>
+<li>can be specified by an <code>HTML Entities name</code>, independent of what character set</li>
+<li>Three ways to get <kbd>&#8364;</kbd>
+<ul>
+<li>entity name: <code class="sourceCode html"><span class="dv">&amp;euro;</span></code></li>
+<li>decimal reference: <code class="sourceCode html"><span class="dv">&amp;#8364;</span></code></li>
+<li>hexadecimal reference: <code class="sourceCode html"><span class="dv">&amp;#x20AC;</span></code></li>
+</ul></li>
+<li>More Symbols: <code>&#8704;</code> &#8704; <code class="sourceCode html"><span class="dv">&amp;forall;</span></code>, <code>&#8706;</code> &#8706; <code class="sourceCode html"><span class="dv">&amp;part;</span></code>, <code>&#8707;</code> &#8707; <code class="sourceCode html"><span class="dv">&amp;exist;</span></code>, <code>&#8709;</code> &#8709; <code class="sourceCode html"><span class="dv">&amp;empty;</span></code>, <code>&#8711;</code> &#8711; <code class="sourceCode html"><span class="dv">&amp;nabla;</span></code>, <code>&#8712;</code> &#8712; <code class="sourceCode html"><span class="dv">&amp;isin;</span></code>, <code>&#8713;</code> &#8713; <code class="sourceCode html"><span class="dv">&amp;notin;</span></code>, <code>&#8715;</code> &#8715; <code class="sourceCode html"><span class="dv">&amp;ni;</span></code>, <code>&#8719;</code> &#8719; <code class="sourceCode html"><span class="dv">&amp;prod;</span></code>, <code>&#8721;</code> &#8721; <code class="sourceCode html"><span class="dv">&amp;sum;</span></code>, <code>&#945;</code> &#945; <code class="sourceCode html"><span class="dv">&amp;alpha;</span></code>, <code>&#946;</code> &#946; <code class="sourceCode html"><span class="dv">&amp;beta;</span></code>, <code>&#947;</code> &#947; <code class="sourceCode html"><span class="dv">&amp;gamma;</span></code>, <code>&#948;</code> &#948; <code class="sourceCode html"><span class="dv">&amp;delta;</span></code>, <code>&#949;</code> &#949; <code class="sourceCode html"><span class="dv">&amp;epsilon;</span></code>, <code>&#950;</code> &#950; <code class="sourceCode html"><span class="dv">&amp;zeta;</span></code>, <code>&#8592;</code> &#8592; <code class="sourceCode html"><span class="dv">&amp;larr;</span></code>, <code>&#8594;</code> &#8594; <code class="sourceCode html"><span class="dv">&amp;rarr;</span></code>, <code>&#8593;</code> &#8593; <code class="sourceCode html"><span class="dv">&amp;uarr;</span></code>, <code>&#8595;</code> &#8595; <code class="sourceCode html"><span class="dv">&amp;darr;</span></code>, <code>&#9827;</code> &#9827; <code class="sourceCode html"><span class="dv">&amp;clubs;</span></code>, <code>&#9829;</code> &#9829; <code class="sourceCode html"><span class="dv">&amp;hearts;</span></code>, <code>&#9830;</code> &#9830; <code class="sourceCode html"><span class="dv">&amp;diams;</span></code>, <code>&#169;</code> &#169; <code class="sourceCode html"><span class="dv">&amp;copy;</span></code>, <code>&#174;</code> &#174; <code class="sourceCode html"><span class="dv">&amp;reg;</span></code>, <code>&#8482;</code> &#8482; <code class="sourceCode html"><span class="dv">&amp;trade;</span></code>,</li>
+<li>Full Refs:
+<ul>
+<li><a href="http://www.w3schools.com/charsets/ref_utf_arrows.asp">Full Arrows Reference</a></li>
+<li><a href="http://www.w3schools.com/charsets/ref_utf_currency.asp">Full Currency Reference</a></li>
+<li><a href="http://www.w3schools.com/charsets/ref_utf_symbols.asp">Full Symbols Reference</a></li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html-encoding-character-sets">HTML Encoding (Character Sets)</h2>
+<dl>
+<dt>What is Character Encoding?</dt>
+<dd><ul>
+<li><strong><a href="http://dvorak4tzx.lofter.com/post/1d4021c8_95a94e0">ASCII</a></strong> was the first <code>character encoding standard</code> (character set): <strong>127</strong></li>
+<li><strong>ANSI (Windows-1252)</strong>, default char set for windows: <strong>256</strong></li>
+<li><strong>ISO-8859-1</strong>, an extension for ASCII, default to HTML4: <strong>256</strong></li>
+<li><strong>Unicode (UTF-8)</strong>, default for HTML5, <code>covers (almost) all the characters and symbols in the world.</code></li>
+<li>The HTML charset Attribute
+<ul>
+<li>HTML4: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html;charset=ISO-8859-1&quot;</span><span class="kw">&gt;</span></code></li>
+<li>HTML5: <code class="sourceCode html"><span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></code></li>
+</ul></li>
+<li>compatibility
+<ul>
+<li><code>ANSI</code>,</li>
+<li><code>IOS-8859-1</code>,</li>
+<li><code>Unicode</code> is identical to ASCII for the values from 0 to 127.</li>
+</ul></li>
+</ul>
+</dd>
+</dl>
+<h2 id="html-uniform-resource-locators">HTML Uniform Resource Locators</h2>
+<dl>
+<dt>Syntax</dt>
+<dd><p><code class="sourceCode bash"><span class="kw">scheme</span>://host.domain:port/path/filename</code></p>
+<ul>
+<li><code>scheme</code> - defines the type of Internet service.<code>http</code></li>
+<li><code>host</code> - defines the domain host (<code>the default host for http is www</code>)</li>
+<li><code>domain</code> - defines the Internet domain name, like <code>w3schools.com</code></li>
+<li><code>port</code> - defs the port number at the host (<code>default port number for http:80</code>)</li>
+<li><code>path</code> - defines a path at the server</li>
+<li><code>filename</code> - defines the name of a document/resource</li>
+</ul>
+</dd>
+<dt>Common URL Schemes</dt>
+<dd><ul>
+<li><code>http</code> : HyperText Transfer Protocol</li>
+<li><code>https</code> : Secure HTTP, All information exchanged are encrypted</li>
+<li><code>ftp</code> : File Transfer Protocol</li>
+<li><code>file</code> : to access files on your own computer</li>
+</ul>
+</dd>
+</dl>
+<p><a href="http://www.w3schools.com/html/html_urlencode.asp">URL Encoding</a></p>
+<h2 id="html---xhtml">HTML - XHTML</h2>
+<p>What Is XHTML?</p>
+<ul>
+<li>XHTML is <strong>HTML defined as an XML application</strong></li>
+<li><strong>EXtensible</strong> HyperText Markup Language</li>
+<li>Almost <strong>identical to HTML 4.01</strong></li>
+<li>A <strong>stricter</strong> and <strong>cleaner</strong> version of HTML</li>
+<li>Supported by all major browsers.</li>
+</ul>
+<p>Why XHTML?</p>
+<ul>
+<li><strong>XML</strong> is a markup language, where documents <strong>must be marked up correctly and &#8220;well-formed&#8221;</strong>.</li>
+<li>By <strong>combining the strengths of HTML and XML</strong>, XHTML was developed.</li>
+<li><strong>XHTML is HTML redesigned as XML.</strong></li>
+</ul>
+<p>The Most Important Differences from HTML</p>
+<ul>
+<li>Document Structure
+<ul>
+<li>XHTML <strong>DOCTYPE</strong> is <strong>mandatory</strong></li>
+<li>The XML <strong>namespace attribute</strong> in <code class="sourceCode html"><span class="kw">&lt;html&gt;</span></code> is <strong>mandatory</strong></li>
+<li><code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, and <code class="sourceCode html"><span class="kw">&lt;body&gt;</span></code> is <strong>mandatory</strong></li>
+</ul></li>
+<li>XHTML Elements
+<ul>
+<li>must be <strong>properly nested</strong></li>
+<li>must always <strong>be closed</strong>, even empty elements, like <code>&lt;br&gt;</code> to <code>&lt;br /&gt;</code></li>
+<li>must be <strong>in lowercase</strong></li>
+<li>must <strong>have one root element</strong></li>
+</ul></li>
+<li>XHTML Attributes
+<ul>
+<li>Attribute names must be in lower case</li>
+<li><strong>Attribute values must be quoted</strong>, <code class="sourceCode html"><span class="kw">&lt;table</span><span class="ot"> width=</span><span class="st">&quot;100%&quot;</span><span class="kw">&gt;</span></code></li>
+<li><strong>Attribute minimization is forbidden</strong>: <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> checked</span><span class="kw">&gt;</span></code> to <code class="sourceCode html"><span class="kw">&lt;input</span><span class="ot"> checked=</span><span class="st">&quot;checked&quot;</span><span class="kw">&gt;</span></code></li>
+</ul></li>
+</ul>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="http://www.w3schools.com/html/html_intro.asp">HTML Introduction</a></li>
+<li><a href="http://www.w3schools.com/html/html_basic.asp">HTML Basic</a></li>
+<li><a href="http://www.w3schools.com/html/html_css.asp">HTML Styles - CSS</a></li>
+<li><a href="http://www.w3schools.com/html/html_images.asp">HTML Images</a></li>
+<li><a href="http://www.w3schools.com/html/html_tables.asp">HTML Table</a></li>
+<li><a href="http://www.w3schools.com/html/html_lists.asp">HTML List</a></li>
+<li><a href="http://www.w3schools.com/html/html_blocks.asp">HTML Blocks</a></li>
+<li><a href="http://www.w3schools.com/html/html_layout.asp">HTML Layouts</a></li>
+<li><a href="http://www.w3schools.com/html/html_forms.asp">HTML Forms and Input</a></li>
+<li><a href="http://www.w3schools.com/html/html_iframe.asp">HTML Iframes</a></li>
+<li><a href="http://www.w3schools.com/html/html_colors.asp">HTML Colors, Color Names</a></li>
+<li><a href="http://www.w3schools.com/html/html_scripts.asp">HTML Scripts: JavaScript</a></li>
+<li><a href="http://www.w3schools.com/html/html_symbols.asp">HTML Symbols</a></li>
+<li><a href="http://www.w3schools.com/html/html_entities.asp">HTML Entities</a></li>
+<li><a href="http://www.w3schools.com/html/html_urlencode.asp">HTML Uniform Resource Locators</a></li>
+<li><a href="http://www.w3schools.com/html/html_charset.asp">HTML Encoding (Character Sets)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bdo"><code>&lt;bdo&gt;</code> - HTML (HyperText Markup Language) | MDN</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#html">html</a></li>
+<li><a class="tzx-tag" href="tags.html/#docs">docs</a></li>
+<li><a class="tzx-tag" href="tags.html/#readings">readings</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0022-learning-html.md" title="669 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0022-learning-html.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 669,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

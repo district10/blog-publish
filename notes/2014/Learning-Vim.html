@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="learning-vim">Learning Vim</h1>
+<div class="figure">
+<img src="http://gnat-tang-shared-image.qiniudn.com/2014-05-six-editor.png" />
+
+</div>
+<hr />
+<h3 id="chapter-1-the-vi-text-editor">Chapter 1, The vi Text Editor</h3>
+<ol style="list-style-type: decimal">
+<li><p>A Brief Historical Perspective</p></li>
+<li>Opening and Closing Files
+<ul>
+<li><code>vi filename</code>, and edit</li>
+<li><code>ZZ</code>, save file</li>
+<li><code>:w</code>, save</li>
+<li><code>:w new-filename</code>, saveAs</li>
+<li><code>:w!</code>, force write</li>
+<li><code>:e!</code>, resume</li>
+<li><code>:q!</code>, force quit</li>
+<li><code>:!rm junk-file</code></li>
+<li><code>:!df</code></li>
+</ul></li>
+<li><p>The only way to learn vi is to practice.</p></li>
+</ol>
+<hr />
+<h3 id="chapter-2-simple-editing">Chapter 2, Simple Editing</h3>
+<ol style="list-style-type: decimal">
+<li>Moving the cursor
+<ul>
+<li>Single Movements: <code>h</code>, <code>j</code>, <code>k</code>, <code>l</code>, they suck! I have the <a href="https://github.com/district10/neo_keyboard_layout">neo-keyboard layout</a></li>
+<li>Numeric Arguments: 1, 2, &#8230;</li>
+<li>Movement Within a Line:
+<ul>
+<li><code>0</code>, move tobeginning of line</li>
+<li><code>$</code>, move to end of line</li>
+<li><code>^</code>, move to first non empty char</li>
+</ul></li>
+<li>Move by Text Block
+<ul>
+<li><code>w,b</code>, move by word, forword, backword, respectively.</li>
+<li><code>W,B</code>, move by BIG word, forword, backword, respectively. &#8220;-&#8221; connected words are treated as one</li>
+<li><code>8G</code>, move to 8th line</li>
+<li><code>G</code>, move to END of file</li>
+<li><code>gg</code>, like <code>1G</code></li>
+</ul></li>
+<li>Move to first char of previous/next line: <code>-</code>, <code>+</code></li>
+</ul></li>
+<li>Simple Edits
+<ul>
+<li><code>a</code>, append; (not necessary, I will customize these key to other use)</li>
+<li><code>i</code>, insert;</li>
+<li><code>c</code>, change;
+<ul>
+<li><code>cw, cb</code>, change word, forward, backward, respectively</li>
+<li><code>c2w</code>, change 2 words, forward</li>
+<li><code>c^</code>, to first not empty char</li>
+<li><code>c0, c$</code>, to begin, end of line, or you use <code>c[Home], c[End]</code></li>
+</ul></li>
+<li><code>d</code>, delete;
+<ul>
+<li><code>dw</code>, by word</li>
+<li><code>db</code>, by word, backward</li>
+<li><code>dd</code>, delete line</li>
+<li><code>d$, d[End], D</code>, delete to end of line</li>
+<li><code>dto</code>, <code>dTx</code>, delete to(not include) &#8220;x&#8221;, forward / backward</li>
+<li><code>d/th</code>, delete until first match of &#8220;th&#8221;</li>
+<li><code>diw</code>, delete current word</li>
+<li><code>di(</code>, delete within the current parens</li>
+</ul></li>
+<li><code>s</code>, substitude
+<ul>
+<li><code>s</code>(one and more char), <code>S</code>(whole line).</li>
+</ul></li>
+<li><code>x, X</code>, delete one char, forward, or backward, respectively (not necessary)
+<ul>
+<li><code>xP, XP</code>, delete and paste back</li>
+<li><code>xp, Xp</code>, swap two chars</li>
+</ul></li>
+<li><code>y</code>, yank;</li>
+<li><code>p</code>, put;
+<ul>
+<li><code>$p</code>, paste to end of line</li>
+<li><code>0P</code>, <code>^P</code>, paste to begin of line</li>
+</ul></li>
+</ul></li>
+<li>General Form of vi Commands
+<ul>
+<li><code>cc, dd, yy</code></li>
+<li><code>(command)(text object)</code></li>
+<li><code>(command)(number)(text object)</code></li>
+<li><code>(number)(command)(text object)</code></li>
+<li><code>cc</code>, change whole line</li>
+<li><code>C</code>, like <code>c$</code></li>
+<li><code>~</code>, change case</li>
+</ul></li>
+<li>Misc
+<ul>
+<li>Repeat your last command
+<ul>
+<li><code>.</code></li>
+</ul></li>
+<li>Undo, Redo
+<ul>
+<li><code>u</code>, <code>C-r</code>, <code>U</code>, seems work differently in evil-mode</li>
+</ul></li>
+<li>Numeric Arguments for Insert Commands: e.g. <code>4i&lt;space&gt;&lt;Esc&gt;</code></li>
+</ul></li>
+<li>Notes
+<ul>
+<li><code>cc</code>, <code>dd</code>, <code>yy</code>, apply to line</li>
+<li><code>C</code>, <code>D</code>, <code>S</code> apply from current position to end, while <code>Y</code>, the whole line</li>
+<li><code>C</code> === <code>c$</code>, <code>D</code> === <code>d$</code>, but <code>Y</code> === <code>yy</code>, instead of <code>y$</code></li>
+<li></li>
+</ul></li>
+<li><p>Overall <code>+------------------------------+------------------------------+------------------------------+------------------------------+    |         Text object          |            Change            |            Delete            |             Copy             |    +------------------------------+------------------------------+------------------------------+------------------------------+    |           One word           |              cw              |              dw              |              yw              |    +------------------------------+------------------------------+------------------------------+------------------------------+    |   Two words, not counting    |          2cW or c2W          |          2dW or d2W          |          2yW or y2W          |    |         punctuation          |                              |                              |                              |    +------------------------------+------------------------------+------------------------------+------------------------------+    |       Three words back       |          3cb or c3b          |          3db or d3b          |          3yb or y3b          |    +------------------------------+------------------------------+------------------------------+------------------------------+    |           One line           |              cc              |              dd              |           yy or Y            |    +------------------------------+------------------------------+------------------------------+------------------------------+    |        To end of line        |           c$ or C            |           d$ or D            |              y$              |    +------------------------------+------------------------------+------------------------------+------------------------------+    |     To beginning of line     |              c0              |              d0              |              y0              |    +------------------------------+------------------------------+------------------------------+------------------------------+    |       Single character       |              r               |            x or X            |           yl or yh           |    +------------------------------+------------------------------+------------------------------+------------------------------+    |       Five characters        |              5s              |              5x              |             5yl              |    +------------------------------+------------------------------+------------------------------+------------------------------+</code></p></li>
+<li>Example
+<ul>
+<li><p><code>r</code>, <code>dd</code>, <code>P</code>, <code>cw</code>, <code>x</code></p>
+<pre><code>With a editor you can scrooll the page,          With a screen editor you can scroll the page,
+move the cursor, delete lines, nisret            move the cursor, delete lines, insert
+characters, and more wrile results of            characters, and more while results of
+your edits as you make tham.                     your edits as you make them.
+Since they allow you to make changes             Screen editors are very popular.
+as you read through a file, much as              Since they allow you to make changes
+you would edit a printed copy,                   as you read through a file, much as
+screen editors are very popular.                 you would edit a printed copy.</code></pre></li>
+<li><p><code>P</code>, <code>p</code>, <code>.</code></p>
+<pre><code>With a screen editor you can                     With a screen editor you can
+scroll the page.                                 scroll the page.
+move the cursor.                                 With a screen editor you can
+delete lines.                                    move the cursor.
+                                             With a screen editor you can
+                                             delete lines.</code></pre></li>
+<li><p><code>J</code></p>
+<pre><code>With a                                           With a screen editor you can scroll the page, move the cursor
+screen editor
+you can
+scroll the page, move the cursor</code></pre></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="chapter-3-moving-around-in-a-hurry">Chapter 3, Moving Around in a Hurry</h3>
+<ol style="list-style-type: decimal">
+<li>Movement by Screens
+<ul>
+<li>Scroling the Screen:
+<ul>
+<li><code>C-b</code>, <code>C-f</code>,</li>
+<li><code>C-u</code>(not work in emacs evil-mode), <code>C-d</code>,</li>
+<li><code>C-y</code>, <code>C-e</code></li>
+<li><code>z&lt;Enter&gt;</code>, <code>z.</code>, <code>z-</code>, move to top/center/bottom and scroll to it (not as good as emacs&#8217; <code>recenter-top-center</code>, i will drop this in my evil-mode)</li>
+</ul></li>
+</ul></li>
+<li><p>Redrawing the Screen: <code>C-l</code>(not work in my evil-mode, we have <code>recenter-top-center</code>)</p></li>
+<li>Movement Within a Screen
+<ul>
+<li><code>H</code>, <code>M</code>, <code>L</code>: to top/middle/bottom of screen</li>
+<li><code>2H</code>, <code>2L</code>: 2 second line from top/bottom</li>
+</ul></li>
+<li>Movement by Line
+<ul>
+<li><code>+</code>, <code>&lt;Enter&gt;</code>, <code>-</code>, move to first char of next/previous line.</li>
+<li>Movement on current line: <code>20|</code>, move to column 20, <code>^</code>, move to first nonblank char.</li>
+</ul></li>
+<li>Movement by Text Blocks
+<ul>
+<li><code>e</code>, <code>E</code>, end of word, (ignore punctuations)</li>
+<li><code>(</code>, <code>)</code>, beginning of current/next setence</li>
+<li><code>{</code>, <code>}</code>, beginning of current/next paragraph</li>
+<li><code>[[</code>, <code>]]</code>, beginning of current/next section</li>
+</ul></li>
+<li>Movement by Searches
+<ul>
+<li><code>/pattern</code>, <code>?pattern</code>, search forward/backward</li>
+<li><code>n</code>, next match</li>
+<li><code>N</code>, next match, opposite position</li>
+<li><code>:set nowrapscan</code>, dont do loop search</li>
+<li><code>d/pattern</code></li>
+</ul></li>
+<li>Current Line Searches
+<ul>
+<li><code>fx</code>, <code>Fx</code>, move on to previous/next &#8216;x&#8217;</li>
+<li><code>tx</code>, <code>Tx</code>, move before char &#8216;x&#8217;, previous/next</li>
+<li><code>;</code>, <code>,</code>, repeat same direction, opposite direction</li>
+<li><code>7fx</code>, move to 7th match</li>
+<li><code>dfx</code>, e.g. <code>dfi</code>, delete from here to first occurance of &#8216;i&#8217;, then <code>d;</code>, delete to second occurance of &#8216;i&#8217;</li>
+</ul></li>
+<li>Movement by Line Number
+<ul>
+<li><code>20G</code>, move to Line #20</li>
+<li><code>``</code>, move back (old position)</li>
+<li><p><code>''</code>, move back, but at the beginning of line</p>
+<pre><code>With a screen editor you can scroll the
+page, move1 move2 move4 move5 move6 move7 the cursor, dlete lines, insert
+characters, and more, while seeing the
+characters, ang the
+results of your edits as you make them.</code></pre></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="chapter-4-beyond-the-basics">Chapter 4, Beyond the Basics</h3>
+<ol style="list-style-type: decimal">
+<li><p>More Command Combinations <code>+------------+------------+-----------+------------------------------+    |Change      |Delete      |Copy       |From cursor to...             |    +------------+------------+-----------+------------------------------+    |cH          |dH          |yH         |Top of screen                 |    +------------+------------+-----------+------------------------------+    |cL          |dL          |yL         |Bottom of screen              |    +------------+------------+-----------+------------------------------+    |c+          |d+          |y+         |Next line                     |    +------------+------------+-----------+------------------------------+    |c5|         |d5|         |y5|        |Column 5 of current line      |    +------------+------------+-----------+------------------------------+    |2c)         |2d)         |2y)        |Second sentence following     |    +------------+------------+-----------+------------------------------+    |c{          |d{          |y{         |Previous paragraph            |    +------------+------------+-----------+------------------------------+    |c/pattern   |d/pattern   |y/pattern  |Pattern                       |    +------------+------------+-----------+------------------------------+    |cn          |dn          |yn         |Next pattern                  |    +------------+------------+-----------+------------------------------+    |cG          |dG          |yG         |End of file                   |    +------------+------------+-----------+------------------------------+    |c13G        |d13G        |y13G       |Line number 13                |    +------------+------------+-----------+------------------------------+</code></p></li>
+<li>Options When Starting vi
+<ul>
+<li><code>vi +3 filename</code>, open file at 3rd line</li>
+<li><code>vi + filename</code>, open file at last line</li>
+<li><code>vi +/pattern filename</code>, open file at first occurance of pattern</li>
+<li><code>vi +R filename</code>, read file in read-only mode</li>
+<li><code>vi -r filename</code>, <code>ex -r filename</code>, Recovering a Buffer</li>
+</ul></li>
+<li>Yank to Named Buffer
+<ul>
+<li>`&#8220;dyy&#8221;, yank to buffer &#8220;d&#8221;</li>
+<li>`&#8220;ayw&#8221;, yank to buffer &#8220;a&#8221;</li>
+<li><code>&quot;ap</code>, <code>&quot;</code>dp`, put buffer &#8220;a&#8221;/&#8220;d&#8221;</li>
+</ul></li>
+<li>Marking Your Place
+<ul>
+<li><code>mx</code>, mark current position to x</li>
+<li><code>'x</code>, <code>`x</code>, move to mark x. (first char, or exact position)</li>
+<li><code>''</code>, <code>``</code>, move to last position</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="chapter-5-introducing-the-ex-editor">Chapter 5, Introducing the ex Editor</h3>
+<pre><code>  __              _       _                                 _ _
+ / _| ___  _ __  | | __ _| |_ ___ _ __   _ __ ___  __ _  __| (_)_ __   __ _
+| |_ / _ \| &#39;__| | |/ _` | __/ _ \ &#39;__| | &#39;__/ _ \/ _` |/ _` | | &#39;_ \ / _` |
+|  _| (_) | |    | | (_| | ||  __/ |    | | |  __/ (_| | (_| | | | | | (_| |
+|_|  \___/|_|    |_|\__,_|\__\___|_|    |_|  \___|\__,_|\__,_|_|_| |_|\__, |
+                                                                      |___/</code></pre>
+<hr />
+<h3 id="chapter-6-global-replacement">Chapter 6, Global Replacement</h3>
+<ol style="list-style-type: decimal">
+<li>Substitude
+<ul>
+<li><code>:s/old/new</code>, substitude first occurance of old</li>
+<li><code>:s/old/new/g</code>, many occurance</li>
+<li><code>:50,100s/old/new/g</code>, <code>:50,100s/old/new</code> apply to 50~100 lines</li>
+<li><code>:1,$s/old/new</code>, apply to whole file</li>
+</ul></li>
+<li>c, confirm
+<ul>
+<li><code>y</code> for yes</li>
+<li><code>n</code> for no</li>
+<li><code>Enter</code>, quit</li>
+</ul></li>
+<li>Content-Sensitive Replacement
+<ul>
+<li><code>:%s/old/new/g</code>, no confirm, whole file</li>
+<li><code>:g/pattern/s/old/new/g</code>,</li>
+<li><code>:1,200g/pattern/s/old/new/g</code></li>
+<li><code>:g/pattern/s/old/new/g</code>, same as <code>:g/pattern/s//new/g</code></li>
+</ul></li>
+<li>Pattern-Matching Rules
+<ul>
+<li><code>.</code>, single char, except a newline</li>
+<li><code>*</code>, match zero or more occurance of previous char
+<ul>
+<li>e.g. <code>a*</code> can match <code>a</code>, <code>aa</code>, <code>aaa</code>, etc</li>
+<li>e.g. <code>.*</code> can mathc any char(s) combination</li>
+</ul></li>
+<li><code>^, $</code>, when it is the first/last char of regex, treated as line beginning/ending, else treated as itself.
+<ul>
+<li>e.g. <code>^Line</code> match any line starts with &#8220;Line&#8221;</li>
+<li>e.g. <code>something^*</code>, can match &#8220;something&#8221;, &#8220;something<sup>&#8220;,&#8221;something</sup>^&#8221;, etc</li>
+</ul></li>
+<li><code>[]</code>, e.g. <code>[aoei]</code> match <code>a</code>, <code>o</code>, <code>e</code>, <code>i</code>; and <code>[a-z]</code>, <code>;:[a-z0-9]</code> works as expected.</li>
+<li><code>:%s/\(That\) or \(this\)/\2 or \1/</code></li>
+<li><code>~</code>, match last seach history. Like you seached &#8220;the&#8221; with <code>/the</code>, then you can search for &#8220;then&#8221; with <code>/~n</code></li>
+<li><code>\</code>, e.g. <code>\.</code> match &#8220;.&#8221;</li>
+<li><code>\&lt;m</code>, <code>\&gt;tion</code>, match words begin with &#8216;m&#8217;, end with &#8220;tion&#8221;</li>
+</ul></li>
+<li>POSIX Bracket Expressions
+<ul>
+<li><code>[:alnum:]</code> Alphanumeric characters</li>
+<li><code>[:alpha:]</code> Alphabetic characters</li>
+<li><code>[:blank:]</code> Space and tab characters</li>
+<li><code>[:cntrl:]</code> Control characters</li>
+<li><code>[:digit:]</code> Numeric characters</li>
+<li><code>[:graph:]</code> Printable and visible (nonspace) characters</li>
+<li><code>[:lower:]</code> Lowercase characters</li>
+<li><code>[:print:]</code> Printable characters (includes whitespace)</li>
+<li><code>[:punct:]</code> Punctuation characters</li>
+<li><code>[:space:]</code> Whitespace characters</li>
+<li><code>[:upper:]</code> Uppercase characters</li>
+<li><code>[:xdigit:]</code> Hexadecimal digits</li>
+</ul></li>
+<li>New Pattern of <code>s/old/NEW/g</code>
+<ul>
+<li><code>\n</code>, n is 1..9, match (THIS)</li>
+<li><code>&amp;</code>, mathed part</li>
+<li><code>~</code>, <code>s/thier/their/</code>, then <code>s/her/~/</code> is like <code>s/her/their</code></li>
+<li><code>\u, \l</code>, uppercase/lowercase char. <code>:s/\(That\) or \(this\)/\u\2 or \l\1/</code></li>
+<li><code>\U, \L, \e, \E</code>, uppercase region, or whole match</li>
+<li><code>:set ic</code>, ignore case</li>
+</ul></li>
+<li>More Substitution Tricks
+<ul>
+<li><code>:s//~/</code>, repeat last substitution</li>
+<li><code>:%&amp;g</code>, Repeat the last substitution everywhere</li>
+<li><code>:%s;/user1/tim;/home/tim;g</code></li>
+</ul></li>
+<li>Exercise
+<ul>
+<li><code>/four</code>, <code>&lt;Enter&gt;</code>, <code>cwfive</code>, <code>n</code>(repeat search), <code>n</code>(bypass one match), <code>.</code>(apply last <code>cwfive</code>)</li>
+</ul></li>
+<li>Examples
+<ul>
+<li><p>example-1</p>
+<pre><code>&lt;p&gt;something&lt;/p&gt;                                                             &lt;p&gt;somethingelse&lt;/p&gt;
+&lt;a&gt;something&lt;/a&gt;   ===&gt; `:%300,400g/&lt;p&gt;/s/something/somethingelse/g` ===&gt;    &lt;a&gt;something&lt;/a&gt;
+&lt;a&gt;something&lt;/a&gt;                                                             &lt;a&gt;something&lt;/a&gt;
+&lt;p&gt;something&lt;/p&gt;                                                             &lt;p&gt;somethingelse&lt;/p&gt;</code></pre></li>
+<li><p>example-2</p>
+<pre><code>one                                                  (one)
+two                                                  (two)
+three       ===&gt; `:348,352s/.*/(&amp;)/` ===&gt;            (three)
+four                                                 (four)
+five                                                 (five)</code></pre></li>
+<li><p>example-3</p>
+<pre><code>That or this   ===&gt;  `:%s/\(That\) or \(this\)/\2 or \1/` ===&gt;  this or That</code></pre></li>
+</ul></li>
+</ol>
+<pre><code>  __              _       _                                 _ _
+ / _| ___  _ __  | | __ _| |_ ___ _ __   _ __ ___  __ _  __| (_)_ __   __ _
+| |_ / _ \| &#39;__| | |/ _` | __/ _ \ &#39;__| | &#39;__/ _ \/ _` |/ _` | | &#39;_ \ / _` |
+|  _| (_) | |    | | (_| | ||  __/ |    | | |  __/ (_| | (_| | | | | | (_| |
+|_|  \___/|_|    |_|\__,_|\__\___|_|    |_|  \___|\__,_|\__,_|_|_| |_|\__, |
+                                                                      |___/</code></pre>
+<hr />
+<h1 id="chapter-7-advanced-editing">Chapter 7, Advanced Editing</h1>
+<ol style="list-style-type: decimal">
+<li>Customizing vi
+<ul>
+<li>The :set Command
+<ul>
+<li><code>:set option</code>, or <code>:set nooption</code></li>
+</ul></li>
+<li>The .exrc File</li>
+</ul></li>
+<li>Executing Unix Commands
+<ul>
+<li><code>:!cmd</code></li>
+<li><code>:r !date</code>, output to file, Thu May 1 12:59:55 CST 2014</li>
+<li><code>:. !date</code>, same as <code>:r</code>, but overwrite current line</li>
+<li><code>:r Learning-Vim.md</code>, this is &#8230;. Good.</li>
+</ul></li>
+<li>Filtering Text Through a Command
+<ul>
+<li><code>:%!sort</code>, you try you die&#8230;</li>
+<li><code>!)cmd</code>, pass these sentence to cmd</li>
+<li><code>!!</code>, current line</li>
+<li><code>!2!</code>, <code>2!!</code>, two lines</li>
+</ul></li>
+<li>Saving Commands
+<ul>
+<li>Word Abbreviation
+<ul>
+<li><code>:ab abbr phrase</code></li>
+<li><code>:unab abbr</code></li>
+</ul></li>
+</ul></li>
+</ol>
+<hr />
+<h1 id="chapter-8-introduction-to-the-vi-clones">Chapter 8, Introduction to the vi Clones</h1>
+<hr />
+<h2 id="tricks">Tricks</h2>
+<ol style="list-style-type: decimal">
+<li><code>diw</code>, <code>di&quot;</code>, <code>di{}</code></li>
+<li><code>:!xxd</code>, hex editor <code>:!xxd -r</code></li>
+<li><code>de</code>, then <code>.</code> as you want</li>
+<li><code>ddp</code>, swap current and next line</li>
+<li><code>bye</code>, <code>yiw</code></li>
+<li><code>'.</code>, last edited line</li>
+<li><code>`.</code>, last edited char</li>
+<li><code>:changes</code>, list changes</li>
+<li>:g/rgba/y A 10.<code>gv</code>, reselects last visual selection</li>
+<li><code>g~~</code>, <code>gUU</code>, <code>guu</code></li>
+<li><code>&gt;&gt;</code>, <code>&lt;&lt;</code>, indent</li>
+<li><code>#</code>, <code>*</code>, search word under cursor</li>
+</ol>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

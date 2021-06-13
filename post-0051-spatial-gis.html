@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-10-28" />
+  <title>GIS &#29702;&#35770;&#19982;&#25216;&#26415; &#8211; &#20316;&#19994; 3&#65306;&#26102;&#31354; GIS &#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">GIS &#29702;&#35770;&#19982;&#25216;&#26415; &#8211; &#20316;&#19994; 3&#65306;&#26102;&#31354; GIS &#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;</h1>
+<h3 class="date">2015-10-28</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#gis-&#29702;&#35770;&#19982;&#25216;&#26415;-&#20316;&#19994;-3&#26102;&#31354;-gis-&#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;">GIS &#29702;&#35770;&#19982;&#25216;&#26415; &#8211; &#20316;&#19994; 3&#65306;&#26102;&#31354; GIS &#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;</a><ul>
+        <li><a href="#&#26102;&#38388;&#27010;&#24565;&#26102;&#38388;&#30340;&#32467;&#26500;&#32500;&#24230;&#26102;&#25928;&#24615;&#21644;&#26102;&#38388;&#30340;&#34920;&#36798;">&#26102;&#38388;&#27010;&#24565;&#65292;&#26102;&#38388;&#30340;&#32467;&#26500;&#12289;&#32500;&#24230;&#12289;&#26102;&#25928;&#24615;&#21644;&#26102;&#38388;&#30340;&#34920;&#36798;</a></li>
+        <li><a href="#&#22914;&#20309;&#25226;&#20107;&#20214;&#21644;&#26102;&#38388;&#30456;&#32852;&#31995;&#26377;&#20851;&#25968;&#25454;&#30340;&#24314;&#27169;&#21644;&#34920;&#36798;">&#22914;&#20309;&#25226;&#20107;&#20214;&#21644;&#26102;&#38388;&#30456;&#32852;&#31995;&#65311;&#26377;&#20851;&#25968;&#25454;&#30340;&#24314;&#27169;&#21644;&#34920;&#36798;</a></li>
+        <li><a href="#&#26597;&#35810;&#20248;&#21270;query-optimization&#21644;&#35780;&#20272;evaluation">&#26597;&#35810;&#20248;&#21270;&#65288;query optimization&#65289;&#21644;&#35780;&#20272;&#65288;evaluation&#65289;</a></li>
+        <li><a href="#&#31995;&#32479;&#26550;&#26500;">&#31995;&#32479;&#26550;&#26500;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="gis-&#29702;&#35770;&#19982;&#25216;&#26415;-&#20316;&#19994;-3&#26102;&#31354;-gis-&#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;">GIS &#29702;&#35770;&#19982;&#25216;&#26415; &#8211; &#20316;&#19994; 3&#65306;&#26102;&#31354; GIS &#30340;&#30740;&#31350;&#20998;&#26512;&#25253;&#21578;</h1>
+<blockquote>
+<p>&#27880;&#65306;&#36825;&#31687;&#25991;&#31456;&#20027;&#35201;&#30340;&#20391;&#37325;&#28857;&#22312;&#26102;&#38388;&#25968;&#25454;&#24211;&#12290;</p>
+</blockquote>
+<p>&#20174; Wikipedia &#19978;&#30340; <a href="https://en.wikipedia.org/wiki/Temporal_database">Temporal database</a> &#39029;&#38754;&#19978;&#25105;&#20102;&#35299;&#21040;&#65292;&#26102;&#38388;&#25968;&#25454;&#24211;&#26159; <a href="https://en.wikipedia.org/wiki/Richard_T._Snodgrass">Richard T. Snodgrass</a> &#22312; 1992 &#24180;&#25552;&#35758;&#21152;&#21040; SQL &#20013;&#65292;&#20316;&#20026;&#19968;&#31181;&#25193;&#23637;&#65292;&#36825;&#25104;&#20102; SQL &#30340;&#26631;&#20934;&#30340;&#19968;&#37096;&#20998;&#65288;ANSI X3.135.-1992 and ISO/IEC 9075:1992&#65289;&#12290;&#25105;&#26366;&#32463;&#20102;&#35299;&#36807; GeoJSON &#26684;&#24335;&#65292;&#29992;&#36807; MongoDB &#25968;&#25454;&#24211;&#23384;&#20648;&#31649;&#29702;&#31354;&#38388;&#24847;&#20041;&#19978;&#30340;&#22320;&#29702;&#20449;&#24687;&#25968;&#25454;&#65292;&#22522;&#26412;&#26126;&#30333;&#22320;&#29702;&#20449;&#24687;&#30340;&#23384;&#20648;&#21644;&#34920;&#36798;&#12290;&#20294;&#23545;&#26102;&#38388;&#25968;&#25454;&#30340;&#23384;&#20648;&#65292;&#21482;&#26377;&#24418;&#32780;&#19978;&#30340;&#31895;&#27973;&#35748;&#35782;&#65292;&#32570;&#20047;&#30452;&#35266;&#30340;&#29702;&#35299;&#21644;&#25972;&#20307;&#30340;&#25226;&#25569;&#65292;&#25152;&#20197;&#25105;&#38405;&#35835;&#20102; Richard Snodgrass &#30340;&#35770;&#25991; <em>Temporal Databases</em><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>&#12290;</p>
+<p>&#31616;&#32780;&#35328;&#20043;&#65292;&#36825;&#31687;&#35770;&#25991;&#20171;&#32461;&#20102; 1992 &#20197;&#26469;&#30340; 15 &#24180;&#20869;&#26102;&#31354;&#25968;&#25454;&#24211;&#30340;&#21457;&#23637;&#65292;&#23545;&#20854;&#20027;&#35201;&#24605;&#24819;&#12289;&#31574;&#30053;&#21644;&#23454;&#29616;&#20570;&#20102;&#20998;&#26512;&#38416;&#26126;&#12290;&#26041;&#20415;&#36215;&#35265;&#65292;&#19979;&#38754;&#29992;&#8220;Snodgrass&#8221;&#34920;&#31034; Richard Snodgrass&#65292;&#8220;&#35770;&#25991;&#8221;&#34920;&#31034;&#26412;&#31687;&#35770;&#25991;&#12290;</p>
+<h2 id="&#26102;&#38388;&#27010;&#24565;&#26102;&#38388;&#30340;&#32467;&#26500;&#32500;&#24230;&#26102;&#25928;&#24615;&#21644;&#26102;&#38388;&#30340;&#34920;&#36798;">&#26102;&#38388;&#27010;&#24565;&#65292;&#26102;&#38388;&#30340;&#32467;&#26500;&#12289;&#32500;&#24230;&#12289;&#26102;&#25928;&#24615;&#21644;&#26102;&#38388;&#30340;&#34920;&#36798;</h2>
+<p>&#20256;&#32479;&#30340;&#25968;&#25454;&#24211;&#65288;DBMS&#65289;&#34429;&#28982;&#35760;&#24405;&#20102;&#26152;&#22825;&#12289;&#20170;&#22825;&#30340;&#25968;&#25454;&#65292;&#20063;&#33021;&#35760;&#24405;&#26126;&#22825;&#30340;&#25968;&#25454;&#65292;&#20294;&#26080;&#27861;&#21453;&#24212;&#25968;&#25454;&#30340;&#21464;&#21270;&#36807;&#31243;&#12290;&#36825;&#21477;&#35805;&#21548;&#19978;&#21435;&#25110;&#35768;&#26222;&#36890;&#65292;&#20294;&#34164;&#21547;&#28145;&#24847;&#65292;&#25105;&#20998;&#26512;&#19968;&#19979;&#12290;&#26222;&#36890;&#30340;&#25968;&#25454;&#24211;&#35760;&#24405;&#30340;&#21508;&#20010;&#23383;&#27573;&#30340;&#20851;&#31995;&#65288;&#20027;&#38190;&#12289;&#22806;&#38190;&#31561;&#32422;&#26463;&#65289;&#65292;&#25968;&#25454;&#24211;&#20449;&#24687;&#21457;&#29983;&#21464;&#21270;&#20854;&#23454;&#26159;&#21487;&#20197;&#21453;&#26144;&#25968;&#25454;&#20869;&#23481;&#26102;&#38388;&#19978;&#30340;&#21464;&#21270;&#65292;&#20294;&#26159;&#36825;&#31181;&#21464;&#21270;&#26410;&#33021;&#36890;&#36807;&#20027;&#38190;&#12289;&#22806;&#38190;&#31561;&#32422;&#26463;&#30340;&#26041;&#24335;&#34987;&#35760;&#24405;&#19979;&#26469;&#65292;&#25152;&#20197;&#37327;&#21270;&#20854;&#21464;&#21270;&#36807;&#31243;&#65292;&#26080;&#27861;&#36827;&#34892;&#26356;&#28145;&#20837;&#30340;&#30740;&#31350;&#12290;&#36825;&#26159;&#38750;&#31354;&#38388;&#25968;&#25454;&#30456;&#23545;&#31354;&#38388;&#25968;&#25454;&#24211;&#30340;&#30828;&#20260;&#12290;&#22312;&#26089;&#26399;&#30340;&#26102;&#38388;&#25968;&#25454;&#24211;&#29702;&#35770;&#30740;&#31350;&#20013;&#65292;&#25552;&#20986;&#20102;&#35768;&#22810;&#21033;&#29992;&#20256;&#32479;&#25968;&#25454;&#24211;&#27010;&#24565;&#23454;&#29616;&#26102;&#24577;&#21151;&#33021;&#30340;&#24819;&#27861;&#12290;</p>
+<p>&#22312;&#36825;&#29255;&#35770;&#25991;&#20013;&#65292;&#20808;&#20551;&#23450;&#26102;&#38388;&#26159;&#19968;&#32500;&#30340;<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>&#65292;&#20854;&#27425;&#20551;&#23450;&#26102;&#38388;&#26159;&#31163;&#25955;&#30340;&#12290;&#36825;&#26679;&#19968;&#26469;&#65292;&#26102;&#38388;&#21644;&#31354;&#38388;&#21487;&#20197;&#34920;&#36798;&#20026;&#27491;&#20132;&#30340;&#19968;&#32452;&#65292;&#22312;&#36825;&#20010;&#32447;&#24615;&#31354;&#38388;&#20013;&#21487;&#20197;&#34920;&#31034;&#20026;&#31163;&#25955;&#30340;&#21521;&#37327;&#65288;&#28857;&#65289;&#12290;</p>
+<p>&#26102;&#38388;&#30340;&#34920;&#31034;&#20381;&#36182;&#20004;&#28857;&#65292;&#19968;&#26159; distance&#65292;&#20108;&#26159; boundedness&#65292;&#36825;&#26159;&#26102;&#38388;&#30340;&#20004;&#20010;&#32500;&#24230;&#12290;&#20030;&#20363;&#35828;&#65292; &#8220;9 &#28857; 20 &#20998;&#8221;<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>&#36825;&#37324;&#26377;&#20004;&#20010; boundedness &#20998;&#21035;&#26159;&#23567;&#26102;&#65288;&#8220;&#28857;&#8221;&#65289;&#21644;&#20998;&#38047;&#65288;&#8220;&#20998;&#8221;&#65289;&#65292;&#23567;&#26102;&#26356;&#21152;&#31895;&#30053;&#65292;&#8220;9&#8221;&#21644;&#8220;20&#8221;&#34920;&#31034; distance&#65292;&#34920;&#31034;&#36317;&#31163;&#26576;&#20010;&#22522;&#28857;&#30340;&#20197; boundedness &#20026;&#21333;&#20301;&#30340;&#26102;&#38388;&#38271;&#24230;&#12290;&#26102;&#38388;&#30340;&#30830;&#23450;&#24615;&#30001;&#27492;&#32780;&#26469;&#12290;&#36825;&#20010; boundedness &#21487;&#20197;&#29992;&#19968;&#23450;&#30340; baseline &#21644; distance &#26367;&#25442;&#65292;&#35770;&#25991;&#20013;&#25552;&#21040;&#30340; baseline &#26377;&#65306;</p>
+<ul>
+<li>Dawn of Time&#65288;&#23431;&#23449;&#22823;&#29190;&#28856;&#65289;</li>
+<li>Past Synchronization Point&#65288;&#36825;&#20010;&#27809;&#30475;&#25026;&#65289;</li>
+<li>UTC&#65288;&#36825;&#26159;&#25105;&#20204;&#29616;&#22312;&#29992;&#30340;&#26102;&#38388;&#65289;</li>
+<li>End of Time?&#65288;&#26377;&#19990;&#30028;&#26411;&#26085;&#21527;&#65311;&#65289;</li>
+</ul>
+<p>&#26102;&#38388;&#27169;&#31946;&#24615;&#30340;&#34920;&#31034;&#21017;&#20381;&#36182;&#20110;&#25968;&#25454;&#24211;&#30340; DBMS granularity&#65292;&#21644;&#22235;&#21449;&#26641;&#27010;&#24565;&#30456;&#20851;&#65292;&#20063;&#23601;&#26159;&#25968;&#25454;&#30340; granularity coarser &#36807;&#31243;&#12290;</p>
+<h2 id="&#22914;&#20309;&#25226;&#20107;&#20214;&#21644;&#26102;&#38388;&#30456;&#32852;&#31995;&#26377;&#20851;&#25968;&#25454;&#30340;&#24314;&#27169;&#21644;&#34920;&#36798;">&#22914;&#20309;&#25226;&#20107;&#20214;&#21644;&#26102;&#38388;&#30456;&#32852;&#31995;&#65311;&#26377;&#20851;&#25968;&#25454;&#30340;&#24314;&#27169;&#21644;&#34920;&#36798;</h2>
+<p>&#20027;&#35201;&#23601;&#26159;&#22312;&#35828;&#22914;&#20309;&#22312;&#35745;&#31639;&#26426;&#20013;&#34920;&#31034;&#12290;&#20854;&#23454;&#21482;&#28041;&#21450;&#20004;&#28857;&#65306;&#19968;&#26159;&#26102;&#38388;&#36328;&#24230;&#30340;&#36873;&#25321;&#65288;span&#65289;&#65292;&#19968;&#20010;&#26159;&#26102;&#38388;&#33539;&#22260;&#12290;&#36825;&#20004;&#28857;&#20915;&#23450;&#20102;&#26102;&#38388;&#30340;&#31934;&#24230;&#21644;&#38271;&#24230;&#33539;&#22260;&#65292;&#20063;&#20915;&#23450;&#20102;&#29992;&#35745;&#31639;&#26426;&#34920;&#36798;&#25152;&#24517;&#39035;&#30340;&#23383;&#33410;&#25968;&#65288;&#20063;&#23601;&#26159;&#20449;&#24687;&#37327;&#65289;&#12290;&#27604;&#22914;&#19968;&#24180; 12 &#20010;&#26376;&#65292;&#26368;&#23569;&#29992; 4 &#20010; bit &#20415;&#21487;&#20197;&#34920;&#31034;&#12290;&#38500;&#20102; span &#30340;&#25968;&#37327;&#35760;&#24405;&#22312;&#35745;&#31639;&#26426;&#20013;&#65288;&#26102;&#38388;&#30340;&#37327;&#65289;&#65292;&#36824;&#38656;&#35201; chronon identifiers&#65288;&#26102;&#38388;&#25139;&#65292;&#30830;&#23450;&#22522;&#20934;&#65289;&#12290;&#36825;&#26679;&#25165;&#33021;&#23545;&#26102;&#38388;&#36827;&#34892;&#36716;&#21270;&#21644;&#25340;&#25509;&#65288;&#36824;&#35760;&#24471;&#8220;9 &#28857; 20 &#20998;&#8221;&#21527;&#65311;&#65289;&#12290;</p>
+<p>&#20854;&#23454;&#36824;&#35201;&#32771;&#34385;&#20107;&#20214;&#30340;&#24314;&#27169;&#21644;&#34920;&#31034;&#12290;&#20107;&#20214;&#30340;&#26680;&#24515;&#22312;&#20110;&#26102;&#38388;&#19978;&#21644;&#31354;&#38388;&#19978;&#30340;&#21464;&#21270;&#65288;time-varying &amp; space-varying&#65289;&#12290;</p>
+<h2 id="&#26597;&#35810;&#20248;&#21270;query-optimization&#21644;&#35780;&#20272;evaluation">&#26597;&#35810;&#20248;&#21270;&#65288;query optimization&#65289;&#21644;&#35780;&#20272;&#65288;evaluation&#65289;</h2>
+<p>&#35770;&#25991;&#39318;&#20808;&#20171;&#32461;&#20102;&#26597;&#35810;&#35821;&#35328;&#38656;&#35201;&#30340; proposals&#65306;</p>
+<ul>
+<li>SQL</li>
+<li>Quel</li>
+<li>QBE</li>
+<li>Relational algebra</li>
+<li>DEAL</li>
+</ul>
+<p>&#36825;&#37096;&#20998;&#25105;&#27809;&#26377;&#32454;&#30475;&#65288;&#20284;&#20046;&#20063;&#19981;&#24517;&#35201;&#65289;&#12290;</p>
+<p>&#20854;&#27425;&#20171;&#32461;&#20102; schema &#35774;&#35745;&#65288;&#23601;&#36319;&#20351;&#29992; MongoDB &#26102;&#30340; Schema Design &#19968;&#26679;&#65289;&#12290;&#31616;&#35328;&#20043;&#65292;&#35774;&#35745;&#30446;&#26631;&#26159;&#65306;&#28040;&#38500;&#27495;&#20041;&#12289;&#30452;&#35266;&#26131;&#25026;&#12289;&#35268;&#21017;&#31616;&#21333;&#12290;&#20854;&#23454;&#29992; JavaScript &#21644; JSON&#65288;JavaScript &#25968;&#25454;&#26684;&#24335;&#65289;&#25152;&#34920;&#36798;&#30340;&#24688;&#22909;&#28385;&#36275;&#19978;&#36848;&#35201;&#27714;&#65292;&#36825;&#37324;&#36148;&#19968;&#27573;&#20197;&#21069;&#39033;&#30446;&#20013;&#30340;&#25968;&#25454;&#24211; Schema Design &#20195;&#30721;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="st">&quot;use strict&quot;</span><span class="op">;</span>
+<span class="kw">var</span> mongoose <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;mongoose&quot;</span>)<span class="op">;</span>
+<span class="kw">var</span> Schema <span class="op">=</span> <span class="va">mongoose</span>.<span class="at">Schema</span><span class="op">;</span>
+<span class="kw">var</span> SiteSchema <span class="op">=</span> <span class="kw">new</span> <span class="at">Schema</span>(<span class="op">{</span>
+  <span class="dt">_id</span><span class="op">:</span> Number<span class="op">,</span>
+  <span class="dt">f_id</span><span class="op">:</span> Number<span class="op">,</span>
+  <span class="dt">i_id</span><span class="op">:</span> Number<span class="op">,</span>
+  <span class="dt">name</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> String<span class="op">,</span> <span class="dt">required</span><span class="op">:</span> <span class="kw">true</span> <span class="op">},</span>
+  <span class="dt">info</span><span class="op">:</span> String<span class="op">,</span>
+  <span class="dt">loc</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> [Number]<span class="op">,</span> <span class="dt">index</span><span class="op">:</span> <span class="st">&#39;2d&#39;</span> <span class="op">},</span>
+  <span class="dt">created</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> Date<span class="op">,</span> <span class="dt">default</span><span class="op">:</span> <span class="va">Date</span>.<span class="at">now</span> <span class="op">},</span>
+  <span class="dt">updated</span><span class="op">:</span> <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> Date<span class="op">,</span> <span class="dt">default</span><span class="op">:</span> <span class="va">Date</span>.<span class="at">now</span> <span class="op">},</span>
+  <span class="dt">updator</span><span class="op">:</span> Number
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="va">SiteSchema</span>.<span class="at">pre</span>(<span class="st">&quot;save&quot;</span><span class="op">,</span> <span class="kw">function</span> (next) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">updated</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>()<span class="op">;</span>
+    <span class="at">next</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="va">SiteSchema</span>.<span class="va">methods</span>.<span class="at">findClosest</span> <span class="op">=</span> <span class="kw">function</span>(cb) <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">model</span>(<span class="st">&#39;Site&#39;</span>).<span class="at">find</span>(<span class="op">{</span>
+        <span class="dt">loc</span><span class="op">:</span> <span class="op">{</span> <span class="dt">$nearSphere </span><span class="op">:</span> <span class="kw">this</span>.<span class="at">loc</span> <span class="op">},</span>
+        <span class="dt">_id</span><span class="op">:</span> <span class="op">{</span> <span class="dt">$ne </span><span class="op">:</span> <span class="kw">this</span>.<span class="at">_id</span> <span class="op">}</span>
+    <span class="op">}</span>).<span class="at">limit</span>(<span class="dv">1</span>).<span class="at">exec</span>(cb)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">mongoose</span>.<span class="at">model</span>(<span class="st">&quot;Site&quot;</span><span class="op">,</span> SiteSchema)<span class="op">;</span></code></pre></div>
+<p>&#35770;&#25991;&#37324;&#20171;&#32461;&#20063;&#37117;&#26159;&#32467;&#26500;&#21270;&#30340;&#26597;&#35810;&#35821;&#35328;&#65292;&#20294;&#37117;&#27809;&#26377; JSON &#26469;&#24471;&#31616;&#21333;&#30452;&#35266;&#12290;</p>
+<h2 id="&#31995;&#32479;&#26550;&#26500;">&#31995;&#32479;&#26550;&#26500;</h2>
+<p>&#65288;&#30053;&#65289;</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>&#26469;&#33258;&#35770;&#25991;&#38598;&#65306;Theories and Methods of Spatio-Temporal Reasoning in Geographic Space&#12290;<a href="#fnref1">&#8617;</a></p></li>
+<li id="fn2"><p>&#26089;&#26399;&#30740;&#31350;&#20998;&#25955;&#22312; linear &#21644; branching &#19978;&#65292;&#26641;&#32467;&#26500;&#30340; branching &#30340;&#26102;&#38388;&#34920;&#31034;&#21487;&#33021;&#23548;&#33268;&#26102;&#38388;&#19978;&#30340;&#8220;&#29615;&#8221;&#65288;&#26102;&#38388;&#20498;&#27969;&#65289;&#65292;&#19981;&#27604; linear &#20551;&#23450;&#31616;&#21333;&#23454;&#29992;&#12290;<a href="#fnref2">&#8617;</a></p></li>
+<li id="fn3"><p>&#36825;&#20010;&#20363;&#23376;&#26159;&#25105;&#20030;&#30340;&#12290;<a href="#fnref3">&#8617;</a></p></li>
+</ol>
+</div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#gis">gis</a></li>
+<li><a class="tzx-tag" href="tags.html/#homework">homework</a></li>
+<li><a class="tzx-tag" href="tags.html/#report">report</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0051-spatial-gis.md" title="120 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0051-spatial-gis.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 120,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

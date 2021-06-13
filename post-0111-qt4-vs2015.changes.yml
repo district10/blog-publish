@@ -1,0 +1,13 @@
+---
+tzx-changes:
+  - hash: a315fef219e9938571b29ae5757e0b9fbd29f9c0
+    datetime: 1507431020
+    insertions: 1
+    deletions: 1
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 84
+    deletions: 0
+
+tzx-filename: _posts/post-0111-qt4-vs2015.md
+...

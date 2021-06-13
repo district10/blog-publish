@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning Makefile</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="managing-projects-with-gnu-make">Managing Projects with GNU Make</h1>
+<p><a href="https://book.douban.com/subject/1850994/"><img src="https://img1.doubanio.com/lpic/s11232437.jpg" /></a></p>
+<h2 id="foreword-preface">Foreword &amp; Preface</h2>
+<p>The <code>make</code> utility is an enticing servant.</p>
+<pre><code>enticing
+
+    [&#618;n&#39;ta&#618;s&#618;&#331;]
+
+    adj. &#36855;&#20154;&#30340;&#65307;&#24341;&#35825;&#30340;
+    v. &#24341;&#35825;&#65307;&#35825;&#39575;&#65288;entice&#30340;ing&#24418;&#24335;&#65289;</code></pre>
+<h2 id="part-i-basic-concepts">Part I: Basic Concepts</h2>
+<h3 id="chapter-1-how-to-write-a-simple-makefile">Chapter 1: How to Write a Simple Makefile</h3>
+<ul>
+<li><p>Moreover, as the program&#8217;s complexity grows these <strong>mundane tasks</strong> can become increasingly error-prone as different versions of the program are developed, perhaps for other platforms or other versions of support libraries, etc.</p>
+<pre><code>mundane [m&#652;n&#39;den]
+
+    adj. &#19990;&#20439;&#30340;&#65292;&#24179;&#20961;&#30340;&#65307;&#19990;&#30028;&#30340;&#65292;&#23431;&#23449;&#30340;</code></pre></li>
+<li>Targets and Prerequisites</li>
+<li>Dependencing Checking</li>
+<li>Minimizing Rebuilds</li>
+<li>Invoking make: makefile, Makefile, GNUMakefile</li>
+<li><p>Basic Makefile Syntax</p>
+<p>&#160;&#160;target<sub>1</sub> target<sub>2</sub> target<sub>3</sub> : Prerequisites<sub>1</sub> Prerequisites<sub>2</sub><br />
+&#160;&#160;&#160;&#160;&#160;&#160;cammand<sub>1</sub><br />
+&#160;&#160;&#160;&#160;&#160;&#160;cammand<sub>2</sub><br />
+&#160;&#160;&#160;&#160;&#160;&#160;cammand<sub>3</sub></p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span>
+<span class="kw">Makefile</span>:6: *** commands commmence before first target.  Stop.</code></pre></div>
+<pre><code>commence
+&#33521; [k&#601;&#39;mens] &#32654; [k&#601;&#39;m&#603;ns]
+
+    v. &#24320;&#22987;&#65307;&#30528;&#25163;&#65307;&lt;&#33521;&gt;&#33719;&#24471;&#23398;&#20301;</code></pre></li>
+</ul>
+<h3 id="chapter-2-rules">Chapter 2: Rules</h3>
+<ul>
+<li><p>Rules</p>
+<ul>
+<li><p>Explicit rules</p>
+<ul>
+<li><code>*.o</code> &lt;- <code>*.c</code></li>
+<li>Wildcards: <code>~</code> (tilde), <code>*</code>, <code>?</code>, <code>[...]</code>, <code>[^...]</code>, etc</li>
+<li><p>Phony Targets</p>
+<ul>
+<li>the standard phony target is &#8220;clean&#8221;</li>
+<li><code>make</code> cannot distinguish between a file target and phony target</li>
+<li>a special target <code class="sourceCode makefile">.PHONY</code> to tell make that a target is not a real file</li>
+<li>phony targets are always out of date, so their <strong>dependent</strong> always get to be remade</li>
+</ul></li>
+<li><p>Empty Targets</p>
+<ul>
+<li><code>make</code> defines a varible <code>$?</code> to be set of prerequisites that are newer than the target</li>
+<li><div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dv">print:</span><span class="dt"> *.[hc]</span>
+    lpr <span class="ch">$?</span>
+    touch <span class="ch">$@</span></code></pre></div></li>
+</ul></li>
+<li><p>Variables</p>
+<ul>
+<li><p>Automatic Variables &#9829;&#65039;</p>
+<ul>
+<li><code class="sourceCode makefile"><span class="ch">$@</span></code>: target</li>
+<li><code class="sourceCode makefile"><span class="ch">$*</span></code>: stem of the target filename (no file extension suffix)</li>
+<li><code class="sourceCode makefile"><span class="ch">$&lt;</span></code>: first prerequsite</li>
+<li><code class="sourceCode makefile"><span class="ch">$?</span></code>: all newer prerequisites than target</li>
+<li><code class="sourceCode makefile"><span class="ch">$^</span></code>: all prerequisites, <strong>sepped by spaces</strong>, no dups</li>
+<li><code class="sourceCode makefile"><span class="ch">$+</span></code>: all prerequisites, <strong>sepped by spaces</strong>, with dups</li>
+</ul>
+<p>variants</p>
+<ul>
+<li><code>D</code>, get directory portion of variable, e.g. <code class="sourceCode makefile"><span class="ch">@</span><span class="fu">mkdir -p </span><span class="ch">$(</span><span class="dt">@D</span><span class="ch">)</span></code></li>
+<li><code>F</code>, get file portion of variable</li>
+</ul></li>
+</ul></li>
+<li><p>Finding Files with VPATH and vpath</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="co"># globally set</span>
+<span class="dt">VPATH </span><span class="ch">=</span><span class="st"> src</span>
+<span class="dt">CPPFLAGS </span><span class="ch">=</span><span class="st"> -I include</span>
+
+<span class="co"># precise way to set: `vpath pattern diroctory-list&#39;</span>
+vpath %.c src
+vpath %.h <span class="kw">include</span></code></pre></div>
+<ul>
+<li><p>the <code>VPATH</code> variable consists of a list of directories to search when <code>make</code> needs a file</p>
+<p>The list of directories can be separated by spaces or colons on Unix and separated by spaces or semicolons on Windows. I prefer to use spaces since that works on all systems and we can <strong>avoid the whole colon/semicolon imbroglio</strong>. Also, the directories are easier to read when separated by spaces.</p>
+<pre><code>imbroglio
+
+    &#33521; [&#618;m&#39;br&#601;&#650;l&#618;&#601;&#650;] &#32654; [&#618;m&#39;brol&#618;o]
+
+    n. &#32416;&#33883;&#65307;&#32439;&#20081;&#65307;&#32439;&#25200;</code></pre></li>
+</ul></li>
+</ul></li>
+<li><p>Pattern rules</p>
+<ul>
+<li><p>Static Pattern Rules</p>
+<p>A static pattern rule is one that <strong>applies only to a specific list of targets</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dv">$(OBJECTS):</span><span class="dt"> %.o: %.c</span>
+    <span class="ch">$(</span><span class="dt">CC</span><span class="ch">)</span> -c <span class="ch">$(</span><span class="dt">CFLAGS</span><span class="ch">)</span> <span class="ch">$&lt;</span> -o <span class="ch">$@</span></code></pre></div>
+<p>all <code>%.o</code> in <code>$(OBJECTS)</code> that depends on <code>$c</code> can be made with this command.</p></li>
+<li><p>Suffix Rules</p>
+<ul>
+<li><code>.c.o:</code> &#31561;&#20215;&#20110; <code>.o: .c</code> (mnemonic: <code>-&gt;</code>)</li>
+<li><code>.p:</code> -&gt; <code>%: %.p</code></li>
+<li><code>make --no-built-in-rules</code>, <code>make -r</code></li>
+</ul></li>
+</ul></li>
+<li><p>Implicit rules</p>
+<ul>
+<li><p>The Implicit Rules Database</p>
+<ul>
+<li><dl>
+<dt><code>make --print-data-base</code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span> --print-data-base
+<span class="kw">...</span>&#30465;&#30053;&#19968;&#20123;...
+<span class="co"># Not a target:</span>
+<span class="kw">.info</span>:
+<span class="co">#  Builtin rule</span>
+<span class="co">#  Implicit rule search has not been done.</span>
+<span class="co">#  Modification time never checked.</span>
+<span class="co">#  File has not been updated.</span>
+
+<span class="co"># Not a target:</span>
+<span class="kw">caffe-notes</span>/misc.md:
+<span class="co">#  Implicit rule search has been done.</span>
+<span class="co">#  Last modified 2017-02-28 19:17:38</span>
+<span class="co">#  File has been updated.</span>
+<span class="co">#  Successfully updated.</span>
+
+<span class="co"># Not a target:</span>
+<span class="kw">2016</span>/note7.md:
+<span class="co">#  Implicit rule search has been done.</span>
+<span class="co">#  Last modified 2017-03-31 16:38:39</span>
+<span class="co">#  File has been updated.</span>
+<span class="co">#  Successfully updated.</span>
+
+<span class="kw">publish/lang</span>/typescript.html: <span class="kw">lang/typescript.md</span>
+<span class="co">#  Implicit rule search has been done.</span>
+<span class="co">#  Implicit/static pattern stem: &#39;lang/typescript&#39;</span>
+<span class="co">#  Last modified 2017-03-06 10:47:56</span>
+<span class="co">#  File has been updated.</span>
+<span class="co">#  Successfully updated.</span>
+<span class="co">#  recipe to execute (from &#39;Makefile&#39;, line 66):</span>
+        <span class="kw">@mkdir</span> -p <span class="ot">$(</span><span class="kw">@D</span><span class="ot">)</span>
+        <span class="kw">(perl</span> meta/cat.pl $<span class="kw">&lt;</span> <span class="kw">|</span> <span class="kw">perl</span> meta/drawer.pl <span class="kw">||</span> <span class="kw">cat</span> $<span class="kw">&lt;)</span> <span class="kw">|</span> <span class="kw">\</span>
+        <span class="kw">pandoc</span> \
+                -V rootdir=../ \
+                -S -s --ascii --mathjax \
+                -f <span class="ot">$(</span><span class="kw">FROM</span><span class="ot">)</span> \
+                --template meta/note.template \
+                -o <span class="ot">$@</span>
+
+<span class="co"># files hash-table stats:</span>
+<span class="co"># Load=304/1024=30%, Rehash=0, Collisions=5881/18470=32%</span>
+<span class="co"># VPATH Search Paths</span>
+
+<span class="co"># No &#39;vpath&#39; search paths.</span>
+
+<span class="co"># No general (&#39;VPATH&#39; variable) search path.</span>
+
+<span class="co"># strcache buffers: 48 (47) / strings = 15127 / storage = 386261 B / avg = 25 B</span>
+<span class="co"># current buf: size = 8162 B / used = 3362 B / count = 105 / avg = 32 B</span>
+<span class="co"># other used: total = 382899 B / count = 15022 / avg = 25 B</span>
+<span class="co"># other free: total = 715 B / max = 28 B / min = 1 B / avg = 15 B</span>
+
+<span class="co"># strcache performance: lookups = 21279 / hit rate = 28%</span>
+<span class="co"># hash-table stats:</span>
+<span class="co"># Load=15127/16384=92%, Rehash=1, Collisions=57821/28961=200%</span>
+<span class="co"># Finished Make data base on Sun May 21 17:31:34 2017</span></code></pre></div>
+</dd>
+</dl></li>
+<li>Working with Implicit Rules</li>
+<li>Rule Structure</li>
+<li>Implicit Rules for Source Control</li>
+<li><p>A Simple Help Command</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dt">MAKE </span><span class="ch">:=</span><span class="st"> make</span>
+<span class="dt">AWK </span><span class="ch">:=</span><span class="st"> awk</span>
+<span class="dt">SORT </span><span class="ch">:=</span><span class="st"> sort</span>
+<span class="dt">PR </span><span class="ch">:=</span><span class="st"> pr</span>
+<span class="dv">help:</span>
+    <span class="ch">$(</span><span class="dt">MAKE</span><span class="ch">)</span> --print-data-base --question |                                          <span class="ch">\</span>
+    <span class="ch">$(</span><span class="dt">AWK</span><span class="ch">)</span> <span class="st">&#39;/^[^.%][-A-Za-z0-9_]*:/ { print substr(</span><span class="ch">$$</span><span class="st">1, 1, length(</span><span class="ch">$$</span><span class="st">1)-1) }&#39;</span> |      <span class="ch">\</span>
+    <span class="ch">$(</span><span class="dt">SORT</span><span class="ch">)</span> | <span class="ch">$(</span><span class="dt">PR</span><span class="ch">)</span> --omit-pagination --width=80 --columns=4</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">make</span> help
+<span class="kw">all</span>             help            n               t
+<span class="kw">c</span>               include         note            w
+<span class="kw">clean</span>           j               serve           watch
+<span class="kw">clone</span>           m               sitemap         wiki
+<span class="kw">gh</span>              Makefile        sm</code></pre></div>
+<p>Using the <code>--question</code> option prevents make from running any actual commands.</p></li>
+<li><p>Special Targets</p>
+<p>A special target is a built-in phony target usedd to change make&#8217;s default behavior.</p></li>
+<li><p>Automatic Dependency Generation</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">echo</span> <span class="st">&quot;#include &lt;stdio.h&gt;&quot;</span> <span class="kw">&gt;</span> stdio.c
+$ <span class="kw">gcc</span> -M stdio.c
+<span class="kw">stdio.o</span>: stdio.c \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/stdio.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/crtdefs.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw_mac.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw_secapi.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/vadefs.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/sdks/_mingw_directx.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw_print_push.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/swprintf.inl \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+ C:/Program\ Files/Haskell\ Platform/7.10.3/mingw/x86_64-w64-mingw32/include/_mingw_print_pop.h</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">make</span> --just-print</code></pre></div></li>
+<li><p>Managing Libraries</p>
+<ul>
+<li>Creating and Updating Libraries</li>
+<li>Using Libraries as Prerequisites</li>
+</ul></li>
+<li><p>Double-Colon Rules</p>
+<p>&#20004;&#32452;&#35268;&#21017;&#37117;&#21487;&#20197;&#20570;&#19968;&#20214;&#20107;&#12290;&#36873;&#25321;&#37027;&#26465;&#26356;&#26032;&#30340;&#36335;&#12290;</p>
+<p>Double-colon rules are an obscure feature that allows the same target to be updated with different commands depending on which set of prerequisites are newer than the target.</p>
+<p>Realistic, useful examples of this feature are difficult to come by (which is why it is an obscure feature), but here is an artificial example:</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dv">file-list:</span><span class="dt">: generate-list-script</span>
+    chmod +x <span class="ch">$&lt;</span>
+    generate-list-script <span class="ch">$(</span><span class="dt">files</span><span class="ch">)</span> &gt; file-list
+<span class="dv">file-list:</span><span class="dt">: </span><span class="ch">$(</span><span class="dt">files</span><span class="ch">)</span>
+    generate-list-script <span class="ch">$(</span><span class="dt">files</span><span class="ch">)</span> &gt; file-list</code></pre></div>
+<p>We can regenerate the file-list target two ways. If the generating script has been updated, we make the script executable, then run it. If the source files have changed, we simply run the script. Although a bit far-fetched, this gives you a feel for how the feature might be used.</p></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="chapter-3-variables-and-macros">Chapter 3: Variables and Macros</h3>
+<ul>
+<li>What Variables Are Used For</li>
+<li><p>Variables Types</p>
+<ul>
+<li>simply expanded variables: <code>:=</code></li>
+<li>recursively expanded variables: <code>=</code></li>
+</ul></li>
+<li><p>Other Types of Assgnment</p>
+<ul>
+<li><code>?=</code>: conditional variable assignment operator, assign only when the variable doesn&#8217;t have a value</li>
+</ul></li>
+<li><p>Macros</p>
+<ul>
+<li><strong>&#29992;&#20102; define &#30340;&#21483; macro&#65292;&#29992;&#30340; assignment &#30340;&#21483; variable</strong></li>
+<li>macro &#21644; variable &#30340; specify &#26159;&#19968;&#26679;&#30340;&#37117;&#26159; <code>$(macro)</code>, <code>$(variable)</code></li>
+<li><div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="kw">define</span> create-jar
+  <span class="ch">@</span><span class="fu">echo Creating </span><span class="ch">$@</span><span class="fu">...</span>
+  <span class="ch">$(</span><span class="dt">RM</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">TMP_JAR_DIR</span><span class="ch">)</span>
+  <span class="ch">$(</span><span class="dt">MKDIR</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">TMP_JAR_DIR</span><span class="ch">)</span>
+  <span class="ch">$(</span><span class="dt">CP</span><span class="ch">)</span> -r <span class="ch">$^</span> <span class="ch">$(</span><span class="dt">TMP_JAR_DIR</span><span class="ch">)</span>
+  cd <span class="ch">$(</span><span class="dt">TMP_JAR_DIR</span><span class="ch">)</span> &amp;&amp; <span class="ch">$(</span><span class="dt">JAR</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">JARFLAGS</span><span class="ch">)</span> <span class="ch">$@</span> .
+  <span class="ch">$(</span><span class="dt">JAR</span><span class="ch">)</span> -ufm <span class="ch">$@</span> <span class="ch">$(</span><span class="dt">MANIFEST</span><span class="ch">)</span>
+  <span class="ch">$(</span><span class="dt">RM</span><span class="ch">)</span> <span class="ch">$(</span><span class="dt">TMP_JAR_DIR</span><span class="ch">)</span>
+<span class="kw">endef</span></code></pre></div></li>
+</ul></li>
+<li><p>When Variables Are Expanded</p>
+<ul>
+<li><code>=</code>, <code>?=</code></li>
+<li><code>:=</code></li>
+<li><code>+=</code></li>
+<li>it&#8217;s evaluation is deferred (&#24310;&#26102;)</li>
+</ul></li>
+<li>Target- and Pattern-Specific Variables</li>
+<li>Where Variables Come From</li>
+<li><p>Conditional and include Processing</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="kw">ifdef</span> COMSPEC
+    ...
+<span class="kw">else</span>
+    ...
+<span class="kw">endif</span></code></pre></div>
+<p><code>ifdef</code> &#36824;&#21487;&#20197;&#26159; <code>ifndef</code>, <code>ifeq</code>, <code>ifneq</code></p></li>
+<li><p>The include Directive</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="kw">include</span> definitions.mk</code></pre></div></li>
+<li><p>Standard make Variables</p></li>
+</ul>
+<h3 id="chapter-4-functions">Chapter 4: Functions</h3>
+<ul>
+<li><p>User-Defined Functions</p>
+<p><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">call</span><span class="st"> macro-name[</span><span class="kw">,</span><span class="st"> param1...]</span><span class="ch">)</span></code>:</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="kw">define</span> parent
+    echo <span class="st">&quot;parent has two parameters: </span><span class="ch">$1</span><span class="st">, </span><span class="ch">$2</span><span class="st">&quot;</span>
+    <span class="ch">$(</span><span class="kw">call</span><span class="st"> child</span><span class="kw">,</span><span class="st"> </span><span class="ch">$1)</span>
+<span class="kw">endef</span>
+
+...
+
+<span class="dv">target:</span><span class="dt"> deps</span>
+    <span class="ch">$(</span><span class="kw">call</span><span class="st"> parent</span><span class="kw">,</span><span class="st">one</span><span class="kw">,</span><span class="st">two</span><span class="ch">)</span></code></pre></div>
+<p>&#23567;&#24515;&#36825;&#37324;&#30340;&#21442;&#25968;&#12290;</p></li>
+<li><p>Built-in Functions</p>
+<p><code>$(function-name arg1[, argn])</code></p>
+<ul>
+<li><p>String Functions</p>
+<ul>
+<li><p><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">filter</span><span class="st"> pattern...</span><span class="kw">,</span><span class="st">text</span><span class="ch">)</span></code> &#27880;&#24847;&#19981;&#35201;&#26377;&#31354;&#26684;</p>
+<p>&#28385;&#36275; pattern &#30340;</p></li>
+<li><p><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">filter-out</span><span class="st"> pattern...</span><span class="kw">,</span><span class="st">text</span><span class="ch">)</span></code> &#19981;&#28385;&#36275;&#30340;</p></li>
+<li><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">findstring</span><span class="st"> string</span><span class="kw">,</span><span class="st">text</span><span class="ch">)</span></code></li>
+<li><p><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">subst</span><span class="st"> search-string</span><span class="kw">,</span><span class="st">replace-string</span><span class="kw">,</span><span class="st">text</span><span class="ch">)</span></code></p>
+<p>e.g.</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">subst</span><span class="st"> .c</span><span class="kw">,</span><span class="st">.o</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">sources</span><span class="ch">))</span></code></pre></div></li>
+<li><p><code class="sourceCode makefile"><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> search-pattern</span><span class="kw">,</span><span class="st">replace-pattern</span><span class="kw">,</span><span class="st">text</span><span class="ch">)</span></code></p>
+<p>wildcard version of <code>subst</code>.</p>
+<p>&#25105;&#20197;&#21069;&#24635;&#20197;&#20026; patsubst &#26159; path substitute&#65292;&#29616;&#22312;&#21457;&#29616;&#21407;&#26469;&#26159; pattern substitute&#12290;</p></li>
+<li><code>$(words text)</code>&#65306;&#23601;&#26159; <code>#text</code></li>
+<li><code>$(word n,text)</code>&#65306;&#23601;&#26159; <code>text[n]</code>&#65292;n &#20174; 1 &#24320;&#22987;&#25968;</li>
+<li><code>$(firstword text)</code>, word 1,text</li>
+<li><p><code>$(wordlist start,end,text)</code>, <code>text[start:end]</code>&#65292;inclusive</p></li>
+</ul></li>
+<li><p>Important Miscellaneous Functions</p>
+<ul>
+<li><strong><code>$(sort list)</code>, remove dups</strong></li>
+<li><code>$(shell command)</code></li>
+</ul></li>
+<li><p>Filename Functions</p>
+<ul>
+<li><p>wildcard pattern&#8230;</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dt">sources </span><span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">wildcard</span><span class="st"> *.c *.h</span><span class="ch">)</span></code></pre></div></li>
+<li><p>dir list&#8230; &#9829;&#65039;</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="dt">source-dirs </span><span class="ch">:=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">sort</span><span class="st"> \</span>
+<span class="st">                    </span><span class="ch">$(</span><span class="kw">dir</span><span class="st"> \</span>
+<span class="st">                        </span><span class="ch">$(</span><span class="kw">shell</span><span class="st"> find . -name &#39;*.c&#39;</span><span class="ch">)))</span></code></pre></div></li>
+<li>notdir name&#8230; filename portion of a file path</li>
+<li>suffix name&#8230;</li>
+<li>basename name&#8230;</li>
+<li><p>addsuffix suffix,name&#8230;</p>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="co"># $(call find-program, filter-pattern)</span>
+<span class="dt">find-program </span><span class="ch">=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">filter</span><span class="st"> </span><span class="ch">$1</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">    </span><span class="ch">$(</span><span class="kw">wildcard</span><span class="st"> \</span>
+<span class="st">        </span><span class="ch">$(</span><span class="kw">addsuffix</span><span class="st"> /*</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">            </span><span class="ch">$(</span><span class="kw">sort</span><span class="st"> \</span>
+<span class="st">                </span><span class="ch">$(</span><span class="kw">subst</span><span class="st"> :</span><span class="kw">,</span><span class="st"> </span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                    </span><span class="ch">$(</span><span class="kw">subst</span><span class="st"> ::</span><span class="kw">,</span><span class="st">:.:</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                        </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> :%</span><span class="kw">,</span><span class="st">.:%</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                            </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> %:</span><span class="kw">,</span><span class="st">%:.</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">PATH</span><span class="ch">)))))))))</span>
+<span class="dv">find:</span>
+    <span class="ch">@</span><span class="fu">echo </span><span class="ch">$(</span><span class="kw">words</span><span class="st"> </span><span class="ch">$(</span><span class="kw">call</span><span class="st"> find-program</span><span class="kw">,</span><span class="st"> %</span><span class="ch">))</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode makefile"><code class="sourceCode makefile"><span class="co"># $(call find-program,wildcard-pattern)</span>
+<span class="dt">find-program </span><span class="ch">=</span><span class="st"> </span><span class="ch">$(</span><span class="kw">wildcard</span><span class="st"> \</span>
+<span class="st">    </span><span class="ch">$(</span><span class="kw">addsuffix</span><span class="st"> /</span><span class="ch">$1</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">        </span><span class="ch">$(</span><span class="kw">sort</span><span class="st"> \</span>
+<span class="st">            </span><span class="ch">$(</span><span class="kw">subst</span><span class="st"> :</span><span class="kw">,</span><span class="st"> </span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                </span><span class="ch">$(</span><span class="kw">subst</span><span class="st"> ::</span><span class="kw">,</span><span class="st">:.:</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                    </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> :%</span><span class="kw">,</span><span class="st">.:%</span><span class="kw">,</span><span class="st"> \</span>
+<span class="st">                        </span><span class="ch">$(</span><span class="kw">patsubst</span><span class="st"> %:</span><span class="kw">,</span><span class="st">%:.</span><span class="kw">,</span><span class="ch">$(</span><span class="dt">PATH</span><span class="ch">))))))))</span>
+<span class="dv">find:</span>
+<span class="ch">@</span><span class="fu">echo </span><span class="ch">$(</span><span class="kw">words</span><span class="st"> </span><span class="ch">$(</span><span class="kw">call</span><span class="st"> find-program</span><span class="kw">,</span><span class="st">*</span><span class="ch">))</span></code></pre></div></li>
+<li>addprefix suffix,name&#8230;</li>
+<li><p>join prefix-list,suffix-list</p></li>
+</ul></li>
+</ul></li>
+<li>Flow Control</li>
+<li><p>Less Important Miscellaneous Functions</p>
+<ul>
+<li>strip text</li>
+<li>origin variable</li>
+<li>warning msg</li>
+</ul></li>
+<li><p>Advanced User-Defined Functions</p>
+<ul>
+<li>eval and value</li>
+<li>Hooking Functions</li>
+<li>Passing Parameters</li>
+</ul></li>
+</ul>
+<h3 id="chapter-5-commands">Chapter 5: Commands</h3>
+<ul>
+<li>Parsing Commands</li>
+<li>Continuing Long Commands</li>
+<li><p>Command Modifiers</p>
+<ul>
+<li><code>@</code>, don&#8217;t echo the command&#65292;&#20854;&#23454;&#23601;&#36825;&#20010;&#24120;&#29992;</li>
+<li><code>-</code>, ignore errors</li>
+<li><code>+</code>, run even with <code>--just-print</code></li>
+</ul></li>
+<li>Error and Interputs</li>
+<li>Which Shell to Use</li>
+<li><p>Empty Commands: <code>header.h: ;</code></p>
+<p>&#36825;&#26679;&#19981;&#22909;</p>
+<pre><code>header.h:
+    &#36825;&#19968;&#34892;&#21482;&#26377;&#19968;&#20010; tab&#65292;&#21487;&#33021;&#34987; editor &#22788;&#29702;&#25481;&#8230;&#8230;</code></pre>
+<p>Empty command &#20027;&#35201;&#26159;&#20026;&#20102;&#38450;&#27490;&#22240;&#20026;&#19968;&#31181; pattern &#30340;&#25991;&#20214;&#26356;&#26032;&#20102;&#32780; execute &#19968;&#20123;&#26080;&#24517;&#35201;&#30340; commands&#12290;</p></li>
+<li>Command Environtment</li>
+<li>Evaluating Commands</li>
+<li><p>Command-Line Limits</p>
+<p>&#22240;&#20026; shell &#25351;&#20196;&#38271;&#24230;&#26377;&#38480;</p>
+<p>&#65288;&#21520;&#27133;&#65306;command-line &#21644; command line &#20004;&#31181;&#35828;&#27861;&#29992;&#30340;&#20154;&#37117;&#24456;&#22810;&#65307;&#23601;&#36319; home page &#21644; homepage &#29992;&#30340;&#20154;&#37117;&#22810;&#19968;&#26679;&#12290;&#65289;</p></li>
+</ul>
+<p>&#21518;&#38754;&#23601;&#27809;&#24517;&#35201;&#30475;&#20102;&#12290;</p>
+<h2 id="part-ii-advanced-and-specialized-topics">Part II: Advanced and Specialized Topics</h2>
+<h3 id="chapter-6-managing-large-projects">Chapter 6: Managing Large Projects</h3>
+<h3 id="chapter-7-portable-makefiles">Chapter 7: Portable Makefiles</h3>
+<h3 id="chapter-8-c-and-c">Chapter 8: C and C++</h3>
+<h3 id="chapter-9-java">Chapter 9: Java</h3>
+<h3 id="chapter-10-improving-the-performance-of-make">Chapter 10: Improving the Performance of make</h3>
+<h3 id="chapter-11-example-makefiles">Chapter 11: Example Makefiles</h3>
+<h3 id="chapter-12-debugging-makefiles">Chapter 12: Debugging Makefiles</h3>
+<h2 id="part-iii-appendixes">Part III: Appendixes</h2>
+<h3 id="appendix-a-running-make">Appendix A: Running make</h3>
+<h3 id="appendix-b-the-outer-limits">Appendix B: The Outer Limits</h3>
+<h3 id="appendix-c-gnu-free-documentation-licensegnu-projectfree-software-foundation-fsf">Appendix C: GNU Free Documentation License&#151;GNU Project&#151;Free Software Foundation (FSF)</h3>
+<h2 id="colophon">Colophon</h2>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

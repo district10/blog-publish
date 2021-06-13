@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>全景漫游场景过渡研究</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1">
+    <style>
+        * {
+            font-family: Monaco, Menlo, Consolas, "Courier New", Monospace, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", STXihei, Heiti, sans-serif, FontAwesome;
+            font-size: 150;
+        }
+        li {
+            margin-bottom: 2em;
+            list-style-type: square;
+        }
+        ul, #qrcode3 {
+            margin-left: 2em;
+        }
+    </style>
+</head>
+<body>
+<h1>全景漫游场景过渡研究</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Blend &#26041;&#27861;</th>
+<th align="center">Morph &#26041;&#27861;</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><img src="doc/blend-effect-0.25.gif" /></td>
+<td align="center"><img src="doc/morph-effect-0.25.gif" /></td>
+</tr>
+</tbody>
+</table>
+<ul>
+    <li>Morph：<a target="_blank" href="dyna_sphere.html" >动态全景球</a>方案<br /><div id="qrcode1"></div></li>
+    <li>Morph：<a target="_blank" href="dyna_texture.html">动态全景图</a>方案<br /><div id="qrcode2"></div></li>
+    <li>Illustration：<a target="_blank" href="dyna_triangle.html">动态三角形</a>方案<br /><div id="qrcode3"></div></li>
+    <li><a target="_blank" href="README.html">说明文档</a></li>
+    <li><a target="_blank" href="editor.html">同名点编辑器</a> (请在电脑打开)</li>
+    <li>论文：室内 360 度全景浏览场景无缝过渡技术研究
+        <a target="_blank" href="http://tangzhixiong.com/master-thesis/">HTML (30 MB, lazy load)</a>
+        <a target="_blank" href="http://tangzhixiong.com/master-thesis/tzx-thesis-min.pdf">PDF (2.5 MB, compressed images)</a>
+        <a target="_blank" href="http://tangzhixiong.com/master-thesis/tzx-thesis-max.pdf">PDF (50 MB, original LaTeX output)</a>
+    </li>
+    <li>
+        <a target="_blank" href="https://www.bilibili.com/video/av11153210/">全景变形技术：一点启发、一点分享 (slides share)</a>
+    </li>
+</ul>
+
+<hr style="color:violet;margin-top: 10em"/>
+<div id="qrcode4"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/qrcode.min.js"></script>
+<script>
+    var url = window.location.toString();
+    var index = url.lastIndexOf('/');
+    var url1 = url.substring(0,index)+'/dyna_sphere.html';
+    var url2 = url.substring(0,index)+'/dyna_texture.html';
+    var url3 = url.substring(0,index)+'/dyna_triangle.html';
+    new QRCode(document.getElementById("qrcode1"), url1);
+    new QRCode(document.getElementById("qrcode2"), url2);
+    new QRCode(document.getElementById("qrcode3"), url3);
+    new QRCode(document.getElementById("qrcode4"), url );
+</script>
+</body>

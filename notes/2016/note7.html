@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notes 7</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<p><a href="note6.html" title="note6.md">&#12304;Prev Note&#12305;</a><a href="../2017/note1.html" title="../2017/note1.md">&#12304;Next Note&#12305;</a></p>
+<ul>
+<li><p><a href="https://matterport.com/">Immersive 3D for the Real World | Matterport</a></p></li>
+<li><p><a href="http://www.itjuzi.com/company/11745">Matterport | IT&#26708;&#23376;</a></p></li>
+<li><dl>
+<dt><a href="https://en.wikipedia.org/wiki/Home_page">Home page - Wikipedia</a> <code class="fold">@</code></dt>
+<dd><p>A <strong>home page</strong> or a start page is the initial or main web page of a website or a browser. The initial page of a website is sometimes called <strong>main page</strong> as well.</p>
+<p>&#12304;Home page <em>vs.</em> homepage&#12305; falls into the same category as website and Web site as well as motor home and motorhome. Originally, the words homepage, website, and motorhome did not exist, but after so much usage over the years it has become acceptable to combine the two words into one.</p>
+<p>In other words, either way is fine.</p>
+<p>&#24456;&#22810;&#21333;&#35789;&#37117;&#26159;&#36825;&#20040;&#28436;&#21270;&#30340;&#12290;</p>
+<p>&#25105;&#20915;&#23450;&#20197;&#21518;&#29992;&#8220;homepage&#8221;&#12290;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://www.onelook.com/?w=homepage&amp;ls=a">Definitions of homepage - OneLook Dictionary Search</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://www.onlinestylebooks.com/Alphabetical.html" class="hearts">OnlineStylebooks.com: Alphabetical List</a> <code class="fold">@</code></dt>
+<dd><p>&#21508;&#31181; style guide&#65292;&#24314;&#35758;&#35835;&#19968;&#20010;&#12290;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style">Wikipedia:Manual of Style - Wikipedia</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://book.douban.com/review/7753640/">functional Java &#20989;&#25968;&#24335;&#29256;&#30340; Java&#65288;A Little Java, A Few Patterns&#65289;&#20070;&#35780;</a> <code class="fold">@</code></dt>
+<dd><p>refs and see also</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/35111005/class-design-in-a-little-java-a-little-pattern/">class design in a little java, a little pattern? - Stack Overflow</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://life.leanote.com/post/Leanote-And-Me">&#25105;&#21644; Leanote</a> <code class="fold">@</code></dt>
+<dd><p>&#36825;&#36135;&#23621;&#28982;&#26377;&#20462;&#25913;&#22238;&#25918;&#8230;&#8230;&#19981;&#30693;&#36947;&#29992;&#20102;&#21738;&#19968;&#20010;&#24211;&#8230;&#8230;Orz &#22909;&#29275;&#36924;&#12290;&#25105;&#20063;&#24819;&#26377;&#12290;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://github.com/leanote/markdown-editor-v2">leanote/markdown-editor-v2: Markdown Editor V2 (Support Vim &amp; Emacs Mode) For Leanote Web &amp; Leanote Desktop App</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://stackoverflow.com/questions/107701/how-can-i-remove-ds-store-files-from-a-git-repository" class="hearts">osx - How can I Remove .DS_Store files from a Git repository? - Stack Overflow</a> <code class="fold">@</code></dt>
+<dd><p>(git remove file)</p>
+<p>Remove existing files from the repository:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">find</span> . -name .DS_Store -print0 <span class="kw">|</span> <span class="kw">xargs</span> -0 git rm -f --ignore-unmatch</code></pre></div>
+<p>Add the line</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">.DS_Store</span></code></pre></div>
+<p>to the file <code>.gitignore</code>, which can be found at the top level of your repository (or created if it isn&#8217;t there already). Then</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> add .gitignore
+<span class="kw">git</span> commit -m <span class="st">&#39;.DS_Store banished!&#39;</span> <span class="co"># &#34987;&#39537;&#36880;&#20102;</span></code></pre></div>
+<p>&#23567;&#32467;&#65306;</p>
+<ul>
+<li>&#22914;&#20309; banish &#19968;&#20123;&#24050;&#32463; track &#20102;&#30340;&#25991;&#20214;&#65311;</li>
+<li>git rm -f &#8211;ignore-unmatch <FILE></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://liujiacai.net/about/">README | Keep Writing Codes / &#29983;&#27963;&#30340;&#20048;&#36259;&#23601;&#22312;&#20110;&#27492;</a> <code class="fold">@</code></dt>
+<dd><p>&#25105;&#21916;&#27426; Matrix67 &#25152;&#33879;&#24605;&#32500;&#30340;&#20048;&#36259;&#19968;&#20070;&#20013;&#24207;&#35328;&#30340;&#19968;&#20010;&#23567;&#27573;&#23376;&#65306;</p>
+<blockquote>
+<p>&#23398;&#29983;&#65306;&#8220;&#21681;&#23478;&#26377;&#30340;&#26159;&#38065;&#65292;&#30011;&#22270;&#20202;&#37117;&#20080;&#24471;&#36215;&#65292;&#20026;&#21861;&#20570;&#22270;&#21482;&#33021;&#29992;&#30452;&#23610;&#21644;&#22278;&#35268;&#65292;&#26377;&#26102;&#36824;&#21482;&#35753;&#29992;&#19968;&#20010;&#65311;&#8221;</p>
+<p>&#32769;&#24072;&#65306;&#8220;&#19978;&#19990;&#32426;&#26377;&#20010;&#20013;&#22269;&#23558;&#20891;&#35266;&#30475;&#23398;&#29983;&#31726;&#29699;&#36187;&#12290;&#27604;&#36187;&#24456;&#28608;&#28872;&#65292;&#23558;&#20891;&#21364;&#24951;&#24936;&#22320;&#35828;&#65292;&#23043;&#20204;&#36825;&#20040;&#22810;&#20154;&#25250;&#19968;&#20010;&#29699;&#65311;&#21457;&#32473;</p>
+<p>&#20182;&#20204;&#27599;&#20154;&#19968;&#20010;&#29699;&#24320;&#24515;&#22320;&#29609;&#22810;&#22909;&#12290;&#8221;</p>
+<p>&#25968;&#23398;&#25991;&#21270;&#24494;&#21338;&#35780;&#35770;&#65306;&#29983;&#27963;&#20013;&#26356;&#26377;&#24847;&#24605;&#30340;&#26159;&#25112;&#32988;&#22256;&#38590;&#21644;&#25361;&#25112;&#25152;&#36194;&#24471;&#30340;&#24555;&#20048;&#21644;&#28385;&#36275;&#12290;</p>
+</blockquote>
+<p>&#26159;&#30340;&#65292;&#29983;&#27963;&#30340;&#20048;&#36259;&#23601;&#22312;&#20110;&#27492;&#12290;</p>
+<hr />
+<p>USTC &#23621;&#28982;&#36824;&#26377;&#36825;&#26679;&#30340;&#38236;&#20687;&#12290;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://github.com/jiacai2050/gooreplacer4chrome">jiacai2050/gooreplacer4chrome: &#19968;&#20010;&#29992;&#20110;&#26367;&#25442;&#32593;&#39029;&#20013; Google Fonts/API/themes &#31561;&#30340; Chrome &#25554;&#20214;&#65292;&#35753;&#20320;&#24555;&#36895;&#25171;&#24320;&#24341;&#29992;&#36825;&#20123;&#36164;&#28304;&#30340;&#39029;&#38754; :-)</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://raawaa.github.io/2016/04/09/cs-for-beginners/">&#25105;&#25152;&#36935;&#21040;&#36807;&#30340;&#20837;&#38376;&#22909;&#20070; | &#23567;&#24515;&#22320;&#28369;</a> <code class="fold">@</code></dt>
+<dd><p>&#21834;&#20846;&#21543;</p>
+<p>&#36825;&#26412;&#8220;&#24043;&#24072;&#20070;&#8221;&#23454;&#22312;&#26159;&#22826;&#20986;&#21517;&#20102;&#65292;&#24120;&#24120;&#34987;&#31616;&#31216;&#20026; SICP&#65288;Structure and Interpretation of Computer Programs&#65289;&#65292;&#26159; MIT &#30340;&#35838;&#26412;&#65288;&#35838;&#31243;&#20195;&#21495; CS6.001&#65289;&#12290;&#36825;&#38376;&#35838;&#20174; 1980 &#24180;&#19968;&#30452;&#25945;&#21040; 2008 &#24180;&#65292;&#27178;&#36328;&#36817;&#19977;&#21313;&#24180;&#12290;&#20063;&#35828;&#26126;&#36825;&#26159;&#19968;&#26412;&#32463;&#24471;&#36215;&#26102;&#38388;&#32771;&#39564;&#30340;&#35838;&#26412;&#12290;</p>
+<p><strong>1986 &#24180;&#65292;&#35813;&#35838;&#31243;&#30340;&#20004;&#20301;&#32769;&#24072;&#65288;&#20063;&#26159;&#36825;&#26412;&#20070;&#30340;&#20316;&#32773;&#65289;Hal Abelson &#21644; Gerald Jay Sussman &#32473;&#24800;&#26222;&#21592;&#24037;&#20570;&#20102;&#19968;&#27425;&#20840;&#22871;&#35762;&#24231;&#65292;&#35762;&#24231;&#20840;&#31243;&#24405;&#20687;&#65292;&#20063;&#26159;&#36825;&#38376;&#35838;&#22312;&#21382;&#21490;&#19978;&#30041;&#19979;&#30340;&#21807;&#19968;&#30340;&#35270;&#39057;&#36164;&#26009;&#65288;&#32477;&#23545;&#28195;&#30011;&#36136;&#65289;&#12290;</strong>&#26412;&#20070;&#21487;&#20197;&#20813;&#36153;&#22312;&#32447;&#38405;&#35835;&#65292;&#26426;&#26800;&#24037;&#19994;&#20986;&#29256;&#31038;&#20986;&#36807;&#20013;&#25991;&#29256;&#12290;</p>
+<p>&#36824;&#26377;&#19968;&#20010; python &#29256;&#26412;&#30340;&#65292;&#20869;&#23481;&#22522;&#26412;&#19968;&#26679;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.v2ex.com/t/319725#reply18">&#20114;&#32852;&#32593;&#38504;&#33853;&#30340;&#24040;&#26143;&#8212;&#8212;Mozilla &#21069;&#19990;&#20170;&#29983; - V2EX</a> <code class="fold">@</code></dt>
+<dd><p><strong>&#20598;&#23572;&#26080;&#32842;&#19968;&#19979;&#26159;&#20026;&#20102;&#22823;&#37096;&#20998;&#26102;&#20505;&#19981;&#26080;&#32842;&#65292;&#21527;&#65311;</strong></p>
+</dd>
+</dl></li>
+<li><p><a href="https://www.v2ex.com/t/330138#reply12">&#32593;&#19978;&#20184;&#36153;&#26597;&#24320;&#25151;&#35760;&#24405;&#65292;&#20154;&#29983;&#36712;&#36857;&#31561;&#26159;&#24590;&#20040;&#20570;&#21040;&#30340;&#65311; - V2EX</a></p></li>
+<li><dl>
+<dt><a href="https://www.zhihu.com/question/30692237/answer/137513486">&#20026;&#20160;&#20040;&#24456;&#23569;&#35265;&#24037;&#36164;&#39640;&#30340;&#31243;&#24207;&#21592;&#28843;&#23500;&#65311; - &#21311;&#21517;&#29992;&#25143;&#30340;&#22238;&#31572; - &#30693;&#20046;</a> <code class="fold">@</code></dt>
+<dd><p>&#25105;&#20844;&#21496;&#39046;&#23548;&#20204;&#24182;&#19981;&#30693;&#36947;&#25105;&#20854;&#23454;&#20063;&#26159;&#26377;&#28857;&#20799;&#24819;&#36208;&#30340;&#65292;&#20294;&#25105;&#19968;&#23450;&#35201;&#25226;&#19981;&#39038;&#21518;&#26524;&#25226;&#25105;&#24320;&#38500;&#30340;&#36131;&#20219;&#20840;&#37096;&#30041;&#32473;&#20182;&#20204;&#12290;</p>
+<p>&#20687;&#25105;&#36825;&#20040;&#37325;&#35201;&#30340;&#20154;&#31455;&#28982;&#21487;&#20197;&#19981;&#29992;&#24037;&#20316;&#20132;&#25509;&#23601;&#30452;&#25509;&#35753;&#25105;&#36208;&#20154;&#65292;&#25105;&#21482;&#33021;&#35828;&#20844;&#21496;&#37324;&#37027;&#24110;&#32463;&#29702;&#30495;&#30340;&#26159;&#26681;&#26412;&#19981;&#22312;&#20046;&#27585;&#25481;&#19968;&#20010;&#20004;&#20010;&#20135;&#21697;&#12290;&#65288;&#21704;&#21704;&#21704;&#65292;&#8220;&#20687;&#25105;&#36825;&#20040;&#37325;&#35201;&#30340;&#20154;&#8221;&#8230;&#8230;&#65289;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.zhihu.com/question/24204835">&#20026;&#20160;&#20040;&#39321;&#28207;&#30340; IT &#34892;&#19994;&#24179;&#22343;&#34218;&#37228;&#36739;&#20302;&#65311; - &#30693;&#20046;</a> <code class="fold">@</code></dt>
+<dd><p>&#19977;. &#35828;&#23454;&#35805;&#65292;&#21644; HK &#30456;&#27604;&#65292;&#22269;&#20869; IT &#30028;&#25165;&#26159;&#20010;&#20154;&#20667;&#38065;&#22810;&#30340;&#39046;&#22495;&#12290;&#20854;&#23454;&#22269;&#20869;&#20219;&#20309;&#39046;&#22495;&#37117;&#26159;&#20154;&#20667;&#38065;&#22810;&#65292;&#21482;&#35201;&#20320;&#25214;&#23545;&#22320;&#26041;&#12290;&#32780; HK &#27809;&#26377;&#36825;&#26679;&#30340;&#22320;&#26041;&#12290;&#32769;&#32599;&#28436;&#35762;&#37324;&#35828;&#65292;&#20219;&#20309;&#34892;&#19994;&#37117;&#26159;&#19977;&#25104;&#30340;&#32463;&#33829; + &#19971;&#25104;&#30340; SB &#26500;&#25104;&#30340;&#65292;<strong>&#21482;&#35201;&#20320;&#33021;&#21435;&#21040;&#37027; 7 &#25104; SB &#30340;&#20844;&#21496;&#65292;&#28982;&#21518;&#21804;&#20303;&#37027;&#20123; SB&#65292;&#20320;&#23601;&#21487;&#20197;&#36731;&#26494;&#25343;&#39640;&#34218;</strong>&#12290;&#32780;&#22312; HK&#65292;&#27809;&#26377;&#36807;&#30828;&#30340;&#25216;&#26415;&#24456;&#38590;&#28151;&#20107;&#20799;&#65292;&#20809;&#38752;&#21561;&#29275;&#25198;&#39640;&#28145;&#32771;&#19968;&#22534;&#35777;&#20063;&#32477;&#23545;&#26159;&#27809;&#22909;&#26524;&#23376;&#21507;&#65292;HK &#35201;&#27714;&#20320;&#32771;&#19968;&#22534;&#35777;&#65292;&#32780;&#19988;&#65292;&#26356;&#35201;&#27714;&#20320;<strong>&#26377;&#21644;&#36825;&#20123;&#35777;&#20070;&#21305;&#37197;&#30340;&#33021;&#21147;</strong>&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.douban.com/note/258495100/">&#27809;&#35265;&#36807;&#22823;&#34503;&#23641;&#23615;</a> <code class="fold">@</code></dt>
+<dd><p>&#26519;&#24840;&#38745;-&#39038;&#23478;&#30007;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>MISC <code class="fold">@</code></dt>
+<dd><p>Vim, &#34507;&#30140;&#30340;&#26381;&#21153;&#22120;&#19978;&#26377; number-lines &#30340;&#35805;&#65292;&#21487;&#33021;&#26174;&#31034;&#20250;&#20986;&#38382;&#39064;&#65292;&#25152;&#20197; <code>set nonu</code>&#65281;</p>
+<p>&#35745;&#31639;&#26426;&#36824;&#27809;&#26377;&#20986;&#29616;&#20043;&#21069;&#65292;&#26377;&#19968;&#31181;&#21483;&#20570;&#30005;&#20256;&#25171;&#23383;&#26426;&#30340;&#29609;&#24847;&#65292;&#27599;&#31186;&#38047;&#21487;&#20197;&#25171; 10 &#20010;&#23383;&#31526;&#12290;&#20294;&#26159;&#23427;&#26377;&#19968;&#20010;&#38382;&#39064;&#65292;&#23601;&#26159;&#25171;&#23436;&#19968;&#34892;&#25442;&#34892;&#30340;&#26102;&#20505;&#65292;&#35201;&#29992;&#21435; 0.2 &#31186;&#65292;&#27491;&#22909;&#21487;&#20197;&#25171;&#20004;&#20010;&#23383;&#31526;&#12290;&#35201;&#26159;&#22312;&#36825; 0.2 &#31186;&#37324;&#38754;&#65292;&#21448;&#26377;&#26032;&#30340;&#23383;&#31526;&#20256;&#36807;&#26469;&#65292;&#37027;&#20040;&#36825;&#20010;&#23383;&#31526;&#23558;&#20002;&#22833;&#12290; &#20110;&#26159;&#65292;&#30740;&#21046;&#20154;&#21592;&#24819;&#20102;&#20010;&#21150;&#27861;&#35299;&#20915;&#36825;&#20010;&#38382;&#39064;&#65292;&#23601;&#26159;&#22312;&#27599;&#34892;&#21518;&#38754;&#21152;&#20004;&#20010;&#34920;&#31034;&#32467;&#26463;&#30340;&#23383;&#31526;&#12290;&#19968;&#20010;&#21483;&#20570;&#8220;&#22238;&#36710;&#8221; <code>\r</code>&#65292;&#21578;&#35785;&#25171;&#23383;&#26426;&#25226;&#25171;&#21360;&#22836;&#23450;&#20301;&#22312;&#24038;&#36793;&#30028;&#65307;&#21478;&#19968;&#20010;&#21483;&#20570;&#8220;&#25442;&#34892;&#8221;<code>\n</code>&#65292;&#21578;&#35785;&#25171;&#23383;&#26426;&#25226;&#32440;&#21521;&#19979;&#31227;&#19968;&#34892;&#12290; &#36825;&#23601;&#26159;&#8220;&#25442;&#34892;&#8221;&#21644;&#8220;&#22238;&#36710;&#8221;&#30340;&#26469;&#21382;&#65292;&#20174;&#23427;&#20204;&#30340;&#33521;&#35821;&#21517;&#23383;&#19978;&#20063;&#21487;&#20197;&#30475;&#20986;&#19968;&#20108;&#12290; &#21518;&#26469;&#65292;&#35745;&#31639;&#26426;&#21457;&#26126;&#20102;&#65292;&#36825;&#20004;&#20010;&#27010;&#24565;&#20063;&#23601;&#34987;&#33324;&#21040;&#20102;&#35745;&#31639;&#26426;&#19978;&#12290;&#37027;&#26102;&#65292;&#23384;&#20648;&#22120;&#24456;&#36149;&#65292;&#19968;&#20123;&#31185;&#23398;&#23478;&#35748;&#20026;&#22312;&#27599;&#34892;&#32467;&#23614;&#21152;&#20004;&#20010;&#23383;&#31526;&#22826;&#28010;&#36153;&#20102;&#65292;&#21152;&#19968;&#20010;&#23601;&#21487;&#20197;&#12290;&#20110;&#26159;&#65292;&#23601;&#20986;&#29616;&#20102;&#20998;&#27495;&#12290;Unix &#31995;&#32479;&#37324;&#65292;&#27599;&#34892;&#32467;&#23614;&#21482;&#26377;&#8220;<&#25442;&#34892;>&#8221;&#65292;&#21363;&#8220;<code>\n</code>&#8221;&#65307; Windows &#31995;&#32479;&#37324;&#38754;&#65292;&#27599;&#34892;&#32467;&#23614;&#26159;&#8220;<&#22238;&#36710;><&#25442;&#34892;>&#8221;&#65292;&#21363;&#8220;<code>\r\n</code>&#8221;&#65307;Mac &#31995;&#32479;&#37324;&#65292;&#27599;&#34892;&#32467;&#23614;&#26159;&#8220;<&#22238;&#36710;>&#8221;&#12290;&#19968;&#20010;&#30452;&#25509;&#21518;&#26524;&#26159;&#65292;Unix/Mac &#31995;&#32479;&#19979;&#30340;&#25991;&#20214;&#22312; Windows &#37324;&#25171;&#24320;&#30340;&#35805;&#65292;&#25152;&#26377;&#25991;&#23383;&#20250;&#21464;&#25104;&#19968;&#34892;&#65307;&#32780; Windows &#37324;&#30340;&#25991;&#20214;&#22312; Unix/Mac &#19979;&#25171;&#24320;&#30340;&#35805;&#65292;&#22312;&#27599;&#34892;&#30340;&#32467;&#23614;&#21487;&#33021;&#20250;&#22810;&#20986;&#19968;&#20010; <code>^M</code> &#31526;&#21495;&#12290;</p>
+<p>&#22312; vim &#20013;&#21487;&#20197;&#36890;&#36807; Control+V Control+M &#26469;&#36755;&#20837; <code>^M</code>&#12290;</p>
+<p>&#20960;&#31181;&#21435;&#38500; ^M &#30340;&#26041;&#27861;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">1</span>&#12289; cat filename1 <span class="kw">|</span> <span class="kw">tr</span> -d <span class="st">&quot;\r&quot;</span> <span class="kw">&gt;</span> newfile
+<span class="kw">2</span>&#12289; sed -e <span class="st">&quot;s/^V^M//&quot;</span> filename <span class="kw">&gt;</span> outputfilename
+<span class="kw">3</span>&#12289; vi&#65306; &#29992; vi &#25171;&#24320;&#25991;&#20214;&#65292;&#36755;&#20837; :%s/^M//g
+<span class="kw">4</span>&#12289; dos2unix</code></pre></div>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://www.cnblogs.com/fangbo/archive/2009/12/24/1631196.html">vi/vim &#26174;&#31034;&#20013;&#25991;&#23383;&#31526;&#24182;&#19988;&#21435;&#25481; ^M &#30340;&#26041;&#27861; - fooboo - &#21338;&#23458;&#22253;</a></li>
+<li>[^M and vim](http://www.linuxquestions.org/questions/linux-software-2/%5Em-and-vim-213557/)</li>
+</ul>
+<p>&#24403;&#20320;&#30340;&#29983;&#27963;&#21464;&#25104;&#19968;&#22376;&#23630;&#30340;&#26102;&#20505;&#65292;&#36890;&#24120;&#37117;&#26159;&#22240;&#20026;&#20320;&#24403;&#26102;&#20570;&#30340;&#20667;&#36924;&#20915;&#23450;&#12290; &#8212;&#12298;&#27515;&#20365;&#12299;</p>
+<p>git diff</p>
+<ul>
+<li><code>--src-prefix=&lt;prefix&gt;</code> -&gt; a/</li>
+<li><code>--dst-prefix=&lt;prefix&gt;</code> -&gt; b/</li>
+<li><code>--no-prefix</code></li>
+</ul>
+<p>&#20043;&#21069;&#29992; git diff &#21644; aha&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+
+<span class="ot">output=$1</span>
+<span class="ot">obasename=</span><span class="kw">`basename</span> <span class="ot">${output}</span><span class="kw">`</span>
+<span class="ot">a=${obasename%</span>.*<span class="ot">}</span>-a.md;
+<span class="ot">b=${obasename%</span>.*<span class="ot">}</span>-b.md;
+
+<span class="kw">(cat</span> _a.md<span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">tail</span> -n +4 <span class="ot">${a}</span><span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">cat</span> _b.md<span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">tail</span> -n +4 <span class="ot">${b}</span><span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">cat</span> _c.md<span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">(git</span> diff --color-words --no-index <span class="ot">${b}</span> <span class="ot">${a}</span> <span class="kw">|</span> <span class="kw">./aha)</span>;
+<span class="kw">cat</span> _d.md<span class="kw">;</span> <span class="kw">\</span>
+<span class="kw">)</span> <span class="kw">|</span> <span class="kw">\</span>
+<span class="kw">pandoc</span> -f markdown+hard_line_breaks --self-contained -S -s --ascii -c _main.css -o <span class="ot">$output</span></code></pre></div>
+<p>&#35910;&#29923;&#30340;&#20849;&#35782;&#22823;&#27010;&#23601;&#26159;&#65306;</p>
+<blockquote>
+<p>&#21516;&#24535;&#39556;&#20658;&#65292;&#20843;&#32452;&#27515;&#22920;&#65292;&#25105;&#19981;&#32467;&#23130;&#65292;&#20197;&#21450;&#19978;&#29677;&#20351;&#20154;&#21464;&#19985;&#12290;</p>
+</blockquote>
+<p>&#27494;&#27721;&#30007;&#20154;&#26356;&#31616;&#21333;&#65292;&#20154;&#21040;&#20013;&#24180;&#27599;&#20010;&#37117;&#20250;&#21464;&#25104;&#22823;&#36135;&#36710;&#21496;&#26426;&#19968;&#26679;&#30340;&#20154;&#29289;&#65292;&#20844;&#21496;&#37324;&#25293;&#19978;&#32423;&#65292;&#39554;&#19979;&#23646;&#65292;&#22312;&#23478;&#35013;&#20316;&#39030;&#26753;&#26609;&#20027;&#24515;&#39592;&#65292;&#22312;&#22806;&#20882;&#20805;&#25195;&#22320;&#20711;&#12290;&#21516;&#26102;&#24635;&#26377;&#26368;&#20302;&#38480;&#24230;&#30340;&#19977;&#35266;&#21644;&#26368;&#23567;&#30340;&#32966;&#37327;&#65292;&#23545;&#24378;&#21183;&#32773;&#26497;&#20854;&#24052;&#32467;&#65292;&#23545;&#24369;&#21183;&#32773;&#25340;&#21629;&#36393;&#36367;&#12290; (&#19968;&#40657;&#40657;&#20004;&#20010;&#31995;&#21015;)</p>
+<p>&#22914;&#26524;&#35828;&#39030;&#23574;&#30340;&#25216;&#26415;&#20154;&#21592;&#26159;&#37325;&#28857;&#25991;&#29289;&#65292;&#37027;&#20040;&#39030;&#23574;&#30340;&#20135;&#21697;&#32463;&#29702;&#23601;&#30495;&#30340;&#26159;&#31232;&#19990;&#23396;&#21697;&#21862;&#12290;&#35828;&#21040;&#24213;&#65292;&#24037;&#31243;&#25216;&#26415;&#36825;&#20123;&#25171;&#24618;&#32451;&#32423;&#65292;&#22810;&#25968;&#36824;&#26159;<strong>&#26377;&#20010;&#28165;&#26224;&#30340;&#36335;&#24452;&#21453;&#39304;&#65292;&#26159;&#8220;&#21487;&#22521;&#20859;&#30340;&#8221;</strong>&#12290;&#20135;&#21697;&#32463;&#29702;&#24590;&#26679;&#22521;&#20859;&#65311;&#25216;&#26415;&#22280;&#27599;&#24180;&#25104;&#21544;&#30340;&#26694;&#26550;&#65292;&#20135;&#21697;&#21602;&#65311;&#25913;&#21464;&#19990;&#30028;&#30340;&#20135;&#21697;&#20960;&#20046;&#26159;&#20197;&#24180;&#20026;&#21333;&#20301;&#35745;&#37327;&#30340;&#12290;&#21313;&#24180;&#21862;&#65292;&#25105;&#20204;&#36824;&#22788;&#20110; iPhone &#30340;&#26102;&#20195;&#65292;&#19981;&#26159;&#21527;&#65311;</p>
+<p>&#65288;&#36335;&#24452;&#21453;&#39304;&#26159;&#21861;&#20040;&#39740;&#8230;&#8230;&#65289;</p>
+<p>&#33945;&#21476;&#30340;&#39046;&#23548;&#32773;&#30495;&#26159;&#32676;&#31070;&#32463;&#30149;&#65292;&#32463;&#27982;&#20027;&#35201;&#26159;&#30719;&#20135;&#20986;&#21475;&#65292;&#20005;&#37325;&#20381;&#36182;&#20013;&#22269;&#65292;&#32467;&#26524;&#36824;&#22312;&#20027;&#26435;&#38382;&#39064;&#19978;&#21050;&#28608;&#20013;&#22269;&#65292;&#20013;&#22269;&#23601;&#22686;&#21152;&#28857;&#36807;&#36335;&#36153;&#27835;&#20102;&#20182;&#19968;&#19979;&#65292;&#23601;&#21741;&#29241;&#21898;&#23064;&#21521;&#21360;&#24230;&#27714;&#25588;&#65292;&#24076;&#26395;&#21360;&#24230;&#33021;&#38459;&#27490;&#20013;&#22269;&#23545;&#33945;&#21476;&#30340;&#21046;&#35009;&#65292;&#36825;&#26159;&#20160;&#20040;&#32467;&#26524;&#26174;&#32780;&#26131;&#35265;&#65292;&#29616;&#22312;&#27809;&#21150;&#27861;&#20102;&#65292;&#21448;&#21521;&#20013;&#22269;&#36947;&#27465;&#26381;&#36719;&#65292;&#24076;&#26395;&#33945;&#20013;&#20851;&#31995;&#37325;&#22238;&#27491;&#36712;&#65292;&#30475;&#26469;&#33945;&#21476;&#30340;&#30149;&#30495;&#26159;&#19981;&#36731;&#65292;&#24471;&#30005;&#12290;</p>
+<p>&#29305;&#26391;&#26222;&#22312;&#20854;&#25512;&#29305;&#19978;&#21457;&#25991;&#31216;&#65306;&#8220;&#20170;&#22825;&#65292;&#22303;&#32819;&#20854;&#12289;&#29790;&#22763;&#21644;&#24503;&#22269;&#37117;&#21457;&#29983;&#20102;&#24656;&#24598;&#34989;&#20987;&#8212;&#8212;&#29616;&#22312;&#30340;&#24773;&#20917;&#21464;&#24471;&#36234;&#26469;&#36234;&#31967;&#31957;&#12290;&#25991;&#26126;&#19990;&#30028;&#24517;&#39035;&#36716;&#21464;&#24605;&#32771;&#26041;&#24335;!&#8221;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://column.etnet.com.cn/column-list-EtnetcolB238/61440.htm">&#38647;&#27915;&#26696; 5 &#35686;&#28174;&#32844; &#26816;&#23519;&#38498;&#19981;&#36215;&#35785; - &#29305;&#20889; - &#32463;&#27982;&#36890;&#20013;&#22269;&#31449;</a> <code class="fold">@</code></dt>
+<dd><p>&#26816;&#23519;&#38498;&#26597;&#26126;&#65292;&#20107;&#21457;&#24403;&#26202;&#37026;&#31561;&#20154;&#21457;&#29616;&#38647;&#27915;&#22312;&#19968;&#38388;&#36275;&#30103;&#24215;&#25509;&#21463;&#24615;&#26381;&#21153;&#21518;&#31163;&#24320;&#65292;&#24576;&#30097;&#20182;&#23254;&#22931;&#20415;&#31435;&#21363;&#36861;&#36214;&#12290;&#38647;&#27915;&#35797;&#22270;&#36867;&#36305;&#65292;&#20854;&#38388;&#35686;&#26041;&#25226;&#20182;&#25265;&#33136;&#25684;&#20498;&#65292;&#29992;&#33050;&#36393;&#20182;&#30340;&#39048;&#38754;&#12289;&#25484;&#25524;&#20182;&#65292;&#24378;&#34892;&#25302;&#19978;&#36710;&#12290;</p>
+<p>&#21518;&#26469;&#38647;&#27915;&#30251;&#36719;&#19981;&#20877;&#25379;&#33073;&#65292;&#37026;&#31561;&#20154;&#26410;&#21450;&#26102;&#24613;&#25937;&#65292;&#24453;&#20043;&#21518;&#36865;&#38498;&#38647;&#24050;&#19981;&#27835;&#12290;&#25353;&#21496;&#27861;&#37492;&#23450;&#65292;&#38647;&#27915;&#22240;&#32963;&#20869;&#23481;&#29289;&#21560;&#20837;&#21628;&#21560;&#36947;&#33268;&#31378;&#24687;&#27515;&#20129;&#65292;&#19982;&#35686;&#26041;&#26366;&#31216;&#20854;&#8220;&#24515;&#33039;&#30149;&#21457;&#8221;&#19981;&#31526;&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="https://twitter.com/XHNews/status/813670105926270977">China Xinhua News on Twitter: &#8220;Big plans! China issues white paper on space development. Missions to Moon and Mars, and many more. Find out https://t.co/0Y49YrMKQw&#8221;</a></p></li>
+<li><dl>
+<dt><a href="http://jovicailic.org/mastering-vim-quickly/">Mastering Vim Quickly - Jovica Ilic</a> <code class="fold">@</code></dt>
+<dd><p>Master Vim Quickly &#8211; From WTF to OMG in no time</p>
+<p>Over the years, Vim got a reputation - that it&#8217;s really difficult to learn it. I&#8217;ve heard many times from guys who are convinced it will <strong>take them months to reach proficiency</strong>.</p>
+<p>That&#8217;s simply wrong. That&#8217;s why I&#8217;m writing a book: Mastering Vim Quickly (from WTF to OMG in no time) which will teach you Vim the way I learned it &#8211; easily and quickly.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/sparanoid/lightense-images">sparanoid/lightense-images: A dependency-free pure JavaScript image zooming library less than 2 KB (gzipped). Inspired by tholman/intense-images</a> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;photo.jpg&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;lightense.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+<span class="kw">&lt;script&gt;</span>
+  <span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;load&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">var</span> el <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelectorAll</span>(<span class="st">&#39;img&#39;</span>)<span class="op">;</span>
+    <span class="at">Lightense</span>(el)<span class="op">;</span>
+  <span class="op">},</span> <span class="kw">false</span>)<span class="op">;</span>
+<span class="op">&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.v2ex.com/t/330558?p=2">&#32456;&#20110;&#30693;&#36947;&#30693;&#20046;&#32593;&#32418;&#36718;&#23376;&#21733;&#30340;&#32534;&#31243;&#27700;&#24179;&#20102; - V2EX</a> <code class="fold">@</code></dt>
+<dd><div class="figure">
+<img src="http://whudoc.qiniudn.com/2016/v2-3b7d5b620d11d0d3580703d59bfb87d2_b.png" />
+
+</div>
+<p>&#36824;&#26159;&#22810;&#27492;&#19968;&#20030;&#35299;&#37322;&#19968;&#19979;&#21543;</p>
+<p>65k &#31471;&#21475;&#25968;&#38480;&#21046;&#30340;&#21069;&#25552;&#26159;&#28304; ip, &#28304;&#31471;&#21475;, &#30446;&#26631; ip, &#30446;&#26631;&#31471;&#21475;&#36825;&#22235;&#20010;&#21464;&#37327;&#22266;&#23450;&#21069;&#19977;&#20010;&#21464;&#37327;&#20043;&#21518;&#25165;&#26377;&#30340;</p>
+<p>c100k &#38382;&#39064;&#22266;&#23450;&#30340;&#21464;&#37327;&#21482;&#26377;&#21069; 2 &#20010;&#65292;&#25152;&#20197;&#21152;&#19978;&#30446;&#26631; ip &#36825;&#20010;&#21464;&#37327;&#65292;&#29702;&#35770;&#36830;&#25509;&#25968;&#21487;&#20197;&#26377;&#26080;&#25968;&#22810;&#20010;&#65292;&#20063;&#23601;&#26159;&#35828;&#65292;&#22914;&#26524;&#19968;&#20010; IP &#21518;&#38754;&#21487;&#20197;&#22534;&#19968;&#22534;&#26426;&#22120;&#30340;&#35805;&#65292;&#26159;&#21487;&#20197;&#26377;&#36828;&#36229;&#30334;&#19975;&#32423;&#36825;&#20010;&#25968;&#37327;&#30340;&#36830;&#25509;&#30340;</p>
+<p><strong>&#22914;&#26524;&#19981;&#20449;&#30340;&#35805;&#65292;&#20320;&#21435; dig &#19968;&#19979; 12306.com &#30475;&#19968;&#19979;&#36825;&#20010;&#22495;&#21517;&#32465;&#20102;&#22810;&#23569;&#20010; ip &#65292;&#20551;&#35774;&#26159; 100 &#65292;&#28982;&#21518;&#23601;&#21487;&#20197;&#24471;&#20986; 12360 &#21482;&#33021;&#26381;&#21153;&#26368;&#22810;&#20845;&#30334;&#19975;&#29992;&#25143;&#30340;&#21487;&#31505;&#32467;&#35770;&#20102;</strong></p>
+<p>&#33267;&#20110;&#25130;&#22270;&#30340;&#20869;&#23481;&#65292;&#35828;&#23454;&#22312;&#25105;&#36824;&#26159;&#26377;&#28857;&#24778;&#35766;&#30340;&#65292;&#20854;&#23427;&#23601;&#27809;&#21861;&#21487;&#35828;&#30340;&#20102;</p>
+<p>0-65535 &#26159;&#31471;&#21475;&#33539;&#22260;&#20540;&#65292;&#19981;&#26159;&#31471;&#21475;&#36830;&#25509;&#25968;&#37327;&#65292;&#26152;&#26381;&#21153;&#26381;&#21153;&#31471;&#30340;&#35805;&#65292;&#31243;&#24207;&#19994;&#21153;&#38656;&#35201;&#65292;&#19968;&#33324;&#20063;&#21482;&#26159;&#24320;&#21551;&#19968;&#20010;&#31471;&#21475;&#26469;&#21495;&#30417;&#21548;&#23458;&#25143;&#31471;&#36807;&#26469;&#30340;&#36830;&#25509;&#65292;&#29702;&#35770;&#19978;&#38142;&#25509;&#25968;&#37327;&#26080;&#38480;&#65292;&#30475;&#26426;&#22120;&#24615;&#33021;&#21644;&#31243;&#24207;&#31995;&#32479;&#20248;&#21270;&#12290;</p>
+<p>&#36718;&#23376;&#21733;&#20960;&#24180;&#21069;&#26469;&#25105;&#20204;&#23398;&#26657;&#32473;&#25105;&#20204;&#28072;&#23039;&#21183;&#30340;&#26102;&#20505;&#8230;&#8230;&#35828;&#20182;&#22823;&#23398;&#24456;&#22810;&#31185;&#30446;&#37117;&#26159;&#20302;&#31354;&#39128;&#36807;&#30340; &#21018;&#27605;&#19994;&#21644;&#38754;&#35797;&#23448;&#20063;&#27809;&#23569;&#25749;&#36807;&#25152;&#20197;&#12290;&#30475;&#21040;&#26576;&#20046;&#24471;&#36825;&#20107; &#20869;&#24515;&#27627;&#26080;&#27874;&#21160;</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://serverfault.com/questions/533611/how-do-high-traffic-sites-service-more-than-65535-tcp-connections">web server - How do high traffic sites service more than 65535 TCP connections? - Server Fault</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/monochromegane/the_platinum_searcher/blob/f4754bcef7b80d4c2f8a45fc9ce1ea33c641b7ef/README.md">the_platinum_searcher/README.md at f4754bcef7b80d4c2f8a45fc9ce1ea33c641b7ef &#183; monochromegane/the_platinum_searcher</a> <code class="fold">@</code></dt>
+<dd><p>If you put configuration file on the following directories, pt use option in the file.</p>
+<ul>
+<li><code>$XDG_CONFIG_HOME/pt/config.toml</code></li>
+<li><code>$HOME/.ptconfig.toml</code></li>
+<li><code>.ptconfig.toml</code> (current directory)</li>
+</ul>
+<pre><code>color = true
+context = 3
+ignore = [&quot;dir1&quot;, &quot;dir2&quot;]
+color-path = &quot;1;34&quot;</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://mvnrepository.com/artifact/org.apache.commons/commons-io/1.3.2">Maven Repository: org.apache.commons &#187; commons-io &#187; 1.3.2</a> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependencies&gt;</span>
+    <span class="kw">&lt;dependency&gt;</span>
+        <span class="kw">&lt;groupId&gt;</span>org.apache.commons<span class="kw">&lt;/groupId&gt;</span>
+        <span class="kw">&lt;artifactId&gt;</span>commons-io<span class="kw">&lt;/artifactId&gt;</span>
+        <span class="kw">&lt;version&gt;</span>1.3.2<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;/dependency&gt;</span>
+<span class="kw">&lt;/dependencies&gt;</span></code></pre></div>
+<p>&#25991;&#20214;&#31227;&#21160;&#12290;FileUtils&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="https://medium.com/flow-ci/github-vs-bitbucket-vs-gitlab-vs-coding-7cf2b43888a1#.dwcfyq3l6">GitHub vs.&#160;Bitbucket vs.&#160;GitLab vs.&#160;Coding &#8211; flow.ci &#8211; Medium</a></p></li>
+<li><dl>
+<dt><a href="http://stackoverflow.com/questions/20307105/perl-from-command-line-substitute-regex-only-once-in-a-file/20307241" class="hearts">Perl from command line: substitute regex only once in a file - Stack Overflow</a> <code class="fold">@</code></dt>
+<dd><pre><code>perl -i -pe &#39;$done ||= s/old/new/&#39; filename
+perl -i -pe &#39;$i = s/old/new/ if !$i&#39; filename
+perl -i -pe &#39;$x++ if $x==0 &amp;&amp; s/old/new/;&#39; filename</code></pre>
+<p><code>-i</code> &#21644; <code>-i.bak</code> &#24212;&#35813;&#26159;&#19968;&#26679;&#65292;&#22240;&#20026;&#40664;&#35748;&#30340; backup &#21518;&#32512;&#23601;&#26159; &#8220;.bak&#8221;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://metacpan.org/release/RJBS/perl-5.22.0">perl-5.22.0 - The Perl 5 language interpreter - metacpan.org</a> <code class="fold">@</code></dt>
+<dd><p>&#36825;&#26159; Windows &#19978; git 2.7.2 &#33258;&#24102;&#65288;&#20869;&#21547;&#65289;&#30340; perl&#65292;&#24863;&#35273;&#36824;&#26159;&#24456;&#26032;&#24456;&#24378;&#22823;&#21834;&#65281;&#36824;&#26032;&#25552;&#20379;&#20102;&#19968;&#20010;&#38075;&#30707;&#36816;&#31639;&#31526;&#65288;<code>&lt;&lt;&gt;&gt;</code>&#65289;</p>
+<dl>
+<dt>New double-diamond operator <code class="foldable">@</code></dt>
+<dd><p><code>&lt;&lt;&gt;&gt;</code> is like <code>&lt;&gt;</code> but uses three-argument open to open each file in <code>@ARGV</code>. This means that each element of <code>@ARGV</code> will be treated as an actual file name, and &#8220;|foo&#8221; won&#8217;t be treated as a pipe open.</p>
+</dd>
+</dl>
+<p>&#20174;&#19968;&#20010; perl &#29233;&#22909;&#32773;&#30340;&#35282;&#24230;&#26469;&#30475;&#65292;perl 6 &#36824;&#20219;&#37325;&#36947;&#36828;&#12290;</p>
+<dl>
+<dt><a href="http://stackoverflow.com/questions/1479741/why-is-three-argument-open-calls-with-autovivified-filehandles-a-perl-best-pract">file io - Why is three-argument open calls with autovivified filehandles a Perl best practice? - Stack Overflow</a> <code class="foldable">@</code></dt>
+<dd><ul>
+<li><code>open(OUT, '&gt;&gt;', $file);</code> three-argument open</li>
+<li><code>open(OUT, &quot;&gt;&gt;$file&quot;);</code> two-argument open</li>
+</ul>
+<p>Using <strong>typeglobs</strong> for filehandles (like OUT) is not a good idea, as they are global across your entire program - you need to be sure that no other routine including those in modules are using the same name (including in the future).</p>
+<p>Using the two-argument form of open exposes your application to mis-behaviour caused by variables containing special characters, for example <code>my $f; open $f, &quot;&gt;$some_filename&quot;;</code> is exposed to the bug where <code>$some_filename</code> containing a leading <code>&gt;</code> will change the program&#8217;s behaviour. &#36825;&#20010;&#22826;&#23628;&#20102;&#8230;&#8230;&#36825;&#26679;&#30340; bug &#35828;&#19981;&#23450;&#24456;&#22810;&#8230;&#8230;&#22909;&#22810;&#28431;&#27934;&#12290;</p>
+<p>Using the three-argument form <strong>avoids this by separating the mode and filename into separate arguments where they can&#8217;t interfere</strong>.</p>
+<p>Moreover, using the lots-of-arguments form with pipes is a very good idea:</p>
+<pre><code>open $pipe, &#39;|-&#39;, &#39;sendmail&#39;, &#39;fred@somewhere.fake&#39;;</code></pre>
+<p>Is better than doing it all as a single string &#8211; it avoids possible shell injection etc.</p>
+<pre><code># &#25171;&#21360; dir &#25351;&#20196;&#30340;&#36755;&#20986;&#12290;
+open $pipe, &#39;|-&#39;, &#39;dir&#39;;
+while(&lt;$pipe&gt;) {
+    print $_;
+}</code></pre>
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode perl"><code class="sourceCode perl"><span class="fu">open</span>( <span class="kw">my</span> <span class="dt">$input_fh</span>, <span class="kw">&quot;</span><span class="st">&lt;</span><span class="kw">&quot;</span>, <span class="dt">$input_file</span> ) || <span class="fu">die</span> <span class="kw">&quot;</span><span class="st">Can&#39;t open </span><span class="dt">$input_file</span><span class="st">: </span><span class="dt">$!</span><span class="kw">&quot;</span>;
+<span class="kw">my</span> <span class="dt">@lines</span> = &lt;<span class="dt">$input_fh</span>&gt;;
+<span class="kw">my</span> <span class="dt">$text</span> = <span class="fu">join</span>(<span class="kw">&#39;&#39;</span>, &lt;<span class="dt">$input_fh</span>&gt;);</code></pre></div>
+<p>Nowadays, I use</p>
+<ul>
+<li><code>File::Slurp</code> for small files that I want to hold completely in memory, and</li>
+<li><code>Tie::File</code> for big files that I want to scalably address and/or files that I want to change in place.</li>
+</ul>
+<p>refs and see also</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/318789/whats-the-best-way-to-open-and-read-a-file-in-perl">What&#8217;s the best way to open and read a file in Perl? - Stack Overflow</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://en.wikipedia.org/wiki/Opening_statement">Opening statement - Wikipedia</a> <code class="fold">@</code></dt>
+<dd><p>An opening statement is generally the first occasion that the trier of fact (jury or judge) has to hear from a lawyer in a trial, aside possibly from questioning during voir dire. The opening statement is generally constructed to serve as a &#8220;road map&#8221; for the fact-finder. This is especially essential, in many jury trials, since jurors (at least theoretically) know nothing at all about the case before the trial, (or if they do, they are strictly instructed by the judge to put preconceived notions aside). Though such statements may be dramatic and vivid, they must be limited to the evidence reasonably expected to be presented during the trial. Attorneys generally conclude opening statements with a reminder that at the conclusion of evidence, the attorney will return to ask the fact-finder to find in his or her client&#8217;s favor.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/district10/md2html/blob/aeaffd09097c7ed970c11acdfb805c452e96b0c8/bin/cat.pl">md2html/cat.pl at aeaffd09097c7ed970c11acdfb805c452e96b0c8 &#183; district10/md2html</a> <code class="fold">@</code></dt>
+<dd><p>&#24863;&#35273;&#33258;&#24049;&#20889;&#30340;&#36825;&#20010;&#36824;&#19981;&#38169;&#12290;&#65288;&#29616;&#22312;&#30475;&#36215;&#26469;&#8230;&#8230;&#36825;&#20010;&#29256;&#26412;&#22909;&#32769;&#22909;&#22522;&#30784;&#12290;&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode perl"><code class="sourceCode perl"><span class="kw">#!/usr/bin/perl</span>
+
+<span class="co"># Usage:</span>
+<span class="co">#       $ perl cat.pl INPUT_FILE &gt; OUTPUT_FILE</span>
+
+<span class="fu">use</span> <span class="fl">5.010</span>;
+<span class="fu">use</span> <span class="kw">strict</span>;
+<span class="fu">use</span> <span class="fu">File::Basename</span>;
+<span class="fu">use</span> Cwd <span class="kw">&#39;</span><span class="st">abs_path</span><span class="kw">&#39;</span>;
+
+<span class="kw">sub </span><span class="fu">inList</span> {
+    <span class="kw">my</span> <span class="dt">$needle</span> = <span class="fu">shift</span>;
+    <span class="kw">my</span> <span class="dt">@haystack</span> = <span class="dt">@_</span>;
+    <span class="kw">foreach</span> <span class="kw">my</span> <span class="dt">$hay</span> (<span class="dt">@haystack</span>) {
+        <span class="kw">if</span> ( <span class="dt">$needle</span> <span class="kw">eq</span> <span class="dt">$hay</span> ) { <span class="kw">return</span> <span class="dv">1</span>; }
+    }
+    <span class="kw">return</span> <span class="dv">0</span>;
+}
+
+<span class="kw">sub </span><span class="fu">unfold</span> {
+    <span class="kw">my</span>(<span class="dt">$PADDING</span>)  = <span class="fu">shift</span> <span class="dt">@_</span>;
+    <span class="kw">my</span>(<span class="dt">$FILENAME</span>) = <span class="fu">shift</span> <span class="dt">@_</span>;
+    <span class="kw">my</span>(<span class="dt">$FULLNAME</span>) = abs_path(<span class="dt">$FILENAME</span>);
+    <span class="kw">if</span> (&amp;inList(<span class="dt">$FULLNAME</span>, <span class="dt">@_</span>) == <span class="dv">1</span>) {
+        <span class="fu">print</span> STDERR <span class="kw">&quot;</span><span class="st">ERROR! Loop detected: </span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="st">[</span><span class="dt">$FULLNAME</span><span class="st">]--&gt;</span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="st">{</span><span class="dt">@_</span><span class="st">}</span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="ch">\n</span><span class="kw">&quot;</span>;
+        <span class="fu">print</span>      <span class="kw">&quot;</span><span class="ch">\n</span><span class="st">ERROR! Loop detected: </span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="st">[</span><span class="dt">$FULLNAME</span><span class="st">]--&gt;</span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="st">{</span><span class="dt">@_</span><span class="st">}</span><span class="kw">&quot;</span>.<span class="kw">&quot;</span><span class="ch">\n\n</span><span class="kw">&quot;</span>;
+        <span class="kw">return</span>;
+    }
+    <span class="fu">unshift</span>(<span class="dt">@_</span>, <span class="dt">$FULLNAME</span>);
+
+    <span class="fu">open</span> <span class="kw">my</span> <span class="dt">$INPUT</span>, <span class="kw">&#39;</span><span class="st">&lt;</span><span class="kw">&#39;</span>, <span class="dt">$FILENAME</span>;
+    <span class="kw">while</span>(&lt;<span class="dt">$INPUT</span>&gt;) {
+        <span class="kw">if</span> (<span class="kw">/</span><span class="ch">^(</span><span class="bn">\s</span><span class="ch">*)</span><span class="ot">\@include &lt;-=</span><span class="ch">(</span><span class="ot">.</span><span class="ch">*)</span><span class="ot">=</span><span class="kw">/</span>) {
+            &amp;unfold(<span class="dt">$PADDING</span>.<span class="dt">$1</span>, dirname(<span class="dt">$FILENAME</span>).<span class="kw">&quot;</span><span class="st">/</span><span class="kw">&quot;</span>.<span class="dt">$2</span>, <span class="dt">@_</span>);
+        } <span class="kw">else</span> {
+            <span class="fu">print</span> <span class="dt">$PADDING</span>.<span class="dt">$_</span>;
+        }
+    }
+}
+
+&amp;unfold(<span class="kw">&quot;&quot;</span>, <span class="dt">$ARGV</span>[<span class="dv">0</span>]);</code></pre></div>
+</dd>
+</dl></li>
+<li><p><a href="http://www.jianshu.com/p/53201636d81a">&#19968;&#20010; javascript &#26465;&#30721;&#25171;&#21360;&#26426;&#31243;&#24207;&#32473;&#25105;&#30340;&#24778;&#21916; - &#31616;&#20070;</a></p></li>
+<li><dl>
+<dt><a href="https://movie.douban.com/review/1015508/">&#24005;&#23792;&#20043;&#21518;&#65292;&#30475;&#36731;&#20102;&#35266;&#20247;&#65288;&#25915;&#22771;&#26426;&#21160;&#38431;2&#65306;&#26080;&#32618;&#65289;&#24433;&#35780;</a> <code class="fold">@</code></dt>
+<dd><p>&#25915;&#20811;&#31995;&#21015;&#30446;&#21069;&#21253;&#25324;&#20004;&#37096;&#30005;&#24433;&#29256;&#21644;&#20004;&#37096; TV &#29256;&#65292;&#20960;&#20046;&#37117;&#26159;&#38590;&#20197;&#36926;&#36234;&#30340;&#26480;&#20316;&#12290;&#12298;Ghost in the shell&#12299;&#26159;&#26368;&#26089;&#30340;&#19968;&#37096;&#65292;&#20063;&#26159;&#36804;&#20170;&#20026;&#27490;&#35780;&#20215;&#26368;&#39640;&#30340;&#65292;&#26368;&#20196;&#20154;&#30127;&#29378;&#30340;&#12290; fans &#20204;&#23545;&#36825;&#37096;&#29255;&#23376;&#30340;&#36861;&#25447;&#21040;&#20102;&#8220;&#22914;&#26524;&#25105;&#35748;&#20026;&#20320;&#19981;&#22815;&#26684;&#65292;&#25105;&#23601;&#19981;&#20250;&#32473;&#20320;&#8221;&#30475;&#30340;&#22320;&#27493;&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="http://www.soku.com/search_video/q_Multiple%20View%20Geometry%20-%20Lecture%201%20(Prof.%20Daniel%20Cremers)?f=1&amp;kb=040200000000000__Multiple%20View%20Geometry%20-%20Lecture%201%20(Prof.%20Daniel%20Cremers)&amp;spm=a2hww.20023042.#qheader_search~10">Multiple View Geometry - Lecture 1 (Prof.&#160;Daniel Cremers) &#8211; &#25628;&#24211;</a></p></li>
+<li><p><a href="http://stackoverflow.com/questions/4045017/what-is-git-diff-patience-for">What is <code>git diff --patience</code> for? - Stack Overflow</a></p></li>
+<li><dl>
+<dt><a href="https://www.douban.com/people/gegejing/status/1934707612/">&#21679;&#21679;&#31934;&#30340;&#24191;&#25773; /PPT karaoke</a> <code class="fold">@</code></dt>
+<dd><p>&#20170;&#22825;&#31038;&#20250;&#23398;&#31995;&#30340;&#26379;&#21451;&#21578;&#35785;&#25105;&#24503;&#22269;&#20154;&#21457;&#26126;&#30340;&#19968;&#31181;&#24656;&#24598;&#28216;&#25103;&#65292;&#21517;&#21483;&#8220;PPT karaoke&#8221;&#12290;&#22823;&#23478;&#20174;&#32593;&#19978;&#19979;&#19968;&#22534;&#20081;&#19971;&#20843;&#31967;&#30340; ppt&#65292;&#28982;&#21518;&#30450;&#35762;&#65292;&#20320;&#26681;&#26412;&#19981;&#30693;&#36947;&#19979;&#19968;&#39029;&#26159;&#20160;&#20040;&#36824;&#24471;&#33258;&#22278;&#20854;&#35828;&#12290;&#36824;&#20998;&#23567;&#32452;&#36187;&#21644;&#20010;&#20154;&#36187;&#12290;&#22826;&#21487;&#24597;&#20102;&#36825;&#28216;&#25103;&#21482;&#33021;&#26159; workaholic &#21457;&#26126;&#30340;&#12290; #fuckGerman#</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://www.serpentine.com/blog/2015/05/13/sometimes-the-old-ways-are-the-best/">Sometimes, the old ways are the best | teideal glic deisbh&#233;alach</a> <code class="fold">@</code></dt>
+<dd><p>The &#8220;old ways&#8221; in the title refer to the fix: in place of a fancy streaming API, I simply allocate a single big buffer and blast the bytes straight into it.</p>
+<p>For that pathological string with almost a megabyte of consecutive backslashes, the new implementation is 27x faster and uses 42x less memory, all for the cost of perhaps an hour of Sunday evening hacking (including a little enabling work that incidentally illustrates just how easy it is to work with monad transformers). Not bad!</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/jgm/pandoc/issues/1417">Better encoding error messages &#183; Issue #1417 &#183; jgm/pandoc</a> <code class="fold">@</code></dt>
+<dd><p>I have bad bytes often too. It takes time to find where they are, but if you don&#8217;t care about these bytes, just use <code>iconv</code> to strip all invalid char sequence:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">iconv</span> -f utf-8 -t utf-8 -c input.md <span class="kw">|</span> <span class="kw">pandoc</span> -o output.html</code></pre></div>
+<ul>
+<li><code>-f</code> is the source format</li>
+<li><code>-t</code> the target format</li>
+<li><code>-c</code> skips any invalid sequence</li>
+</ul>
+<p>See <a href="http://stackoverflow.com/questions/12999651/how-to-remove-non-utf-8-characters-from-text-file">linux - How to remove non UTF-8 characters from text file - Stack Overflow</a>.</p>
+<p>You can then diff to see where the bad bytes are:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">git</span> diff --no-index --color-words <span class="kw">&lt;(iconv</span> -f utf-8 -t utf-8 -c input.md<span class="kw">)</span> input.md</code></pre></div>
+<p>&#29992; file &#26469;&#26816;&#27979;&#23383;&#31526;&#32534;&#30721;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash">$ <span class="kw">echo</span> <span class="st">&quot;abc&quot;</span> <span class="kw">&gt;</span> file.txt
+$ <span class="kw">file</span> -bi file.txt                         <span class="co"># b: brief, i: mime-type and mime-encoding</span>
+<span class="kw">text/plain</span>; <span class="ot">charset=</span>us-ascii
+<span class="kw">(</span>&#36825;&#26159; <span class="kw">mime-type)</span>, <span class="kw">(</span>&#36825;&#26159; <span class="kw">mime-encoding)</span>
+
+$ <span class="kw">echo</span> <span class="st">&quot;abc&#22909;&quot;</span> <span class="kw">&gt;</span> file.txt
+$ <span class="kw">file</span> -bi file.txt
+<span class="kw">text/plain</span>; <span class="ot">charset=</span>iso-8859-1</code></pre></div>
+<p>iso-8859-1 &#23601;&#26159; notepad &#37324;&#25152;&#35828;&#30340; ANSI&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO/IEC 8859-1 - Wikipedia</a></p></li>
+<li><dl>
+<dt><a href="https://gist.github.com/vkyii/1079783">git &#20081;&#30721;&#35299;&#20915;&#26041;&#26696;&#27719;&#24635;</a> <code class="fold">@</code></dt>
+<dd><pre><code>&#21407;&#24086;&#22320;&#22336;: http://topic.csdn.net/u/20110113/19/b0d5d506-4307-428b-a61d-7974aa66a2da.html
+
+&#39318;&#20808;&#35201;&#35828;&#26126;&#30340;&#26159;&#65306;&#36825;&#37324;&#20171;&#32461;&#30340;&#26041;&#27861;&#37117;&#26159;&#22823;&#37096;&#20998;&#26159;&#26412;&#20154;&#8220;&#24735;&#8221;&#20986;&#26469;&#30340;&#65292;&#25152;&#20197;&#32593;&#19978;&#38590;&#26377;&#27969;&#20256;&#65281;
+&#22909;&#26041;&#27861;&#19981;&#33021;&#33258;&#24049;&#31169;&#34255;&#65292;&#21542;&#21017;&#23601;&#30333;&#24537;&#20046;&#36825;&#20960;&#22825;&#20102;&#65292;&#20998;&#20139;&#32473;&#26377;&#38656;&#35201;&#30340;&#26379;&#21451;&#20204;&#12290;&#22914;&#26524;&#26377;&#36716;&#36733;&#65292;&#25964;&#35831;&#27880;&#26126;&#26469;&#33258;*CSDN &#32769;&#37011;*&#20316;&#21697;&#12290;
+&#21621;&#21621;&#65292;&#32473;&#33258;&#24049;&#25171;&#24191;&#21578;&#65292;&#23454;&#22312;&#26159;&#26080;&#32827;&#20043;&#26497;&#65292;&#26435;&#24403;&#26080;&#32842;&#20043;&#26102;&#25171;&#23383;&#20043;&#29992;&#12290;
+&#27426;&#36814;&#27969;&#20256;&#65292;&#20026;&#26368;&#20248;&#31168;&#30340;&#20998;&#24067;&#24335;&#29256;&#26412;&#31649;&#29702;&#31995;&#32479; Git &#20570;&#23459;&#20256;&#65281;&#65281;
+
+&#27493;&#39588;&#65306;
+1.  &#19979;&#36733;&#65306;http://loaden.googlecode.com/files/gitconfig.7z
+2.  &#35299;&#21387;&#21040;&#65306;&lt;MsysGit &#23433;&#35013;&#30446;&#24405;&gt;/cmd/&#65292;&#20363;&#22914;&#65306;D:\Program Files\Git\cmd
+3.  &#36827;&#20837; Bash&#65292;&#25191;&#34892; gitconfig
+
+&#25630;&#23450;&#20160;&#20040;&#20102;&#65311;
+&#30475;&#30475; gitconfig &#30340;&#20869;&#23481;&#20808;&#65306;
+
+Perl code
+#!/bin/sh
+
+# &#20840;&#23616;&#25552;&#20132;&#29992;&#25143;&#21517;&#19982;&#37038;&#31665;
+git config --global user.name &quot;Yuchen Deng&quot;
+git config --global user.email &#37038;&#31665;&#21517;@gmail.com
+
+# &#20013;&#25991;&#32534;&#30721;&#25903;&#25345;
+echo &quot;export LESSCHARSET=utf-8&quot; &gt; $HOME/.profile
+git config --global gui.encoding utf-8
+git config --global i18n.commitencoding utf-8
+git config --global i18n.logoutputencoding gbk
+
+# &#20840;&#23616;&#32534;&#36753;&#22120;&#65292;&#25552;&#20132;&#26102;&#23558;COMMIT_EDITMSG&#32534;&#30721;&#36716;&#25442;&#25104;UTF-8&#21487;&#36991;&#20813;&#20081;&#30721;
+git config --global core.editor notepad2
+
+# &#24046;&#24322;&#24037;&#20855;&#37197;&#32622;
+git config --global diff.external git-diff-wrapper.sh
+git config --global diff.tool tortoise
+git config --global difftool.tortoise.cmd &#39;TortoiseMerge -base:&quot;$LOCAL&quot; -theirs:&quot;$REMOTE&quot;&#39;
+git config --global difftool.prompt false
+
+# &#21512;&#24182;&#24037;&#20855;&#37197;&#32622;
+git config --global merge.tool tortoise
+git config --global mergetool.tortoise.cmd &#39;TortoiseMerge -base:&quot;$BASE&quot; -theirs:&quot;$REMOTE&quot; -mine:&quot;$LOCAL&quot; -merged:&quot;$MERGED&quot;&#39;
+git config --global mergetool.prompt false
+
+# &#21035;&#21517;&#35774;&#32622;
+git config --global alias.dt difftool
+git config --global alias.mt mergetool
+
+# &#21462;&#28040; $ git gui &#30340;&#20013;&#25991;&#30028;&#38754;&#65292;&#25913;&#29992;&#33521;&#25991;&#30028;&#38754;&#26356;&#26131;&#25026;
+if [ -f &quot;/share/git-gui/lib/msgs/zh_cn.msg&quot; ]; then
+rm /share/git-gui/lib/msgs/zh_cn.msg
+fi
+
+&#36825;&#20010;&#33050;&#26412;&#35299;&#20915;&#20102;&#65306;
+
+1. &#20013;&#25991;&#20081;&#30721;
+2. &#22270;&#24418;&#21270; Diff/Merge
+3. &#36824;&#21407;&#33521;&#25991;&#30028;&#38754;&#65292;&#26356;&#22909;&#25026;
+&#20854;&#20013;&#26368;&#26377;&#20215;&#20540;&#30340;&#65292;&#23601;&#26159; Git &#30340; Diff/Merge &#22806;&#37096;&#24037;&#20855; TortoiseMerge &#37197;&#32622;&#12290;
+&#23433;&#35013; MsysGit &#21518;&#65292;&#19968;&#20010;&#21629;&#20196;&#21363;&#21487;&#23436;&#25104;&#37197;&#32622;&#12290;
+&#36866;&#29992;&#20110; MsysGit &#23433;&#35013;&#29256;&#19982;&#32511;&#33394;&#29256;&#12290;
+
+&#32593;&#19978;&#20851;&#20110;&#20026; Git &#37197;&#32622; TortoiseMerge &#26469;&#36827;&#34892; diff &#21644; merge &#30340;&#20171;&#32461;&#20960;&#20046;&#27809;&#26377;
+&#65288;&#21453;&#27491;&#25105;&#27809;&#26377;&#25628;&#32034;&#21040;&#65289;&#65292;&#20294;&#25105;&#35748;&#20026; TortoiseMerge &#26159;&#26368;&#22909;&#29992;&#30340;&#65292;&#21333;&#25991;&#20214;&#65288;&#19968;&#20010;&#21487;
+&#25191;&#34892;&#31243;&#24207;&#65292;&#32511;&#33394;&#29256;&#65292;&#19979;&#36733;&#22320;&#22336;&#65306;
+http://sourceforge.net/projects/tortoisesvn/files/Tools/1.6.7/TortoiseDiff-1.6.7.zip/download
+&#23454;&#22312;&#26159;&#32477;&#37197;&#65281;
+
+&#20026;&#20160;&#20040;&#19981;&#20351;&#29992; TortoiseGit&#65311;&#20182;&#20204;&#19981;&#26159;&#38598;&#25104;&#20102; TortoiseMerge &#21527;&#65311;
+&#29702;&#30001;&#65306;TortoiseGit &#21482;&#26377; Windows &#25165;&#26377;&#65292;&#25105;&#26356;&#21916;&#27426; git gui&#65292;&#32467;&#21512; gitk&#65292;&#36328;&#24179;&#21488;&#23454;&#22312;&#30456;&#21516;&#30340;&#25805;&#20316;&#26041;&#24335;&#65292;&#26356;&#29245;&#65281;
+&#22914;&#26524;&#24744;&#31163;&#19981;&#24320; TortoiseGit&#65292;&#36825;&#31687;&#25991;&#31456;&#23601;&#30452;&#25509;&#26080;&#35270;&#21543;&#12290;</code></pre>
+<pre><code>git &#20081;&#30721;&#35299;&#20915;&#26041;&#26696;&#27719;&#24635; http://zengrong.net/post/1249.htm
+&#26412;&#31449;&#21407;&#21019;&#25991;&#31456;&#65292;&#36716;&#36733;&#35831;&#27880;&#26126;&#65306; &#36716;&#36733;&#33258; zrong&#39;s Blog&#65292;
+&#21407;&#25991; git &#20081;&#30721;&#35299;&#20915;&#26041;&#26696;&#27719;&#24635;&#65292;&#27426;&#36814;&#20351;&#29992;&#25991;&#31456;&#28304;&#30721;&#36827;&#34892;&#36716;&#36733;&#12290;
+
+&#26412;&#31449;&#36716;&#36733;&#25991;&#31456;&#20250;&#26631;&#26126;[&#36716;]&#65292;&#36716;&#36733;&#35831;&#27880;&#26126;&#21407;&#22987;&#20316;&#32773;&#25991;&#31456;&#22320;&#22336;&#12290;
+
+&#25105;&#19968;&#30452;&#26159;&#22312; cygwin &#19979;&#20351;&#29992; git&#65292;&#36741;&#20197; TortoiseGit&#12290;&#20351;&#29992;&#19978;&#27809;&#20160;&#20040;&#38382;&#39064;&#65292;&#20294;&#20170;
+&#22825;&#22312;&#22788;&#29702;&#19968;&#20010;&#26377;&#20013;&#25991;&#25991;&#20214;&#21517;&#30340;&#39033;&#30446;&#26102;&#21364;&#20986;&#29616;&#25991;&#20214;&#21517;&#20081;&#30721;&#30340;&#38382;&#39064;&#12290;&#24773;&#20917;&#26159;&#36825;&#26679;&#30340;&#65306;
+
+&#22312;&#19968;&#20010;&#20351;&#29992; cygwin &#30340; bash &#25552;&#20132;&#30340; git &#39033;&#30446;&#20013;&#65292;&#24050;&#32463;&#23436;&#25104;&#20102;&#25152;&#26377;&#30340;&#25552;&#20132;&#65292;&#20294;&#20351;
+&#29992; TortoiseGit &#26597;&#30475;&#30340;&#26102;&#20505;&#65292;&#21364;&#21457;&#29616;&#20173;&#26377;&#25991;&#20214;&#27809;&#26377;&#25552;&#20132;&#65292;&#29978;&#33267;&#26159;&#26377;&#25991;&#20214;&#36824;&#22788;&#20110;&#26410;
+&#26242;&#23384;&#30340;&#29366;&#24577;&#12290;&#20110;&#26159;&#20351;&#29992; TortoiseGit &#25552;&#20132;&#65307;&#20877;&#27425;&#29992; cygwin &#19979;&#30340; git status &#26597;
+&#30475;&#65292;&#36825;&#27425;&#21448;&#21457;&#29616;&#20102;&#26410;&#25552;&#20132;&#30340;&#24773;&#20917;&#12290;&#20877;&#27425;&#29992; git commit &#21629;&#20196;&#34892;&#25552;&#20132;&#65307;&#22238;&#21040;
+TortoiseGit &#19979;&#26597;&#30475;&#65292;&#38382;&#39064;&#21448;&#20986;&#29616;&#20102;&#65281;&#27492;&#26102;&#20934;&#22791;&#36820;&#22238;&#20004;&#27425;&#25552;&#20132;&#21069;&#30340;&#29256;&#26412;&#65292;&#21364;&#22240;&#20026;
+&#25991;&#20214;&#21517;&#20081;&#30721;&#30340;&#38382;&#39064;&#65292;&#26080;&#27861;&#36820;&#22238;&#20102;&#65281;&#25628;&#32034;&#19968;&#30058;&#65292;&#21457;&#29616; git &#25991;&#20214;&#21517;&#12289;log &#20081;&#30721;&#65292;&#26159;&#26222;
+&#36941;&#38382;&#39064;&#65292;&#36825;&#20854;&#20013;&#26377;&#32534;&#30721;&#30340;&#21407;&#22240;&#65292;&#20063;&#26377;&#36328;&#24179;&#21488;&#30340;&#21407;&#22240;&#12290;&#22240;&#20026; git &#26159;&#20174; linux &#31227;&#26893;
+&#36807;&#26469;&#65292;&#40664;&#35748;&#37319;&#29992; UTF-8 &#32534;&#30721;&#12290;&#32780; Windows &#40664;&#35748;&#20351;&#29992; UTF-16 &#32534;&#30721;&#26469;&#20445;&#23384;&#25991;&#20214;&#21517;&#65292;
+&#24212;&#35813;&#23601;&#26159;&#36825;&#20123;&#19981;&#21516;&#30340;&#22788;&#29702;&#26041;&#24335;&#36896;&#25104;&#20102;&#20081;&#30721;&#12290;&#19979;&#38754;&#26159;&#35299;&#20915;&#26041;&#26696;&#65306;
+
+&#20081;&#30721;&#24773;&#26223; 1
+&#22312; cygwin &#20013;&#65292;&#20351;&#29992; git add &#28155;&#21152;&#35201;&#25552;&#20132;&#30340;&#25991;&#20214;&#30340;&#26102;&#20505;&#65292;&#22914;&#26524;&#25991;&#20214;&#21517;&#26159;&#20013;&#25991;&#65292;&#20250;
+&#26174;&#31034;&#24418;&#22914; 274\232\350\256\256\346\200\273\347\273\223.png &#30340;&#20081;&#30721;&#12290;
+
+&#35299;&#20915;&#26041;&#26696;&#65306;
+
+&#22312; bash &#25552;&#31034;&#31526;&#19979;&#36755;&#20837;&#65306;
+
+git config &#8211;global core.quotepath false
+
+ore.quotepath &#35774;&#20026; false &#30340;&#35805;&#65292;&#23601;&#19981;&#20250;&#23545; 0&#215;80 &#20197;&#19978;&#30340;&#23383;&#31526;&#36827;&#34892; quote&#12290;&#20013;&#25991;&#26174;&#31034;&#27491;&#24120;&#12290;
+
+&#20081;&#30721;&#24773;&#26223; 2
+&#22312; MsysGit &#20013;&#65292;&#20351;&#29992; git log &#26174;&#31034;&#25552;&#20132;&#30340;&#20013;&#25991; log &#20081;&#30721;&#12290;
+
+&#35299;&#20915;&#26041;&#26696;&#65306;
+
+&#35774;&#32622; git gui &#30340;&#30028;&#38754;&#32534;&#30721;
+
+git config &#8211;global gui.encoding utf-8
+
+&#35774;&#32622; commit log &#25552;&#20132;&#26102;&#20351;&#29992; utf-8 &#32534;&#30721;&#65292;&#21487;&#36991;&#20813;&#26381;&#21153;&#22120;&#19978;&#20081;&#30721;&#65292;&#21516;&#26102;&#19982;linix&#19978;&#30340;&#25552;&#20132;&#20445;&#25345;&#19968;&#33268;&#65281;
+
+git config &#8211;global i18n.commitencoding utf-8
+
+&#20351;&#24471;&#22312; $ git log &#26102;&#23558; utf-8 &#32534;&#30721;&#36716;&#25442;&#25104; gbk &#32534;&#30721;&#65292;&#35299;&#20915;Msys bash&#20013;git log &#20081;&#30721;&#12290;
+
+git config &#8211;global i18n.logoutputencoding gbk
+
+&#20351;&#24471; git log &#21487;&#20197;&#27491;&#24120;&#26174;&#31034;&#20013;&#25991;&#65288;&#37197;&#21512;i18n.logoutputencoding = gbk)&#65292;&#22312; /etc/profile &#20013;&#28155;&#21152;&#65306;
+
+export LESSCHARSET=utf-8
+
+&#20081;&#30721;&#24773;&#26223; 3
+&#22312; MsysGit &#33258;&#24102;&#30340; bash &#20013;&#65292;&#20351;&#29992; ls &#21629;&#20196;&#26597;&#30475;&#20013;&#25991;&#25991;&#20214;&#21517;&#20081;&#30721;&#12290;cygwin &#27809;&#26377;&#36825;&#20010;&#38382;&#39064;&#12290;
+
+&#35299;&#20915;&#26041;&#26696;&#65306;
+
+&#20351;&#29992; ls &#8211;show-control-chars &#21629;&#20196;&#26469;&#24378;&#21046;&#20351;&#29992;&#25511;&#21046;&#21488;&#23383;&#31526;&#32534;&#30721;&#26174;&#31034;&#25991;&#20214;&#21517;&#65292;&#21363;&#21487;&#26597;&#30475;&#20013;&#25991;&#25991;&#20214;&#21517;&#12290;
+
+&#20026;&#20102;&#26041;&#20415;&#20351;&#29992;&#65292;&#21487;&#20197;&#32534;&#36753; /etc/git-completion.bash &#65292;&#26032;&#22686;&#19968;&#34892; alias ls=&#8221;ls &#8211;show-control-chars&#8221;
+
+&#26368;&#32456;&#65292;&#36824;&#26159;&#27809;&#33021;&#35299;&#20915;&#26368;&#24320;&#22987;&#25105;&#25552;&#21040;&#30340;&#25991;&#20214;&#21517;&#25552;&#20132;&#20081;&#30721;&#30340;&#38382;&#39064;&#12290;&#19981;&#36807;&#20498;&#26159;&#26377;&#20102;&#19968;&#20010;
+&#26032;&#21457;&#29616;&#65306;&#20351;&#29992; git gui &#21629;&#20196;&#65292;&#22312; MsysGit &#19979;&#65292;&#30475;&#21040;&#30340;&#20013;&#25991;&#25991;&#20214;&#21517;&#20026;&#27491;&#24120;&#65307;&#32780;&#22312;
+cygwin &#19979;&#65292;&#30475;&#21040;&#30340;&#20013;&#25991;&#25991;&#20214;&#21517;&#20026;&#20081;&#30721;&#12290;&#21516;&#26679;&#30340;&#65292;&#22914;&#26524;&#19968;&#30452;&#20351;&#29992; TortoiseGit&#65288;&#23454;
+&#38469;&#35843;&#29992; MsysGit&#65289;&#25552;&#20132;&#65292;&#37027;&#20040;&#20013;&#25991;&#25991;&#20214;&#21517;&#27809;&#38382;&#39064;&#65307;&#19968;&#30452;&#20351;&#29992; cygwin &#25552;&#20132;&#65292;&#20013;&#25991;
+&#25991;&#20214;&#21517;&#20063;&#27809;&#38382;&#39064;&#12290;&#20294;&#19968;&#23450;&#19981;&#33021;&#20132;&#21449;&#20351;&#29992;&#12290;&#36825;&#24212;&#35813;&#26159;&#20004;&#20010;&#24179;&#21488;&#40664;&#35748;&#22788;&#29702;&#20013;&#25991;&#25991;&#20214;&#21517;
+&#30340;&#26041;&#24335;&#19981;&#21516;&#36896;&#25104;&#30340;&#12290;
+
+&#20998;&#21035;&#35774;&#32622; LANG&#12289;LC_CTYPE&#12289;LC_ALL &#21442;&#25968;&#20026;&#21516;&#26679;&#30340;&#32534;&#30721;&#65292;&#38382;&#39064;&#20381;&#26087;&#12290;
+
+cygwin &#23448;&#26041;&#32593;&#31449;&#25552;&#21040;&#20102;&#38750;&#25289;&#19969;&#35821;&#25991;&#20214;&#21517;&#30340;&#38382;&#39064;&#65292;&#20063;&#35768;&#30740;&#31350;&#21518;&#33021;&#35299;&#20915;&#35813;&#21543;&#65306;Chapter 2. Setting Up Cygwin
+
+&#36825;&#37324;&#36824;&#26377;&#19968;&#31687;&#35762;&#35299; Linux &#31995;&#32479;&#32534;&#30721;&#25991;&#31456;&#65306;locale &#30340;&#35774;&#23450;&#21450;&#20854; LANG&#12289;LC_ALL&#12289;LANGUAGE &#29615;&#22659;&#21464;&#37327;&#30340;&#21306;&#21035;
+
+&#35980;&#20284;&#32456;&#26497;&#30340;&#35299;&#20915;&#21150;&#27861;&#26159;&#36890;&#36807;&#20462;&#25913; git &#21644; TortoiseGit &#28304;&#30721;&#23454;&#29616;&#30340;&#65292;&#26377;&#32593;&#21451;&#36825;&#20040;
+&#20570;&#20102;&#65306;&#35753; Windows &#19979; Git &#21644; TortoiseGit &#25903;&#25345;&#20013;&#25991;&#25991;&#20214;&#21517; /UTF-8
+
+&#26412;&#25991;&#21442;&#32771;&#38142;&#25509;&#65306;
+
+&#25630;&#23450; Git &#20013;&#25991;&#20081;&#30721;&#12289;&#29992; TortoiseMerge &#23454;&#29616; Diff/Merge MsysGit &#20081;&#30721;&#19982;&#36328;&#24179;
+&#21488;&#29256;&#26412;&#31649;&#29702;git &#20013;&#25991;&#25991;&#20214;&#21517;&#12289;&#30446;&#24405;&#21517;&#20081;&#30721;&#24212;&#35813;&#24590;&#20040;&#35299;&#20915;&#65311;</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://blog.csdn.net/zenghao0708/article/details/27185961">&#20026;&#20160;&#20040;&#20351;&#29992; do{}while(0)? - zenghao0708 &#30340;&#19987;&#26639; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> <code class="fold">@</code></dt>
+<dd><p>&#32456;&#20110;&#26377;&#20154;&#35299;&#37322;&#23545;&#20102;&#12290;&#20043;&#21069;&#30475;&#36807;&#35910;&#29923;&#19978;&#19968;&#20010;&#36763;&#26222;&#26862;&#22836;&#20687;&#30340;&#35910;&#27833;&#21457;&#25991;&#35828;&#36825;&#20010;&#65292;&#31616;&#30452;&#30606;&#35762;&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="http://developer.qiniu.com/article/developer/security/download-token.html">&#19979;&#36733;&#20973;&#35777;</a></p></li>
+<li><p><a href="http://stackoverflow.com/questions/4779582/markdown-and-including-multiple-files">Markdown and including multiple files - Stack Overflow</a></p></li>
+<li><p><a href="https://www.zhihu.com/question/24038129">opencv &#25552;&#20379;&#20102;&#22810;&#23569;&#20010;&#29305;&#24449;&#28857;&#30340; descriptor&#65311; - &#30693;&#20046;</a></p></li>
+<li><p><a href="https://github.com/4ker/image_stitching">4ker/image_stitching: OpenCV&#8217;s Image Stitching samples</a></p></li>
+<li><p><a href="https://github.com/kushalvyas/Python-Multiple-Image-Stitching">kushalvyas/Python-Multiple-Image-Stitching: Implementation of multiple image stitching</a></p></li>
+<li><p><a href="http://ppwwyyxx.com/2016/How-to-Write-a-Panorama-Stitcher/">OpenPano: How to write a Panorama Stitcher | Yuxin&#8217;s Blog</a></p></li>
+<li><p><a href="https://github.com/willard-yuan/SeetaFaceLib">willard-yuan/SeetaFaceLib: SeetaFace for Xcode and Qt</a></p></li>
+<li><dl>
+<dt><a href="https://github.com/zenorocha/clipboard.js/issues/248">False Advertising. There are dependencies to this project. &#183; Issue #248 &#183; zenorocha/clipboard.js</a> <code class="fold">@</code></dt>
+<dd><p><span class="citation">@FagnerMartinsBrack</span> I honestly think <strong>this is super irrelevant</strong> and has nothing to do with &#8220;impact&#8221; or &#8220;meaningfulness&#8221;. There are tons of more important things to be done in this project (and in life).</p>
+</dd>
+</dl></li>
+<li><p><a href="http://www.javascripter.net/faq/eventbubbling.htm">JavaScript Event Bubbling and Event Propagation</a></p></li>
+<li><dl>
+<dt><a href="http://stackoverflow.com/questions/1036347/how-do-i-use-boolean-variables-in-perl">How do I use boolean variables in Perl? - Stack Overflow</a> <code class="fold">@</code></dt>
+<dd><p>1 ture, 0 false.</p>
+<p>Can I vote perl down for not having booleans? &#21704;&#21704;&#21704;&#21487;&#20197;&#30340;&#12290;</p>
+</dd>
+</dl></li>
+<li><p><a href="https://github.com/perlancar/perl-Color-ANSI-Util/blob/master/lib/Color/ANSI/Util.pm">perl-Color-ANSI-Util/Util.pm at master &#183; perlancar/perl-Color-ANSI-Util</a></p></li>
+<li><dl>
+<dt><a href="http://blog.csdn.net/vagrxie/article/details/8861285">&#29992; Rakefile &#31649;&#29702;&#24037;&#31243; - &#20061;&#22825;&#38593;&#32718;&#30340;&#21338;&#23458; - &#21338;&#23458;&#39057;&#36947; - CSDN.NET</a> <code class="fold">@</code></dt>
+<dd><p>&#20284;&#20046;&#27604; makefile &#24378;&#22823;&#12290;</p>
+<p>&#23448;&#26041;&#35828;&#26126;&#26377;&#22914;&#19979;&#20248;&#28857;:</p>
+<ul>
+<li>Ruby &#35821;&#27861;</li>
+<li>&#21487;&#20197;&#35774;&#23450; task &#30340;&#20381;&#36182;</li>
+<li>&#25903;&#25345; patterns &#30340;&#35268;&#21017;</li>
+<li>&#28789;&#27963;&#30340; FileList &#31867;, &#34892;&#20026;&#20687; array, &#20294;&#26159;&#21487;&#20197;&#26041;&#20415;&#30340;&#25805;&#20316;&#25991;&#20214;&#21517;&#21644;&#36335;&#24452;</li>
+<li>&#26377;&#19968;&#20010;&#39044;&#20808;&#21253;&#35013;&#22909;&#30340;&#24211;, &#21487;&#20197;&#26041;&#20415;&#30340;&#23454;&#29616;&#31867;&#20284; build tarball &#21644;&#21457;&#24067;&#21040; ssh &#32593;&#31449;&#31561;&#21151;&#33021;.</li>
+<li>&#25903;&#25345;&#24182;&#34892; task.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode ruby"><code class="sourceCode ruby">file <span class="st">&quot;helloworld&quot;</span> =&gt; <span class="st">&quot;helloworld.cc&quot;</span> <span class="kw">do</span> |t|
+    sh <span class="st">&quot;g++ </span><span class="ot">#{</span>t.prerequisites.join(<span class="st">&#39; &#39;</span>)<span class="ot">}</span><span class="st"> -o </span><span class="ot">#{</span>t.name<span class="ot">}</span><span class="st">&quot;</span>
+<span class="kw">end</span></code></pre></div>
+<pre><code>task :default =&gt; &quot;helloworld&quot;
+
+file &quot;helloworld&quot; =&gt; &quot;helloworld.cc&quot; do |t|
+    sh &quot;g++ #{t.prerequisites.join(&#39; &#39;)} -o #{t.name}&quot;
+end</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/ppresume/quotes">ppresume/quotes: Some random quotes used by http://ppresume.com</a> <code class="fold">@</code></dt>
+<dd><ul>
+<li>content:
+<ul>
+<li>&#8220;When you don&#8217;t create things, you become defined by your tastes rather than ability. Your tastes only narrow &amp; exclude people. So create.&#8221; author: why the luck stuff from: <a href="http://whymirror.github.io/">http://whymirror.github.io/</a></li>
+</ul></li>
+<li>content:
+<ul>
+<li>In theory, there is no difference between theory and practice. But, in practice, there is. author: Jan L. A. van de Snepscheut from: <a href="http://en.wikiquote.org/wiki/Jan_L._A._van_de_Snepscheut">Wikipedia</a></li>
+</ul></li>
+<li>content:
+<ul>
+<li>The future has already arrived. It is just not evenly distributed yet. author: William Gibson from: <a href="https://en.wikiquote.org/wiki/William_Gibson">Wikiquote</a></li>
+</ul></li>
+<li>content:
+<ul>
+<li>The term kerning also takes on a different meaning. In digital typesetting, kerning is a second advance vector that is added to the first. author: Yannis Haralambous from: <a href="http://shop.oreilly.com/product/9780596102425.do">Fonts and Encodings</a></li>
+</ul></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://github.com/mislav/poignant-guide/">mislav/poignant-guide: Why&#8217;s Poignant Guide to Ruby</a> <code class="fold">@</code></dt>
+<dd><p>On August 19, 2009 Why the Lucky Stiff removed every trace of his work from the Web, including this book: the Poignant Guide to Ruby.</p>
+<p>poignant, <code>['p&#596;&#618;nj&#601;nt]</code>, adj. &#23574;&#38160;&#30340;&#65307;&#36763;&#37240;&#30340;&#65307;&#28145;&#21051;&#30340;&#65307;&#20999;&#20013;&#35201;&#23475;&#30340;</p>
+<p>I&#8217;ve salvaged &#65288;&#25327;&#25937;&#65289; the book from the Internet archive and re-published it. The original work was under the Attribution-ShareAlike license.</p>
+<blockquote>
+<p>&#8220;Quite so,&#8221; he said. &#8220;I went out to my car yesterday and there was a shoe in the passenger&#8217;s seat. A very battered (&#30952;&#25439;&#30340;) oxford. Looking straight ahead like it needed a lift to the cobbler&#8217;s (&#34917;&#38795;&#21280;). I did a cavity search and came up with a crisp note from my deceased (&#24050;&#25925;&#30340;) ancestor, the same whose property I&#8217;ve looked after, lo, these many years.&#8221;</p>
+<p>&#8220;Wow,&#8221; I said. And I glared at my shoe, at the things it would do when I&#8217;m gone.</p>
+</blockquote>
+<pre><code>  ~ the potion pledge ~
+
+    EVERYTHING IS AN OBJECT.
+    However, OBJECTS AREN&#39;T EVERYTHING.
+
+    (And, incidentally, everything is a function.)
+
+  * Elimination of line noise.
+
+    I avoid @, #, $, %, {}.
+    Stick with ., |, (), [], =, !, ?. Easier on the eyes.
+    These are common punctuations in English.
+
+  * I try to defer to &#65288;defer to&#65292;&#36981;&#20174;&#65289;English when it comes to punctuation rules.
+
+    Period means &quot;end&quot;. (In other langs it means &quot;method call&quot;.)
+    Comma breaks up statements.
+    Space between messages gives a noun-verb feeling.
+
+      window open (width=400, height=500)
+
+  ~ feverish &#65288;&#26497;&#24230;&#20852;&#22859;&#30340;&#65289; and fond thankyous ~
+
+  I am gravely indebted to Basile Starynkevitch, who fielded my
+  questions about his garbage collector. I favor French hackers
+  to an extreme (Xavier Leroy, Nicolas Cannasse, Guy Decoux,
+  Mathieu Bochard to name only a portion of those I admire) and
+  am very glad to represent their influence in Potion&#39;s garbage
+  collector.</code></pre>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=773106">_why is no more | Hacker News</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Why_the_lucky_stiff">why the lucky stiff - Wikipedia</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://en.wikipedia.org/wiki/Why%27s_(poignant)_Guide_to_Ruby">why&#8217;s (poignant) Guide to Ruby - Wikipedia</a> <code class="fold">@</code></dt>
+<dd><p>The book is published in HTML and PDF. Chapter three was reprinted in The Best Software Writing I: Selected and Introduced by Joel Spolsky (Apress, 2005).</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.douban.com/note/539972770/">&#25105;&#30340;&#23617;&#31070;&#30007;&#21451;</a> <code class="fold">@</code></dt>
+<dd><p>&#27264;&#37070;&#30340;&#23617;&#24635;&#26159;&#24456;&#33261;&#65292;&#33261;&#28385;&#25972;&#20010;&#34987;&#31389;&#12290;&#24179;&#26085;&#37324;&#65292;&#25105;&#26159;&#20010;&#27604;&#36739;&#33021;&#20316;&#30340;&#20154;&#65292;&#32780;&#20182;&#26377;&#27604;&#36739;&#20667;&#36924;&#65292;&#25152;&#20197;&#25105;&#32463;&#24120;&#21644;&#20182;&#38393;&#21035;&#25197;&#12290;&#38393;&#36215;&#21035;&#25197;&#26469;&#65292;&#25105;&#21916;&#27426;&#25226;&#22836;&#22475;&#36827;&#34987;&#23376;&#37324;&#65292;&#21487;&#20182;&#30340;&#23617;&#23454;&#22312;&#26159;&#22826;&#33261;&#20102;&#65292;&#24324;&#24471;&#25105;&#29436;&#29384;&#22320;&#25472;&#24320;&#34987;&#23376;&#65292;&#25552;&#36215;&#26469;&#19968;&#36890;&#29378;&#25159;&#12290;&#20504;&#33509;&#25105;&#27809;&#22312;&#34987;&#31389;&#37324;&#65292;&#20182;&#23601;&#24456;&#20054;&#24039;&#22320;&#25472;&#24320;&#34987;&#23376;&#65292;&#23558;&#23617;&#32929;&#31245;&#24494;&#20280;&#20986;&#21435;&#19968;&#28857;&#20877;&#25918;&#12290;&#21457;&#29616;&#20182;&#36825;&#20010;&#21160;&#20316;&#65292;&#25105;&#24517;&#39035;&#36805;&#36895;&#36530;&#24320;&#65292;&#25165;&#33021;&#19981;&#34987;&#29071;&#27515;&#65292;&#20419;&#29421;&#24515;&#36215;&#30340;&#26102;&#20505;&#65292;&#20182;&#23601;&#19968;&#25226;&#25602;&#30528;&#25105;&#19981;&#25918;&#65292;&#38750;&#35201;&#25105;&#38395;&#19978;&#19968;&#38395;&#25165;&#32610;&#20241;&#12290;&#22909;&#22312;&#24456;&#23567;&#30340;&#26102;&#20505;&#65292;&#25105;&#23601;&#32451;&#25104;&#20102;&#19968;&#38376;&#32477;&#19990;&#27494;&#21151;&#65292;&#36805;&#36895;&#32763;&#36215;&#19978;&#22068;&#21767;&#23558;&#40763;&#23380;&#32039;&#32039;&#22581;&#20303;&#12290;&#36825;&#38376;&#27494;&#21151;&#38656;&#35201;&#24378;&#22823;&#30340;&#40763;&#24687;&#65292;&#23558;&#19978;&#22068;&#21767;&#28145;&#28145;&#21560;&#20303;&#25165;&#34892;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="http://www.slate.com/articles/technology/technology/2012/03/ruby_ruby_on_rails_and__why_the_disappearance_of_one_of_the_world_s_most_beloved_computer_programmers_.single.html">Ruby, Ruby on Rails, and _why: The disappearance of one of the world&#8217;s most beloved computer programmers.</a> <code class="fold">@</code></dt>
+<dd><p>He riffed on his nom d&#8217;Internet, Why the Lucky Stiff: &#8220;Some people want to call me Mr.&#160;Why. My nametag was filed under &#8216;L.&#8217; The thing is, it&#8217;s just a middle name. There&#8217;s no first or last. It&#8217;s just one middle name. That&#8217;s just the nature of it,&#8221; he said.</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://addons.mozilla.org/en-GB/firefox/addon/its-all-text/?src=search" class="hearts">It&#8217;s All Text! :: Add-ons for Firefox</a> <code class="fold">@</code></dt>
+<dd><p>&#25226;&#32534;&#36753;&#24555;&#25463;&#38190;&#32465;&#23450;&#21040; c-m &#19978;&#27604;&#36739;&#29245;&#12290;&#27809;&#26377;&#20914;&#31361;&#12290;m-&gt;markdown&#12290;&#35843;&#29992; vim &#26159;&#26368;&#22909;&#30340;&#12290;&#20197;&#21069;&#25105;&#29992;&#36807;&#19968;&#20010; Edit with Emacs&#12290;&#20284;&#20046;&#19968;&#27169;&#19968;&#26679;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.zhihu.com/question/20961593/answer/16833385">&#22914;&#20309;&#35780;&#20215;&#26576;&#19978;&#28023;&#22899;&#29983;&#23545;&#24555;&#39184;&#24215;&#26381;&#21153;&#21592;&#35828;&#12300;&#22312;&#19978;&#28023;&#20570;&#26381;&#21153;&#19994;&#35201;&#20250;&#35828;&#19978;&#28023;&#35805;&#12301;&#30340;&#28909;&#38376;&#24494;&#21338;&#65311; - &#38065;&#21331;&#32676;&#30340;&#22238;&#31572; - &#30693;&#20046;</a> <code class="fold">@</code></dt>
+<dd><p>&#32780;&#22312;&#36825;&#26679;&#30340;&#32972;&#26223;&#19979;&#65292;&#36825;&#20010;&#35821;&#35328;&#26412;&#36523;&#22312;&#36825;&#20123;&#36523;&#20221;&#27495;&#35270;&#32773;&#20154;&#32676;&#20307;&#20013;&#22320;&#20301;&#20250;&#39640;&#28072;&#65292;&#32780;&#22312;&#22806;&#37096;&#20154;&#32676;&#30475;&#26469;&#65292;&#21017;&#20250;&#34987;&#37145;&#35270;&#65292;&#21435;&#23398;&#30340;&#20154;&#65292;&#26080;&#35770;&#20986;&#20110;&#20160;&#20040;&#30446;&#30340;&#65292;&#37117;&#26174;&#24471;&#26377;&#28857;&#38075;&#33829;&#32780;&#35844;&#23194;&#65288;&#40657;&#20154;&#20063;&#20013;&#26377;&#22240; acting white &#30340;&#21407;&#22240;&#34987;&#37145;&#35270;&#30340;&#29366;&#20917;&#65289;&#12290;&#36825;&#20010;&#29615;&#22659;&#26159;&#19981;&#21033;&#20110;&#35821;&#35328;&#25193;&#25955;&#21457;&#23637;&#30340;&#12290;&#24182;&#19988;&#22312;&#36825;&#26679;&#30340;&#32972;&#26223;&#19979;&#65292;&#20219;&#20309;&#35752;&#35770;&#37117;&#26159;&#23545;&#22280;&#22806;&#20154;&#30340;&#20882;&#29359;&#65292;&#36827;&#32780;&#24378;&#21270; B &#31572;&#26696;&#65292;&#30495;&#27491;&#32431;&#27491;&#30446;&#30340;&#24819;&#20445;&#25252;&#21457;&#23637;&#26576;&#35821;&#35328;&#65292;&#24212;&#35813;&#26159;&#21387;&#21046;&#36825;&#31181;&#35328;&#35770;&#21644;&#30456;&#20851;&#30340;&#35752;&#35770;&#25165;&#23545;&#12290;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt><a href="https://www.zhihu.com/question/21112223">&#22312;&#32447;&#38405;&#35835; PDF &#21644;&#20570;&#31508;&#35760;&#30340;&#32593;&#31449;&#26377;&#21527;&#65311; - &#22312;&#32447;&#38405;&#35835; - &#30693;&#20046;</a> <code class="fold">@</code></dt>
+<dd><p>refs and see also</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/20021288">PDF &#29992;&#20160;&#20040;&#36719;&#20214;&#38405;&#35835;&#25928;&#26524;&#36739;&#22909;&#65311; - &#30005;&#23376;&#20070;&#38405;&#35835;&#22120;&#65288;&#30828;&#20214;&#65289; - &#30693;&#20046;</a></li>
+<li><a href="https://www.tracker-software.com/product/pdf-xchange-viewer/download?fileid=448">Tracker Software Products :: PDF-XChange Viewer, Free PDF Reader</a></li>
+<li><a href="https://meiriyiwen.com/random">&#31616;&#21333; &#19977;&#27611; | &#27599;&#26085;&#19968;&#25991;</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><p><a href="http://shop.oreilly.com/product/9780596102425.do">Fonts &amp; Encodings&#160;-&#160;O&#8217;Reilly Media</a></p></li>
+<li><dl>
+<dt>Vim <code class="fold">@</code></dt>
+<dd><p><code>:digraphs</code></p>
+<ul>
+<li><dl>
+<dt>&#36755;&#20837;&#26041;&#27861; <code>C-k</code> <code class="fold">@</code></dt>
+<dd><pre class="vim"><code>CTRL-K a:               &quot; &#228;
+CTRL-K e&gt;               &quot; &#234;</code></pre>
+<ul>
+<li>By decimal value: ^Vnnn (with 000 &lt;= nnn &lt;= 255)</li>
+<li>By octal value: ^VOnnn or ^Vonnn (with 000 &lt;= nnn &lt;= 377)</li>
+<li>By hex value: ^VXnn or ^Vxnn (with 00 &lt;= nn &lt;= FF)</li>
+<li>By hex value for BMP Unicode codepoints: ^Vunnnn (with 0000 &lt;= nnnn &lt;= FFFF)</li>
+<li>By hex value for any Unicode codepoint: ^VUnnnnnnnn (with 00000000 &lt;= nnnnnnnn &lt;= 7FFFFFFF)</li>
+</ul>
+<p>See <code>:help mbyte-combining</code> for details.</p>
+<p>See <code>:help digraph-table</code> for details.</p>
+<p>&#35268;&#21017;&#65306;</p>
+<pre><code>char name                   char                    meaning ~
+Exclamation mark            !                       Grave
+Apostrophe                  &#39;                       Acute accent
+Greater-Than sign           &gt;                       Circumflex accent
+Question mark               ?                       Tilde
+Hyphen-Minus                -                       Macron
+Left parenthesis            (                       Breve
+Full stop                   .                       Dot above
+Colon                       :                       Diaeresis
+Comma                       ,                       Cedilla
+Underline                   _                       Underline
+Solidus                     /                       Stroke
+Quotation mark              &quot;                       Double acute accent
+Semicolon                   ;                       Ogonek
+Less-Than sign              &lt;                       Caron
+Zero                        0                       Ring above
+Two                         2                       Hook
+Nine                        9                       Horn
+Equals                      =                       Cyrillic (= used as second char)
+Asterisk                    *                       Greek
+Percent sign                %                       Greek/Cyrillic special
+Plus                        +                       smalls: Arabic, capitals: Hebrew
+Three                       3                       some Latin/Greek/Cyrillic letters
+Four                        4                       Bopomofo
+Five                        5                       Hiragana
+Six                         6                       Katakana</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#22768;&#35843; <code>!'&gt;&lt;?:-;:</code> <code class="fold">@</code></dt>
+<dd><pre><code>&#192;   A!  0xc0    192     LATIN CAPITAL LETTER A WITH GRAVE
+&#193;   A&#39;  0xc1    193     LATIN CAPITAL LETTER A WITH ACUTE
+&#194;   A&gt;  0xc2    194     LATIN CAPITAL LETTER A WITH CIRCUMFLEX
+&#461;   A&lt;
+&#195;   A?  0xc3    195     LATIN CAPITAL LETTER A WITH TILDE
+&#196;   A:  0xc4    196     LATIN CAPITAL LETTER A WITH DIAERESIS
+&#256;   A-  0100    0256    LATIN CAPITAL LETTER A WITH MACRON
+&#260;   A;  0104    0260    LATIN CAPITAL LETTER A WITH OGONEK
+&#196;   A:
+&#197;   AA  0xc5    197     LATIN CAPITAL LETTER A WITH RING ABOVE</code></pre>
+<p>&#65288;&#19981;&#26159;&#27599;&#20010;&#23383;&#27597;&#37117;&#26377;&#22768;&#35843;&#12290;&#65289;</p>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#36135;&#24065; <code class="fold">@</code></dt>
+<dd><pre><code>&#164;   Cu  0xa4    164     CURRENCY SIGN
+&#165;   Ye  0xa5    165     YEN SIGN
+&#8364;   Eu  20AC    8364    EURO SIGN
+&#163;   Pd  0xa3    163     POUND SIGN
+&#8240;   %0  2030    8240    PER MILLE SIGN
+&#8451;   oC  2103    8451    DEGREE CELSIUS
+&#8457;   oF  2109    8457    DEGREE FAHRENHEIT
+&#8486;   Om  2126    8486    OHM SIGN    &#65288;&#30005;&#38459;&#65306;&#27431;&#22982;&#65289;</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#23383;&#27597;&#34920; <code>&#24076;&#33098;&#8220;&#26143;&#8221;&#65292;&#25289;&#19969;&#8220;&#24418;&#8221;</code> <code class="fold">@</code></dt>
+<dd><p>&#35268;&#21017;&#65306;</p>
+<ul>
+<li>&#24076;&#33098;&#23383;&#31526;&#65288;alpha~omega&#65289;&#37117;&#26159; <code>[&#22823;&#20889;&#23383;&#27597;/&#23567;&#20889;&#23383;&#27597;]*</code></li>
+</ul>
+<p>&#24076;&#33098;&#23383;&#31526;&#65306;</p>
+<pre><code>&#913;   A*  0391    0913    GREEK CAPITAL LETTER ALPHA
+&#914;   B*  0392    0914    GREEK CAPITAL LETTER BETA
+&#915;   G*  0393    0915    GREEK CAPITAL LETTER GAMMA
+&#916;   D*  0394    0916    GREEK CAPITAL LETTER DELTA
+&#917;   E*  0395    0917    GREEK CAPITAL LETTER EPSILON
+&#918;   Z*  0396    0918    GREEK CAPITAL LETTER ZETA
+&#919;   Y*  0397    0919    GREEK CAPITAL LETTER ETA
+&#920;   H*  0398    0920    GREEK CAPITAL LETTER THETA
+&#921;   I*  0399    0921    GREEK CAPITAL LETTER IOTA
+&#922;   K*  039A    0922    GREEK CAPITAL LETTER KAPPA
+&#923;   L*  039B    0923    GREEK CAPITAL LETTER LAMDA
+&#924;   M*  039C    0924    GREEK CAPITAL LETTER MU
+&#925;   N*  039D    0925    GREEK CAPITAL LETTER NU
+&#926;   C*  039E    0926    GREEK CAPITAL LETTER XI
+&#927;   O*  039F    0927    GREEK CAPITAL LETTER OMICRON
+&#928;   P*  03A0    0928    GREEK CAPITAL LETTER PI
+&#929;   R*  03A1    0929    GREEK CAPITAL LETTER RHO
+&#931;   S*  03A3    0931    GREEK CAPITAL LETTER SIGMA
+&#932;   T*  03A4    0932    GREEK CAPITAL LETTER TAU
+&#933;   U*  03A5    0933    GREEK CAPITAL LETTER UPSILON
+&#934;   F*  03A6    0934    GREEK CAPITAL LETTER PHI
+&#935;   X*  03A7    0935    GREEK CAPITAL LETTER CHI
+&#936;   Q*  03A8    0936    GREEK CAPITAL LETTER PSI
+&#937;   W*  03A9    0937    GREEK CAPITAL LETTER OMEGA
+
+&#945;   a*  03B1    0945    GREEK SMALL LETTER ALPHA
+&#946;   b*  03B2    0946    GREEK SMALL LETTER BETA
+&#947;   g*  03B3    0947    GREEK SMALL LETTER GAMMA
+&#948;   d*  03B4    0948    GREEK SMALL LETTER DELTA
+&#949;   e*  03B5    0949    GREEK SMALL LETTER EPSILON
+&#950;   z*  03B6    0950    GREEK SMALL LETTER ZETA
+&#951;   y*  03B7    0951    GREEK SMALL LETTER ETA
+&#952;   h*  03B8    0952    GREEK SMALL LETTER THETA
+&#953;   i*  03B9    0953    GREEK SMALL LETTER IOTA
+&#954;   k*  03BA    0954    GREEK SMALL LETTER KAPPA
+&#955;   l*  03BB    0955    GREEK SMALL LETTER LAMDA
+&#956;   m*  03BC    0956    GREEK SMALL LETTER MU
+&#957;   n*  03BD    0957    GREEK SMALL LETTER NU
+&#958;   c*  03BE    0958    GREEK SMALL LETTER XI
+&#959;   o*  03BF    0959    GREEK SMALL LETTER OMICRON
+&#960;   p*  03C0    0960    GREEK SMALL LETTER PI
+&#961;   r*  03C1    0961    GREEK SMALL LETTER RHO
+&#962;   *s  03C2    0962    GREEK SMALL LETTER FINAL SIGMA
+&#963;   s*  03C3    0963    GREEK SMALL LETTER SIGMA
+&#964;   t*  03C4    0964    GREEK SMALL LETTER TAU
+&#965;   u*  03C5    0965    GREEK SMALL LETTER UPSILON
+&#966;   f*  03C6    0966    GREEK SMALL LETTER PHI
+&#967;   x*  03C7    0967    GREEK SMALL LETTER CHI
+&#968;   q*  03C8    0968    GREEK SMALL LETTER PSI
+&#969;   w*  03C9    0969    GREEK SMALL LETTER OMEGA</code></pre>
+<p>&#36825;&#20123;&#20063;&#26159;&#24076;&#33098;&#23383;&#31526;&#65306;</p>
+<pre><code>&#970;   j*  03CA    0970    GREEK SMALL LETTER IOTA WITH DIALYTIKA
+&#938;   J*  03AA    0938    GREEK CAPITAL LETTER IOTA WITH DIALYTIKA
+
+&#973;   u%  03CD    0973    GREEK SMALL LETTER UPSILON WITH TONOS
+&#971;   v*  03CB    0971    GREEK SMALL LETTER UPSILON WITH DIALYTIKA
+&#939;   V*  03AB    0939    GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA
+
+&#972;   o%  03CC    0972    GREEK SMALL LETTER OMICRON WITH TONOS
+&#974;   w%  03CE    0974    GREEK SMALL LETTER OMEGA WITH TONOS
+
+&#940;   a%  03AC    0940    GREEK SMALL LETTER ALPHA WITH TONOS
+&#941;   e%  03AD    0941    GREEK SMALL LETTER EPSILON WITH TONOS
+&#942;   y%  03AE    0942    GREEK SMALL LETTER ETA WITH TONOS
+&#943;   i%  03AF    0943    GREEK SMALL LETTER IOTA WITH TONOS
+
+&#944;   u3  03B0    0944    GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS
+
+&#984;   &#39;G  03D8    0984    GREEK LETTER ARCHAIC KOPPA
+&#985;   ,G  03D9    0985    GREEK SMALL LETTER ARCHAIC KOPPA
+&#986;   T3  03DA    0986    GREEK LETTER STIGMA
+&#987;   t3  03DB    0987    GREEK SMALL LETTER STIGMA
+&#988;   M3  03DC    0988    GREEK LETTER DIGAMMA
+&#989;   m3  03DD    0989    GREEK SMALL LETTER DIGAMMA
+&#990;   K3  03DE    0990    GREEK LETTER KOPPA
+&#991;   k3  03DF    0991    GREEK SMALL LETTER KOPPA
+&#992;   P3  03E0    0992    GREEK LETTER SAMPI
+&#993;   p3  03E1    0993    GREEK SMALL LETTER SAMPI
+&#1012;   &#39;%  03F4    1012    GREEK CAPITAL THETA SYMBOL
+&#1013;   j3  03F5    1013    GREEK LUNATE EPSILON SYMBOL</code></pre>
+<p>&#25289;&#19969;&#23383;&#31526;</p>
+<pre><code>&#216;   O/  0xd8    216     LATIN CAPITAL LETTER O WITH STROKE
+&#223;   ss  0xdf    223     LATIN SMALL LETTER SHARP S (German)
+&#230;   ae  0xe6    230     LATIN SMALL LETTER AE
+&#231;   c,  0xe7    231     LATIN SMALL LETTER C WITH CEDILLA
+&#240;   d-  0xf0    240     LATIN SMALL LETTER ETH (Icelandic)
+&#247;   -:  0xf7    247     DIVISION SIGN
+&#248;   o/  0xf8    248     LATIN SMALL LETTER O WITH STROKE
+&#266;   C.  010A    0266    LATIN CAPITAL LETTER C WITH DOT ABOVE
+&#273;   d/  0111    0273    LATIN SMALL LETTER D WITH STROKE
+&#292;   H&gt;  0124    0292    LATIN CAPITAL LETTER H WITH CIRCUMFLEX
+&#293;   h&gt;  0125    0293    LATIN SMALL LETTER H WITH CIRCUMFLEX
+&#295;   h/  0127    0295    LATIN SMALL LETTER H WITH STROKE
+&#307;   ij  0133    0307    LATIN SMALL LIGATURE IJ
+&#338;   OE  0152    0338    LATIN CAPITAL LIGATURE OE
+&#339;   oe  0153    0339    LATIN SMALL LIGATURE OE
+&#331;   ng  014B    0331    LATIN SMALL LETTER ENG
+&#437;   Z/  01B5    0437    LATIN CAPITAL LETTER Z WITH STROKE
+&#438;   z/  01B6    0438    LATIN SMALL LETTER Z WITH STROKE
+&#439;   ED  01B7    0439    LATIN CAPITAL LETTER EZH</code></pre>
+<p>Ezh (&#439; &#658;) /&#712;&#603;&#658;/, also called the &#8220;tailed z&#8221;, is a letter whose lower case form is used in the International Phonetic Alphabet (IPA), representing the voiced postalveolar fricative consonant. For example: vision /&#712;v&#618;&#658;&#601;n/.</p>
+<p>refs and see also</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Ezh">Ezh - Wikipedia</a></li>
+</ul>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#31354;&#26684;&#21644;&#36830;&#23383;&#31526; <code class="fold">@</code></dt>
+<dd><pre><code>&#8194;   1N  2002    8194    EN SPACE
+&#8195;   1M  2003    8195    EM SPACE
+&#8196;   3M  2004    8196    THREE-PER-EM SPACE
+&#8197;   4M  2005    8197    FOUR-PER-EM SPACE
+&#8198;   6M  2006    8198    SIX-PER-EM SPACE
+&#8201;   1T  2009    8201    THIN SPACE
+&#8202;   1H  200A    8202    HAIR SPACE
+
+&#8208;   -1  2010    8208    HYPHEN
+&#8211;   -N  2013    8211    EN DASH `
+&#8212;   -M  2014    8212    EM DASH
+&#8213;   -3  2015    8213    HORIZONTAL BAR</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#19978;&#19979;&#26631;&#19982;&#25968;&#23383; <code>S</code>/<code>s</code>/<code>R</code>/<code>r</code>/<code>c</code> <code class="fold">@</code></dt>
+<dd><p>&#21508;&#31181; prime &#30340;&#26684;&#24335;&#26159; <code>[1-3]</code> + <code>'</code> &#25110;&#32773; <code>&quot;</code></p>
+<pre><code>&#8242;   1&#39;  2032    8242    PRIME
+&#8243;   2&#39;  2033    8243    DOUBLE PRIME
+&#8244;   3&#39;  2034    8244    TRIPLE PRIME
+&#8245;   1&quot;  2035    8245    REVERSED PRIME
+&#8246;   2&quot;  2036    8246    REVERSED DOUBLE PRIME
+&#8247;   3&quot;  2037    8247    REVERSED TRIPLE PRIME</code></pre>
+<p>&#19978;&#26631;&#26159; <code>[0~9+-=]S</code>&#65288;superscript&#65289;&#65306;</p>
+<pre><code>&#8304;   0S  2070    8304    SUPERSCRIPT ZERO
+&#185;   1S  0xb9    185     SUPERSCRIPT ONE
+&#178;   2S  0xb2    178     SUPERSCRIPT TWO
+&#179;   3S  0xb3    179     SUPERSCRIPT THREE
+&#8308;   4S  2074    8308    SUPERSCRIPT FOUR
+&#8309;   5S  2075    8309    SUPERSCRIPT FIVE
+&#8310;   6S  2076    8310    SUPERSCRIPT SIX
+&#8311;   7S  2077    8311    SUPERSCRIPT SEVEN
+&#8312;   8S  2078    8312    SUPERSCRIPT EIGHT
+&#8313;   9S  2079    8313    SUPERSCRIPT NINE
+&#8314;   +S  207A    8314    SUPERSCRIPT PLUS SIGN
+&#8315;   -S  207B    8315    SUPERSCRIPT MINUS
+&#8316;   =S  207C    8316    SUPERSCRIPT EQUALS SIGN
+&#8317;   (S  207D    8317    SUPERSCRIPT LEFT PARENTHESIS
+&#8318;   )S  207E    8318    SUPERSCRIPT RIGHT PARENTHESIS
+&#8319;   nS  207F    8319    SUPERSCRIPT LATIN SMALL LETTER N `</code></pre>
+<p>&#20030;&#20010;&#20363;&#23376;&#65306;x&#178;+y&#178;=z&#178; &amp; a&#8317;&#8309;&#8314;&#8312;&#8318;</p>
+<p>&#19979;&#26631;&#26159; <code>[0~9+-=]s</code>&#65288;subscript&#65289;&#65306;</p>
+<pre><code>&#8320;   0s  2080    8320    SUBSCRIPT ZERO
+&#8321;   1s  2081    8321    SUBSCRIPT ONE
+&#8322;   2s  2082    8322    SUBSCRIPT TWO
+&#8323;   3s  2083    8323    SUBSCRIPT THREE
+&#8324;   4s  2084    8324    SUBSCRIPT FOUR
+&#8325;   5s  2085    8325    SUBSCRIPT FIVE
+&#8326;   6s  2086    8326    SUBSCRIPT SIX
+&#8327;   7s  2087    8327    SUBSCRIPT SEVEN
+&#8328;   8s  2088    8328    SUBSCRIPT EIGHT
+&#8329;   9s  2089    8329    SUBSCRIPT NINE
+&#8330;   +s  208A    8330    SUBSCRIPT PLUS SIGN
+&#8331;   -s  208B    8331    SUBSCRIPT MINUS
+&#8332;   =s  208C    8332    SUBSCRIPT EQUALS SIGN
+&#8333;   (s  208D    8333    SUBSCRIPT LEFT PARENTHESIS
+&#8334;   )s  208E    8334    SUBSCRIPT RIGHT PARENTHESIS</code></pre>
+<p>&#20998;&#25968;&#23601;&#26159;&#20004;&#20010;&#20010;&#25968;&#23383;&#65306;</p>
+<pre><code>&#189;   12  0xbd    189     VULGAR FRACTION ONE HALF
+&#8531;   13  2153    8531    VULGAR FRACTION ONE THIRD
+&#8532;   23  2154    8532    VULGAR FRACTION TWO THIRDS
+&#188;   14  0xbc    188     VULGAR FRACTION ONE QUARTER
+&#190;   34  0xbe    190     VULGAR FRACTION THREE QUARTERS
+&#8533;   15  2155    8533    VULGAR FRACTION ONE FIFTH
+&#8534;   25  2156    8534    VULGAR FRACTION TWO FIFTHS
+&#8535;   35  2157    8535    VULGAR FRACTION THREE FIFTHS
+&#8536;   45  2158    8536    VULGAR FRACTION FOUR FIFTHS
+&#8537;   16  2159    8537    VULGAR FRACTION ONE SIXTH
+&#8538;   56  215A    8538    VULGAR FRACTION FIVE SIXTHS
+&#8539;   18  215B    8539    VULGAR FRACTION ONE EIGHTH
+&#8540;   38  215C    8540    VULGAR FRACTION THREE EIGHTHS
+&#8541;   58  215D    8541    VULGAR FRACTION FIVE EIGHTHS
+&#8542;   78  215E    8542    VULGAR FRACTION SEVEN EIGHTHS</code></pre>
+<p>&#24341;&#29992;&#31526;&#21495;&#26159;&#35937;&#24418;&#65288;<code>&#8216;</code> &#21644; <code>6</code>&#65292;<code>&#8217;</code> &#21644; <code>9</code>&#65289;&#65306;</p>
+<pre><code>&#730;   &#39;0  02DA    0730    RING ABOVE
+&#8216;   &#39;6  2018    8216    LEFT SINGLE QUOTATION MARK
+&#8217;   &#39;9  2019    8217    RIGHT SINGLE QUOTATION MARK
+&#8220;   &quot;6  201C    8220    LEFT DOUBLE QUOTATION MARK
+&#8221;   &quot;9  201D    8221    RIGHT DOUBLE QUOTATION MARK</code></pre>
+<p>&#19981;&#36807;&#25105;&#20204;&#30340;&#20013;&#25991;&#36755;&#20837;&#27861;&#24050;&#32463;&#26377;&#36825;&#20123;&#20102;&#12290;</p>
+<p><code>[1-c]R/r</code> -&gt; &#32599;&#39532;&#23383;&#31526; 1~12&#65306;</p>
+<pre><code>&#8544;   1R  2160    8544    ROMAN NUMERAL ONE
+&#8545;   2R  2161    8545    ROMAN NUMERAL TWO
+&#8546;   3R  2162    8546    ROMAN NUMERAL THREE
+&#8547;   4R  2163    8547    ROMAN NUMERAL FOUR
+&#8548;   5R  2164    8548    ROMAN NUMERAL FIVE
+&#8549;   6R  2165    8549    ROMAN NUMERAL SIX
+&#8550;   7R  2166    8550    ROMAN NUMERAL SEVEN
+&#8551;   8R  2167    8551    ROMAN NUMERAL EIGHT
+&#8552;   9R  2168    8552    ROMAN NUMERAL NINE
+&#8553;   aR  2169    8553    ROMAN NUMERAL TEN
+&#8554;   bR  216A    8554    ROMAN NUMERAL ELEVEN
+&#8555;   cR  216B    8555    ROMAN NUMERAL TWELVE
+
+&#8560;   1r  2170    8560    SMALL ROMAN NUMERAL ONE
+&#8561;   2r  2171    8561    SMALL ROMAN NUMERAL TWO
+&#8562;   3r  2172    8562    SMALL ROMAN NUMERAL THREE
+&#8563;   4r  2173    8563    SMALL ROMAN NUMERAL FOUR
+&#8564;   5r  2174    8564    SMALL ROMAN NUMERAL FIVE
+&#8565;   6r  2175    8565    SMALL ROMAN NUMERAL SIX
+&#8566;   7r  2176    8566    SMALL ROMAN NUMERAL SEVEN
+&#8567;   8r  2177    8567    SMALL ROMAN NUMERAL EIGHT
+&#8568;   9r  2178    8568    SMALL ROMAN NUMERAL NINE
+&#8569;   ar  2179    8569    SMALL ROMAN NUMERAL TEN
+&#8570;   br  217A    8570    SMALL ROMAN NUMERAL ELEVEN
+&#8571;   cr  217B    8571    SMALL ROMAN NUMERAL TWELVE</code></pre>
+<p><code>[1-9]c</code> -&gt; &#27721;&#23383;&#65288;ideogram&#65292;&#35937;&#24418;&#65292;&#34920;&#24847;&#65292;<code>['&#618;di&#601;.&#609;r&#230;m]</code>&#65289;&#65306;</p>
+<pre><code>&#12832;  1c  3220    12832   PARENTHESIZED IDEOGRAPH ONE
+&#12833;  2c  3221    12833   PARENTHESIZED IDEOGRAPH TWO
+&#12834;  3c  3222    12834   PARENTHESIZED IDEOGRAPH THREE
+&#12835;  4c  3223    12835   PARENTHESIZED IDEOGRAPH FOUR
+&#12836;  5c  3224    12836   PARENTHESIZED IDEOGRAPH FIVE
+&#12837;  6c  3225    12837   PARENTHESIZED IDEOGRAPH SIX
+&#12838;  7c  3226    12838   PARENTHESIZED IDEOGRAPH SEVEN
+&#12839;  8c  3227    12839   PARENTHESIZED IDEOGRAPH EIGHT
+&#12840;  9c  3228    12840   PARENTHESIZED IDEOGRAPH NINE</code></pre>
+<p>&#20320;&#21487;&#20197;&#25226; c &#29702;&#35299;&#25104; chinese&#12290;</p>
+<p>&#25968;&#23383;&#21152;&#19978; <code>.</code> &#23601;&#26159;&#25968;&#23383;&#32534;&#21495;&#65288;&#36825;&#20010;&#24050;&#32463;&#19981;&#33021;&#26356;&#21152;&#30452;&#25509;&#20102;&#8230;&#8230;&#65289;&#65306;</p>
+<pre><code>&#9352;   1.  2488    9352    DIGIT ONE FULL STOP
+&#9353;   2.  2489    9353    DIGIT TWO FULL STOP
+&#9354;   3.  248A    9354    DIGIT THREE FULL STOP
+&#9355;   4.  248B    9355    DIGIT FOUR FULL STOP
+&#9356;   5.  248C    9356    DIGIT FIVE FULL STOP
+&#9357;   6.  248D    9357    DIGIT SIX FULL STOP
+&#9358;   7.  248E    9358    DIGIT SEVEN FULL STOP
+&#9359;   8.  248F    9359    DIGIT EIGHT FULL STOP
+&#9360;   9.  2490    9360    DIGIT NINE FULL STOP</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#36923;&#36753;&#31526;&#21495;&#20197;&#21450;&#21508;&#31181;&#31661;&#22836; &#9829;&#65039; <code class="fold">@</code></dt>
+<dd><p>&#36923;&#36753;&#31526;&#21495;&#65306;</p>
+<pre><code>&#8757;   :.  2235    8757    BECAUSE         &#20174;&#19978;&#24448;&#19979;&#30475;&#65292;&#20808;&#30475;&#21040;&#30340;&#23601;&#26159; :&#65292;&#21518;&#30475;&#21040;&#30340;&#23601;&#26159; .
+&#8756;   .:  2234    8756    THEREFORE
+
+&#8704;   FA  2200    8704    FOR ALL
+&#8707;   TE  2203    8707    THERE EXISTS
+
+&#36825;&#20010; DE &#21644; NB &#19981;&#22909;&#35760;&#65292;&#20294;&#26159;&#26159;&#24456;&#26377;&#29992;&#30340;&#23383;&#31526;&#12290;
+&#8710;   DE  2206    8710    INCREMENT
+&#8711;   NB  2207    8711    NABLA
+
+&#8743;   AN  2227    8743    LOGICAL AND
+&#8744;   OR  2228    8744    LOGICAL OR
+
+&#8709;   /0  2205    8709    EMPTY SET
+&#8712;   (-  2208    8712    ELEMENT OF
+&#8715;   -)  220B    8715    CONTAINS AS MEMBER
+&#8733;   0(  221D    8733    PROPORTIONAL TO
+&#8745;   (U  2229    8745    INTERSECTION
+&#8746;   )U  222A    8746    UNION
+&#8834;   (C  2282    8834    SUBSET OF
+&#8835;   )C  2283    8835    SUPERSET OF
+&#8838;   (_  2286    8838    SUBSET OF OR EQUAL TO
+&#8839;   )_  2287    8839    SUPERSET OF OR EQUAL TO
+
+&#8801;   =3  2261    8801    IDENTICAL TO
+&#8660;   ==  21D4    8660    LEFT RIGHT DOUBLE ARROW
+&#8800;   !=  2260    8800    NOT EQUAL TO
+&#8804;   =&lt;  2264    8804    LESS-THAN OR EQUAL TO       &#36825;&#20004;&#20010;&#36825;&#20040;&#24618;&#65292;&#26159;&#22240;&#20026; =&gt; &#21644; &lt;= &#29992;&#20570;&#20102;&#31661;&#22836;
+&#8805;   &gt;=  2265    8805    GREATER-THAN OR EQUAL TO
+&#8814;   !&lt;  226E    8814    NOT LESS-THAN
+&#8815;   !&gt;  226F    8815    NOT GREATER-THAN
+&#8810;   &lt;*  226A    8810    MUCH LESS-THAN
+&#8811;   *&gt;  226B    8811    MUCH GREATER-THAN
+
+&#8771;   ?-  2243    8771    ASYMPTOTICALLY EQUAL TO
+&#8773;   ?=  2245    8773    APPROXIMATELY EQUAL TO
+&#8776;   ?2  2248    8776    ALMOST EQUAL TO
+&#8780;   =?  224C    8780    ALL EQUAL TO</code></pre>
+<pre><code>&#8214;   !2  2016    8214    DOUBLE VERTICAL LINE
+&#8215;   =2  2017    8215    DOUBLE LOW LINE
+
+&#8224;   /-  2020    8224    DAGGER
+&#8225;   /=  2021    8225    DOUBLE DAGGER
+&#177;   +-  0xb1    177     PLUS-MINUS SIGN
+&#215;   *X  0xd7    215     MULTIPLICATION SIGN
+&#8260;   /f  2044    8260    FRACTION SLASH
+&#8251;   :X  203B    8251    REFERENCE MARK
+
+&#8719;   *P  220F    8719    N-ARY PRODUCT
+&#8721;   +Z  2211    8721    N-ARY SUMMATION
+&#8723;   -+  2213    8723    MINUS-OR-PLUS SIGN
+
+Integral&#65292;&#19968;&#31181;&#26159; In&#65292;&#19968;&#31181;&#26159; DI&#65292;&#19968;&#31181;&#26159;&#29615; Io
+&#8747;   In  222B    8747    INTEGRAL
+&#8748;   DI  222C    8748    DOUBLE INTEGRAL
+&#8750;   Io  222E    8750    CONTOUR INTEGRAL
+
+&#8857;   0.  2299    8857    CIRCLED DOT OPERATOR
+&#8869;   -T  22A5    8869    UP TACK
+&#8901;   .P  22C5    8901    DOT OPERATOR
+&#8942;   :3  22EE    8942    VERTICAL ELLIPSIS
+&#8943;   .3  22EF    8943    MIDLINE HORIZONTAL ELLIPSIS
+
+&#8968;   &lt;7  2308    8968    LEFT CEILING
+&#8969;   &gt;7  2309    8969    RIGHT CEILING
+&#8970;   7&lt;  230A    8970    LEFT FLOOR
+&#8971;   7&gt;  230B    8971    RIGHT FLOOR
+
+&#9001;  &lt;/  2329    9001    LEFT-POINTING ANGLE BRACKET
+&#9002;  /&gt;  232A    9002    RIGHT-POINTING ANGLE BRACKET</code></pre>
+<p>&#21508;&#31181;&#31661;&#22836;&#65306;</p>
+<pre><code>&#8592;   &lt;-  2190    8592    LEFTWARDS ARROW
+&#8593;   -!  2191    8593    UPWARDS ARROW
+&#8594;   -&gt;  2192    8594    RIGHTWARDS ARROW
+&#8595;   -v  2193    8595    DOWNWARDS ARROW
+&#8596;   &lt;&gt;  2194    8596    LEFT RIGHT ARROW
+&#8597;   UD  2195    8597    UP DOWN ARROW
+&#8656;   &lt;=  21D0    8656    LEFTWARDS DOUBLE ARROW
+&#8658;   =&gt;  21D2    8658    RIGHTWARDS DOUBLE ARROW
+
+&#30475;&#19978;&#21435;&#26159;&#31661;&#22836;&#65292;&#20294;&#20854;&#23454;&#26159;&#24341;&#29992;&#31526;&#21495;&#65306;
+&#8249;   &lt;1  2039    8249    SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+&#8250;   &gt;1  203A    8250    SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+&#171;   &lt;&lt;  0xab    171     LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+&#187;   &gt;&gt;  0xbb    187     RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>&#20854;&#20182; <code class="fold">@</code></dt>
+<dd><pre><code>&#23545;&#38169;
+&#10003;   OK  2713    10003   CHECK MARK
+&#10007;   XX  2717    10007   BALLOT X
+
+&#24615;&#21035;
+&#9792;   Fm  2640    9792    FEMALE SIGN
+&#9794;   Ml  2642    9794    MALE SIGN
+
+&#29260;&#65288;Suit (cards)&#65289;
+    The four French playing cards suits used primarily in the
+    English-speaking world:
+        spades (&#9824;),
+        hearts (&#9829;),
+        diamonds (&#9830;) and
+        clubs (&#9827;)
+&#9824;   cS  2660    9824    BLACK SPADE SUIT
+&#9825;   cH  2661    9825    WHITE HEART SUIT
+&#9826;   cD  2662    9826    WHITE DIAMOND SUIT
+&#9827;   cC  2663    9827    BLACK CLUB SUIT
+
+&#38899;&#31526;
+&#9833;   Md  2669    9833    QUARTER NOTE `
+&#9834;   M8  266A    9834    EIGHTH NOTE `
+&#9835;   M2  266B    9835    BEAMED EIGHTH NOTES
+&#9837;   Mb  266D    9837    MUSIC FLAT SIGN
+&#9838;   Mx  266E    9838    MUSIC NATURAL SIGN
+&#9839;   MX  266F    9839    MUSIC SHARP SIGN
+
+&#27880;&#38899;
+&#12549;  b4  3105    12549   BOPOMOFO LETTER B
+&#12550;  p4  3106    12550   BOPOMOFO LETTER P
+&#12551;  m4  3107    12551   BOPOMOFO LETTER M
+&#12552;  f4  3108    12552   BOPOMOFO LETTER F
+&#12553;  d4  3109    12553   BOPOMOFO LETTER D
+&#12554;  t4  310A    12554   BOPOMOFO LETTER T
+&#12555;  n4  310B    12555   BOPOMOFO LETTER N `
+&#12556;  l4  310C    12556   BOPOMOFO LETTER L
+&#12557;  g4  310D    12557   BOPOMOFO LETTER G
+&#12558;  k4  310E    12558   BOPOMOFO LETTER K
+&#12559;  h4  310F    12559   BOPOMOFO LETTER H
+&#12560;  j4  3110    12560   BOPOMOFO LETTER J
+&#12561;  q4  3111    12561   BOPOMOFO LETTER Q
+&#12562;  x4  3112    12562   BOPOMOFO LETTER X
+&#12563;  zh  3113    12563   BOPOMOFO LETTER ZH
+&#12564;  ch  3114    12564   BOPOMOFO LETTER CH
+&#12565;  sh  3115    12565   BOPOMOFO LETTER SH
+&#12566;  r4  3116    12566   BOPOMOFO LETTER R
+&#12567;  z4  3117    12567   BOPOMOFO LETTER Z
+&#12568;  c4  3118    12568   BOPOMOFO LETTER C
+&#12569;  s4  3119    12569   BOPOMOFO LETTER S
+&#12570;  a4  311A    12570   BOPOMOFO LETTER A
+&#12571;  o4  311B    12571   BOPOMOFO LETTER O
+&#12572;  e4  311C    12572   BOPOMOFO LETTER E
+&#12574;  ai  311E    12574   BOPOMOFO LETTER AI
+&#12575;  ei  311F    12575   BOPOMOFO LETTER EI
+&#12576;  au  3120    12576   BOPOMOFO LETTER AU
+&#12577;  ou  3121    12577   BOPOMOFO LETTER OU
+&#12578;  an  3122    12578   BOPOMOFO LETTER AN
+&#12579;  en  3123    12579   BOPOMOFO LETTER EN
+&#12580;  aN  3124    12580   BOPOMOFO LETTER ANG
+&#12581;  eN  3125    12581   BOPOMOFO LETTER ENG
+&#12582;  er  3126    12582   BOPOMOFO LETTER ER
+&#12583;  i4  3127    12583   BOPOMOFO LETTER I
+&#12584;  u4  3128    12584   BOPOMOFO LETTER U
+&#12585;  iu  3129    12585   BOPOMOFO LETTER IU
+&#12586;  v4  312A    12586   BOPOMOFO LETTER V
+&#12587;  nG  312B    12587   BOPOMOFO LETTER NG
+&#12588;  gn  312C    12588   BOPOMOFO LETTER GN</code></pre>
+<p>ligature&#65306;</p>
+<pre><code>&#64256;   ff  FB00    64256   LATIN SMALL LIGATURE FF
+&#64257;   fi  FB01    64257   LATIN SMALL LIGATURE FI
+&#64258;   fl  FB02    64258   LATIN SMALL LIGATURE FL
+&#64261;   ft  FB05    64261   LATIN SMALL LIGATURE LONG S T
+&#64262;   st  FB06    64262   LATIN SMALL LIGATURE ST</code></pre>
+<pre><code>&#176;   DG  0xb0    176 DEGREE SIGN
+&#167;   SE  0xa7    167 SECTION SIGN
+&#182;   PI  0xb6    182 PILCROW SIGN
+&#166;   BB  0xa6    166 BROKEN BAR
+&#183;   .M  0xb7    183 MIDDLE DOT
+&#168;   &#39;:  0xa8    168 DIAERESIS
+&#169;   Co  0xa9    169 COPYRIGHT SIGN
+&#172;   NO  0xac    172 NOT SIGN
+&#174;   Rg  0xae    174 REGISTERED SIGN
+&#181;   My  0xb5    181 MICRO SIGN      &#36825;&#26159;&#8220;&#24494;&#8221;&#19981;&#26159; mu
+&#191;   ?I  0xbf    191 INVERTED QUESTION MARK
+&#8734;   00  221E    8734    INFINITY
+&#8706;   dP  2202    8706    PARTIAL DIFFERENTIAL
+&#8728;   Ob  2218    8728    RING OPERATOR
+&#8729;   Sb  2219    8729    BULLET OPERATOR
+&#8730;   RT  221A    8730    SQUARE ROOT
+&#8736;   -V  2220    8736    ANGLE
+&#8741;   PP  2225    8741    PARALLEL TO</code></pre>
+</dd>
+</dl></li>
+</ul>
+</dd>
+</dl></li>
+</ul>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

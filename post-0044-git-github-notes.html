@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2014-08-10" />
+  <title>Git&#12289;GitHub &#21644; Windows</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Git&#12289;GitHub &#21644; Windows</h1>
+<h3 class="date">2014-08-10</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#windows-&#19978;&#37197;&#32622;-git">Windows &#19978;&#37197;&#32622; Git</a><ul>
+        <li><a href="#github-&#26159;&#20160;&#20040;">GitHub &#26159;&#20160;&#20040;</a><ul>
+        <li><a href="#git-&#24120;&#29992;&#27969;&#31243;">Git &#24120;&#29992;&#27969;&#31243;</a></li>
+        <li><a href="#&#20351;&#29992;-github-&#30340;&#21069;&#25552;&#20197;&#21450;&#19968;&#20123;&#24120;&#35782;">&#20351;&#29992; GitHub &#30340;&#21069;&#25552;&#20197;&#21450;&#19968;&#20123;&#24120;&#35782;</a></li>
+        </ul></li>
+        <li><a href="#github-&#25945;&#31243;step-by-step">GitHub &#25945;&#31243;&#65306;Step by Step</a><ul>
+        <li><a href="#&#19979;&#36733;-git-for-windows">&#19979;&#36733; Git for Windows</a></li>
+        <li><a href="#&#23433;&#35013;-git-for-windows">&#23433;&#35013; Git for Windows</a></li>
+        <li><a href="#&#20351;&#29992;-git-bash">&#20351;&#29992; Git Bash</a></li>
+        <li><a href="#&#32534;&#36753;&#22120;&#36873;&#25321;">&#32534;&#36753;&#22120;&#36873;&#25321;</a></li>
+        </ul></li>
+        <li><a href="#&#22312;-github-&#19978;&#26032;&#24314;&#19968;&#20010;-repo">&#22312; GitHub &#19978;&#26032;&#24314;&#19968;&#20010; Repo</a></li>
+        <li><a href="#&#38468;&#24405;">&#38468;&#24405;</a><ul>
+        <li><a href="#&#20026;&#20160;&#20040;&#35201;&#23398;&#20064;-git">&#20026;&#20160;&#20040;&#35201;&#23398;&#20064; Git</a></li>
+        <li><a href="#&#25991;&#26723;&#25776;&#20889;&#19982;-coding-&#35268;&#33539;">&#25991;&#26723;&#25776;&#20889;&#19982; Coding &#35268;&#33539;</a></li>
+        </ul></li>
+        <li><a href="#&#19968;&#20123;&#31508;&#35760;">&#19968;&#20123;&#31508;&#35760;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="windows-&#19978;&#37197;&#32622;-git">Windows &#19978;&#37197;&#32622; Git</h1>
+<h2 id="github-&#26159;&#20160;&#20040;">GitHub &#26159;&#20160;&#20040;</h2>
+<ul>
+<li><a href="http://baike.baidu.com/view/3366456.htm">GitHub &#26159;&#24590;&#26679;&#19968;&#20010;&#32593;&#31449;</a>&#65306;&#19968;&#20010;&#31243;&#24207;&#25176;&#31649;&#32593;&#31449;&#65292;&#19968;&#20010;&#31038;&#20250;&#21270;&#32534;&#31243;&#24179;&#21488;&#65288;Social Coding&#65289;</li>
+<li>GitHub &#20351;&#29992; Git &#29256;&#26412;&#25511;&#21046;&#65292;Git &#20316;&#20026;&#19968;&#20010;&#29256;&#26412;&#25511;&#21046;&#24037;&#20855;&#26377;&#20160;&#20040;&#29305;&#28857;&#65306;
+<ul>
+<li>Git &#26159;&#30446;&#21069;&#19990;&#30028;&#19978;&#26368;&#20808;&#36827;&#30340;&#20998;&#24067;&#24335;&#29256;&#26412;&#25511;&#21046;&#31995;&#32479;&#65288;&#27809;&#26377;&#20043;&#19968;&#65289;&#12290;</li>
+<li>&#29305;&#28857;&#26159;&#39640;&#31471;&#22823;&#27668;&#19978;&#26723;&#27425;&#65281;&#65288;<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001373962845513aefd77a99f4145f0a2c7a7ca057e7570000">&#24278;&#38634;&#23792;&#35821;</a>&#65289;</li>
+</ul></li>
+<li>GitHub &#23545;&#20110;&#31243;&#24207;&#21592;&#30340;&#24847;&#20041;&#65306;
+<ul>
+<li>&#20320;&#35201;&#30693;&#36947; GitHub &#34987;&#20013;&#22269;&#30340;&#38450;&#28779;&#38271;&#22478;&#23553;&#38145;&#36807;&#20960;&#27425;&#65292;&#22312;&#22810;&#20154;&#32852;&#21517;&#25239;&#35758;&#19979;&#25165;&#35299;&#38145;&#12290;&#26446;&#24320;&#22797;&#20063;&#21457;&#21338;&#22768;&#25588;&#65306;</li>
+</ul>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/github-blocked.png" alt="GitHub is blocked by GFW" />
+<p class="caption">GitHub is blocked by GFW</p>
+</div></li>
+<li>GitHub &#30340;&#31454;&#20105;&#23545;&#25163;&#65306;
+<ul>
+<li>&#22269;&#22806;&#30340; BitBucket&#65292;&#20197;&#21450;</li>
+<li>&#20013;&#22269;&#30340; GitHub &#20811;&#38534;&#29256; GitCafe&#65288;&#24050;&#32463;&#21512;&#24182;&#21040;&#20102; <Coding.net>&#65289;</li>
+</ul></li>
+<li><p>&#29616;&#22312;&#35831;&#27880;&#20876;&#19968;&#20010; GitHub &#36134;&#25143;&#65288;&#24517;&#39035;&#30340;&#65289;&#65292;&#26377;&#36134;&#25143;&#30340;&#35831;&#30331;&#24405;</p></li>
+</ul>
+<h3 id="git-&#24120;&#29992;&#27969;&#31243;">Git &#24120;&#29992;&#27969;&#31243;</h3>
+<ul>
+<li>&#35814;&#32454;&#25139; Git &#25945;&#31243;&#65306;<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">&#24278;&#38634;&#23792; Git &#25945;&#31243;</a>&#65292;&#25110;&#32773; <a href="http://jianshu.io/p/db84ee45f16c">&#25105;&#30340; ProGIT &#31508;&#35760;</a></li>
+<li>&#31616;&#21333;&#22320;&#35828; Git &#35760;&#24405;&#20102;&#25991;&#26723;&#30340;&#29366;&#24577;&#21644;&#29366;&#24577;&#38388;&#30340;&#21464;&#21160;&#65292;&#25152;&#26377;&#35760;&#24405;&#39033;&#20998;&#20026;&#19977;&#20010;&#29366;&#24577;&#65306;
+<ul>
+<li>Modified&#65288;&#20462;&#25913;&#20102;&#65289;</li>
+<li>Staged&#65288;&#25552;&#20132;&#20102;&#65289;</li>
+<li>Committed&#65288;&#25552;&#20132;&#30830;&#35748;&#20102;&#65289;&#12290;</li>
+</ul></li>
+<li>Git &#21629;&#20196;&#20998;&#20026;&#19977;&#20010;&#37096;&#20998;&#65306;<code class="sourceCode bash"><span class="kw">git</span></code> + <code>&#21629;&#20196;</code> + <code>&#21442;&#25968;</code> &#31561;&#65292;&#27604;&#22914;&#65306;
+<ul>
+<li><code class="sourceCode bash"><span class="kw">git</span> clone url</code> &#20174; url&#65288;&#38656;&#35201;&#21512;&#27861;&#30340; git repo &#25165;&#34892;&#65289; &#20811;&#38534;&#19968;&#20010;&#21103;&#26412;&#21040;&#26412;&#22320;&#24403;&#21069;&#30446;&#24405;</li>
+<li><code class="sourceCode bash"><span class="kw">git</span> commit -m <span class="st">&quot;message&quot;</span></code> &#25226;&#20462;&#25913;&#25552;&#20132;&#24182;&#35760;&#24405;</li>
+</ul></li>
+<li>&#19968;&#20010;&#36890;&#24120;&#30340; Git &#27969;&#31243;&#26159;&#65306;
+<ul>
+<li><code class="sourceCode bash"><span class="kw">git</span> clone git@github.com:district10/new-repo.git</code>
+<ul>
+<li>&#25226;&#19968;&#20010;&#20113;&#31471; Repo &#22797;&#21046;&#19979;&#26469;</li>
+<li>&#22797;&#21046;&#21035;&#20154;&#30340; Repo &#29992; HTTPS &#21327;&#35758;&#65292;&#22797;&#21046;&#33258;&#24049;&#30340; Repo &#29992; GIT &#21327;&#35758;&#65292;&#30452;&#25509;&#22312;&#26412;&#22320;&#21019;&#24314;&#19968;&#20010; Git Repo &#21017;&#20351;&#29992; <code class="sourceCode bash"><span class="kw">git</span> init</code></li>
+<li>&#19968;&#20010; Git Repo &#26377;&#19968;&#20123;&#25991;&#26723;&#26469;&#35760;&#24405;&#21464;&#21270;&#65292;&#20182;&#20204;&#26159;&#38544;&#34255;&#30340;&#12290;</li>
+</ul></li>
+<li><code class="sourceCode bash"><span class="kw">git</span> add -A</code>
+<ul>
+<li>&#22312;&#27599;&#27425;&#20462;&#25913;&#21518;&#65292;&#20462;&#25913;&#30340;&#25991;&#26723;&#30340;&#29366;&#24577;&#23601;&#20174; Clean&#65288;Committed&#65289; &#21464;&#25104; Modified</li>
+<li>&#20351;&#29992;&#36825;&#20010;&#21629;&#20196;&#25226;&#25152;&#26377;&#20869;&#23481;&#25552;&#20132;&#65292;&#29366;&#24577;&#21464;&#25104; Staged</li>
+</ul></li>
+<li><code class="sourceCode bash"><span class="kw">git</span> commit -m <span class="st">&quot;&#25552;&#20132;&#35760;&#24405;&quot;</span></code>
+<ul>
+<li>&#25226;&#20462;&#25913; commit&#65292;&#27604;&#22914;&#65306;&#8221;&#20462;&#27491;&#20102;&#19968;&#20010;&#25340;&#20889;&#38169;&#35823;&#8220;&#65288;Fixed Typo&#65289;&#65292;&#20294;&#36825;&#26102;&#20505;&#21482;&#26159;&#26412;&#22320;&#20462;&#25913;&#22909;&#20102;&#65292;&#20113;&#31471;&#65288;GitHub &#31471;&#65289;&#27809;&#26377;&#21516;&#27493;&#12290;</li>
+</ul></li>
+<li><code>git push</code>
+<ul>
+<li>&#25226;&#20462;&#25913;&#21516;&#27493;&#21040;&#20113;&#31471;&#65292;&#26368;&#31616;&#21333;&#22320;&#26041;&#24335;&#23601;&#26159; <code class="sourceCode bash"><span class="kw">git</span> push</code></li>
+<li>&#22810;&#20154;&#21512;&#20316;&#30340;&#26102;&#20505;&#65292;&#27599;&#27425;&#20808;&#25226;&#26412;&#22320;&#20462;&#25913; Commit&#65292;&#20877; Push &#21040; &#20113;&#31471;&#12290;&#20877;&#25226;&#21035;&#20154;&#30340;&#20462;&#25913; <code class="sourceCode bash"><span class="kw">git</span> pull</code> &#19979;&#26469;&#12290;</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="&#20351;&#29992;-github-&#30340;&#21069;&#25552;&#20197;&#21450;&#19968;&#20123;&#24120;&#35782;">&#20351;&#29992; GitHub &#30340;&#21069;&#25552;&#20197;&#21450;&#19968;&#20123;&#24120;&#35782;</h3>
+<ul>
+<li>&#32852;&#32593;&#30340;&#30005;&#33041;</li>
+<li>&#32593;&#39029;&#30331;&#20837;&#65288;&#22312;&#32593;&#39029;&#19978;&#20063;&#21487;&#20197;&#24456;&#26041;&#20415;&#30340;&#26597;&#30475;&#21035;&#20154;&#20195;&#30721;&#65292;&#20811;&#38534;&#21035;&#20154;&#30340; Repo&#65289;</li>
+<li>&#25511;&#21046;&#21488; SSH &#36830;&#25509;&#65288;&#29992; SSH &#30331;&#20837;&#26041;&#20415;&#22320;&#21516;&#27493;&#20195;&#30721;&#65292;&#29256;&#26412;&#25511;&#21046;&#65289;</li>
+<li>&#26368;&#22909;&#23398;&#20064;&#19968;&#19979; Markdown &#30340;&#20351;&#29992;
+<ul>
+<li>GitHub &#19978;&#30340; README &#25991;&#26723;&#24456;&#22810;&#37117;&#26159;&#29992; Markdown &#20889;&#25104;&#65288;&#20197; <code>.md</code> &#32467;&#23614;&#30340;&#25991;&#20214;&#65289;</li>
+<li>&#23398;&#20064; Markdown &#21487;&#21442;&#32771;&#25105;&#30340;&#21338;&#23458;&#65306;<a href="http://jianshu.io/p/7bd23251da0a">Markdown &#31616;&#26126;&#25945;&#31243;</a></li>
+</ul></li>
+<li><p>&#25991;&#26723;&#20445;&#23384;&#26102;&#32534;&#30721;&#35831;&#20351;&#29992; &#12304;UTF-8 &#26080; BOM &#26684;&#24335;&#32534;&#30721;&#12305;&#32780;&#19981;&#26159; Windows &#40664;&#35748;&#30340; &#12304;ANSI &#26684;&#24335;&#32534;&#30721;&#12305;&#65292;&#22312; Notepad++ &#37324;&#22914;&#19979;&#35774;&#32622;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/ansi-utf8.png" alt="Notepad++ &amp; UTF-8 encoding" />
+<p class="caption">Notepad++ &amp; UTF-8 encoding</p>
+</div></li>
+</ul>
+<h2 id="github-&#25945;&#31243;step-by-step">GitHub &#25945;&#31243;&#65306;Step by Step</h2>
+<p>Linux &#29992;&#25143;&#65292;&#30452;&#25509;&#25970;&#21629;&#20196;&#65292;&#19968;&#34892;&#25630;&#23450;&#65306;<code class="sourceCode bash"><span class="kw">apt-get</span> install git</code></p>
+<p>Windows &#30340;&#35805;&#8230;&#8230;</p>
+<h3 id="&#19979;&#36733;-git-for-windows">&#19979;&#36733; Git for Windows</h3>
+<p>Git &#38656;&#35201;&#23433;&#35013;&#20351;&#29992;&#65292;&#21040; <a href="http://www.git-scm.com/downloads">Git Scm</a> &#19979;&#36733; Windows &#29256;&#26412;&#65306;Git for Windows&#12290;&#22240;&#19979;&#36733;&#38656;&#35201;&#32763;&#22681;&#65292;&#36825;&#37324;&#25552;&#20379;&#19968;&#20010;&#22791;&#20221;&#65306;<a href="http://whudoc.qiniudn.com/Git-2.7.2-64-bit.exe">Git-2.7.2</a>&#12290;</p>
+<h3 id="&#23433;&#35013;-git-for-windows">&#23433;&#35013; Git for Windows</h3>
+<p>&#12304;1&#12305; &#21452;&#20987;&#22914;&#19979;&#22270;&#26631;&#65288;&#12304;&#21491;&#38190; - &#20197;&#31649;&#29702;&#21592;&#36523;&#20221;&#36816;&#34892;&#12305;&#21709;&#24212;&#26356;&#24555;&#65289;&#65292;&#24320;&#22987;&#23433;&#35013;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-for-windows.png" alt="git for windows" />
+<p class="caption">git for windows</p>
+</div>
+<p>&#12304;2&#12305; &#19979;&#19968;&#27493;&#65292;&#21516;&#24847; GNU General Public License</p>
+<p>&#12304;3&#12305; &#36873;&#25321;&#32452;&#20214;&#65292;&#25226; <code>Git Bash Here</code> &#21644; <code>Git GUI Here</code> &#27880;&#20876;&#21040;&#27880;&#20876;&#34920;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-setup-components.png" alt="git bash" />
+<p class="caption">git bash</p>
+</div>
+<p>&#12304;4&#12305; &#36873;&#25321; Git Bash&#65292;Bash &#26159;&#19968;&#31181;&#21629;&#20196;&#34892;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-setup-gitbash.png" alt="git bash" />
+<p class="caption">git bash</p>
+</div>
+<p>&#12304;5&#12305; &#36873;&#25321; Git &#25442;&#34892;&#31526;&#24037;&#20316;&#26041;&#24335;&#65288;Windows&#65292;Unix/Linux&#65292;Mac OS &#30340;&#25442;&#34892;&#31526;&#21508;&#19981;&#30456;&#21516;&#65289;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-setup-lineendings.png" alt="newline" />
+<p class="caption">newline</p>
+</div>
+<p>&#12304;6&#12305; &#23433;&#35013;&#23436;&#25104;&#65292;&#22312;&#36164;&#28304;&#31649;&#29702;&#22120;&#37324;&#21491;&#38190;&#20986;&#29616;&#20102; Git Bash &#21644; Git GUI &#36873;&#39033;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/gitbash-gitgui.png" alt="git bash &amp; git gui" />
+<p class="caption">git bash &amp; git gui</p>
+</div>
+<h3 id="&#20351;&#29992;-git-bash">&#20351;&#29992; Git Bash</h3>
+<p>&#12304;1&#12305; &#25171;&#24320; Git Bash</p>
+<p>&#22312;&#26576;&#19968;&#25991;&#20214;&#22841;&#19979;&#21491;&#38190;&#21333;&#20987;&#25171;&#24320; Git Bash&#65292;&#36825;&#26159;&#19968;&#20010;&#21629;&#20196;&#34892;&#29615;&#22659;&#65292;&#23601;&#20687; Windows &#19979;&#30340; CMD&#65292; PowerShell &#25110;&#32773; Linux &#19979;&#30340; Bash&#65292;Zsh</p>
+<p>&#12304;2&#12305; Hello Git Bash</p>
+<p>&#35797;&#30528;&#36755;&#20837;&#65292;<code class="sourceCode bash"><span class="kw">echo</span> Hello Git Bash</code>&#65292;&#22238;&#36710;&#65292;&#23601;&#26377;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-hello.png" alt="hello world" />
+<p class="caption">hello world</p>
+</div>
+<p>&#39034;&#20415;&#25226;&#33258;&#24049;&#30340;&#29992;&#25143;&#21517;&#21644;&#37038;&#31665;&#37197;&#32622;&#19968;&#19979;&#65306;&#65288;&#25226;&#29992;&#25143;&#21517;&#21644;&#37038;&#31665;&#25913;&#25104;&#33258;&#24049; GitHub &#36134;&#21495;&#23545;&#24212;&#30340;&#29992;&#25143;&#21517;&#37038;&#31665;&#65289;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> config --global user.name <span class="st">&quot;&lt;NAME&gt;&quot;</span>
+<span class="kw">git</span> config --global user.email <span class="st">&quot;&lt;EMAIL&gt;&quot;</span>
+<span class="kw">git</span> config --global credential.helper <span class="st">&quot;cache --timeout=3600&quot;</span>
+<span class="co"># git config --global push.default simple</span></code></pre></div>
+<p>&#12304;3&#12305; &#20811;&#38534;&#19968;&#20010; GitHub Repository</p>
+<p>&#20811;&#38534;&#65288;Clone&#65289;&#23601;&#26159;&#25226;&#20195;&#30721;&#22797;&#21046;&#21040;&#26412;&#22320;&#65292;&#21040; GitHub &#19978;&#25214;&#20010; Repo&#65292;&#27604;&#22914;&#65306;<a href="https://github.com/alols/xcape" class="uri">https://github.com/alols/xcape</a></p>
+<p>&#22312; Git Bash &#37324;&#36755;&#20837; <code class="sourceCode bash"><span class="kw">git</span> clone https://github.com/alols/xcape</code>&#65292;&#22238;&#36710;&#65292;&#23601;&#26377;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/git-clone-https.png" alt="git clone" />
+<p class="caption"><code class="sourceCode bash"><span class="kw">git</span> clone</code></p>
+</div>
+<p>&#12304;4&#12305; &#37197;&#32622; SSH</p>
+<p>&#39318;&#20808;&#25171;&#24320; Git Bash&#65288;&#19981;&#35770;&#22312;&#21738;&#20010;&#25991;&#20214;&#22841;&#37117;&#34892;&#65289;&#65292;&#28982;&#21518;&#36755;&#20837; <code class="sourceCode bash"><span class="kw">cd</span> ~/.ssh</code> &#25226;&#30446;&#24405;&#36339;&#36716;&#21040;&#33258;&#24049;&#29992;&#25143;&#30340; <code>.ssh</code> &#30446;&#24405;&#19979;&#65307;&#65288;&#22914;&#26524;&#22833;&#36133;&#65292;&#21017;&#36755;&#20837; <code class="sourceCode bash"><span class="kw">cd</span> ~ <span class="kw">&amp;&amp;</span> <span class="kw">mkdir</span> .ssh <span class="kw">&amp;&amp;</span> <span class="kw">cd</span> .ssh</code>&#65289;</p>
+<p>&#36755;&#20837; <code class="sourceCode bash"><span class="kw">ls</span></code> &#65288;&#25171;&#21360;&#30446;&#24405;&#65289;&#24212;&#35813;&#36755;&#20986;&#20026;&#31354;&#65307;</p>
+<p>&#36755;&#20837; <code class="sourceCode bash"><span class="kw">ssh-keygen.exe</span> -t rsa -C <span class="st">&quot;your-email&quot;</span></code> &#65288;&#25442;&#25104;&#20320;&#30340;&#37038;&#31665;&#65289;&#65292;&#22238;&#36710;&#65292;&#26377;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/img/gen-ssh-a.png" alt="ssh-keygen" />
+<p class="caption"><code class="sourceCode bash"><span class="kw">ssh-keygen</span></code></p>
+</div>
+<p>&#31561;&#24453;&#20320;&#36755;&#20837;&#30446;&#24405;&#65292;&#30452;&#25509;&#20351;&#29992;&#40664;&#35748;&#30340;&#65292;&#22238;&#36710;&#21363;&#21487;&#65307;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/img/gen-ssh-b.png" />
+
+</div>
+<p>&#31561;&#24453;&#20320;&#36755;&#20837;&#23494;&#30721;&#65292;&#21487;&#20197;&#19981;&#35774;&#32622;&#65288;&#26041;&#20415;&#33258;&#24049;&#65289;&#65292;&#22238;&#36710;&#20004;&#27425;&#21363;&#21487;&#65307;</p>
+<p>&#28982;&#21518; SSH &#23494;&#38053;&#20844;&#38053;&#23601;&#29983;&#25104;&#22909;&#20102;&#65292;&#29992; ls &#30475;&#19968;&#19979;&#65288;&#36755;&#20837; <code class="sourceCode bash"><span class="kw">ls</span></code>)&#65292;&#26597;&#30475; &#29983;&#25104;&#30340;&#20844;&#38053;&#65292;&#24182;&#25335;&#36125;&#21040;&#21098;&#36148;&#26495;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/img/gen-ssh-c.png" />
+
+</div>
+<p>&#21040; GitHub &#37324;&#35774;&#32622; SSH&#65292;&#22914;&#19979;&#65306;</p>
+<p>&#12304;Step 1&#12305;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/img/gen-ssh-d.png" />
+
+</div>
+<p>&#12304;Step 2&#12305;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/img/gen-ssh-e.png" />
+
+</div>
+<p>&#20445;&#23384;&#22909;&#23601;&#21487;&#20197;&#20102;&#12290;</p>
+<h3 id="&#32534;&#36753;&#22120;&#36873;&#25321;">&#32534;&#36753;&#22120;&#36873;&#25321;</h3>
+<p>Geek &#30340;&#32534;&#36753;&#22120;&#26377; Emacs&#65292;Vim&#65292;&#20294;&#26159;&#25512;&#33616;&#22823;&#23478;&#20351;&#29992; Notepad++&#65288;&#23588;&#20854;&#26159;&#22312; Windows &#19978;&#65289;&#65292;&#36825;&#20010;&#32534;&#36753;&#22120;&#31616;&#21333;&#22909;&#29992;&#12290;&#32780;&#19988;&#26377;&#20415;&#25658;&#29256;&#65292;&#35299;&#21387;&#21363;&#21487;&#20351;&#29992;&#12290;</p>
+<p>&#36825;&#37324;&#25552;&#20379;&#19968;&#20010; Portable &#29256;&#26412;&#19979;&#36733;&#65306; <a href="http://download.tuxfamily.org/notepadplus/6.6.8/npp.6.6.8.bin.7z" class="uri">http://download.tuxfamily.org/notepadplus/6.6.8/npp.6.6.8.bin.7z</a></p>
+<h2 id="&#22312;-github-&#19978;&#26032;&#24314;&#19968;&#20010;-repo">&#22312; GitHub &#19978;&#26032;&#24314;&#19968;&#20010; Repo</h2>
+<p>&#12304;1&#12305;</p>
+<p>&#39318;&#20808;&#21435; GitHub &#20027;&#39029; <a href="https://github.com" class="uri">https://github.com</a> &#65292;&#22312;&#21491;&#19978;&#35282;&#28857;&#20987; <code>New Repository</code></p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-a.png" alt="new repository" />
+<p class="caption">new repository</p>
+</div>
+<p>&#12304;2&#12305;</p>
+<p>&#28982;&#21518;&#36755;&#20837;&#26032; Repo &#30340;&#21517;&#31216;&#65292;&#36755;&#20837; Repo &#35828;&#26126;&#65292;&#36873;&#25321; Public&#65288;Private &#35201;&#25910;&#36153;&#65289;&#65292;&#21246;&#36873;&#29983;&#25104; <code>README</code> &#25991;&#26723;&#65292;&#36873;&#25321;&#19968;&#20010; <code>.gitignore</code> &#25991;&#20214;&#65288;&#20063;&#21487;&#19981;&#36873;&#65289;&#65292;&#36873;&#25321;&#19968;&#20010;&#21327;&#35758;&#65292;&#36825;&#37324;&#25105;&#36873;&#20102; <code>GPL v3</code>&#65292;&#25972;&#20010;&#22914;&#19979;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-b.png" />
+
+</div>
+<p>&#36825;&#26679;&#65292;&#23601;&#22312; GitHub &#19978;&#26032;&#24314;&#20102;&#19968;&#20010; Repo&#65292;&#22914;&#19979;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-c.png" />
+
+</div>
+<p>&#12304;3&#12305;</p>
+<p>&#28982;&#21518;&#25226;&#36825;&#20010; Repo &#29992; Git &#20811;&#38534;&#19979;&#26469;&#65292;&#20808;&#21040;&#22914;&#19978;&#22270;&#21491;&#19979;&#35282;&#65292;&#22797;&#21046; SSH &#38142;&#25509;&#65306;</p>
+<p><code>git@github.com:district10/new-repo.git</code>&#65288;&#22797;&#21046;&#33258;&#24049;&#30340; Repo &#29992; SSH&#65292;&#21035;&#20154;&#30340;&#29992; HTTPS&#65289;</p>
+<p>&#28982;&#21518;&#21040;&#26412;&#22320;&#30446;&#24405;&#65292;&#27604;&#22914;&#36825;&#20010; <code>github</code> &#25991;&#20214;&#22841;&#19979;&#65292;&#21491;&#38190;&#25171;&#24320; Git Bash&#65292;&#36755;&#20837;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> clone git@github.com:district10/new-repo.git</code></pre></div>
+<p>&#22914;&#22270;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-d.png" alt="&#21491;&#38190;&#25171;&#24320; Git Bash" />
+<p class="caption">&#21491;&#38190;&#25171;&#24320; Git Bash</p>
+</div>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-e.png" alt="git clone git@github.com:district10/new-repo.git" />
+<p class="caption"><code class="sourceCode bash"><span class="kw">git</span> clone git@github.com:district10/new-repo.git</code></p>
+</div>
+<p>&#20811;&#38534;&#22909;&#21518;&#24403;&#21069;&#25991;&#20214;&#22841;&#19979;&#23601;&#26377;&#20102; <code>new-repo</code> &#25991;&#20214;&#22841;&#65292;&#22914;&#22270;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-f.png" />
+
+</div>
+<p>&#12304;4&#12305;</p>
+<p>&#36827;&#20837;&#25991;&#20214;&#22841;&#65292;&#29992; Notepad++ &#25171;&#24320; <code>README.md</code> &#25991;&#20214;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-g.png" alt="open README.md" />
+<p class="caption">open README.md</p>
+</div>
+<p>&#31616;&#21333;&#22320;&#20462;&#25913;&#65292;&#28155;&#21152;&#19968;&#34892; &#8220;&#12304;&#36825;&#26159;&#26032;&#20837;&#30340;&#19968;&#34892;&#12290;&#26469;&#33258; Notepad++&#12305;&#8221;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-h.png" alt="edit README.md" />
+<p class="caption">edit README.md</p>
+</div>
+<p>&#28982;&#21518;&#22312; <code>new-repo</code> &#25991;&#20214;&#22841;&#25171;&#24320; Git Bash &#25552;&#20132;&#20462;&#25913;&#24182; Push &#21040; GitHub&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-i.png" />
+
+</div>
+<p>&#20877;&#21040;&#33258;&#24049;&#30340; GitHub &#19978;&#65292;&#26597;&#30475;&#65292;&#21457;&#29616;&#20462;&#25913;&#24050;&#32463;&#25552;&#20132;&#19978;&#21435;&#20102;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/new-repo-j.png" alt="save &amp; add &amp;&amp; commit &amp;&amp; push" />
+<p class="caption">save &amp; add &amp;&amp; commit &amp;&amp; push</p>
+</div>
+<p>&#12304;&#23436;&#12305;</p>
+<p>&#36825;&#23601;&#26159;&#22312; GitHub &#19978;&#26032;&#24314;&#19968;&#20010; Repo &#30340;&#36807;&#31243;&#12290;&#20197;&#21518;&#20462;&#25913;&#20043;&#21518;&#65292;&#20877;</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">git</span> add -A <span class="co"># &#19982; git add README.md &#19981;&#21516;&#30340;&#26159;&#65292;&#36825;&#20010;&#21629;&#20196;&#19968;&#27425;&#28155;&#21152;&#25152;&#26377;&#20462;&#25913;&#20102;&#30340;&#25991;&#26723;</span>
+<span class="kw">git</span> commit -m <span class="st">&quot;Msg&quot;</span>
+<span class="kw">git</span> push</code></pre></div>
+<p>&#21363;&#21487;&#25226;&#20195;&#30721;&#21516;&#27493;&#21040; GitHub&#12290;Git &#22312;&#32534;&#20889;&#20195;&#30721;&#26102;&#21487;&#20197;&#24456;&#22909;&#30340;&#25511;&#21046;&#29256;&#26412;&#65292;&#28145;&#20837;&#30340;&#23398;&#20064;&#65292;&#21487;&#20197;&#21442;&#32771; <a href="http://book.douban.com/review/6465637/">&#26368;&#22909;&#30340; Git &#36827;&#38454;&#26448;&#26009;</a>&#12290;</p>
+<h2 id="&#38468;&#24405;">&#38468;&#24405;</h2>
+<h3 id="&#20026;&#20160;&#20040;&#35201;&#23398;&#20064;-git">&#20026;&#20160;&#20040;&#35201;&#23398;&#20064; Git</h3>
+<ul>
+<li>XDite &#30340;&#21338;&#25991;&#65306;<a href="http://blog.xdite.net/posts/2014/06/18/git-pull-request-homework">&#26377;&#25928;&#25552;&#21319;&#22823;&#23416;&#29983;&#31478;&#29229;&#21147; &#8211; &#29992; Git Pull Request &#25910;&#20316;&#26989;</a></li>
+<li>&#21512;&#20316;&#65288;&#21738;&#24597;&#26368;&#24320;&#22987;&#26159;&#25171;&#25171;&#26434;&#65289;&#65306;<a href="https://github.com/sparanoid/chinese-copywriting-guidelines/pull/20">added an empty line before quotation by district10 &#183; Pull Request #20 &#183; sparanoid/chinese-copywriting-guidelines</a></li>
+</ul>
+<h3 id="&#25991;&#26723;&#25776;&#20889;&#19982;-coding-&#35268;&#33539;">&#25991;&#26723;&#25776;&#20889;&#19982; Coding &#35268;&#33539;</h3>
+<ul>
+<li><a href="https://gitcafe.com/Guide-of-Coding/general-convensions">&#20889;&#21338;&#23458;&#65292;&#25776;&#20889;&#25991;&#26723;&#36890;&#29992;&#35268;&#33539;</a></li>
+<li><a href="https://gitcafe.com/Guide-of-Coding/coding-conventions">Coding &#35268;&#33539;</a></li>
+</ul>
+<h4 id="&#22914;&#26377;&#30097;&#38382;">&#22914;&#26377;&#30097;&#38382;</h4>
+<p>&#22914;&#26377;&#30097;&#38382;&#35831;&#21040; Issue &#25552;&#38382;&#65306;</p>
+<div class="figure">
+<img src="http://whudoc.qiniudn.com/github-guide/img/issues.png" />
+
+</div>
+<hr />
+<h2 id="&#19968;&#20123;&#31508;&#35760;">&#19968;&#20123;&#31508;&#35760;</h2>
+<dl>
+<dt><a href="http://tangzhixiong.com/gh-pages-demo/">&#23637;&#31034; GitHub Pages &#24590;&#20040;&#29992; by district10</a></dt>
+<dd><p>&#25945;&#20320;&#22914;&#20309;&#22312; GitHub &#19978;&#29992;&#24324;&#19968;&#20010;&#31616;&#21333;&#30340;&#23637;&#31034;&#39029;&#38754;&#12290;</p>
+</dd>
+<dt><a href="https://github.com/arvida/emoji-cheat-sheet.com/#contributing">&#22914;&#20309;&#22312; GitHub &#19978; Contributing&#65288;&#36129;&#29486;&#65289;&#65292;&#19968;&#20010;&#31616;&#21333;&#27969;&#31243;&#65306;</a></dt>
+<dd><ol>
+<li>Fork it!</li>
+<li>Create your feature branch: <code class="sourceCode bash"><span class="kw">git</span> checkout -b my-new-feature</code></li>
+<li>Commit your changes: <code class="sourceCode bash"><span class="kw">git</span> commit -am <span class="st">&#39;Add some feature&#39;</span></code></li>
+<li>Push to the branch: <code class="sourceCode bash"><span class="kw">git</span> push origin my-new-feature</code></li>
+<li>Submit a pull request and enjoy! :D</li>
+</ol>
+</dd>
+<dt>&#19968;&#20010;&#26356;&#21152;&#35814;&#32454;&#30340;&#27969;&#31243;&#65306;</dt>
+<dd><p><a href="https://github.com/zhukov/webogram/blob/master/CONTRIBUTING.md">webogram/CONTRIBUTING.md at master &#183; zhukov/webogram</a></p>
+</dd>
+</dl>
+<hr />
+<p>Refs</p>
+<ol>
+<li><a href="https://github.com/whudoc/github-guide">whudoc/github-guide</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#git">git</a></li>
+<li><a class="tzx-tag" href="tags.html/#github">github</a></li>
+<li><a class="tzx-tag" href="tags.html/#windows">windows</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/f8d4a1d796993958bc5e4510840454aba6b43031/_posts/post-0044-git-github-notes.md" title="3 insertions(+), 2 deletions(-)">1509463654</option>
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0044-git-github-notes.md" title="337 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0044-git-github-notes.md";
+var tzxChanges = [
+    {
+        hash: "f8d4a1d796993958bc5e4510840454aba6b43031",
+        datetime: "1509463654",
+        insertions: 3,
+        deletions: 2
+    },
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 337,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

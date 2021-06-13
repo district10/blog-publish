@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-11-23" />
+  <title>Vim Rules</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Vim Rules</h1>
+<h3 class="date">2015-11-23</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#vim-rules">Vim Rules</a><ul>
+        <li><a href="#cmds">Cmds</a></li>
+        <li><a href="#&#27599;&#22825;&#24517;&#29992;&#30340;-vim-&#23439;">&#27599;&#22825;&#24517;&#29992;&#30340; Vim &#23439;</a></li>
+        <li><a href="#&#27599;&#22825;&#24517;&#23432;-vim-&#23478;&#35268;">&#27599;&#22825;&#24517;&#23432; Vim &#23478;&#35268;</a></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="vim-rules">Vim Rules</h1>
+<p>Vim rules. Rules, a verb. Vim rules. Rules, a noun.</p>
+<p><a href="http://gnat.qiniudn.com/vim.svg">vim graphical cheat sheet</a></p>
+<h2 id="cmds">Cmds</h2>
+<p>delete trailing whitespace</p>
+<p><code>:%s/\s\+$//</code></p>
+<p>pangu-spacing&#65288;&#22312;&#20013;&#33521;&#25991;&#20043;&#38388;&#21152;&#19978;&#31354;&#26684;&#65289;</p>
+<pre class="plain"><code>silent! &#39;&lt;,&#39;&gt;s/\([\u4e00-\u9fa5\u3040-\u30FF]\)\([a-zA-Z0-9@&amp;=\[\$\%\^\-\+(\/\\]\)/\1 \2/g
+silent! &#39;&lt;,&#39;&gt;s/\([a-zA-Z0-9!&amp;;=\]\,\.\:\?\$\%\^\-\+\)\/\\]\)\([\u4e00-\u9fa5\u3040-\u30FF]\)/\1 \2/g</code></pre>
+<p>&#25226;&#19978;&#38754;&#30340;&#20004;&#34892;&#25335;&#36125;&#21040;&#26576;&#19968;&#20010;&#23492;&#23384;&#22120;&#22914; <code>p</code>&#65288;&#36873;&#20013;&#19978;&#38754;&#19978;&#34892;&#65292;&#28982;&#21518;&#25191;&#34892; <code>:&quot;py</code>&#65289;&#65292;&#28982;&#21518;&#36873;&#23450;&#25991;&#26412;&#65292;&#25191;&#34892; <code>:@p</code>&#12290;</p>
+<p>&#25110;&#32773;&#25226;&#36825;&#20004;&#21477;&#35805;&#21152;&#21040; Vim &#37324;&#65292;&#28982;&#21518;&#36873;&#20013;&#65292;&#25191;&#34892; <code>:call Pangu()</code>&#12290;</p>
+<pre class="vim"><code>function! Pangu()   &quot; :call Pangu()
+    silent! &#39;&lt;,&#39;&gt;s/\([\u4e00-\u9fa5\u3040-\u30FF]\)\([a-zA-Z0-9@&amp;=\[\$\%\^\-\+(\/\\]\)/\1 \2/g
+    silent! &#39;&lt;,&#39;&gt;s/\([a-zA-Z0-9!&amp;;=\]\,\.\:\?\$\%\^\-\+\)\/\\]\)\([\u4e00-\u9fa5\u3040-\u30FF]\)/\1 \2/g
+endfunction</code></pre>
+<h2 id="&#27599;&#22825;&#24517;&#29992;&#30340;-vim-&#23439;">&#27599;&#22825;&#24517;&#29992;&#30340; Vim &#23439;</h2>
+<p>&#27880;&#24847;&#65292;&#36825;&#37324;&#26377;&#19981;&#21487;&#35265;&#23383;&#31526;&#65281;&#20351;&#29992;&#30340;&#26102;&#20505;&#25335;&#36125;&#21040;&#30456;&#24212;&#23492;&#23384;&#22120;&#20877; <code>@x</code> &#21363;&#21487;&#35843;&#29992;&#12290;</p>
+<dl>
+<dt>QObject &#8594; <code class="sourceCode cpp"><span class="ot">QObject</span></code></dt>
+<dd><pre><code>viwbi`ea`{.cpp}k</code></pre>
+</dd>
+<dt>tr() &#8594; <code class="sourceCode cpp"><span class="fu">tr</span>()</code>, QObject::tr() &#8594; <code class="sourceCode cpp"><span class="ot">QObject::</span>tr()</code>,</dt>
+<dd><pre><code>viWBi`f)a`{.cpp}k</code></pre>
+</dd>
+</dl>
+<p>Qt::SolidPattern, <code class="sourceCode cpp"><span class="ot">Qt::</span>SolidPattern</code></p>
+<h2 id="&#27599;&#22825;&#24517;&#23432;-vim-&#23478;&#35268;">&#27599;&#22825;&#24517;&#23432; Vim &#23478;&#35268;</h2>
+<p>&#23492;&#23384;&#22120;</p>
+<ol>
+<li><code>a</code>, <code>b</code>: temp register</li>
+<li><code>c</code>: class: QObject &#8594; <code class="sourceCode cpp"><span class="ot">QObject</span></code></li>
+<li><code>g</code>: namespace: Qt::Red &#8594; <code class="sourceCode cpp"><span class="ot">Qt::</span>Red</code></li>
+<li><code>f</code>: function: QObject::tr() &#8594; <code class="sourceCode cpp"><span class="ot">QObject::</span>tr()</code></li>
+<li><code>r</code>: refs</li>
+<li><code>n</code>: now</li>
+<li><code>m</code>:</li>
+<li><code>v</code>:</li>
+<li><code>w</code>:</li>
+<li><code>t</code>: tilde: word &#8594; <code>word</code></li>
+</ol>
+<p><a href="http://lilydjwg.is-programmer.com/guestbook">&#20381;&#20113;</a> &#25171;&#21253;&#30340;&#21253;&#21547;&#34892;&#31105;&#21017;&#30340; Vim&#65306; <a href="http://whudoc.qiniudn.com/2016/gvim74-x64.402.exe" class="uri">http://whudoc.qiniudn.com/2016/gvim74-x64.402.exe</a>&#12290;&#21487;&#24796;&#30340;&#26159;&#36825;&#20010;&#25171;&#21253;&#30340;&#8220;Edit with Vim&#8221;&#19981;&#33021;&#29983;&#25928;&#12290;&#38656;&#35201;&#33258;&#24049;&#28155;&#21152;&#21491;&#38190;&#33756;&#21333;&#12290;</p>
+<p><a href="http://whudoc.qiniudn.com/2016/gvim74-x64.402.exe.7z" class="uri">http://whudoc.qiniudn.com/2016/gvim74-x64.402.exe.7z</a>&#12290;</p>
+<hr />
+<p>refs and see also</p>
+<ol>
+<li><a href="https://github.com/hotoo/pangu.vim/blob/master/plugin/pangu.vim">pangu.vim/pangu.vim at master &#183; hotoo/pangu.vim</a></li>
+</ol>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#vim">vim</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0070-some-vim-rules.md" title="86 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0070-some-vim-rules.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 86,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="caffe-commons">Caffe Commons</h1>
+<ul>
+<li><dl>
+<dt>misc code <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// Convert macro to string</span>
+<span class="ot">#define STRINGIFY(m) #m</span>
+<span class="ot">#define AS_STRING(m) STRINGIFY(m)</span></code></pre></div>
+</dd>
+</dl></li>
+<li><dl>
+<dt>commons, <code>D:\tzx\git\caffe-rc3\src\caffe\common.cpp</code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> caffe {
+
+  ...
+
+  <span class="dt">static</span> Caffe&amp; Get(); <span class="co">//   Thread local context for Caffe.</span>
+  <span class="kw">enum</span> Brew { CPU, GPU };
+  <span class="kw">inline</span> <span class="dt">static</span> Brew mode() { <span class="kw">return</span> Get().mode_; }
+
+  ...
+
+  <span class="co">// This random number generator facade hides boost and CUDA rng</span>
+  <span class="co">// implementation from one another (for cross-platform compatibility).</span>
+  <span class="kw">class</span> RNG {
+   <span class="kw">public</span>:
+    RNG();
+    <span class="kw">explicit</span> RNG(<span class="dt">unsigned</span> <span class="dt">int</span> seed);
+    <span class="kw">explicit</span> RNG(<span class="dt">const</span> RNG&amp;);
+    RNG&amp; <span class="kw">operator</span>=(<span class="dt">const</span> RNG&amp;);
+    <span class="dt">void</span>* generator();
+   <span class="kw">private</span>:
+    <span class="kw">class</span> Generator;
+    shared_ptr&lt;Generator&gt; generator_;
+  };
+
+  ...
+
+  <span class="co">// Prints the current GPU status.</span>
+  <span class="dt">static</span> <span class="dt">void</span> DeviceQuery();
+  <span class="co">// Parallel training info</span>
+  <span class="kw">inline</span> <span class="dt">static</span> <span class="dt">int</span> solver_count() { <span class="kw">return</span> Get().solver_count_; }
+  <span class="kw">inline</span> <span class="dt">static</span> <span class="dt">void</span> set_solver_count(<span class="dt">int</span> val) { Get().solver_count_ = val; }
+  <span class="kw">inline</span> <span class="dt">static</span> <span class="dt">bool</span> root_solver() { <span class="kw">return</span> Get().root_solver_; }
+  <span class="kw">inline</span> <span class="dt">static</span> <span class="dt">void</span> set_root_solver(<span class="dt">bool</span> val) { Get().root_solver_ = val; }
+
+ <span class="kw">protected</span>:
+<span class="ot">#ifndef CPU_ONLY</span>
+  cublasHandle_t cublas_handle_;
+  curandGenerator_t curand_generator_;
+<span class="ot">#endif</span>
+  shared_ptr&lt;RNG&gt; random_generator_;
+
+  Brew mode_;
+  <span class="dt">int</span> solver_count_;
+  <span class="dt">bool</span> root_solver_;
+
+ <span class="kw">private</span>:
+  <span class="co">// The private constructor to avoid duplicate instantiation.</span>
+  Caffe();
+
+  DISABLE_COPY_AND_ASSIGN(Caffe);
+};</code></pre></div>
+</dd>
+</dl></li>
+</ul>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

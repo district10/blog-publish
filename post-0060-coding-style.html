@@ -1,0 +1,482 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="TANG ZhiXiong; dvorak4tzx; district10" />
+  <meta name="date" content="2015-08-06" />
+  <title>CVRS C++ Coding Style Guidelines</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="jquery-ui.css" type="text/css" />
+  <link rel="stylesheet" href="font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="main.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">CVRS C++ Coding Style Guidelines</h1>
+<h3 class="date">2015-08-06</h3>
+</div>
+<div id="tocbox" class="pokerface">
+    <div id="tocboxheader">&#xf03b;</div>
+    <div id="tocboxbody">
+        <ul>
+        <li><a href="#cvrs-c-coding-style-guidelines">CVRS C++ Coding Style Guidelines</a><ul>
+        <li><a href="#&#38646;&#32490;&#35770;">&#38646;&#12289;&#32490;&#35770;</a></li>
+        <li><a href="#&#19968;c-&#35821;&#35328;&#37096;&#20998;">&#19968;&#12289;C++ &#35821;&#35328;&#37096;&#20998;</a><ul>
+        <li><a href="#&#25991;&#20214;">1&#65289;&#25991;&#20214;&#65306;</a></li>
+        <li><a href="#&#31867;">2&#65289;&#31867;&#65306;</a></li>
+        <li><a href="#&#32467;&#26500;&#20307;">3&#65289;&#32467;&#26500;&#20307;&#65306;</a></li>
+        <li><a href="#&#20989;&#25968;&#21644;&#21464;&#37327;">4&#65289;&#20989;&#25968;&#21644;&#21464;&#37327;&#65306;</a></li>
+        <li><a href="#&#23439;">5&#65289;&#23439;&#65306;</a></li>
+        </ul></li>
+        <li><a href="#&#19977;&#31243;&#24207;&#25490;&#29256;&#35268;&#21017;">&#19977;&#12289;&#31243;&#24207;&#25490;&#29256;&#35268;&#21017;</a><ul>
+        <li><a href="#&#27491;&#30830;&#21644;&#38169;&#35823;&#20030;&#20363;">&#27491;&#30830;&#21644;&#38169;&#35823;&#20030;&#20363;</a></li>
+        <li><a href="#&#20854;&#20182;&#19968;&#20123;&#35828;&#26126;">&#20854;&#20182;&#19968;&#20123;&#35828;&#26126;</a></li>
+        </ul></li>
+        </ul></li>
+        </ul>
+    </div>
+</div>
+<div id="navigator" class="pokerface"><a id="gotoindex" href="index.html" title="&#25353;&#19979;&#12304;h&#12305;&#33719;&#21462;&#39029;&#38754;&#24110;&#21161;&#12290;">&#xf015;</a></div>
+<h1 id="cvrs-c-coding-style-guidelines">CVRS C++ Coding Style Guidelines</h1>
+<p>&#32769;&#24072;&#35753;&#25105;&#20889;&#19968;&#20010;&#32534;&#31243;&#35268;&#33539;&#65292;&#35753;&#22823;&#23478;&#21442;&#32771;&#12290;&#24403;&#26102;&#20889;&#22312; <a href="http://zybuluo.com" class="uri">http://zybuluo.com</a>&#65292;&#29616;&#22312;&#25644;&#36816;&#36807;&#26469;&#12290;</p>
+<p>CVRS &#23454;&#39564;&#23460;&#19978;&#30340;&#29256;&#26412;&#65288;&#26087;&#65289;&#65306;<a href="http://cvrs.whu.edu.cn/docs/CVRS-CodingStyleGuide.html" class="uri">http://cvrs.whu.edu.cn/docs/CVRS-CodingStyleGuide.html</a></p>
+<h2 id="&#38646;&#32490;&#35770;">&#38646;&#12289;&#32490;&#35770;</h2>
+<ol>
+<li><strong>&#27880;&#37322;</strong>&#20998;&#20026;&#20004;&#31181;&#65292;&#31532;&#19968;&#31181;&#26159;&#32473;&#33258;&#24049;&#30475;&#25110;&#32773;&#20854;&#20182;&#30475;&#20195;&#30721;&#30340;&#20154;&#30475;&#65292;&#29992; <code>// comment</code> &#25110;&#32773; <code>/* comment */</code>&#65292;&#31532;&#20108;&#31181;&#26159;&#20250;&#34987;&#25918;&#21040;&#25991;&#26723;&#20013;&#65292;&#29992; <code>//! comment</code> &#25110;&#32773; <code>/*! comment */</code>&#65288;&#20063;&#23601;&#26159;&#22810;&#21152;&#19968;&#20010; <code>!</code> &#30340;&#20107;&#65289;&#12290;</li>
+<li><strong>&#20195;&#30721;&#23485;&#24230;</strong>&#19981;&#33021;&#36229;&#36807; 80 &#20010;&#23383;&#31526;&#12290;&#65288;&#27880;&#37322;&#20063;&#19981;&#33021;&#65289;</li>
+<li>&#20195;&#30721;&#32534;&#36753;&#23436;&#21518;&#65292;&#35201;&#25226; trailing space &#21435;&#25481;&#65288;Notepad++ &#20013; <code>Edit--Blank Operations--Trim Trailing Space</code>&#65289;</li>
+</ol>
+<h2 id="&#19968;c-&#35821;&#35328;&#37096;&#20998;">&#19968;&#12289;C++ &#35821;&#35328;&#37096;&#20998;</h2>
+<h3 id="&#25991;&#20214;">1&#65289;&#25991;&#20214;&#65306;</h3>
+<p>C &#35821;&#35328;&#20013;&#65292;&#21333;&#35789;&#20840;&#23567;&#20889;&#65292;&#21333;&#35789;&#20043;&#38388;&#29992; <code>_</code> &#36830;&#25509;&#65292;e.g. <code>feature_detector.h</code>, <code>feature_detector.c</code>&#65307;</p>
+<p>C++ &#20013;&#65292;&#21333;&#35789;&#39318;&#23383;&#27597;&#29992;&#22823;&#20889;&#34920;&#31034;&#65292;&#21333;&#35789;&#20043;&#38388;&#19981;&#31354;&#26684;&#65292;e.g. <code>FeatureDetector.h</code>&#65292;<code>FeatureDetector.cpp</code></p>
+<h3 id="&#31867;">2&#65289;&#31867;&#65306;</h3>
+<ol>
+<li>&#23450;&#20041;&#22768;&#26126;&#65306;&#23545;&#20110;&#31867;&#30340;&#20316;&#29992;&#21644;&#20869;&#23481;&#36827;&#34892;&#31616;&#21333;&#30340;&#35828;&#26126;&#65292;&#29992; <code>//! remarks</code>&#12290;</li>
+<li>&#21629;&#21517;&#35268;&#21017;&#65306;e.g. <code class="sourceCode cpp">ComputingTemperature</code>&#12290;&#65288;&#19981;&#21516;&#20110; MFC&#65292;&#22914; MFC &#20013; <code class="sourceCode cpp">CZoomDlg</code>&#65292;&#22312;&#31867;&#21069;&#21152; <code>C</code>&#12290;&#32780;&#23567;&#32452;&#32479;&#19968;&#30452;&#25509;&#34920;&#31034;&#20026; <code class="sourceCode cpp">ZoomDlg</code>&#12290;&#65289;</li>
+</ol>
+<h3 id="&#32467;&#26500;&#20307;">3&#65289;&#32467;&#26500;&#20307;&#65306;</h3>
+<p>C++ &#20013;&#32467;&#26500;&#20307;&#19981;&#38656;&#35201; <code class="sourceCode cpp"><span class="kw">typedef</span></code> &#20415;&#21487;&#30452;&#25509;&#24403;&#25104;&#31867;&#22411;&#20351;&#29992;&#65292;&#20063;&#23601;&#26159;&#35828;&#65292;&#19979;&#38754;&#20004;&#31181;&#26159;&#19968;&#26679;&#30340;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// method 1</span>
+<span class="kw">struct</span> ElecStateStruct {
+    <span class="dt">char</span> *elec_name;
+    <span class="dt">char</span> *elec_state;
+};
+
+<span class="co">// method 2</span>
+<span class="kw">typedef</span> <span class="kw">struct</span> ElecStateStruct {
+    <span class="dt">char</span> *elec_name;
+    <span class="dt">char</span> *elec_state;
+} ElecStateStruct;</code></pre></div>
+<p><strong>&#20294;&#25512;&#33616;&#20351;&#29992;&#31532;&#20108;&#31181;</strong>&#12290;</p>
+<p>&#21629;&#21517;&#35268;&#21017;&#21644;&#31867;&#30340;&#19968;&#26679;&#12290;</p>
+<h3 id="&#20989;&#25968;&#21644;&#21464;&#37327;">4&#65289;&#20989;&#25968;&#21644;&#21464;&#37327;&#65306;</h3>
+<p><strong>&#20989;&#25968;&#65306;</strong></p>
+<ol>
+<li>&#23450;&#20041;&#22768;&#26126;&#65306;&#22312;&#22836;&#25991;&#20214;&#65288;<code>.h</code> &#25991;&#20214;&#65289;&#30340;&#31867;&#20013;&#65292;&#19968;&#33324;&#20808;&#20889; private &#22411;&#65292;&#20877;&#20889; public &#22411;&#12290;&#24182;&#20808;&#23450;&#20041;&#21464;&#37327;&#21518;&#23450;&#20041;&#20989;&#25968;&#12290;&#20869;&#23481;&#20889;&#20110; <code>.cpp</code> &#25991;&#20214;&#65292;&#24182;&#23545;&#20854;&#35828;&#26126;&#12290;</li>
+<li>&#21629;&#21517;&#35268;&#21017;&#65306;<code class="sourceCode cpp">currentTemperature( ... )</code>&#65292;<code class="sourceCode cpp">filtering( ... )</code></li>
+<li>&#27880;&#37322;&#65306;&#19982; C &#19968;&#33268;&#65292;&#39035;&#22312;&#20989;&#25968;&#21069;&#36827;&#34892;&#35828;&#26126;&#12290;&#35828;&#26126;&#20989;&#25968;&#21151;&#33021;&#12289;&#21442;&#25968;&#21547;&#20041;&#21450;&#36820;&#22238;&#20540;&#31561;&#65292;e.g.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">//!</span> Function is used <span class="kw">for</span> feature point extraction,
+<span class="co">//!</span> giving ... type variables,
+<span class="co">//!</span> returns <span class="dv">1</span> means success, <span class="dv">0</span> means failure
+<span class="dt">int</span> extractionPoint( ... )
+{
+    ...
+}</code></pre></div>
+<p><strong>&#21464;&#37327;&#65306;</strong></p>
+<ol>
+<li>&#23450;&#20041;&#22768;&#26126;&#65306;&#19982; C &#19968;&#33268;&#12290;</li>
+<li>&#21629;&#21517;&#35268;&#21017;&#65306;&#20840;&#23616;&#65288;e.g. <code class="sourceCode cpp">_currentTemperature</code>)&#65292;&#23616;&#37096;&#65288;e.g. <code class="sourceCode cpp">currentTemperature</code>&#65289;&#65292;&#20989;&#25968;&#20869;&#37096;&#30340;&#21464;&#37327;&#21487;&#20197;&#23613;&#21487;&#33021;&#30701;&#12290;</li>
+<li>Qt &#20013;&#20449;&#21495;&#21644;&#27133;&#20063;&#21487;&#29992; C &#35821;&#35328;&#39118;&#26684;&#12290;&#27604;&#22914;&#65306;</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">signals</span>:
+    <span class="dt">void</span> angle_resolution( <span class="dt">double</span> res );
+    <span class="dt">void</span> angleResolution( <span class="dt">double</span> res );
+
+<span class="kw">public</span> <span class="kw">slots</span>:
+    <span class="dt">void</span> on_angle_resolution( <span class="dt">double</span> res );
+    <span class="dt">void</span> onAngleResolution( <span class="dt">double</span> res );</code></pre></div>
+<h3 id="&#23439;">5&#65289;&#23439;&#65306;</h3>
+<p>&#20840;&#22823;&#20889;&#65292;&#19981;&#20197; <code>_</code> &#24320;&#22836;&#65288;&#36991;&#20813;&#37325;&#23450;&#20041;&#35206;&#30422;&#26631;&#20934;&#24211;&#25110;&#20854;&#20182;&#22320;&#26041;&#30340;&#23439;&#65289;&#65292;e.g. <code class="sourceCode cpp">CURRENT_TEMPERATURE</code>&#12290;</p>
+<h2 id="&#19977;&#31243;&#24207;&#25490;&#29256;&#35268;&#21017;">&#19977;&#12289;&#31243;&#24207;&#25490;&#29256;&#35268;&#21017;</h2>
+<p>&#21407;&#21017; 0&#65306;</p>
+<blockquote>
+<ol>
+<li>&#32654;&#35266;&#65288;&#19981;&#35201;&#21533;&#24796;&#20320;&#30340;&#31354;&#26684;&#21644;&#31354;&#34892;&#65289;</li>
+<li>&#33258;&#36523;&#30340;&#19968;&#33268;&#24615;</li>
+<li>&#22823;&#23478;&#30340;&#19968;&#33268;&#24615;&#65288;&#35268;&#33539;&#65289;</li>
+</ol>
+</blockquote>
+<p>&#21407;&#21017; 1&#65306;</p>
+<blockquote>
+<ol>
+<li>&#29992;&#31561;&#23485;&#23383;&#20307;</li>
+<li>&#19981;&#20351;&#29992; <code>tab</code> &#38190;&#65292;&#29992; 4 &#20010;&#31354;&#26684;&#20195;&#26367;&#65288;&#22240;&#20026;&#19981;&#21516; IDE&#12289;&#32534;&#36753;&#22120;&#12289;&#32593;&#39029;&#65292;&#23545; tab &#30340;&#26174;&#31034;&#23485;&#24230;&#19981;&#19968;&#33268;&#12290;&#65289;</li>
+<li>&#32553;&#36827;&#65288;indent&#65289;&#29992; 4 &#20010;&#31354;&#26684;&#65288;Visual Studio &#38656;&#35201;&#35774;&#32622;&#65289;</li>
+</ol>
+</blockquote>
+<p>C Example:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;                                         </span><span class="co">// &lt;-- &#27880;&#24847;&#36825;&#37324; &lt;stdio.h&gt; &#21069;&#30340;&#31354;&#26684;</span>
+<span class="ot">#include &lt;math.h&gt;</span>
+                                                           <span class="co">// &lt;-- &#12304;#include&#12305;s &#21518;&#31354;&#34892;</span>
+<span class="ot">#define PI (3.1415)                                        </span><span class="co">// &lt;-- &#26368;&#22909;&#37117;&#21152;&#19978;&#25324;&#21495;</span>
+
+<span class="kw">typedef</span> <span class="kw">struct</span> PointCoordinate
+{
+    <span class="dt">int</span> x ;
+    <span class="dt">int</span> y;
+} Point;
+
+<span class="co">//! setting coordinate                                     // &lt;-- &#20989;&#25968;&#35828;&#26126;</span>
+Point set_point( <span class="dt">int</span> a, <span class="dt">int</span> b );                           <span class="co">// &lt;-- &#20989;&#25968;&#22768;&#26126;&#65292;&#21442;&#25968;&#21015;&#34920;&#36825;&#37324;&#26377;&#31354;&#26684;</span>
+<span class="co">//! get the area of the circle</span>
+<span class="dt">double</span> get_area( <span class="dt">int</span> radius );
+
+<span class="dt">void</span> main()
+{
+    <span class="co">// define the coordinate of the center, the radius and the area of a circle</span>
+    Point point_circle;                                    <span class="co">// &lt;-- &#21464;&#37327;&#23450;&#20041;&#35268;&#21017;&#65306;&#23567;&#20889;&#65292;&#20043;&#38388;&#21152;&#19979;&#21010;&#32447;</span>
+    <span class="dt">int</span> radius_circle;
+    <span class="dt">double</span> area_circle;
+
+    <span class="co">// input the information of a circle                   // &lt;-- &#20989;&#25968;&#37096;&#20998;&#27493;&#39588;&#24847;&#20041;&#35828;&#26126;&#35268;&#21017;</span>
+    printf( <span class="st">&quot;please input point.x &amp; point.y: </span><span class="ch">\n</span><span class="st">&quot;</span> );        <span class="co">// &lt;-- &#20989;&#25968;&#35843;&#29992;&#65292;&#21442;&#25968;&#21015;&#34920;&#36825;&#37324;&#26377;&#31354;&#26684;</span>
+    scanf( <span class="st">&quot;%d%d&quot;</span>, &amp;point_circle.x, &amp;point_circle.y );
+    printf( <span class="st">&quot;please input the radius of the circle:</span><span class="ch">\t</span><span class="st">&quot;</span> );
+    scanf( <span class="st">&quot;%d&quot;</span>, &amp;radius_circle );
+
+    area_circle = PI * radius_circle * radius_circle;
+    printf( <span class="st">&quot;the area of a circle is: %lf</span><span class="ch">\n</span><span class="st">&quot;</span>, area_circle );
+}
+
+Point setPoint( <span class="dt">int</span> a, <span class="dt">int</span> b )                             <span class="co">// &lt;-- &#20989;&#25968;&#23450;&#20041;&#65292;&#21442;&#25968;&#21015;&#34920;&#36825;&#37324;&#26377;&#31354;&#26684;</span>
+{
+    Ponit pt;
+    pt.x = a;
+    pt.y = b;
+    <span class="kw">return</span> pt;
+}
+
+<span class="dt">double</span> getArea( <span class="dt">int</span> radius )
+{
+    <span class="dt">double</span> S;
+    S = PI * radius * radius;
+    <span class="kw">return</span> S;
+}</code></pre></div>
+<p>&#21152;&#31354;&#26684;&#21482;&#26159;&#20986;&#20110;&#26131;&#35835;&#24615;&#30340;&#32771;&#34385;&#65292;&#25152;&#20197;&#25105;&#20204;&#29992; <code class="sourceCode cpp">scanf( <span class="st">&quot;</span><span class="ch">%d</span><span class="st">&quot;</span>, &amp;radius_circle );</code> &#32780;&#19981;&#26159; <code class="sourceCode cpp">scanf(<span class="st">&quot;</span><span class="ch">%d</span><span class="st">&quot;</span>, &amp;radius_circle);</code>&#12290;&#20294;&#22914;&#26524;&#34892;&#36807;&#38271;&#65292;&#23601;&#21487;&#20197;&#30465;&#30053;&#36825;&#20123;&#31354;&#26684;&#65292;&#27604;&#22914;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">while</span> ( <span class="dv">1</span> == scanf(<span class="st">&quot;%d&quot;</span>, &amp;num) ) {       <span class="co">// &#36825;&#37324;&#27809;&#31354;&#26684;</span>
+    printf( <span class="st">&quot;%d</span><span class="ch">\n</span><span class="st">&quot;</span>, num );               <span class="co">// &#36825;&#37324;&#26377;&#31354;&#26684;</span>
+}</code></pre></div>
+<p>C++ Example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="ot">#define PI (3.1415)</span>
+<span class="ot">#define MAX (300)</span>
+
+<span class="er">//! basic class&#65292;2dim_point                                // &lt;-- &#23545;&#31867;&#30340;&#35828;&#26126;</span>
+<span class="kw">class</span>  Point
+{
+<span class="kw">private</span>:                                                   <span class="co">// &lt;-- &#20808; private</span>
+    <span class="dt">int</span> x;                                                 <span class="co">// &lt;-- &#19981;&#33021;&#26159; _x</span>
+    <span class="dt">int</span> y;
+<span class="kw">public</span>:
+    <span class="dt">int</span> getX( ) { <span class="kw">return</span> x; }                              <span class="co">// &lt;-- &#26497;&#20854;&#31616;&#21333;&#30340;&#20989;&#25968;&#65292;&#21487;&#20197;&#25918;&#22312;&#19968;&#34892;</span>
+    <span class="dt">int</span> getY( ) { <span class="kw">return</span> y; }
+
+    <span class="co">//!</span> setting coordinate                                 <span class="co">// &lt;-- &#20989;&#25968;&#35828;&#26126;&#65288;&#36825;&#20010;&#20989;&#25968;&#65292;&#23601;&#19981;&#35813;&#25918;&#22312;&#19968;&#34892;&#65289;</span>
+    <span class="dt">void</span> setPoint( <span class="dt">int</span> a, <span class="dt">int</span> b )
+    {
+        x = a;
+        y = b;
+    }
+
+    <span class="co">//!</span> calc distance from <span class="kw">this</span> point to another
+    <span class="dt">double</span> distanceTo( Point &amp;pt );                        <span class="co">// &lt;-- &#38271;&#30340;&#20989;&#25968;&#37117;&#25918;&#22312; cpp &#25991;&#20214;</span>
+};
+
+<span class="co">//!</span> derived <span class="kw">class</span> circle
+<span class="kw">class</span> Circle : <span class="kw">public</span> Point
+{
+    <span class="kw">private</span>:
+        <span class="co">//!</span> radius of a circle                             <span class="co">// &lt;-- &#21464;&#37327;&#35828;&#26126;&#26684;&#24335;</span>
+        <span class="dt">int</span> radius;
+    <span class="kw">public</span>:
+        <span class="co">//!</span> set the size of the radius
+        <span class="dt">int</span> setRadious( <span class="dt">int</span> r ) { radius = r; }
+        <span class="dt">void</span> getRadious( ) { <span class="kw">return</span> radius; }
+        <span class="co">//!</span> get the area of the circle
+        <span class="dt">double</span> getArea( ) { <span class="kw">return</span> PI * radius * radius; }
+};
+
+<span class="dt">void</span> main( )
+{
+    <span class="co">// define a circle</span>
+    Circle circle1;
+
+    <span class="co">// set up circle center &amp; radius                       // &lt;-- &#23545;&#31243;&#24207;&#20013;&#30340;&#37096;&#20998;&#27493;&#39588;&#35828;&#26126;</span>
+    circle1.setPoint(<span class="dv">200</span>, <span class="dv">250</span>);
+    circle1.setRadius(<span class="dv">100</span>);
+
+    <span class="co">// output the X coordinate of the center of the circle1</span>
+    cout &lt;&lt; <span class="st">&quot;x = &quot;</span><span class="co"> </span>&lt;&lt; circle1.getX() &lt;&lt; endl;
+    <span class="co">// output the X coordinate of the center of the circle1</span>
+    cout &lt;&lt; <span class="st">&quot;the Area of Circle1 is &quot;</span><span class="co"> </span>&lt;&lt; circle1.getArea() &lt;&lt; endl;
+}</code></pre></div>
+<h3 id="&#27491;&#30830;&#21644;&#38169;&#35823;&#20030;&#20363;">&#27491;&#30830;&#21644;&#38169;&#35823;&#20030;&#20363;</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*</span>
+<span class="co"> * &#21152;&#36275;&#22815;&#30340;&#31354;&#26684;</span>
+<span class="co">**/</span>
+
+<span class="kw">for</span>(<span class="dt">int</span> i;i&lt;count;i++)                                     <span class="co">// WRONG</span>
+<span class="kw">for</span> ( <span class="dt">int</span> i; i &lt; count; i++ )                              <span class="co">// CORRECT</span>
+<span class="kw">for</span> ( <span class="dt">int</span> i; i &lt; count; ++i )                              <span class="co">// EVEN BETTER</span>
+
+<span class="dt">int</span> max(<span class="dt">int</span> a,<span class="dt">int</span> b)                                       <span class="co">// WRONG</span>
+<span class="dt">int</span> max( <span class="dt">int</span> a, <span class="dt">int</span> b )                                    <span class="co">// CORRECT</span>
+
+max(<span class="dv">23</span>,<span class="dv">45</span>);                                                <span class="co">// WRONG</span>
+max(<span class="dv">23</span>, <span class="dv">45</span>);                                               <span class="co">// WRONG</span>
+max( <span class="dv">23</span>, <span class="dv">45</span> );                                             <span class="co">// CORRECT</span>
+max( <span class="dv">21</span>, max(max(<span class="dv">3</span>,<span class="dv">8</span>), <span class="dv">34</span>) );                              <span class="co">// CORRECT&#65292;&#20307;&#20250;&#19968;&#19979;&#36825;&#20123;&#31354;&#26684;&#30340;&#26377;&#26080;</span>
+
+show();                                                    <span class="co">// CORRECT</span>
+show( );                                                   <span class="co">// CORRECT</span>
+
+<span class="co">/*</span>
+<span class="co"> * &#22823;&#25324;&#21495;&#30340;&#20301;&#32622;</span>
+<span class="co">**/</span>
+
+<span class="kw">for</span> ( <span class="dt">int</span> i; i &lt; count; ++i )                              <span class="co">// CORRECT&#65292;&#27880;&#24847;&#36825;&#37324;&#30340;&#31354;&#26684;</span>
+{
+    ...
+}
+
+<span class="kw">for</span> ( <span class="dt">int</span> i; i &lt; count; ++i ) {                            <span class="co">// CORRECT</span>
+    ...
+}
+
+<span class="co">// &#21516;&#29702;&#65292;&#27491;&#30830;&#30340; while&#65292;if&#65292;do while &#24212;&#20026;</span>
+<span class="kw">while</span> ( CONDITION ) {
+    ...
+}
+
+<span class="kw">while</span> ( CONDITION )
+{
+    ...
+}
+
+<span class="kw">if</span> ( CONDITION ) {
+    ...
+}
+
+<span class="kw">if</span> ( CONDITION )
+{
+    ...
+}
+
+<span class="kw">if</span> ( CONDITION_1 ) {
+    ...
+} <span class="kw">else</span> <span class="kw">if</span> ( CONDITION_2 ) {
+    ...
+} <span class="kw">else</span> {
+    ...
+}
+
+<span class="kw">do</span> {
+    ...
+} <span class="kw">while</span> ( CONDITION );
+
+
+<span class="co">/*</span>
+<span class="co"> * &#27704;&#36828;&#37117;&#21152; {}&#65292;&#21738;&#24597;&#21482;&#26377;&#19968;&#34892;&#20195;&#30721;&#65292;&#36866;&#29992;&#20110; if&#12289;for&#12289;while &#21644;&#20989;&#25968;&#22768;&#26126;+&#23450;&#20041;</span>
+<span class="co">**/</span>
+<span class="kw">if</span> ( FATAL_ERROR )                                         <span class="co">// WRONG</span>
+    <span class="kw">return</span> EXIT_FAILURE;
+
+<span class="kw">if</span> ( FATAL_ERROR ) {                                       <span class="co">// CORRECT</span>
+    <span class="kw">return</span> EXIT_FAILURE;
+}
+
+<span class="dt">int</span> getX( ) <span class="kw">return</span> x;                                      <span class="co">// WRONG</span>
+<span class="dt">int</span> getX( ) { <span class="kw">return</span> x; }                                  <span class="co">// CORRECT</span>
+
+
+<span class="co">/*</span>
+<span class="co"> * &#20989;&#25968;&#22768;&#26126;&#21644;&#35843;&#29992;&#30340;&#21442;&#25968;&#35268;&#33539;</span>
+<span class="co">**/</span>
+
+<span class="dt">void</span> func();                                               <span class="co">// WRONG</span>
+<span class="dt">void</span> func2(<span class="dt">int</span> i, <span class="dt">int</span> j);
+
+<span class="dt">void</span> func( );                                              <span class="co">// CORRECT</span>
+<span class="dt">void</span> func2( <span class="dt">int</span> i, <span class="dt">int</span> j );</code></pre></div>
+<h3 id="&#20854;&#20182;&#19968;&#20123;&#35828;&#26126;">&#20854;&#20182;&#19968;&#20123;&#35828;&#26126;</h3>
+<p><strong>&#27880;&#37322;&#30340;&#25918;&#32622;</strong></p>
+<p>&#27969;&#31243;&#19978;&#30340;&#19996;&#35199;&#65292;&#22841;&#22312;&#20195;&#30721;&#20869;&#65292;&#22914;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// set up circle center</span>
+circle.setPoint( <span class="dv">200</span>, <span class="dv">250</span> );
+<span class="co">// set up circle radius</span>
+circle.setRadius( <span class="dv">100</span> );</code></pre></div>
+<p>&#34917;&#20805;&#35828;&#26126;&#24615;&#36136;&#30340;&#19996;&#35199;&#65292;&#25918;&#22312;&#34892;&#23614;&#65292;&#22914;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">fprintf( fp,
+         <span class="st">&quot;| </span><span class="ch">%*i</span><span class="st"> &quot;</span>              <span class="co">// index</span>
+         <span class="st">&quot;| </span><span class="ch">%*s</span><span class="st"> &quot;</span>              <span class="co">// timestamp</span>
+         <span class="st">&quot;| </span><span class="ch">%*s%d%*s</span><span class="st"> &quot;</span>         <span class="co">// log level</span>
+         <span class="st">&quot;| </span><span class="ch">%*s%s%*s</span><span class="st"> &quot;</span>         <span class="co">// type (aligned to center)</span>
+         <span class="st">&quot;| </span><span class="ch">%-*s</span><span class="st"> &quot;</span>             <span class="co">// action</span>
+         <span class="st">&quot;| </span><span class="ch">%*s</span><span class="st"> |</span><span class="ch">\n</span><span class="st">&quot;</span>,          <span class="co">// messag</span>
+         ... );</code></pre></div>
+<p><strong>&#23545;&#40784;</strong></p>
+<p>&#36890;&#24120;&#19981;&#38656;&#35201;&#23545;&#40784;&#65292;&#27604;&#22914;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> x0;
+<span class="dt">double</span> dx;</code></pre></div>
+<p>&#19981;&#24517;&#20889;&#25104;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span>    x0;
+<span class="dt">double</span> dx;</code></pre></div>
+<p>&#20294;&#22914;&#26524;&#24456;&#22810;&#19996;&#35199;&#65292;&#26377;&#19968;&#31181;&#33707;&#21517;&#30340;&#32852;&#31995;&#65292;&#23545;&#40784;&#21017;&#26159;&#19978;&#19978;&#20043;&#36873;&#65292;&#27604;&#22914;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/*</span>
+<span class="co"> * &#23545;&#40784;&#23454;&#20363; 1</span>
+<span class="co">**/</span>
+ust.time              = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+<span class="co">// q target</span>
+ust.q_target[<span class="dv">0</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+ust.q_target[<span class="dv">1</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+ust.q_target[<span class="dv">2</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+ust.q_target[<span class="dv">3</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+ust.q_target[<span class="dv">4</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+ust.q_target[<span class="dv">5</span>]       = parse8BytesToDouble(ba, c, f); c += <span class="dv">8</span>;
+
+<span class="co">/*</span>
+<span class="co"> * &#23545;&#40784;&#31034;&#20363; 2</span>
+<span class="co">**/</span>
+<span class="kw">enum</span> URFunctionCodes { <span class="co">/* 0-128d */</span>
+    <span class="co">// mb_req_pdu</span>
+    READ_COILS                   = <span class="bn">0x01</span>,  <span class="co">// read output bits</span>
+    READ_DISCRETE_INPUTS         = <span class="bn">0x02</span>,  <span class="co">// read input bits</span>
+    READ_HOLDING_REGISTERS       = <span class="bn">0x03</span>,  <span class="co">// read output registers</span>
+    READ_INPUT_REGISTERS         = <span class="bn">0x04</span>,  <span class="co">// read input registers</span>
+};
+
+<span class="co">/*</span>
+<span class="co"> * &#23545;&#40784;&#31034;&#20363; 3</span>
+<span class="co">**/</span>
+mcuAddr.insert(  ROLL_PITCH_YAW,        <span class="bn">0x000B</span>  );
+mcuAddr.insert(  accX_accY_accZ,        <span class="bn">0x000E</span>  );
+mcuAddr.insert(  GyroscopeX,            <span class="bn">0x0011</span>  );</code></pre></div>
+<p>&#21253;&#25324;&#34892;&#26411;&#30340; <code>//</code> &#27880;&#37322;&#20063;&#26368;&#22909;&#23545;&#40784;&#12290;&#22806;&#65292;&#24378;&#28872;&#24314;&#35758; Qt &#30340;&#20449;&#21495;&#21644;&#27133;&#20063;&#23545;&#40784;&#65292;&#19981;&#35201;&#20351;&#29992;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="fu">connect</span>(mcu, <span class="kw">SIGNAL</span>(mcuTimestamp(<span class="dt">quint32</span>)), <span class="kw">this</span>, <span class="kw">SLOT</span>(onMCUTimestamp(<span class="dt">quint32</span>)));</code></pre></div>
+<p>&#32780;&#26159;&#20351;&#29992;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="fu">connect</span>( mcu, <span class="kw">SIGNAL</span>(mcuTimestamp(<span class="dt">quint32</span>)),
+         <span class="kw">this</span>, <span class="kw">SLOT</span>(onMCUTimestamp(<span class="dt">quint32</span>)) );</code></pre></div>
+<p>&#21442;&#25968;&#21015;&#34920;&#20063;&#35201;&#23545;&#40784;&#65306;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">// method 1</span>
+<span class="kw">return</span> <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">.</span><span class="ch">%03d</span><span class="st">&quot;</span>         <span class="co">// e.g. 01:23:45.678</span>
+                        , dt.time().hour()
+                        , dt.time().minute()
+                        , dt.time().second()
+                        , dt.time().msec() );
+<span class="co">// method 2</span>
+<span class="kw">return</span> <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">.</span><span class="ch">%03d</span><span class="st">&quot;</span>,        <span class="co">// e.g. 01:23:45.678</span>
+                          dt.time().hour(),
+                          dt.time().minute(),
+                          dt.time().second(),
+                          dt.time().msec() );
+<span class="co">// but not this one</span>
+<span class="kw">return</span> <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">.</span><span class="ch">%03d</span><span class="st">&quot;</span>,        <span class="co">// e.g. 01:23:45.678</span>
+                          dt.time().hour(), dt.time().minute(),
+                          dt.time().second(), t.time().msec() );
+<span class="co">// and, of course, not this one</span>
+<span class="kw">return</span> <span class="ot">QString</span>().sprintf( <span class="st">&quot;</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">:</span><span class="ch">%02d</span><span class="st">.</span><span class="ch">%03d</span><span class="st">&quot;</span>, dt.time().hour(),
+    dt.time().minute(), dt.time().second(), t.time().msec() );</code></pre></div>
+<ul class="tzx-tags-group">
+<li><a class="tzx-tag" href="tags.html/#doc">doc</a></li>
+<li><a class="tzx-tag" href="tags.html/#cpp">cpp</a></li>
+<li><a class="tzx-tag" href="tags.html/#coding style">coding style</a></li>
+</ul>
+
+<div class="tzx-changes"><select id="tzx-changes" title="&#21382;&#21490;&#29256;&#26412;">
+<option value="https://raw.githubusercontent.com/district10/blog/503e511788e741cf3ef0f32f8894bf9b83c6206b/_posts/post-0060-coding-style.md" title="438 insertions(+), 0 deletions(-)">1504105630</option>
+</select></div>
+
+<script>
+var tzxFilename = "_posts/post-0060-coding-style.md";
+var tzxChanges = [
+    {
+        hash: "503e511788e741cf3ef0f32f8894bf9b83c6206b",
+        datetime: "1504105630",
+        insertions: 438,
+        deletions: 0
+    },
+];
+</script>
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="clappr.min.js"></script>
+<script type="text/javascript" src="lazyload.min.js"></script>
+<script type="text/javascript" src="egg.min.js"></script>
+<script type="text/javascript" src="moment.min.js"></script>
+<script type="text/javascript" src="clipboard.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<hr style="color: #9ddcff;"/>
+<div id="copyright">TANG ZhiXiong, 2018.  Generated by Pandoc on Travis CI. <a  href="https://github.com/district10/blog">Fork Me on GitHub.</a></div>
+<div id="comments" class="comments-area"></div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '010a49f90ea2dacb0963',
+        clientSecret: '38512e4e4da431fc61d44508ed53f9fe6eb7f29f',
+        repo: 'blog',
+        owner: 'district10',
+        admin: ['district10'],
+        id: window.location.pathname,
+    });
+gitalk.render('comments');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+---
+tzx-changes:
+  - hash: 58d3d3880db6ca3930e48156b2a0339ab4f5351a
+    datetime: 1578505724
+    insertions: 13
+    deletions: 0
+  - hash: ded14406deb993ce55c95eaa57587283d6f75cd4
+    datetime: 1520091927
+    insertions: 4
+    deletions: 0
+  - hash: 27e4e050872974d92bfa25abd4ea5a10e45c3dfe
+    datetime: 1507975553
+    insertions: 16
+    deletions: 0
+  - hash: 5bbf5af1073e64cafe7726fbb975a2246cf977fb
+    datetime: 1506764927
+    insertions: 1
+    deletions: 1
+  - hash: 8ca3bb404b11dab62de6f8703287e7f02fb402c0
+    datetime: 1506222979
+    insertions: 1
+    deletions: 1
+  - hash: 0eda199dc180f502501e4c8459e0901b4a2303ab
+    datetime: 1506222677
+    insertions: 6
+    deletions: 3
+  - hash: 7120c3486ec161f6cd0e33cc9d2f330061914ac8
+    datetime: 1506222392
+    insertions: 82
+    deletions: 0
+  - hash: a693a9bf45051d86b9e5192ef005b7230f849074
+    datetime: 1505741204
+    insertions: 10
+    deletions: 0
+  - hash: 2e961d65420dc3c78ddb5ce85de9ec06bf626904
+    datetime: 1505004828
+    insertions: 4
+    deletions: 0
+  - hash: 6cde7dddd060f5f7e2a9f9e19bcd59f559e079f5
+    datetime: 1504774623
+    insertions: 5
+    deletions: 0
+  - hash: 8b8c72b6690dc6947b1a621c713d128815827ee0
+    datetime: 1504741766
+    insertions: 16
+    deletions: 0
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 3836
+    deletions: 0
+
+tzx-filename: _pages/koans.md
+...

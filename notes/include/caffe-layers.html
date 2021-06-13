@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="caffe-layers">Caffe Layers</h1>
+<ul>
+<li><p>absval_layer.cpp <code class="fold">@</code></p>
+<p>&#25991;&#26723;&#65306;<a href="http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1AbsValLayer.html#details">Caffe: caffe::AbsValLayer<Dtype> Class Template Reference</a>&#12290;</p>
+<p><a href="http://caffe.berkeleyvision.org/doxygen/absval__layer_8hpp_source.html">Caffe: include/caffe/layers/absval_layer.hpp Source File</a></p>
+<dl>
+<dt>header file: <code>include/caffe/layers/absval_layer.hpp</code> <code class="fold">@</code></dt>
+<dd><p><a href="http://caffe.berkeleyvision.org/doxygen/absval__layer_8hpp_source.html">Caffe: include/caffe/layers/absval_layer.hpp Source File</a></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#ifndef CAFFE_ABSVAL_LAYER_HPP_</span>
+<span class="ot">#define CAFFE_ABSVAL_LAYER_HPP_</span>
+
+<span class="ot">#include &lt;vector&gt;</span>
+
+<span class="ot">#include &quot;caffe/blob.hpp&quot;</span>
+<span class="ot">#include &quot;caffe/layer.hpp&quot;</span>
+<span class="ot">#include &quot;caffe/proto/caffe.pb.h&quot;</span>
+
+<span class="ot">#include &quot;caffe/layers/neuron_layer.hpp&quot;</span>
+
+<span class="kw">namespace</span> caffe {
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> Dtype&gt;
+<span class="kw">class</span> AbsValLayer : <span class="kw">public</span> NeuronLayer&lt;Dtype&gt; {
+ <span class="kw">public</span>:
+  <span class="kw">explicit</span> AbsValLayer(<span class="dt">const</span> LayerParameter&amp; param)
+      : NeuronLayer&lt;Dtype&gt;(param) {}
+  <span class="kw">virtual</span> <span class="dt">void</span> LayerSetUp(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top);
+
+  <span class="kw">virtual</span> <span class="kw">inline</span> <span class="dt">const</span> <span class="dt">char</span>* type() <span class="dt">const</span> { <span class="kw">return</span> <span class="st">&quot;AbsVal&quot;</span>; }
+  <span class="kw">virtual</span> <span class="kw">inline</span> <span class="dt">int</span> ExactNumBottomBlobs() <span class="dt">const</span> { <span class="kw">return</span> <span class="dv">1</span>; }
+  <span class="kw">virtual</span> <span class="kw">inline</span> <span class="dt">int</span> ExactNumTopBlobs() <span class="dt">const</span> { <span class="kw">return</span> <span class="dv">1</span>; }
+
+ <span class="kw">protected</span>:
+  <span class="kw">virtual</span> <span class="dt">void</span> Forward_cpu(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top);
+  <span class="kw">virtual</span> <span class="dt">void</span> Forward_gpu(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top);
+
+  <span class="kw">virtual</span> <span class="dt">void</span> Backward_cpu(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+      <span class="dt">const</span> vector&lt;<span class="dt">bool</span>&gt;&amp; propagate_down, <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom);
+  <span class="kw">virtual</span> <span class="dt">void</span> Backward_gpu(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+      <span class="dt">const</span> vector&lt;<span class="dt">bool</span>&gt;&amp; propagate_down, <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom);
+};
+
+}  <span class="co">// namespace caffe</span>
+
+<span class="ot">#endif  </span><span class="co">// CAFFE_ABSVAL_LAYER_HPP_</span></code></pre></div>
+</dd>
+<dt>source code: <code>src/caffe/layers/absval_layer.cpp</code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;vector&gt;</span>
+
+<span class="ot">#include &quot;caffe/layers/absval_layer.hpp&quot;</span>
+<span class="ot">#include &quot;caffe/util/math_functions.hpp&quot;</span>
+
+<span class="kw">namespace</span> caffe {
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> Dtype&gt;
+<span class="dt">void</span> AbsValLayer&lt;Dtype&gt;::LayerSetUp(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom,
+      <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  NeuronLayer&lt;Dtype&gt;::LayerSetUp(bottom, top);
+  CHECK_NE(top[<span class="dv">0</span>], bottom[<span class="dv">0</span>]) &lt;&lt; <span class="kw">this</span>-&gt;type() &lt;&lt; <span class="st">&quot; Layer does not &quot;</span>
+    <span class="st">&quot;allow in-place computation.&quot;</span>;
+}
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> Dtype&gt;
+<span class="dt">void</span> AbsValLayer&lt;Dtype&gt;::Forward_cpu(
+    <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom, <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top) {
+  <span class="dt">const</span> <span class="dt">int</span> count = top[<span class="dv">0</span>]-&gt;count();
+  Dtype* top_data = top[<span class="dv">0</span>]-&gt;mutable_cpu_data();
+  caffe_abs(count, bottom[<span class="dv">0</span>]-&gt;cpu_data(), top_data);
+}
+
+<span class="kw">template</span> &lt;<span class="kw">typename</span> Dtype&gt;
+<span class="dt">void</span> AbsValLayer&lt;Dtype&gt;::Backward_cpu(<span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; top,
+    <span class="dt">const</span> vector&lt;<span class="dt">bool</span>&gt;&amp; propagate_down, <span class="dt">const</span> vector&lt;Blob&lt;Dtype&gt;*&gt;&amp; bottom) {
+  <span class="dt">const</span> <span class="dt">int</span> count = top[<span class="dv">0</span>]-&gt;count();
+  <span class="dt">const</span> Dtype* top_diff = top[<span class="dv">0</span>]-&gt;cpu_diff();
+  <span class="kw">if</span> (propagate_down[<span class="dv">0</span>]) {
+    <span class="dt">const</span> Dtype* bottom_data = bottom[<span class="dv">0</span>]-&gt;cpu_data();
+    Dtype* bottom_diff = bottom[<span class="dv">0</span>]-&gt;mutable_cpu_diff();
+    caffe_cpu_sign(count, bottom_data, bottom_diff);
+    caffe_mul(count, bottom_diff, top_diff, bottom_diff);
+  }
+}
+
+<span class="ot">#ifdef CPU_ONLY</span>
+STUB_GPU(AbsValLayer);
+<span class="ot">#endif</span>
+
+INSTANTIATE_CLASS(AbsValLayer);
+REGISTER_LAYER_CLASS(AbsVal);
+
+}  <span class="co">// namespace caffe</span></code></pre></div>
+</dd>
+</dl></li>
+</ul>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

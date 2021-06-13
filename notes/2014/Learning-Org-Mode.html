@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="learning-org-mode">Learning Org-Mode</h1>
+<h2 id="the-org-manualorg-manual-by-carsten-dominik"><strong><em><a href="http://orgmode.org/org.html">The Org Manual</a></em></strong> by Carsten Dominik</h2>
+<h2 id="toc">TOC</h2>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>A Introduction</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Document Structure</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Tables</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Hyperlinks</li>
+</ol></li>
+<li><ol start="5" style="list-style-type: decimal">
+<li>TODO Items</li>
+</ol></li>
+<li><ol start="6" style="list-style-type: decimal">
+<li>Tags</li>
+</ol></li>
+<li><ol start="7" style="list-style-type: decimal">
+<li>Properties</li>
+</ol></li>
+<li><ol start="8" style="list-style-type: decimal">
+<li>Dates and Times</li>
+</ol></li>
+<li><ol start="9" style="list-style-type: decimal">
+<li>Capture - Refile - Archive</li>
+</ol></li>
+<li><ol start="10" style="list-style-type: decimal">
+<li>Agenda Views</li>
+</ol></li>
+<li><ol start="11" style="list-style-type: decimal">
+<li>Markup for rich export</li>
+</ol></li>
+<li><ol start="12" style="list-style-type: decimal">
+<li>Exporting</li>
+</ol></li>
+<li><ol start="13" style="list-style-type: decimal">
+<li>Publishing</li>
+</ol></li>
+<li><ol start="14" style="list-style-type: decimal">
+<li>Working with source code</li>
+</ol></li>
+<li><ol start="15" style="list-style-type: decimal">
+<li>Miscellaneous</li>
+</ol></li>
+<li><ol start="16" style="list-style-type: decimal">
+<li>Appendix A Hacking</li>
+</ol></li>
+<li><ol start="17" style="list-style-type: decimal">
+<li>GNU Free Documentation License</li>
+</ol></li>
+</ul>
+<hr />
+<h3 id="a-introduction">01. A Introduction</h3>
+<ul>
+<li>Org is a <strong>toolbox</strong> and can be used in different ways and for different ends, for example:
+<ul>
+<li>an outline extension with visibility cycling and structure editing</li>
+<li>an ASCII system and table editor for taking structured notes</li>
+<li>a TODO list editor</li>
+<li>a full agenda and planner with deadlines and work scheduling</li>
+<li>an environment in which to implement David Allenfls GTD system</li>
+<li>a simple hypertext system, with HTML and L TEX export</li>
+<li>a publishing tool to create a set of interlinked web pages</li>
+<li><strong>an environment for literate programming</strong></li>
+</ul></li>
+</ul>
+<hr />
+<h3 id="document-structure">02. Document Structure</h3>
+<ol style="list-style-type: decimal">
+<li><p>Outlines</p></li>
+<li><p>Headlines</p></li>
+<li>Visibility cycling
+<ul>
+<li><strong>FOLDED</strong> -&gt; <strong>CHILDREN</strong> -&gt; <strong>SUBTREE</strong>
+<ul>
+<li><code>&lt;Tab&gt;</code> (<strong>org-cycle</strong>)</li>
+<li><code>S-&lt;TAB&gt;</code> (<strong>org-global-cycle</strong>)</li>
+</ul></li>
+<li><strong>OVERVIEW</strong> -&gt; <strong>CONTENTS</strong> -&gt; <strong>SHOW ALL</strong>
+<ul>
+<li><code>C-u &lt;TAB&gt;</code> (?) (OVERVIEW)</li>
+<li><code>C-u C-u &lt;TAB&gt;</code> (<strong>org-set-startup-visibility</strong>)</li>
+<li><code>C-u C-u C-u &lt;TAB&gt;</code> (<strong>show-all</strong>) (show all, including drawers)</li>
+<li><code>C-c C-r</code> (<strong>org-reveal</strong>)</li>
+<li><code>C-c C-k</code> (<strong>show-branches</strong>)</li>
+<li><code>C-c C-x b</code> (<strong>org-tree-to-indirect-buffer</strong>)</li>
+<li><code>C-c C-x v</code> (<strong>org-copy-visible</strong>)</li>
+</ul></li>
+<li>Initial visibility
+<ul>
+<li><code>#+STARTUP: overview/content/showall/showeverything</code></li>
+</ul></li>
+<li>Catching invisible edits
+<ul>
+<li>Set <code>org-catch-invisible-edits</code> to <code>non-nil</code></li>
+</ul></li>
+</ul></li>
+<li>Motion
+<ul>
+<li><code>C-c C-n</code>, <code>C-c C-p</code> (<strong>outline-next-visible-heading</strong>), (<strong>outline-previous-visible-heading</strong>)</li>
+<li><code>C-c C-f</code>, <code>C-c C-b</code> (<strong>org-forward-same-level</strong>), (<strong>org-backward-same-level</strong>)</li>
+<li><code>C-c C-u</code> (<strong>outline-up-heading</strong>)</li>
+<li><code>C-c C-j</code> (<strong>org-goto</strong>)</li>
+</ul></li>
+<li>Structure editing
+<ul>
+<li><code>M-&lt;RET&gt;</code> (org-insert-heading)</li>
+<li><code>C-&lt;RET&gt;</code> (<strong>org-insert-heading-respect-content</strong>) (seems better, not truncate current line)</li>
+<li><code>M-S-&lt;RET&gt;</code> (org-insert-todo-heading)</li>
+<li><code>C-S-&lt;RET&gt;</code> (<strong>org-insert-todo-heading-respect-content</strong>) (seems better)</li>
+<li><code>M-&lt;left&gt;</code> (<strong>org-do-promote</strong>)</li>
+<li><code>M-&lt;right&gt;</code> (<strong>org-do-demote</strong>)</li>
+<li><code>M-S-&lt;left&gt;</code> (<strong>org-promote-subtree</strong>)</li>
+<li><code>M-S-&lt;right&gt;</code> (<strong>org-demote-subtree</strong>)</li>
+<li><code>M-S-&lt;up&gt;</code> (<strong>org-move-subtree-up</strong>)</li>
+<li><code>M-S-&lt;down&gt;</code> (<strong>org-move-subtree-down</strong>)</li>
+<li><code>M-h</code> (<strong>org-mark-element</strong>)</li>
+<li><code>C-c @</code> (<strong>org-mark-subtree</strong>)</li>
+<li><code>C-c C-x C-w</code> (<strong>org-cut-subtree</strong>)</li>
+<li><code>C-c C-x M-w</code> (<strong>org-copy-subtree</strong>)</li>
+<li><code>C-c C-x C-y</code> (<strong>org-paste-subtree</strong>)</li>
+<li><code>C-y</code> (<strong>org-yank</strong>) <code>A good way to force a normal yank is C-u C-y</code></li>
+<li><code>C-c C-x c</code> (<strong>org-clone-subtree-with-time-shift</strong>)</li>
+<li><code>C-c C-w</code> (<strong>org-refile</strong>)</li>
+<li><code>C-c ^</code> (<strong>org-sort</strong>) Narrow buffer</li>
+<li><code>C-x n s</code> (<strong>org-narrow-to-subtree</strong>)</li>
+<li><code>C-x n b</code> (<strong>org-narrow-to-block</strong>)</li>
+<li><code>C-x n w</code> (<strong>widen</strong>)</li>
+<li><code>C-c *</code> (<strong>org-toggle-heading</strong>)</li>
+</ul></li>
+<li>Sparse trees
+<ul>
+<li><code>C-c /</code> (<strong>org-sparse-tree</strong>)</li>
+<li><code>C-c / r</code> (<strong>org-occur</strong>)</li>
+<li><code>M-g n</code> or <code>M-g M-n</code> (<strong>next-error</strong>)</li>
+<li><code>M-g p</code> or <code>M-g M-p</code> (<strong>previous-error</strong>)</li>
+</ul></li>
+<li>Plain lists
+<ul>
+<li>(<strong>org-list-demote-modify-bullet</strong>)</li>
+<li>(<strong>org-list-indent-offset</strong>)</li>
+</ul></li>
+<li>Drawers
+<ul>
+<li><code>C-c C-x d</code> (<strong>org-insert-drawer</strong>)</li>
+<li><code>C-c C-z</code> (<strong>org-add-note</strong>)</li>
+</ul></li>
+<li>Blocks
+<ul>
+<li>Org mode uses begin&#8230;end blocks for various purposes from including source code examples</li>
+</ul></li>
+<li>Footnotes
+<ul>
+<li>[1]</li>
+<li>[fn:name]</li>
+<li>[fn:: This is the inline definition of this footnote]</li>
+<li>[fn:name: a definition]</li>
+<li>(<strong>org-footnote-auto-label</strong>), (<strong>org-footnote-auto-adjust</strong>)</li>
+<li><code>C-c C-x f</code> (<strong>org-footnote-action</strong>)</li>
+<li><code>C-c C-o</code> or <code>mouse-1/2</code></li>
+</ul></li>
+<li>The Orgstruct minor mode
+<ul>
+<li><p>Add Hook</p>
+<pre><code>(add-hook &#39;message-mode-hook &#39;turn-on-orgstruct)
+(add-hook &#39;message-mode-hook &#39;turn-on-orgstruct++)</code></pre></li>
+</ul></li>
+<li>Org syntax
+<ul>
+<li>To explore the abstract structure of an Org buffer, run this in a buffer: <code>M-: (org-element-parse-buffer) RET</code></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="tables">03. Tables</h3>
+<ol style="list-style-type: decimal">
+<li>The built-in table editor
+<ul>
+<li><p>Example</p>
+<pre><code>| Name  | Phone | Age |
+|-------+-------+-----|
+| Peter |  1234 |  17 |
+| Anna  |  4321 |  25 |</code></pre></li>
+<li>Keys
+<ul>
+<li><code>&lt;RET&gt;</code>, add line</li>
+<li><code>&lt;TAB&gt;</code>, align</li>
+<li><code>C-c RET</code>, add horizontal spliter, like <code>| one | two</code>, then <code>C-c RET</code></li>
+</ul></li>
+<li><strong>Creation and conversion</strong>: <code>C-c |</code>, <code>org-table-create-or-convert-from-region</code>
+<ul>
+<li><code>C-u</code> forces CSV</li>
+<li><code>C-u C-u</code> forces TAB
+<ul>
+<li>a numeric argument N indicates that at least N consecutive spaces, or alternatively a TAB will be the separator</li>
+</ul></li>
+</ul></li>
+<li>Re-aligning and field motion
+<ul>
+<li><code>C-c C-c</code> (<strong>org-table-align</strong>)</li>
+<li><code>&lt;TAB&gt;</code> (<strong>org-table-next-field</strong>)</li>
+<li><code>S-&lt;TAB&gt;</code> (<strong>org-table-previous-field</strong>)</li>
+<li><code>&lt;RET&gt;</code> (<strong>org-table-next-row</strong>)</li>
+<li><code>M-a</code> (<strong>org-table-beginning-of-field</strong>)</li>
+<li><code>M-e</code> (<strong>org-table-end-of-field</strong>)</li>
+</ul></li>
+<li>Column and row editing
+<ul>
+<li><code>M-&lt;left&gt;</code> (<strong>org-table-move-column-left</strong>)</li>
+<li><code>M-&lt;right&gt;</code> (<strong>org-table-move-column-right</strong>)</li>
+<li><code>M-S-&lt;left&gt;</code> (<strong>org-table-delete-column</strong>)</li>
+<li><code>M-S-&lt;right&gt;</code> (<strong>org-table-insert-column</strong>)</li>
+<li><code>M-&lt;up&gt;</code> (<strong>org-table-move-row-up</strong>)</li>
+<li><code>M-&lt;down&gt;</code> (<strong>org-table-move-row-down</strong>)</li>
+<li><code>M-S-&lt;up&gt;</code> (<strong>org-table-kill-row</strong>)</li>
+<li><code>M-S-&lt;down&gt;</code> (<strong>org-table-insert-row</strong>)</li>
+<li><code>C-c -</code> (<strong>org-table-insert-hline</strong>), pretty like <code>C-c RET</code></li>
+<li><code>C-c &lt;RET&gt;</code> (<strong>org-table-hline-and-move</strong>)</li>
+<li><code>C-c ^</code> (<strong>org-table-sort-lines</strong>)</li>
+</ul></li>
+<li>Regions
+<ul>
+<li><code>C-c C-x M-w</code> (<strong>org-table-copy-region</strong>)</li>
+<li><code>C-c C-x C-&gt;</code> (<strong>org-table-cut-region</strong>)</li>
+<li><code>C-c C-x C-&gt;</code> (<strong>org-table-paste-rectangle</strong>)</li>
+<li><code>M-&lt;RET&gt;</code> (<strong>org-table-wrap-region</strong>)</li>
+</ul></li>
+<li>Calculations
+<ul>
+<li><code>C-c +</code> (<strong>org-table-sum</strong>)</li>
+<li><code>S-&lt;RET&gt;</code> (<strong>org-table-copy-down</strong>), (<strong>org-table-copy-increment</strong>)</li>
+</ul></li>
+<li>Miscellaneous
+<ul>
+<li><code>C-c</code> (<strong>org-table-edit-field</strong>)</li>
+<li><code>M-x org-table-import RET</code>, Import a file as a table</li>
+<li><code>C-c |</code> (<strong>org-table-create-or-convert-from-region</strong>)</li>
+<li><code>M-x org-table-export RET</code></li>
+<li>Disable it: <code>(setq org-enable-table-editor nil)</code></li>
+</ul></li>
+</ul></li>
+<li>Column width and alignment
+<ul>
+<li><p>Specify Col Width</p>
+<pre><code>|---+------------------------------|               |---+--------|
+|   |                              |               |   | &lt;6&gt;    |
+| 1 | one                          |               | 1 | one    |
+| 2 | two                          |     ----\     | 2 | two    |
+| 3 | This is a long chunk of text |     ----/     | 3 | This=&gt; |
+| 4 | four                         |               | 4 | four   |
+|---+------------------------------|               |---+--------|</code></pre></li>
+<li><p><code>org-startup-align-all-tables</code></p>
+<pre><code>    #+STARTUP: align
+    #+STARTUP: noalign</code></pre></li>
+<li><p><code>&lt;r&gt;</code>, <code>&lt;c&gt;</code> or <code>&lt;l&gt;</code>, or <code>&lt;r20&gt;</code></p></li>
+</ul></li>
+<li>Column groups
+<ul>
+<li>A special row where the first field contains only &#8216;/&#8217;</li>
+</ul></li>
+<li>The Orgtbl minor mode
+<ul>
+<li><code>(add-hook 'message-mode-hook 'turn-on-orgtbl)</code></li>
+</ul></li>
+<li>The spreadsheet
+<ul>
+<li>References
+<ul>
+<li><code>C-c ?</code>, show ref. <code>C-c }</code>, togggle ref.</li>
+<li>Field references: <code>@row$column</code>
+<ul>
+<li><code>@+3</code> or <code>@-1</code></li>
+<li><code>@&lt;</code> and <code>@&gt;</code> are immutable references the first and last row in the table, respectively</li>
+<li><code>@I</code> refers to the first hline, <span class="citation">@II</span> to the second, etc.</li>
+<li><code>@-I</code> refers to the first such line above the current line,</li>
+<li><code>@+I</code> to the first such line below the current line</li>
+<li><code>@III+2</code> which is the second data line after the third hline in the table</li>
+<li><code>@0</code> and <code>$0</code> refer to the current row and column, respectively</li>
+</ul></li>
+<li><p>Range references</p>
+<pre><code>$1..$3        first three fields in the current row
+$P..$Q        range, using column names (see under Advanced)
+$&lt;&lt;&lt;..$&gt;&gt;     start in third column, continue to the one but last
+@2$1..@4$3    6 fields between these two fields (same as A2..C4)
+@-1$-2..@-1   3 fields in the row above, starting from 2 columns on the left
+@I..II        between first and second hline, short for @I..@II</code></pre></li>
+<li>Field coordinates in formulas</li>
+<li>Named references
+<ul>
+<li><code>#+CONSTANTS: c=299792458. pi=3.14 eps=2.4e-6</code></li>
+<li><code>org-table-formula-constants</code></li>
+</ul></li>
+<li>Formula syntax for Calc</li>
+<li>Emacs Lisp forms as formulas</li>
+</ul></li>
+<li>Durations and time values</li>
+<li>Field and range formulas</li>
+<li>Column formulas</li>
+<li>Lookup functions</li>
+<li>Editing and debugging formulas</li>
+<li>Updating the table</li>
+<li>Advanced features</li>
+</ul></li>
+<li>Org-Plot</li>
+</ol>
+<hr />
+<h3 id="hyperlinks">04. Hyperlinks</h3>
+<ol style="list-style-type: decimal">
+<li>Link format
+<ul>
+<li><code>[[link][description]]</code> or alternatively <code>[[link]]</code></li>
+<li><code>C-c C-l</code> to edit link</li>
+<li><code>C-c C-o</code> to follow link</li>
+</ul></li>
+<li>Internal links
+<ul>
+<li>Radio targets</li>
+</ul></li>
+<li>External links
+<ul>
+<li>http://www.google.com.sg</li>
+<li>file://root/Desktop/Schedule.txt</li>
+<li>mailto:gnat_tang@yeah.net</li>
+<li>irc:/irc.com/#emacs/bob</li>
+<li>shell:ls *.org</li>
+<li>etc</li>
+</ul></li>
+<li>Handling links
+<ul>
+<li><code>C-c l</code> (<strong>org-store-link</strong>)</li>
+<li><code>C-c C-l</code> (<strong>org-insert-link</strong>), or just edit current link</li>
+<li><code>C-c C-o</code> (<strong>org-open-at-point</strong>)</li>
+<li><code>C-c C-x C-v</code> (<strong>org-toggle-inline-images</strong>)</li>
+<li><code>C-c %</code> (<strong>org-mark-ring-push</strong>)</li>
+<li><code>C-c &amp;</code> (<strong>org-mark-ring-goto</strong>)</li>
+<li><code>C-c C-x C-n</code> (<strong>org-next-link</strong>)</li>
+<li><code>C-c C-x C-p</code> (<strong>org-previous-link</strong>)</li>
+</ul></li>
+<li><p>Using links outside Org</p>
+<pre><code>(global-set-key &quot;\C-c L&quot; &#39;org-insert-link-global)
+(global-set-key &quot;\C-c o&quot; &#39;org-open-at-point-global)</code></pre></li>
+<li><p>Link abbreviations</p>
+<pre><code>    (setq org-link-abbrev-alist
+          &#39;((&quot;bugzilla&quot;  . &quot;http://10.1.2.9/bugzilla/show_bug.cgi?id=&quot;)
+            (&quot;url-to-ja&quot; . &quot;http://translate.google.fr/translate?sl=en&amp;tl=ja&amp;u=%h&quot;)
+            (&quot;google&quot;    . &quot;http://www.google.com/search?q=&quot;)
+            (&quot;ads&quot;       . &quot;http://adsabs.harvard.edu/cgi-bin/nph-abs_connect?author=%s&amp;db_key=AST&quot;)))</code></pre></li>
+<li><p>Search options in file links</p>
+<pre><code>    [[file:~/code/main.c::255]]
+    [[file:~/xx.org::My Target]]
+    [[file:~/xx.org::*My Target]]
+    [[file:~/xx.org::#my-custom-id]]
+    [[file:~/xx.org::/regexp/]]</code></pre></li>
+<li><p>Custom Searches</p></li>
+</ol>
+<hr />
+<h3 id="todo-items">05. TODO Items</h3>
+<ol style="list-style-type: decimal">
+<li>Basic TODO functionality
+<ul>
+<li>Headline starts with &#8220;TODO&#8221; will become &#8220;TODO&#8221;: <code>*** TODO Write letter to Sam Fortune</code></li>
+<li><code>C-c C-t</code> (<strong>org-todo</strong>): <strong>(unmarked)</strong> -&gt; <strong>TODO</strong> -&gt; <strong>DONE</strong></li>
+<li><code>C-u C-c C-t</code></li>
+<li><code>S-&lt;right&gt; / S-&lt;left&gt;</code> like <code>C-c C-t</code></li>
+<li><code>C-c / t</code> (<strong>org-show-todo-tree</strong>)</li>
+<li><code>C-c / T</code></li>
+<li><code>C-c a t</code> (<strong>org-todo-list</strong>)</li>
+<li><code>S-M-&lt;RET&gt;</code> (<strong>org-insert-todo-heading</strong>)</li>
+</ul></li>
+<li>Extended use of TODO keywords
+<ul>
+<li><p>TODO keywords as workflow states</p>
+<pre><code>(setq org-todo-keywords
+   &#39;((sequence &quot;TODO&quot; &quot;FEEDBACK&quot; &quot;VERIFY&quot; &quot;|&quot; &quot;DONE&quot; &quot;DELEGATED&quot;)))</code></pre></li>
+<li><p>TODO keywords as types</p>
+<pre><code>(setq org-todo-keywords &#39;((type &quot;Fred&quot; &quot;Sara&quot; &quot;Lucy&quot; &quot;|&quot; &quot;DONE&quot;)))</code></pre></li>
+<li><p>Multiple keyword sets in one file</p>
+<pre><code>(setq org-todo-keywords
+       &#39;((sequence &quot;TODO&quot; &quot;|&quot; &quot;DONE&quot;)
+         (sequence &quot;REPORT&quot; &quot;BUG&quot; &quot;KNOWNCAUSE&quot; &quot;|&quot; &quot;FIXED&quot;)
+         (sequence &quot;|&quot; &quot;CANCELED&quot;)))</code></pre></li>
+<li><p>Fast access to TODO states (<code>C-c C-t</code> to select)</p>
+<pre><code>(setq org-todo-keywords
+       &#39;((sequence &quot;TODO(t)&quot; &quot;|&quot; &quot;DONE(d)&quot;)
+         (sequence &quot;REPORT(r)&quot; &quot;BUG(b)&quot; &quot;KNOWNCAUSE(k)&quot; &quot;|&quot; &quot;FIXED(f)&quot;)
+         (sequence &quot;|&quot; &quot;CANCELED(c)&quot;)))</code></pre></li>
+<li>Setting up keywords for individual files
+<ul>
+<li><code>#+TODO: TODO FEEDBACK VERIFY | DONE CANCELED</code></li>
+<li><code>#+SEQ_TODO: Seq1 Seq2 | Seq-done</code></li>
+<li><code>#+TYP_TODO: Fred Sara Lucy Mike | DONE</code></li>
+</ul></li>
+<li><p>Faces for TODO keywords</p>
+<pre><code>(setq org-todo-keyword-faces
+       &#39;((&quot;TODO&quot; . org-warning) (&quot;STARTED&quot; . &quot;yellow&quot;)
+         (&quot;CANCELED&quot; . (:foreground &quot;blue&quot; :weight bold))))</code></pre></li>
+<li>TODO dependencies
+<ul>
+<li>C-c C-x o (org-toggle-ordered-property)</li>
+<li>C-u C-u C-u C-c C-t: Change TODO state, circumventing any state blocking.</li>
+</ul></li>
+</ul></li>
+<li>Progress logging
+<ul>
+<li>Closing items
+<ul>
+<li><code>(setq org-log-done 'time)</code></li>
+<li><code>(setq org-log-done 'note)</code></li>
+</ul></li>
+<li>Tracking TODO state changes
+<ul>
+<li>&#8220;!&#8221;, for <strong>timestamp</strong></li>
+<li>&#8220;@&#8221;, for <strong>note with timestamp</strong></li>
+<li><p>Set it up</p>
+<pre><code>(setq org-todo-keywords
+      &#39;((sequence &quot;TODO(t)&quot; &quot;WAIT(w@/!)&quot; &quot;|&quot; &quot;DONE(d!)&quot; &quot;CANCELED(c@)&quot;)))</code></pre></li>
+<li>Or set logging preferences local to a buffer: <code>#+TODO: TODO(t) WAIT(w@/!) | DONE(d!) CANCELED(c@)</code></li>
+</ul></li>
+<li>Tracking your habits</li>
+</ul></li>
+<li>Priorities
+<ul>
+<li><code>*** TODO [#A] Write letter to Sam Fortune</code></li>
+<li><code>C-c ,</code> (<strong>org-priority</strong>), setup priorities</li>
+<li><code>S-&lt;up&gt;</code> (<strong>org-priority-up</strong>)</li>
+<li><code>S-&lt;down&gt;</code> (<strong>org-priority-down</strong>)</li>
+</ul></li>
+<li>Breaking tasks down into subtasks
+<ul>
+<li>Insert either &#8216;[/]&#8217; or &#8216;[%]&#8217; anywhere in the headline</li>
+</ul></li>
+<li>Checkboxes
+<ul>
+<li><code>[ ]</code>, <code>[/]</code>, <code>[%]</code></li>
+<li><code>C-c C-c</code> (<strong>org-toggle-checkbox</strong>)</li>
+<li><code>C-c C-x C-b</code> (<strong>org-toggle-checkbox</strong>)</li>
+<li><code>M-S-&lt;RET&gt;</code> (<strong>org-insert-todo-heading</strong>)</li>
+<li><code>C-c C-x o</code> (<strong>org-toggle-ordered-property</strong>)</li>
+<li><code>C-c #</code> (<strong>org-update-statistics-cookies</strong>), <code>C-u C-c</code> to update whole file</li>
+<li><img src="src/org-todo-progress.png" title="fig:" /></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="tags-work-reading">06. Tags :work:, :reading&#127926;</h3>
+<ol style="list-style-type: decimal">
+<li>Tag inheritance
+<ul>
+<li><code>#+FILETAGS: :Peter:Boss:Secret:</code></li>
+</ul></li>
+<li>Setting tags
+<ul>
+<li><code>C-c C-q</code> (<strong>org-set-tags-command</strong>)</li>
+<li><code>C-c C-c</code> (<strong>org-set-tags-command</strong>), when the cursor in the headline</li>
+<li><p><code>org-tag-alist</code>, (<strong>org-tag-persistent-alist</strong>)</p>
+<pre><code>#+TAGS: @work @home @tennisclub
+#+TAGS: laptop car pc sailboat
+#+TAGS: @work(w)  @home(h)  @tennisclub(t)  laptop(l)  pc(p)
+#+STARTUP: noptag
+(setq org-tag-alist &#39;((&quot;@work&quot; . ?w) (&quot;@home&quot; . ?h) (&quot;laptop&quot; . ?l)))</code></pre></li>
+</ul></li>
+<li>Tag groups
+<ul>
+<li><p>groups</p>
+<pre><code>#+TAGS: { @read : @read_book @read_ebook }
+(setq org-tag-alist &#39;((:startgroup . nil)
+                       (&quot;@read&quot; . nil)
+                       (:grouptags . nil)
+                       (&quot;@read_book&quot; . nil)
+                       (&quot;@read_ebook&quot; . nil)
+                       (:endgroup . nil)))</code></pre></li>
+</ul></li>
+<li>Tag searches
+<ul>
+<li><code>C-c / m</code> or <code>C-c \</code> (<strong>org-match-sparse-tree</strong>)</li>
+<li><code>C-c a m</code> (<strong>org-tags-view</strong>)</li>
+<li><code>C-c a M</code> (<strong>org-tags-view</strong>)</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="properties">07. Properties</h3>
+<ol style="list-style-type: decimal">
+<li>Property syntax
+<ul>
+<li><code>M-&lt;TAB&gt;</code> (<strong>pcomplete</strong>)</li>
+<li><code>C-c C-x p</code> (<strong>org-set-property</strong>)</li>
+<li><code>C-u M-x org-insert-drawer RET</code></li>
+<li><code>C-c C-c</code> (<strong>org-property-action</strong>)</li>
+<li><code>C-c C-c s</code> (<strong>org-set-property</strong>)</li>
+<li><code>S-&lt;right&gt;</code> (<strong>org-property-next-allowed-value</strong>)</li>
+<li><code>S-&lt;left&gt;</code> (<strong>org-property-previous-allowed-value</strong>)</li>
+<li><code>C-c C-c d</code> (<strong>org-delete-property</strong>)</li>
+<li><code>C-c C-c D</code> (<strong>org-delete-property-globally</strong>)</li>
+<li><code>C-c C-c c</code> (<strong>org-compute-property-at-point</strong>)</li>
+</ul></li>
+<li><p>Special properties</p>
+<pre><code>    ID           A globally unique ID used for synchronization during
+                 iCalendar or MobileOrg export.
+    TODO         The TODO keyword of the entry.
+    TAGS         The tags defined directly in the headline.
+    ALLTAGS      All tags, including inherited ones.
+    CATEGORY     The category of an entry.
+    PRIORITY     The priority of the entry, a string with a single letter.
+    DEADLINE     The deadline time string, without the angular brackets.
+    SCHEDULED    The scheduling timestamp, without the angular brackets.
+    CLOSED       When was this entry closed?
+    TIMESTAMP    The first keyword-less timestamp in the entry.
+    TIMESTAMP_IA The first inactive timestamp in the entry.
+    CLOCKSUM     The sum of CLOCK intervals in the subtree.  org-clock-sum
+                 must be run first to compute the values in the current buffer.
+    CLOCKSUM_T   The sum of CLOCK intervals in the subtree for today.
+                 org-clock-sum-today must be run first to compute the
+                 values in the current buffer.
+    BLOCKED      &quot;t&quot; if task is currently blocked by children or siblings
+    ITEM         The headline of the entry.
+    FILE         The filename the entry is located in.</code></pre></li>
+<li>Property searches
+<ul>
+<li><code>C-c / m</code> or <code>C-c \</code> (**org-match-sparse-tree*8)</li>
+<li><code>C-c a m</code> (<strong>org-tags-view</strong>)</li>
+<li><code>C-c a M</code> (<strong>org-tags-view</strong>)</li>
+<li><code>C-c / p</code></li>
+</ul></li>
+<li><p>Property Inheritance</p></li>
+<li>Column view
+<ul>
+<li>Defining columns
+<ul>
+<li>Scope of column definitions
+<ul>
+<li><p>to entire file</p>
+<pre><code>#+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO</code></pre></li>
+<li><p>to a specific tree</p>
+<pre><code>** Top node for columns view
+   :PROPERTIES:
+   :COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+   :END:</code></pre></li>
+</ul></li>
+<li>Column attributes: <code>%[width]property[(title)][{summary-type}]</code></li>
+</ul></li>
+<li>Using column view
+<ul>
+<li>Turning column view on and off
+<ul>
+<li>C-c C-x C-c (org-columns)</li>
+<li>r (org-columns-redo)</li>
+<li>g (org-columns-redo)</li>
+<li>q (org-columns-quit)</li>
+</ul></li>
+<li>Editing values
+<ul>
+<li><code>&lt;left&gt;</code>, <code>&lt;right&gt;</code>, <code>&lt;up&gt;</code>, <code>&lt;down&gt;</code></li>
+<li><code>S-&lt;left&gt;/&lt;right&gt;</code>, switch values</li>
+<li><code>1..9,0</code>, Directly select the Nth allowed value, 0 selects the 10th value</li>
+<li>n (org-columns-next-allowed-value)</li>
+<li><TODO></li>
+</ul></li>
+<li>Modifying the table structure
+<ul>
+<li>&lt; (org-columns-narrow) by one char</li>
+<li><blockquote>
+<pre><code>(org-columns-widen)    by one char</code></pre>
+</blockquote></li>
+<li>S-M-<right> (org-columns-new)</li>
+<li>S-M-<left> (org-columns-delete)</li>
+</ul></li>
+</ul></li>
+<li>Capturing column view
+<ul>
+<li><p>column view, an overlay over a buffer, so cant be printed directly. To capture a column view, use a <strong>columnview dynamic block</strong></p>
+<pre><code>* The column view
+#+BEGIN: columnview :hlines 1 :id &quot;label&quot;
+#+END:</code></pre></li>
+<li>Dynamic Block has the Following Parameters:
+<ul>
+<li><code>:id</code></li>
+<li><code>:hlines</code></li>
+<li><code>:vlines</code></li>
+<li><code>:maxlevel</code></li>
+</ul></li>
+<li>Insert Or Update The Dynamic Block:
+<ul>
+<li>C-c C-x i (org-insert-columns-dblock)</li>
+<li>C-c C-c or C-c C-x C-u (org-dblock-update)</li>
+<li>C-u C-c C-x C-u (org-update-all-dblocks)</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><a href="http://orgmode.org/org.html#Using-the-property-API">The Property API</a></p></li>
+</ol>
+<hr />
+<h3 id="dates-and-times">08. Dates and Times</h3>
+<ol style="list-style-type: decimal">
+<li>Timestamps, deadlines, and scheduling
+<ul>
+<li>Plain timestamp; Event; Appointment: <code>&lt;2006-11-01 Wed 19:15&gt;</code></li>
+<li>Timestamp with repeater interval: <code>&lt;2007-05-16 Wed 12:30 +1w&gt;</code></li>
+<li>Diary-style sexp entries: &lt;%%(diary-float t 4 2)&gt;</li>
+<li>Time/Date range: &lt;2004-08-23 Mon&gt;&#8211;&lt;2004-08-26 Thu&gt;</li>
+<li>Inactive timestamp: [2006-11-01 Wed]</li>
+</ul></li>
+<li>Creating timestamps
+<ul>
+<li><code>C-c .</code> (org-time-stamp) just date</li>
+<li><code>C-c !</code> (org-time-stamp-inactive) just date</li>
+<li><code>C-u C-c .</code> with time</li>
+<li><code>C-u C-c !</code> with time</li>
+<li><code>C-c C-c</code> Normalize timestamp, insert/fix day name if missing or wrong.</li>
+<li><code>C-c &lt;</code> (org-date-from-calendar)</li>
+<li><code>C-c &gt;</code> (org-goto-calendar)</li>
+<li><code>C-c C-o</code> (org-open-at-point)</li>
+<li><code>S-&lt;left&gt;</code> (org-timestamp-down-day)</li>
+<li><code>S-&lt;right&gt;</code> (org-timestamp-up-day)</li>
+<li><code>S-&lt;up&gt;</code> (org-timestamp-up)</li>
+<li><code>S-&lt;down&gt;</code> (org-timestamp-down-down)</li>
+<li><code>C-c C-y</code> (org-evaluate-time-range)</li>
+<li>Format I.
+<ul>
+<li><ol style="list-style-type: decimal">
+<li><p>format 1</p>
+<pre><code>+0            &#8658; today
+.             &#8658; today
++4d           &#8658; four days from today
++4            &#8658; same as above
++2w           &#8658; two weeks from today
+++5           &#8658; five days from default date
++2tue         &#8658; second Tuesday from now
+-wed          &#8658; last Wednesday</code></pre></li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li><p>format 2</p>
+<pre><code>11am-1:15pm    &#8658; 11:00-13:15
+11am--1:15pm   &#8658; same as above
+11am+2:15      &#8658; same as above</code></pre></li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li><p>format 3</p>
+<pre><code>&lt;RET&gt;                     Choose date at cursor in calendar.
+mouse-1                   Select date by clicking on it.
+S-&lt;right&gt;/&lt;left&gt;          One day forward/backward.
+S-&lt;down&gt;/&lt;up&gt;             One week forward/backward.
+M-S-&lt;right&gt;/&lt;left&gt;        One month forward/backward.
+&gt; / &lt;                     Scroll calendar forward/backward by one month.
+M-v / C-v                 Scroll calendar forward/backward by 3 months.</code></pre></li>
+</ol></li>
+</ul></li>
+<li>Custom time format
+<ul>
+<li>C-c C-x C-t (org-toggle-time-stamp-overlays)</li>
+</ul></li>
+</ul></li>
+<li>Deadlines and scheduling
+<ul>
+<li>DEADLINE</li>
+<li>SCHEDULED</li>
+<li>Inserting deadlines or schedules
+<ul>
+<li>C-c C-d (org-deadline)</li>
+<li>C-c C-s (org-schedule)</li>
+<li>C-c C-x C-k (org-mark-entry-for-agenda-action)</li>
+<li>C-c / d (org-check-deadlines)</li>
+<li>C-c / b (org-check-before-date)</li>
+<li>C-c / a (org-check-after-date)</li>
+</ul></li>
+<li>Repeated tasks</li>
+</ul></li>
+<li>Clocking work time
+<ul>
+<li><p>Save the clock history</p>
+<pre><code>(setq org-clock-persist &#39;history)
+(org-clock-persistence-insinuate)</code></pre></li>
+<li>Clocking commands
+<ul>
+<li><code>C-c C-x C-i</code> (<strong>org-clock-in</strong>)</li>
+<li><code>C-c C-x C-o</code> (<strong>org-clock-out</strong>)</li>
+<li><code>C-c C-x C-x</code> (<strong>org-clock-in-last</strong>)</li>
+<li><code>C-c C-x C-e</code> (<strong>org-clock-modify-effort-estimate</strong>)</li>
+<li><code>C-c C-c or C-c C-y</code> (<strong>org-evaluate-time-range</strong>)</li>
+<li><code>C-S-&lt;up/down&gt;</code> (<strong>org-clock-timestamps-up/down</strong>)</li>
+<li><code>S-M-&lt;up/down&gt;</code> (<strong>org-timestamp-up/down</strong>)</li>
+<li><code>C-c C-t</code> (<strong>org-todo</strong>)</li>
+<li><code>C-c C-x C-q</code> (<strong>org-clock-cancel</strong>)</li>
+<li><code>C-c C-x C-j</code> (<strong>org-clock-goto</strong>)</li>
+<li><code>C-c C-x C-d</code> (<strong>org-clock-display</strong>)</li>
+</ul></li>
+<li>The clock table
+<ul>
+<li><code>C-c C-x C-r</code> (org-clock-report)</li>
+<li><code>C-c C-c or C-c C-x C-u</code> (org-dblock-update)</li>
+<li><code>C-u C-c C-x C-u</code> (update)</li>
+<li><code>S-&lt;left&gt; / &lt;right&gt;</code> (org-clocktable-try-shift)</li>
+</ul></li>
+<li><p>Resolving idle time and continuous clocking</p></li>
+</ul></li>
+<li>Effort estimates
+<ul>
+<li><code>C-c C-x e</code> (org-set-effort)</li>
+<li><code>C-c C-x C-e</code> (org-clock-modify-effort-estimate)</li>
+</ul></li>
+<li>Taking notes with a relative timer
+<ul>
+<li><code>C-c C-x .</code> (org-timer) reset with a prefix argument</li>
+<li><code>C-c C-x -</code> (org-timer-item) reset with a prefix argument</li>
+<li><code>M-&lt;RET&gt;</code> (org-insert-heading)</li>
+<li><code>C-c C-x ,</code> pause / continue</li>
+<li><code>C-u C-c C-x ,</code></li>
+<li><code>C-c C-x 0</code> (org-timer-start) Reset the timer without inserting anything into the buffer</li>
+</ul></li>
+<li>Countdown timer
+<ul>
+<li><code>C-c C-x ;</code> (<strong>org-timer-set-timer</strong>)</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="capture---refile---archive">09. Capture - Refile - Archive</h3>
+<ol style="list-style-type: decimal">
+<li>Capture
+<ul>
+<li><p>Setting up capture</p>
+<pre><code>(setq org-default-notes-file (concat org-directory &quot;/notes.org&quot;))
+(define-key global-map &quot;\C-cc&quot; &#39;org-capture)</code></pre></li>
+<li>Using capture
+<ul>
+<li>C-c c (org-capture)
+<ul>
+<li>C-c C-c (org-capture-finalize)</li>
+<li>C-c C-w (org-capture-refile)</li>
+<li>C-c C-k (org-capture-kill)</li>
+</ul></li>
+<li>C-u C-c c Visit the target location of a capture template.</li>
+<li>C-u C-u C-c c Visit the last stored capture item in its buffer.</li>
+</ul></li>
+<li>Capture templates
+<ul>
+<li>C-c c C org-capture-templates</li>
+<li><p>Setup a template</p>
+<pre><code>(setq org-capture-templates
+      &#39;((&quot;t&quot; &quot;Todo&quot; entry (file+headline &quot;~/org/gtd.org&quot; &quot;Tasks&quot;)
+             &quot;* TODO %?\n  %i\n  %a&quot;)
+        (&quot;j&quot; &quot;Journal&quot; entry (file+datetree &quot;~/org/journal.org&quot;)
+             &quot;* %?\nEntered on %U\n  %i\n  %a&quot;)))</code></pre></li>
+<li><p>Difine Your Shortcut</p>
+<pre><code>(define-key global-map &quot;\C-cx&quot;
+     (lambda () (interactive) (org-capture nil &quot;x&quot;)))</code></pre></li>
+<li>Template elements
+<ul>
+<li>keys: (&#8220;b&#8221; &#8220;Templates for marking stuff to buy&#8221;), &#8220;b&#8221; is the key.</li>
+<li>description</li>
+<li>type: entry / item / checkitem / table-line / plain</li>
+<li>target</li>
+<li>(file &#8220;path/to/file&#8221;)</li>
+<li>(id &#8220;id of existing org entry&#8221;)</li>
+<li>(file+headline &#8220;path/to/file&#8221; &#8220;node headline&#8221;), for unique heading</li>
+<li>(file+olp &#8220;path/to/file&#8221; &#8220;Level 1 heading&#8221; &#8220;Level 2&#8221; &#8230;), for non-unique heading</li>
+<li>(file+regexp &#8220;path/to/file&#8221; &#8220;regexp to find location&#8221;)</li>
+<li>(file+datetree &#8220;path/to/file&#8221;)</li>
+<li>(file+datetree+prompt &#8220;path/to/file&#8221;)</li>
+<li>(file+function &#8220;path/to/file&#8221; function-finding-location)</li>
+<li>(clock)</li>
+<li>(function function-finding-location), write your own function to find both file and location</li>
+</ul></li>
+<li>template</li>
+<li>properties: :prepend, :immediate-finish, :empty-lines, :clock-in, :clock-keep, :clock-resume, :unnarrowed, :table-line-pos, :kill-buffer</li>
+<li>Template expansion
+<ul>
+<li><p>In the template itself, special %-escapes92 allow dynamic insertion of content.</p>
+<pre><code>%[file]     Insert the contents of the file given by file.
+%(sexp)     Evaluate Elisp sexp and replace with the result.
+               For convenience, %:keyword (see below) placeholders
+               within the expression will be expanded prior to this.
+               The sexp must return a string.
+%&lt;...&gt;      The result of format-time-string on the ... format specification.
+%t          Timestamp, date only.
+%T          Timestamp, with date and time.
+%u, %U      Like the above, but inactive timestamps.
+%i          Initial content, the region when capture is called while the
+            region is active.
+            The entire text will be indented like %i itself.
+%a          Annotation, normally the link created with org-store-link.
+%A          Like %a, but prompt for the description part.
+%l          Like %a, but only insert the literal link.
+%c          Current kill ring head.
+%x          Content of the X clipboard.
+%k          Title of the currently clocked task.
+%K          Link to the currently clocked task.
+%n          User name (taken from user-full-name).
+%f          File visited by current buffer when org-capture was called.
+%F          Full path of the file or directory visited by current buffer.
+%:keyword   Specific information for certain link types, see below.
+%^g         Prompt for tags, with completion on tags in target file.
+%^G         Prompt for tags, with completion all tags in all agenda files.
+%^t         Like %t, but prompt for date.  Similarly %^T, %^u, %^U.
+            You may define a prompt like %^{Birthday}t.
+%^C         Interactive selection of which kill or clip to use.
+%^L         Like %^C, but insert as link.
+%^{prop}p   Prompt the user for a value for property prop.
+%^{prompt}  prompt the user for a string and replace this sequence with it.
+            You may specify a default value and a completion table with
+            %^{prompt|default|completion2|completion3...}.
+            The arrow keys access a prompt-specific history.
+%\n         Insert the text entered at the nth %^{prompt}, where n is
+            a number, starting from 1.
+%?          After completing the template, position cursor here.</code></pre></li>
+<li><p>For specific link types</p>
+<pre><code>Link type                        |  Available keywords
+---------------------------------+----------------------------------------------
+bbdb                             |  %:name %:company
+irc                              |  %:server %:port %:nick
+vm, vm-imap, wl, mh, mew, rmail  |  %:type %:subject %:message-id
+                                 |  %:from %:fromname %:fromaddress
+                                 |  %:to   %:toname   %:toaddress
+                                 |  %:date (message date header field)
+                                 |  %:date-timestamp (date as active timestamp)
+                                 |  %:date-timestamp-inactive (date as inactive timestamp)
+                                 |  %:fromto (either &quot;to NAME&quot; or &quot;from NAME&quot;)94
+gnus                             |  %:group, for messages also all email fields
+w3, w3m                          |  %:url
+info                             |  %:file %:node
+calendar                         |  %:date</code></pre></li>
+<li><code>%?</code> After completing the template, position cursor here.</li>
+</ul></li>
+<li><p>Templates in contexts</p>
+<pre><code>(setq org-capture-templates-contexts
+   &#39;((&quot;p&quot; (in-mode . &quot;message-mode&quot;))))
+(setq org-capture-templates-contexts
+   &#39;((&quot;p&quot; &quot;q&quot; (in-mode . &quot;message-mode&quot;))))</code></pre></li>
+</ul></li>
+</ul></li>
+<li>Attachments
+<ul>
+<li><code>C-c C-a</code> (org-attach)
+<ul>
+<li><code>a</code> (org-attach-attach)</li>
+<li><code>c/m/l</code> copy/link/move</li>
+<li><code>n</code> (org-attach-new)</li>
+<li><code>z</code> (org-attach-sync)</li>
+<li><code>o</code> (org-attach-open)</li>
+<li><code>O</code> (org-attach-open-in-emacs)</li>
+<li><code>f</code> (org-attach-reveal)</li>
+<li><code>F</code> (org-attach-reveal-in-emacs)</li>
+<li><code>d</code> (org-attach-delete-one)</li>
+<li><code>D</code> (org-attach-delete-all)</li>
+<li><code>s</code> (org-attach-set-directory)</li>
+<li><code>i</code> (org-attach-set-inherit)</li>
+</ul></li>
+</ul></li>
+<li>RSS feeds
+<ul>
+<li><p>org-feed-alist</p>
+<pre><code>   (setq org-feed-alist
+          &#39;((&quot;Slashdot&quot;
+              &quot;http://rss.slashdot.org/Slashdot/slashdot&quot;
+              &quot;~/txt/org/feeds.org&quot; &quot;Slashdot Entries&quot;)))</code></pre></li>
+<li><code>C-c C-x g</code> (org-feed-update-all)</li>
+<li><code>C-c C-x g</code></li>
+<li><p><code>C-c C-x G</code> (org-feed-goto-inbox)</p></li>
+</ul></li>
+<li><p><a href="http://orgmode.org/worg/org-contrib/org-protocol.html">Protocols for external access</a></p></li>
+<li>Refile and copy
+<ul>
+<li><code>C-c M-w</code> (org-copy)</li>
+<li><code>C-c C-w</code> (org-refile)</li>
+<li><code>C-u C-c C-w</code> Use the refile interface to jump to a heading.</li>
+<li><code>C-u C-u C-c</code> C-w (org-refile-goto-last-stored)</li>
+<li><code>C-2 C-c C-w</code> Refile as the child of the item currently being clocked.</li>
+<li><code>C-3 C-c C-w</code> Refile and keep the entry in place. Also see org-refile-keep to make this the default behavior, and beware that this may result in duplicated ID properties.</li>
+<li><code>C-0 C-c C-w or C-u C-u C-u C-c C-w</code> (org-refile-cache-clear)</li>
+</ul></li>
+<li>Archiving
+<ul>
+<li>C-c C-x C-a (org-archive-subtree-default)
+<ul>
+<li>Moving a tree to the archive file
+<ul>
+<li>C-c C-x C-s or short C-c $ (org-archive-subtree)</li>
+<li>C-u C-c C-x C-s</li>
+</ul></li>
+</ul></li>
+<li>Internal archiving
+<ul>
+<li>C-c C-x a (org-toggle-archive-tag)</li>
+<li>C-u C-c C-x a Check if any direct children of the current headline should be archived.</li>
+<li>C-TAB (org-force-cycle-archived)</li>
+<li>C-c C-x A (org-archive-to-archive-sibling)</li>
+</ul></li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="agenda-views">10. Agenda Views</h3>
+<ul>
+<li>Before
+<ul>
+<li>Org can select items based on various criteria and display them in a separate buffer. Seven different view types are provided:
+<ul>
+<li>an <strong>agenda</strong> that is like a calendar and shows information for specific dates,</li>
+<li>a <strong>TODO</strong> list that covers all unfinished action items,</li>
+<li>a <strong>match view</strong>, showings headlines based on the tags, properties, and TODO state associated with them,</li>
+<li>a <strong>timeline view</strong> that shows all events in a single Org file, in time-sorted view,</li>
+<li>a <strong>text search view</strong> that shows all entries from multiple files that contain specified keywords,</li>
+<li>a <strong>stuck projects view</strong> showing projects that currently don&#8217;t move along, and</li>
+<li><strong>custom views</strong> that are special searches and combinations of different views.</li>
+</ul></li>
+<li>agenda buffer (read-only)</li>
+</ul></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Agenda files
+<ul>
+<li><code>org-agenda-files</code></li>
+<li>C-c [ (org-agenda-file-to-front), Add current file to the list of agenda files.</li>
+<li>C-c ] (org-remove-file)</li>
+<li>C-&#8217; (org-cycle-agenda-files)</li>
+<li>C-, Cycle through agenda file list, visiting one file after the other.</li>
+<li>M-x org-iswitchb RET</li>
+<li>C-c C-x &lt; (org-agenda-set-restriction-lock)</li>
+<li>C-c C-x &gt; (org-agenda-remove-restriction-lock)</li>
+<li>When working with speedbar.el
+<ul>
+<li>&lt; in the speedbar frame (org-speedbar-set-agenda-restriction)</li>
+<li><blockquote>
+<p>in the speedbar frame (org-agenda-remove-restriction-lock)</p>
+</blockquote></li>
+</ul></li>
+</ul></li>
+<li>The agenda dispatcher
+<ul>
+<li>agenda dispatcher, bound to <code>C-c a</code>
+<ul>
+<li><code>a</code> calendar-like agenda</li>
+<li><code>t / T</code> TODO</li>
+<li><code>m / M</code> Create a list of headlines matching a TAGS expression</li>
+<li><code>L</code> Create the timeline view for the current buffer</li>
+<li><code>s</code> Create a list of entries selected by a boolean expression of keywords and/or regular expressions that must or must not occur in the entry.</li>
+<li><code>/</code> Search for a regular expression</li>
+<li><code># / !</code> Create a list of stuck projects</li>
+<li><code>&lt;</code> Restrict an agenda command to the current buffer100. After pressing &lt;, you still need to press the character selecting the command.</li>
+<li><code>&lt; &lt;</code></li>
+<li><code>*</code> Toggle sticky agenda views</li>
+</ul></li>
+</ul></li>
+<li>The built-in agenda views
+<ul>
+<li>The weekly/daily agenda
+<ul>
+<li>C-c a a (org-agenda-list)</li>
+<li>C-u 2 1 C-c a a (21 days)</li>
+<li>(setq org-agenda-start-day &#8220;+10d&#8221;)</li>
+<li>Calendar/Diary integration (setq org-agenda-include-diary t)</li>
+<li>Anniversaries from BBDB</li>
+<li>Appointment reminders: org-agenda-to-appt</li>
+</ul></li>
+<li>The global TODO list
+<ul>
+<li>C-c a t (org-todo-list) show list</li>
+<li>C-c a T (org-todo-list)</li>
+</ul></li>
+<li>Matching tags and properties
+<ul>
+<li>C-c a m (org-tags-view) <code>C-c / m</code></li>
+<li>C-c a M (org-tags-view)</li>
+<li>Match syntax
+<ul>
+<li><code>+</code>, <code>-</code>, <code>&amp;</code>, <code>|</code>;</li>
+<li><code>work</code>, <code>work&amp;boss</code>, <code>+work-boss</code>, <code>work|laptop</code>, <code>work|laptop+night</code>, <code>work+{^boss.*}</code></li>
+</ul></li>
+</ul></li>
+<li>Timeline for a single file
+<ul>
+<li>C-c a L (org-timeline) When called with a C-u prefix, all unfinished TODO entries (scheduled or not) are also listed under the current date.</li>
+</ul></li>
+<li>Search view
+<ul>
+<li>C-c a s (org-search-view)</li>
+</ul></li>
+<li>Stuck projects
+<ul>
+<li>C-c a # (org-agenda-list-stuck-projects)</li>
+<li>C-c a ! Customize the variable org-stuck-projects to define what a stuck project is and how to find it.</li>
+</ul></li>
+</ul></li>
+<li>Presentation and sorting
+<ul>
+<li>Categories
+<ul>
+<li>Specify Cat: <code>#+CATEGORY: Thesis</code></li>
+<li>Set up icons for category by customizing the <code>org-agenda-category-icon-alist</code> variable.</li>
+</ul></li>
+<li>Time-of-day specifications
+<ul>
+<li>Variable: <code>org-agenda-use-time-grid</code></li>
+<li>Configured it with <code>org-agenda-time-grid</code></li>
+</ul></li>
+<li>Sorting agenda items
+<ul>
+<li><code>org-agenda-sorting-strategy</code></li>
+</ul></li>
+<li>Filtering/limiting agenda items
+<ul>
+<li>Filtering in the agenda
+<ul>
+<li>/ (org-agenda-filter-by-tag)</li>
+<li>&#160; (org-agenda-filter-by-tag-refine)</li>
+<li>[words] {regexpr} in search view</li>
+<li>&lt; (org-agenda-filter-by-category)</li>
+<li>^ (org-agenda-filter-by-top-headline)</li>
+<li>= (org-agenda-filter-by-regexp)</li>
+<li>| (org-agenda-filter-remove-all)</li>
+</ul></li>
+<li>Setting limits for the agenda
+<ul>
+<li>org-agenda-max-entries</li>
+<li>org-agenda-max-effort <code>(setq org-agenda-max-effort 100)</code>, set max effort to 100 mins</li>
+<li>org-agenda-max-todos</li>
+<li>org-agenda-max-tags</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Commands in the agenda buffer
+<ul>
+<li>Motion
+<ul>
+<li><code>n</code>, <code>&lt;down&gt;</code>, <code>C-n</code> (org-agenda-next-line)</li>
+<li><code>p</code>, <code>&lt;up&gt;</code>, <code>C-p</code> (org-agenda-previous-line)</li>
+</ul></li>
+<li>View/Go to Org file
+<ul>
+<li><SPC> or mouse-3 (org-agenda-show-and-scroll-up)</li>
+<li>L (org-agenda-recenter)</li>
+<li><TAB> or mouse-2 (org-agenda-goto)</li>
+<li><RET> (org-agenda-switch-to)</li>
+<li>F (org-agenda-follow-mode) very good~</li>
+<li>C-c C-x b (org-agenda-tree-to-indirect-buffer)</li>
+<li>C-c C-o (org-agenda-open-link)</li>
+</ul></li>
+<li>Change display
+<ul>
+<li><code>A</code> Interactively select another agenda view and append it to the current view.</li>
+<li><code>o</code> Delete other windows.</li>
+<li><code>v d</code> or <code>short d</code> (org-agenda-day-view)</li>
+<li><code>v w</code> or <code>short w</code> (org-agenda-week-view)</li>
+<li><code>v t</code> (org-agenda-fortnight-view)</li>
+<li><code>v m</code> (org-agenda-month-view)</li>
+<li><code>v y</code> (org-agenda-year-view)</li>
+<li><code>v SPC</code> (org-agenda-reset-view)</li>
+<li><code>v SPC</code> (org-agenda-reset-view)</li>
+<li><code>f</code> (org-agenda-later) Go forward in time to display the following org-agenda-current-span days.</li>
+<li><code>b</code> (org-agenda-earlier) Go backward in time to display earlier dates.</li>
+<li>``` (org-agenda-goto-today) Go to today.</li>
+<li><code>j</code> (org-agenda-goto-date) Prompt for a date and go there.</li>
+<li><code>J</code> (org-agenda-clock-goto) Go to the currently clocked-in task in the agenda buffer.</li>
+<li><code>D</code> (org-agenda-toggle-diary) Toggle the inclusion of diary entries. See Weekly/daily agenda.</li>
+<li><code>v l</code> or short <code>l</code> (org-agenda-log-mode)</li>
+<li><code>v [</code> or short <code>[</code> (org-agenda-manipulate-query-add)</li>
+<li><code>v a</code> (org-agenda-archives-mode)</li>
+<li><code>v A</code> (org-agenda-archives-mode &#8217;files)</li>
+<li><code>v R</code> or short <code>R</code> (org-agenda-clockreport-mode)</li>
+<li><code>v c</code> Show overlapping clock entries, clocking gaps, and other clocking problems in the current agenda range.</li>
+<li><code>v E</code> or short <code>E</code> (org-agenda-entry-text-mode)</li>
+<li><code>G</code> (org-agenda-toggle-time-grid)</li>
+<li><code>g</code>, <code>r</code> (org-agenda-redo)</li>
+<li><code>C-x C-s</code> or short <code>s</code> (org-save-all-org-buffers)</li>
+<li><code>C-c C-x C-c</code> (org-agenda-columns)</li>
+<li><code>C-c C-x &gt;</code> (org-agenda-remove-restriction-lock)</li>
+</ul></li>
+<li>Secondary filtering and query editing
+<ul>
+<li>/ (org-agenda-filter-by-tag)</li>
+<li>&#160; (org-agenda-filter-by-tag-refine)</li>
+<li>&lt; (org-agenda-filter-by-category)</li>
+<li>^ (org-agenda-filter-by-top-headline)</li>
+<li>= (org-agenda-filter-by-regexp)</li>
+<li>| (org-agenda-filter-remove-all)</li>
+</ul></li>
+<li>Remote editing
+<ul>
+<li><code>0--9</code> Digit argument.</li>
+<li><code>C-_</code> (org-agenda-undo)</li>
+<li><code>t</code> (org-agenda-todo)</li>
+<li><code>C-S-&lt;right&gt;</code>, <code>C-S-&lt;left&gt;</code> (org-agenda-todo-nextset), (org-agenda-todo-previousset)</li>
+<li><code>C-k</code> (org-agenda-kill)</li>
+<li><code>C-c C-w</code> (org-agenda-refile)</li>
+<li><code>C-c C-x C-a</code> or short <code>a</code> (org-agenda-archive-default-with-confirmation)</li>
+<li><code>C-c C-x a</code> (org-agenda-toggle-archive-tag)</li>
+<li><code>C-c C-x A</code> (org-agenda-archive-to-archive-sibling)</li>
+<li><code>C-c C-x C-s</code> or short <code>$</code> (org-agenda-archive)</li>
+<li><code>T</code> (org-agenda-show-tags)</li>
+<li><code>:</code> (org-agenda-set-tags)</li>
+<li><code>,</code> Set the priority for the current item (org-agenda-priority)</li>
+<li><code>P</code> (org-agenda-show-priority)</li>
+<li><code>+</code> or <code>S-&lt;up&gt;</code> (org-agenda-priority-up)</li>
+<li><code>-</code> or <code>S-&lt;down&gt;</code> (org-agenda-priority-down)</li>
+<li><code>z</code> or <code>C-c C-z</code> (org-agenda-add-note)</li>
+<li><code>C-c C-a</code> (org-attach) Dispatcher for all command related to attachments.</li>
+<li><code>C-c C-s</code> (org-agenda-schedule) Schedule this item. With prefix arg remove the scheduling timestamp</li>
+<li><code>C-c C-d</code> (org-agenda-deadline) Set a deadline for this item. With prefix arg remove the deadline.</li>
+<li><code>S-&lt;right&gt;</code> (org-agenda-do-date-later)</li>
+<li><code>S-&lt;left&gt;</code> (org-agenda-do-date-earlier)</li>
+<li><code>&gt;</code> (org-agenda-date-prompt)</li>
+<li><code>I</code> (org-agenda-clock-in)</li>
+<li><code>O</code> (org-agenda-clock-out)</li>
+<li><code>X</code> (org-agenda-clock-cancel) Cancel the currently running clock.</li>
+<li><code>J</code> (org-agenda-clock-goto) Jump to the running clock in another window.</li>
+<li><code>k</code> (org-agenda-capture) Like org-capture, but use the date at point as the default date for the capture template.</li>
+</ul></li>
+<li>Dragging agenda lines forward/backward
+<ul>
+<li>M-<up> (org-agenda-drag-line-backward)</li>
+<li>M-<down> (org-agenda-drag-line-forward)</li>
+</ul></li>
+<li>Bulk remote editing selected entries
+<ul>
+<li><code>m</code> (org-agenda-bulk-mark) Mark the entry at point for bulk action. With numeric prefix argument, mark that many successive entries.</li>
+<li><code>*</code> (org-agenda-bulk-mark-all) Mark all visible agenda entries for bulk action.</li>
+<li><code>u</code> (org-agenda-bulk-unmark)</li>
+<li><code>U</code> (org-agenda-bulk-remove-all-marks)</li>
+<li><code>M-m</code> (org-agenda-bulk-toggle)</li>
+<li><code>M-*</code> (org-agenda-bulk-toggle-all)</li>
+<li><code>%</code> (org-agenda-bulk-mark-regexp) Mark entries matching a regular expression for bulk action.</li>
+<li><code>B</code> (org-agenda-bulk-action)
+<ul>
+<li><code>*</code> Toggle persistent marks.</li>
+<li><code>$</code> Archive all selected entries.</li>
+<li><code>A</code> Archive entries by moving them to their respective archive siblings.</li>
+<li><code>t</code> Change TODO state.</li>
+<li><code>+</code> Add a tag to all selected entries.</li>
+<li><code>-</code> Remove a tag from all selected entries.</li>
+<li><code>s</code> Schedule all items to a new date.</li>
+<li><code>d</code> Set deadline to a specific date.</li>
+<li><code>r</code> Prompt for a single refile target and move all entries.</li>
+<li><code>S</code> Reschedule randomly into the coming N days. N will be prompted for. With prefix arg (C-u B S), scatter only across weekdays.</li>
+<li><code>f</code> Apply a function to marked entries.</li>
+</ul></li>
+</ul></li>
+<li>Calendar commands <TODO></li>
+<li>Exporting to a file</li>
+<li>Quit and Exit</li>
+</ul></li>
+<li>Custom agenda views
+<ul>
+<li>Storing searches</li>
+<li>Block agenda</li>
+<li>Setting options for custom commands</li>
+</ul></li>
+<li><p>Exporting Agenda Views</p></li>
+<li>Using column view in the agenda
+<ul>
+<li>C-c C-x C-c (org-agenda-columns)</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="markup-for-rich-export">11. Markup for rich export</h3>
+<ol style="list-style-type: decimal">
+<li>Structural markup elements
+<ul>
+<li><strong>Document title</strong>: Where the title is taken from
+<ul>
+<li><code>#+TITLE: This is the title of the document</code></li>
+</ul></li>
+<li><strong>Headings and sections</strong>: The document structure as seen by the exporter
+<ul>
+<li><code>#+OPTIONS: H:4</code></li>
+</ul></li>
+<li><p><strong>Table of contents</strong>: The if and where of the table of contents</p>
+<pre><code>    #+OPTIONS: toc:2          (only to two levels in TOC)
+    #+OPTIONS: toc:nil        (no default TOC at all)
+    #+TOC: headlines 2        (insert TOC here, with two headline levels)
+    #+TOC: listings           (build a list of listings)
+    #+TOC: tables             (build a list of tables)</code></pre></li>
+<li><strong>Lists</strong>: unordered, ordered, and description lists</li>
+<li><strong>Paragraphs</strong>: Paragraphs
+<ul>
+<li><p>line breaks: <code>\\</code>, en empty line, or this way:</p>
+<pre><code>    #+BEGIN_VERSE
+    Great clouds overhead
+    Tiny black birds rise and fall
+    Snow covers Emacs
+
+        -- AlexSchroeder
+    #+END_VERSE</code></pre>
+<pre><code>    #+BEGIN_QUOTE
+    Everything should be made as simple as possible,
+    but not any simpler -- Albert Einstein
+    #+END_QUOTE</code></pre>
+<pre><code>    #+BEGIN_CENTER
+    Everything should be made as simple as possible, \\
+    but not any simpler
+    #+END_CENTER</code></pre></li>
+</ul></li>
+<li><strong>Footnote markup</strong>: Footnotes</li>
+<li><strong>Emphasis and monospace</strong>: Bold, italic, etc.
+<ul>
+<li><p>e.g.</p>
+<pre><code>make words *bold*, /italic/, _underlined_, =verbatim= and ~code~, and, if you must, &#8216;+strike-through+&#8217;.</code></pre></li>
+<li><code>org-fontify-emphasized-text</code></li>
+</ul></li>
+<li><strong>Horizontal rules</strong>: Make a line, at least <strong>5 dashes</strong></li>
+<li><strong>Comment lines</strong>: What will <em>not</em> be exported
+<ul>
+<li><p>e.g.</p>
+<pre><code>#+BEGIN_COMMENT
+#+END_COMMENT</code></pre></li>
+<li><p><code>C-c ;</code>, toggle comment</p></li>
+</ul></li>
+</ul></li>
+<li>Images and Tables
+<ul>
+<li><p>CAPTION 1: Table</p>
+<pre><code>#+CAPTION: This is the caption for the next table (or link)
+#+NAME:   tab:basic-data
+    | ... | ...|
+    |-----|----|</code></pre></li>
+<li><p>CAPTION 2: Tables</p>
+<pre><code>#+CAPTION[Caption for list of tables]: Caption for table.    </code></pre></li>
+<li><p>Image Caption</p>
+<pre><code>#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:SED-HR4049
+[[./img/a.jpg]]    </code></pre></li>
+</ul></li>
+<li>Literal examples
+<ul>
+<li><p>plain text example</p>
+<pre><code>#+BEGIN_EXAMPLE
+Some example from a text file.
+#+END_EXAMPLE</code></pre></li>
+<li><p>code block example</p>
+<pre><code>#+BEGIN_SRC emacs-lisp
+  (defun org-xor (a b)
+         &quot;Exclusive or.&quot;
+      (if a (not b) b))
+#+END_SRC</code></pre></li>
+<li><p><code>C-c '</code>, <code>C-c l</code></p></li>
+</ul></li>
+<li>Include files
+<ul>
+<li><p>Examples</p>
+<pre><code>#+INCLUDE: &quot;~/.emacs&quot; src emacs-lisp`, &quot;src&quot; is the markup, other markups: &#8216;quote&#8217;, &#8216;example&#8217;, etc
+#+INCLUDE: &quot;~/my-book/chapter2.org&quot; :minlevel 1
+#+INCLUDE: &quot;~/.emacs&quot; :lines &quot;5-10&quot;   Include lines 5 to 10, 10 excluded
+#+INCLUDE: &quot;~/.emacs&quot; :lines &quot;-10&quot;    Include lines 1 to 10, 10 excluded
+#+INCLUDE: &quot;~/.emacs&quot; :lines &quot;10-&quot;    Include lines from 10 to EOF</code></pre></li>
+<li><p><code>C-c '</code>, Visit the include file at point.</p></li>
+</ul></li>
+<li><p><a href="http://orgmode.org/org.html#Generating-an-index">Index entries</a></p>
+<pre><code>    * Curriculum Vitae
+    #+INDEX: CV
+    #+INDEX: Application!CV</code></pre></li>
+<li>Macro replacement
+<ul>
+<li>Define a text snippet: <code>#+MACRO: name   replacement text $1, $2 are arguments</code></li>
+<li>then use <code>{{{name(arg1,arg2)}}}</code> to refer it<br />
+</li>
+<li><code>{{{title}}}</code>, <code>{{{author}}}</code> will refer to <code>#+TITLE: title</code>, <code>#+AUTHOR: author</code></li>
+<li><code>{{{time(FORMAT)}}}</code>, <code>{{{modification-time(FORMAT)}}}</code></li>
+</ul></li>
+<li>Embedded LaTeX
+<ul>
+<li>Special symbols
+<ul>
+<li><code>Angles are written as Greek letters \alpha, \beta and \gamma.</code></li>
+<li><code>C-c C-x \</code>, Toggle display of entities as UTF-8 characters.</li>
+</ul></li>
+<li>Subscripts and superscripts
+<ul>
+<li><code>The mass of the sun is M_sun = 1.989 x 10^30 kg. The radius of the sun is R_{sun} = 6.96 x 10^8 m.</code></li>
+</ul></li>
+<li>LaTeX fragments
+<ul>
+<li><p>Not need any special snippet at all</p>
+<pre><code>\begin{equation}
+x=\sqrt{b}
+\end{equation}
+
+If $a^2=b$ and \( b=2 \), then the solution must be
+either $$ a=+\sqrt{2} $$ or \[ a=-\sqrt{2} \].</code></pre></li>
+<li><p><code>org-export-with-latex</code></p>
+<pre><code>#+OPTIONS: tex:t          Do the right thing automatically (MathJax)
+#+OPTIONS: tex:nil        Do not process LaTeX fragments at all
+#+OPTIONS: tex:verbatim   Verbatim export, for jsMath or so</code></pre></li>
+</ul></li>
+<li>Previewing LaTeX fragments
+<ul>
+<li><code>C-c C-x C-l</code>, (org-preview-latex-segment)</li>
+<li><code>C-c C-c</code>, Remove the overlay preview images.</li>
+<li><p>Turn on/off preview</p>
+<pre><code>#+STARTUP: latexpreview
+#+STARTUP: nolatexpreview</code></pre></li>
+</ul></li>
+<li>Using CDLaTeX to enter math</li>
+</ul></li>
+<li><p>Special blocks</p>
+<pre><code>    #+BEGIN_LATEX
+    #+BEGIN_ABSTRACT
+    #+BEGIN_VIDEO</code></pre>
+<ul>
+<li>Refer to back-end specific documentation for more information.</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="exporting">12. Exporting</h3>
+<ol style="list-style-type: decimal">
+<li><strong>The Export Dispatcher</strong>: The main exporter interface</li>
+<li><strong>Export back-ends</strong>: Built-in export formats</li>
+<li><strong>Export settings</strong>: Generic export settings</li>
+<li><strong>ASCII/Latin-1/UTF-8 export</strong>: Exporting to flat files with encoding</li>
+<li><strong>Beamer export</strong>: Exporting as a Beamer presentation</li>
+<li><strong>HTML export</strong>: Exporting to HTML</li>
+<li><strong>LaTeX and PDF export</strong>: Exporting to LaTeX, and processing to PDF</li>
+<li><strong>Markdown export</strong>: Exporting to Markdown</li>
+<li><strong>OpenDocument Text export</strong>: Exporting to OpenDocument Text</li>
+<li><strong>Org export</strong>: Exporting to Org</li>
+<li><strong>iCalendar export</strong>: Exporting to iCalendar</li>
+<li><strong>Other built-in back-ends</strong>: Exporting to Texinfo or a man page</li>
+<li><strong>Export in foreign buffers</strong>: Author tables and lists in Org syntax</li>
+<li><strong>Advanced configuration</strong>: Fine-tuning the export output</li>
+</ol>
+<hr />
+<h3 id="publishing">13. Publishing</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Configuration</strong>: Defining projects</li>
+<li><strong>Uploading files</strong>: How to get files up on the server</li>
+<li><strong>Sample configuration</strong>: Example projects</li>
+<li><strong>Triggering publication</strong>: Publication commands</li>
+</ol>
+<hr />
+<h3 id="working-with-source-code">14. Working with source code</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Structure of code blocks</strong>: Code block syntax described</li>
+<li><strong>Editing source code</strong>: Language major-mode editing</li>
+<li><strong>Exporting code blocks</strong>: Export contents and/or results</li>
+<li><strong>Extracting source code</strong>: Create pure source code files</li>
+<li><strong>Evaluating code blocks</strong>: Place results of evaluation in the Org mode buffer</li>
+<li><strong>Library of Babel</strong>: Use and contribute to a library of useful code blocks</li>
+<li><strong>Languages</strong>: List of supported code block languages</li>
+<li><strong>Header arguments</strong>: Configure code block functionality</li>
+<li><strong>Results of evaluation</strong>: How evaluation results are handled</li>
+<li><strong>Noweb reference syntax</strong>: Literate programming in Org mode</li>
+<li><strong>Key bindings and useful functions</strong>: Work quickly with code blocks</li>
+<li><strong>Batch execution</strong>: Call functions from the command line</li>
+</ol>
+<hr />
+<h3 id="miscellaneous">15. Miscellaneous</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Completion</strong>: M-TAB knows what you need</li>
+<li><strong>Easy Templates</strong>: Quick insertion of structural elements</li>
+<li><strong>Speed keys</strong>: Electric commands at the beginning of a headline</li>
+<li><strong>Code evaluation security</strong>: Org mode files evaluate inline code</li>
+<li><strong>Customization</strong>: Adapting Org to your taste</li>
+<li><strong>In-buffer settings</strong>: Overview of the #+KEYWORDS</li>
+<li><strong>The very busy C-c C-c key</strong>: When in doubt, press C-c C-c</li>
+<li><strong>Clean view</strong>: Getting rid of leading stars in the outline</li>
+<li><strong>TTY keys</strong>: Using Org on a tty</li>
+<li><strong>Interaction</strong>: Other Emacs packages</li>
+<li><strong>org-crypt</strong>: Encrypting Org files</li>
+</ol>
+<hr />
+<h3 id="appendix-a-hacking">16. Appendix A Hacking</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Hooks</strong>: How to reach into Org&#8217;s internals</li>
+<li><strong>Add-on packages</strong>: Available extensions</li>
+<li><strong>Adding hyperlink types</strong>: New custom link types</li>
+<li><strong>Adding export back-ends</strong>: How to write new export back-ends</li>
+<li><strong>Context-sensitive commands</strong>: How to add functionality to such commands</li>
+<li><strong>Tables in arbitrary syntax</strong>: Orgtbl for LaTeX and other programs</li>
+<li><strong>Dynamic blocks</strong>: Automatically filled blocks</li>
+<li><strong>Special agenda views</strong>: Customized views</li>
+<li><strong>Speeding up your agendas</strong>: Tips on how to speed up your agendas</li>
+<li><strong>Extracting agenda information</strong>: Post-processing of agenda information</li>
+<li><strong>Using the property API</strong>: Writing programs that use entry properties</li>
+<li><strong>Using the mapping API</strong>: Mapping over all or selected entries</li>
+</ol>
+<hr />
+<h3 id="gnu-free-documentation-license">17. GNU Free Documentation License</h3>
+<hr />
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>

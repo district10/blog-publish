@@ -1,0 +1,37 @@
+---
+tzx-changes:
+  - hash: 82e41a168c3be50baefc1772d4012ac4d6f27a71
+    datetime: 1577899989
+    insertions: 1
+    deletions: 1
+  - hash: 93725095ec33ca8d29227c4a470e86749e41a8a4
+    datetime: 1577898250
+    insertions: 1
+    deletions: 1
+  - hash: 6ce8c017a0e860e5bd959c2d4b6fbe6023266aca
+    datetime: 1577897256
+    insertions: 1
+    deletions: 0
+  - hash: 5618241ac3729477ef1419755743d3d127c23a1a
+    datetime: 1555770708
+    insertions: 0
+    deletions: 2
+  - hash: 03add53d7ffb5db9d5565b372a727291fb7e2fac
+    datetime: 1534269391
+    insertions: 2
+    deletions: 1
+  - hash: 10548ab4edc8246bdc9411b421f81e7a1b61b22f
+    datetime: 1517320080
+    insertions: 1
+    deletions: 0
+  - hash: 4e2501ae80e67e1fb1d01280bbccc1fada6c341f
+    datetime: 1506837112
+    insertions: 4
+    deletions: 4
+  - hash: 503e511788e741cf3ef0f32f8894bf9b83c6206b
+    datetime: 1504105630
+    insertions: 153
+    deletions: 0
+
+tzx-filename: index.md
+...

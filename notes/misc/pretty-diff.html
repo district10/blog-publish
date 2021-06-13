@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="author" content="district10" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MISC</title>
+    <link rel="stylesheet" href="../github-markdown.css" type="text/css" />
+    <link rel="stylesheet" href="../highlight.css" type="text/css" />
+    <link rel="stylesheet" href="../notes.css" type="text/css" />
+</head>
+<body class="markdown-body">
+<div id="navigator">
+    <a id="gotoindex" href="index.html" title="&#12304;&#22238;&#21040;&#31508;&#35760;&#32034;&#24341; | Back to Index&#12305;">&#9763;</a></div>
+<div id="main-body">
+<h1 id="pretty-diff">Pretty diff</h1>
+<p>&#22312;&#30475; caffe &#30340;&#23448;&#26041;&#20363;&#23376;&#65292;03-fine-tuning.ipynb &#26159;&#20010;&#24456;&#36190;&#30340;&#20363;&#23376;&#65292;&#20294;&#26159;&#37027;&#20010;</p>
+<dl>
+<dt><code class="sourceCode python"><span class="op">!</span>diff models<span class="op">/</span>bvlc_reference_caffenet<span class="op">/</span>train_val.prototxt models<span class="op">/</span>finetune_flickr_style<span class="op">/</span>train_val.prototxt</code> <code class="fold">@</code></dt>
+<dd><div class="sourceCode"><pre class="sourceCode diff"><code class="sourceCode diff"><span class="dt">1c1</span>
+<span class="st">&lt; name: &quot;CaffeNet&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt; name: &quot;FlickrStyleCaffeNet&quot;</span>
+<span class="dt">4c4</span>
+<span class="st">&lt;   type: &quot;Data&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   type: &quot;ImageData&quot;</span>
+<span class="dt">15,26c15,19</span>
+<span class="st">&lt; # mean pixel / channel-wise mean instead of mean image</span>
+<span class="st">&lt; #  transform_param {</span>
+<span class="st">&lt; #    crop_size: 227</span>
+<span class="st">&lt; #    mean_value: 104</span>
+<span class="st">&lt; #    mean_value: 117</span>
+<span class="st">&lt; #    mean_value: 123</span>
+<span class="st">&lt; #    mirror: true</span>
+<span class="st">&lt; #  }</span>
+<span class="st">&lt;   data_param {</span>
+<span class="st">&lt;     source: &quot;examples/imagenet/ilsvrc12_train_lmdb&quot;</span>
+<span class="st">&lt;     batch_size: 256</span>
+<span class="st">&lt;     backend: LMDB</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   image_data_param {</span>
+<span class="ot">&gt;     source: &quot;data/flickr_style/train.txt&quot;</span>
+<span class="ot">&gt;     batch_size: 50</span>
+<span class="ot">&gt;     new_height: 256</span>
+<span class="ot">&gt;     new_width: 256</span>
+<span class="dt">31c24</span>
+<span class="st">&lt;   type: &quot;Data&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   type: &quot;ImageData&quot;</span>
+<span class="dt">42,51c35,36</span>
+<span class="st">&lt; # mean pixel / channel-wise mean instead of mean image</span>
+<span class="st">&lt; #  transform_param {</span>
+<span class="st">&lt; #    crop_size: 227</span>
+<span class="st">&lt; #    mean_value: 104</span>
+<span class="st">&lt; #    mean_value: 117</span>
+<span class="st">&lt; #    mean_value: 123</span>
+<span class="st">&lt; #    mirror: false</span>
+<span class="st">&lt; #  }</span>
+<span class="st">&lt;   data_param {</span>
+<span class="st">&lt;     source: &quot;examples/imagenet/ilsvrc12_val_lmdb&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   image_data_param {</span>
+<span class="ot">&gt;     source: &quot;data/flickr_style/test.txt&quot;</span>
+<span class="dt">53c38,39</span>
+<span class="st">&lt;     backend: LMDB</span>
+<span class="kw">---</span>
+<span class="ot">&gt;     new_height: 256</span>
+<span class="ot">&gt;     new_width: 256</span>
+<span class="dt">323a310</span>
+<span class="ot">&gt;   # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer</span>
+<span class="dt">360c347</span>
+<span class="st">&lt;   name: &quot;fc8&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   name: &quot;fc8_flickr&quot;</span>
+<span class="dt">363c350,351</span>
+<span class="st">&lt;   top: &quot;fc8&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   top: &quot;fc8_flickr&quot;</span>
+<span class="ot">&gt;   # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained</span>
+<span class="dt">365c353</span>
+<span class="st">&lt;     lr_mult: 1</span>
+<span class="kw">---</span>
+<span class="ot">&gt;     lr_mult: 10</span>
+<span class="dt">369c357</span>
+<span class="st">&lt;     lr_mult: 2</span>
+<span class="kw">---</span>
+<span class="ot">&gt;     lr_mult: 20</span>
+<span class="dt">373c361</span>
+<span class="st">&lt;     num_output: 1000</span>
+<span class="kw">---</span>
+<span class="ot">&gt;     num_output: 20</span>
+<span class="dt">387c375</span>
+<span class="st">&lt;   bottom: &quot;fc8&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   bottom: &quot;fc8_flickr&quot;</span>
+<span class="dt">397c385</span>
+<span class="st">&lt;   bottom: &quot;fc8&quot;</span>
+<span class="kw">---</span>
+<span class="ot">&gt;   bottom: &quot;fc8_flickr&quot;</span></code></pre></div>
+</dd>
+</dl>
+<hr />
+<div class="tabNav" target="tab1">
+<ul>
+<li><a href="#tab1" title="models/bvlc_reference_caffenet/train_val.prototxt">bvlc</a></li>
+<li><a href="#tab2" title="models/finetune_flickr_style/train_val.prototxt">tune flickr</a></li>
+<li><a href="#tab3">pretty diff</a></li>
+</ul>
+</div>
+<div class="tabs">
+<div id="tab1">
+<pre><code>name: &quot;CaffeNet&quot;
+layer {
+  name: &quot;data&quot;
+  type: &quot;Data&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+# mean pixel / channel-wise mean instead of mean image
+#  transform_param {
+#    crop_size: 227
+#    mean_value: 104
+#    mean_value: 117
+#    mean_value: 123
+#    mirror: true
+#  }
+  data_param {
+    source: &quot;examples/imagenet/ilsvrc12_train_lmdb&quot;
+    batch_size: 256
+    backend: LMDB
+  }
+}
+layer {
+  name: &quot;data&quot;
+  type: &quot;Data&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+# mean pixel / channel-wise mean instead of mean image
+#  transform_param {
+#    crop_size: 227
+#    mean_value: 104
+#    mean_value: 117
+#    mean_value: 123
+#    mirror: false
+#  }
+  data_param {
+    source: &quot;examples/imagenet/ilsvrc12_val_lmdb&quot;
+    batch_size: 50
+    backend: LMDB
+  }
+}
+layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu1&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;conv1&quot;
+}
+layer {
+  name: &quot;pool1&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;pool1&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm1&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool1&quot;
+  top: &quot;norm1&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv2&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm1&quot;
+  top: &quot;conv2&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 2
+    kernel_size: 5
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu2&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;conv2&quot;
+}
+layer {
+  name: &quot;pool2&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;pool2&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm2&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool2&quot;
+  top: &quot;norm2&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv3&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm2&quot;
+  top: &quot;conv3&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu3&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv3&quot;
+}
+layer {
+  name: &quot;conv4&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv4&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu4&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv4&quot;
+}
+layer {
+  name: &quot;conv5&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv5&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu5&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;conv5&quot;
+}
+layer {
+  name: &quot;pool5&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;pool5&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;fc6&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;pool5&quot;
+  top: &quot;fc6&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu6&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+}
+layer {
+  name: &quot;drop6&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc7&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc7&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu7&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+}
+layer {
+  name: &quot;drop7&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc8&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc8&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 1000
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;accuracy&quot;
+  type: &quot;Accuracy&quot;
+  bottom: &quot;fc8&quot;
+  bottom: &quot;label&quot;
+  top: &quot;accuracy&quot;
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: &quot;loss&quot;
+  type: &quot;SoftmaxWithLoss&quot;
+  bottom: &quot;fc8&quot;
+  bottom: &quot;label&quot;
+  top: &quot;loss&quot;
+}</code></pre>
+</div>
+<div id="tab2">
+<pre><code>name: &quot;FlickrStyleCaffeNet&quot;
+layer {
+  name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+  image_data_param {
+    source: &quot;data/flickr_style/train.txt&quot;
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+layer {
+  name: &quot;data&quot;
+  type: &quot;ImageData&quot;
+  top: &quot;data&quot;
+  top: &quot;label&quot;
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 227
+    mean_file: &quot;data/ilsvrc12/imagenet_mean.binaryproto&quot;
+  }
+  image_data_param {
+    source: &quot;data/flickr_style/test.txt&quot;
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+layer {
+  name: &quot;conv1&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;data&quot;
+  top: &quot;conv1&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu1&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;conv1&quot;
+}
+layer {
+  name: &quot;pool1&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv1&quot;
+  top: &quot;pool1&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm1&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool1&quot;
+  top: &quot;norm1&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv2&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm1&quot;
+  top: &quot;conv2&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 2
+    kernel_size: 5
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu2&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;conv2&quot;
+}
+layer {
+  name: &quot;pool2&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv2&quot;
+  top: &quot;pool2&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;norm2&quot;
+  type: &quot;LRN&quot;
+  bottom: &quot;pool2&quot;
+  top: &quot;norm2&quot;
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+layer {
+  name: &quot;conv3&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;norm2&quot;
+  top: &quot;conv3&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;relu3&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv3&quot;
+}
+layer {
+  name: &quot;conv4&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv3&quot;
+  top: &quot;conv4&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 384
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu4&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv4&quot;
+}
+layer {
+  name: &quot;conv5&quot;
+  type: &quot;Convolution&quot;
+  bottom: &quot;conv4&quot;
+  top: &quot;conv5&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  convolution_param {
+    num_output: 256
+    pad: 1
+    kernel_size: 3
+    group: 2
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu5&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;conv5&quot;
+}
+layer {
+  name: &quot;pool5&quot;
+  type: &quot;Pooling&quot;
+  bottom: &quot;conv5&quot;
+  top: &quot;pool5&quot;
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layer {
+  name: &quot;fc6&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;pool5&quot;
+  top: &quot;fc6&quot;
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu6&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+}
+layer {
+  name: &quot;drop6&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc6&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc7&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc6&quot;
+  top: &quot;fc7&quot;
+  # Note that lr_mult can be set to 0 to disable any fine-tuning of this, and any other, layer
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.005
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 1
+    }
+  }
+}
+layer {
+  name: &quot;relu7&quot;
+  type: &quot;ReLU&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+}
+layer {
+  name: &quot;drop7&quot;
+  type: &quot;Dropout&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc7&quot;
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: &quot;fc8_flickr&quot;
+  type: &quot;InnerProduct&quot;
+  bottom: &quot;fc7&quot;
+  top: &quot;fc8_flickr&quot;
+  # lr_mult is set to higher than for other layers, because this layer is starting from random while the others are already trained
+  param {
+    lr_mult: 10
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output: 20
+    weight_filler {
+      type: &quot;gaussian&quot;
+      std: 0.01
+    }
+    bias_filler {
+      type: &quot;constant&quot;
+      value: 0
+    }
+  }
+}
+layer {
+  name: &quot;accuracy&quot;
+  type: &quot;Accuracy&quot;
+  bottom: &quot;fc8_flickr&quot;
+  bottom: &quot;label&quot;
+  top: &quot;accuracy&quot;
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: &quot;loss&quot;
+  type: &quot;SoftmaxWithLoss&quot;
+  bottom: &quot;fc8_flickr&quot;
+  bottom: &quot;label&quot;
+  top: &quot;loss&quot;
+}</code></pre>
+</div>
+<div id="tab3">
+
+</div>
+</div>
+</div>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="blur-svg">
+    <defs>
+        <filter id="blur-filter">
+            <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+        </filter>
+    </defs>
+</svg>
+<script src="../lazyload.min.js"></script>
+<script src="../jquery-3.0.0.min.js"></script>
+<script src="../jquery.idTabs.min.js"></script>
+<script src="../egg.min.js"></script>
+<script src="../clipboard.min.js"></script>
+<script src="../notes.js"></script>
+</body>
+</html>
